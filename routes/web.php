@@ -26,9 +26,7 @@ Auth::routes();
 Route::get('/me/profile', function(){
 	return view('profile.me');
 });
-Route::get('/me/profiles', function(){
-	return view('profile.profiles');
-});
+Route::get('/me/profiles', 'ProfileController@profile_profiles');
 Route::get('/me/saved', function(){
 	return view('profile.saved');
 });

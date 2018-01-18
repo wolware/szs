@@ -72,6 +72,9 @@ class UserController extends Controller
             if($noviAvatar == 1){
                 $user->avatar = $newAvatarName;
             }
+           // DB::table('users')->where("id", Auth::user()->id)->update($data->all());
+            $user->address = $data['address'];
+            $user->phone = $data['phone'];
             $user->update($data->all());
             flash('Uspješno ste editovali Vaš profil.');
             return redirect('me/settings');

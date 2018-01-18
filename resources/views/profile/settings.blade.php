@@ -140,7 +140,6 @@
           </div>
 
         </div>
-		
 		<div class="row postavke-red">
 			<!-- Register -->
             <div class="card">
@@ -195,14 +194,14 @@
 				  </div>
 				  <div class="form-group col-md-6">
                     <label for="account-address-1"><i class="fa fa-map-marker"></i> Adresa stanovanja</label>
-                    <input type="text" class="form-control" value="" name="address" id="account-address-1" placeholder="{{isset($data->address) ? $data->address : 'Unesite Vasu adresu' }}" value="{{ isset($data->address) ? $data->address : '' }}">
+                    <input type="text" class="form-control" name="address" id="account-address-1" placeholder="{{$data->address}}" value="{{$data->address}}">
                   </div>
                   <div class="form-group col-md-6">
 					<label for="telefon-1"><i class="fa fa-phone-square"></i> Kontakt telefon</label>
-                    <input type="text" class="form-control" value="" name="phone" id="telefon-1"  placeholder="{{isset($data->phone) ? $data->phone : 'Unesite kontakt telefon' }}" value="{{ isset($data->phone) ? $data->phone : '' }}">
+                    <input type="text" class="form-control"  name="phone" id="telefon-1" placeholder="{{$data->phone}}" value="{{$data->phone}}">
                   </div>
                   <div class="form-group form-group--submit">
-                    <button type="submit" href="#" class="btn btn-default btn-lg btn-block btn-register"><i class="fa fa-floppy-o"></i> Spasi izmjene</button>
+                    <button type="submit" disabled class="btn btn-default btn-lg btn-block btn-register"><i class="fa fa-floppy-o"></i> Spasi izmjene</button>
                   </div>
                 </form>
                 <!-- Register Form / End -->
@@ -213,6 +212,7 @@
       </div>
     </div>
 
+      <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
 <script type="text/javascript">
    function previewFile(){
        var preview = document.getElementById('userAvatar');
@@ -229,5 +229,8 @@
            preview.src = "";
        }
   }
+  $('input').on('change', function(){
+    document.getElementsByClassName('btn-register')[0].disabled = false;
+  });
 </script>
 @endsection

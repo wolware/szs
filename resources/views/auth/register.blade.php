@@ -57,37 +57,43 @@
                 <!-- Register Form -->
                 <form id="registerForm" role="form" action="{{ url('/register') }}" method="POST">
                   {!! csrf_field() !!}
-                  <div class="form-group col-md-6">
-                    <label for="register-name"><i class="fa fa-user"></i> Korisničko ime</label>
-                    <input type="text" name="name" id="register-name" minlength="3" class="form-control" value="{{ old('name') }}" placeholder="Unesite korisničko ime" required>
+                  <div class="row">
+                    <div class="form-group col-md-6">
+                      <label for="register-name"><i class="fa fa-user"></i> Korisničko ime</label>
+                      <input type="text" name="name" id="register-name" minlength="3" class="form-control" value="{{ old('name') }}" placeholder="Unesite korisničko ime" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="register-email"><i class="fa fa-envelope-open-o"></i> Email</label>
+                      <input type="email" name="email" id="register-email" class="form-control" placeholder="Unesite email" value="{{ old('email') }}" required>
+                    </div>
                   </div>
-                  <div class="form-group col-md-6">
-                    <label for="register-email"><i class="fa fa-envelope-open-o"></i> Email</label>
-                    <input type="email" name="email" id="register-email" class="form-control" placeholder="Unesite email" value="{{ old('email') }}" required>
+                  <div class="row">
+                    <div class="form-group col-md-6">
+                      <label for="register-password"><i class="fa fa-lock"></i> Lozinka</label>
+                      <input type="password" name="password" id="password" minlength="6" class="form-control" placeholder="Unesite lozinku" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label for="repeat-password"><i class="fa fa-repeat"></i> Ponovite lozinku</label>
+                      <input type="password" name="password_confirmation" minlength="6" id="password_confirmation" class="form-control" placeholder="Ponovite lozinku" required>
+                    </div>
                   </div>
-                  <div class="form-group col-md-6">
-                    <label for="register-password"><i class="fa fa-lock"></i> Lozinka</label>
-                    <input type="password" name="password" id="password" minlength="6" class="form-control" placeholder="Unesite lozinku" required>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="repeat-password"><i class="fa fa-repeat"></i> Ponovite lozinku</label>
-                    <input type="password" name="password_confirmation" minlength="6" id="password_confirmation" class="form-control" placeholder="Ponovite lozinku" required>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="pol"><i class="fa fa-venus-mars"></i> Spol:</label>
-                    <select class="form-control" name="spol" id="pol" required>
-                        @if (old('spol'))
-                          <option selected>{{old('spol')}}</option>
-                        @else
-                          <option disabled selected>Izaberite pol</option>
-                        @endif
-                        <option>Muško</option>
-                        <option>Žensko</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label class="control-label" for="date"><i class="fa fa-calendar-o"></i> Datum rođenja</label>
-                    <input class="form-control" id="date" name="dob" placeholder="Izaberite datum rođenja" value="{{old('dob')}}" type="text" required/>
+                  <div class="row">
+                    <div class="form-group col-md-6">
+                      <label for="pol"><i class="fa fa-venus-mars"></i> Spol:</label>
+                      <select class="form-control" name="spol" id="pol" required>
+                          @if (old('spol'))
+                            <option selected>{{old('spol')}}</option>
+                          @else
+                            <option disabled selected>Izaberite pol</option>
+                          @endif
+                          <option>Muško</option>
+                          <option>Žensko</option>
+                      </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label class="control-label" for="date"><i class="fa fa-calendar-o"></i> Datum rođenja</label>
+                      <input class="form-control" id="date" name="dob" placeholder="Izaberite datum rođenja" value="{{old('dob')}}" type="text" required/>
+                    </div>
                   </div>
                   <div class="form-group col-md-6">
                     <label for="drzava"><i class="fa fa-globe"></i> Država:</label>

@@ -103,7 +103,11 @@ class ClubController extends Controller
                 'teren' => $data['teren'],
                 'takmicenje' => $data['takmicenje'],
                 'savez' => $data['savez'],
-                'adresa' => $data['adresa']
+                'adresa' => $data['adresa'],
+                'objavljeno' => time(),
+                'user_id' => Auth::user()->id,
+                'views' => 0,
+                'status' => '0'
             ]);
 
             if(!empty($data['vremeplov'])){

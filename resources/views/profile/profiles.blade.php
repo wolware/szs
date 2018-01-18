@@ -102,7 +102,7 @@
                           <span class="widget-player__details-label">Aktivnih</span>
                           <span class="widget-player__details-desc">profila</span>
                         </span>
-                        <span class="widget-player__details-value">45</span>
+                        <span class="widget-player__details-value">{{$aktivnih}}</span>
                       </div>
                     </div>
                     <div class="widget-player__details__item">
@@ -111,7 +111,7 @@
                           <span class="widget-player__details-label">Na čekanju</span>
                           <span class="widget-player__details-desc">profila</span>
                         </span>
-                        <span class="widget-player__details-value">12</span>
+                        <span class="widget-player__details-value">{{$cekanje}}</span>
                       </div>
                     </div>
                   </div>
@@ -123,7 +123,7 @@
                           <span class="widget-player__details-label">Odbijenih</span>
                           <span class="widget-player__details-desc">profila</span>
                         </span>
-                        <span class="widget-player__details-value">4</span>
+                        <span class="widget-player__details-value">{{$odbijenih}}</span>
                       </div>
                     </div>
                     <div class="widget-player__details__item">
@@ -132,7 +132,7 @@
                           <span class="widget-player__details-label">Uklonjenih</span>
                           <span class="widget-player__details-desc">profila</span>
                         </span>
-                        <span class="widget-player__details-value">2</span>
+                        <span class="widget-player__details-value">{{$uklonjenih}}</span>
                       </div>
                     </div>
                   </div>
@@ -141,58 +141,7 @@
               </div>
             </div>
       
-            <div class="card">
-              <div class="card__header">
-                <h4><i class="fa fa-pie-chart"></i> Statistika mojih profila</h4>
-              </div>
-              <div class="card__content statistika-profila-general">
-                <div class="widget-player__details">
-            
-                  <div class="widget-player__details-row">
-                    <div class="widget-player__details__item">
-                      <div class="widget-player__details-desc-wrapper">
-                        <span class="widget-player__details-holder">
-                          <span class="widget-player__details-label">Pregledi</span>
-                          <span class="widget-player__details-desc">profila</span>
-                        </span>
-                        <span class="widget-player__details-value">1455896</span>
-                      </div>
-                    </div>
-                    <div class="widget-player__details__item">
-                      <div class="widget-player__details-desc-wrapper">
-                        <span class="widget-player__details-holder">
-                          <span class="widget-player__details-label">Podjele</span>
-                          <span class="widget-player__details-desc">profila</span>
-                        </span>
-                        <span class="widget-player__details-value">49555</span>
-                      </div>
-                    </div>
-                  </div>
-          
-          <div class="widget-player__details-row">
-                    <div class="widget-player__details__item">
-                      <div class="widget-player__details-desc-wrapper">
-                        <span class="widget-player__details-holder">
-                          <span class="widget-player__details-label">Prosjek</span>
-                          <span class="widget-player__details-desc">pregleda po profilu</span>
-                        </span>
-                        <span class="widget-player__details-value">32,35</span>
-                      </div>
-                    </div>
-                    <div class="widget-player__details__item">
-                      <div class="widget-player__details-desc-wrapper">
-                        <span class="widget-player__details-holder">
-                          <span class="widget-player__details-label">Oznake</span>
-                          <span class="widget-player__details-desc">mojih profila</span>
-                        </span>
-                        <span class="widget-player__details-value">8545</span>
-                      </div>
-                    </div>
-                  </div>
-            
-                </div>
-              </div>
-            </div>
+       
       
       <div class="card">
               <div class="card__header">
@@ -271,42 +220,24 @@
                   </tr>
                 </thead>
                 <tbody>
+                  @foreach($clubs as $club)
                   <tr>
-                    <td class="player-season-avg__season">FK Sve Za Sport</td>
-                    <td class="player-season-avg__gmp">01012456</td>
-                    <td class="player-season-avg__min">20. Novembar, 2017.</td>
-                    <td class="player-season-avg__tg">0</td>
-                    <td class="player-season-avg__gg"><a style="color:#0288D1;">NA ČEKANJU</a></td>
-                    <td class="player-season-avg__ts"><a href="#">Uredi</a></td>
-                    <td class="player-season-avg__st"><a href="#">Pregledaj</a></td>
+                    <td class="player-season-avg__season">{{$club->name}}</td>
+                    <td class="player-season-avg__gmp">{{$club->id}}</td>
+                    <td class="player-season-avg__min">{{date("jS F, Y", $club->objavljeno) }}</td>
+                    <td class="player-season-avg__tg">{{$club->views}}</td>
+                    <td class="player-season-avg__gg"><a style="color:#0288D1;">
+                      @if($club->status == 0)
+                        NA ČEKANJU
+                      @else
+                        AKTIVNO
+                      @endif
+                    </a></td>
+                    <td class="player-season-avg__ts"><a href="{{url('clubs/'.$club->id.'/edit')}}">Uredi</a></td>
+                    <td class="player-season-avg__st"><a href="{{url('clubs/'.$club->id)}}">Pregledaj</a></td>
                   </tr>
-                  <tr>
-                    <td class="player-season-avg__season">RK Sve Za Sport</td>
-                    <td class="player-season-avg__gmp">01012457</td>
-                    <td class="player-season-avg__min">18. Novembar, 2017.</td>
-                    <td class="player-season-avg__tg">5545</td>
-                    <td class="player-season-avg__gg"><a style="color:#388E3C;">AKTIVNO</a></td>
-                    <td class="player-season-avg__ts"><a href="#">Uredi</a></td>
-                    <td class="player-season-avg__st"><a href="#">Pregledaj</a></td>
-                  </tr>
-                  <tr>
-                    <td class="player-season-avg__season">KK Sve Za Sport</td>
-                    <td class="player-season-avg__gmp">01012488</td>
-                    <td class="player-season-avg__min">17. Novembar, 2017.</td>
-                    <td class="player-season-avg__tg">57585</td>
-                    <td class="player-season-avg__gg"><a style="color:#388E3C;">AKTIVNO</a></td>
-                    <td class="player-season-avg__ts"><a href="#">Uredi</a></td>
-                    <td class="player-season-avg__st"><a href="#">Pregledaj</a></td>
-                  </tr>
-                  <tr>
-                    <td class="player-season-avg__season">OK Sve Za Sport</td>
-                    <td class="player-season-avg__gmp">01012777</td>
-                    <td class="player-season-avg__min">14. Novembar, 2017.</td>
-                    <td class="player-season-avg__tg">0</td>
-                    <td class="player-season-avg__gg"><a style="color:#B71C1C;">ODBIJENO</a></td>
-                    <td class="player-season-avg__ts"><a href="#">Uredi</a></td>
-                    <td class="player-season-avg__st"><a href="#">Pregledaj</a></td>
-                  </tr>
+                  @endforeach
+                 
                 </tbody>
               </table>
             </div>
