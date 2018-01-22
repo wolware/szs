@@ -41,11 +41,11 @@
 
    };
 
-   $('.galerija').on('change', function() {
+  $('.galerija').on('change', function() {
        imagesPreview(this);
-      setTimeout(function(){
+      /*setTimeout(function(){
         $('.album__item').last().remove();
-      },50);
+      },50);*/
    });
    $('.galerija_edit').on('change', function() {
        imagesPreview(this);
@@ -179,6 +179,33 @@ $('#createNewFootballer').validate({
   rules:{
     logo:{
       extension: 'png|jpg|jpeg'
+    },
+    ime:{
+      required:true,
+    },
+    prezime:{
+      required:true,
+    },
+    karakter:{
+      required:true,
+    },
+    drzava:{
+      required:true,
+    },
+    entitet: {
+      required:true,
+    },
+    kanton:{
+      required:true,
+    },
+    klub:{
+      required:true,
+    },
+    visina:{
+      required:true,
+    },
+    tezina:{
+      required: true,
     }
   }
 });
@@ -198,7 +225,9 @@ $('.prvi_korak_end').on('click', function(){
   $('#createNewClub').valid();
 });
 
-
+$('.btn-dalje').on('click', function(){
+  $('#createNewFootballer').valid();
+});
       jQuery.extend(jQuery.validator.messages, {
     required: "Ovo polje je obavezno.",
     remote: "Please fix this field.",

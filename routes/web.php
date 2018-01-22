@@ -63,9 +63,9 @@ Route::get('/profile/new', function(){
 
 // CLUB
 Route::get('/clubs', 'ClubController@index_show');
+Route::get('/clubs/new', 'ClubController@new_show');
 Route::get('/clubs/{id}', 'ClubController@show');
 Route::get('/clubs/{id}/edit', 'ClubController@edit_club_show');
-Route::get('/clubs/new', 'ClubController@new_show');
 Route::post('/clubs/new/create', 'ClubController@new');
 Route::post('/clubs/{id}/edit', 'ClubController@edit_club');
 
@@ -94,6 +94,22 @@ Route::post('/athlete/athletics/create', 'AthleticsController@new');
 Route::get('/athlete/basketball/new', 'BasketballController@index');
 Route::get('/athlete/basketball/{id}', 'BasketballController@show');
 Route::post('/athlete/basketball/create', 'BasketballController@new');
+
+//**VOLLEYBALL
+Route::get('/athlete/volleyball/new', 'OdbojkaController@index');
+Route::post('/athlete/volleyball/create', 'OdbojkaController@new');
+Route::get('/athlete/volleyball/{id}', 'OdbojkaController@show');
+
+//**HANDBALL
+Route::get('/athlete/handball/new', 'HandballController@index');
+Route::post('/athlete/handball/create', 'HandballController@new');
+Route::get('/athlete/handball/{id}', 'HandballController@show');
+
+//**SKIING
+Route::get('/athlete/skiing/new', 'SkiingController@index');
+Route::post('/athlete/skiing/create', 'SkiingController@new');
+Route::get('/athlete/skiing/{id}', 'SkiingController@show');
+
 
 //LOGOUT
 Route::get('user/logout', 'Auth\LoginController@logout');
