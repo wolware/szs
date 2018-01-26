@@ -33,6 +33,9 @@ class ClubController extends Controller
     {
         return view('clubs.new');
     }
+    public function clubs_add(){
+        return view('clubs.add');
+    }
     public function index_show(){
         $data = DB::table('clubs')->get();
         return view('clubs.index', ['data' => $data]);
@@ -60,16 +63,16 @@ class ClubController extends Controller
     		'kontinent' => 'required|max:255|string',
     		'drzava' => 'required|max:255|string',
     		'entitet' => 'required',
-    		'kanton' => 'required',
-    		'opcina' => 'required',
+    		/*'kanton' => 'required',
+    		'opcina' => 'required',*/
     		'grad' => 'required',
     		'tip' => 'required',
     		'kategorija' => 'required',
-    		'godina_osnivanja' => 'required|integer',
+    		/*'godina_osnivanja' => 'required|integer',
     		'teren' => 'required|max:255|string',
     		'takmicenje' => 'required',
     		'savez' => 'required',
-    		'adresa' => 'required'
+    		'adresa' => 'required'*/
     	], $messages);
     	if($validator->fails()){
     		return redirect('clubs/new')
@@ -85,6 +88,12 @@ class ClubController extends Controller
     			$data['logo'] = $newLogoName;
     		}else{
                 $data['logo'] = 'default.png';
+            }
+            if(empty($data['kanton'])){
+                $data['kanton'] = $data['kantonSrb'];
+            }
+            if(empty($data['opcina'])){
+                $data['opcina'] = $data['opcinaSrb'];
             }
             $id = DB::table('clubs')->insertGetId([
                 'logo' => $newLogoName,
@@ -115,6 +124,11 @@ class ClubController extends Controller
                     'content' => $data['vremeplov'],
                     'club_id' => $id
                 ]);
+            }else{
+                DB::table('vremeplov')->insert([
+                    'content' => "",
+                    'club_id' => $id
+                ]);
             }
 
             if(!empty($data['trofej_takmicenja'][0])){
@@ -133,6 +147,16 @@ class ClubController extends Controller
                         continue;
                      }
                 }
+            }else{
+                DB::table('trofej')->insert([
+                    'vrsta_nagrade' => "",
+                    'tip_nagrade' => "",
+                    'naziv_takmicenja' => "",
+                    'nivo_takmicenja' => "",
+                    'sezona' => "",
+                    'osvajanje' => "",
+                    'club_id' => $id
+                ]);
             }
 
             if($data->hasFile('avatar_licnost')){
@@ -152,6 +176,14 @@ class ClubController extends Controller
                         ]);
                     }
                 }
+            }else{
+                DB::table('istaknute_licnosti')->insert([
+                    'avatar' => "default_avatar.png",
+                    'ime' => "",
+                    'prezime' => "",
+                    'opis' => "",
+                    'club_id' => $id
+                ]);
             }
 
             if($data->hasFile('galerija')){
@@ -166,6 +198,11 @@ class ClubController extends Controller
                         'club_id' => $id
                     ]);
                 }
+            }else{
+                DB::table('clubs_galerija')->insert([
+                    'image' => "default_galerija.png",
+                    'club_id' => $id
+                ]);
             }
 
              return redirect('clubs/'.$id.'/edit');
@@ -202,11 +239,11 @@ class ClubController extends Controller
             'grad' => 'required',
             'tip' => 'required',
             'kategorija' => 'required',
-            'godina_osnivanja' => 'required|integer',
+            /*'godina_osnivanja' => 'required|integer',
             'teren' => 'required|max:255|string',
             'takmicenje' => 'required',
             'savez' => 'required',
-            'adresa' => 'required'
+            'adresa' => 'required'*/
         ], $messages);
         if($validator->fails()){
             return redirect('clubs/'.$id.'/edit')

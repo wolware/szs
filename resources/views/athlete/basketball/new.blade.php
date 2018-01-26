@@ -88,7 +88,7 @@
           <!-- Nav tabs -->
           <ul class="nav nav-tabs nav-justified nav-product-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#tab-opcenito" role="tab" data-toggle="tab"><i class="fa fa-info-circle"></i><small>O sportisti</small>Općenito</a></li>
-			<li role="presentation"><a href="#tab-predispozicije" role="tab" data-toggle="tab"><i class="fa fa-bolt"></i><small>Predispozicije</small>Sportiste</a></li>
+			<li role="presentation" class="preslic"><a href="#tab-predispozicije" role="tab" data-toggle="tab"><i class="fa fa-bolt"></i><small>Predispozicije</small>Sportiste</a></li>
             <li role="presentation"><a href="#tab-biografija" role="tab" data-toggle="tab"><i class="fa fa-history"></i><small>Biografija</small>Sportiste</a></li>
             <li role="presentation"><a href="#tab-vitrina" role="tab" data-toggle="tab"><i class="fa fa-trophy"></i><small>Trofejna</small>Vitrina</a></li>
 			<li role="presentation"><a href="#tab-galerija" role="tab" data-toggle="tab"><i class="fa fa-picture-o"></i><small>Foto</small>Galerija</a></li>
@@ -176,7 +176,7 @@
   					</select>
 				  </div>
 				
-				  <div class="form-group col-md-4">
+				  <div class="form-group col-md-4" id="kantonDiv">
                     <label for="entitet"><img class="flow-icons-013" src="{{asset('images/icons/map.svg')}}"></img> Entitet/Distrikt</label>
                     <select class="form-control" id="entitet" name="entitet" required>
   						<option value="" disabled selected>Izaberite entitet/distrikt</option>
@@ -186,7 +186,7 @@
   					</select>
 				  </div>
 				
-				  <div class="form-group col-md-4">
+				  <div class="form-group col-md-4" id="opcineDiv">
                     <label for="kanton"><img class="flow-icons-013" src="{{asset('images/icons/placeholder.svg')}}"></img> Kanton</label>
                     <select class="form-control" id="kanton" name="kanton">
   						<option value="" disabled selected>Izaberite kanton</option>
@@ -203,7 +203,7 @@
   					</select>
 				  </div>
 				  
-				  <div class="form-group col-md-4">
+				  <div class="form-group col-md-4" id="regijaDiv" style="display:none;">
                     <label for="opcine-ks"><img class="flow-icons-013" src="{{asset('images/icons/opcina.svg')}}"></img> Općine Kantona Sarajevo</label>
                     <select class="form-control" id="opcine-ks" name="opcina">
   						<option value="" disabled selected>Izaberite općinu</option>
@@ -219,7 +219,7 @@
   					</select>
 				  </div>
 				  
-				  <div class="form-group col-md-4">
+				  <div class="form-group col-md-4" id="opSrb" style="display:none;">
                     <label for="regija"><img class="flow-icons-013" src="{{asset('images/icons/placeholder.svg')}}"></img> Regija</label>
                     <select class="form-control" id="regija" name="kanton">
   						<option value="" disabled selected>Izaberite regiju</option>

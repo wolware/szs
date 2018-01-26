@@ -11,14 +11,13 @@
     ================================================== -->
   
 
-    <!-- Header / End -->
     
     <!-- Pushy Panel - Dark -->
     <aside class="pushy-panel pushy-panel--dark">
       <div class="pushy-panel__inner">
         <header class="pushy-panel__header">
           <div class="pushy-panel__logo">
-            <a href="index.php"><img src="{{asset('images/soccer/logo.png')}}" srcset="images/soccer/logo@2x.png 2x" alt="Alchemists"></a>
+            <a href="index.php"><img src="{{url('assets/images/soccer/logo.png')}}" srcset="assets/images/soccer/logo@2x.png 2x" alt="Alchemists"></a>
           </div>
         </header>
         <div class="pushy-panel__content">
@@ -56,7 +55,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-10 col-md-offset-1">
-            <h1 class="page-icon-objavi-title"><img src="{{asset('images/icons/add-new-main.png')}}"></img></h1>
+            <h1 class="page-icon-objavi-title"><img src="{{url('assets/images/icons/add-new-main.png')}}"></h1>
             <h1 class="page-heading__title">Objavi novi profil</h1>
             <ol class="page-heading__breadcrumb breadcrumb">
               <li class="registracija-podnaslov">Izaberi kategoriju profila</li>
@@ -87,14 +86,14 @@
 					<div class="post-grid__item col-sm-3">
 					  <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
 						<figure class="posts__thumb">
-						<img src="{{asset('images/wpps/sportski-klub-wp.png')}}" alt="">
+						<img src="{{url('assets/images/wpps/sportski-klub-wp.png')}}" alt="">
 						</figure>
 						<div class="posts__inner card__content">
 							<h6 class="posts__title ime-sportiste-klub-lista"><a href="#">Sportski Klub</a></h6>
-							<div class="posts__excerpt">Dostupno: 5</div>
+							<div class="posts__excerpt">Dostupno: 6</div>
 						</div>
 						<footer class="posts__footer card__footer">
-							<a href="{{url('clubs/new')}}" class="btn btn-warning btn1-objavi-klub"><i class="fa fa-plus-circle"></i> Dodaj novi klub</a>
+							<a href="{{url('/clubs/new')}}" class="btn btn-warning btn1-objavi-klub"><i class="fa fa-plus-circle"></i> Dodaj novi klub</a>
 						</footer>
 					  </div>
 					</div>
@@ -102,7 +101,7 @@
 					<div class="post-grid__item col-sm-3">
 					  <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
 						<figure class="posts__thumb">
-							<img src="{{asset('images/wpps/skola-sporta-wp.png')}}" alt="">
+							<img src="{{url('assets/images/wpps/skola-sporta-wp.png')}}" alt="">
 						</figure>
 						<div class="posts__inner card__content">
 							<h6 class="posts__title ime-sportiste-klub-lista"><a href="#">Škola sporta</a></h6>
@@ -117,14 +116,14 @@
 					<div class="post-grid__item col-sm-3">
 					  <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
 						<figure class="posts__thumb">
-							<img src="{{asset('images/wpps/sportisti-wp.png')}}" alt="">
+							<img src="{{url('assets/images/wpps/sportisti-wp.png')}}" alt="">
 						</figure>
 						<div class="posts__inner card__content">
 							<h6 class="posts__title ime-sportiste-klub-lista"><a href="#">Sportista</a></h6>
-							<div class="posts__excerpt">Dostupno: 6</div>
+							<div class="posts__excerpt">Dostupno: 7</div>
 						</div>
 						<footer class="posts__footer card__footer">
-							<a href="{{url('/athletes/add')}}" class="btn btn-warning btn1-objavi-sportistu"><i class="fa fa-plus-circle"></i> Dodaj novog sportistu</a>
+							<a href="objavi-sportistu.php" class="btn btn-warning btn1-objavi-sportistu"><i class="fa fa-plus-circle"></i> Dodaj novog sportistu</a>
 						</footer>
 					  </div>
 					</div>
@@ -132,14 +131,14 @@
 					<div class="post-grid__item col-sm-3">
 					  <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
 						<figure class="posts__thumb">
-							<img src="{{asset('images/wpps/sportski-objekt-wp.png')}}" alt="">
+							<img src="{{url('assets/images/wpps/sportski-objekt-wp.png')}}" alt="">
 						</figure>
 						<div class="posts__inner card__content">
 							<h6 class="posts__title ime-sportiste-klub-lista"><a href="#">Sportski Objekt</a></h6>
 							<div class="posts__excerpt">Dostupno: 1</div>
 						</div>
 						<footer class="posts__footer card__footer">
-							<a href="objavi-objekat.php" class="btn btn-warning btn1-objavi-objekt"><i class="fa fa-plus-circle"></i> Dodaj novi objekt</a>
+							<a href="objavi-objekt.php" class="btn btn-warning btn1-objavi-objekt"><i class="fa fa-plus-circle"></i> Dodaj novi objekt</a>
 						</footer>
 					  </div>
 					</div>
@@ -147,7 +146,7 @@
 					<div class="post-grid__item col-sm-3">
 					  <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
 						<figure class="posts__thumb">
-							<img src="{{asset('images/wpps/oprema-wp.png')}}" alt="">
+							<img src="{{url('assets/images/wpps/oprema-wp.png')}}" alt="">
 						</figure>
 						<div class="posts__inner card__content">
 							<h6 class="posts__title ime-sportiste-klub-lista"><a href="#">Prodavnica Sportske Opreme</a></h6>
@@ -162,7 +161,7 @@
 					<div class="post-grid__item col-sm-3">
 					  <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
 						<figure class="posts__thumb">
-							<img src="{{asset('images/wpps/kadrovi-wp.png')}}" alt="">
+							<img src="{{url('assets/images/wpps/kadrovi-wp.png')}}" alt="">
 						</figure>
 						<div class="posts__inner card__content">
 							<h6 class="posts__title ime-sportiste-klub-lista"><a href="#">Stručni Kadar</a></h6>
@@ -177,7 +176,7 @@
 					<div class="post-grid__item col-sm-3">
 					  <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
 						<figure class="posts__thumb">
-							<img src="{{asset('images/wpps/sportski-event-wp.png')}}" alt="">
+							<img src="{{url('assets/images/wpps/sportski-event-wp.png')}}" alt="">
 						</figure>
 						<div class="posts__inner card__content">
 							<h6 class="posts__title ime-sportiste-klub-lista"><a href="#">Sportski Event</a></h6>
@@ -192,7 +191,7 @@
 					<div class="post-grid__item col-sm-3">
 					  <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
 						<figure class="posts__thumb">
-							<img src="{{asset('images/wpps/dijaspora-klub-wp.png')}}" alt="">
+							<img src="{{url('assets/images/wpps/dijaspora-klub-wp.png')}}" alt="">
 						</figure>
 						<div class="posts__inner card__content">
 							<h6 class="posts__title ime-sportiste-klub-lista"><a href="#">Dijaspora (Klub)</a></h6>
@@ -208,6 +207,8 @@
 		
 	  </div>
 	  </div>
+
+    <!-- Content / End -->
 
 
 @endsection

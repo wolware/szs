@@ -62,6 +62,7 @@ Route::get('/profile/new', function(){
 });
 
 // CLUB
+Route::get('/clubs/add', 'ClubController@clubs_add');
 Route::get('/clubs', 'ClubController@index_show');
 Route::get('/clubs/new', 'ClubController@new_show');
 Route::get('/clubs/{id}', 'ClubController@show');
@@ -75,7 +76,7 @@ Route::post('/trofej/edit/{id}', 'ClubController@edit_trofej');
 Route::post('/galerija/edit/{id}', 'ClubController@edit_galerija');
 
 //ATHLETE
-
+Route::get('/athletes/add', 'AthletesController@athletes_add');
 //**FOOTBALLER
 Route::get('/athlete/footballer/new', 'FootballerController@index');
 Route::get('/athlete/footballer/{id}', 'FootballerController@show');

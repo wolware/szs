@@ -90,7 +90,6 @@ class RegisterController extends Controller
             'spol' => 'required',
             'dob' => 'required',
             'country' => 'required',
-            'language' => 'required',
             'prihvatam' => 'required'
         ], $messages);
 
@@ -106,7 +105,6 @@ class RegisterController extends Controller
             $user->spol = $data['spol'];
             $user->dob = $data['dob'];
             $user->country = $data['country'];
-            $user->language = $data['language'];
             $user->save();
 
             Auth::loginUsingId($user->id);

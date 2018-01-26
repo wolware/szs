@@ -20,6 +20,10 @@ class AikidoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         return view('athlete.aikido.new');
@@ -43,9 +47,9 @@ class AikidoController extends Controller
             'kanton' => 'required',
             'opcina' => 'required',
             'grad' => 'required',
-            'klub' => 'required',
+            /*'klub' => 'required',
             'visina' => 'required',
-            'tezina' => 'required'
+            'tezina' => 'required'*/
         ], $messages);
         if($validator->fails()){
             return redirect('athlete/aikido/new')

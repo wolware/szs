@@ -26,23 +26,67 @@
            for (i = 0; i < filesAmount; i++) {
                var reader = new FileReader();
 
-               reader.onload = function(event) {
+               reader.onloadend = function(event) {
                     if(prvi==0){
                       var adnew = '<div class="album__item col-xs-6 col-sm-3"><div class="album__item-holder"><a href="'+event.target.result+'" class="album__item-link mp_gallery"><figure class="album__thumb"><img src="'+event.target.result+'" alt=""></figure><div class="album__item-desc"><img src="images/icons/expand-square.svg" class="pregled-slike" alt=""></img></div></a></div><div class="progress-stats upload-slike-statust-bar"><div class="progress"><div class="progress__bar progress__bar-width-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div></div></div>';
                       //$(adnew).appendTo('#galerija_klub');
-                      $('.form-objavi-klub-01').append(adnew);
+                      $('#tab-galerija .form-objavi-klub-01').append(adnew);
+                      
                     }
                }
 
                reader.readAsDataURL(input.files[i]);
            }
        }
-
-
    };
 
   $('.galerija').on('change', function() {
-       imagesPreview(this);
+       var prvi = 0;
+       var input = $(this);
+       if (input.files) {
+           var filesAmount = input.files.length;
+           for (i = 0; i < filesAmount; i++) {
+               var reader = new FileReader();
+
+               reader.onloadend = function(event) {
+                    if(prvi==0){
+                      var adnew = '<div class="album__item col-xs-6 col-sm-3"><div class="album__item-holder"><a href="'+event.target.result+'" class="album__item-link mp_gallery"><figure class="album__thumb"><img src="'+event.target.result+'" alt=""></figure><div class="album__item-desc"><img src="images/icons/expand-square.svg" class="pregled-slike" alt=""></img></div></a></div><div class="progress-stats upload-slike-statust-bar"><div class="progress"><div class="progress__bar progress__bar-width-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div></div></div>';
+                      //$(adnew).appendTo('#galerija_klub');
+                      $('#tab-galerija .form-objavi-klub-01').append(adnew);
+                      
+                    }
+               }
+
+               reader.readAsDataURL(input.files[i]);
+           }
+       }
+       //imagesPreview(this);
+      /*setTimeout(function(){
+        $('.album__item').last().remove();
+      },50);*/
+   });
+  $('.galerijak').on('change', function() {
+       var prvi = 0;
+       var input = $(this).context;
+       console.log(input.files);
+       if (input.files) {
+           var filesAmount = input.files.length;
+           for (i = 0; i < filesAmount; i++) {
+               var reader = new FileReader();
+
+               reader.onloadend = function(event) {
+                    if(prvi==0){
+                      var adnew = '<div class="album__item col-xs-6 col-sm-3"><div class="album__item-holder"><a href="'+event.target.result+'" class="album__item-link mp_gallery"><figure class="album__thumb"><img src="'+event.target.result+'" alt=""></figure><div class="album__item-desc"><img src="images/icons/expand-square.svg" class="pregled-slike" alt=""></img></div></a></div><div class="progress-stats upload-slike-statust-bar"><div class="progress"><div class="progress__bar progress__bar-width-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div></div></div>';
+                      //$(adnew).appendTo('#galerija_klub');
+                      $('#tab-galerija .form-objavi-klub-01').append(adnew);
+                      
+                    }
+               }
+
+               reader.readAsDataURL(input.files[i]);
+           }
+       }
+       //imagesPreview(this);
       /*setTimeout(function(){
         $('.album__item').last().remove();
       },50);*/
@@ -51,17 +95,23 @@
        imagesPreview(this);
    });
 });
+
+      
     $(document).ready(function(){
+
+
         $('#entitet').change(function(){
             var _entitet = $(this).val();
             if(_entitet == "Federacija BiH"){
                 $('#kantonDiv').css({"display":"block"});
                 $('#opcineDiv').css({"display":"block"});
                 $('#regijaDiv').css({"display":"none"});
+                $('#opSrb').css({"display":"none"});
             }else{
                 $('#kantonDiv').css({"display":"none"});
                 $('#opcineDiv').css({"display":"none"});
                 $('#regijaDiv').css({"display":"block"});
+                $('#opSrb').css({"display":"block"});
             }
         });
 
@@ -169,10 +219,49 @@ $('#createNewClub').validate({
     logo:{
       extension: 'png|jpg|jpeg'
     },
-    godina_osnivanja : {
-        number: true,
+    godina_osnivanja:{
         required: true
-    }
+    },
+    name:{
+      required:true,
+    },
+    karakter:{
+      required:true,
+    },
+    kontinent:{
+      required:true,
+    },
+    drzava:{
+      required:true,
+    },
+    entitet:{
+      required:true,
+    },
+    kanton:{
+      required:true,
+    },
+    grad:{
+      required:true,
+    },
+    tip:{
+      required:true,
+    },
+    sport:{
+      required:true,
+    },
+    kategorija:{
+      required:true,
+    },
+    teren:{
+      required:true,
+    },
+    takmicenje:{
+      required:true,
+    },
+    savez:{
+      required:true,
+    },
+
   }}
 );
 $('#createNewFootballer').validate({
@@ -212,6 +301,7 @@ $('#createNewFootballer').validate({
 $.validator.addMethod('filesize', function (value, element, param) {
     return this.optional(element) || (element.files[0].size <= param)
 }, 'File size must be less than {0}');
+
 $('#editClubForm').validate({
   rules: {
     logo: {
@@ -221,13 +311,49 @@ $('#editClubForm').validate({
   }
 });
 
-$('.prvi_korak_end').on('click', function(){
+/*$('.prvi_korak_end').on('click', function(){
   $('#createNewClub').valid();
-});
+  return false;
+});*/
 
-$('.btn-dalje').on('click', function(){
+/*$('.btn-dalje').on('click', function(){
   $('#createNewFootballer').valid();
+});*/
+$('.prvi_korak_end').click(function(){
+  if($('#createNewClub').length == 0){
+    $('#createNewFootballer').valid();
+    if($('#createNewFootballer').validate().errorList.length < 1){
+      $('.nav-product-tabs li').removeClass('active');
+     
+      $('.preslic').closest('li').addClass('active');
+      $('.tab-pane').removeClass('active');
+      $('.tab-pane').removeClass('in');
+      $('#tab-predispozicije').addClass('in');
+      $('#tab-predispozicije').addClass('active');
+    }
+  }else{
+     $('#createNewClub').valid();
+  if($('#createNewClub').validate().errorList.length < 1){
+    $('.nav-product-tabs li').removeClass('active');
+   
+    $('.preslic').closest('li').addClass('active');
+    $('.tab-pane').removeClass('active');
+    $('.tab-pane').removeClass('in');
+    $('#tab-licnosti').addClass('in');
+    $('#tab-licnosti').addClass('active');
+  }
+  }
+ 
+  return false;
 });
+/*$('.bt-zavrsi').click(function(){
+  $('#createNewClub').valid();
+  if($('#createNewClub').validate().errorList.length > 1){
+    return false;
+  }else{
+    $('#createNewClub').submit();
+  }
+});*/
       jQuery.extend(jQuery.validator.messages, {
     required: "Ovo polje je obavezno.",
     remote: "Please fix this field.",

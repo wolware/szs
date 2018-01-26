@@ -19,6 +19,10 @@ class BasketballController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         return view('athlete.basketball.new');
@@ -43,9 +47,9 @@ class BasketballController extends Controller
             'kanton' => 'required',
             'opcina' => 'required',
             'grad' => 'required',
-            'klub' => 'required',
+            /*'klub' => 'required',
             'visina' => 'required',
-            'tezina' => 'required'
+            'tezina' => 'required'*/
         ], $messages);
         if($validator->fails()){
             return redirect('athlete/basketball/new')

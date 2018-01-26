@@ -18,6 +18,10 @@ class SkiingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         return view('athlete.skiing.new');
@@ -42,9 +46,9 @@ class SkiingController extends Controller
             'kanton' => 'required',
             'opcina' => 'required',
             'grad' => 'required',
-            'klub' => 'required',
+            /*'klub' => 'required',
             'visina' => 'required',
-            'tezina' => 'required'
+            'tezina' => 'required'*/
         ], $messages);
         if($validator->fails()){
             return redirect('athlete/skiing/new')
@@ -61,6 +65,13 @@ class SkiingController extends Controller
                 $data['avatar'] = $newLogoName;
             }else{
                 $data['avatar'] = 'default.png';
+            }
+
+             if(empty($data['kanton'])){
+                $data['kanton'] = $data['kantonSrb'];
+            }
+            if(empty($data['opcina'])){
+                $data['opcina'] = $data['opcinaSrb'];
             }
             $id = DB::table('skiing')->insertGetId([
                 'avatar' => $newLogoName,
@@ -93,6 +104,12 @@ class SkiingController extends Controller
                     'sportista' => 'skiing',
                     'sportista_id' => $id
                 ]);
+            }else{
+                DB::table('biografija')->insert([
+                    'content' => "",
+                    'sportista' => 'skiing',
+                    'sportista_id' => $id
+                ]);
             }
 
             if(!empty($data['naziv_takmicenja'][0])){
@@ -112,6 +129,17 @@ class SkiingController extends Controller
                         continue;
                      }
                 }
+            }else{
+                 DB::table('sportista_trofej')->insert([
+                    'vrsta_nagrade' => "",
+                    'tip_nagrade' => "",
+                    'naziv_takmicenja' => "",
+                    'nivo_takmicenja' => "",
+                    'sezona' => "",
+                    'osvajanja' => 0,
+                    'sportista' => 'skiing',
+                    'sportista_id' => $id
+                ]);
             }
 
             if(!empty($data['klub_kh'][0])){
@@ -127,6 +155,13 @@ class SkiingController extends Controller
                         continue;
                      }
                 }
+            }else{
+                DB::table('klupska_historija')->insert([
+                    'sezona' => "",
+                    'klub' => "",
+                    'sportista' => 'skiing',
+                    'sportista_id' => $id
+                ]);
             }
 
             /*if($data->hasFile('avatar_licnost')){
@@ -161,6 +196,12 @@ class SkiingController extends Controller
                         'sportista_id' => $id
                     ]);
                 }
+            }else{
+                DB::table('sportista_galerija')->insert([
+                    'url' => "default.png",
+                    'sportista' => 'skiing',
+                    'sportista_id' => $id
+                ]);
             }
 
              return redirect('athlete/skiing/'.$id);

@@ -153,8 +153,8 @@
             </li>
           </ul>
           @else
-            <li class="nav-account__item"><a href="{{url('login')}}"><i class="fa fa-sign-out"></i> Login</a></li>
-              <li class="nav-account__item"><a href="{{url('register')}}"><i class="fa fa-sign-out"></i> Register</a></li>
+            <li class="nav-account__item"><a href="{{url('login')}}"><i class="fa fa-sign-out"></i> Prijava</a></li>
+              <li class="nav-account__item"><a href="{{url('register')}}"><i class="fa fa-sign-out"></i> Registracija</a></li>
           @endif
           <!-- Account Navigation / End -->
 

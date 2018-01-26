@@ -19,6 +19,10 @@ class FootballerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         return view('athlete.footballer.new');
@@ -43,9 +47,9 @@ class FootballerController extends Controller
             'kanton' => 'required',
             'opcina' => 'required',
             'grad' => 'required',
-            'klub' => 'required',
+            /*'klub' => 'required',
             'visina' => 'required',
-            'tezina' => 'required'
+            'tezina' => 'required'*/
         ], $messages);
         if($validator->fails()){
             return redirect('athlete/footballer/new')

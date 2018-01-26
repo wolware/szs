@@ -18,6 +18,10 @@ class OdbojkaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         return view('athlete.volleyball.new');
@@ -32,7 +36,7 @@ class OdbojkaController extends Controller
             'confirmed' => ':attribute se ne podudara.',
             'integer' => ':attribute mora biti broj',
         ];
-        $validator = Validator::make($data->all(),[
+       $validator = Validator::make($data->all(),[
             'ime' => 'required|max:255|string',
             'prezime' => 'required|max:255|string',
             'karakter' => 'required|max:255|string',
@@ -42,9 +46,9 @@ class OdbojkaController extends Controller
             'kanton' => 'required',
             'opcina' => 'required',
             'grad' => 'required',
-            'klub' => 'required',
+            /*'klub' => 'required',
             'visina' => 'required',
-            'tezina' => 'required'
+            'tezina' => 'required'*/
         ], $messages);
         if($validator->fails()){
             return redirect('athlete/volleyball/new')

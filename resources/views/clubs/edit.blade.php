@@ -215,23 +215,23 @@
 				  </div>
 
 				  @else
-				  <div class="form-group col-md-4" hidden>
+				  <div class="form-group col-md-4">
                     <label for="regija"><img class="flow-icons-013" src="assets/images/icons/placeholder.svg"></img> Regija</label>
-                    <select class="form-control" id="regija" name="regija">
-                    	<option value="{{$data->regija}}">{{$data->regija}}</option>
+                    <select class="form-control" id="regija" name="kanton">
+                    	<option value="{{$data->kanton}}">{{$data->kanton}}</option>
   						<option value="" disabled>Izaberite regiju</option>
 						<option value="Banjalucka" disabled>Banjalučka</option>
     					<option value="Dobojsko-bijeljinska" disabled>Dobojsko-bijeljinska</option>
 						<option value="Sarajevsko-zvornicka">Sarajevsko-zvornička</option>
-    					<option value="Trebinjsko-focanska"disabled>Trebinjsko-fočanska</option>
+    					<option value="Trebinjsko-focanska" disabled>Trebinjsko-fočanska</option>
   					</select>
 				  </div>
 
-				  <div class="form-group col-md-4" hidden>
+				  <div class="form-group col-md-4">
                     <label for="opcine-sz-reg"><img class="flow-icons-013" src="assets/images/icons/opcina.svg"></img> Općine Sarajevsko-Zvorničke regije</label>
                     <select name="opcina" class="form-control" id="opcine-sz-reg">
-                    	<option value="{{$data->regija}}">{{$data->regija}}</option>
-  						<option value="" disabled selected>Izaberite općinu</option>
+                    	<option value="{{$data->opcina}}" selected>{{$data->opcina}}</option>
+  						<option value="" disabled>Izaberite općinu</option>
 						<option value="Bratunac" disabled>Bratunac</option>
     					<option value="Han Pijesak" disabled>Han Pijesak</option>
 						<option value="Ilijas">Ilijaš</option>
@@ -272,61 +272,7 @@
     					<option value="Invalidski sportski klub">Invalidski sportski klub</option>
   					</select>
 				  </div>
-				  @if($data->sport)
-				  <div class="form-group col-md-4">
-                    <label for="sport"><img class="flow-icons-013" src="{{asset('images/icons/menu-circular-button.svg')}}"></img> Sportovi</label>
-                    <select class="form-control" id="sport" name="sport" selected>
-                    	<option value="{{$data->sport}}" selected>{{$data->sport}}</option>
-						<option value="Aikido">Aikido</option>
-						<option value="Atletika">Atletika</option>
-						<option value="Auto-Moto">Auto-Moto</option>
-						<option value="Badminton">Badminton</option>
-						<option value="Biciklizam">Biciklizam</option>
-						<option value="Bob">Bob</option>
-						<option value="Bocanje">Boćanje</option>
-						<option value="Bodybuilding and Fitness">Bodybuilding & Fitness</option>
-						<option value="Boks">Boks</option>
-						<option value="Curling">Curling</option>
-						<option value="Dizanje tegova">Dizanje tegova</option>
-						<option value="Futsal">Futsal</option>
-						<option value="Gimnastika">Gimnastika</option>
-						<option value="Golf">Golf</option>
-						<option value="Hokej">Hokej</option>
-						<option value="Hrvanje">Hrvanje</option>
-						<option value="Jedrenje">Jedrenje</option>
-						<option value="Ju Jitsu">Ju Jitsu</option>
-						<option value="Judo">Judo</option>
-						<option value="Kajak Kanu i Rafting">Kajak Kanu i Rafting</option>
-						<option value="Karate">Karate</option>
-						<option value="Kick Box">Kick Box</option>
-						<option value="Klizanje">Klizanje</option>
-						<option value="Konjicki sportovi">Konjički sportovi</option>
-						<option value="Kosarka">Košarka</option>
-						<option value="Kung Fu">Kung Fu</option>
-						<option value="Kuglanje">Kuglanje</option>
-						<option value="Nogomet">Nogomet</option>
-						<option value="Macevanje">Mačevanje</option>
-						<option value="Odbojka">Odbojka</option>
-						<option value="Planinarstvo">Planinarstvo</option>
-						<option value="Plivanje">Plivanje</option>
-						<option value="Ragbi">Ragbi</option>
-						<option value="Ronjenje">Ronjenje</option>
-						<option value="Rukomet">Rukomet</option>
-						<option value="Skijanje">Skijanje</option>
-						<option value="Sportski ribolov">Sportski ribolov</option>
-						<option value="Stoni tenis">Stoni tenis</option>
-						<option value="Strelicarstvo">Streličarstvo</option>
-						<option value="Streljastvo">Streljaštvo</option>
-						<option value="Sah">Šah</option>
-						<option value="Teakwondo">Taekwondo</option>
-						<option value="Tenis">Tenis</option>
-						<option value="Triatlon">Triatlon</option>
-						<option value="Vaterpolo">Vaterpolo</option>
-						<option value="Vazduhoplovstvo">Vazduhoplovstvo</option>
-						<option value="Veslanje">Veslanje</option>
-					</select>
-				  </div>
-				  @else
+				  @if($data->invalidski_sport)
 				  <div class="form-group col-md-4">
                     <label for="invalidski-sport"><img class="flow-icons-013" src="assets/images/icons/disability.svg"></img> Sportovi za osobe sa invaliditetom</label>
                     <select class="form-control" id="invalidski_sport">
@@ -343,11 +289,65 @@
 						<option value="Sah">Šah</option>
 					</select>
 				  </div>
+          @else
+            <div class="form-group col-md-4">
+                    <label for="sport"><img class="flow-icons-013" src="{{asset('images/icons/menu-circular-button.svg')}}"></img> Sportovi</label>
+                    <select class="form-control" id="sport" name="sport" selected>
+                      <option value="{{$data->sport}}" selected>{{$data->sport}}</option>
+            <option value="Aikido">Aikido</option>
+            <option value="Atletika">Atletika</option>
+            <option value="Auto-Moto">Auto-Moto</option>
+            <option value="Badminton">Badminton</option>
+            <option value="Biciklizam">Biciklizam</option>
+            <option value="Bob">Bob</option>
+            <option value="Bocanje">Boćanje</option>
+            <option value="Bodybuilding and Fitness">Bodybuilding & Fitness</option>
+            <option value="Boks">Boks</option>
+            <option value="Curling">Curling</option>
+            <option value="Dizanje tegova">Dizanje tegova</option>
+            <option value="Futsal">Futsal</option>
+            <option value="Gimnastika">Gimnastika</option>
+            <option value="Golf">Golf</option>
+            <option value="Hokej">Hokej</option>
+            <option value="Hrvanje">Hrvanje</option>
+            <option value="Jedrenje">Jedrenje</option>
+            <option value="Ju Jitsu">Ju Jitsu</option>
+            <option value="Judo">Judo</option>
+            <option value="Kajak Kanu i Rafting">Kajak Kanu i Rafting</option>
+            <option value="Karate">Karate</option>
+            <option value="Kick Box">Kick Box</option>
+            <option value="Klizanje">Klizanje</option>
+            <option value="Konjicki sportovi">Konjički sportovi</option>
+            <option value="Kosarka">Košarka</option>
+            <option value="Kung Fu">Kung Fu</option>
+            <option value="Kuglanje">Kuglanje</option>
+            <option value="Nogomet">Nogomet</option>
+            <option value="Macevanje">Mačevanje</option>
+            <option value="Odbojka">Odbojka</option>
+            <option value="Planinarstvo">Planinarstvo</option>
+            <option value="Plivanje">Plivanje</option>
+            <option value="Ragbi">Ragbi</option>
+            <option value="Ronjenje">Ronjenje</option>
+            <option value="Rukomet">Rukomet</option>
+            <option value="Skijanje">Skijanje</option>
+            <option value="Sportski ribolov">Sportski ribolov</option>
+            <option value="Stoni tenis">Stoni tenis</option>
+            <option value="Strelicarstvo">Streličarstvo</option>
+            <option value="Streljastvo">Streljaštvo</option>
+            <option value="Sah">Šah</option>
+            <option value="Teakwondo">Taekwondo</option>
+            <option value="Tenis">Tenis</option>
+            <option value="Triatlon">Triatlon</option>
+            <option value="Vaterpolo">Vaterpolo</option>
+            <option value="Vazduhoplovstvo">Vazduhoplovstvo</option>
+            <option value="Veslanje">Veslanje</option>
+          </select>
+          </div>
 				  @endif
 				  <div class="form-group col-md-4">
                     <label for="kategorija-klub"><img class="flow-icons-013" src="{{asset('images/icons/gender-symbols.svg')}}"></img> Kategorija kluba</label>
                     <select class="form-control" id="kategorija-klub" name="kategorija">
-                    	<option value="{{$data->kategorija}}"></option>
+                    	<option value="{{$data->kategorija}}">{{$data->kategorija}}</option>
 						<option value="Muski klub">Muški klub</option>
 						<option value="Zenski klub">Ženski klub</option>
 						<option value="Mjesovito">Mješovito</option>
@@ -499,15 +499,7 @@
 			<!-- Tab: Ličnosti -->
 
 			<div role="tabpanel" class="tab-pane fade neaktivno" id="tab-licnosti">
-			<div class="row obavijesti-racun">
-				<div class="alert alert-warning">
-				  <strong>PREMIUM račun Vam dozvoljava unos do maksimalnih 5 kadrova.</strong>
-				</div>
-				<div class="alert alert-warning" hidden>
-				  <button href="premium.php" type="button" class="btn btn-xs btn-default btn-outline alert-btn-right">Aktiviraj premium</button>
-				  <strong>STANDARDAN račun Vam dozvoljava unos do maksimalno 3 kadra.</strong>
-				</div>
-			</div>
+
 			@foreach($licnosti as $licnost)
 <form id="editLicnosti" role="form" action="{{ url('/licnost/edit/'.$licnost->id) }}" method="POST" enctype="multipart/form-data" >
 				{!! csrf_field() !!}
@@ -578,15 +570,7 @@
 			<div role="tabpanel" class="tab-pane fade neaktivno" id="tab-vremeplov">
 				<form id="editVremeplov" role="form" action="{{ url('/vremeplov/edit/'.$vremeplov->id) }}" method="POST" enctype="multipart/form-data" >
 				{!! csrf_field() !!}
-			<div class="row obavijesti-racun">
-				<div class="alert alert-warning">
-				  <strong>PREMIUM račun Vam dozvoljava unos do maksimalnih 150 linija teksta.</strong>
-				</div>
-				<div class="alert alert-warning" hidden>
-				  <button href="premium.php" type="button" class="btn btn-xs btn-default btn-outline alert-btn-right">Aktiviraj premium</button>
-				  <strong>STANDARDAN račun Vam dozvoljava unos do maksimalnih 50 linija teksta.</strong>
-				</div>
-			</div>
+
 			<div class="row">
 
 				
@@ -614,15 +598,6 @@
 			<!-- Tab: Vitrina -->
 			<div role="tabpanel" class="tab-pane fade neaktivno" id="tab-vitrina">
 
-				<div class="row obavijesti-racun">
-					<div class="alert alert-warning">
-					  <strong>PREMIUM račun Vam dozvoljava unos do maksimalnih 24 trofeja/nagrada.</strong>
-					</div>
-					<div class="alert alert-warning" hidden>
-					  <button href="premium.php" type="button" class="btn btn-xs btn-default btn-outline alert-btn-right">Aktiviraj premium</button>
-					  <strong>STANDARDAN račun Vam dozvoljava unos do maksimalno 8 trofeja/nagrada.</strong>
-					</div>
-				</div>
 
 			@foreach($trofeji as $trofej)
 			<form id="editTrofej" role="form" action="{{ url('/trofej/edit/'.$trofej->id) }}" method="POST" enctype="multipart/form-data" >
@@ -1110,15 +1085,7 @@
 			<div role="tabpanel" class="tab-pane fade neaktivno" id="tab-galerija">
 <form id="editClubForm" name="editClubsForm" role="form" action="{{ url('/galerija/edit/'.$data->id) }}" method="POST" enctype="multipart/form-data" >
 				{!! csrf_field() !!}
-				<div class="row obavijesti-racun">
-					<div class="alert alert-warning">
-					  <strong>PREMIUM račun Vam dozvoljava unos do maksimalnih 20 slika.</strong>
-					</div>
-					<div class="alert alert-warning" hidden>
-					  <button href="premium.php" type="button" class="btn btn-xs btn-default btn-outline alert-btn-right">Aktiviraj premium</button>
-					  <strong>STANDARDAN račun Vam dozvoljava unos do maksimalno 12 slika.</strong>
-					</div>
-				</div>
+
 
 
 				<div class="row dodavanje-slika">

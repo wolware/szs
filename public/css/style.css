@@ -247,7 +247,10 @@ ul.list li::before {
   padding: 10px 0;
   margin-bottom: 20px;
 }
-
+.album__item-holder{
+  min-height: 170px;
+  max-height: 170px;
+}
 @media (min-width: 992px) {
   .content-title {
     padding: 25px 0;
