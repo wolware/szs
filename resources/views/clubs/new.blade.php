@@ -254,7 +254,7 @@
 
 				  <div class="form-group col-md-4">
                     <label for="mjesto"><img class="flow-icons-013" src="{{asset('images/icons/small-calendar.svg')}}"></img> Mjesto/Grad kluba*</label>
-                    <input name="grad" type="text" name="mjesto" id="mjesto" class="form-control" placeholder="Unesite mjesto kluba" required>
+                    <input name="grad" type="text" name="mjesto" id="mjesto" class="form-control" placeholder="Unesite mjesto kluba" onFocus="initAutocomplete()" required autocomplete="on">
                   </div>
 
 				  <div class="form-group col-md-4">
@@ -424,7 +424,7 @@
 
 					<div class="form-group col-md-4">
 						<label for="adresa"><img class="flow-icons-013" src="{{asset('images/icons/icon.svg')}}"></img> Adresa (ne prikazuje se)</label>
-						<input type="text" name="adresa" id="adresa" class="form-control" placeholder="Unesite adresu sjedišta kluba" required>
+						<input type="text" name="adresa" id="adresa" onFocus="adresaAutoComp()" class="form-control" placeholder="Unesite adresu sjedišta kluba" required>
 					</div>
 
 			</div>

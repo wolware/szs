@@ -180,8 +180,8 @@
                     <label for="entitet"><img class="flow-icons-013" src="{{asset('images/icons/map.svg')}}"></img> Entitet/Distrikt</label>
                     <select class="form-control" id="entitet" name="entitet" required>
   						<option value="" disabled selected>Izaberite entitet/distrikt</option>
-						<option value="fbih">Federacija BiH</option>
-    					<option value="rs">Republika Srpska</option>
+						<option value="Federacija BiH">Federacija BiH</option>
+    					<option value="Republika Srpska">Republika Srpska</option>
 						<option value="distrikt" disabled>Distrikt Brčko</option>
   					</select>
 				  </div>
@@ -262,7 +262,7 @@
 				  
 				  <div class="form-group col-md-4">
                     <label for="mjesto"><img class="flow-icons-013" src="{{asset('images/icons/small-calendar.svg')}}"></img> Mjesto/Grad kluba</label>
-                    <input type="text" name="grad" id="mjesto" class="form-control" placeholder="Unesite mjesto kluba" required>
+                    <input type="text" name="grad" id="mjesto" onFocus="initAutocomplete()" class="form-control" placeholder="Unesite mjesto kluba">
                   </div>
 				
 			</div>
@@ -281,10 +281,10 @@
 						<input type="text" name="fb" id="fcb" class="form-control" placeholder="Unesite link službene facebook stranice">
 					</div>
 					
-					<div class="form-group col-md-6">
+					<!--<div class="form-group col-md-6">
 						<label for="twt"><img class="flow-icons-013" src="{{asset('images/icons/twitter.svg"')}}></img> Twitter profil</label>
 						<input type="text" name="twt" id="twt" class="form-control" placeholder="Unesite link službenog twitter profila">
-					</div>
+					</div>-->
 					
 					<div class="form-group col-md-6">
 						<label for="inst"><img class="flow-icons-013" src="{{asset('images/icons/instagram.svg')}}"></img> Instagram profil</label>
@@ -628,6 +628,4 @@
 		
 	  </div>
 	  </div>
-
-
 @endsection

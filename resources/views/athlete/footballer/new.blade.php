@@ -88,7 +88,7 @@
           <!-- Nav tabs -->
           <ul class="nav nav-tabs nav-justified nav-product-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#tab-opcenito" role="tab" data-toggle="tab"><i class="fa fa-info-circle"></i><small>O sportisti</small>Općenito</a></li>
-			<li role="presentation"><a href="#tab-predispozicije" role="tab" data-toggle="tab"><i class="fa fa-bolt"></i><small>Predispozicije</small>Sportiste</a></li>
+			<li role="presentation" class="preslic"><a href="#tab-predispozicije" role="tab" data-toggle="tab"><i class="fa fa-bolt"></i><small>Predispozicije</small>Sportiste</a></li>
             <li role="presentation"><a href="#tab-biografija" role="tab" data-toggle="tab"><i class="fa fa-history"></i><small>Biografija</small>Sportiste</a></li>
             <li role="presentation"><a href="#tab-vitrina" role="tab" data-toggle="tab"><i class="fa fa-trophy"></i><small>Trofejna</small>Vitrina</a></li>
 			<li role="presentation"><a href="#tab-galerija" role="tab" data-toggle="tab"><i class="fa fa-picture-o"></i><small>Foto</small>Galerija</a></li>
@@ -143,7 +143,7 @@
                   </div>
 				  <div class="form-group col-md-12">
                     <label for="karakter-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"></img> Karakter sportiste</label>
-						<select class="form-control" id="entitet" name="karakter" required>
+						<select class="form-control" id="asasa" name="karakter" required>
   						<option value="profesionalac" selected>Profesionalni sportista</option>
 						<option value="amater">Sportista amater</option>
     					<option value="rekreativac">Sportista rekreativac</option>
@@ -180,13 +180,13 @@
                     <label for="entitet"><img class="flow-icons-013" src="{{asset('images/icons/map.svg')}}"></img> Entitet/Distrikt</label>
                     <select class="form-control" id="entitet" name="entitet" required>
   						<option value="" disabled selected>Izaberite entitet/distrikt</option>
-						<option value="fbih">Federacija BiH</option>
-    					<option value="rs">Republika Srpska</option>
+						<option value="Federacija BiH">Federacija BiH</option>
+    					<option value="Republika Srpska">Republika Srpska</option>
 						<option value="distrikt" disabled>Distrikt Brčko</option>
   					</select>
 				  </div>
 				
-				  <div class="form-group col-md-4">
+				  <div class="form-group col-md-4" id="kantonDiv">
                     <label for="kanton"><img class="flow-icons-013" src="{{asset('images/icons/placeholder.svg')}}"></img> Kanton</label>
                     <select class="form-control" id="kanton" name="kanton">
   						<option value="" disabled selected>Izaberite kanton</option>
@@ -203,7 +203,7 @@
   					</select>
 				  </div>
 				  
-				  <div class="form-group col-md-4">
+				  <div class="form-group col-md-4" id="opcineDiv">
                     <label for="opcine-ks"><img class="flow-icons-013" src="{{asset('images/icons/opcina.svg')}}"></img> Općine Kantona Sarajevo</label>
                     <select class="form-control" id="opcine-ks" name="opcina">
   						<option value="" disabled selected>Izaberite općinu</option>
@@ -219,9 +219,9 @@
   					</select>
 				  </div>
 				  
-				  <div class="form-group col-md-4">
+				  <div class="form-group col-md-4" id="regijaDiv" style="display: none;">
                     <label for="regija"><img class="flow-icons-013" src="{{asset('images/icons/placeholder.svg')}}"></img> Regija</label>
-                    <select class="form-control" id="regija" name="kanton">
+                    <select class="form-control" id="regija" name="kantonSrb">
   						<option value="" disabled selected>Izaberite regiju</option>
 						<option value="blk" disabled>Banjalučka</option>
     					<option value="dbj" disabled>Dobojsko-bijeljinska</option>
@@ -230,9 +230,9 @@
   					</select>
 				  </div>
 				  
-				  <div class="form-group col-md-4">
+				  <div class="form-group col-md-4" id="opSrb" style="display: none;">
                     <label for="opcine-sz-reg"><img class="flow-icons-013" src="{{asset('images/icons/opcina.svg')}}"></img> Općine Sarajevsko-Zvorničke regije</label>
-                    <select class="form-control" id="opcine-sz-reg" name="opcina">
+                    <select class="form-control" id="opcine-sz-reg" name="opcinaSrb">
   						<option value="" disabled selected>Izaberite općinu</option>
 						<option value="bratunac" disabled>Bratunac</option>
     					<option value="hanpijesak" disabled>Han Pijesak</option>
@@ -262,7 +262,7 @@
 				  
 				  <div class="form-group col-md-4">
                     <label for="mjesto"><img class="flow-icons-013" src="{{asset('images/icons/small-calendar.svg')}}"></img> Mjesto/Grad kluba</label>
-                    <input type="text" name="grad" id="mjesto" class="form-control" placeholder="Unesite mjesto kluba" required>
+                    <input type="text" name="grad" id="mjesto" onFocus="initAutocomplete()" class="form-control" placeholder="Unesite mjesto kluba" required>
                   </div>
 				
 			</div>
@@ -281,11 +281,11 @@
 						<input type="text" name="fb" id="fcb" class="form-control" placeholder="Unesite link službene facebook stranice">
 					</div>
 					
-					<div class="form-group col-md-6">
+					<!--<div class="form-group col-md-6">
 						<label for="twt"><img class="flow-icons-013" src="{{asset('images/icons/twitter.svg"')}}></img> Twitter profil</label>
 						<input type="text" name="twt" id="twt" class="form-control" placeholder="Unesite link službenog twitter profila">
 					</div>
-					
+					-->
 					<div class="form-group col-md-6">
 						<label for="inst"><img class="flow-icons-013" src="{{asset('images/icons/instagram.svg')}}"></img> Instagram profil</label>
 						<input type="text" name="instagram" id="inst" class="form-control" placeholder="Unesite link službenog instagram profila">
@@ -314,7 +314,7 @@
 				<div class="col-md-6">
                 </div>
 				<div class="form-group form-group--submit col-md-6" >
-                    <a href="#" class="btn btn-default btn-sm btn-block btn-dalje">Sljedeći korak <i class="fa fa-chevron-right"></i></a>
+                    <a type="submit" name="submit" class="btn btn-default btn-sm btn-block btn-dalje prvi_korak_end">Sljedeći korak <i class="fa fa-chevron-right"></i></a>
                 </div>
 				
 			</div>
@@ -411,7 +411,14 @@
 					
 				  
 			</div>
-					
+					<div class="row">
+        <div class="form-group form-group--submit col-md-6">
+                    <a href="#tab-opcenito" role="tab" data-toggle="tab" class="btn btn-default btn-sm btn-block btn-nazad"><i class="fa fa-chevron-left"></i> Nazad</a>
+                </div>
+        <div class="form-group form-group--submit col-md-6">
+                    <a href="#tab-biografija" role="tab" data-toggle="tab" class="btn btn-default btn-sm btn-block btn-dalje">Sljedeći korak <i class="fa fa-chevron-right"></i></a>
+                </div>
+      </div>
 			</div>
 			
 			<!-- Tab: Predispozicije / End -->
@@ -419,15 +426,7 @@
 			<!-- Tab: Vremeplov -->
 			
 			<div role="tabpanel" class="tab-pane fade neaktivno" id="tab-biografija">
-			<div class="row obavijesti-racun">
-				<div class="alert alert-warning">
-				  <strong>PREMIUM račun Vam dozvoljava unos do maksimalnih 150 linija teksta.</strong>
-				</div>
-				<div class="alert alert-warning">
-				  <button href="premium.php" type="button" class="btn btn-xs btn-default btn-outline alert-btn-right">Aktiviraj premium</button>
-				  <strong>STANDARDAN račun Vam dozvoljava unos do maksimalnih 50 linija teksta.</strong>
-				</div>
-			</div>
+
 			<div class="row">
 							
 				<div class="row identitet-style">
@@ -447,10 +446,10 @@
 			
 			<div class="row">
 				<div class="form-group form-group--submit col-md-6">
-                    <a href="#" class="btn btn-default btn-sm btn-block btn-nazad"><i class="fa fa-chevron-left"></i> Nazad</a>
+                    <a href="#tab-predispozicije" role="tab" data-toggle="tab" class="btn btn-default btn-sm btn-block btn-nazad"><i class="fa fa-chevron-left"></i> Nazad</a>
                 </div>
-				<div class="form-group form-group--submit col-md-6">
-                    <a href="#" class="btn btn-default btn-sm btn-block btn-dalje">Sljedeći korak <i class="fa fa-chevron-right"></i></a>
+        <div class="form-group form-group--submit col-md-6">
+                    <a href="#tab-vitrina" role="tab" data-toggle="tab" class="btn btn-default btn-sm btn-block btn-dalje">Sljedeći korak <i class="fa fa-chevron-right"></i></a>
                 </div>
 			</div>
 			
@@ -460,16 +459,6 @@
 			
 			<!-- Tab: Vitrina -->
 			<div role="tabpanel" class="tab-pane fade neaktivno" id="tab-vitrina">
-			
-				<div class="row obavijesti-racun">
-					<div class="alert alert-warning">
-					  <strong>PREMIUM račun Vam dozvoljava unos do maksimalnih 24 trofeja/nagrada.</strong>
-					</div>
-					<div class="alert alert-warning">
-					  <button href="premium.php" type="button" class="btn btn-xs btn-default btn-outline alert-btn-right">Aktiviraj premium</button>
-					  <strong>STANDARDAN račun Vam dozvoljava unos do maksimalno 8 trofeja/nagrada.</strong>
-					</div>
-				</div>
 			
 			<div class="row">
 			<div class="row form-segment">
@@ -531,18 +520,16 @@
 			
 			<div class="row">
 				<div class="col-md-4"></div>
-				<div class="form-group form-group--submit col-md-4">
-                    <a href="#" class="btn btn-default btn-sm btn-block btn-dodaj"><i class="fa fa-database"></i> 2 Dodavanje trofeja </a>
-                </div>
+
 				<div class="col-md-4"></div>
 			</div>
 			
 			<div class="row">
 				<div class="form-group form-group--submit col-md-6">
-                    <a href="#" class="btn btn-default btn-sm btn-block btn-nazad"><i class="fa fa-chevron-left"></i> Nazad</a>
+                    <a href="#tab-biografija" role="tab" data-toggle="tab" class="btn btn-default btn-sm btn-block btn-nazad"><i class="fa fa-chevron-left"></i> Nazad</a>
                 </div>
-				<div class="form-group form-group--submit col-md-6">
-                    <a href="#" class="btn btn-default btn-sm btn-block btn-dalje">Sljedeći korak <i class="fa fa-chevron-right"></i></a>
+        <div class="form-group form-group--submit col-md-6">
+                    <a href="#tab-galerija" role="tab" data-toggle="tab" class="btn btn-default btn-sm btn-block btn-dalje">Sljedeći korak <i class="fa fa-chevron-right"></i></a>
                 </div>
 			</div>
 			
@@ -552,15 +539,6 @@
 			<!-- Tab: Foto galerija -->
 			<div role="tabpanel" class="tab-pane fade neaktivno" id="tab-galerija">
 			
-				<div class="row obavijesti-racun">
-					<div class="alert alert-warning">
-					  <strong>PREMIUM račun Vam dozvoljava unos do maksimalnih 20 slika.</strong>
-					</div>
-					<div class="alert alert-warning">
-					  <button href="premium.php" type="button" class="btn btn-xs btn-default btn-outline alert-btn-right">Aktiviraj premium</button>
-					  <strong>STANDARDAN račun Vam dozvoljava unos do maksimalno 12 slika.</strong>
-					</div>
-				</div>
 				
 				
 				<div class="row dodavanje-slika">
@@ -568,7 +546,7 @@
 						  <p class="dodaj-sliku-naslov">Dodajte slike</p>
 						  <p class="dodaj-sliku-call">u Vašu galeriju</p>
 						  <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-							Odaberi slike... <input type="file" class="galerija" name="galerija[]" accept="image/*" accept="image/*" multiple style="display: none;">
+							Odaberi slike... <input type="file" class="galerijak" name="galerija[]" accept="image/*" accept="image/*" multiple style="display: none;">
 						  </label>
 						  <div class="info001">
 							<p class="info-upload-slike">Preporučena dimenzija za vaše slike:</p>
@@ -602,18 +580,16 @@
 				
 				<div class="row">
 					<div class="col-md-4"></div>
-					<div class="form-group form-group--submit col-md-4">
-						<a href="#" class="btn btn-default btn-sm btn-block btn-dodaj"><i class="fa fa-database"></i> 3 Dodavanje fotografije </a>
-					</div>
+					
 					<div class="col-md-4"></div>
 				</div>
 				
 				<div class="row">
-					<div class="form-group form-group--submit col-md-6">
-						<a href="#" class="btn btn-default btn-sm btn-block btn-nazad"><i class="fa fa-chevron-left"></i> Nazad</a>
-					</div>
-					<div class="form-group form-group--submit col-md-6" >
-						<button type="submit" class="btn btn-default btn-sm btn-block btn-dalje"><i class="fa fa-plus-circle"></i> Završi i objavi</a>
+					   <div class="form-group form-group--submit col-md-6">
+            <a href="#tab-vitrina" role="tab" data-toggle="tab" class="btn btn-default btn-sm btn-block btn-nazad"><i class="fa fa-chevron-left"></i> Nazad</a>
+          </div>
+          <div class="form-group form-group--submit col-md-6" >
+            <button type="submit" class="btn btn-default btn-sm btn-block btn-dalje"><i class="fa fa-plus-circle"></i> Završi i objavi</a>
 						</form>
 						<!-- Modal -->
 						  <div class="modal fade" id="myModal" role="dialog">
@@ -629,9 +605,7 @@
 								  <p class="bravo-info">Predložak koji ste napravili će biti u najkraćem mogućem vremenskom periodu pregledan od strane naše administracije, te ukoliko bude zadovoljavao sve uvjete koje nalaže Sve Za Sport, biti će i objavljen.</p>
 								  <p class="bravo-hello">Sportski pozdrav!</p>
 								</div>
-								<div class="modal-footer">
-								  <button type="button" class="btn btn-default btn-close-modal-01" data-dismiss="modal"><i class="fa fa-times"></i> Zatvori prozor</button>
-								</div>
+
 							  </div>
 							  
 							</div>

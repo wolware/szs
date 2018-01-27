@@ -67,6 +67,12 @@ class FootballerController extends Controller
             }else{
                 $data['avatar'] = 'default.png';
             }
+            if(empty($data['kanton'])){
+                $data['kanton'] = $data['kantonSrb'];
+            }
+            if(empty($data['opcina'])){
+                $data['opcina'] = $data['opcinaSrb'];
+            }
             $id = DB::table('fudbaler')->insertGetId([
                 'avatar' => $newLogoName,
                 'ime' => $data['ime'],
@@ -99,6 +105,12 @@ class FootballerController extends Controller
                     'sportista' => 'footballer',
                     'sportista_id' => $id
                 ]);
+            }else{
+                DB::table('biografija')->insert([
+                    'content' => "",
+                    'sportista' => 'footballer',
+                    'sportista_id' => $id
+                ]);
             }
 
             if(!empty($data['naziv_takmicenja'][0])){
@@ -118,6 +130,17 @@ class FootballerController extends Controller
                         continue;
                      }
                 }
+            }else{
+                DB::table('sportista_trofej')->insert([
+                    'vrsta_nagrade' => "",
+                    'tip_nagrade' => "",
+                    'naziv_takmicenja' => "",
+                    'nivo_takmicenja' => "",
+                    'sezona' => "",
+                    'osvajanja' => 0,
+                    'sportista' => 'footballer',
+                    'sportista_id' => $id
+                ]);
             }
 
             if(!empty($data['klub_kh'][0])){
@@ -133,6 +156,13 @@ class FootballerController extends Controller
                         continue;
                      }
                 }
+            }else{
+                DB::table('klupska_historija')->insert([
+                    'sezona' => "",
+                    'klub' => "",
+                    'sportista' => 'footballer',
+                    'sportista_id' => $id
+                ]);
             }
 
             /*if($data->hasFile('avatar_licnost')){
@@ -167,6 +197,12 @@ class FootballerController extends Controller
                         'sportista_id' => $id
                     ]);
                 }
+            }else{
+                DB::table('sportista_galerija')->insert([
+                    'url' => "default.png",
+                    'sportista' => 'footballer',
+                    'sportista_id' => $id
+                ]);
             }
 
              return redirect('athlete/footballer/'.$id);

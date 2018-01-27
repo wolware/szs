@@ -23508,6 +23508,24 @@ td.team-leader__goals {
 #main-home-bg {
 	background-color:#06182b;
 	height:520px;
-{
-	
-	
+}
+#ui-datepicker-div{
+  background: #fff !important;
+  box-shadow: 0px 1px 3px rgba(0,0,0,.25) !important;
+  padding: 10px;
+}
+#ui-datepicker-div a{
+  margin:0px 10px;
+  cursor: pointer;
+}
+
+.ui-datepicker-title {
+    background: rgba(0,0,0,.05);
+    padding: 0px 10px;
+}
+.ui-datepicker-calendar th{
+  text-align: center;
+}
+.pac-container{
+  z-index: 9999999;
+}

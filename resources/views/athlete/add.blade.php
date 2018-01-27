@@ -100,7 +100,7 @@
 					  </div>
 					</div>
 					
-					<div class="post-grid__item col-sm-3">
+					<!--<div class="post-grid__item col-sm-3">
 					  <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
 						<figure class="posts__thumb">
 							<img src="{{url('assets/images/wpps/oprema-wp.png')}}" alt="">
@@ -113,7 +113,7 @@
 							<a href="{{url('/athlete/aikido/new')}}" class="btn btn-warning btn1-objavi-prodavnicu">Pregled karte sporta <i class="fa fa-chevron-right"></i></a>
 						</footer>
 					  </div>
-					</div>
+					</div>-->
 					
 					<div class="post-grid__item col-sm-3">
 					  <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">

@@ -13,9 +13,16 @@
           preview.src = "";
       }
  }
+ $(document).ready(function () {
+   
+});
+
+
 
  $(function() {
    // Multiple images preview in browser
+   
+
    var imagesPreview = function(input, placeToInsertImagePreview) {
     console.log("pozvana");
     var prvi = 0;

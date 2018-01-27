@@ -66,6 +66,12 @@ class OdbojkaController extends Controller
             }else{
                 $data['avatar'] = 'default.png';
             }
+            if(empty($data['kanton'])){
+                $data['kanton'] = $data['kantonSrb'];
+            }
+            if(empty($data['opcina'])){
+                $data['opcina'] = $data['opcinaSrb'];
+            }
             $id = DB::table('volleyball')->insertGetId([
                 'avatar' => $newLogoName,
                 'ime' => $data['ime'],
@@ -97,6 +103,12 @@ class OdbojkaController extends Controller
                     'sportista' => 'volleyball',
                     'sportista_id' => $id
                 ]);
+            }else{
+                DB::table('biografija')->insert([
+                    'content' => "",
+                    'sportista' => 'volleyball',
+                    'sportista_id' => $id
+                ]);
             }
 
             if(!empty($data['naziv_takmicenja'][0])){
@@ -116,6 +128,17 @@ class OdbojkaController extends Controller
                         continue;
                      }
                 }
+            }else{
+                DB::table('sportista_trofej')->insert([
+                    'vrsta_nagrade' => "",
+                    'tip_nagrade' => "",
+                    'naziv_takmicenja' => "",
+                    'nivo_takmicenja' => "",
+                    'sezona' => "",
+                    'osvajanja' => 0,
+                    'sportista' => 'volleyball',
+                    'sportista_id' => $id
+                ]);
             }
 
             if(!empty($data['klub_kh'][0])){
@@ -131,6 +154,13 @@ class OdbojkaController extends Controller
                         continue;
                      }
                 }
+            }else{
+                DB::table('klupska_historija')->insert([
+                    'sezona' => "",
+                    'klub' => "",
+                    'sportista' => 'volleyball',
+                    'sportista_id' => $id
+                ]);
             }
 
             /*if($data->hasFile('avatar_licnost')){
@@ -165,6 +195,12 @@ class OdbojkaController extends Controller
                         'sportista_id' => $id
                     ]);
                 }
+            }else{
+                DB::table('sportista_galerija')->insert([
+                    'url' => "default.png",
+                    'sportista' => 'volleyball',
+                    'sportista_id' => $id
+                ]);
             }
 
              return redirect('athlete/volleyball/'.$id);

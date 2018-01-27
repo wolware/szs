@@ -351,6 +351,32 @@
     );
 </script>
       <script src="{{ asset('js/init.js') }}"></script>
-      <script src="{{ asset('js/custom.js') }}"></script>
+      <script>
+       function initAutocomplete() {
+           autocomplete1 = new google.maps.places.Autocomplete(document.getElementById('mjesto'), {types: ['geocode']});
+           autocomplete1.addListener('place_changed', function () {
+               var place = autocomplete1.getPlace();
+               if (!place.geometry) {
+                   window.alert("Nismo mogli pronaći traženo mjesto!");
+                   return;
+               }
+           });
+           
+       }
+       function adresaAutoComp() {
+           autocomplete1 = new google.maps.places.Autocomplete(document.getElementById('adresa'), {types: ['geocode']});
+           autocomplete1.addListener('place_changed', function () {
+               var place = autocomplete1.getPlace();
+               if (!place.geometry) {
+                   window.alert("Nismo mogli pronaći traženo mjesto!");
+                   return;
+               }
+           });
+           
+       }
+   </script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAO6kDxfB19QkynnAGz5nlmX6Kbrb_pAsQ&libraries=places&region=BA&language=hr"></script>
+   
+      <script src="{{ asset('js/custom.js?t='.time()) }}"></script>
 </body>
 </html>

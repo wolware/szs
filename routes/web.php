@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
 
 
 // Socialite loign
@@ -116,4 +114,3 @@ Route::get('/athlete/skiing/{id}', 'SkiingController@show');
 Route::get('user/logout', 'Auth\LoginController@logout');
 
 
-Route::get('/home', 'HomeController@index')->name('home');
