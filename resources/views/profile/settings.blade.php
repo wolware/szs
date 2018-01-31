@@ -184,17 +184,8 @@
   					</select>
 				  </div>
 				  <div class="form-group col-md-6">
-  					<label for="jezik"><i class="fa fa-language"></i> Jezik:</label>
-  					<select class="form-control" name="language" id="jezik" required>
-              <option value="{{$data->language}}" selected>{{$data->language}}</option>
-              <option value="Bosanski">Bosanski</option>
-    					<option value="Engleski">Engleski</option>
-    					<option value="Njemački">Njemački</option>
-  					</select>
-				  </div>
-				  <div class="form-group col-md-6">
                     <label for="account-address-1"><i class="fa fa-map-marker"></i> Adresa stanovanja</label>
-                    <input type="text" class="form-control" name="address" id="account-address-1" placeholder="{{$data->address}}" value="{{$data->address}}">
+                    <input type="text" class="form-control" name="address" onclick="adresaAutoComp()" id="adresa" placeholder="{{$data->address}}" value="{{$data->address}}">
                   </div>
                   <div class="form-group col-md-6">
 					<label for="telefon-1"><i class="fa fa-phone-square"></i> Kontakt telefon</label>

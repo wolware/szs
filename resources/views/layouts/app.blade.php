@@ -14,9 +14,9 @@
 
   <!-- Favicons
   ================================================== -->
-  <link rel="shortcut icon" href="assets/images/soccer/favicons/favicon.ico">
-  <link rel="apple-touch-icon" sizes="120x120" href="assets/images/soccer/favicons/favicon-120.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="assets/images/soccer/favicons/favicon-152.png">
+  <link rel="shortcut icon" href="{{asset('assets/images/soccer/favicons/favicon.ico')}}">
+  <link rel="apple-touch-icon" sizes="120x120" href="{{asset('assets/images/soccer/favicons/favicon-120.png')}}">
+  <link rel="apple-touch-icon" sizes="152x152" href="{{asset('assets/images/soccer/favicons/favicon-152.png')}}">
 
   <!-- Mobile Specific Metas
   ================================================== -->
@@ -50,7 +50,7 @@
     <!-- Header Mobile -->
     <div class="header-mobile clearfix" id="header-mobile">
       <div class="header-mobile__logo">
-        <a href="{{url('/')}}"><img src="{{asset('images/soccer/logo.png')}}" srcset="assets/images/soccer/logo@2x.png 2x" alt="Sve Za Sport" class="header-mobile__logo-img"></a>
+        <a href="{{url('/')}}"><img src="{{asset('images/soccer/logo.png')}}" srcset="{{asset('assets/images/soccer/logo@2x.png 2x')}}" alt="Sve Za Sport" class="header-mobile__logo-img"></a>
       </div>
       <div class="header-mobile__inner">
         <a id="header-mobile__toggle" class="burger-menu-icon"><span class="burger-menu-icon__line"></span></a>
@@ -172,9 +172,9 @@
               <a href="sportovi.php" class="info-block__link">Sportovi</a>
             </li>
             <li class="info-block__item info-block__item--contact-secondary">
-              <a href="klubovi.php"><img src="{{asset('images/klubovi-fff.png')}}" class="df-icon df-icon--soccer-ball"></a>
+              <a href="{{url('/clubs')}}"><img src="{{asset('images/klubovi-fff.png')}}" class="df-icon df-icon--soccer-ball"></a>
               <h6 class="info-block__heading">Sportski</h6>
-              <a href="klubovi.php" class="info-block__link">Klubovi</a>
+              <a href="{{url('/clubs')}}" class="info-block__link">Klubovi</a>
             </li>
       <li class="info-block__item info-block__item--contact-secondary">
               <a href="skole.php"><img src="{{asset('images/skole-fff.png')}}" class="df-icon df-icon--soccer-ball"></a>
@@ -182,9 +182,9 @@
               <a href="skole.php" class="info-block__link">Škole</a>
             </li>
             <li class="info-block__item info-block__item--contact-secondary">
-              <a href="sportisti.php"><img src="{{asset('images/sportisti-fff.png')}}" class="df-icon df-icon--soccer-ball"></a>
+              <a href="/athletes/add"><img src="{{asset('images/sportisti-fff.png')}}" class="df-icon df-icon--soccer-ball"></a>
               <h6 class="info-block__heading">BH</h6>
-              <a href="sportisti.php" class="info-block__link">Sportisti</a>
+              <a href="/athletes/add" class="info-block__link">Sportisti</a>
             </li>
             <li class="info-block__item info-block__item--contact-secondary">
               <a href="objekti.php"><img src="{{asset('images/objekti-fff.png')}}" class="df-icon df-icon--soccer-ball"></a>
@@ -213,7 +213,7 @@
 
             <!-- Header Logo -->
             <div class="header-logo">
-              <a href="index.php"><img src="{{asset('images/soccer/logo.png')}}" srcset="images/soccer/logo@2x.png 2x" alt="Sve Za Sport" class="header-logo__img"></a>
+              <a href="index.php"><img src="{{asset('images/soccer/logo.png')}}" srcset="{{asset('images/soccer/logo@2x.png 2x')}}" alt="Sve Za Sport" class="header-logo__img"></a>
             </div>
             <!-- Header Logo / End -->
 

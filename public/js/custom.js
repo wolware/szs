@@ -201,6 +201,16 @@
         autoclose: true,
       };
       date_input.datepicker(options);
+
+       var date_input=$('input[name="dob"]'); //our date input has the name "date"
+      var container=$('form').length>0 ? $('form').parent() : "body";
+      var options={
+        format: 'mm/dd/yyyy',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+      };
+      date_input.datepicker(options);
     });
      $('#registerForm').validate({
       rules: {
