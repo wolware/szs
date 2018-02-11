@@ -44,8 +44,8 @@ class BasketballController extends Controller
             'kontinent' => 'required|max:255|string',
             'drzava' => 'required|max:255|string',
             'entitet' => 'required',
-            'kanton' => 'required',
-            'opcina' => 'required',
+            /*'kanton' => 'required',
+            'opcina' => 'required',*/
             'grad' => 'required',
             /*'klub' => 'required',
             'visina' => 'required',

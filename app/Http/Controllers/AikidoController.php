@@ -44,8 +44,8 @@ class AikidoController extends Controller
             'kontinent' => 'required|max:255|string',
             'drzava' => 'required|max:255|string',
             'entitet' => 'required',
-            'kanton' => 'required',
-            'opcina' => 'required',
+            /*'kanton' => 'required',
+            'opcina' => 'required',*/
             'grad' => 'required',
             /*'klub' => 'required',
             'visina' => 'required',
@@ -66,6 +66,13 @@ class AikidoController extends Controller
                 $data['avatar'] = $newLogoName;
             }else{
                 $data['avatar'] = 'default.png';
+            }
+
+             if(empty($data['kanton'])){
+                $data['kanton'] = $data['kantonSrb'];
+            }
+            if(empty($data['opcina'])){
+                $data['opcina'] = $data['opcinaSrb'];
             }
             $id = DB::table('aikido')->insertGetId([
                 'avatar' => $newLogoName,
@@ -97,6 +104,12 @@ class AikidoController extends Controller
                     'sportista' => 'aikido',
                     'sportista_id' => $id
                 ]);
+            }else{
+                DB::table('biografija')->insert([
+                    'content' => "",
+                    'sportista' => 'aikido',
+                    'sportista_id' => $id
+                ]);
             }
 
             if(!empty($data['naziv_takmicenja'][0])){
@@ -116,6 +129,17 @@ class AikidoController extends Controller
                         continue;
                      }
                 }
+            }else{
+                 DB::table('sportista_trofej')->insert([
+                    'vrsta_nagrade' => "",
+                    'tip_nagrade' => "",
+                    'naziv_takmicenja' => "",
+                    'nivo_takmicenja' => "",
+                    'sezona' => "",
+                    'osvajanja' => 0,
+                    'sportista' => 'aikido',
+                    'sportista_id' => $id
+                ]);
             }
 
             if(!empty($data['klub_kh'][0])){
@@ -131,6 +155,13 @@ class AikidoController extends Controller
                         continue;
                      }
                 }
+            }else{
+                DB::table('klupska_historija')->insert([
+                    'sezona' => "",
+                    'klub' => "",
+                    'sportista' => 'aikido',
+                    'sportista_id' => $id
+                ]);
             }
 
             /*if($data->hasFile('avatar_licnost')){
@@ -165,6 +196,12 @@ class AikidoController extends Controller
                         'sportista_id' => $id
                     ]);
                 }
+            }else{
+                DB::table('sportista_galerija')->insert([
+                    'url' => "default.png",
+                    'sportista' => 'aikido',
+                    'sportista_id' => $id
+                ]);
             }
 
              return redirect('athlete/aikido/'.$id);
@@ -197,9 +234,15 @@ class AikidoController extends Controller
      * @param  \App\Aikido  $aikido
      * @return \Illuminate\Http\Response
      */
-    public function show(Aikido $aikido)
+    public function show($id)
     {
-        //
+        $sportista = 'aikido';
+        $personal = DB::table('aikido')->where('id', $id)->first();
+        $biografija = DB::table('biografija')->where('sportista', $sportista)->where('sportista_id', $id)->first();
+        $klupska_historija = DB::table('klupska_historija')->where('sportista', $sportista)->where('sportista_id', $id)->get();
+        $sportista_trofej = DB::table('sportista_trofej')->where('sportista', $sportista)->where('sportista_id', $id)->get();
+        $sportista_galerija = DB::table('sportista_galerija')->where('sportista', $sportista)->where('sportista_id', $id)->get();
+        return view('athlete.aikido.profile', ['personal' => $personal, 'biografija' => $biografija, 'klupska_historija' => $klupska_historija, 'sportista_trofej' => $sportista_trofej, 'sportista_galerija' => $sportista_galerija]);
     }
 
     /**

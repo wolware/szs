@@ -20,7 +20,7 @@ class ClubController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('show');
+        $this->middleware('auth')->except('show')->except('index_show');
     }
 
     /**

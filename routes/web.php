@@ -83,10 +83,12 @@ Route::post('/athlete/footballer/create', 'FootballerController@new');
 
 //**AIKIDO
 Route::get('/athlete/aikido/new', 'AikidoController@index');
+Route::get('/athlete/aikido/{id}', 'AikidoController@show');
 Route::post('/athlete/aikido/create', 'AikidoController@new');
 
 //**ATLETIKA
 Route::get('/athlete/athletics/new', 'AthleticsController@index');
+Route::get('/athlete/athletics/{id}', 'AthleticsController@show');
 Route::post('/athlete/athletics/create', 'AthleticsController@new');
 
 //**BASKETBALL
@@ -108,6 +110,16 @@ Route::get('/athlete/handball/{id}', 'HandballController@show');
 Route::get('/athlete/skiing/new', 'SkiingController@index');
 Route::post('/athlete/skiing/create', 'SkiingController@new');
 Route::get('/athlete/skiing/{id}', 'SkiingController@show');
+
+//**BADMINTON
+Route::get('/athlete/badminton/new', 'BadmintonController@index');
+Route::post('/athlete/badminton/create', 'BadmintonController@new');
+Route::get('/athlete/badminton/{id}', 'BadmintonController@show');
+
+//**BICYCLING
+Route::get('/athlete/bicycling/new', 'BicyclingController@index');
+Route::post('/athlete/bicycling/create', 'BicyclingController@new');
+Route::get('/athlete/bicycling/{id}', 'BicyclingController@show');
 
 
 //LOGOUT

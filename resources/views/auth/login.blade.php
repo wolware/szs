@@ -54,7 +54,7 @@
                 <form role="form" action="{{ url('/login') }}" method="POST">
                   {!! csrf_field() !!}
                   <div class="form-group">
-                    <label for="register-name"><i class="fa fa-user"></i> Korisničko ime</label>
+                    <label for="register-name"><i class="fa fa-user"></i> E-mail</label>
                     <input type="text" name="name" id="register-name" class="form-control" placeholder="Unesite korisničko ime">
                   </div>
                   

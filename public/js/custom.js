@@ -336,6 +336,20 @@ $('#editClubForm').validate({
 /*$('.btn-dalje').on('click', function(){
   $('#createNewFootballer').valid();
 });*/
+
+$('.btn-dalje').on('click', function(){
+  var sledeci = $('.nav-product-tabs').find('.active').next();
+  $('.nav-product-tabs li').removeClass('active');
+
+  sledeci.addClass('active');
+});
+
+$('.btn-nazad').on('click', function(){
+  var prethodni = $('.nav-product-tabs').find('.active').prev();
+  $('.nav-product-tabs li').removeClass('active');
+
+  prethodni.addClass('active');
+});
 $('.prvi_korak_end').click(function(){
   if($('#createNewClub').length == 0){
     $('#createNewFootballer').valid();
