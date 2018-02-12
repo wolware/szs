@@ -51,16 +51,16 @@
                   </div>
                   <div class="col-md-8">
                     <!-- Login Form -->
-                <form role="form" action="{{ url('/login') }}" method="POST">
+                <form class="loginFormaVer" role="form" action="{{ url('/login') }}" method="POST">
                   {!! csrf_field() !!}
                   <div class="form-group">
                     <label for="register-name"><i class="fa fa-user"></i> E-mail</label>
-                    <input type="text" name="name" id="register-name" class="form-control" placeholder="Unesite korisničko ime">
+                    <input type="text" name="name" id="register-name" class="form-control" placeholder="Unesite korisničko ime" required>
                   </div>
                   
                   <div class="form-group">
                     <label for="register-password"><i class="fa fa-lock"></i> Lozinka</label>
-                    <input type="password" name="password" id="register-password" class="form-control" placeholder="Unesite lozinku">
+                    <input type="password" name="password" id="register-password" class="form-control" placeholder="Unesite lozinku" required>
                   </div>
                   
                   <div class="form-group form-group--submit">

@@ -46,7 +46,8 @@ class ClubController extends Controller
         $trofej = DB::table('trofej')->where('club_id', $id)->get();
         $licnosti = DB::table('istaknute_licnosti')->where('club_id', $id)->get();
         $galerija = DB::table('clubs_galerija')->where('club_id', $id)->get();
-        return view('clubs.profile', ['personal' => $personal, 'vremeplov' => $vremeplov, 'trofej' => $trofej, 'licnosti' => $licnosti, 'galerija' => $galerija]);
+        $user = DB::table('users')->where('id', $personal->user_id)->first();
+        return view('clubs.profile', ['personal' => $personal, 'vremeplov' => $vremeplov, 'trofej' => $trofej, 'licnosti' => $licnosti, 'galerija' => $galerija, 'user' => $user]);
     }
 
     public function new(Request $data){

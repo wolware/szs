@@ -281,6 +281,16 @@ $('#createNewClub').validate({
 
   }}
 );
+$('.loginFormaVer').validate({
+  rules:{
+    name:{
+      required: true,
+    },
+    password:{
+      required:true,
+    }
+  }
+});
 $('#createNewFootballer').validate({
   rules:{
     logo:{
@@ -350,6 +360,15 @@ $('.btn-nazad').on('click', function(){
 
   prethodni.addClass('active');
 });
+$('.btn-prijava').on('click', function(){
+  $('.loginFormaVer').valid();
+  if($('.loginFormaVer').validate().errorList.length < 1){
+    $('.loginFormaVer').submit();
+  }else{
+    return false;
+  }
+});
+
 $('.prvi_korak_end').click(function(){
   if($('#createNewClub').length == 0){
     $('#createNewFootballer').valid();

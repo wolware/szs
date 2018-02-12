@@ -307,7 +307,7 @@
                               <img class="flow-icons-012" src="{{asset('images/icons/calendar-add-event-button-with-plus-sign.svg')}}" alt="">
                             </td>
                             <td class="lineup__num">Dio SveZaSport</td>
-                            <td class="lineup__name">25. Oktobra, 2017.</td>
+                            <td class="lineup__name">{{date('d.m.Y',$personal->objavljeno)}}</td>
                           </tr>
 						  <tr>
 							<td class="lineup__info">
@@ -348,11 +348,11 @@
                         <td class="team-leader__player">
                           <div class="team-leader__player-info">
                             <figure class="team-leader__player-img team-leader__player-img--sm">
-                              <img src="{{asset('images/tarik.jpg')}}" alt="">
+                              <img src="{{asset('images/avatars/'.$user->avatar)}}" alt="">
                             </figure>
                             <div class="team-leader__player-inner">
-                              <h5 class="team-leader__player-name autor-slika">Tarik Jašarević</h5>
-                              <span class="team-leader__player-position"><i class="fa fa-tag"></i> 00502565</span>
+                              <h5 class="team-leader__player-name autor-slika">{{$user->name}}</h5>
+                              <span class="team-leader__player-position"><i class="fa fa-tag"></i> {{$user->id}}</span>
                             </div>
                           </div>
                         </td>
@@ -530,76 +530,7 @@
           @endforeach
           
           <!-- Izdvojena licnost / End -->
-		  <!-- Izdvojena licnost -->
-          <div class="team-roster__item card card--no-paddings">
-              <div class="team-roster__content-wrapper">
-
-                <!-- Izdvojena licnost sika -->
-                <figure class="team-roster__player-img">
-                  <img class="izdvojene-licnosti-slika" src="{{asset('images/dino-secic.jpg')}}" alt="">
-                </figure>
-                <!-- Izdvojena licnost slika / End-->
-
-                <!-- Izdvojena licnost sadrzaj -->
-                <div class="team-roster__content">
-
-                  <!-- Izdvojena licnost detalji -->
-                  <div class="team-roster__player-details">
-                    <div class="team-roster__player-info">
-                      <h3 class="team-roster__player-name">
-                        <span class="team-roster__player-first-name">Dino</span>
-                        <span class="team-roster__player-last-name">Šečić</span>
-                      </h3>
-                    </div>
-                  </div>
-                  <!-- Izdvojena licnost detalji / End -->
-
-                  <!-- Izdvojena licnost info -->
-                  <div class="team-roster__player-excerpt">
-                    Lorem ipsum dolor sit amet, consectetur adipisi nel elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mini veniam, quis nostrud en derum sum laborem.
-                  </div>
-                  <!-- Izdvojena licnost info / End -->
-                </div>
-                <!-- Izdvojena licnost sadrzaj / End -->
-
-              </div>
-          </div>
-          <!-- Izdvojena licnost / End -->
-		  <!-- Izdvojena licnost -->
-          <div class="team-roster__item card card--no-paddings">
-              <div class="team-roster__content-wrapper">
-
-                <!-- Izdvojena licnost sika -->
-                <figure class="team-roster__player-img">
-                  <img class="izdvojene-licnosti-slika" src="{{asset('images/edin-music.JPG')}}" alt="">
-                </figure>
-                <!-- Izdvojena licnost slika / End-->
-
-                <!-- Izdvojena licnost sadrzaj -->
-                <div class="team-roster__content">
-
-                  <!-- Izdvojena licnost detalji -->
-                  <div class="team-roster__player-details">
-                    <div class="team-roster__player-info">
-                      <h3 class="team-roster__player-name">
-                        <span class="team-roster__player-first-name">Edin</span>
-                        <span class="team-roster__player-last-name">Musić</span>
-                      </h3>
-                    </div>
-                  </div>
-                  <!-- Izdvojena licnost detalji / End -->
-
-                  <!-- Izdvojena licnost info -->
-                  <div class="team-roster__player-excerpt">
-                    Lorem ipsum dolor sit amet, consectetur adipisi nel elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad mini veniam, quis nostrud en derum sum laborem.
-                  </div>
-                  <!-- Izdvojena licnost info / End -->
-                </div>
-                <!-- Izdvojena licnost sadrzaj / End -->
-
-              </div>
-          </div>
-          <!-- Izdvojena licnost / End -->
+		 
 
         </div>
         <!-- Izdvojena licnost - Kartica / End -->
@@ -646,7 +577,11 @@
                 </header>
 
                 <div class="post__content">
-                {{$vremeplov->content}}
+               @if($vremeplov)
+                 @if($vremeplov->content != "" || $vremeplov->content != null || !empty($vremeplov->content))
+                  {{$vremeplov->content}}
+                @endif
+               @endif
                 </div>
             </article>
             <!-- Article / End -->
@@ -680,105 +615,7 @@
 
 					@endforeach
 					
-					  <div class="col-md-3">
-                      <div class="awards__item">
-                        <figure class="awards__figure awards__figure--space">
-                          <img src="{{asset('images/trophies/trofej.svg')}}" alt="">
-                        </figure>
-                        <div class="awards__desc">
-                          <h5 class="awards__name">Kup BiH 2016/2017</h5>
-                          <div class="awards__date">Sezona 2016/2017</div>
-                        </div>
-                      </div>
-					  </div>
-					  <div class="col-md-3">
-                      <div class="awards__item">
-                        <figure class="awards__figure awards__figure--space">
-                          <img src="{{asset('images/trophies/trofej.svg')}}" alt="">
-                        </figure>
-                        <div class="awards__desc">
-                          <h5 class="awards__name">Premier Liga BiH</h5>
-                          <div class="awards__date">2017/2018</div>
-                        </div>
-                      </div>
-					  </div>
-					  <div class="col-md-3">
-                      <div class="awards__item">
-                        <figure class="awards__figure awards__figure--space">
-                          <img src="{{asset('images/trophies/trofej.svg')}}" alt="">
-                        </figure>
-                        <div class="awards__desc">
-                          <h5 class="awards__name">Premier Liga BiH</h5>
-                          <div class="awards__date">2017/2018</div>
-                        </div>
-                      </div>
-					  </div>
-					  <div class="col-md-3">
-                      <div class="awards__item">
-                        <figure class="awards__figure awards__figure--space">
-                          <img src="{{asset('images/trophies/trofej.svg')}}" alt="">
-                        </figure>
-                        <div class="awards__desc">
-                          <h5 class="awards__name">Premier Liga BiH</h5>
-                          <div class="awards__date">2017/2018</div>
-                        </div>
-                      </div>
-					  </div>
-					  <div class="col-md-3">
-                      <div class="awards__item">
-                        <figure class="awards__figure awards__figure--space">
-                          <img src="{{asset('images/trophies/trofej.svg')}}" alt="">
-                        </figure>
-                        <div class="awards__desc">
-                          <h5 class="awards__name">Premier Liga BiH</h5>
-                          <div class="awards__date">2017/2018</div>
-                        </div>
-                      </div>
-					  </div>
-					  <div class="col-md-3">
-                      <div class="awards__item">
-                        <figure class="awards__figure awards__figure--space">
-                          <img src="{{asset('images/trophies/trofej.svg')}}" alt="">
-                        </figure>
-                        <div class="awards__desc">
-                          <h5 class="awards__name">Premier Liga BiH</h5>
-                          <div class="awards__date">2017/2018</div>
-                        </div>
-                      </div>
-					  </div>
-					  <div class="col-md-3">
-                      <div class="awards__item">
-                        <figure class="awards__figure awards__figure--space">
-                          <img src="{{asset('images/trophies/trofej.svg')}}" alt="">
-                        </figure>
-                        <div class="awards__desc">
-                          <h5 class="awards__name">Premier Liga BiH</h5>
-                          <div class="awards__date">2017/2018</div>
-                        </div>
-                      </div>
-					  </div>
-					  <div class="col-md-3">
-                      <div class="awards__item">
-                        <figure class="awards__figure awards__figure--space">
-                          <img src="{{asset('images/trophies/trofej.svg')}}" alt="">
-                        </figure>
-                        <div class="awards__desc">
-                          <h5 class="awards__name">Premier Liga BiH</h5>
-                          <div class="awards__date">2017/2018</div>
-                        </div>
-                      </div>
-					  </div>
-					  <div class="col-md-3">
-                      <div class="awards__item">
-                        <figure class="awards__figure awards__figure--space">
-                          <img src="{{asset('images/trophies/trofej.svg')}}" alt="">
-                        </figure>
-                        <div class="awards__desc">
-                          <h5 class="awards__name">Premier Liga BiH</h5>
-                          <div class="awards__date">2017/2018</div>
-                        </div>
-                      </div>
-					  </div>
+					 
 				</div>
                 <!-- Widget: Awards / End -->
             </div>
@@ -1418,148 +1255,7 @@
 
 					@endforeach
 					
-					<div class="album__item col-xs-6 col-sm-4">
-						<div class="album__item-holder">
-							<a href="{{asset('images/banner-122.jpg')}}" class="album__item-link mp_gallery">
-							<figure class="album__thumb">
-								<img src="{{asset('images/banner-122.jpg')}}" alt="">
-							</figure>
-							<div class="album__item-desc">
-								<img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt=""></img>
-							</div>
-							</a>
-						</div>
-					</div>
 					
-					<div class="album__item col-xs-6 col-sm-4">
-						<div class="album__item-holder">
-							<a href="{{asset('images/banner-122.jpg')}}" class="album__item-link mp_gallery">
-							<figure class="album__thumb">
-								<img src="{{asset('images/banner-122.jpg')}}" alt="">
-							</figure>
-							<div class="album__item-desc">
-								<img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt=""></img>
-							</div>
-							</a>
-						</div>
-					</div>
-					
-					<div class="album__item col-xs-6 col-sm-4">
-						<div class="album__item-holder">
-							<a href="{{asset('images/banner-122.jpg')}}" class="album__item-link mp_gallery">
-							<figure class="album__thumb">
-								<img src="{{asset('images/banner-122.jpg')}}" alt="">
-							</figure>
-							<div class="album__item-desc">
-								<img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt=""></img>
-							</div>
-							</a>
-						</div>
-					</div>
-					
-					<div class="album__item col-xs-6 col-sm-4">
-						<div class="album__item-holder">
-							<a href="{{asset('images/banner-122.jpg')}}" class="album__item-link mp_gallery">
-							<figure class="album__thumb">
-								<img src="{{asset('images/banner-122.jpg')}}" alt="">
-							</figure>
-							<div class="album__item-desc">
-								<img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt=""></img>
-							</div>
-							</a>
-						</div>
-					</div>
-					
-					<div class="album__item col-xs-6 col-sm-4">
-						<div class="album__item-holder">
-							<a href="{{asset('images/banner-122.jpg')}}" class="album__item-link mp_gallery">
-							<figure class="album__thumb">
-								<img src="{{asset('images/banner-122.jpg')}}" alt="">
-							</figure>
-							<div class="album__item-desc">
-								<img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt=""></img>
-							</div>
-							</a>
-						</div>
-					</div>
-					
-					<div class="album__item col-xs-6 col-sm-4">
-						<div class="album__item-holder">
-							<a href="{{asset('images/banner-122.jpg')}}" class="album__item-link mp_gallery">
-							<figure class="album__thumb">
-								<img src="{{asset('images/banner-122.jpg')}}" alt="">
-							</figure>
-							<div class="album__item-desc">
-								<img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt=""></img>
-							</div>
-							</a>
-						</div>
-					</div>
-					
-					<div class="album__item col-xs-6 col-sm-4">
-						<div class="album__item-holder">
-							<a href="{{asset('images/banner-122.jpg')}}" class="album__item-link mp_gallery">
-							<figure class="album__thumb">
-								<img src="{{asset('images/banner-122.jpg')}}" alt="">
-							</figure>
-							<div class="album__item-desc">
-								<img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt=""></img>
-							</div>
-							</a>
-						</div>
-					</div>
-					
-					<div class="album__item col-xs-6 col-sm-4">
-						<div class="album__item-holder">
-							<a href="{{asset('images/banner-122.jpg')}}" class="album__item-link mp_gallery">
-							<figure class="album__thumb">
-								<img src="{{asset('images/banner-122.jpg')}}" alt="">
-							</figure>
-							<div class="album__item-desc">
-								<img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt=""></img>
-							</div>
-							</a>
-						</div>
-					</div>
-					
-					<div class="album__item col-xs-6 col-sm-4">
-						<div class="album__item-holder">
-							<a href="{{asset('images/banner-122.jpg')}}" class="album__item-link mp_gallery">
-							<figure class="album__thumb">
-								<img src="{{asset('images/banner-122.jpg')}}" alt="">
-							</figure>
-							<div class="album__item-desc">
-								<img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt=""></img>
-							</div>
-							</a>
-						</div>
-					</div>
-					
-					<div class="album__item col-xs-6 col-sm-4">
-						<div class="album__item-holder">
-							<a href="{{asset('images/banner-122.jpg')}}" class="album__item-link mp_gallery">
-							<figure class="album__thumb">
-								<img src="{{asset('images/banner-122.jpg')}}" alt="">
-							</figure>
-							<div class="album__item-desc">
-								<img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt=""></img>
-							</div>
-							</a>
-						</div>
-					</div>
-					
-					<div class="album__item col-xs-6 col-sm-4">
-						<div class="album__item-holder">
-							<a href="{{asset('images/banner-122.jpg')}}" class="album__item-link mp_gallery">
-							<figure class="album__thumb">
-								<img src="{{asset('images/banner-122.jpg')}}" alt="">
-							</figure>
-							<div class="album__item-desc">
-								<img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt=""></img>
-							</div>
-							</a>
-						</div>
-					</div>
 					
 					
 				</div>

@@ -460,15 +460,6 @@
 			<!-- Tab: Vitrina -->
 			<div role="tabpanel" class="tab-pane fade neaktivno" id="tab-vitrina">
 			
-				<div class="row obavijesti-racun">
-					<div class="alert alert-warning">
-					  <strong>PREMIUM račun Vam dozvoljava unos do maksimalnih 24 trofeja/nagrada.</strong>
-					</div>
-					<div class="alert alert-warning">
-					  <button href="premium.php" type="button" class="btn btn-xs btn-default btn-outline alert-btn-right">Aktiviraj premium</button>
-					  <strong>STANDARDAN račun Vam dozvoljava unos do maksimalno 8 trofeja/nagrada.</strong>
-					</div>
-				</div>
 			
 			<div class="row">
 			<div class="row form-segment">
