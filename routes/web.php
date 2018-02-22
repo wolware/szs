@@ -121,6 +121,31 @@ Route::get('/athlete/bicycling/new', 'BicyclingController@index');
 Route::post('/athlete/bicycling/create', 'BicyclingController@new');
 Route::get('/athlete/bicycling/{id}', 'BicyclingController@show');
 
+//**GIMNASTIKA
+Route::get('/athlete/gimnastika/new', 'GimnastikaController@index');
+Route::post('/athlete/gimnastika/create', 'GimnastikaController@new');
+Route::get('/athlete/gimnastika/{id}', 'GimnastikaController@show');
+
+//**JUDO
+Route::get('/athlete/judo/new', 'JudoController@index');
+Route::post('/athlete/judo/create', 'JudoController@new');
+Route::get('/athlete/judo/{id}', 'JudoController@show');
+
+//**KARATE
+Route::get('/athlete/karate/new', 'KarateController@index');
+Route::post('/athlete/karate/create', 'KarateController@new');
+Route::get('/athlete/karate/{id}', 'KarateController@show');
+
+//**PLIVANJE
+Route::get('/athlete/plivanje/new', 'PlivanjeController@index');
+Route::post('/athlete/plivanje/create', 'PlivanjeController@new');
+Route::get('/athlete/plivanje/{id}', 'PlivanjeController@show');
+
+//**TENIS
+Route::get('/athlete/tenis/new', 'TenisController@index');
+Route::post('/athlete/tenis/create', 'TenisController@new');
+Route::get('/athlete/tenis/{id}', 'TenisController@show');
+
 
 //LOGOUT
 Route::get('user/logout', 'Auth\LoginController@logout');
