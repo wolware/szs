@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 
 class ClubController extends Controller
 {
@@ -36,8 +37,29 @@ class ClubController extends Controller
     public function clubs_add(){
         return view('clubs.add');
     }
-    public function index_show(){
-        $data = DB::table('clubs')->get();
+    public function index_show(Request $data){
+        $q = DB::table('clubs');
+        if(Input::has('kategorija')){
+            $q->where('kategorija', Input::get('kategorija'));
+        }
+        if(Input::has('tip')){
+            $q->where('tip', Input::get('tip'));
+        }
+        if(Input::has('sport')){
+            $q->where('sport', Input::get('sport'));
+        }
+        if(Input::has('entitet')){
+            $q->where('entitet', Input::get('entitet'));
+        }
+        if(Input::has('kanton')){
+            $q->where('kanton', Input::get('kanton'));
+        }
+        if(Input::has('opcina')){
+            $q->where('opcina', Input::get('opcina'));
+        }
+
+
+        $data = $q->get();
         return view('clubs.index', ['data' => $data]);
     }
     public function show($id){

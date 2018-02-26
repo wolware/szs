@@ -174,6 +174,139 @@
 						</footer>
 					  </div>
 					</div>
+
+					<div class="post-grid__item col-sm-3">
+					  <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
+						<figure class="posts__thumb">
+							<img src="{{url('assets/images/wpps/oprema-wp.png')}}" alt="">
+						</figure>
+						<div class="posts__inner card__content">
+							<h6 class="posts__title ime-sportiste-klub-lista"><a href="#">Badminton</a></h6>
+							<div class="posts__excerpt"></div>
+						</div>
+						<footer class="posts__footer card__footer">
+							<a href="{{url('/athlete/badminton/new')}}" class="btn btn-warning btn1-objavi-prodavnicu">Pregled karte sporta <i class="fa fa-chevron-right"></i></a>
+						</footer>
+					  </div>
+					</div>
+
+					<div class="post-grid__item col-sm-3">
+					  <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
+						<figure class="posts__thumb">
+							<img src="{{url('assets/images/wpps/oprema-wp.png')}}" alt="">
+						</figure>
+						<div class="posts__inner card__content">
+							<h6 class="posts__title ime-sportiste-klub-lista"><a href="#">Biciklizam</a></h6>
+							<div class="posts__excerpt"></div>
+						</div>
+						<footer class="posts__footer card__footer">
+							<a href="{{url('/athlete/bicycling/new')}}" class="btn btn-warning btn1-objavi-prodavnicu">Pregled karte sporta <i class="fa fa-chevron-right"></i></a>
+						</footer>
+					  </div>
+					</div>
+
+					<div class="post-grid__item col-sm-3">
+					  <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
+						<figure class="posts__thumb">
+							<img src="{{url('assets/images/wpps/oprema-wp.png')}}" alt="">
+						</figure>
+						<div class="posts__inner card__content">
+							<h6 class="posts__title ime-sportiste-klub-lista"><a href="#">Gimnastika</a></h6>
+							<div class="posts__excerpt"></div>
+						</div>
+						<footer class="posts__footer card__footer">
+							<a href="{{url('/athlete/gimnastika/new')}}" class="btn btn-warning btn1-objavi-prodavnicu">Pregled karte sporta <i class="fa fa-chevron-right"></i></a>
+						</footer>
+					  </div>
+					</div>
+
+					<div class="post-grid__item col-sm-3">
+					  <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
+						<figure class="posts__thumb">
+							<img src="{{url('assets/images/wpps/oprema-wp.png')}}" alt="">
+						</figure>
+						<div class="posts__inner card__content">
+							<h6 class="posts__title ime-sportiste-klub-lista"><a href="#">Judo</a></h6>
+							<div class="posts__excerpt"></div>
+						</div>
+						<footer class="posts__footer card__footer">
+							<a href="{{url('/athlete/judo/new')}}" class="btn btn-warning btn1-objavi-prodavnicu">Pregled karte sporta <i class="fa fa-chevron-right"></i></a>
+						</footer>
+					  </div>
+					</div>
+
+					<div class="post-grid__item col-sm-3">
+					  <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
+						<figure class="posts__thumb">
+							<img src="{{url('assets/images/wpps/oprema-wp.png')}}" alt="">
+						</figure>
+						<div class="posts__inner card__content">
+							<h6 class="posts__title ime-sportiste-klub-lista"><a href="#">Karate</a></h6>
+							<div class="posts__excerpt"></div>
+						</div>
+						<footer class="posts__footer card__footer">
+							<a href="{{url('/athlete/karate/new')}}" class="btn btn-warning btn1-objavi-prodavnicu">Pregled karte sporta <i class="fa fa-chevron-right"></i></a>
+						</footer>
+					  </div>
+					</div>
+
+					<div class="post-grid__item col-sm-3">
+					  <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
+						<figure class="posts__thumb">
+							<img src="{{url('assets/images/wpps/oprema-wp.png')}}" alt="">
+						</figure>
+						<div class="posts__inner card__content">
+							<h6 class="posts__title ime-sportiste-klub-lista"><a href="#">Plivanje</a></h6>
+							<div class="posts__excerpt"></div>
+						</div>
+						<footer class="posts__footer card__footer">
+							<a href="{{url('/athlete/plivanje/new')}}" class="btn btn-warning btn1-objavi-prodavnicu">Pregled karte sporta <i class="fa fa-chevron-right"></i></a>
+						</footer>
+					  </div>
+					</div>
+
+					<div class="post-grid__item col-sm-3">
+					  <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
+						<figure class="posts__thumb">
+							<img src="{{url('assets/images/wpps/oprema-wp.png')}}" alt="">
+						</figure>
+						<div class="posts__inner card__content">
+							<h6 class="posts__title ime-sportiste-klub-lista"><a href="#">Tenis</a></h6>
+							<div class="posts__excerpt"></div>
+						</div>
+						<footer class="posts__footer card__footer">
+							<a href="{{url('/athlete/tenis/new')}}" class="btn btn-warning btn1-objavi-prodavnicu">Pregled karte sporta <i class="fa fa-chevron-right"></i></a>
+						</footer>
+					  </div>
+					</div>
+					<div class="post-grid__item col-sm-3">
+					  <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
+						<figure class="posts__thumb">
+							<img src="{{url('assets/images/wpps/oprema-wp.png')}}" alt="">
+						</figure>
+						<div class="posts__inner card__content">
+							<h6 class="posts__title ime-sportiste-klub-lista"><a href="#">Atletika</a></h6>
+							<div class="posts__excerpt"></div>
+						</div>
+						<footer class="posts__footer card__footer">
+							<a href="{{url('/athlete/athletics/new')}}" class="btn btn-warning btn1-objavi-prodavnicu">Pregled karte sporta <i class="fa fa-chevron-right"></i></a>
+						</footer>
+					  </div>
+					</div>
+					<div class="post-grid__item col-sm-3">
+					  <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
+						<figure class="posts__thumb">
+							<img src="{{url('assets/images/wpps/oprema-wp.png')}}" alt="">
+						</figure>
+						<div class="posts__inner card__content">
+							<h6 class="posts__title ime-sportiste-klub-lista"><a href="#">Aikido</a></h6>
+							<div class="posts__excerpt"></div>
+						</div>
+						<footer class="posts__footer card__footer">
+							<a href="{{url('/athlete/aikido/new')}}" class="btn btn-warning btn1-objavi-prodavnicu">Pregled karte sporta <i class="fa fa-chevron-right"></i></a>
+						</footer>
+					  </div>
+					</div>
 					
 					
 				

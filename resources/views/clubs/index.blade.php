@@ -69,74 +69,73 @@
 		 <!-- Post Filter -->
 			<div class="post-filter">
 			  <div class="container">
-				<form action="#" class="post-filter__form clearfix forma-filteri">
+				<form role="form" method="GET" class="post-filter__form clearfix forma-filteri">
 				  <div class="post-filter__select">
 					<label class="post-filter__label">Kategorija kluba</label>
-					<select class="cs-select cs-skin-border">
+					<select class="cs-select cs-skin-border" name="kategorija">
 					  <option value="" disabled selected>Izaberite kategoriju kluba</option>
-					  <option value="muski-klub">Muški klubovi</option>
-					  <option value="zenski-klub">Ženski klubovi</option>
-					  <option value="mjesovito">Mješovito</option>
+					  <option value="Muski klubovi">Muški klubovi</option>
+					  <option value="Zenski klub">Ženski klubovi</option>
+					  <option value="Mjesovito">Mješovito</option>
 					</select>
 				  </div>
 				  <div class="post-filter__select">
 					<label class="post-filter__label">Tip sporta</label>
-					<select class="cs-select cs-skin-border">
-					  <option value="skl" selected>Sportski klubovi</option>
-    				  <option value="iskl">Invalidski sportski klubovi</option>
+					<select class="cs-select cs-skin-border" name="tip">
+					  <option value="Sportski klub" selected>Sportski klubovi</option>
 					</select>
 				  </div>
 				 <div class="post-filter__select">
 					<label class="post-filter__label">Sport</label>
-					<select class="cs-select cs-skin-border">
-						<option value="" disabled selected>Izaberite sport</option>
-						<option value="">Aikido</option>
-						<option value="">Atletika</option>
-						<option value="">Auto-Moto</option>
-						<option value="">Badminton</option>
-						<option value="">Biciklizam</option>
-						<option value="">Bob</option>
-						<option value="">Boćanje</option>
-						<option value="">Bodybuilding & Fitness</option>
-						<option value="">Boks</option>
-						<option value="">Curling</option>
-						<option value="">Dizanje tegova</option>
-						<option value="">Futsal</option>
-						<option value="">Gimnastika</option>
-						<option value="">Golf</option>
-						<option value="">Hokej</option>
-						<option value="">Hrvanje</option>
-						<option value="">Jedrenje</option>
-						<option value="">Ju Jitsu</option>
-						<option value="">Judo</option>
-						<option value="">Kajak Kanu i Rafting</option>
-						<option value="">Karate</option>
-						<option value="">Kick Box</option>
-						<option value="">Klizanje</option>
-						<option value="">Konjički sportovi</option>
-						<option value="">Košarka</option>
-						<option value="">Kung Fu</option>
-						<option value="">Kuglanje</option>
-						<option value="">Nogomet</option>
-						<option value="">Mačevanje</option>
-						<option value="">Odbojka</option>
-						<option value="">Planinarstvo</option>
-						<option value="">Plivanje</option>
-						<option value="">Ragbi</option>
-						<option value="">Ronjenje</option>
-						<option value="">Rukomet</option>
-						<option value="">Skijanje</option>
-						<option value="">Sportski ribolov</option>
-						<option value="">Stoni tenis</option>
-						<option value="">Streličarstvo</option>
-						<option value="">Streljaštvo</option>
-						<option value="">Šah</option>
-						<option value="">Taekwondo</option>
-						<option value="">Tenis</option>
-						<option value="">Triatlon</option>
-						<option value="">Vaterpolo</option>
-						<option value="">Vazduhoplovstvo</option>
-						<option value="">Veslanje</option>
+					<select class="cs-select cs-skin-border" name="sport">
+						<option value="" selected>Izaberite sport</option>
+						<option value="Aikido">Aikido</option>
+						<option value="Atletika">Atletika</option>
+						<option value="Auto-Moto">Auto-Moto</option>
+						<option value="Badminton">Badminton</option>
+						<option value="Biciklizam">Biciklizam</option>
+						<option value="Bob">Bob</option>
+						<option value="Bocanje">Boćanje</option>
+						<option value="Bodybuilding and Fitness">Bodybuilding & Fitness</option>
+						<option value="Boks">Boks</option>
+						<option value="Curling">Curling</option>
+						<option value="Dizanje tegova">Dizanje tegova</option>
+						<option value="Futsal">Futsal</option>
+						<option value="Gimnastika">Gimnastika</option>
+						<option value="Golf">Golf</option>
+						<option value="Hokej">Hokej</option>
+						<option value="Hrvanje">Hrvanje</option>
+						<option value="Jedrenje">Jedrenje</option>
+						<option value="Ju Jitsu">Ju Jitsu</option>
+						<option value="Judo">Judo</option>
+						<option value="Kajak Kanu i Rafting">Kajak Kanu i Rafting</option>
+						<option value="Karate">Karate</option>
+						<option value="Kick Box">Kick Box</option>
+						<option value="Klizanje">Klizanje</option>
+						<option value="Konjicki sportovi">Konjički sportovi</option>
+						<option value="Kosarka">Košarka</option>
+						<option value="Kung Fu">Kung Fu</option>
+						<option value="Kuglanje">Kuglanje</option>
+						<option value="Nogomet">Nogomet</option>
+						<option value="Macevanje">Mačevanje</option>
+						<option value="Odbojka">Odbojka</option>
+						<option value="Planinarstvo">Planinarstvo</option>
+						<option value="Plivanje">Plivanje</option>
+						<option value="Ragbi">Ragbi</option>
+						<option value="Ronjenje">Ronjenje</option>
+						<option value="Rukomet">Rukomet</option>
+						<option value="Skijanje">Skijanje</option>
+						<option value="Sportski ribolov">Sportski ribolov</option>
+						<option value="Stoni tenis">Stoni tenis</option>
+						<option value="Strelicarstvo">Streličarstvo</option>
+						<option value="Streljastvo">Streljaštvo</option>
+						<option value="Sah">Šah</option>
+						<option value="Teakwondo">Taekwondo</option>
+						<option value="Tenis">Tenis</option>
+						<option value="Triatlon">Triatlon</option>
+						<option value="Vaterpolo">Vaterpolo</option>
+						<option value="Vazduhoplovstvo">Vazduhoplovstvo</option>
+						<option value="Veslanje">Veslanje</option>
 					</select>
 				  </div>
 				  <div class="post-filter__select" hidden>
@@ -157,25 +156,25 @@
 				  </div>
 				  <div class="post-filter__select">
 					<label class="post-filter__label">Entitet</label>
-					<select class="cs-select cs-skin-border">
-					  <option value="fbih" selected>Federacija BiH</option>
-    				  <option value="rs">Republika Srpska</option>
-					  <option value="distrikt">Distrikt Brčko</option>
+					<select class="cs-select cs-skin-border" name="entitet">
+					  <option value="Federacija BiH" selected>Federacija BiH</option>
+    				  <option value="Republika Srpska">Republika Srpska</option>
+					  <option value="Distrikt Brcko">Distrikt Brčko</option>
 					</select>
 				  </div>
 				  <div class="post-filter__select">
 					<label class="post-filter__label">Kanton</label>
-					<select class="cs-select cs-skin-border">
-						<option value="usk">Unsko-sanski</option>
-    					<option value="pk">Posavski</option>
-						<option value="tk">Tuzlanski</option>
-    					<option value="zdk">Zeničko-dobojski</option>
-						<option value="bpk">Bosansko-podrinjski</option>
-    					<option value="sbk">Srednjobosanski</option>
-						<option value="hnk">Hercegovačko-neretvanski</option>
-    					<option value="zhk">Zapadnohercegovački</option>
-						<option value="ks" selected>Kanton Sarajevo</option>
-    					<option value="k10">Kanton 10</option>
+					<select class="cs-select cs-skin-border" name="kanton">
+						<option value="Unsko-sanski Kanton" disabled>Unsko-sanski Kanton</option>
+    					<option value="Posavski Kanton" disabled>Posavski Kanton</option>
+						<option value="Tuzlanski Kanton" disabled>Tuzlanski Kanton</option>
+    					<option value="Zeničko-dobojski Kanton" disabled>Zeničko-dobojski Kanton</option>
+						<option value="Bosansko-podrinjski kanton" disabled>Bosansko-podrinjski Kanton</option>
+    					<option value="Srednjobosanski Kanton" disabled>Srednjobosanski Kanton</option>
+						<option value="Hercegovačko-neretvanski Kanton" disabled>Hercegovačko-neretvanski Kanton</option>
+    					<option value="Zapadnohercegovački Kanton" disabled>Zapadnohercegovački Kanton</option>
+						<option value="Kanton Sarajevo" selected>Kanton Sarajevo</option>
+    					<option value="Kanton 10" disabled>Kanton 10</option>
 					</select>
 				  </div>
 				  <div class="post-filter__select" hidden>
@@ -190,17 +189,16 @@
 				  </div>
 				  <div class="post-filter__select">
 					<label class="post-filter__label">Općine Kantona Sarajevo</label>
-					<select class="cs-select cs-skin-border">
+					<select class="cs-select cs-skin-border" name="opcina">
 					  <option value="" disabled selected>Filter nije izabran</option>
-					  <option value="hadzici">Hadžići</option>
-    				  <option value="ilidza">Ilidža</option>
-					  <option value="ilijas">Ilijaš</option>
-    				  <option value="centar">Centar</option>
-					  <option value="novi-grad">Novi Grad</option>
-    				  <option value="novo-sarajevo">Novo Sarajevo</option>
-					  <option value="stari-grad">Stari Grad</option>
-    				  <option value="trnovo">Trnovo</option>
-					  <option value="vogosca">Vogošća</option>
+					  <option value="Hadzici">Hadžići</option>
+						<option value="Ilidza">Ilidža</option>
+						<option value="Ilijas">Ilijaš</option>
+						<option value="Centar">Centar</option>
+						<option value="Novi-grad">Novi Grad</option>
+						<option value="Novo-sarajevo">Novo Sarajevo</option>
+						<option value="Stari-grad">Stari Grad</option>
+						<option value="Trnovo">Trnovo</option>
 					</select>
 				  </div>
 				  <div class="post-filter__select" hidden>
