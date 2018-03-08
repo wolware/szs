@@ -207,15 +207,15 @@
                     <label for="opcine-ks"><img class="flow-icons-013" src="{{asset('images/icons/opcina.svg')}}"></img> Općine Kantona Sarajevo</label>
                     <select class="form-control" id="opcine-ks" name="opcina">
   						<option value="" disabled selected>Izaberite općinu</option>
-						<option value="hadzici">Hadžići</option>
-    					<option value="ilidza">Ilidža</option>
-						<option value="ilijas">Ilijaš</option>
-    					<option value="centar">Centar</option>
-						<option value="novi-grad">Novi Grad</option>
-    					<option value="novo-sarajevo">Novo Sarajevo</option>
-						<option value="stari-grad">Stari Grad</option>
-    					<option value="trnovo">Trnovo</option>
-						<option value="vogosca">Vogošća</option>
+						<option value="Hadzici">Hadžići</option>
+    					<option value="Ilidza">Ilidža</option>
+						<option value="Ilijas">Ilijaš</option>
+    					<option value="Centar">Centar</option>
+						<option value="Novi Grad">Novi Grad</option>
+    					<option value="Novo Sarajevo">Novo Sarajevo</option>
+						<option value="Stari Grad">Stari Grad</option>
+    					<option value="Trnovo">Trnovo</option>
+						<option value="Vogosca">Vogošća</option>
   					</select>
 				  </div>
 				  
@@ -387,7 +387,7 @@
 					
 					<div class="form-group col-md-4">
 						<label for="vrijednost"><img class="flow-icons-013" src="{{asset('images/icons/icon.svg')}}"></img> Vrijednost</label>
-						<input type="text" name="vrijednost" id="vrijednost" class="form-control" placeholder="Unesite tržišnu vrijednost sportiste">
+						<input type="number" name="vrijednost" id="vrijednost" class="form-control" placeholder="Unesite tržišnu vrijednost sportiste">
 						<span class="info-polje">Provjerite vrijednost</span> <a class="info-polje" href="http://www.transfermarkt.de/"><i class="fa fa-question-circle-o"></i></a>
 					</div>
 					

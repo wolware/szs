@@ -213,7 +213,7 @@
 
             <!-- Header Logo -->
             <div class="header-logo">
-              <a href="index.php"><img src="{{asset('images/soccer/logo.png')}}" srcset="{{asset('images/soccer/logo@2x.png 2x')}}" alt="Sve Za Sport" class="header-logo__img"></a>
+              <a href="{{url('/')}}"><img src="{{asset('images/soccer/logo.png')}}" srcset="{{asset('images/soccer/logo@2x.png 2x')}}" alt="Sve Za Sport" class="header-logo__img"></a>
             </div>
             <!-- Header Logo / End -->
 
