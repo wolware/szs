@@ -63,7 +63,7 @@ Route::get('/profile/new', function(){
 Route::get('/clubs/add', 'ClubController@clubs_add');
 Route::get('/clubs', 'ClubController@index_show');
 Route::get('/clubs/new', 'ClubController@new_show');
-Route::get('/clubs/{id}', 'ClubController@show');
+Route::get('/clubs/{id}', 'ClubController@club_show');
 Route::get('/clubs/{id}/edit', 'ClubController@edit_club_show');
 Route::post('/clubs/new/create', 'ClubController@new');
 Route::post('/clubs/{id}/edit', 'ClubController@edit_club');

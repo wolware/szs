@@ -21,7 +21,7 @@ class ClubController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth')->except('show')->except('index_show');
+        $this->middleware('auth')->except(['club_show', 'index_show']);
     }
 
     /**
@@ -62,7 +62,7 @@ class ClubController extends Controller
         $data = $q->get();
         return view('clubs.index', ['data' => $data]);
     }
-    public function show($id){
+    public function club_show($id){
         $personal = DB::table('clubs')->where('id', $id)->first();
         $vremeplov = DB::table('vremeplov')->where('club_id', $id)->first();
         $trofej = DB::table('trofej')->where('club_id', $id)->get();
