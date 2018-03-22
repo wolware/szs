@@ -59,6 +59,14 @@ Route::get('/profile/new', function(){
 	return view('profile.new');
 });
 
+// OBJECTS
+Route::get('/objects/dvorana/new', 'DvoranaController@new_show');
+Route::post('/objects/dvorana/create', 'DvoranaController@new');
+
+Route::get('/objects/skijaliste/new', function(){
+	return view('objects.skijaliste.new');
+});
+
 // CLUB
 Route::get('/clubs/add', 'ClubController@clubs_add');
 Route::get('/clubs', 'ClubController@index_show');

@@ -281,6 +281,32 @@ $('#createNewClub').validate({
 
   }}
 );
+$('#createNewDvorana').validate({
+  rules:{
+    profilna:{
+      extension: 'png|jpg|jpeg'
+    },
+    naziv:{
+      required:true
+    },
+    kontinent:{
+      required: true,
+    },
+    drzava:{
+      required:true,
+    },
+    entitet:{
+      required:true,
+    },
+    kanton:{
+      required:true,
+    },
+    grad:{
+      required:true,
+    },
+
+  }
+});
 $('.loginFormaVer').validate({
   rules:{
     name:{
@@ -346,7 +372,24 @@ $('#editClubForm').validate({
 /*$('.btn-dalje').on('click', function(){
   $('#createNewFootballer').valid();
 });*/
+$('.prvi_korak_end_obj').click(function(){
+  $('#createNewDvorana').valid();
+    if($('#createNewDvorana').validate().errorList.length < 1){
+      $('.nav-product-tabs li').removeClass('active');
+     
+      $('.preslic').closest('li').addClass('active');
+      $('.tab-pane').removeClass('active');
+      $('.tab-pane').removeClass('in');
+      $('#tab-predispozicije').addClass('in');
+      $('#tab-predispozicije').addClass('active');
 
+      var sledeci = $('.nav-product-tabs').find('.preslic');
+      $('.nav-product-tabs li').removeClass('active');
+
+      sledeci.addClass('active');
+      return false;
+    }
+});
 $('.btn-dalje').on('click', function(){
   var sledeci = $('.nav-product-tabs').find('.active').next();
   $('.nav-product-tabs li').removeClass('active');
@@ -396,6 +439,8 @@ $('.prvi_korak_end').click(function(){
  
   return false;
 });
+
+
 /*$('.bt-zavrsi').click(function(){
   $('#createNewClub').valid();
   if($('#createNewClub').validate().errorList.length > 1){
