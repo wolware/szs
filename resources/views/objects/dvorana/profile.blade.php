@@ -1,62 +1,12 @@
-<!DOCTYPE html>
-<html lang="ba">
-<head>
+@extends('layouts.app')
 
-  <!-- Basic Page Needs
-  ================================================== -->
-  <title>SveZaSport.ba | Royal Arena</title>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="Alchemists - Sports News HTML Template">
-  <meta name="author" content="Dan Fisher">
-  <meta name="keywords" content="Sports News HTML Template">
-
-  <!-- Favicons
-  ================================================== -->
-  <link rel="shortcut icon" href="assets/images/soccer/favicons/favicon.ico">
-  <link rel="apple-touch-icon" sizes="120x120" href="assets/images/soccer/favicons/favicon-120.png">
-  <link rel="apple-touch-icon" sizes="152x152" href="assets/images/soccer/favicons/favicon-152.png">
-
-  <!-- Mobile Specific Metas
-  ================================================== -->
-  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-
-  <!-- Google Web Fonts
-  ================================================== -->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CSource+Sans+Pro:400,700" rel="stylesheet">
-
-  <!-- CSS
-  ================================================== -->
-
-  <!-- Vendor CSS -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-  <link href="assets/fonts/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
-  <link href="assets/vendor/magnific-popup/dist/magnific-popup.css" rel="stylesheet">
-  <link href="assets/vendor/slick/slick.css" rel="stylesheet">
-
-
-
-  <!-- Template CSS-->
-  <link href="assets/css/style.css" rel="stylesheet">
-
-  <!-- Custom CSS-->
-  <link href="assets/css/custom.css" rel="stylesheet">
-
-</head>
-
-<body class="template-soccer">
-
+@section('content')
+{{dd($dvorana)}}
   <div class="site-wrapper clearfix">
     <div class="site-overlay"></div>
 
 
-<!-- Header
-    ================================================== -->
-  
-    <?php
-    require('include-header.php'); 
-  ?>
+
     <!-- Header / End -->
     
     <!-- Pushy Panel - Dark -->
@@ -1288,51 +1238,4 @@
   </div>
     <!-- Content / End -->
 
-    <!-- Footer
-    ================================================== -->
-    <?php
-    require('include-footer.php'); 
-  ?>
-    <!-- Footer / End -->    
-    
-  </div>
-
-  <!-- Javascript Files
-  ================================================== -->
-  <!-- Core JS -->
-  <script src="assets/vendor/jquery/jquery.min.js"></script>
-  <script src="assets/js/core-min.js"></script>
-  
-  <!-- Vendor JS -->
-  <script src="assets/vendor/twitter/jquery.twitter.js"></script>
-  
-  
-  <!-- Template JS -->
-  <script src="assets/js/init.js"></script>
-  <script src="assets/js/custom.js"></script>
- 
-<!--  jQuery -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-
-<!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
-<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
-
-<!-- Bootstrap Date-Picker Plugin -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
-
-<script>
-    $(document).ready(function(){
-      var date_input=$('input[name="date"]'); //our date input has the name "date"
-      var container=$('form').length>0 ? $('form').parent() : "body";
-      var options={
-        format: 'mm/dd/yyyy',
-        container: container,
-        todayHighlight: true,
-        autoclose: true,
-      };
-      date_input.datepicker(options);
-    })
-  </script>
-  </body>
-  </html>
+@endsection

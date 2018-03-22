@@ -62,9 +62,13 @@ Route::get('/profile/new', function(){
 // OBJECTS
 Route::get('/objects/dvorana/new', 'DvoranaController@new_show');
 Route::post('/objects/dvorana/create', 'DvoranaController@new');
+Route::get('/objects/dvorana/{id}', 'DvoranaController@dvorana_show');
 
 Route::get('/objects/skijaliste/new', function(){
 	return view('objects.skijaliste.new');
+});
+Route::get('/objects/skijaliste/{id}', function(){
+	return view('objects.skijaliste.profile');
 });
 
 // CLUB

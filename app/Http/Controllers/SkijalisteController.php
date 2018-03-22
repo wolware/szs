@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
-class DvoranaController extends Controller
+class SkijalisteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,11 +23,11 @@ class DvoranaController extends Controller
     }
     public function new_show()
     {
-        return view('objects.dvorana.new');
+        return view('objects.skijaliste.new');
     }
-    public function dvorana_show($id){
-        $dvorana = DB::table('dvorana')->where('id', $id)->first();
-        return view('objects.dvorana.profile', ['dvorana' => $dvorana]);
+    public function skijaliste_show($id){
+        $skijaliste = DB::table('skijaliste')->where('id', $id)->first();
+        return view('object.skijaliste.profile', ['skijaliste' => $skijaliste]);
     }
 
     public function new(Request $data){
@@ -51,7 +51,7 @@ class DvoranaController extends Controller
             'tezina' => 'required'*/
         ], $messages);
         if($validator->fails()){
-            return redirect('objects/dvorana/new')
+            return redirect('objects/skijaliste/new')
                         ->withErrors($validator)
                         ->withInput();
         }else{
@@ -73,7 +73,7 @@ class DvoranaController extends Controller
             if(empty($data['opcina'])){
                 $data['opcina'] = $data['opcinaSrb'];
             }
-            $id = DB::table('dvorana')->insertGetId([
+            $id = DB::table('skijaliste')->insertGetId([
                 'profilna' => $newLogoName,
                 'naziv' => $data['naziv'],
                 'kontinent' => $data['kontinent'],
@@ -140,7 +140,7 @@ class DvoranaController extends Controller
                 ]); 
             }
 
-             return redirect('objects/dvorana/'.$id);
+             return redirect('objects/skijaliste/'.$id);
         }
     }
 
