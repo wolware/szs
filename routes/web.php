@@ -60,6 +60,7 @@ Route::get('/profile/new', function(){
 });
 
 // OBJECTS
+Route::get('/objects', 'DvoranaController@index_show');
 Route::get('/objects/dvorana/new', 'DvoranaController@new_show');
 Route::post('/objects/dvorana/create', 'DvoranaController@new');
 Route::get('/objects/dvorana/{id}', 'DvoranaController@dvorana_show');
@@ -85,7 +86,15 @@ Route::post('/vremeplov/edit/{id}', 'ClubController@edit_vremeplov');
 Route::post('/trofej/edit/{id}', 'ClubController@edit_trofej');
 Route::post('/galerija/edit/{id}', 'ClubController@edit_galerija');
 
+//SCHOOLS
+Route::get('/schools', 'SchoolController@index_show');
+
+//STAFF
+Route::get('/staff', 'StaffController@index_show');
+
+
 //ATHLETE
+Route::get('/athletes', 'AthletesController@index_show');
 Route::get('/athletes/add', 'AthletesController@athletes_add');
 //**FOOTBALLER
 Route::get('/athlete/footballer/new', 'FootballerController@index');

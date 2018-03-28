@@ -20,7 +20,7 @@
             <h1 class="page-heading__title"><i class="fa fa-user-o fa-2x"></i></h1>
             <h1 class="page-heading__title">Prijava korisnika</h1>
             <ol class="page-heading__breadcrumb breadcrumb">
-              <li class="registracija-podnaslov"><a href="index.html">Sve za sport</a></li>
+              <li class="registracija-podnaslov"><a href="{{'/'}}">Sve za sport</a></li>
             </ol>
           </div>
         </div>
@@ -55,7 +55,7 @@
                   {!! csrf_field() !!}
                   <div class="form-group">
                     <label for="register-name"><i class="fa fa-user"></i> E-mail</label>
-                    <input type="text" name="name" id="register-name" class="form-control" placeholder="Unesite korisničko ime" required>
+                    <input type="text" name="name" id="register-name" class="form-control" placeholder="Unesite email" required>
                   </div>
                   
                   <div class="form-group">

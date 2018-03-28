@@ -8,7 +8,7 @@
     <div class="site-overlay"></div>
 
 
-<!-- Header
+    <!-- Header
     ================================================== -->
 
     <!-- Header / End -->
@@ -254,7 +254,7 @@
 
     <!-- Content
     ================================================== -->
-      <div class="site-content">
+    <div class="site-content">
 		<div class="container">
 					
 					@foreach ($data as $club)
@@ -293,6 +293,7 @@
 		</div>
 	 </div>
     <!-- Content / End -->
+  </div>
 
 
 @endsection

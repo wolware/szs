@@ -19,7 +19,11 @@ class DvoranaController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth')->except(['index_show']);
+    }
+    public function index_show()
+    {
+        return view('objects.index');
     }
     public function new_show()
     {
