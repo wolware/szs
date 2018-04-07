@@ -64,6 +64,29 @@ Route::get('/objects/dvorana/new', 'DvoranaController@new_show');
 Route::post('/objects/dvorana/create', 'DvoranaController@new');
 Route::get('/objects/dvorana/{id}', 'DvoranaController@dvorana_show');
 
+Route::get('/objects/teretana/new', 'TeretanaController@new_show');
+Route::post('/objects/teretana/create', 'TeretanaController@new');
+Route::get('/objects/teretana/{id}', 'TeretanaController@teretana_show');
+
+Route::get('/objects/streljana/new', 'StreljanaController@new_show');
+Route::post('/objects/streljana/create', 'StreljanaController@new');
+Route::get('/objects/streljana/{id}', 'StreljanaController@streljana_show');
+Route::get('/objects/stadion/new', 'StadionController@new_show');
+Route::post('/objects/stadion/create', 'StadionController@new');
+Route::get('/objects/stadion/{id}', 'StadionController@stadion_show');
+
+Route::get('/objects/kuglana/new', 'KuglanaController@new_show');
+Route::post('/objects/kuglana/create', 'KuglanaController@new');
+Route::get('/objects/kuglana/{id}', 'KuglanaController@kuglana_show');
+
+Route::get('/objects/bazen/new', 'BazenController@new_show');
+Route::post('/objects/bazen/create', 'BazenController@new');
+Route::get('/objects/bazen/{id}', 'BazenController@bazen_show');
+
+Route::get('/objects/balon/new', 'BalonController@new_show');
+Route::post('/objects/balon/create', 'BalonController@new');
+Route::get('/objects/balon/{id}', 'BalonController@balon_show');
+
 Route::get('/objects/skijaliste/new', function(){
 	return view('objects.skijaliste.new');
 });
