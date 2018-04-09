@@ -54,6 +54,12 @@ Route::get('/messages/important', function(){
 	return view('messages.important');
 });
 
+//NEWS
+Route::get('/news/new', function(){
+    return view('news.new');
+});
+Route::post('/news/new/create','NewsController@new');
+
 // PROFILE CREATE
 Route::get('/profile/new', function(){
 	return view('profile.new');

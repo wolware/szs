@@ -121,7 +121,7 @@
 						</figure>
 						<div class="posts__inner card__content">
 							<h6 class="posts__title ime-sportiste-klub-lista"><a href="#">Sportista</a></h6>
-							<div class="posts__excerpt">Dostupno: 6</div>
+							<div class="posts__excerpt">Dostupno: 14</div>
 						</div>
 						<footer class="posts__footer card__footer">
 							<a href="{{url('/athletes/add')}}" class="btn btn-warning btn1-objavi-sportistu"><i class="fa fa-plus-circle"></i> Dodaj novog sportistu</a>
@@ -195,11 +195,11 @@
 							<img src="{{asset('images/wpps/dijaspora-klub-wp.png')}}" alt="">
 						</figure>
 						<div class="posts__inner card__content">
-							<h6 class="posts__title ime-sportiste-klub-lista"><a href="#">Dijaspora (Klub)</a></h6>
-							<div class="posts__excerpt">Dostupno: 2</div>
+							<h6 class="posts__title ime-sportiste-klub-lista"><a href="{{url('/news/new')}}">Vijest</a></h6>
+							<div class="posts__excerpt">Dostupno: Neograničeno</div>
 						</div>
 						<footer class="posts__footer card__footer">
-							<a href="objavi-klub-dijaspora.php" class="btn btn-warning btn1-objavi-dijasporu"><i class="fa fa-plus-circle"></i> Dodaj novi klub</a>
+							<a href="{{url('/news/new')}}" class="btn btn-warning btn1-objavi-dijasporu"><i class="fa fa-plus-circle"></i> Dodaj novu vijest</a>
 						</footer>
 					  </div>
 					</div>

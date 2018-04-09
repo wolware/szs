@@ -55,7 +55,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-10 col-md-offset-1">
-            <h1 class="page-icon-objavi-title"><img src="{{asset('images/icons/dodaj-klub.png')}}"></img></h1>
+            <h1 class="page-icon-objavi-title"><img src="{{asset('images/icons/dodaj-klub.png')}}"></h1>
             <h1 class="page-heading__title">Objavi Klub</h1>
             <ol class="page-heading__breadcrumb breadcrumb">
               <li class="registracija-podnaslov">Dodavanje novog profila</li>
@@ -134,11 +134,11 @@
 				 <div class="col-md-6">
 
 				  <div class="form-group col-md-12">
-                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"></img> Ime/Naziv kluba*</label>
+                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Ime/Naziv kluba*</label>
                     <input type="text" name="name" id="ime-kluba" class="form-control" placeholder="Unesite ime/naziv kluba" maxlength="255" required>
                   </div>
 				  <div class="form-group has-success col-md-12">
-                    <label for="karakter-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"></img> Karakter kluba* <span>(izmjenjivo)</span></label>
+                    <label for="karakter-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Karakter kluba* <span>(izmjenjivo)</span></label>
                     <input type="text" name="karakter" id="karakter-kluba" class="form-control" value="Fudbalski klub" placeholder="Unesite karakter kluba" maxlength="255" required>
 					<span>Prilikom unosa karaktera kluba ne unositi kratice kao što su: FK, NK, KK, OK i sl.</span>
                   </div>
@@ -155,21 +155,21 @@
 				 </div>
 
 				  <div class="form-group col-md-4">
-                    <label for="kontinent"><img class="flow-icons-013" src="{{asset('images/icons/international-delivery.svg')}}"></img> Kontinent*</label>
+                    <label for="kontinent"><img class="flow-icons-013" src="{{asset('images/icons/international-delivery.svg')}}"> Kontinent*</label>
                     <select name="kontinent" class="form-control" id="kontinent" required>
   						<option value="Evropa" selected>Evropa</option>
   					</select>
 				  </div>
 
 				  <div class="form-group col-md-4">
-                    <label for="drzava"><img class="flow-icons-013" src="{{asset('images/icons/earth.svg')}}"></img> Država*</label>
+                    <label for="drzava"><img class="flow-icons-013" src="{{asset('images/icons/earth.svg')}}"> Država*</label>
                     <select name="drzava" class="form-control" id="drzava" required>
   						<option value="Bosna i Hercegovina" selected>Bosna i Hercegovina</option>
   					</select>
 				  </div>
 
 				  <div class="form-group col-md-4">
-                    <label for="entitet"><img class="flow-icons-013" src="{{asset('images/icons/map.svg')}}"></img> Entitet/Distrikt*</label>
+                    <label for="entitet"><img class="flow-icons-013" src="{{asset('images/icons/map.svg')}}"> Entitet/Distrikt*</label>
                     <select name="entitet" class="form-control" id="entitet" required>
   						<option value=""  selected>Izaberite entitet/distrikt</option>
 						<option value="Federacija BiH">Federacija BiH</option>
@@ -179,7 +179,7 @@
 				  </div>
 
 				  <div class="form-group col-md-4" id="kantonDiv">
-                    <label for="kanton"><img class="flow-icons-013" src="{{asset('images/icons/placeholder.svg')}}"></img> Kanton*</label>
+                    <label for="kanton"><img class="flow-icons-013" src="{{asset('images/icons/placeholder.svg')}}"> Kanton*</label>
                     <select name="kanton" class="form-control" id="kanton" required>
   						<option value="" disabled selected>Izaberite kanton</option>
 						<option value="Unsko-sanski Kanton" disabled>Unsko-sanski Kanton</option>
@@ -196,7 +196,7 @@
 				  </div>
 
 				  <div class="form-group col-md-4" id="opcineDiv">
-                    <label for="opcine-ks"><img class="flow-icons-013" src="{{asset('images/icons/opcina.svg')}}"></img> Općine Kantona Sarajevo*</label>
+                    <label for="opcine-ks"><img class="flow-icons-013" src="{{asset('images/icons/opcina.svg')}}"> Općine Kantona Sarajevo*</label>
                     <select name="opcina" class="form-control" id="opcine-ks" required>
   						<option value="" disabled selected>Izaberite općinu</option>
 						<option value="Hadzici">Hadžići</option>
@@ -212,7 +212,7 @@
 				  </div>
 
 				  <div class="form-group col-md-4" id="regijaDiv" style="display:none;">
-                    <label for="regija"><img class="flow-icons-013" src="{{asset('images/icons/placeholder.svg')}}"></img> Regija*</label>
+                    <label for="regija"><img class="flow-icons-013" src="{{asset('images/icons/placeholder.svg')}}"> Regija*</label>
                     <select name="kantonSrb" class="form-control" id="regija">
   						<option value="" disabled selected>Izaberite regiju</option>
 						<option value="Banjalucka" disabled>Banjalučka</option>
@@ -223,7 +223,7 @@
 				  </div>
 
 				  <div class="form-group col-md-4" id="opSrb" style="display:none;">
-                    <label for="opcine-sz-reg"><img class="flow-icons-013" src="{{asset('images/icons/opcina.svg')}}"></img> Općine Sarajevsko-Zvorničke regije*</label>
+                    <label for="opcine-sz-reg"><img class="flow-icons-013" src="{{asset('images/icons/opcina.svg')}}"> Općine Sarajevsko-Zvorničke regije*</label>
                     <select class="form-control" name="opcinaSrb">
   						<option value="" disabled selected>Izaberite općinu</option>
 						<option value="Bratunac" disabled>Bratunac</option>
@@ -253,12 +253,12 @@
 				  </div>
 
 				  <div class="form-group col-md-4">
-                    <label for="mjesto"><img class="flow-icons-013" src="{{asset('images/icons/small-calendar.svg')}}"></img> Mjesto/Grad kluba*</label>
+                    <label for="mjesto"><img class="flow-icons-013" src="{{asset('images/icons/small-calendar.svg')}}"> Mjesto/Grad kluba*</label>
                     <input name="grad" type="text" name="mjesto" id="mjesto" class="form-control" placeholder="Unesite mjesto kluba" onFocus="initAutocomplete()" required autocomplete="on">
                   </div>
 
 				  <div class="form-group col-md-4">
-                    <label for="tip-kluba"><img class="flow-icons-013" src="{{asset('images/icons/klubovi-icon.svg')}}"></img> Tip kluba*</label>
+                    <label for="tip-kluba"><img class="flow-icons-013" src="{{asset('images/icons/klubovi-icon.svg')}}"> Tip kluba*</label>
                     <select name="tip" class="form-control" id="tip-kluba" required>
   						<option value="" disabled selected>Izaberite tip kluba</option>
 						<option value="Sportski klub">Sportski klub</option>
@@ -267,7 +267,7 @@
 				  </div>
 
 				  <div class="form-group col-md-4" id="sportoviDiv">
-                    <label for="sport"><img class="flow-icons-013" src="{{asset('images/icons/menu-circular-button.svg')}}"></img> Sportovi*</label>
+                    <label for="sport"><img class="flow-icons-013" src="{{asset('images/icons/menu-circular-button.svg')}}"> Sportovi*</label>
                     <select name="sport" class="form-control" id="sport">
   						<option value="" selected>Izaberite sport</option>
 						<option value="Aikido">Aikido</option>
@@ -321,7 +321,7 @@
 				  </div>
 
 				  <div class="form-group col-md-4" id="iSportoviDiv" style="display: none;">
-                    <label for="invalidski-sport"><img class="flow-icons-013" src="{{asset('images/icons/disability.svg')}}"></img> Invalidski sportovi</label>
+                    <label for="invalidski-sport"><img class="flow-icons-013" src="{{asset('images/icons/disability.svg')}}"> Invalidski sportovi</label>
                     <select name="invalidski_sport" class="form-control" id="invalidski-sport">
   						<option value="" selected>Izaberite sport</option>
 						<option value="Alpsko skijanje">Alpsko skijanje</option>
@@ -338,7 +338,7 @@
 				  </div>
 
 				  <div class="form-group col-md-4">
-                    <label for="kategorija-klub"><img class="flow-icons-013" src="{{asset('images/icons/gender-symbols.svg')}}"></img> Kategorija kluba*</label>
+                    <label for="kategorija-klub"><img class="flow-icons-013" src="{{asset('images/icons/gender-symbols.svg')}}"> Kategorija kluba*</label>
                     <select name="kategorija" class="form-control" id="kategorija-klub" required>
   						<option value="" selected>Izaberite kategoriju kluba</option>
 						<option value="Muski klub">Muški klub</option>
@@ -356,22 +356,22 @@
 			 </div>
 			<div class="row">
 				  <div class="form-group col-md-6">
-                    <label for="godina-osnivanja"><img class="flow-icons-013" src="{{asset('images/icons/small-calendar.svg')}}"></img> Godina osnivanja kluba</label>
+                    <label for="godina-osnivanja"><img class="flow-icons-013" src="{{asset('images/icons/small-calendar.svg')}}"> Godina osnivanja kluba</label>
                     <input name="godina_osnivanja" type="number" id="godina-osnivanja" class="form-control" placeholder="Unesite godinu osnivanja kluba" required="true">
                   </div>
 
 				  <div class="form-group col-md-6">
-                    <label for="domaci-teren"><img class="flow-icons-013" src="{{asset('images/icons/stadium-icon.svg')}}"></img> Domaći teren</label>
+                    <label for="domaci-teren"><img class="flow-icons-013" src="{{asset('images/icons/stadium-icon.svg')}}"> Domaći teren</label>
                     <input name="teren" type="text" name="domaci-teren" id="domaci-teren" class="form-control" placeholder="Unesite naziv domaćeg terena kluba" required>
                   </div>
 
 				  <div class="form-group col-md-6">
-                    <label for="takmicenje"><img class="flow-icons-013" src="{{asset('images/icons/trophy.svg')}}"></img> Takmičenje</label>
+                    <label for="takmicenje"><img class="flow-icons-013" src="{{asset('images/icons/trophy.svg')}}"> Takmičenje</label>
                     <input type="text" name="takmicenje" id="takmicenje" class="form-control" placeholder="Unesite naziv takmičenja u kojem klub nastupa" required>
                   </div>
 
 				  <div class="form-group col-md-6">
-                    <label for="savez"><img class="flow-icons-013" src="{{asset('images/icons/savez.svg')}}"></img> Savez kojem klub pripada</label>
+                    <label for="savez"><img class="flow-icons-013" src="{{asset('images/icons/savez.svg')}}"> Savez kojem klub pripada</label>
 					<div class="form-group">
 					  <label class="radio radio-inline">
 						<input type="radio" id="inlineCheckbox1" name="savez" value="option1"> Državni savez
@@ -398,32 +398,32 @@
 			 <div class="row">
 
 					<div class="form-group col-md-4">
-						<label for="tel1"><img class="flow-icons-013" src="{{asset('images/icons/phone-call.svg')}}"></img> Telefon 1</label>
+						<label for="tel1"><img class="flow-icons-013" src="{{asset('images/icons/phone-call.svg')}}"> Telefon 1</label>
 						<input type="number" name="telefon1" id="tel1" class="form-control" placeholder="Unesite broj za službeni telefon 1">
 					</div>
 
 					<div class="form-group col-md-4">
-						<label for="tel2"><img class="flow-icons-013" src="{{asset('images/icons/phone-call.svg')}}"></img> Telefon 2</label>
+						<label for="tel2"><img class="flow-icons-013" src="{{asset('images/icons/phone-call.svg')}}"> Telefon 2</label>
 						<input type="number" name="telefon2" id="tel2" class="form-control" placeholder="Unesite broj za službeni telefon 2">
 					</div>
 
 					<div class="form-group col-md-4">
-						<label for="fax"><img class="flow-icons-013" src="{{asset('images/icons/fax-with-phone.svg')}}"></img> Fax</label>
+						<label for="fax"><img class="flow-icons-013" src="{{asset('images/icons/fax-with-phone.svg')}}"> Fax</label>
 						<input type="number" name="fax" id="fax" class="form-control" placeholder="Unesite broj za službeni fax">
 					</div>
 
 					<div class="form-group col-md-4">
-						<label for="mail"><img class="flow-icons-013" src="{{asset('images/icons/envelope.svg')}}"></img> E-mail</label>
+						<label for="mail"><img class="flow-icons-013" src="{{asset('images/icons/envelope.svg')}}"> E-mail</label>
 						<input type="email" name="email" id="mail" class="form-control" placeholder="Unesite službeni E-mail">
 					</div>
 
 					<div class="form-group col-md-4">
-						<label for="web"><img class="flow-icons-013" src="{{asset('images/icons/worldwide.svg')}}"></img> Web stranica</label>
+						<label for="web"><img class="flow-icons-013" src="{{asset('images/icons/worldwide.svg')}}"> Web stranica</label>
 						<input type="text" name="web_stranica" id="web" class="form-control" placeholder="Unesite link službene web stranice">
 					</div>
 
 					<div class="form-group col-md-4">
-						<label for="adresa"><img class="flow-icons-013" src="{{asset('images/icons/icon.svg')}}"></img> Adresa (ne prikazuje se)</label>
+						<label for="adresa"><img class="flow-icons-013" src="{{asset('images/icons/icon.svg')}}"> Adresa (ne prikazuje se)</label>
 						<input type="text" name="adresa" id="adresa" onFocus="adresaAutoComp()" class="form-control" placeholder="Unesite adresu sjedišta kluba" required>
 					</div>
 
@@ -437,22 +437,22 @@
 			 <div class="row">
 
 					<div class="form-group col-md-6">
-						<label for="fcb"><img class="flow-icons-013" src="{{asset('images/icons/facebook.svg')}}"></img> Facebook stranica</label>
+						<label for="fcb"><img class="flow-icons-013" src="{{asset('images/icons/facebook.svg')}}"> Facebook stranica</label>
 						<input type="text" name="fb" id="fcb" class="form-control" placeholder="Unesite link službene facebook stranice">
 					</div>
 
 					<div class="form-group col-md-6">
-						<label for="twt"><img class="flow-icons-013" src="{{asset('images/icons/twitter.svg')}}"></img> Twitter profil</label>
+						<label for="twt"><img class="flow-icons-013" src="{{asset('images/icons/twitter.svg')}}"> Twitter profil</label>
 						<input type="text" name="twitter" id="twt" class="form-control" placeholder="Unesite link službenog twitter profila">
 					</div>
 
 					<div class="form-group col-md-6">
-						<label for="inst"><img class="flow-icons-013" src="{{asset('images/icons/instagram.svg')}}"></img> Instagram profil</label>
+						<label for="inst"><img class="flow-icons-013" src="{{asset('images/icons/instagram.svg')}}"> Instagram profil</label>
 						<input type="text" name="instagram" id="inst" class="form-control" placeholder="Unesite link službenog instagram profila">
 					</div>
 
 					<div class="form-group col-md-6">
-						<label for="yt"><img class="flow-icons-013" src="{{asset('images/icons/youtube.svg')}}"></img> YouTUBE pofil</label>
+						<label for="yt"><img class="flow-icons-013" src="{{asset('images/icons/youtube.svg')}}"> YouTUBE pofil</label>
 						<input type="text" name="yt" id="yt" class="form-control" placeholder="Unesite link službenog YouTUBE kanala">
 					</div>
 
@@ -466,7 +466,7 @@
 			 <div class="row">
 
 					<div class="form-group col-md-12">
-						<label for="videoprez"><img class="flow-icons-013" src="{{asset('images/icons/play-button.svg')}}"></img> Video prezentacija</label>
+						<label for="videoprez"><img class="flow-icons-013" src="{{asset('images/icons/play-button.svg')}}"> Video prezentacija</label>
 						<input type="text" name="video" id="videoprez" class="form-control" placeholder="Unesite link videa (YouTUBE)">
 					</div>
 
@@ -521,15 +521,15 @@
 				 <div class="col-md-6">
 
 				  <div class="form-group col-md-6 col-xs-12">
-                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"></img> Ime</label>
+                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Ime</label>
                     <input type="text" name="licnost_ime[]" id="ime-kluba" class="form-control" placeholder="Unesite ime ličnosti">
                   </div>
 				  <div class="form-group col-md-6 col-xs-12">
-                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"></img> Prezime</label>
+                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Prezime</label>
                     <input type="text" name="licnost_prezime[]" id="ime-kluba" class="form-control" placeholder="Unesite prezime ime ličnosti">
                   </div>
 				  <div class="form-group col-md-12">
-					<label for="opis"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"></img> Opis i uloga</label>
+					<label for="opis"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Opis i uloga</label>
 					<textarea class="form-control" rows="4" id="opis" name="licnost_opis[]" maxlength="350" placeholder="Upišite kratak opis uloge i funkcije navedene ličnosti u klubu..."></textarea>
 				  </div>
 
@@ -572,15 +572,15 @@
 				 <div class="col-md-6">
 
 				  <div class="form-group col-md-6 col-xs-12">
-                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"></img> Ime</label>
+                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Ime</label>
                     <input type="text" name="licnost_ime[]" id="ime-kluba" class="form-control" placeholder="Unesite ime ličnosti">
                   </div>
 				  <div class="form-group col-md-6 col-xs-12">
-                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"></img> Prezime</label>
+                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Prezime</label>
                     <input type="text" name="licnost_prezime[]" id="ime-kluba" class="form-control" placeholder="Unesite prezime ime ličnosti">
                   </div>
 				  <div class="form-group col-md-12">
-					<label for="opis"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"></img> Opis i uloga</label>
+					<label for="opis"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Opis i uloga</label>
 					<textarea class="form-control" rows="4" id="opis" name="licnost_opis[]" maxlength="350" placeholder="Upišite kratak opis uloge i funkcije navedene ličnosti u klubu..."></textarea>
 				  </div>
 
@@ -623,15 +623,15 @@
 				 <div class="col-md-6">
 
 				  <div class="form-group col-md-6 col-xs-12">
-                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"></img> Ime</label>
+                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Ime</label>
                     <input type="text" name="licnost_ime[]" id="ime-kluba" class="form-control" placeholder="Unesite ime ličnosti">
                   </div>
 				  <div class="form-group col-md-6 col-xs-12">
-                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"></img> Prezime</label>
+                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Prezime</label>
                     <input type="text" name="licnost_prezime[]" id="ime-kluba" class="form-control" placeholder="Unesite prezime ime ličnosti">
                   </div>
 				  <div class="form-group col-md-12">
-					<label for="opis"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"></img> Opis i uloga</label>
+					<label for="opis"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Opis i uloga</label>
 					<textarea class="form-control" rows="4" id="opis" name="licnost_opis[]" maxlength="350" placeholder="Upišite kratak opis uloge i funkcije navedene ličnosti u klubu..."></textarea>
 				  </div>
 
@@ -674,15 +674,15 @@
 				 <div class="col-md-6">
 
 				  <div class="form-group col-md-6 col-xs-12">
-                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"></img> Ime</label>
+                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Ime</label>
                     <input type="text" name="licnost_ime[]" id="ime-kluba" class="form-control" placeholder="Unesite ime ličnosti">
                   </div>
 				  <div class="form-group col-md-6 col-xs-12">
-                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"></img> Prezime</label>
+                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Prezime</label>
                     <input type="text" name="licnost_prezime[]" id="ime-kluba" class="form-control" placeholder="Unesite prezime ime ličnosti">
                   </div>
 				  <div class="form-group col-md-12">
-					<label for="opis"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"></img> Opis i uloga</label>
+					<label for="opis"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Opis i uloga</label>
 					<textarea class="form-control" rows="4" id="opis" name="licnost_opis[]" maxlength="350" placeholder="Upišite kratak opis uloge i funkcije navedene ličnosti u klubu..."></textarea>
 				  </div>
 
@@ -725,15 +725,15 @@
 				 <div class="col-md-6">
 
 				  <div class="form-group col-md-6 col-xs-12">
-                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"></img> Ime</label>
+                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Ime</label>
                     <input type="text" name="licnost_ime[]" id="ime-kluba" class="form-control" placeholder="Unesite ime ličnosti">
                   </div>
 				  <div class="form-group col-md-6 col-xs-12">
-                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"></img> Prezime</label>
+                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Prezime</label>
                     <input type="text" name="licnost_prezime[]" id="ime-kluba" class="form-control" placeholder="Unesite prezime ime ličnosti">
                   </div>
 				  <div class="form-group col-md-12">
-					<label for="opis"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"></img> Opis i uloga</label>
+					<label for="opis"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Opis i uloga</label>
 					<textarea class="form-control" rows="4" id="opis" name="licnost_opis[]" maxlength="350" placeholder="Upišite kratak opis uloge i funkcije navedene ličnosti u klubu..."></textarea>
 				  </div>
 
@@ -765,7 +765,7 @@
 				 <div class="col-md-12">
 
 				  <div class="form-group col-md-12">
-					<label for="opis"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"></img> Vremeplov</label>
+					<label for="opis"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Vremeplov</label>
 					<textarea class="form-control" rows="20" id="opis" name="vremeplov" maxlength="1050" placeholder="Upišite ukratko informacije vezane za historijat vašeg kluba i njegovu tradiciju..."></textarea>
 				  </div>
 
@@ -802,7 +802,7 @@
 			 </div>
 				<div class="col-md-6">
 				  <div class="form-group col-md-6">
-                    <label for="vrsta-nagrade"><img class="flow-icons-013" src="{{asset('images/icons/medalja.svg')}}"></img> Vrsta nagrade</label>
+                    <label for="vrsta-nagrade"><img class="flow-icons-013" src="{{asset('images/icons/medalja.svg')}}"> Vrsta nagrade</label>
                     <select name="vrsta_nagrade[]" class="form-control" id="vrsta-nagrade">
   						<option value="" selected>Izaberite vrstu osvojene nagrade</option>
 						<option value="Medalja">Medalja</option>
@@ -812,7 +812,7 @@
   					</select>
                   </div>
 				  <div class="form-group col-md-6">
-                    <label for="tip-nagrade"><img class="flow-icons-013" src="{{asset('images/icons/medalja.svg')}}"></img> Tip nagrade</label>
+                    <label for="tip-nagrade"><img class="flow-icons-013" src="{{asset('images/icons/medalja.svg')}}"> Tip nagrade</label>
                     <select name="tip_nagrade[]" class="form-control" id="tip-nagrade">
   						<option value="" selected>Izaberite tip nagrade</option>
 						<option value="Zlato">Zlato (1. mjesto)</option>
@@ -822,7 +822,7 @@
   					</select>
                   </div>
 				  <div class="form-group col-md-12">
-                    <label for="tip-nagrade"><img class="flow-icons-013" src="{{asset('images/icons/medalja.svg')}}"></img> Nivo takmičenja</label>
+                    <label for="tip-nagrade"><img class="flow-icons-013" src="{{asset('images/icons/medalja.svg')}}"> Nivo takmičenja</label>
                     <select name="nivo_nagrade[]" class="form-control" id="tip-nagrade">
   						<option value="" selected>Izaberite nivo takmičenja</option>
 						<option value="Internacionalni nivo">Internacionalni nivo</option>
@@ -835,15 +835,15 @@
 				</div>
 				<div class="col-md-6">
 				  <div class="form-group">
-                    <label for="takmicenje"><img class="flow-icons-013" src="{{asset('images/icons/trophy.svg')}}"></img> Naziv takmičenja</label>
+                    <label for="takmicenje"><img class="flow-icons-013" src="{{asset('images/icons/trophy.svg')}}"> Naziv takmičenja</label>
                     <input type="text" name="trofej_takmicenja[]" id="takmicenje" class="form-control" placeholder="Unesite naziv takmicenja za koje je osvojena nagrada">
                   </div>
 				  <div class="form-group col-md-6 col-xs-12">
-                    <label for="sezona"><img class="flow-icons-013" src="{{asset('images/icons/small-calendar.svg')}}"></img> Sezona/Godina</label>
+                    <label for="sezona"><img class="flow-icons-013" src="{{asset('images/icons/small-calendar.svg')}}"> Sezona/Godina</label>
                     <input type="text" name="trofej_sezona[]" id="sezona" class="form-control" placeholder="Unesite Sezonu/Godinu osvajanja trofeja">
                   </div>
 				  <div class="form-group col-md-6 col-xs-12">
-                    <label for="osvajanja"><img class="flow-icons-013" src="{{asset('images/icons/the-sum-of.svg')}}"></img> Broj osvajanja</label>
+                    <label for="osvajanja"><img class="flow-icons-013" src="{{asset('images/icons/the-sum-of.svg')}}"> Broj osvajanja</label>
                     <input type="number" name="trofej_osvajanja[]" id="osvajanja" class="form-control" placeholder="Unesite broj osvajanja trofeja">
                   </div>
 				</div>
@@ -898,7 +898,7 @@
 								<img src="{{asset('images/banner-122.jpg')}}" alt="">
 							</figure>
 							<div class="album__item-desc">
-								<img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt=""></img>
+								<img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt="">
 							</div>
 							</a>
 						</div>
@@ -940,7 +940,7 @@
 								  <h4 class="modal-title">USPJEŠNO STE KREIRALI KLUB</h4>
 								</div>
 								<div class="modal-body">
-								  <img class="ikona-modal" src="{{asset('images/icons/checked.svg')}}"></img>
+								  <img class="ikona-modal" src="{{asset('images/icons/checked.svg')}}">
 								  <p class="bravo-info">Predložak koji ste napravili će biti u najkraćem mogućem vremenskom periodu pregledan od strane naše administracije, te ukoliko bude zadovoljavao sve uvjete koje nalaže Sve Za Sport, biti će i objavljen.</p>
 								  <p class="bravo-hello">Sportski pozdrav!</p>
 								</div>
@@ -1000,7 +1000,7 @@
                 var reader = new FileReader();
 
                 reader.onload = function(event) {
-                	var adnew = '<div class="album__item col-xs-6 col-sm-3"><div class="album__item-holder"><a href="'+event.target.result+'" class="album__item-link mp_gallery"><figure class="album__thumb"><img src="'+event.target.result+'" alt=""></figure><div class="album__item-desc"><img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt=""></img></div></a></div><div class="progress-stats upload-slike-statust-bar"><div class="progress"><div class="progress__bar progress__bar-width-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div></div></div>';
+                	var adnew = '<div class="album__item col-xs-6 col-sm-3"><div class="album__item-holder"><a href="'+event.target.result+'" class="album__item-link mp_gallery"><figure class="album__thumb"><img src="'+event.target.result+'" alt=""></figure><div class="album__item-desc"><img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt=""></div></a></div><div class="progress-stats upload-slike-statust-bar"><div class="progress"><div class="progress__bar progress__bar-width-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div></div></div>';
                     $(adnew).appendTo('#galerija_klub');
                 }
 
