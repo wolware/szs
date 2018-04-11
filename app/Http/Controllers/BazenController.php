@@ -27,7 +27,9 @@ class BazenController extends Controller
     }
     public function bazen_show($id){
         $bazen = DB::table('bazen')->where('id', $id)->first();
-        return view('objects.bazen.profile', ['bazen' => $bazen]);
+        $vremeplov = DB::table('vremeplov_objekta')->where('objekat_id', $id)->first();
+        $galerija = DB::table('galerija_objekat')->where('objekat_id', $id)->get();
+        return view('objects.bazen.profile', ['bazen' => $bazen, 'vremeplov' => $vremeplov, 'galerija' => $galerija]);
     }
 
     public function new(Request $data){

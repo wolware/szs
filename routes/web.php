@@ -60,6 +60,8 @@ Route::get('/profile/new', function(){
 });
 
 // OBJECTS
+Route::get('/objects/add', 'ObjectsController@objects_add');
+
 Route::get('/objects/dvorana/new', 'DvoranaController@new_show');
 Route::post('/objects/dvorana/create', 'DvoranaController@new');
 Route::get('/objects/dvorana/{id}', 'DvoranaController@dvorana_show');

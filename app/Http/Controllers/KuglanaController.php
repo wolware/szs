@@ -27,7 +27,9 @@ class KuglanaController extends Controller
     }
     public function kuglana_show($id){
         $kuglana = DB::table('kuglana')->where('id', $id)->first();
-        return view('objects.kuglana.profile', ['kuglana' => $kuglana]);
+        $vremeplov = DB::table('vremeplov_objekta')->where('objekat_id', $id)->first();
+        $galerija = DB::table('galerija_objekat')->where('objekat_id', $id)->get();
+        return view('objects.kuglana.profile', ['kuglana' => $kuglana, 'vremeplov' => $vremeplov, 'galerija' => $galerija]);
     }
 
     public function new(Request $data){
