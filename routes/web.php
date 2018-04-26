@@ -54,7 +54,7 @@ Route::get('/messages/important', function(){
 	return view('messages.important');
 });
 
-//NEWS
+//News
 Route::get('/news/new', function(){
     return view('news.new');
 });
