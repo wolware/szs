@@ -35,6 +35,7 @@
   <link href="{{ asset('/fonts/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
   <link href="{{ asset('/vendor/magnific-popup/dist/magnific-popup.css') }}" rel="stylesheet">
   <link href="{{ asset('/vendor/slick/slick.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/selectize.css') }}" rel="stylesheet">
 
 
 

@@ -99,6 +99,7 @@
                                     <div class="row">
                                         <form id="createNewClub" role="form" action="{{ url('/news/new/create') }}" method="POST" enctype="multipart/form-data" >
                                             {!! csrf_field() !!}
+
                                             <div class="row identitet-style">
 
 
@@ -112,6 +113,25 @@
 
                                             </div>
 
+                                            <div class="row identitet-style">
+                                                <div class="col-md-12">
+                                                    <div class="form-group col-md-12">
+                                                        <label for="kategorija-vijesti"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Kategorija vijesti kluba*</label>
+                                                        <select class="form-control" name="kategorija" id="kategorija-vijesti" placeholder="Unesite kategoriju vijesti" required>
+                                                            <option value="0">Općenito</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row identitet-style">
+                                                <div class="col-md-12">
+                                                    <div class="form-group col-md-12">
+                                                        <label for="tagovi-vijesti"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Tagovi vijesti kluba</label>
+                                                        <input type="text" name="tagovi" id="tagovi-vijesti" class="form-control" placeholder="Unesite tagove vijesti">
+                                                    </div>
+                                                </div>
+                                            </div>
 
                                             <div class="row form-segment">
                                                 <header class="card__header">
@@ -121,7 +141,7 @@
 
                                             <div class="form-group col-md-12">
                                                 <label for="sadrzaj"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Sadržaj</label>
-                                                <textarea class="form-control" rows="20" id="sadrzaj" name="sadrzaj" maxlength="1050"></textarea>
+                                                <textarea class="form-control" rows="20" id="sadrzaj" name="sadrzaj"></textarea>
                                             </div>
                                             <div class="row">
                                                 <div class="form-group form-group--submit col-md-6">
@@ -150,6 +170,20 @@
         <script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
         <script>
             CKEDITOR.replace( 'sadrzaj' );
+        </script>
+        <!-- Selectize for tags -->
+        <script src="{{ asset('js/selectize.js') }}"></script>
+        <script>
+            $('#tagovi-vijesti').selectize({
+                delimiter: ',',
+                persist: false,
+                create: function(input) {
+                    return {
+                        value: input,
+                        text: input
+                    }
+                }
+            });
         </script>
     </div>
 @endsection
