@@ -16,11 +16,11 @@ class VijestKategorijaTableSeeder extends Seeder
 
         $kategorije = [
             ['naziv' => 'Općenito'],
-            ['naziv' => 'Takmičenja/rezultati/turniti'],
+            ['naziv' => 'Takmičenja/rezultati/turniri'],
             ['naziv' => 'Zanimljivosti'],
             ['naziv' => 'Šampioni svakodnevnice'],
             ['naziv' => 'Talent skener'],
-            ['naziv' => 'Zdrav život(Nutricionizam, trening)'],
+            ['naziv' => 'Zdrav život (Nutricionizam, trening)'],
             ['naziv' => 'Stručni tekstovi'],
         ];
 

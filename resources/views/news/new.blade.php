@@ -69,15 +69,6 @@
         ================================================== -->
         <div class="site-content">
             <div class="container">
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
                 <div class="row profil-content-b06">
                     <!-- Main content -->
                     <div class="sidebar col-md-12 overscreen">
@@ -97,6 +88,25 @@
                                 <!-- Tab: Općenito -->
                                 <div role="tabpanel" class="tab-pane fade in active" id="tab-opcenito">
                                     <div class="row">
+                                        <!-- Successfully added message -->
+                                        @if (Session::has('success'))
+                                            <div class="col-md-12">
+                                                <div id="uspjesnoDodano" class="alert alert-success">{{ Session::get('success') }}</div>
+                                            </div>
+                                        @endif
+                                        <!-- Server side errors -->
+                                        @if ($errors->any())
+                                            <div class="col-md-12">
+                                                <div class="alert alert-danger">
+                                                    <ul>
+                                                        @foreach ($errors->all() as $error)
+                                                            <li>{{ $error }}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        @endif
+
                                         <form id="createNewClub" role="form" action="{{ url('/news/new/create') }}" method="POST" enctype="multipart/form-data" >
                                             {!! csrf_field() !!}
 
@@ -107,7 +117,7 @@
 
                                                     <div class="form-group col-md-12">
                                                         <label for="naslov-vijesti"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Naslov vijesti kluba*</label>
-                                                        <input type="text" name="naslov" id="naslov-vijesti" class="form-control" placeholder="Unesite naslov vijesti" maxlength="255" required>
+                                                        <input type="text" name="naslov" id="naslov-vijesti" class="form-control" placeholder="Unesite naslov vijesti" maxlength="255" required value="{{ old('naslov') }}">
                                                     </div>
                                                 </div>
 
@@ -117,8 +127,10 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group col-md-12">
                                                         <label for="kategorija-vijesti"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Kategorija vijesti kluba*</label>
-                                                        <select class="form-control" name="kategorija" id="kategorija-vijesti" placeholder="Unesite kategoriju vijesti" required>
-                                                            <option value="0">Općenito</option>
+                                                        <select class="form-control" name="kategorija" id="kategorija-vijesti" placeholder="Unesite kategoriju vijesti" value="{{ old('kategorija') }}" required>
+                                                            @foreach($vijest_kategorija as $kategorija)
+                                                                <option value="{{ $kategorija->id }}" {{ (old("kategorija") == $kategorija->id ? "selected":"") }}>{{ $kategorija->naziv }}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
@@ -128,7 +140,7 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group col-md-12">
                                                         <label for="tagovi-vijesti"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Tagovi vijesti kluba</label>
-                                                        <input type="text" name="tagovi" id="tagovi-vijesti" class="form-control" placeholder="Unesite tagove vijesti">
+                                                        <input type="text" name="tagovi" id="tagovi-vijesti" class="form-control" placeholder="Unesite tagove vijesti" value="{{ old('tagovi') }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -141,7 +153,7 @@
 
                                             <div class="form-group col-md-12">
                                                 <label for="sadrzaj"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Sadržaj</label>
-                                                <textarea class="form-control" rows="20" id="sadrzaj" name="sadrzaj"></textarea>
+                                                <textarea class="form-control" rows="20" id="sadrzaj" name="sadrzaj" value="{{ old('sadrzaj') }}"></textarea>
                                             </div>
                                             <div class="row">
                                                 <div class="form-group form-group--submit col-md-6">
@@ -184,6 +196,10 @@
                     }
                 }
             });
+
+            setTimeout(function() {
+                $('#uspjesnoDodano').slideUp();
+            }, 3000);
         </script>
     </div>
 @endsection
