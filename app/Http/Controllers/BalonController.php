@@ -27,7 +27,10 @@ class BalonController extends Controller
     }
     public function balon_show($id){
         $balon = DB::table('balon')->where('id', $id)->first();
-        return view('objects.balon.profile', ['balon' => $balon]);
+        $vremeplov = DB::table('vremeplov_objekta')->where('objekat_id', $id)->first();
+        $galerija = DB::table('galerija_objekat')->where('objekat_id', $id)->get();
+        return view('objects.balon.profile', ['balon' => $balon, 'vremeplov' => $vremeplov, 'galerija' => $galerija]);
+    
     }
 
     public function new(Request $data){

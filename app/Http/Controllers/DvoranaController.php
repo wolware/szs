@@ -31,7 +31,9 @@ class DvoranaController extends Controller
     }
     public function dvorana_show($id){
         $dvorana = DB::table('dvorana')->where('id', $id)->first();
-        return view('objects.dvorana.profile', ['dvorana' => $dvorana]);
+        $vremeplov = DB::table('vremeplov_objekta')->where('objekat_id', $id)->first();
+        $galerija = DB::table('galerija_objekat')->where('objekat_id', $id)->get();
+        return view('objects.dvorana.profile', ['dvorana' => $dvorana, 'vremeplov' => $vremeplov, 'galerija' => $galerija]);
     }
 
     public function new(Request $data){

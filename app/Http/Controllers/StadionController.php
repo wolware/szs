@@ -27,7 +27,9 @@ class StadionController extends Controller
     }
     public function stadion_show($id){
         $stadion = DB::table('stadion')->where('id', $id)->first();
-        return view('objects.stadion.profile', ['stadion' => $stadion]);
+        $vremeplov = DB::table('vremeplov_objekta')->where('objekat_id', $id)->first();
+        $galerija = DB::table('galerija_objekat')->where('objekat_id', $id)->get();
+        return view('objects.stadion.profile', ['stadion' => $stadion, 'vremeplov' => $vremeplov, 'galerija' => $galerija]);
     }
 
     public function new(Request $data){

@@ -53,8 +53,8 @@
     
         <div class="player-info__title player-info__title--mobile">
           <h1 class="player-info__name">
-            <span class="player-info__first-name">Sportska dvorana</span>
-            <span class="player-info__last-name">{{$dvorana->naziv}}</span>
+            <span class="player-info__first-name">Sportski balon</span>
+            <span class="player-info__last-name">{{$balon->naziv}}</span>
           </h1>
         </div>
     
@@ -73,8 +73,8 @@
     
             <div class="player-info__title player-info__title--desktop">
               <h1 class="player-info__name">
-                <span class="player-info__first-name">Sportska dvorana</span>
-                <span class="player-info__last-name">{{$dvorana->naziv}}</span>
+                <span class="player-info__first-name">Sportski balon</span>
+                <span class="player-info__last-name">{{$balon->naziv}}</span>
               </h1>
             </div>
       
@@ -159,28 +159,28 @@
                               <img class="flow-icons-012" src="{{asset('assets/images/icons/field.svg')}}" alt="">
                             </td>
                             <td class="lineup__num">Broj terena (sala)</td>
-                            <td class="lineup__name"><a class="profil-poveznica" href="#">{{$dvorana->broj_terena}}</a></td>
+                            <td class="lineup__name"><a class="profil-poveznica" href="#">{{$balon->broj_terena}}</a></td>
                           </tr>
               <tr>
               <td class="lineup__info">
                               <img class="flow-icons-012" src="{{asset('assets/images/icons/parquet.svg')}}" alt="">
                             </td>
                             <td class="lineup__num">Vrsta podloge</td>
-                            <td class="lineup__name"><a class="profil-poveznica" href="#">{{$dvorana->vrsta_podloge}}</a></td>
+                            <td class="lineup__name"><a class="profil-poveznica" href="#">{{$balon->vrsta_podloge}}</a></td>
                           </tr>
               <tr>
               <td class="lineup__info">
                               <img class="flow-icons-012" src="{{asset('assets/images/icons/scale-screen.svg')}}" alt="">
                             </td>
                             <td class="lineup__num">Ukupna površina</td>
-                            <td class="lineup__name"><a class="profil-poveznica" href="#">{{$dvorana->povrsina_objekta}}m<sup>2</sup></a></td>
+                            <td class="lineup__name"><a class="profil-poveznica" href="#">{{$balon->povrsina_objekta}}m<sup>2</sup></a></td>
                           </tr>
               <tr>
               <td class="lineup__info">
                               <img class="flow-icons-012" src="{{asset('assets/images/icons/gledaoci.svg')}}" alt="">
                             </td>
                             <td class="lineup__num">Kapacitet gledaoca</td>
-                            <td class="lineup__name"><a class="profil-poveznica" href="#">{{$dvorana->kapacitet_objekta}}</a></td>
+                            <td class="lineup__name"><a class="profil-poveznica" href="#">{{$balon->kapacitet_objekta}}</a></td>
                           </tr>
                 
                         </tbody>
@@ -196,7 +196,7 @@
                     <!-- Socijalne mreze -->
                     
       <div class="col-md-6 profili-soc-mreza">
-              <a href="{{$dvorana->fb}}" class="btn-social-counter btn-social-counter--fb" target="_blank">
+              <a href="{{$balon->fb}}" class="btn-social-counter btn-social-counter--fb" target="_blank">
                 <div class="btn-social-counter__icon">
                   <i class="fa fa-facebook"></i>
                 </div>
@@ -212,7 +212,7 @@
               </a>
        </div>
        <div class="col-md-6 profili-soc-mreza">
-        <a href="{{$dvorana->instagram}}" class="btn-social-counter btn-social-counter--instagram" target="_blank">
+        <a href="{{$balon->instagram}}" class="btn-social-counter btn-social-counter--instagram" target="_blank">
                 <div class="btn-social-counter__icon">
                   <i class="fa fa-instagram"></i>
                 </div>
@@ -220,7 +220,7 @@
               </a>
        </div>
        <div class="col-md-6 profili-soc-mreza">
-        <a href="{{$dvorana->yt}}" class="btn-social-counter btn-social-counter--yt" target="_blank">
+        <a href="{{$balon->yt}}" class="btn-social-counter btn-social-counter--yt" target="_blank">
                 <div class="btn-social-counter__icon">
                   <i class="fa fa-youtube-play"></i>
                 </div>
@@ -249,42 +249,42 @@
                               <img class="flow-icons-012" src="{{asset('assets/images/icons/wifi.svg')}}" alt="">
                             </td>
                             <td class="lineup__num">Wi-Fi</td>
-                            <td class="lineup__name">{{$dvorana->wifi}}</td>
+                            <td class="lineup__name">{{$balon->wifi}}</td>
                           </tr>
               <tr>
               <td class="lineup__info">
                               <img class="flow-icons-012" src="{{asset('assets/images/icons/parking-sign.svg')}}" alt="">
                             </td>
                             <td class="lineup__num">Parking</td>
-                            <td class="lineup__name">{{$dvorana->parking}}</td>
+                            <td class="lineup__name">{{$balon->parking}}</td>
                           </tr>
               <tr>
               <td class="lineup__info">
                               <img class="flow-icons-012" src="{{asset('assets/images/icons/cutlery.svg')}}" alt="">
                             </td>
                             <td class="lineup__num">Restoran</td>
-                            <td class="lineup__name">{{$dvorana->restoran}}</td>
+                            <td class="lineup__name">{{$balon->restoran}}</td>
                           </tr>
               <tr>
               <td class="lineup__info">
                               <img class="flow-icons-012" src="{{asset('assets/images/icons/coffee-cup.svg')}}" alt="">
                             </td>
                             <td class="lineup__num">Kafeterija</td>
-                            <td class="lineup__name">{{$dvorana->kafeterija}}</td>
+                            <td class="lineup__name">{{$balon->kafeterija}}</td>
                           </tr>
               <tr>
               <td class="lineup__info">
                               <img class="flow-icons-012" src="{{asset('assets/images/icons/accessibility-sign.svg')}}" alt="">
                             </td>
                             <td class="lineup__num">Pristup za osobe sa invaliditetom</td>
-                            <td class="lineup__name">{{$dvorana->pristup_invalid}}</td>
+                            <td class="lineup__name">{{$balon->pristup_invalid}}</td>
                           </tr>
               <tr>
               <td class="lineup__info">
                               <img class="flow-icons-012" src="{{asset('assets/images/icons/room-key.svg')}}" alt="">
                             </td>
                             <td class="lineup__num">Ukupno svlačionica</td>
-                            <td class="lineup__name">{{$dvorana->broj_svlacionica}}</td>
+                            <td class="lineup__name">{{$balon->broj_svlacionica}}</td>
                           </tr>
                 
                         </tbody>
@@ -312,7 +312,7 @@
                               <img class="flow-icons-012" src="{{asset('assets/images/icons/tag.svg')}}" alt="">
                             </td>
                             <td class="lineup__num">ID objekta</td>
-                            <td class="lineup__name">{{$dvorana->id}}</td>
+                            <td class="lineup__name">{{$balon->id}}</td>
                           </tr>
               <tr>
               <td class="lineup__info">
@@ -420,21 +420,21 @@
                               <img class="flow-icons-012" src="{{asset('assets/images/icons/office-block.svg')}}" alt="">
                             </td>
                             <td class="lineup__num gadget-no-border">Grad/Mjesto</td>
-                            <td class="lineup__name gadget-no-border">{{$dvorana->grad}}</td>
+                            <td class="lineup__name gadget-no-border">{{$balon->grad}}</td>
                           </tr>
               <tr>
               <td class="lineup__info gadget-no-border">
                               <img class="flow-icons-012" src="{{asset('assets/images/icons/opcina.svg')}}" alt="">
                             </td>
                             <td class="lineup__num gadget-no-border">Općina</td>
-                            <td class="lineup__name gadget-no-border">{{$dvorana->opcina}}</td>
+                            <td class="lineup__name gadget-no-border">{{$balon->opcina}}</td>
                           </tr>
               <tr>
               <td class="lineup__info gadget-no-border">
                               <img class="flow-icons-012" src="{{asset('assets/images/icons/placeholder.svg')}}" alt="">
                             </td>
                             <td class="lineup__num gadget-no-border">Kanton/Regija</td>
-                            <td class="lineup__name gadget-no-border">{{$dvorana->kanton}}</td>
+                            <td class="lineup__name gadget-no-border">{{$balon->kanton}}</td>
                           </tr>
                 
                         </tbody>
@@ -463,21 +463,21 @@
                               <img class="flow-icons-012" src="{{asset('assets/images/icons/map.svg')}}" alt="">
                             </td>
                             <td class="lineup__num gadget-no-border">Entitet</td>
-                            <td class="lineup__name gadget-no-border">{{$dvorana->entitet}}</td>
+                            <td class="lineup__name gadget-no-border">{{$balon->entitet}}</td>
                           </tr>
               <tr>
               <td class="lineup__info gadget-no-border">
                               <img class="flow-icons-012" src="{{asset('assets/images/icons/earth.svg')}}" alt="">
                             </td>
                             <td class="lineup__num gadget-no-border">Država</td>
-                            <td class="lineup__name gadget-no-border"><img class="zastava-drzave" src="{{asset('assets/images/icons/bosnia-and-herzegovina.svg')}}" alt=""> {{$dvorana->drzava}}</td>
+                            <td class="lineup__name gadget-no-border"><img class="zastava-drzave" src="{{asset('assets/images/icons/bosnia-and-herzegovina.svg')}}" alt=""> {{$balon->drzava}}</td>
                           </tr>
               <tr>
               <td class="lineup__info gadget-no-border">
                               <img class="flow-icons-012" src="{{asset('assets/images/icons/international-delivery.svg')}}" alt="">
                             </td>
                             <td class="lineup__num gadget-no-border">Kontinent</td>
-                            <td class="lineup__name gadget-no-border">{{$dvorana->kontinent}}</td>
+                            <td class="lineup__name gadget-no-border">{{$balon->kontinent}}</td>
                           </tr>
                 
                         </tbody>
@@ -572,43 +572,43 @@
                                 <tbody>
                                   <tr>
                                     <td class="ocjena-szs-info">Tuševi sa toplom vodom</td>
-                                    <td class="ocjena-szs-ans">{{$dvorana->tusevi}}</td>
+                                    <td class="ocjena-szs-ans">{{$balon->tusevi}}</td>
                                   </tr>
                                   <tr>
                                     <td class="ocjena-szs-info">Tabla za rezultate</td>
-                                    <td class="ocjena-szs-ans">{{$dvorana->tabla}}</td>
+                                    <td class="ocjena-szs-ans">{{$balon->tabla}}</td>
                                   </tr>
                                   <tr>
                                     <td class="ocjena-szs-info">Igraona u sklopu objekta</td>
-                                    <td class="ocjena-szs-ans">{{$dvorana->igraona}}</td>
+                                    <td class="ocjena-szs-ans">{{$balon->igraona}}</td>
                                   </tr>
                                   <tr>
                                     <td class="ocjena-szs-info">Ormarić za garderobu sa ključem</td>
-                                    <td class="ocjena-szs-ans">{{$dvorana->ormaric}}</td>
+                                    <td class="ocjena-szs-ans">{{$balon->ormaric}}</td>
                                   </tr>
                                   <tr>
                                     <td class="ocjena-szs-info">Mokri čvor za posjetioce</td>
-                                    <td class="ocjena-szs-ans">{{$dvorana->mokri_cvor}}</td>
+                                    <td class="ocjena-szs-ans">{{$balon->mokri_cvor}}</td>
                                   </tr>
                   <tr>
                                     <td class="ocjena-szs-info">Rekviziti za rekreaciju</td>
-                                    <td class="ocjena-szs-ans">{{$dvorana->rekviziti}}</td>
+                                    <td class="ocjena-szs-ans">{{$balon->rekviziti}}</td>
                                   </tr>
                   <tr>
                                     <td class="ocjena-szs-info">Klimatizacija</td>
-                                    <td class="ocjena-szs-ans">{{$dvorana->klimatizacija}}</td>
+                                    <td class="ocjena-szs-ans">{{$balon->klimatizacija}}</td>
                                   </tr>
                   <tr>
                                     <td class="ocjena-szs-info">Zaštitne mreže</td>
-                                    <td class="ocjena-szs-ans">{{$dvorana->zastitne_mreze}}</td>
+                                    <td class="ocjena-szs-ans">{{$balon->zastitne_mreze}}</td>
                                   </tr>
                   <tr>
                                     <td class="ocjena-szs-info">Optimalna temperatura</td>
-                                    <td class="ocjena-szs-ans">{{$dvorana->optimalna_temperatura}}</td>
+                                    <td class="ocjena-szs-ans">{{$balon->optimalna_temperatura}}</td>
                                   </tr>
                   <tr>
                                     <td class="ocjena-szs-info">Video nadzor</td>
-                                    <td class="ocjena-szs-ans">{{$dvorana->video_nadzor}}</td>
+                                    <td class="ocjena-szs-ans">{{$balon->video_nadzor}}</td>
                                   </tr>
                                 </tbody>
                               </table>
