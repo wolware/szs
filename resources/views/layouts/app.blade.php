@@ -42,6 +42,7 @@
   <!-- Template CSS-->
   <link href="{{ asset('/css/datepicker.css?t=44') }}" rel="stylesheet">
   <link href="{{ asset('/css/style.css?t=') }}{{time()}}" rel="stylesheet">
+  <link href="{{ asset('/css/custom.css?t=') }}{{time()}}" rel="stylesheet">
 
 </head>
 <body>

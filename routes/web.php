@@ -56,6 +56,7 @@ Route::get('/messages/important', function(){
 
 //News
 Route::get('/news/new', 'NewsController@addNewsForm');
+Route::get('/news/{id}', 'NewsController@displayNews');
 Route::post('/news/new/create','NewsController@new');
 
 // PROFILE CREATE

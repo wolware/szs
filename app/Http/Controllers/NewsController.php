@@ -24,7 +24,8 @@ class NewsController extends Controller
         $validatedData = Validator::make($request->all(), [
             'naslov' => 'required|unique:vijest|max:255',
             'kategorija' => 'required',
-            'sadrzaj' => 'required'
+            'sadrzaj' => 'required',
+            'slika' => 'max:2048'
         ]);
 
         if ($validatedData->fails())
@@ -34,12 +35,17 @@ class NewsController extends Controller
                 ->withInput();
         }
 
+        // Ucitaj sliku i spasi u /public/images/vijesti/galerija
+        $photoName = auth()->user()->id . '_' . time() . '.' . $request->slika->getClientOriginalExtension();
+        $request->slika->move(public_path('images/vijesti/galerija'), $photoName);
+
 
         $vijest = Vijest::create([
             'naslov' => $request->get('naslov'),
             'sadrzaj' => $request->get('sadrzaj'),
             'user_id' => auth()->user()->id,
-            'vijest_kategorija_id' => $request->get('kategorija')
+            'vijest_kategorija_id' => $request->get('kategorija'),
+            'slika' => $photoName
         ]);
 
         if($vijest) {
@@ -50,7 +56,7 @@ class NewsController extends Controller
 
                 foreach ($tagovi as $tag) {
                     $noviTag = Tag::firstOrCreate([
-                        'tag' => $tag
+                        'tag' => trim($tag, " ")
                     ]);
 
                     if($noviTag) {
@@ -63,5 +69,15 @@ class NewsController extends Controller
 
             return redirect()->back()->with('success', 'Vijest "' . $vijest->naslov . '" je kreirana uspješno.');
         }
+    }
+
+    public function displayNews($id) {
+        $novost = Vijest::with('tagovi', 'kategorija', 'user')->find($id);
+
+        if(!$novost) {
+            abort(404);
+        }
+
+        return view('news.display_news', compact('novost'));
     }
 }

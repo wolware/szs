@@ -2,3 +2,16 @@
 File Name: 		custom.css
 Description:  You can add your custom CSS here and it will overwrite template styles
 */
+
+.image-responsive-width {
+    width: 100%;
+    height: auto;
+}
+
+.post--single .post__meta {
+    margin-bottom: 0;
+}
+
+.no-border {
+    border: none!important;
+}
