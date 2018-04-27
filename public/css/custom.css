@@ -5,7 +5,8 @@ Description:  You can add your custom CSS here and it will overwrite template st
 
 .image-responsive-width {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
 }
 
 .post--single .post__meta {

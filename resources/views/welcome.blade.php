@@ -71,95 +71,27 @@
                 <!-- Slider -->
                 <div class="slick posts posts--slider-featured posts-slider posts-slider--center">
 
-                  <div class="posts__item posts__item--category-1">
-                    <a href="#" class="posts__link-wrapper">
-                      <figure class="posts__thumb">
-                        <img src="{{asset('images/banner-11.jpg')}}" alt="">
-                      </figure>
-                      <div class="posts__inner">
-                        <div class="posts__cat">
-                          <span class="label posts__cat-label"><i class="fa fa-tag"></i> SZS APLIKACIJE</span>
+                  @foreach($vijesti as $vijest)
+                    <div class="posts__item posts__item--category-1">
+                      <a href="{{ url('/news/' . $vijest->id) }}" class="posts__link-wrapper">
+                        <figure class="posts__thumb">
+                          @if($vijest->slika)
+                            <img src="{{asset('images/vijesti/galerija/' . 'naslovna' . $vijest->slika)}}" alt="">
+                          @else
+                            <img src="{{asset('images/vijesti/' . 'vijesti-dodaj-sliku.png')}}" alt="">
+                          @endif
+                        </figure>
+                        <div class="posts__inner">
+                          <div class="posts__cat">
+                            <span class="label posts__cat-label"><i class="fa fa-tag"></i> {{ $vijest->kategorija->naziv }}</span>
+                          </div>
+                          <h3 class="posts__title">{{ $vijest->naslov }}</h3>
+                          <time datetime="{{ Carbon\Carbon::parse($vijest->created_at)->format('Y-m-d') }}" class="posts__date">{{ Carbon\Carbon::parse($vijest->created_at)->format('d. F, Y.') }}</time>
                         </div>
-                        <h3 class="posts__title">SveZaSport otvara nove aplikacione grantove. Aplicirajte za sportski event u vašem mjestu!</h3>
-                        <time datetime="2017-06-28" class="posts__date">28. Jun, 2017.</time>
-                      </div>
-                    </a>
-                  </div>
+                      </a>
+                    </div>
+                  @endforeach
 
-                  <div class="posts__item posts__item--category-3">
-                    <a href="#" class="posts__link-wrapper">
-                      <figure class="posts__thumb">
-                        <img src="{{asset('images/banner-11.jpg')}}" alt="">
-                      </figure>
-                      <div class="posts__inner">
-                        <div class="posts__cat">
-                          <span class="label posts__cat-label"><i class="fa fa-tag"></i> SZS APLIKACIJE</span>
-                        </div>
-                        <h3 class="posts__title">SveZaSport otvara nove aplikacione grantove. Aplicirajte za sportski event u vašem mjestu!</h3>
-                        <time datetime="2017-06-28" class="posts__date">28. Jun, 2017.</time>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div class="posts__item posts__item--category-1">
-                    <a href="#" class="posts__link-wrapper">
-                      <figure class="posts__thumb">
-                        <img src="{{asset('images/banner-11.jpg')}}" alt="">
-                      </figure>
-                      <div class="posts__inner">
-                        <div class="posts__cat">
-                          <span class="label posts__cat-label"><i class="fa fa-tag"></i> SZS APLIKACIJE</span>
-                        </div>
-                        <h3 class="posts__title">SveZaSport otvara nove aplikacione grantove. Aplicirajte za sportski event u vašem mjestu!</h3>
-                        <time datetime="2017-06-28" class="posts__date">28. Jun, 2017.</time>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div class="posts__item posts__item--category-3">
-                    <a href="#" class="posts__link-wrapper">
-                      <figure class="posts__thumb">
-                        <img src="{{asset('images/banner-11.jpg')}}" alt="">
-                      </figure>
-                      <div class="posts__inner">
-                        <div class="posts__cat">
-                          <span class="label posts__cat-label"><i class="fa fa-tag"></i> SZS APLIKACIJE</span>
-                        </div>
-                        <h3 class="posts__title">SveZaSport otvara nove aplikacione grantove. Aplicirajte za sportski event u vašem mjestu!</h3>
-                        <time datetime="2017-06-28" class="posts__date">28. Jun, 2017.</time>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div class="posts__item posts__item--category-3">
-                    <a href="#" class="posts__link-wrapper">
-                      <figure class="posts__thumb">
-                        <img src="{{asset('images/banner-11.jpg')}}" alt="">
-                      </figure>
-                      <div class="posts__inner">
-                        <div class="posts__cat">
-                          <span class="label posts__cat-label"><i class="fa fa-tag"></i> SZS APLIKACIJE</span>
-                        </div>
-                        <h3 class="posts__title">SveZaSport otvara nove aplikacione grantove. Aplicirajte za sportski event u vašem mjestu!</h3>
-                        <time datetime="2017-06-28" class="posts__date">28. Jun, 2017.</time>
-                      </div>
-                    </a>
-                  </div>
-
-                  <div class="posts__item posts__item--category-2">
-                    <a href="#" class="posts__link-wrapper">
-                      <figure class="posts__thumb">
-                        <img src="{{asset('images/banner-11.jpg')}}" alt="">
-                      </figure>
-                      <div class="posts__inner">
-                        <div class="posts__cat">
-                          <span class="label posts__cat-label"><i class="fa fa-tag"></i> SZS APLIKACIJE</span>
-                        </div>
-                        <h3 class="posts__title">SveZaSport otvara nove aplikacione grantove. Aplicirajte za sportski event u vašem mjestu!</h3>
-                        <time datetime="20-06-2017" class="posts__date">28. Jun, 2017.</time>
-                      </div>
-                    </a>
-                  </div>
 
                 </div>
                 <!-- Slider / End -->

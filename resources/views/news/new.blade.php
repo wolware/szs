@@ -228,6 +228,23 @@
 
                     reader.onload = function(e) {
                         $('.slika-upload-klub').attr('src', e.target.result);
+                        var image = new Image();
+                        image.src = e.target.result;
+                        image.onload = function () {
+
+                            var height = this.height;
+                            var width = this.width;
+                            if (height < 720 || width < 980) {
+                                $('.info-upload-slike').animate({
+                                    'color': 'red'
+                                });
+                                return false;
+                            }
+                            $('.info-upload-slike').animate({
+                                'color': 'green'
+                            });
+                            return false;
+                        };
                     }
 
                     reader.readAsDataURL(input.files[0]);

@@ -8,6 +8,7 @@ use App\VijestKategorija;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
 
 class NewsController extends Controller
 {
@@ -25,7 +26,7 @@ class NewsController extends Controller
             'naslov' => 'required|unique:vijest|max:255',
             'kategorija' => 'required',
             'sadrzaj' => 'required',
-            'slika' => 'max:2048'
+            'slika' => 'dimensions:min_width=980,min_height=720|max:5120'
         ]);
 
         if ($validatedData->fails())
@@ -38,6 +39,11 @@ class NewsController extends Controller
         // Ucitaj sliku i spasi u /public/images/vijesti/galerija
         $photoName = auth()->user()->id . '_' . time() . '.' . $request->slika->getClientOriginalExtension();
         $request->slika->move(public_path('images/vijesti/galerija'), $photoName);
+
+        // Izrezi i optimizuj sliku za naslovnu
+        $image_resize = Image::make(public_path('images/vijesti/galerija/' . $photoName));
+        $image_resize->crop(960, 600);
+        $image_resize->save(public_path('images/vijesti/galerija/' . 'naslovna' . $photoName));
 
 
         $vijest = Vijest::create([
@@ -72,7 +78,7 @@ class NewsController extends Controller
     }
 
     public function displayNews($id) {
-        $novost = Vijest::with('tagovi', 'kategorija', 'user')->find($id);
+        $novost = Vijest::where('odobreno', 1)->with('tagovi', 'kategorija', 'user')->find($id);
 
         if(!$novost) {
             abort(404);

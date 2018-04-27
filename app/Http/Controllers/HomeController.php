@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Vijest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -24,6 +25,8 @@ class HomeController extends Controller
     {
         $sportasi = DB::table('fudbaler')->limit(6)->orderBy('id', 'desc')->get();
         $klubovi = DB::table('clubs')->limit(6)->orderBy('id', 'desc')->get();
-        return view('welcome', ['sportasi' => $sportasi, 'klubovi' => $klubovi]);
+        $vijesti = Vijest::where('odobreno', 1)->orderBy('id', 'DESC')->take(5)->get();
+
+        return view('welcome', ['sportasi' => $sportasi, 'klubovi' => $klubovi, 'vijesti' => $vijesti]);
     }
 }
