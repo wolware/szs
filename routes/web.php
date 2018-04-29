@@ -21,7 +21,7 @@ Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallba
 Auth::routes();
 
 // Lista ruta za guest korisnike
-Route::get('/news/{id}', 'NewsController@displayNews');
+Route::get('/news/{id:[0-9]+}', 'NewsController@displayNews');
 Route::get('/clubs', 'ClubController@index_show');
 Route::get('/clubs/{id}', 'ClubController@club_show');
 Route::get('/schools', 'SchoolController@index_show');
@@ -66,7 +66,7 @@ Route::middleware('auth')->group(function () {
 
     //News for Auth
     Route::get('/news/new', 'NewsController@addNewsForm');
-    Route::post('/news/new/create','NewsController@new');
+    Route::post('/news/new/create', 'NewsController@new');
 
     // PROFILE CREATE
     Route::get('/profile/new', function(){
