@@ -78,7 +78,7 @@ class NewsController extends Controller
     }
 
     public function displayNews($id) {
-        $novost = Vijest::where('odobreno', 1)->with('tagovi', 'kategorija', 'user')->find($id);
+        $novost = Vijest::where('odobreno', 1)->where('izbrisano', 0)->with('tagovi', 'kategorija', 'user')->find($id);
 
         if(!$novost) {
             abort(404);

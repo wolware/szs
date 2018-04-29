@@ -25,7 +25,7 @@ class HomeController extends Controller
     {
         $sportasi = DB::table('fudbaler')->limit(6)->orderBy('id', 'desc')->get();
         $klubovi = DB::table('clubs')->limit(6)->orderBy('id', 'desc')->get();
-        $vijesti = Vijest::where('odobreno', 1)->orderBy('id', 'DESC')->take(5)->get();
+        $vijesti = Vijest::where('odobreno', 1)->where('izbrisano', 0)->orderBy('id', 'DESC')->take(5)->get();
 
         return view('welcome', ['sportasi' => $sportasi, 'klubovi' => $klubovi, 'vijesti' => $vijesti]);
     }
