@@ -16,3 +16,30 @@ Description:  You can add your custom CSS here and it will overwrite template st
 .no-border {
     border: none!important;
 }
+
+.licnostHover,
+.nagradaHover {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.izbrisiLicnost,
+.izbrisiNagradu {
+    font-size: 20px;
+    opacity: 0;
+    transition: 0.2s opacity ease-in;
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.licnostHover:hover .izbrisiLicnost,
+.nagradaHover:hover .izbrisiNagradu{
+    opacity: 1;
+}
+
+.izbrisiLicnost:hover,
+.izbrisiNagradu:hover{
+    color: #f49222;
+}
