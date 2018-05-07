@@ -2,19 +2,78 @@
 var licnostiCount = 1;
 var nagradeCount = 1;
 
-function previewFile(name, place) {
-    var preview = document.getElementById(place);
-    var file = document.getElementById(name).files[0];
+function previewFile(name, place, maxHeight, maxWidth, minHeight, minWidth) {
+    if (typeof(maxHeight) === 'undefined') maxHeight = null;
+    if (typeof(maxWidth) === 'undefined') maxWidth = null;
+    if (typeof(minHeight) === 'undefined') minHeight = null;
+    if (typeof(minWidth) === 'undefined') minWidth = null;
+
+
+    var preview = $(place);
+    var file_input = $(name);
+    var file = $(name).get(0).files;
+    var error = file_input.closest('.sadrzaj-slike').find('.info-upload-slike');
+    console.log(error);
     var reader = new FileReader();
 
-    reader.onloadend = function () {
-        preview.src = reader.result;
-    }
+    reader.onloadend = function (e) {
+        preview.attr('src', e.target.result);
 
-    if (file) {
-        reader.readAsDataURL(file);
+        var image = new Image();
+        image.src = e.target.result;
+
+        image.onload = function () {
+            var height = this.height;
+            var width = this.width;
+
+            if(maxHeight && maxWidth && minHeight && minWidth) {
+                if ((height >= maxHeight || height <= minHeight) || (width >= maxWidth || width <= minWidth)) {
+                    error.animate({
+                        'color': 'red'
+                    });
+                    return false;
+                }
+
+                error.animate({
+                    'color': 'green'
+                });
+                return true;
+            } else if (maxHeight && maxWidth) {
+                if (height >= maxHeight || width >= maxWidth) {
+                    error.animate({
+                        'color': 'red'
+                    });
+                    return false;
+                }
+
+                error.animate({
+                    'color': 'green'
+                });
+                return true;
+            } else if (minHeight && minWidth) {
+                if (height <= minHeight || width <= minWidth) {
+                    error.animate({
+                        'color': 'red'
+                    });
+                    return false;
+                }
+
+                error.animate({
+                    'color': 'green'
+                });
+                return true;
+            }
+        };
+    };
+
+    if (file.length > 0) {
+        reader.readAsDataURL(file[0]);
     } else {
-        preview.src = "";
+        preview.attr('src', '');
+
+        error.animate({
+            'color': 'red'
+        });
     }
 }
 
@@ -58,7 +117,7 @@ $(function () {
 
                 reader.onloadend = function (event) {
                     if (prvi == 0) {
-                        var adnew = '<div class="album__item col-xs-6 col-sm-3"><div class="album__item-holder"><a href="' + event.target.result + '" class="album__item-link mp_gallery"><figure class="album__thumb"><img src="' + event.target.result + '" alt=""></figure><div class="album__item-desc"><img src="images/icons/expand-square.svg" class="pregled-slike" alt=""></img></div></a></div><div class="progress-stats upload-slike-statust-bar"><div class="progress"><div class="progress__bar progress__bar-width-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div></div></div>';
+                        var adnew = '<div class="album__item col-xs-6 col-sm-3"><div class="album__item-holder"><a href="' + window.URL.createObjectURL(reader.result) + '" class="album__item-link mp_gallery"><figure class="album__thumb"><img src="' + window.URL.createObjectURL(reader.result) + '" alt=""></figure><div class="album__item-desc"><img src="images/icons/expand-square.svg" class="pregled-slike" alt=""></img></div></a></div><div class="progress-stats upload-slike-statust-bar"><div class="progress"><div class="progress__bar progress__bar-width-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div></div></div>';
                         //$(adnew).appendTo('#galerija_klub');
                         $('#tab-galerija .form-objavi-klub-01').append(adnew);
 
@@ -292,14 +351,14 @@ $(document).ready(function () {
             '<div class="col-md-6 objavi-klub-logo-setup">' +
             '<div class="col-md-7">' +
             '<div class="alc-staff__photo">' +
-            '<img class="slika-edit-profil" src="/images/default_avatar.png" alt="">' +
+            '<img class="slika-edit-profil" id="slika-licnost-prikaz' + licnostiCount + '" src="/images/default_avatar.png" alt="">' +
             '</div>' +
             '</div>' +
             '<div class="col-md-5 sadrzaj-slike">' +
             '<p class="dodaj-sliku-naslov klub-a1">Slika ličnosti</p>' +
             '<p class="dodaj-sliku-call">Odaberite sliku za istaknutu ličnost</p>' +
             '<label class="btn btn-default btn-xs btn-file dodaj-sliku-button">' +
-            'Odaberi sliku... <input type="file" name="licnost[' + licnostiCount + '][avatar]" accept="image/*" style="display: none;" onchange="previewFile(\'all\', \'slika-edit-profil1\')">' +
+            'Odaberi sliku... <input type="file" name="licnost[' + licnostiCount + '][avatar]" id="licnostAvatar' + licnostiCount + '" accept="image/*" style="display: none;" onchange="previewFile(\'#licnostAvatar' + licnostiCount + '\',\'#slika-licnost-prikaz' + licnostiCount + '\', 1080, 1920, 250, 312)">' +
             '</label>' +
             '<div class="info001">' +
             '<p class="info-upload-slike">Preporučene dimenzije za sliku ličnosti:</p>' +

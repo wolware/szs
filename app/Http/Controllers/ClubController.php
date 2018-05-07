@@ -73,13 +73,6 @@ class ClubController extends Controller
     }
 
     public function new(Request $data){
-        $messages = [
-            'required' => ':attribute polje je obavezno.',
-            'max' => ':attribute mora imati manje karaktera od :max',
-            'min' => ':attribute mora imati više karaktera od :min',
-            'confirmed' => ':attribute se ne podudara.',
-            'integer' => ':attribute mora biti broj.',
-        ];
 
     	$validator = Validator::make($data->all(),[
     	    'logo' => 'required|image|dimensions:min_width=200,min_height=200,max_width=1024,max_height=1024',
@@ -89,19 +82,21 @@ class ClubController extends Controller
     		'drzava' => 'required|max:255|string|in:Bosna i Hercegovina',
     		'entitet' => 'required|max:255|string|in:Federacija BiH,Republika Srpska',
     		'kanton' => 'required_if:entitet,Federacija BiH|nullable|max:255|string',
-    		'opcina' => 'required|max:255|string',
+    		'opcina' => 'required_if:entitet,Federacija BiH|nullable|max:255|string',
+            'opcinaSrb' => 'required_if:entitet,Republika Srpska|nullable|max:255|string',
     		'regija' => 'required_if:entitet,Republika Srpska|nullable|max:255|string',
     		'grad' => 'required|max:255|string',
     		'tip' => 'required|max:255|string|in:Sportski klub,Invalidski sportski klub',
-    		'sport' => 'required|max:255|string',
+    		'sport' => 'required_if:tip,Sportski klub|nullable|max:255|string',
+    		'invalidski_sport' => 'required_if:tip,Invalidski sportski klub|nullable|max:255|string',
     		'kategorija' => 'required|max:255|string|in:Muški klub,Ženski klub,Mješovito',
     		'godina_osnivanja' => 'nullable|digits:4|integer|min:1800|max:'.date('Y'),
     		'teren' => 'nullable|max:255|string',
     		'takmicenje' => 'nullable|max:255|string',
     		'savez' => 'nullable|max:255|string|in:Državni savez,Entitetski savez,Kantonalni savez',
-    		'telefon1' => 'nullable|max:50|integer',
-            'telefon2' => 'nullable|max:50|integer',
-            'fax' => 'nullable|max:50|integer',
+    		'telefon1' => 'nullable|max:50|string',
+            'telefon2' => 'nullable|max:50|string',
+            'fax' => 'nullable|max:50|string',
             'email' => 'nullable|max:255|email',
             'web_stranica' => 'nullable|max:255|string',
     		'adresa' => 'nullable|max:255|string',
@@ -130,7 +125,7 @@ class ClubController extends Controller
             // Slike
             'galerija' => 'array',
             'galerija.*' => 'required|image',
-    	], $messages);
+    	]);
     	if($validator->fails()){
     		return redirect('clubs/new')
     					->withErrors($validator)
@@ -138,22 +133,21 @@ class ClubController extends Controller
     	}else{
     		if($data->file('logo')){
     			$logo = $data->file('logo');
-    			$newLogoName = time() . rand(111,999) . '.' . $logo->getClientOriginalExtension();
+    			$newLogoName = time() . '-' . Auth::user()->id . '.' . $logo->getClientOriginalExtension();
     			$destinationPath = public_path('/images/club_logo');
     			$logo->move($destinationPath, $newLogoName);
 
     			$data['logo'] = $newLogoName;
-    		}else{
+    		} else {
                 $data['logo'] = 'default.png';
             }
-            if(empty($data['kanton'])){
-                $data['kanton'] = $data['kantonSrb'];
-            }
-            if(empty($data['opcina'])){
+
+            if(!$data['opcina']){
                 $data['opcina'] = $data['opcinaSrb'];
             }
+
             $id = DB::table('clubs')->insertGetId([
-                'logo' => $newLogoName,
+                'logo' => $data['logo'],
                 'name' => $data['name'],
                 'karakter' => $data['karakter'],
                 'kontinent' => $data['kontinent'],
@@ -164,89 +158,84 @@ class ClubController extends Controller
                 'kanton' => $data['kanton'],
                 'grad' => $data['grad'],
                 'tip' => $data['tip'],
+                'sport' => $data['sport'],
+                'invalidski_sport' => $data['invalidski_sport'],
                 'kategorija' => $data['kategorija'],
                 'godina_osnivanja' => $data['godina_osnivanja'],
                 'teren' => $data['teren'],
                 'takmicenje' => $data['takmicenje'],
                 'savez' => $data['savez'],
+                'telefon1' => $data['telefon1'],
+                'telefon2' => $data['telefon2'],
+                'fax' => $data['fax'],
+                'email' => $data['email'],
+                'web_stranica' => $data['web_stranica'],
                 'adresa' => $data['adresa'],
+                'fb' => $data['fb'],
+                'twitter' => $data['twitter'],
+                'instagram' => $data['instagram'],
+                'yt' => $data['yt'],
+                'video' => $data['video'],
                 'objavljeno' => time(),
-                'user_id' => Auth::user()->id,
-                'views' => 0,
-                'status' => '0'
+                'user_id' => Auth::user()->id
             ]);
 
-            if(!empty($data['vremeplov'])){
+            if($data['vremeplov']){
                 DB::table('vremeplov')->insert([
                     'content' => $data['vremeplov'],
                     'club_id' => $id
                 ]);
-            }else{
+            } else {
                 DB::table('vremeplov')->insert([
                     'content' => "",
                     'club_id' => $id
                 ]);
             }
 
-            if(!empty($data['trofej_takmicenja'][0])){
-                foreach($data['trofej_takmicenja'] as $key=>$t_t){
-                   if(!empty($t_t)){
+            if($data['nagrada']){
+                foreach($data['nagrada'] as $key => $t_t){
+                   if($t_t){
                          DB::table('trofej')->insert([
-                            'vrsta_nagrade' => $data['vrsta_nagrade'][$key],
-                            'tip_nagrade' => $data['tip_nagrade'][$key],
-                            'naziv_takmicenja' => $data['trofej_takmicenja'][$key],
-                            'nivo_takmicenja' => $data['nivo_nagrade'][$key],
-                            'sezona' => $data['trofej_sezona'][$key],
-                            'osvajanje' => $data['trofej_osvajanja'][$key],
+                            'vrsta_nagrade' => $data['nagrada'][$key]['vrsta'],
+                            'tip_nagrade' => $data['nagrada'][$key]['tip'],
+                            'naziv_takmicenja' => $data['nagrada'][$key]['takmicenje'],
+                            'nivo_takmicenja' =>  $data['nagrada'][$key]['nivo'],
+                            'sezona' =>  $data['nagrada'][$key]['sezona'],
+                            'osvajanje' =>  $data['nagrada'][$key]['osvajanja'] ? $data['nagrada'][$key]['osvajanja'] : null ,
                             'club_id' => $id
                         ]);
-                     }else{
-                        continue;
-                     }
+                   }
                 }
-            }else{
-                DB::table('trofej')->insert([
-                    'vrsta_nagrade' => "",
-                    'tip_nagrade' => "",
-                    'naziv_takmicenja' => "",
-                    'nivo_takmicenja' => "",
-                    'sezona' => "",
-                    'osvajanje' => "",
-                    'club_id' => $id
-                ]);
             }
 
-            if($data->hasFile('avatar_licnost')){
-                $avatar_licnosti = $data->file('avatar_licnost');
-                foreach($avatar_licnosti as $key=>$a_l){
-                    if(!empty($data['licnost_ime'][$key]) || $data['licnost_ime'][$key] != ''){
-                        $newavatarlicnostiName = time() . time() . rand(4,9) . '.' . $a_l->getClientOriginalExtension();
-                        $destPath = public_path('/images/avatar_licnost');
-                        $a_l->move($destPath, $newavatarlicnostiName);
+            if($data['licnost']){
+
+                foreach($data['licnost'] as $key => $a_l){
+                    if($a_l){
+                        $logo = $data['licnost'][$key]['avatar'];
+                        if($logo) {
+                            $newavatarlicnostiName = time() . '-' . $id . '.' . $logo->getClientOriginalExtension();
+                            $destPath = public_path('/images/avatar_licnost');
+                            $logo->move($destPath, $newavatarlicnostiName);
+                        } else {
+                            $newavatarlicnostiName = 'default_avatar.png';
+                        }
 
                         DB::table('istaknute_licnosti')->insert([
                             'avatar' => $newavatarlicnostiName,
-                            'ime' => $data['licnost_ime'][$key],
-                            'prezime' => $data['licnost_prezime'][$key],
-                            'opis' => $data['licnost_opis'][$key],
+                            'ime' => $data['licnost'][$key]['ime'],
+                            'prezime' => $data['licnost'][$key]['prezime'],
+                            'opis' => $data['licnost'][$key]['opis'] ? $data['licnost'][$key]['opis'] : null,
                             'club_id' => $id
                         ]);
                     }
                 }
-            }else{
-                DB::table('istaknute_licnosti')->insert([
-                    'avatar' => "default_avatar.png",
-                    'ime' => "",
-                    'prezime' => "",
-                    'opis' => "",
-                    'club_id' => $id
-                ]);
             }
 
             if($data->hasFile('galerija')){
                 $galerije = $data->file('galerija');
                 foreach($galerije as $key=>$gal){
-                    $newgalName = time() . time() . rand(4,9) . '.' . $gal->getClientOriginalExtension();
+                    $newgalName = time() . '-' .  $id . '.' . $gal->getClientOriginalExtension();
                     $destPath = public_path('/images/galerija_klub');
                     $gal->move($destPath, $newgalName);
 
@@ -255,14 +244,9 @@ class ClubController extends Controller
                         'club_id' => $id
                     ]);
                 }
-            }else{
-                DB::table('clubs_galerija')->insert([
-                    'image' => "default_galerija.png",
-                    'club_id' => $id
-                ]);
             }
 
-             return redirect('clubs/'.$id.'/edit');
+            return redirect('/clubs/'.$id.'/edit');
     	}
     }
 

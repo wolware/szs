@@ -125,7 +125,7 @@
 								  <p class="dodaj-sliku-naslov klub-a1">Logo kluba*</p>
 								  <p class="dodaj-sliku-call">Identitet kluba</p>
 								  <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-									Odaberi logo... <input type="file" id="file_logo_kluba" name="logo" style="display: none;" accept="image/*" onchange="previewFile('file_logo_kluba','slika-upload-klub')">
+									Odaberi logo... <input type="file" id="file_logo_kluba" name="logo" style="display: none;" accept="image/*" onchange="previewFile('#file_logo_kluba', '#slika-upload-klub', 1024, 1024, 512, 512)">
 								  </label>
 								  <div class="info001">
 									<p class="info-upload-slike">Preporučene dimenzije za logo:</p>
@@ -183,7 +183,7 @@
 							</select>
 						  </div>
 
-						  <div class="form-group col-md-4" id="kantonDiv">
+						  <div class="form-group col-md-4" id="kantonDiv" style="display:{{ old('entitet') == 'Republika Srpska' ? 'none' : 'block' }};">
 							<label for="kanton"><img class="flow-icons-013" src="{{asset('images/icons/placeholder.svg')}}"> Kanton*</label>
 							<select name="kanton" class="form-control" id="kanton">
 								<option value="" disabled {{ old('kanton') == '' ? 'selected' : '' }}>Izaberite kanton</option>
@@ -200,7 +200,7 @@
 							</select>
 						  </div>
 
-						  <div class="form-group col-md-4" id="opcineDiv">
+						  <div class="form-group col-md-4" id="opcineDiv" style="display:{{ old('entitet') == 'Republika Srpska' ? 'none' : 'block' }};">
 							<label for="opcine-ks"><img class="flow-icons-013" src="{{asset('images/icons/opcina.svg')}}"> Općine Kantona Sarajevo*</label>
 							<select name="opcina" class="form-control" id="opcine-ks">
 								<option value="" disabled {{ old('opcina') == '' ? 'selected' : '' }}>Izaberite općinu</option>
@@ -216,7 +216,7 @@
 							</select>
 						  </div>
 
-						  <div class="form-group col-md-4" id="regijaDiv" style="display:none;">
+						  <div class="form-group col-md-4" id="regijaDiv" style="display:{{ old('entitet') == 'Republika Srpska' ? 'block' : 'none' }}};">
 							<label for="regija"><img class="flow-icons-013" src="{{asset('images/icons/placeholder.svg')}}"> Regija*</label>
 							<select name="regija" class="form-control" id="regija">
 								<option value="" disabled {{ old('regija') == '' ? 'selected' : '' }}>Izaberite regiju</option>
@@ -227,7 +227,7 @@
 							</select>
 						  </div>
 
-						  <div class="form-group col-md-4" id="opSrb" style="display:none;">
+						  <div class="form-group col-md-4" id="opSrb" style="display:{{ old('entitet') == 'Republika Srpska' ? 'block' : 'none' }};">
 							<label for="opcine-sz-reg"><img class="flow-icons-013" src="{{asset('images/icons/opcina.svg')}}"> Općine Sarajevsko-Zvorničke regije*</label>
 							<select class="form-control" name="opcinaSrb">
 								<option value="" disabled {{ old('opcinaSrb') == '' ? 'selected' : '' }}>Izaberite općinu</option>
@@ -501,14 +501,14 @@
 												<div class="col-md-6 objavi-klub-logo-setup">
 													<div class="col-md-7">
 														<div class="alc-staff__photo">
-															<img class="slika-edit-profil" src="{{ asset('images/default_avatar.png') }}" alt="">
+															<img class="slika-edit-profil" id="slika-licnost-prikaz{{ $key }}" src="{{ asset('images/default_avatar.png') }}" alt="">
 															</div>
 														</div>
 													<div class="col-md-5 sadrzaj-slike">
 														<p class="dodaj-sliku-naslov klub-a1">Slika ličnosti</p>
 														<p class="dodaj-sliku-call">Odaberite sliku za istaknutu ličnost</p>
 														<label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-															Odaberi sliku... <input type="file" name="licnost[{{ $key }}][avatar]" accept="image/*" style="display: none;" onchange="previewFile('all', 'slika-edit-profil1')">
+															Odaberi sliku... <input type="file" name="licnost[{{ $key }}][avatar]" id="licnostAvatar{{ $key }}" accept="image/*" style="display: none;" onchange="previewFile('#licnostAvatar{{ $key }}', '#slika-licnost-prikaz{{ $key }}', 1080, 1920, 250, 312)">
 															</label>
 														<div class="info001">
 															<p class="info-upload-slike">Preporučene dimenzije za sliku ličnosti:</p>
@@ -767,21 +767,6 @@
       <script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
 <script type="text/javascript">
 	CKEDITOR.replace( 'vremeplov' );
-   function previewFile(name, place){
-       var preview = document.getElementById(place);
-       var file    = document.getElementById(name).files[0];
-       var reader  = new FileReader();
-
-       reader.onloadend = function () {
-           preview.src = reader.result;
-       }
-
-       if (file) {
-           reader.readAsDataURL(file);
-       } else {
-           preview.src = "";
-       }
-  }
 
   $(function() {
     // Multiple images preview in browser

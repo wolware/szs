@@ -245,7 +245,7 @@
                             });
                             return false;
                         };
-                    }
+                    };
 
                     reader.readAsDataURL(input.files[0]);
                 }
