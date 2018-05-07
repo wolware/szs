@@ -136,10 +136,8 @@ class ClubController extends Controller
     			$newLogoName = time() . '-' . Auth::user()->id . '.' . $logo->getClientOriginalExtension();
     			$destinationPath = public_path('/images/club_logo');
     			$logo->move($destinationPath, $newLogoName);
-
-    			$data['logo'] = $newLogoName;
     		} else {
-                $data['logo'] = 'default.png';
+                $newLogoName = 'default.png';
             }
 
             if(!$data['opcina']){
@@ -147,7 +145,7 @@ class ClubController extends Controller
             }
 
             $id = DB::table('clubs')->insertGetId([
-                'logo' => $data['logo'],
+                'logo' => $newLogoName,
                 'name' => $data['name'],
                 'karakter' => $data['karakter'],
                 'kontinent' => $data['kontinent'],
@@ -212,7 +210,7 @@ class ClubController extends Controller
 
                 foreach($data['licnost'] as $key => $a_l){
                     if($a_l){
-                        $logo = $data['licnost'][$key]['avatar'];
+                        $logo = array_key_exists('avatar', $data['licnost'][$key]) ? $data['licnost'][$key]['avatar'] : null;
                         if($logo) {
                             $newavatarlicnostiName = time() . '-' . $id . '.' . $logo->getClientOriginalExtension();
                             $destPath = public_path('/images/avatar_licnost');
@@ -232,10 +230,10 @@ class ClubController extends Controller
                 }
             }
 
-            if($data->hasFile('galerija')){
-                $galerije = $data->file('galerija');
+            if($data['galerija']){
+                $galerije = $data['galerija'];
                 foreach($galerije as $key=>$gal){
-                    $newgalName = time() . '-' .  $id . '.' . $gal->getClientOriginalExtension();
+                    $newgalName = $key . '-' .time() . '-' .  $id . '.' . $gal->getClientOriginalExtension();
                     $destPath = public_path('/images/galerija_klub');
                     $gal->move($destPath, $newgalName);
 
@@ -406,7 +404,7 @@ class ClubController extends Controller
         }
     }
     public function edit_galerija(Request $data, $id){
-        if($data->hasFile('galerija')){
+        if($data['galerija']){
             $galerije = $data->file('galerija');
             foreach($galerije as $key=>$gal){
                 $newgalName = time() . time() . rand(4,9) . '.' . $gal->getClientOriginalExtension();

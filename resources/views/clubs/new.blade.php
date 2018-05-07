@@ -216,7 +216,7 @@
 							</select>
 						  </div>
 
-						  <div class="form-group col-md-4" id="regijaDiv" style="display:{{ old('entitet') == 'Republika Srpska' ? 'block' : 'none' }}};">
+						  <div class="form-group col-md-4" id="regijaDiv" style="display:{{ old('entitet') == 'Republika Srpska' ? 'block' : 'none' }};">
 							<label for="regija"><img class="flow-icons-013" src="{{asset('images/icons/placeholder.svg')}}"> Regija*</label>
 							<select name="regija" class="form-control" id="regija">
 								<option value="" disabled {{ old('regija') == '' ? 'selected' : '' }}>Izaberite regiju</option>
@@ -259,7 +259,7 @@
 
 						  <div class="form-group col-md-4">
 							<label for="grad"><img class="flow-icons-013" src="{{asset('images/icons/small-calendar.svg')}}"> Mjesto/Grad kluba*</label>
-							<input name="grad" id="mjesto" class="form-control" placeholder="Unesite mjesto kluba" onFocus="initAutocomplete()" value="{{ old('grad') }}" autocomplete="on">
+							<input name="grad" id="mjesto" class="form-control" placeholder="Unesite mjesto kluba" value="{{ old('grad') }}">
 						  </div>
 
 						  <div class="form-group col-md-4">
@@ -271,7 +271,7 @@
 							</select>
 						  </div>
 
-						  <div class="form-group col-md-4" id="sportoviDiv">
+						  <div class="form-group col-md-4" id="sportoviDiv" style="display:{{ old('tip') == 'Sportski klub' ? 'block' : 'none' }};">
 							<label for="sport"><img class="flow-icons-013" src="{{asset('images/icons/menu-circular-button.svg')}}"> Sportovi*</label>
 							<select name="sport" class="form-control" id="sport">
 								<option value="" {{ old('sport') == '' ? 'selected' : '' }}>Izaberite sport</option>
@@ -325,7 +325,7 @@
 							</select>
 						  </div>
 
-						  <div class="form-group col-md-4" id="iSportoviDiv" style="display: none;">
+						  <div class="form-group col-md-4" id="iSportoviDiv" style="display:{{ old('tip') == 'Sportski klub' ? 'none' : 'block' }};">
 							<label for="invalidski-sport"><img class="flow-icons-013" src="{{asset('images/icons/disability.svg')}}"> Invalidski sportovi</label>
 							<select name="invalidski_sport" class="form-control" id="invalidski-sport" value="{{ old('invalidski_sport') }}">
 								<option value="" {{ old('invalidski_sport') == '' ? 'selected' : '' }}>Izaberite sport</option>
