@@ -258,54 +258,59 @@ class ClubController extends Controller
     }
 
     public function edit_club(Request $data, $id){
-        $messages = [
-            'required' => ':attribute polje je obavezno.',
-            'max' => ':attribute mora imati manje karaktera od :max',
-            'min' => ':attribute mora imati više karaktera od :min',
-            'confirmed' => ':attribute se ne podudara.',
-            'integer' => ':attribute mora biti broj',
-            'logo.max' => 'logo mora biti manji od 2MB'
-        ];
         $validator = Validator::make($data->all(),[
-            'logo_klub' => 'max:2048',
+            'logo' => 'required|image|dimensions:min_width=200,min_height=200,max_width=1024,max_height=1024',
             'name' => 'required|max:255|string',
             'karakter' => 'required|max:255|string',
-            'kontinent' => 'required|max:255|string',
-            'drzava' => 'required|max:255|string',
-            'entitet' => 'required',
-            'kanton' => 'required',
-            'opcina' => 'required',
-            'grad' => 'required',
-            'tip' => 'required',
-            'kategorija' => 'required',
-            /*'godina_osnivanja' => 'required|integer',
-            'teren' => 'required|max:255|string',
-            'takmicenje' => 'required',
-            'savez' => 'required',
-            'adresa' => 'required'*/
-        ], $messages);
+            'kontinent' => 'required|max:255|string|in:Evropa',
+            'drzava' => 'required|max:255|string|in:Bosna i Hercegovina',
+            'entitet' => 'required|max:255|string|in:Federacija BiH,Republika Srpska',
+            'kanton' => 'required_if:entitet,Federacija BiH|nullable|max:255|string',
+            'opcina' => 'required_if:entitet,Federacija BiH|nullable|max:255|string',
+            'opcinaSrb' => 'required_if:entitet,Republika Srpska|nullable|max:255|string',
+            'regija' => 'required_if:entitet,Republika Srpska|nullable|max:255|string',
+            'grad' => 'required|max:255|string',
+            'tip' => 'required|max:255|string|in:Sportski klub,Invalidski sportski klub',
+            'sport' => 'required_if:tip,Sportski klub|nullable|max:255|string',
+            'invalidski_sport' => 'required_if:tip,Invalidski sportski klub|nullable|max:255|string',
+            'kategorija' => 'required|max:255|string|in:Muški klub,Ženski klub,Mješovito',
+            'godina_osnivanja' => 'nullable|digits:4|integer|min:1800|max:'.date('Y'),
+            'teren' => 'nullable|max:255|string',
+            'takmicenje' => 'nullable|max:255|string',
+            'savez' => 'nullable|max:255|string|in:Državni savez,Entitetski savez,Kantonalni savez',
+            'telefon1' => 'nullable|max:50|string',
+            'telefon2' => 'nullable|max:50|string',
+            'fax' => 'nullable|max:50|string',
+            'email' => 'nullable|max:255|email',
+            'web_stranica' => 'nullable|max:255|string',
+            'adresa' => 'nullable|max:255|string',
+            'fb' => 'nullable|max:255|string',
+            'instagram' => 'nullable|max:255|string',
+            'twitter' => 'nullable|max:255|string',
+            'yt' => 'nullable|max:255|string',
+            'video' => 'nullable|max:255|string'
+        ]);
+
         if($validator->fails()){
-            return redirect('clubs/'.$id.'/edit')
+            return redirect('/clubs/'.$id.'/edit')
                         ->withErrors($validator)
                         ->withInput();
         }else{
-            if($data->file('logo_klub')){
-               $logo = $data->file('logo_klub');
-                $newLogoName = time() . rand(111,999) . '.' . $logo->getClientOriginalExtension();
+            if($data->file('logo')){
+                $logo = $data->file('logo');
+                $newLogoName = time() . '-' . Auth::user()->id . '.' . $logo->getClientOriginalExtension();
                 $destinationPath = public_path('/images/club_logo');
                 $logo->move($destinationPath, $newLogoName);
 
-                $data['logo'] = $newLogoName; 
+                $data['logo'] = $newLogoName;
+            } else {
+                $data['logo'] = 'default.png';
             }
 
             DB::table('clubs')->where('id', $id)->update($data->all());
-            //$club->logo = $newLogoName;
-            //$club->update($data->all());
+
             flash('Uspješno ste editovali Vaš klub.');
-            return redirect('clubs/'.$id.'/edit');
-
-
-           
+            return redirect('/clubs/'.$id.'/edit');
         }
     }
 
