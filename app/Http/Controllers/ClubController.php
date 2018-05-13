@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\ClubRepository;
+use App\Repositories\RegionRepository;
+use App\Repositories\SportRepository;
 use Illuminate\Http\Request;
 use App\User;
 use App\Club;
@@ -14,14 +17,23 @@ use Illuminate\Support\Facades\Input;
 
 class ClubController extends Controller
 {
+    protected $regionRepository;
+    protected $sportRepository;
+    protected $clubRepository;
+
     /**
      * Create a new controller instance.
      *
-     * @return void
+     * @param RegionRepository $regionRepository
+     * @param SportRepository $sportRepository
+     * @param ClubRepository $clubRepository
      */
-    public function __construct()
+    public function __construct(RegionRepository $regionRepository, SportRepository $sportRepository, ClubRepository $clubRepository)
     {
         $this->middleware('auth')->except(['club_show', 'index_show']);
+        $this->regionRepository = $regionRepository;
+        $this->sportRepository = $sportRepository;
+        $this->clubRepository = $clubRepository;
     }
 
     /**
@@ -32,7 +44,11 @@ class ClubController extends Controller
     
     public function new_show()
     {
-        return view('clubs.new');
+        $regions = $this->regionRepository->getAll();
+        $sports = $this->sportRepository->getAll();
+        $clubCategories = $this->clubRepository->getSportCategories();
+
+        return view('clubs.new', compact('regions', 'sports', 'clubCategories'));
     }
     public function clubs_add(){
         return view('clubs.add');

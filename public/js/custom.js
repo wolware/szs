@@ -166,6 +166,17 @@ $(function () {
 
 $(document).ready(function () {
 
+    // Select boxovi za regione
+    var continentSelect = $('select#continent');
+    var countrySelect = $('select#country');
+    var provinceSelect = $('select#province');
+    var regionSelect = $('select#region');
+    var municipalitySelect = $('select#municipality');
+
+    // Select boxes
+    var sportTypeSelect = $('select#club-type');
+    var sportSelect = $('select#sport');
+
     // Nadji najveci array key od old inputa za licnost ako postoji
     if($('.licnostHover').length) {
         var num = $('.licnostHover').map(function() {
@@ -197,24 +208,9 @@ $(document).ready(function () {
         return false;
     }, "Polje mora biti tipa string.");
 
-    $('#entitet').change(function () {
-        var _entitet = $(this).val();
-        if (_entitet == "Federacija BiH") {
-            $('#kantonDiv').css({"display": "block"});
-            $('#opcineDiv').css({"display": "block"});
-            $('#regijaDiv').css({"display": "none"});
-            $('#opSrb').css({"display": "none"});
-        } else {
-            $('#kantonDiv').css({"display": "none"});
-            $('#opcineDiv').css({"display": "none"});
-            $('#regijaDiv').css({"display": "block"});
-            $('#opSrb').css({"display": "block"});
-        }
-    });
-
     // Validacije forme za dodavanje kluba
     $('#createNewClub').validate({
-            ignore: ":not(:visible)",
+            ignore: ':not(:visible),:disabled',
             rules: {
                 logo: {
                     required: true,
@@ -230,29 +226,29 @@ $(document).ready(function () {
                     string: true,
                     maxlength: 255
                 },
-                kontinent: {
+                continent: {
                     required: true,
-                    string: true,
+                    digits: true,
                     maxlength: 255
                 },
-                drzava: {
+                country: {
                     required: true,
-                    string: true,
+                    digits: true,
                     maxlength: 255
                 },
-                entitet: {
+                province: {
                     required: true,
-                    string: true,
+                    digits: true,
                     maxlength: 255
                 },
-                kanton: {
+                region: {
                     required: true,
-                    string: true,
+                    digits: true,
                     maxlength: 255
                 },
-                opcina: {
+                municipality: {
                     required: true,
-                    string: true,
+                    digits: true,
                     maxlength: 255
                 },
                 grad: {
@@ -532,14 +528,97 @@ $(document).ready(function () {
         $(this).closest('.nagradaHover').slideUp('normal', function() { $(this).remove(); } );
     });
 
-    $('#tip-kluba').change(function () {
-        var _tipkluba = $(this).val();
-        if (_tipkluba == "Sportski klub") {
-            $('#sportoviDiv').css({"display": "block"});
-            $('#iSportoviDiv').css({"display": "none"});
+    // Dodavanje kluba - Promjena kontinenta
+    continentSelect.on('change', function () {
+        var itemsToShow = countrySelect.children("option[data-parent^=" + continentSelect.val() + "]");
+
+        if(itemsToShow.length > 0) {
+            countrySelect.prop('disabled', false);
+            countrySelect.children('option').hide();
+            countrySelect.children('option:first').show();
+            itemsToShow.show();
         } else {
-            $('#sportoviDiv').css({"display": "none"});
-            $('#iSportoviDiv').css({"display": "block"});
+            countrySelect.children('option:first').show();
+            countrySelect.prop('disabled', 'disabled');
+        }
+        // Resetuj sve selecte poslije ovog
+        countrySelect.prop("selectedIndex", 0);
+        provinceSelect.prop("selectedIndex", 0).prop('disabled', 'disabled');
+        regionSelect.prop("selectedIndex", 0).prop('disabled', 'disabled');
+        municipalitySelect.prop("selectedIndex", 0).prop('disabled', 'disabled');
+    });
+
+    // Dodavanje kluba - Promjena države
+    countrySelect.on('change', function () {
+        var itemsToShow = provinceSelect.children("option[data-parent^=" + countrySelect.val() + "]");
+
+        if(itemsToShow.length > 0) {
+            provinceSelect.prop('disabled', false);
+            provinceSelect.children('option').hide();
+            provinceSelect.children('option:first').show();
+            itemsToShow.show();
+        } else {
+            provinceSelect.children('option:first').show();
+            provinceSelect.prop('disabled', 'disabled');
+        }
+        // Resetuj sve selecte poslije ovog
+        provinceSelect.prop("selectedIndex", 0);
+        regionSelect.prop("selectedIndex", 0).prop('disabled', 'disabled');
+        municipalitySelect.prop("selectedIndex", 0).prop('disabled', 'disabled');
+    });
+
+    // Dodavanje kluba - Promjena pokrajine
+    provinceSelect.on('change', function () {
+        var itemsToShow = regionSelect.children("option[data-parent^=" + provinceSelect.val() + "]");
+
+        if(itemsToShow.length > 0) {
+            regionSelect.prop('disabled', false);
+            regionSelect.children('option').hide();
+            regionSelect.children('option:first').show();
+            itemsToShow.show();
+        } else {
+            regionSelect.children('option:first').show();
+            regionSelect.prop('disabled', 'disabled');
+        }
+
+        // Resetuj sve selecte poslije ovog
+        regionSelect.prop("selectedIndex", 0);
+        municipalitySelect.prop("selectedIndex", 0).prop('disabled', 'disabled');
+    });
+
+    // Dodavanje kluba - Promjena regije
+    regionSelect.on('change', function () {
+        var itemsToShow = municipalitySelect.children("option[data-parent^=" + regionSelect.val() + "]");
+
+        if(itemsToShow.length > 0) {
+            municipalitySelect.prop('disabled', false);
+            municipalitySelect.children('option').hide();
+            municipalitySelect.children('option:first').show();
+            itemsToShow.show();
+        } else {
+            municipalitySelect.children('option:first').show();
+            municipalitySelect.prop('disabled', 'disabled');
+        }
+
+        // Resetuj sve selecte poslije ovog
+        municipalitySelect.prop("selectedIndex", 0);
+    });
+
+    // Selekt za sportove
+    sportTypeSelect.on('change', function () {
+        var itemsToShow;
+        if(sportTypeSelect.val() == 1 || sportTypeSelect.val() == 2) {
+           if(sportTypeSelect.val() == 1) {
+               itemsToShow = sportSelect.children("option[data-disabled^='0']");
+           } else if (sportTypeSelect.val() == 2) {
+               itemsToShow = sportSelect.children("option[data-disabled^='1']");
+           }
+           sportSelect.prop('disabled', false);
+           sportSelect.children('option').hide();
+           sportSelect.children('option:first').show();
+           itemsToShow.show();
+        } else {
+            sportSelect.prop('disabled', 'disabled');
         }
     });
 

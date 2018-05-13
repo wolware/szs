@@ -35,7 +35,7 @@ class CreateClubsTable extends Migration
             $table->boolean('approved')->default(0);
             $table->boolean('deleted')->default(0);
             $table->unsignedInteger('association_id')->nullable();
-            $table->unsignedInteger('sport_category_id');
+            $table->unsignedInteger('club_category_id');
             $table->unsignedInteger('sport_id');
             $table->unsignedInteger('region_id');
             $table->unsignedInteger('user_id');
@@ -44,9 +44,9 @@ class CreateClubsTable extends Migration
                 ->references('id')
                 ->on('associations');
 
-            $table->foreign('sport_category_id')
+            $table->foreign('club_category_id')
                 ->references('id')
-                ->on('sport_categories')
+                ->on('club_categories')
                 ->onDelete('cascade');
 
             $table->foreign('sport_id')

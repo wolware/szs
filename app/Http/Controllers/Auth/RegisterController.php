@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Region;
+use App\Repositories\RegionRepository;
 use App\User;
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
@@ -32,14 +36,17 @@ class RegisterController extends Controller
      */
     protected $redirectTo = '/home';
 
+    protected $regionRepository;
+
     /**
      * Create a new controller instance.
      *
-     * @return void
+     * @param RegionRepository $regionRepository
      */
-    public function __construct()
+    public function __construct(RegionRepository $regionRepository)
     {
         $this->middleware('guest');
+        $this->regionRepository = $regionRepository;
     }
 
     /**
@@ -60,18 +67,10 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
-     * @return \App\User
+     * @param Request $data
+     * @return Redirect
      */
-    /*protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
-    }
-*/
+
     public function register(Request $data){
         $messages = [
             'required' => ':attribute polje je obavezno.',
@@ -99,18 +98,31 @@ class RegisterController extends Controller
                         ->withInput();
         }else{
             $user = new User();
-            $user->name = $data['name'];
-            $user->email = $data['email'];
-            $user->password = bcrypt($data['password']);
-            $user->spol = $data['spol'];
-            $user->dob = $data['dob'];
-            $user->country = $data['country'];
-            $user->save();
 
-            Auth::loginUsingId($user->id);
+            $user->name = $data->name;
+            $user->email = $data->email;
+            $user->password = bcrypt($data->password);
+            $user->spol = $data->spol;
+            $user->dob = Carbon::parse($data->dob)->toDateString();
+            $user->country = $data->country;
 
-            return redirect('/');
+            if($user->save()) {
+                Auth::loginUsingId($user->id);
+                return redirect('/');
+            }
         }
 
+    }
+
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+        $countries = $this->regionRepository->getCountries();
+
+        return view('auth.register', compact('countries'));
     }
 }
