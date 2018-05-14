@@ -176,6 +176,8 @@ $(document).ready(function () {
     // Select boxes
     var sportTypeSelect = $('select#club-type');
     var sportSelect = $('select#sport');
+    var associationBox = $('#associations');
+    var associationRadio = $('input[name="association"]');
 
     // Nadji najveci array key od old inputa za licnost ako postoji
     if($('.licnostHover').length) {
@@ -221,77 +223,69 @@ $(document).ready(function () {
                     string: true,
                     maxlength: 255
                 },
-                karakter: {
+                nature: {
                     required: true,
                     string: true,
                     maxlength: 255
                 },
                 continent: {
                     required: true,
-                    digits: true,
-                    maxlength: 255
+                    digits: true
                 },
                 country: {
                     required: true,
-                    digits: true,
-                    maxlength: 255
+                    digits: true
                 },
                 province: {
                     required: true,
-                    digits: true,
-                    maxlength: 255
+                    digits: true
                 },
                 region: {
                     required: true,
-                    digits: true,
-                    maxlength: 255
+                    digits: true
                 },
                 municipality: {
                     required: true,
-                    digits: true,
-                    maxlength: 255
+                    digits: true
                 },
-                grad: {
+                city: {
                     required: true,
                     string: true,
                     maxlength: 255
                 },
-                tip: {
+                type: {
                     required: true,
-                    string: true,
-                    maxlength: 255
+                    digits: true
                 },
                 sport: {
                     required: true,
-                    string: true,
-                    maxlength: 255
+                    digits: true
                 },
-                kategorija: {
+                category: {
                     required: true,
-                    string: true,
-                    maxlength: 255
+                    digits: true
                 },
-                godina_osnivanja: {
+                established_in: {
                     digits: true,
                     range: [1800, new Date().getFullYear()]
                 },
-                teren: {
+                home_field: {
                     string: true,
                     maxlength: 255
                 },
-                takmicenje: {
+                competition: {
                     string: true,
                     maxlength: 255
                 },
-                savez: {
-                    string: true,
-                    maxlength: 255
+                association: {
+                    required: true,
+                    digits: true
                 },
-                telefon1: {
+                phone_1: {
                     digits: true,
                     maxlength: 255
                 },
-                telefon2: {
+                phone_2: {
                     digits: true,
                     maxlength: 50
                 },
@@ -303,15 +297,15 @@ $(document).ready(function () {
                     email: true,
                     maxlength: 255
                 },
-                web_stranica: {
+                website: {
                     string: true,
                     maxlength: 255
                 },
-                adresa: {
+                address: {
                     string: true,
                     maxlength: 255
                 },
-                fb: {
+                facebook: {
                     string: true,
                     maxlength: 255
                 },
@@ -323,7 +317,7 @@ $(document).ready(function () {
                     string: true,
                     maxlength: 255
                 },
-                yt: {
+                youtube: {
                     string: true,
                     maxlength: 255
                 },
@@ -331,7 +325,7 @@ $(document).ready(function () {
                     string: true,
                     maxlength: 255
                 },
-                vremeplov : {
+                history: {
                     string: true
                 },
                 'galerija[]' : {
@@ -565,6 +559,20 @@ $(document).ready(function () {
         provinceSelect.prop("selectedIndex", 0);
         regionSelect.prop("selectedIndex", 0).prop('disabled', 'disabled');
         municipalitySelect.prop("selectedIndex", 0).prop('disabled', 'disabled');
+
+        // Izlistaj sve saveze države ako postoje
+        var associationsToShow = associationBox.find("input[data-region^=" + countrySelect.val() + "]");
+        console.log(associationsToShow);
+        associationRadio.prop('checked', false);
+
+        if(associationsToShow.length > 0) {
+            associationRadio.closest('label').hide();
+            associationsToShow.closest('label').css('display', 'inline-block');
+            associationBox.show();
+        } else {
+            associationBox.hide();
+        }
+
     });
 
     // Dodavanje kluba - Promjena pokrajine
@@ -613,6 +621,7 @@ $(document).ready(function () {
            } else if (sportTypeSelect.val() == 2) {
                itemsToShow = sportSelect.children("option[data-disabled^='1']");
            }
+           sportSelect.prop('selectedIndex', 0);
            sportSelect.prop('disabled', false);
            sportSelect.children('option').hide();
            sportSelect.children('option:first').show();
@@ -621,6 +630,8 @@ $(document).ready(function () {
             sportSelect.prop('disabled', 'disabled');
         }
     });
+
+
 
     var date_input = $('input[name="date"]'); //our date input has the name "date"
     var container = $('form').length > 0 ? $('form').parent() : "body";

@@ -173,7 +173,7 @@
 
 							  <div class="form-group col-md-4">
 								<label for="country"><img class="flow-icons-013" src="{{asset('images/icons/earth.svg')}}"> Država*</label>
-								<select name="country" class="form-control" id="country" disabled>
+								<select name="country" class="form-control" id="country" {{ old('country') ? '' : 'disabled' }}>
 									<option selected disabled>Izaberite državu kluba</option>
 									@foreach($regions as $region)
 										@if($region->region_type->type == 'Country')
@@ -185,7 +185,7 @@
 
 							  <div class="form-group col-md-4">
 								<label for="province"><img class="flow-icons-013" src="{{asset('images/icons/map.svg')}}"> Pokrajina*</label>
-								<select name="province" class="form-control" id="province" disabled>
+								<select name="province" class="form-control" id="province" {{ old('province') ? '' : 'disabled' }}>
 									<option selected disabled>Izaberite pokrajinu kluba</option>
 									@foreach($regions as $region)
 										@if($region->region_type->type == 'Province')
@@ -198,7 +198,7 @@
 						<div class="row">
 						  <div class="form-group col-md-4">
 							<label for="region"><img class="flow-icons-013" src="{{asset('images/icons/placeholder.svg')}}"> Regija*</label>
-							<select name="region" class="form-control" id="region" disabled>
+							<select name="region" class="form-control" id="region" {{ old('region') ? '' : 'disabled' }}>
 								<option selected disabled>Izaberite regiju kluba</option>
 								@foreach($regions as $region)
 									@if($region->region_type->type == 'Region')
@@ -210,7 +210,7 @@
 
 						  <div class="form-group col-md-4">
 							<label for="municipality"><img class="flow-icons-013" src="{{asset('images/icons/opcina.svg')}}"> Općina*</label>
-							<select name="municipality" class="form-control" id="municipality" disabled>
+							<select name="municipality" class="form-control" id="municipality" {{ old('municipality') ? '' : 'disabled' }}>
 								<option selected disabled>Izaberite općinu kluba</option>
 								@foreach($regions as $region)
 									@if($region->region_type->type == 'Municipality')
@@ -222,7 +222,7 @@
 
 						  <div class="form-group col-md-4">
 							<label for="mjesto"><img class="flow-icons-013" src="{{asset('images/icons/small-calendar.svg')}}"> Mjesto/Grad kluba*</label>
-							<input name="city" id="mjesto" class="form-control" placeholder="Unesite mjesto kluba" value="{{ old('grad') }}">
+							<input name="city" id="mjesto" class="form-control" placeholder="Unesite mjesto kluba" value="{{ old('city') }}">
 						  </div>
 						</div>
 						<div class="row">
@@ -250,7 +250,7 @@
 							<select name="category" class="form-control" id="club-category">
 								<option selected disabled>Izaberite sport kluba</option>
 								@foreach($clubCategories as $category)
-									<option value="{{ $category->id }}" {{ old('$category') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+									<option value="{{ $category->id }}" {{ old('category') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
 								@endforeach
 							</select>
 						  </div>
@@ -279,22 +279,16 @@
 							<input type="text" name="competiton" id="takmicenje" class="form-control" placeholder="Unesite naziv takmičenja u kojem klub nastupa" value="{{ old('competiton') }}">
 						  </div>
 
-						  <div class="form-group col-md-6">
-							<label for="savez"><img class="flow-icons-013" src="{{asset('images/icons/savez.svg')}}"> Savez kojem klub pripada</label>
-							<div class="form-group">
-							  <label class="radio radio-inline">
-								<input type="radio" id="inlineCheckbox1" name="association" value="Državni savez" {{ old('association') == 'Državni savez' ? 'checked' : '' }}> Državni savez
-								<span class="radio-indicator"></span>
-							  </label>
-							  <label class="radio radio-inline">
-								<input type="radio" id="inlineCheckbox2" name="association" value="Entitetski savez" {{ old('association') == 'Entitetski savez' ? 'checked' : '' }}> Entitetski savez
-								<span class="radio-indicator"></span>
-							  </label>
-							  <label class="radio radio-inline">
-								<input type="radio" id="inlineCheckbox3" name="association" value="Kantonalni savez" {{ old('association') == 'Kantonalni savez' ? 'checked' : '' }}> Kantonalni savez
-								<span class="radio-indicator"></span>
-							  </label>
-							</div>
+						  <div class="form-group col-md-6" id="associations" style="display: {{ old('country') ? 'block' : 'none' }};">
+							<label><img class="flow-icons-013" src="{{asset('images/icons/savez.svg')}}"> Savez kojem klub pripada</label>
+							  <div class="form-group">
+								  @foreach($associations as $association)
+									  <label class="radio radio-inline" style="display: {{ old('country') == $association->region_id ? 'inline-block' : 'none' }};">
+										  <input type="radio" data-region="{{ $association->region_id }}" name="association" value="{{ $association->id }}" {{ old('association') == $association->id ? 'checked' : '' }}> {{ $association->name }}
+										  <span class="radio-indicator"></span>
+									  </label>
+								  @endforeach
+							  </div>
 						  </div>
 
 					</div>
@@ -308,12 +302,12 @@
 
 							<div class="form-group col-md-4">
 								<label for="tel1"><img class="flow-icons-013" src="{{asset('images/icons/phone-call.svg')}}"> Telefon 1</label>
-								<input type="number" name="telefon1" id="tel1" class="form-control" placeholder="Unesite broj za službeni telefon 1" value="{{ old('telefon1') }}">
+								<input type="number" name="phone_1" id="tel1" class="form-control" placeholder="Unesite broj za službeni telefon 1" value="{{ old('phone_1') }}">
 							</div>
 
 							<div class="form-group col-md-4">
 								<label for="tel2"><img class="flow-icons-013" src="{{asset('images/icons/phone-call.svg')}}"> Telefon 2</label>
-								<input type="number" name="telefon2" id="tel2" class="form-control" placeholder="Unesite broj za službeni telefon 2" value="{{ old('telefon2') }}">
+								<input type="number" name="phone_2" id="tel2" class="form-control" placeholder="Unesite broj za službeni telefon 2" value="{{ old('phone_2') }}">
 							</div>
 
 							<div class="form-group col-md-4">
@@ -328,12 +322,12 @@
 
 							<div class="form-group col-md-4">
 								<label for="web"><img class="flow-icons-013" src="{{asset('images/icons/worldwide.svg')}}"> Web stranica</label>
-								<input type="text" name="web_stranica" id="web" class="form-control" placeholder="Unesite link službene web stranice" value="{{ old('web_stranica') }}">
+								<input type="text" name="website" id="web" class="form-control" placeholder="Unesite link službene web stranice" value="{{ old('website') }}">
 							</div>
 
 							<div class="form-group col-md-4">
 								<label for="adresa"><img class="flow-icons-013" src="{{asset('images/icons/icon.svg')}}"> Adresa (ne prikazuje se)</label>
-								<input type="text" name="adresa" id="adresa" onFocus="adresaAutoComp()" class="form-control" placeholder="Unesite adresu sjedišta kluba" value="{{ old('adresa') }}">
+								<input type="text" name="address" id="adresa" class="form-control" placeholder="Unesite adresu sjedišta kluba" value="{{ old('address') }}">
 							</div>
 
 					</div>
@@ -346,23 +340,23 @@
 					 <div class="row">
 
 							<div class="form-group col-md-6">
-								<label for="fcb"><img class="flow-icons-013" src="{{asset('images/icons/facebook.svg')}}"> Facebook stranica</label>
-								<input type="text" name="fb" id="fcb" class="form-control" placeholder="Unesite link službene facebook stranice" value="{{ old('fb') }}">
+								<label for="facebook"><img class="flow-icons-013" src="{{asset('images/icons/facebook.svg')}}"> Facebook stranica</label>
+								<input type="text" name="facebook" id="facebook" class="form-control" placeholder="Unesite link službene facebook stranice" value="{{ old('facebook') }}">
 							</div>
 
 							<div class="form-group col-md-6">
-								<label for="twt"><img class="flow-icons-013" src="{{asset('images/icons/twitter.svg')}}"> Twitter profil</label>
-								<input type="text" name="twitter" id="twt" class="form-control" placeholder="Unesite link službenog twitter profila" value="{{ old('twitter') }}">
+								<label for="twitter"><img class="flow-icons-013" src="{{asset('images/icons/twitter.svg')}}"> Twitter profil</label>
+								<input type="text" name="twitter" id="twitter" class="form-control" placeholder="Unesite link službenog twitter profila" value="{{ old('twitter') }}">
 							</div>
 
 							<div class="form-group col-md-6">
-								<label for="inst"><img class="flow-icons-013" src="{{asset('images/icons/instagram.svg')}}"> Instagram profil</label>
-								<input type="text" name="instagram" id="inst" class="form-control" placeholder="Unesite link službenog instagram profila" value="{{ old('instagram') }}">
+								<label for="instagram"><img class="flow-icons-013" src="{{asset('images/icons/instagram.svg')}}"> Instagram profil</label>
+								<input type="text" name="instagram" id="instagram" class="form-control" placeholder="Unesite link službenog instagram profila" value="{{ old('instagram') }}">
 							</div>
 
 							<div class="form-group col-md-6">
-								<label for="yt"><img class="flow-icons-013" src="{{asset('images/icons/youtube.svg')}}"> YouTUBE pofil</label>
-								<input type="text" name="yt" id="yt" class="form-control" placeholder="Unesite link službenog YouTUBE kanala" value="{{ old('yt') }}">
+								<label for="youtube"><img class="flow-icons-013" src="{{asset('images/icons/youtube.svg')}}"> YouTUBE pofil</label>
+								<input type="text" name="youtube" id="youtube" class="form-control" placeholder="Unesite link službenog YouTUBE kanala" value="{{ old('youtube') }}">
 							</div>
 
 					</div>
@@ -375,8 +369,8 @@
 					 <div class="row">
 
 							<div class="form-group col-md-12">
-								<label for="videoprez"><img class="flow-icons-013" src="{{asset('images/icons/play-button.svg')}}"> Video prezentacija</label>
-								<input type="text" name="video" id="videoprez" class="form-control" placeholder="Unesite link videa (YouTUBE)" value="{{ old('video') }}">
+								<label for="video"><img class="flow-icons-013" src="{{asset('images/icons/play-button.svg')}}"> Video prezentacija</label>
+								<input type="text" name="video" id="video" class="form-control" placeholder="Unesite link videa (YouTUBE)" value="{{ old('video') }}">
 							</div>
 
 
@@ -470,7 +464,7 @@
 
 						  <div class="form-group col-md-12">
 							<label for="opis"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Vremeplov</label>
-							<textarea class="form-control" rows="20" id="opis" name="vremeplov" placeholder="Upišite ukratko informacije vezane za historijat vašeg kluba i njegovu tradiciju..." {{ old('vremeplov') }}></textarea>
+							<textarea class="form-control" rows="20" id="opis" name="history" placeholder="Upišite ukratko informacije vezane za historijat vašeg kluba i njegovu tradiciju...">{{ old('history') }}</textarea>
 						  </div>
 
 						 </div>
