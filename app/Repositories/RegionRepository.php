@@ -15,8 +15,8 @@ class RegionRepository {
     public function getAll() {
         return $this->model
             ->with('region_type')
-            ->orderBy('name', 'asc'
-            )->get();
+            ->orderBy('name', 'asc')
+            ->get();
     }
 
     public function getCountries()
@@ -25,7 +25,7 @@ class RegionRepository {
             ->whereHas('region_type', function ($query) {
                 $query->where('type', '=', 'Country');
             })
-            ->orderBy()
+            ->orderBy('name', 'asc')
             ->get();
     }
 }

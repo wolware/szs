@@ -221,8 +221,8 @@
 						  </div>
 
 						  <div class="form-group col-md-4">
-							<label for="grad"><img class="flow-icons-013" src="{{asset('images/icons/small-calendar.svg')}}"> Mjesto/Grad kluba*</label>
-							<input name="grad" id="mjesto" class="form-control" placeholder="Unesite mjesto kluba" value="{{ old('grad') }}">
+							<label for="mjesto"><img class="flow-icons-013" src="{{asset('images/icons/small-calendar.svg')}}"> Mjesto/Grad kluba*</label>
+							<input name="city" id="mjesto" class="form-control" placeholder="Unesite mjesto kluba" value="{{ old('grad') }}">
 						  </div>
 						</div>
 						<div class="row">
@@ -265,33 +265,33 @@
 					 </div>
 					<div class="row">
 						  <div class="form-group col-md-6">
-							<label for="godina-osnivanja"><img class="flow-icons-013" src="{{asset('images/icons/small-calendar.svg')}}"> Godina osnivanja kluba</label>
-							<input name="godina_osnivanja" type="number" id="godina-osnivanja" class="form-control" placeholder="Unesite godinu osnivanja kluba" value="{{ old('godina_osnivanja') }}">
+							<label for="established_in"><img class="flow-icons-013" src="{{asset('images/icons/small-calendar.svg')}}"> Godina osnivanja kluba</label>
+							<input name="established_in" type="number" id="established_in" class="form-control" placeholder="Unesite godinu osnivanja kluba" value="{{ old('established_in') }}">
 						  </div>
 
 						  <div class="form-group col-md-6">
 							<label for="domaci-teren"><img class="flow-icons-013" src="{{asset('images/icons/stadium-icon.svg')}}"> Domaći teren</label>
-							<input name="teren" type="text" id="domaci-teren" class="form-control" placeholder="Unesite naziv domaćeg terena kluba" value="{{ old('teren') }}">
+							<input name="home_field" type="text" id="domaci-teren" class="form-control" placeholder="Unesite naziv domaćeg terena kluba" value="{{ old('home_field') }}">
 						  </div>
 
 						  <div class="form-group col-md-6">
 							<label for="takmicenje"><img class="flow-icons-013" src="{{asset('images/icons/trophy.svg')}}"> Takmičenje</label>
-							<input type="text" name="takmicenje" id="takmicenje" class="form-control" placeholder="Unesite naziv takmičenja u kojem klub nastupa" value="{{ old('takmicenje') }}">
+							<input type="text" name="competiton" id="takmicenje" class="form-control" placeholder="Unesite naziv takmičenja u kojem klub nastupa" value="{{ old('competiton') }}">
 						  </div>
 
 						  <div class="form-group col-md-6">
 							<label for="savez"><img class="flow-icons-013" src="{{asset('images/icons/savez.svg')}}"> Savez kojem klub pripada</label>
 							<div class="form-group">
 							  <label class="radio radio-inline">
-								<input type="radio" id="inlineCheckbox1" name="savez" value="Državni savez" {{ old('savez') == 'Državni savez' ? 'checked' : '' }}> Državni savez
+								<input type="radio" id="inlineCheckbox1" name="association" value="Državni savez" {{ old('association') == 'Državni savez' ? 'checked' : '' }}> Državni savez
 								<span class="radio-indicator"></span>
 							  </label>
 							  <label class="radio radio-inline">
-								<input type="radio" id="inlineCheckbox2" name="savez" value="Entitetski savez" {{ old('savez') == 'Entitetski savez' ? 'checked' : '' }}> Entitetski savez
+								<input type="radio" id="inlineCheckbox2" name="association" value="Entitetski savez" {{ old('association') == 'Entitetski savez' ? 'checked' : '' }}> Entitetski savez
 								<span class="radio-indicator"></span>
 							  </label>
 							  <label class="radio radio-inline">
-								<input type="radio" id="inlineCheckbox3" name="savez" value="Kantonalni savez" {{ old('savez') == 'Kantonalni savez' ? 'checked' : '' }}> Kantonalni savez
+								<input type="radio" id="inlineCheckbox3" name="association" value="Kantonalni savez" {{ old('association') == 'Kantonalni savez' ? 'checked' : '' }}> Kantonalni savez
 								<span class="radio-indicator"></span>
 							  </label>
 							</div>

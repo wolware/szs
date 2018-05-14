@@ -26,7 +26,7 @@ class RegionsTableSeeder extends Seeder
                                 'region_type' => 3,
                                 'regions' => [
                                     [
-                                        'name' => 'Unsko-Sanski',
+                                        'name' => 'Unsko-sanski',
                                         'region_type' => 4,
                                     ],
                                     [
@@ -38,7 +38,11 @@ class RegionsTableSeeder extends Seeder
                                         'region_type' => 4,
                                     ],
                                     [
-                                        'name' => 'Zeničko-Dobojski',
+                                        'name' => 'Zeničko-dobojski',
+                                        'region_type' => 4,
+                                    ],
+                                    [
+                                        'name' => 'Bosansko-podrinjski',
                                         'region_type' => 4,
                                     ],
                                     [
@@ -46,7 +50,7 @@ class RegionsTableSeeder extends Seeder
                                         'region_type' => 4,
                                     ],
                                     [
-                                        'name' => 'Hercegovačko-Neretvanski',
+                                        'name' => 'Hercegovačko-neretvanski',
                                         'region_type' => 4,
                                     ],
                                     [
@@ -138,7 +142,7 @@ class RegionsTableSeeder extends Seeder
         foreach ($regions as $continent) {
             $createContinent = App\Region::create([
                'name' => $continent->name,
-               'region_type' => $continent->region_type
+               'region_type_id' => $continent->region_type
             ]);
 
             $continentId = $createContinent->id;
@@ -147,7 +151,7 @@ class RegionsTableSeeder extends Seeder
                 foreach ($continent->countries as $country) {
                     $createCountry = App\Region::create([
                         'name' => $country->name,
-                        'region_type' => $country->region_type,
+                        'region_type_id' => $country->region_type,
                         'region_parent' => $continentId,
                     ]);
 
@@ -157,7 +161,7 @@ class RegionsTableSeeder extends Seeder
                         foreach ($country->provinces as $province) {
                             $createProvince = App\Region::create([
                                 'name' => $province->name,
-                                'region_type' => $province->region_type,
+                                'region_type_id' => $province->region_type,
                                 'region_parent' => $countryId,
                             ]);
 
@@ -167,7 +171,7 @@ class RegionsTableSeeder extends Seeder
                                 foreach ($province->regions as $region) {
                                     $createRegion = App\Region::create([
                                         'name' => $region->name,
-                                        'region_type' => $region->region_type,
+                                        'region_type_id' => $region->region_type,
                                         'region_parent' => $provinceId,
                                     ]);
 
@@ -177,7 +181,7 @@ class RegionsTableSeeder extends Seeder
                                         foreach ($region->municipalities as $municipality) {
                                             $createMunicipality = App\Region::create([
                                                 'name' => $municipality->name,
-                                                'region_type' => $municipality->region_type,
+                                                'region_type_id' => $municipality->region_type,
                                                 'region_parent' => $regionId,
                                             ]);
                                         }
