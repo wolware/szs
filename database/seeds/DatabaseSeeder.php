@@ -15,5 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call(VijestKategorijaTableSeeder::class);
         $this->call(RegionTypesTableSeeder::class);
         $this->call(RegionsTableSeeder::class);
+        $this->call(SportsTableSeeder::class);
+        $this->call(ClubCategoriesTableSeeder::class);
     }
 }
