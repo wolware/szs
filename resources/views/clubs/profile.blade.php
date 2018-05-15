@@ -549,16 +549,18 @@
             		<img src="{{asset('images/REKLAMA-752-100.png')}}" class="reklama-klubovi"/>
             	</div>
             </div>
-			
-			<div class="row">
-			<div class="col-md-12">
-			<div class="widget__title card__header istaknute-licnosti-naslov">
-                <h4><i class="fa fa-play-circle-o"></i> Video prezentacija</h4>
-              </div>
-					<embed class="video-home"
-						src="https://youtube.com/embed/0wCC3aLXdOw">
-			</div>
-			</div>
+
+            @if($club->video)
+                <div class="row">
+                    <div class="col-md-12">
+                    <div class="widget__title card__header istaknute-licnosti-naslov">
+                        <h4><i class="fa fa-play-circle-o"></i> Video prezentacija</h4>
+                      </div>
+                            <embed class="video-home"
+                                src="{{ $club->video }}">
+                    </div>
+                </div>
+            @endif
 			
 			
 		</div>

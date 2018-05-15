@@ -631,7 +631,121 @@ $(document).ready(function () {
         }
     });
 
-
+    $('#editClubForm').validate({
+        ignore: ':not(:visible),:disabled',
+        rules: {
+            logo: {
+                extension: 'png|jpg|jpeg'
+            },
+            name: {
+                required: true,
+                string: true,
+                maxlength: 255
+            },
+            nature: {
+                required: true,
+                string: true,
+                maxlength: 255
+            },
+            continent: {
+                required: true,
+                digits: true
+            },
+            country: {
+                required: true,
+                digits: true
+            },
+            province: {
+                required: true,
+                digits: true
+            },
+            region: {
+                required: true,
+                digits: true
+            },
+            municipality: {
+                required: true,
+                digits: true
+            },
+            city: {
+                required: true,
+                string: true,
+                maxlength: 255
+            },
+            type: {
+                required: true,
+                digits: true
+            },
+            sport: {
+                required: true,
+                digits: true
+            },
+            category: {
+                required: true,
+                digits: true
+            },
+            established_in: {
+                digits: true,
+                range: [1800, new Date().getFullYear()]
+            },
+            home_field: {
+                string: true,
+                maxlength: 255
+            },
+            competition: {
+                string: true,
+                maxlength: 255
+            },
+            association: {
+                required: true,
+                digits: true
+            },
+            phone_1: {
+                digits: true,
+                maxlength: 255
+            },
+            phone_2: {
+                digits: true,
+                maxlength: 50
+            },
+            fax: {
+                digits: true,
+                maxlength: 50
+            },
+            email: {
+                email: true,
+                maxlength: 255
+            },
+            website: {
+                string: true,
+                maxlength: 255
+            },
+            address: {
+                string: true,
+                maxlength: 255
+            },
+            facebook: {
+                string: true,
+                maxlength: 255
+            },
+            instagram: {
+                string: true,
+                maxlength: 255
+            },
+            twitter: {
+                string: true,
+                maxlength: 255
+            },
+            youtube: {
+                string: true,
+                maxlength: 255
+            },
+            video: {
+                string: true,
+                maxlength: 255
+            }
+        }
+    });
 
     var date_input = $('input[name="date"]'); //our date input has the name "date"
     var container = $('form').length > 0 ? $('form').parent() : "body";
@@ -748,14 +862,6 @@ $.validator.addMethod('filesize', function (value, element, param) {
     return this.optional(element) || (element.files[0].size <= param)
 }, 'File size must be less than {0}');
 
-$('#editClubForm').validate({
-    rules: {
-        logo: {
-            extension: 'png|jpg|jpeg',
-            filesize: 1,
-        }
-    }
-});
 
 /*$('.prvi_korak_end').on('click', function(){
   $('#createNewClub').valid();
@@ -786,9 +892,7 @@ $('.prvi_korak_end_obj').click(function () {
 $('.btn-dalje').on('click', function () {
     if ($(this).closest('form').valid()) {
         var sledeci = $('.nav-product-tabs').find('.active').next();
-        console.log(sledeci);
         var sljedeci_tab = $('.tab-pane.active').next();
-        console.log(sljedeci_tab);
 
         $('.nav-product-tabs li').removeClass('active');
         $('.tab-pane').removeClass('active in');

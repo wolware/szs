@@ -11,7 +11,7 @@ class Club extends Model
     }
 
     public function category() {
-        return $this->belongsTo('App\ClubCategory');
+        return $this->belongsTo('App\ClubCategory', 'club_category_id');
     }
 
     public function sport() {

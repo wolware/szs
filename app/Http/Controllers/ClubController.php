@@ -126,7 +126,7 @@ class ClubController extends Controller
     		'established_in' => 'nullable|digits:4|integer|min:1800|max:'.date('Y'),
     		'home_field' => 'nullable|max:255|string',
     		'competition' => 'nullable|max:255|string',
-    		'savez' => 'nullable|max:255|integer',
+    		'association' => 'nullable|max:255|integer',
     		'phone_1' => 'nullable|max:50|string',
             'phone_2' => 'nullable|max:50|string',
             'fax' => 'nullable|max:50|string',
@@ -193,7 +193,7 @@ class ClubController extends Controller
                 'name' => $data->get('name'),
                 'nature' => $data->get('nature'),
                 'city' => $data->get('city'),
-                'established_in' => new Carbon($data->get('established_in')),
+                'established_in' => $data->get('established_in'),
                 'home_field' => $data->get('home_field'),
                 'competition' => $data->get('competition'),
                 'phone_1' => $data->get('phone_1'),
@@ -286,68 +286,126 @@ class ClubController extends Controller
     }
 
     public function edit_club_show($id){
-        $data = DB::table('clubs')->where('id', $id)->first();
-        $licnosti = DB::table('istaknute_licnosti')->where('club_id', $id)->get();
-        $vremeplov = DB::table('vremeplov')->where('club_id', $id)->first();
-        $trofeji = DB::table('trofej')->where('club_id', $id)->get();
-        $galerija = DB::table('clubs_galerija')->where('club_id', $id)->get();
-        return view('clubs.edit', ['data' => $data, 'licnosti' => $licnosti, 'vremeplov' => $vremeplov, 'trofeji' => $trofeji, 'galerija' => $galerija]);
+
+        $regions = $this->regionRepository->getAll();
+        $sports = $this->sportRepository->getAll();
+        $clubCategories = $this->clubRepository->getSportCategories();
+        $associations = $this->associationRepository->getAll();
+
+        $club = Club::with(['histories','trophies','club_staff','images','creator','association','region','category','association'])
+            ->where('id', $id)
+            ->first();
+
+        if($club) {
+            $clubRegions = collect();
+            $currentRegion = $club->region;
+            while ($currentRegion) {
+                $clubRegions->put(strtolower($currentRegion->region_type->type), $currentRegion->id);
+
+                $currentRegion = $currentRegion->parent_region;
+            }
+
+            $club->setAttribute('regions', $clubRegions);
+            return view('clubs.edit', compact('club', 'regions', 'sports', 'clubCategories', 'associations'));
+        }
+
+        abort(404);
+
     }
 
     public function edit_club(Request $data, $id){
+
         $validator = Validator::make($data->all(),[
-            'logo' => 'required|image|dimensions:min_width=200,min_height=200,max_width=1024,max_height=1024',
+            'logo' => 'image|dimensions:min_width=200,min_height=200,max_width=1024,max_height=1024',
             'name' => 'required|max:255|string',
-            'karakter' => 'required|max:255|string',
-            'kontinent' => 'required|max:255|string|in:Evropa',
-            'drzava' => 'required|max:255|string|in:Bosna i Hercegovina',
-            'entitet' => 'required|max:255|string|in:Federacija BiH,Republika Srpska',
-            'kanton' => 'required_if:entitet,Federacija BiH|nullable|max:255|string',
-            'opcina' => 'required_if:entitet,Federacija BiH|nullable|max:255|string',
-            'opcinaSrb' => 'required_if:entitet,Republika Srpska|nullable|max:255|string',
-            'regija' => 'required_if:entitet,Republika Srpska|nullable|max:255|string',
-            'grad' => 'required|max:255|string',
-            'tip' => 'required|max:255|string|in:Sportski klub,Invalidski sportski klub',
-            'sport' => 'required_if:tip,Sportski klub|nullable|max:255|string',
-            'invalidski_sport' => 'required_if:tip,Invalidski sportski klub|nullable|max:255|string',
-            'kategorija' => 'required|max:255|string|in:Muški klub,Ženski klub,Mješovito',
-            'godina_osnivanja' => 'nullable|digits:4|integer|min:1800|max:'.date('Y'),
-            'teren' => 'nullable|max:255|string',
-            'takmicenje' => 'nullable|max:255|string',
-            'savez' => 'nullable|max:255|string|in:Državni savez,Entitetski savez,Kantonalni savez',
-            'telefon1' => 'nullable|max:50|string',
-            'telefon2' => 'nullable|max:50|string',
+            'nature' => 'required|max:255|string',
+            'continent' => 'required|max:255|integer',
+            'country' => 'required|max:255|integer',
+            'province' => 'max:255|integer',
+            'region' => 'max:255|integer',
+            'municipality' => 'max:255|integer',
+            'city' => 'required|max:255|string',
+            'type' => 'required|max:255|integer',
+            'sport' => 'required|max:255|integer',
+            'category' => 'required|max:255|integer',
+            'established_in' => 'nullable|digits:4|integer|min:1800|max:'.date('Y'),
+            'home_field' => 'nullable|max:255|string',
+            'competition' => 'nullable|max:255|string',
+            'association' => 'nullable|max:255|integer',
+            'phone_1' => 'nullable|max:50|string',
+            'phone_2' => 'nullable|max:50|string',
             'fax' => 'nullable|max:50|string',
             'email' => 'nullable|max:255|email',
-            'web_stranica' => 'nullable|max:255|string',
-            'adresa' => 'nullable|max:255|string',
-            'fb' => 'nullable|max:255|string',
+            'website' => 'nullable|max:255|string',
+            'address' => 'nullable|max:255|string',
+            'facebook' => 'nullable|max:255|string',
             'instagram' => 'nullable|max:255|string',
             'twitter' => 'nullable|max:255|string',
-            'yt' => 'nullable|max:255|string',
-            'video' => 'nullable|max:255|string'
+            'youtube' => 'nullable|max:255|string',
+            'video' => 'nullable|max:255|string',
         ]);
 
         if($validator->fails()){
             return redirect('/clubs/'.$id.'/edit')
                         ->withErrors($validator)
                         ->withInput();
-        }else{
+        } else {
+            // Provjeri najmanji level regije
+            $region_id = $data->get('country');
+
+            if($data->has('province')) {
+                $region_id = $data->get('province');
+            }
+
+            if($data->has('region')) {
+                $region_id = $data->get('region');
+            }
+
+            if($data->has('municipality')) {
+                $region_id = $data->get('municipality');
+            }
+
+            $fieldsToUpdate = [
+                'name' => $data->get('name'),
+                'nature' => $data->get('nature'),
+                'city' => $data->get('city'),
+                'established_in' => $data->get('established_in'),
+                'home_field' => $data->get('home_field'),
+                'competition' => $data->get('competition'),
+                'phone_1' => $data->get('phone_1'),
+                'phone_2' => $data->get('phone_2'),
+                'fax' => $data->get('fax'),
+                'email' => $data->get('email'),
+                'website' => $data->get('website'),
+                'address' => $data->get('address'),
+                'facebook' => $data->get('facebook'),
+                'twitter' => $data->get('twitter'),
+                'instagram' => $data->get('instagram'),
+                'youtube' => $data->get('youtube'),
+                'video' => $data->get('video'),
+                'association_id' => $data->get('association'),
+                'club_category_id' => $data->get('category'),
+                'sport_id' => $data->get('sport'),
+                'region_id' => $region_id,
+                'updated_at' => new Carbon(),
+            ];
+
             if($data->file('logo')){
                 $logo = $data->file('logo');
                 $newLogoName = time() . '-' . Auth::user()->id . '.' . $logo->getClientOriginalExtension();
                 $destinationPath = public_path('/images/club_logo');
                 $logo->move($destinationPath, $newLogoName);
 
-                $data['logo'] = $newLogoName;
-            } else {
-                $data['logo'] = 'default.png';
+                $fieldsToUpdate['logo'] = $newLogoName;
             }
 
-            DB::table('clubs')->where('id', $id)->update($data->all());
+            $updateClub = Club::where('id', $id)
+                ->update($fieldsToUpdate);
 
-            flash('Uspješno ste editovali Vaš klub.');
-            return redirect('/clubs/'.$id.'/edit');
+            if($updateClub) {
+                flash('Uspješno ste editovali Vaš klub.');
+                return redirect('/clubs/' . $id . '/edit');
+            }
         }
     }
 
