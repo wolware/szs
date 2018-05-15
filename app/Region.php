@@ -10,7 +10,13 @@ class Region extends Model
 
     protected $fillable = ['name', 'region_type', 'region_parent'];
 
+    protected $with = ['parent_region'];
+
     public function region_type() {
         return $this->belongsTo('App\RegionType');
+    }
+
+    public function parent_region() {
+        return $this->belongsTo('App\Region', 'region_parent', 'id');
     }
 }

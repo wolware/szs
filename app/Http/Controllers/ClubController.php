@@ -89,13 +89,24 @@ class ClubController extends Controller
         return view('clubs.index', ['data' => $data]);
     }
     public function club_show($id){
-        $personal = DB::table('clubs')->where('id', $id)->first();
-        $vremeplov = DB::table('vremeplov')->where('club_id', $id)->first();
-        $trofej = DB::table('trofej')->where('club_id', $id)->get();
-        $licnosti = DB::table('istaknute_licnosti')->where('club_id', $id)->get();
-        $galerija = DB::table('clubs_galerija')->where('club_id', $id)->get();
-        $user = DB::table('users')->where('id', $personal->user_id)->first();
-        return view('clubs.profile', ['personal' => $personal, 'vremeplov' => $vremeplov, 'trofej' => $trofej, 'licnosti' => $licnosti, 'galerija' => $galerija, 'user' => $user]);
+        $club = Club::with(['histories','trophies','club_staff','images','creator','association','region'])
+            ->where('id', $id)
+            ->first();
+
+        if($club) {
+            $regions = collect();
+            $currentRegion = $club->region;
+            while ($currentRegion) {
+                $regions->put(strtolower($currentRegion->region_type->type), $currentRegion->name);
+
+                $currentRegion = $currentRegion->parent_region;
+            }
+
+            $club->setAttribute('regions', $regions);
+            return view('clubs.profile', compact('club'));
+        }
+
+        abort(404);
     }
 
     public function new(Request $data){
@@ -252,8 +263,8 @@ class ClubController extends Controller
                     }
                 }
 
-                if($data->filled('galerija')){
-                    $galerije = $data->get('galerija');
+                if($data->file('galerija')){
+                    $galerije = $data->file('galerija');
                     foreach($galerije as $key => $slika){
                         $newgalName = $key . '-' .time() . '-' .  $club_id . '.' . $slika->getClientOriginalExtension();
                         $destPath = public_path('/images/galerija_klub');

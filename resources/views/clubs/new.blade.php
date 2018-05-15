@@ -664,7 +664,7 @@
       <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
       <script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
 <script type="text/javascript">
-	CKEDITOR.replace( 'vremeplov' );
+	CKEDITOR.replace('history');
 
   $(function() {
     // Multiple images preview in browser

@@ -6,14 +6,39 @@ use Illuminate\Database\Eloquent\Model;
 
 class Club extends Model
 {
-   	protected $fillable = [
-        'name', 'drzava', 'grad'
-    ];
+    public function association() {
+        return $this->belongsTo('App\Association');
+    }
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-   
+    public function category() {
+        return $this->belongsTo('App\ClubCategory');
+    }
+
+    public function sport() {
+        return $this->belongsTo('App\Sport');
+    }
+
+    public function region() {
+        return $this->belongsTo('App\Region');
+    }
+
+    public function creator() {
+        return $this->belongsTo('App\User', 'user_id');
+    }
+
+    public function trophies() {
+        return $this->hasMany('App\Trophy');
+    }
+
+    public function histories() {
+        return $this->hasMany('App\History');
+    }
+
+    public function images() {
+        return $this->hasMany('App\Gallery');
+    }
+
+    public function club_staff() {
+        return $this->hasMany('App\ClubStaff');
+    }
 }

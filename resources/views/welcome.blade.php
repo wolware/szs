@@ -164,7 +164,7 @@
             </figure>
             <div class="posts__inner card__content">
               <h6 class="posts__title ime-sportiste-klub-lista"><a href="#">{{$klub->name}}</a></h6>
-              <div class="posts__excerpt">{{$klub->grad}}</div>
+              <div class="posts__excerpt">{{$klub->city}}</div>
             </div>
             <footer class="posts__footer card__footer">
               <a href="{{url('/clubs/'.$klub->id)}}" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila kluba</a>
