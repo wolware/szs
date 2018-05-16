@@ -43,3 +43,18 @@ Description:  You can add your custom CSS here and it will overwrite template st
 .izbrisiNagradu:hover{
     color: #f49222;
 }
+
+.btn-spasi {
+    color: #fff;
+    background-color: #f49222;
+    border: 1px solid #c5751a;
+    font-family: "Fira sans", serif;
+    font-size: 20px;
+    border-radius: 5px;
+    font-weight: 300;
+    margin-top: 20px;
+}
+
+.overscreen {
+    z-index: 1000!important;
+}

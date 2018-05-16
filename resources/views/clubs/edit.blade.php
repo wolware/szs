@@ -71,15 +71,6 @@
 
         <div class="row profil-content-b06">
           <!-- Main content -->
-          @if ($errors->any())
-                  <div class="alert alert-danger">
-                      <ul>
-                          @foreach ($errors->all() as $error)
-                              <li>{{ $error }}</li>
-                          @endforeach
-                      </ul>
-                  </div>
-              @endif
         <div class="sidebar col-md-12 overscreen">
 
        <!-- Single Product Tabbed Content -->
@@ -94,7 +85,19 @@
 			<li role="presentation"><a href="#tab-galerija" role="tab" data-toggle="tab"><i class="fa fa-picture-o"></i><small>Foto</small>Galerija</a></li>
 			<li role="presentation"><a href="#tab-pozivnice" role="tab" data-toggle="tab"><i class="fa fa-envelope-open-o"></i><small>Pozivnice i</small>Zahtjevi</a></li>
           </ul>
-
+            <div class="row form-segment">
+                <div class="col-md-12">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                </div>
+            </div>
           <!-- Tab panes -->
           <div class="tab-content card__content">
 
@@ -137,11 +140,11 @@
 
 				  <div class="form-group col-md-12">
                     <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Ime/Naziv kluba*</label>
-                    <input type="text" name="name" id="ime-kluba" class="form-control" value="{{$club->name}}" placeholder="{{$club->name}}">
+                    <input type="text" name="name" id="ime-kluba" class="form-control" value="{{$club->name}}" placeholder="Unesite ime/naziv kluba">
                   </div>
 				  <div class="form-group has-success col-md-12">
                     <label for="karakter-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Karakter kluba*<span>(izmjenjivo)</span></label>
-                    <input type="text" name="nature" id="karakter-kluba" class="form-control" value="{{$club->nature}}" placeholder="{{$club->nature}}">
+                    <input type="text" name="nature" id="karakter-kluba" class="form-control" value="{{$club->nature}}" placeholder="Unesite karakter kluba">
 					<span>Prilikom unosa karaktera kluba ne unositi kratice kao što su: FK, NK, KK, OK i sl.</span>
                   </div>
 
@@ -263,17 +266,17 @@
 				
 				  <div class="form-group col-md-6">
                     <label for="godina-osnivanja"><img class="flow-icons-013" src="{{asset('images/icons/small-calendar.svg')}}"> Godina osnivanja kluba</label>
-                    <input type="number" name="established_in" id="godina-osnivanja" class="form-control" value="{{$club->established_in}}">
+                    <input type="number" name="established_in" id="godina-osnivanja" class="form-control" placeholder="Unesite godinu osnivanja kluba" value="{{$club->established_in}}">
                   </div>
 
 				  <div class="form-group col-md-6">
                     <label for="domaci-teren"><img class="flow-icons-013" src="{{asset('images/icons/stadium-icon.svg')}}"> Domaći teren</label>
-                    <input type="text" name="home_field" id="domaci-teren" class="form-control" value="{{$club->home_field}}">
+                    <input type="text" name="home_field" id="domaci-teren" class="form-control" placeholder="Unesite naziv domaćeg terena kluba" value="{{$club->home_field}}">
                   </div>
 
 				  <div class="form-group col-md-6">
                     <label for="takmicenje"><img class="flow-icons-013" src="{{asset('images/icons/trophy.svg')}}"> Takmičenje</label>
-                    <input type="text" name="competition" id="takmicenje" class="form-control" value="{{$club->competition}}">
+                    <input type="text" name="competition" id="takmicenje" class="form-control" placeholder="Unesite naziv takmičenja u kojem klub nastupa" value="{{$club->competition}}">
                   </div>
 
 				<div class="form-group col-md-6" id="associations" style="display: {{ $club->regions->has('country') ? 'block' : 'none' }};">
@@ -301,32 +304,32 @@
 
 					<div class="form-group col-md-4">
 						<label for="tel1"><img class="flow-icons-013" src="{{asset('images/icons/phone-call.svg')}}"> Telefon 1</label>
-						<input type="number" name="phone_1" id="tel1" class="form-control" value="{{ $club->phone_1 }}">
+						<input type="number" name="phone_1" id="tel1" class="form-control" placeholder="Unesite broj za službeni telefon 1" value="{{ $club->phone_1 }}">
 					</div>
 
 					<div class="form-group col-md-4">
 						<label for="tel2"><img class="flow-icons-013" src="{{asset('images/icons/phone-call.svg')}}">  Telefon 2</label>
-						<input type="number" name="phone_2" id="tel2" class="form-control" value="{{ $club->phone_2 }}">
+						<input type="number" name="phone_2" id="tel2" class="form-control" placeholder="Unesite broj za službeni telefon 2" value="{{ $club->phone_2 }}">
 					</div>
 
 					<div class="form-group col-md-4">
 						<label for="fax"><img class="flow-icons-013" src="{{asset('images/icons/fax-with-phone.svg')}}"> Fax</label>
-						<input type="number" name="fax" id="fax" class="form-control" value="{{ $club->fax }}">
+						<input type="number" name="fax" id="fax" class="form-control" placeholder="Unesite broj za službeni fax" value="{{ $club->fax }}">
 					</div>
 
 					<div class="form-group col-md-4">
 						<label for="mail"><img class="flow-icons-013" src="{{asset('images/icons/envelope.svg')}}"> E-mail</label>
-						<input type="email" name="email" id="mail" class="form-control" value="{{ $club->email }}">
+						<input type="email" name="email" id="mail" class="form-control" placeholder="Unesite službeni E-mail" value="{{ $club->email }}">
 					</div>
 
 					<div class="form-group col-md-4">
 						<label for="web"><img class="flow-icons-013" src="{{asset('images/icons/worldwide.svg')}}"> Web stranica</label>
-						<input type="text" name="website" id="web" class="form-control" value="{{ $club->website }}">
+						<input type="text" name="website" id="web" class="form-control" placeholder="Unesite link službene web stranice" value="{{ $club->website }}">
 					</div>
 
 					<div class="form-group col-md-4">
 						<label for="adresa"><img class="flow-icons-013" src="{{asset('images/icons/icon.svg')}}"> Adresa (ne prikazuje se)</label>
-						<input type="text" name="address" id="adresa" class="form-control" value="{{ $club->address }}">
+						<input type="text" name="address" id="adresa" class="form-control" placeholder="Unesite adresu sjedišta kluba" value="{{ $club->address }}">
 					</div>
 
 				
@@ -342,22 +345,22 @@
 
 					<div class="form-group col-md-6">
 						<label for="fcb"><img class="flow-icons-013" src="{{asset('images/icons/facebook.svg')}}"> Facebook stranica</label>
-						<input type="text" name="facebook" id="fcb" class="form-control" value="{{ $club->facebook }}">
+						<input type="text" name="facebook" id="fcb" class="form-control" placeholder="Unesite link službenog facebook profila" value="{{ $club->facebook }}">
 					</div>
 
 					<div class="form-group col-md-6">
 						<label for="twt"><img class="flow-icons-013" src="{{asset('images/icons/twitter.svg')}}"> Twitter profil</label>
-						<input type="text" name="twitter" id="twt" class="form-control" value="{{ $club->twitter }}">
+						<input type="text" name="twitter" id="twt" class="form-control" placeholder="Unesite link službenog twitter profila" value="{{ $club->twitter }}">
 					</div>
 
 					<div class="form-group col-md-6">
 						<label for="inst"><img class="flow-icons-013" src="{{asset('images/icons/instagram.svg')}}"> Instagram profil</label>
-						<input type="text" name="instagram" id="inst" class="form-control" value="{{ $club->instagram }}">
+						<input type="text" name="instagram" id="inst" class="form-control" placeholder="Unesite link službenog instagram profila" value="{{ $club->instagram }}">
 					</div>
 
 					<div class="form-group col-md-6">
 						<label for="yt"><img class="flow-icons-013" src="{{asset('images/icons/youtube.svg')}}"> YouTUBE profil</label>
-						<input type="text" name="youtube" id="yt" class="form-control" value="{{ $club->youtube }}">
+						<input type="text" name="youtube" id="yt" class="form-control" placeholder="Unesite link službenog YouTUBE kanala" value="{{ $club->youtube }}">
 					</div>
 
 				
@@ -371,9 +374,9 @@
 			 <div class="row">
 					<div class="form-group col-md-12">
 						<label for="videoprez"><img class="flow-icons-013" src="{{asset('images/icons/play-button.svg')}}"> Video prezentacija</label>
-						<input type="text" name="video" id="videoprez" class="form-control" value="{{ $club->video }}">
+						<input type="text" name="video" id="videoprez" class="form-control" placeholder="Unesite link videa (YouTUBE)" value="{{ $club->video }}">
 					</div>
-					<button type="submit" class="btn btn-default btn-sm btn-block" ><i class="fa fa-plus-circle"></i> Spremi</button>
+					<button type="submit" class="btn btn-default btn-sm btn-block btn-spasi" ><i class="fa fa-plus-circle"></i> Spremi</button>
 			</div>
 
   		</form>
@@ -383,180 +386,170 @@
             <!-- Tab: Općenito / End -->
 
 			<!-- Tab: Ličnosti -->
-
-			<div role="tabpanel" class="tab-pane fade neaktivno" id="tab-licnosti">
-
-			@foreach($club->club_staff as $licnost)
-<form id="editLicnosti" role="form" action="{{ url('/licnost/edit/'.$licnost->id) }}" method="POST" enctype="multipart/form-data" >
-				{!! csrf_field() !!}
-			<div class="row">
-
-				<div class="row identitet-style">
-
-				 <div class="col-md-6 objavi-klub-logo-setup">
-
-				    <div class="col-md-7">
-
-                      <div class="alc-staff__photo">
-                            <img class="slika-edit-profil" id="slika-edit-profil1" src="{{ isset($licnost->avatar) ? asset('images/avatar_licnost/'.$licnost->avatar) : asset('images/default_avatar.png')}}" alt="">
-                          </div>
-
-				    </div>
-
-                    <div class="col-md-5 sadrzaj-slike">
-
-						  <p class="dodaj-sliku-naslov klub-a1">Slika ličnosti</p>
-						  <p class="dodaj-sliku-call">Odaberite sliku za istaknutu ličnost</p>
-						  <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-							Odaberi sliku... <input type="file" name="avatar_licnost" id="al1" accept="image/*" style="display: none;" onchange="previewFile('#all', '#slika-edit-profil1', 1080, 1920, 250, 312)">
-						  </label>
-						  <div class="info001">
-							<p class="info-upload-slike">Preporučene dimenzije za sliku ličnosti:</p>
-							<p class="info-upload-slike">Minimalno: 312x250 px</p>
-							<p class="info-upload-slike">Maksimalno: 1920x1080 px</p>
+			  <div role="tabpanel" class="tab-pane fade" id="tab-licnosti">
+				  <form id="editLicnosti" role="form" action="{{ url('/licnost/edit/' . $club->id) }}" method="POST" enctype="multipart/form-data" >
+					{!! csrf_field() !!}
+					  <div id="dodajLicnostButtons" class="row">
+						  <div id="licnostiLista">
+							  @if($club->club_staff)
+								  @foreach($club->club_staff as $key => $licnost)
+									  <div class="row licnostHover" data-key="{{ $key }}">
+                                          <input type="hidden" name="licnost[{{ $key }}][id]" value="{{ $licnost->id }}">
+										  <div class="izbrisiLicnost"><i class="fa fa-times-circle-o"></i></div>
+										  <div class="row identitet-style">
+											  <div class="col-md-6 objavi-klub-logo-setup">
+												  <div class="col-md-7">
+													  <div class="alc-staff__photo">
+														  <img class="slika-edit-profil" id="slika-licnost-prikaz{{ $key }}" src="{{ asset('images/avatar_licnost/' . $licnost->avatar) }}" alt="">
+													  </div>
+												  </div>
+												  <div class="col-md-5 sadrzaj-slike">
+													  <p class="dodaj-sliku-naslov klub-a1">Slika ličnosti</p>
+													  <p class="dodaj-sliku-call">Odaberite sliku za istaknutu ličnost</p>
+													  <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
+														  Odaberi sliku... <input type="file" name="licnost[{{ $key }}][avatar]" id="licnostAvatar{{ $key }}" accept="image/*" style="display: none;" onchange="previewFile('#licnostAvatar{{ $key }}', '#slika-licnost-prikaz{{ $key }}', 1080, 1920, 250, 312)">
+													  </label>
+													  <div class="info001">
+														  <p class="info-upload-slike">Preporučene dimenzije za sliku ličnosti:</p>
+														  <p class="info-upload-slike">Minimalno: 312x250 px</p>
+														  <p class="info-upload-slike">Maksimalno: 1920x1080 px</p>
+													  </div>
+												  </div>
+											  </div>
+											  <div class="col-md-6">
+												  <div class="form-group col-md-6 col-xs-12">
+													  <label for="ime-kluba"><img class="flow-icons-013" src="{{ asset('images/icons/edit.svg') }}"> Ime</label>
+													  <input type="text" name="licnost[{{ $key }}][ime]" class="form-control" placeholder="Unesite ime ličnosti" value="{{ $licnost->firstname }}">
+												  </div>
+												  <div class="form-group col-md-6 col-xs-12">
+													  <label for="ime-kluba"><img class="flow-icons-013" src="{{ asset('images/icons/edit.svg') }}"> Prezime</label>
+													  <input type="text" name="licnost[{{ $key }}][prezime]" class="form-control" placeholder="Unesite prezime ime ličnosti" value="{{ $licnost->lastname }}">
+												  </div>
+												  <div class="form-group col-md-12">
+													  <label for="opis"><img class="flow-icons-013" src="{{ asset('images/icons/edit.svg') }}"> Opis i uloga</label>
+													  <textarea class="form-control" rows="4" name="licnost[{{ $key }}][opis]" placeholder="Upišite kratak opis uloge i funkcije navedene ličnosti u klubu...">{{ $licnost->biography }}</textarea>
+												  </div>
+											  </div>
+										  </div>
+									  </div>
+								  @endforeach
+							  @endif
 						  </div>
-
-					</div>
-				 </div>
-
-				 <div class="col-md-6">
-
-				  <div class="form-group col-md-6 col-xs-12">
-                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Ime*</label>
-                    <input type="text" name="ime" id="ime-kluba" class="form-control" placeholder="Unesite ime ličnosti" value="{{$licnost->ime}}">
-                  </div>
-				  <div class="form-group col-md-6 col-xs-12">
-                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Prezime*</label>
-                    <input type="text" name="prezime" id="ime-kluba" class="form-control" placeholder="Unesite prezime ime ličnosti" value="{{$licnost->prezime}}">
-                  </div>
-				  <div class="form-group col-md-12">
-					<label for="opis"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Opis i uloga</label>
-					<textarea class="form-control" rows="4" id="opis" name="opis" maxlength="350" placeholder="Upišite kratak opis uloge i funkcije navedene ličnosti u klubu...">{{$licnost->opis}}</textarea>
-				  </div>
-
-				 </div>
-
-				</div>
-			</div>
-			<button  type="submit" class="btn btn-default btn-sm btn-block btn-dalje" ><i class="fa fa-plus-circle"></i> Spremi licnost</button>
-</form>
-			@endforeach
+						  <div class="col-md-12 text-center">
+							  <button class="btn btn-primary" type="button" id="dodajLicnost">Dodaj ličnost</button>
+						  </div>
+					  </div>
+					  <button  type="submit" class="btn btn-default btn-sm btn-block btn-spasi" ><i class="fa fa-plus-circle"></i> Spremi ličnosti</button>
+				  </form>
+			  </div>
 			<!-- Kadar 01 -->
 
 			<!-- Kadar 01 / End-->
 			<!-- Kadar 02 -->
 
 			<!-- Kadar 05 / End-->
-			</div>
+
 
 			<!-- Tab: Ličnosti / End -->
 
 			<!-- Tab: Vremeplov -->
 
-			<div role="tabpanel" class="tab-pane fade neaktivno" id="tab-vremeplov">
-				<form id="editVremeplov" role="form" action="{{ url('/vremeplov/edit/' . $club->histories[0]->id) }}" method="POST" enctype="multipart/form-data" >
-				{!! csrf_field() !!}
-
-			<div class="row">
-
-				
-				<div class="row identitet-style">
-
-				 <div class="col-md-12">
-
-				  <div class="form-group col-md-12">
-					<label for="opis"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Vremeplov</label>
-					<textarea class="form-control" rows="20" name="history" id="opis" maxlength="1050">{{$club->histories[0]->content}}</textarea>
-				  </div>
-
-				 </div>
-
-				</div>
-				
-
-			</div>
-			<button  type="submit" class="btn btn-default btn-sm btn-block btn-dalje" ><i class="fa fa-plus-circle"></i> Spremi vremeplov</button>
-		</form>
-			</div>
+              <div role="tabpanel" class="tab-pane fade neaktivno" id="tab-vremeplov">
+                  <form id="editClubHistory" role="form"
+                        action="{{ url('/vremeplov/edit/' . $club->histories[0]->id) }}" method="POST"
+                        enctype="multipart/form-data">
+                      {!! csrf_field() !!}
+                      <div class="row">
+                          <div class="row identitet-style">
+                              <div class="col-md-12">
+                                  <div class="form-group col-md-12">
+                                      <label for="opis"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Vremeplov</label>
+                                      <textarea class="form-control" rows="20" name="history" id="opis" placeholder="Upišite ukratko informacije vezane za historijat vašeg kluba i njegovu tradiciju...">{{$club->histories[0]->content}}</textarea>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <button type="submit" class="btn btn-default btn-sm btn-block btn-spasi"><i
+                                  class="fa fa-plus-circle"></i> Spremi vremeplov
+                      </button>
+                  </form>
+              </div>
 
 			<!-- Tab: Vremeplov / End -->
 
 			<!-- Tab: Vitrina -->
 			<div role="tabpanel" class="tab-pane fade neaktivno" id="tab-vitrina">
-
-
-			@foreach($club->trophies as $trofej)
-			<form id="editTrofej" role="form" action="{{ url('/trofej/edit/'.$trofej->id) }}" method="POST" enctype="multipart/form-data" >
-				{!! csrf_field() !!}
-			<div class="row">
-			<div class="row form-segment">
-			  <header class="card__header">
-                <h4><i class="fa fa-plus-circle"></i> Unos osvojenog trofeja/nagrade</h4>
-              </header>
-			 </div>
-				<div class="col-md-6">
-				  <div class="form-group col-md-6">
-                    <label for="vrsta-nagrade"><img class="flow-icons-013" src="{{asset('images/icons/medalja.svg')}}"> Vrsta nagrade</label>
-                    <select class="form-control" id="vrsta-nagrade" name="vrsta_nagrade">
-                    	<option value="{{$trofej->vrsta_nagrade}}" selected>{{$trofej->vrsta_nagrade}}</option>
-						<option value="Medalja">Medalja</option>
-						<option value="Trofej">Trofej/Pehar</option>
-						<option value="Priznanje">Priznanje</option>
-						<option value="Plaketa">Plaketa</option>
-  					</select>
-                  </div>
-				  <div class="form-group col-md-6">
-                    <label for="tip-nagrade">< class="flow-icons-013" src="{{asset('images/icons/medalja.svg')}}"> Tip nagrade</label>
-                    <select class="form-control" id="tip-nagrade" name="tip_nagrade">
-                    	<option value="{{$trofej->tip_nagrade}}" selected>{{$trofej->tip_nagrade}}</option>
-						<option value="Zlato">Zlato (1. mjesto)</option>
-						<option value="Srebro">Srebro (2. mjesto)</option>
-						<option value="Bronza">Bronza (3. mjesto)</option>
-						<option value="Ostalo">Ostalo</option>
-  					</select>
-                  </div>
-				  <div class="form-group col-md-12">
-                    <label for="tip-nagrade"><img class="flow-icons-013" src="{{asset('images/icons/medalja.svg')}}"> Nivo takmičenja</label>
-                    <select class="form-control" id="tip-nagrade" name="nivo_takmicenja">
-                    	<option value="{{$trofej->nivo_takmicenja}}" selected>{{$trofej->nivo_takmicenja}}</option>
-						<option value="Internacionalni nivo">Internacionalni nivo</option>
-						<option value="Regionalni nivo">Regionalni nivo</option>
-						<option value="Drzavni nivo">Državni nivo</option>
-						<option value="Entitetski nivo">Entitetski nivo</option>
-						<option value="Drugo">Drugo</option>
-  					</select>
-                  </div>
-				</div>
-				<div class="col-md-6">
-				  <div class="form-group">
-                    <label for="takmicenje"><img class="flow-icons-013" src="{{asset('images/icons/trophy.svg')}}"> Naziv takmičenja</label>
-                    <input type="text" name="naziv_takmicenja" id="takmicenje" class="form-control" value="{{$trofej->naziv_takmicenja}}" placeholder="{{$trofej->naziv_takmicenja}}">
-                  </div>
-				  <div class="form-group col-md-6 col-xs-12">
-                    <label for="sezona"><img class="flow-icons-013" src="{{asset('images/icons/small-calendar.svg')}}"> Sezona/Godina</label>
-                    <input type="text" name="sezona" id="sezona" class="form-control" value="{{$trofej->sezona}}" placeholder="{{$trofej->sezona}}">
-                  </div>
-				  <div class="form-group col-md-6 col-xs-12">
-                    <label for="osvajanja"><img class="flow-icons-013" src="{{asset('images/icons/the-sum-of.svg')}}"> Broj osvajanja</label>
-                    <input type="number" name="osvajanje" id="osvajanja" class="form-control" value="{{$trofej->osvajanje}}" placeholder="{{$trofej->osvajanje}}">
-                  </div>
-				</div>
-			</div>
-			<button  type="submit" class="btn btn-default btn-sm btn-block btn-dalje" ><i class="fa fa-plus-circle"></i> Spremi trofej</button>
-</form>
-			@endforeach
-
-
-
-
-			<!--<div class="row">
-				<div class="col-md-4"></div>
-				<div class="form-group form-group--submit col-md-4">
-                    <a href="#" class="btn btn-default btn-sm btn-block btn-dodaj"><i class="fa fa-database"></i> 2 Dodavanje trofeja </a>
-                </div>
-				<div class="col-md-4"></div>
-			</div>-->
-
+                <form id="editClubTrophies" role="form" action="{{ url('/trofej/edit/' . $club->id) }}" method="POST" enctype="multipart/form-data" >
+                    {!! csrf_field() !!}
+                    <div class="row">
+                        <div class="row form-segment">
+                            <header class="card__header">
+                                <h4><i class="fa fa-plus-circle"></i> Unos osvojenog trofeja/nagrade</h4>
+                            </header>
+                        </div>
+                        <div id="nagradeLista">
+                            @if($club->trophies)
+                                @foreach($club->trophies as $key => $nagrada)
+                                    <div class="row nagradaHover" data-key="{{ $key }}">
+                                        <input type="hidden" name="nagrada[{{ $key }}][id]" value="{{ $nagrada->id }}">
+                                        <div class="izbrisiNagradu"><i class="fa fa-times-circle-o"></i></div>
+                                        <div class="col-md-6">
+                                            <div class="form-group col-md-6">
+                                                <label for="vrsta-nagrade"><img class="flow-icons-013" src="{{ asset('images/icons/medalja.svg') }}"> Vrsta nagrade</label>
+                                                <select name="nagrada[{{ $key }}][vrsta]" class="form-control">
+                                                    <option value="" {{ $nagrada->type == '' ? 'selected' : '' }}>Izaberite vrstu osvojene nagrade</option>
+                                                    <option value="Medalja" {{ $nagrada->type == 'Medalja' ? 'selected' : '' }}>Medalja</option>
+                                                    <option value="Trofej/Pehar" {{ $nagrada->type == 'Trofej/Pehar' ? 'selected' : '' }}>Trofej/Pehar</option>
+                                                    <option value="Priznanje" {{ $nagrada->type == 'Priznanje' ? 'selected' : '' }}>Priznanje</option>
+                                                    <option value="Plaketa" {{ $nagrada->type == 'Plaketa' ? 'selected' : '' }}>Plaketa</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label for="tip-nagrade"><img class="flow-icons-013" src="{{ asset('images/icons/medalja.svg') }}"> Tip nagrade</label>
+                                                <select name="nagrada[{{ $key }}][tip]" class="form-control">
+                                                    <option value="" {{ $nagrada->place == '' ? 'selected' : '' }}>Izaberite tip nagrade</option>
+                                                    <option value="Zlato" {{ $nagrada->place == 'Zlato' ? 'selected' : '' }}>Zlato (1. mjesto)</option>
+                                                    <option value="Srebro" {{ $nagrada->place == 'Srebro' ? 'selected' : '' }}>Srebro (2. mjesto)</option>
+                                                    <option value="Bronza" {{ $nagrada->place == 'Bronza' ? 'selected' : '' }}>Bronza (3. mjesto)</option>
+                                                    <option value="Ostalo" {{ $nagrada->place == 'Ostalo' ? 'selected' : '' }}>Ostalo</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                <label for="tip-nagrade"><img class="flow-icons-013" src="{{ asset('images/icons/medalja.svg') }}"> Nivo takmičenja</label>
+                                                <select name="nagrada[{{ $key }}][nivo]" class="form-control">
+                                                    <option value="" {{ $nagrada->level_of_competition == '' ? 'selected' : '' }}>Izaberite nivo takmičenja</option>
+                                                    <option value="Internacionalni nivo" {{ $nagrada->level_of_competition == 'Internacionalni nivo' ? 'selected' : '' }}>Internacionalni nivo</option>
+                                                    <option value="Regionalni nivo" {{ $nagrada->level_of_competition == 'Regionalni nivo' ? 'selected' : '' }}>Regionalni nivo</option>
+                                                    <option value="Državni nivo" {{ $nagrada->level_of_competition == 'Državni nivo' ? 'selected' : '' }}>Državni nivo</option>
+                                                    <option value="Entitetski nivo" {{ $nagrada->level_of_competition == 'Entitetski nivo' ? 'selected' : '' }}>Entitetski nivo</option>
+                                                    <option value="Drugo" {{ $nagrada->level_of_competition == 'Drugo' ? 'selected' : '' }}>Drugo</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="takmicenje"><img class="flow-icons-013" src="{{ asset('images/icons/trophy.svg') }}"> Naziv takmičenja</label>
+                                                <input type="text" name="nagrada[{{ $key }}][takmicenje]" class="form-control" placeholder="Unesite naziv takmicenja za koje je osvojena nagrada" value="{{ $nagrada->competition_name }}">
+                                            </div>
+                                            <div class="form-group col-md-6 col-xs-12">
+                                                <label for="sezona"><img class="flow-icons-013" src="{{ asset('images/icons/small-calendar.svg') }}"> Sezona/Godina</label>
+                                                <input type="text" name="nagrada[{{ $key }}][sezona]" class="form-control" placeholder="Unesite Sezonu/Godinu osvajanja trofeja" value="{{ $nagrada->season }}">
+                                            </div>
+                                            <div class="form-group col-md-6 col-xs-12">
+                                                <label for="osvajanja"><img class="flow-icons-013" src="{{ asset('images/icons/the-sum-of.svg') }}"> Broj osvajanja</label>
+                                                <input type="number" name="nagrada[{{ $key }}][osvajanja]" class="form-control" placeholder="Unesite broj osvajanja trofeja" value="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
+                        <div class="col-md-12 text-center">
+                            <button class="btn btn-primary" type="button" id="dodajNagradu">Dodaj trofej</button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-default btn-sm btn-block btn-spasi" ><i class="fa fa-plus-circle"></i> Spremi trofeje</button>
+                </form>
 			</div>
 			<!-- Tab: Vitrina / End -->
 
@@ -969,61 +962,41 @@
 
 			<!-- Tab: Foto galerija -->
 			<div role="tabpanel" class="tab-pane fade neaktivno" id="tab-galerija">
-<form id="editClubForm" name="editClubsForm" role="form" action="{{ url('/galerija/edit/' . $club->id) }}" method="POST" enctype="multipart/form-data" >
-				{!! csrf_field() !!}
-
-
-
-				<div class="row dodavanje-slika">
-                      <div class="col-md-12 sadrzaj-slike">
-						  <p class="dodaj-sliku-naslov">Dodajte slike</p>
-						  <p class="dodaj-sliku-call">u Vašu galeriju</p>
-						  <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-							Odaberi slike... <input type="file" class="galerija_edit" name="galerija[]" accept="image/*" multiple style="display: none;">
-						  </label>
-						  <div class="info001">
-							<p class="info-upload-slike">Preporučena dimenzija za vaše slike:</p>
-							<p class="info-upload-slike">1920x1080 px</p>
-						  </div>
-						</div>
-				</div>
-
-
-				<div class="row form-objavi-klub-01">
-
-					@foreach($club->images as $slika)
-
-					<div class="album__item col-xs-6 col-sm-3" id="galerija_klub">
-						<div class="album__item-holder">
-							<a href="{{asset('images/galerija_klub'.$slika->image)}}" class="album__item-link mp_gallery">
-							<figure class="album__thumb">
-								<img src="{{asset('images/galerija_klub/'.$slika->image)}}" alt="">
-							</figure>
-							<div class="album__item-desc">
-								<img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt="">
-							</div>
-							</a>
-						</div>
-					</div>
-
-					@endforeach
-
-
-
-				</div>
-
-				<!--<div class="row">
-					<div class="col-md-4"></div>
-					<div class="form-group form-group--submit col-md-4">
-						<a href="#" class="btn btn-default btn-sm btn-block btn-dodaj"><i class="fa fa-database"></i> 3 Dodavanje fotografije </a>
-					</div>
-					<div class="col-md-4"></div>
-				</div>-->
-				<div class="row">
-					<div class="form-group form-group--submit col-md-6" >
-						
-					<button  type="submit" class="btn btn-default btn-sm btn-block btn-dalje" ><i class="fa fa-plus-circle"></i> Spremi izmjene</button>
+                <form id="editClubGallery" role="form" action="{{ url('/galerija/edit/' . $club->id) }}" method="POST" enctype="multipart/form-data" >
+                    {!! csrf_field() !!}
+                    <div class="row dodavanje-slika">
+                          <div class="col-md-12 sadrzaj-slike">
+                              <p class="dodaj-sliku-naslov">Dodajte slike</p>
+                              <p class="dodaj-sliku-call">u Vašu galeriju</p>
+                              <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
+                                Odaberi slike... <input type="file" class="galerija_edit" name="galerija[]" accept="image/*" multiple style="display: none;">
+                              </label>
+                              <div class="info001">
+                                <p class="info-upload-slike">Preporučena dimenzija za vaše slike:</p>
+                                <p class="info-upload-slike">1920x1080 px</p>
+                              </div>
+                          </div>
+                    </div>
+                    <div class="row form-objavi-klub-01">
+                        @foreach($club->images as $slika)
+                        <div class="album__item col-xs-6 col-sm-3" id="galerija_klub">
+                            <div class="album__item-holder">
+                                <a href="{{asset('images/galerija_klub/' . $slika->image)}}" class="album__item-link mp_gallery">
+                                <figure class="album__thumb">
+                                    <img src="{{asset('images/galerija_klub/' . $slika->image)}}" alt="">
+                                </figure>
+                                <div class="album__item-desc">
+                                    <img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt="">
+                                </div>
+                                </a>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
+					<button type="submit" class="btn btn-default btn-sm btn-block btn-spasi" ><i class="fa fa-plus-circle"></i> Spremi galeriju</button>
 				</form>
+                <div class="row">
+                    <div class="form-group form-group--submit col-md-6">
 						<!-- Modal -->
 						  <div class="modal fade" id="myModal" role="dialog">
 							<div class="modal-dialog">
@@ -1051,8 +1024,6 @@
 
 			</div>
 			<!-- Tab: Foto galerija / End -->
-
-
 
         <!-- Single Product Tabbed Content / End -->
 		</div>
