@@ -1,368 +1,816 @@
- function previewFile(name, place){
-      var preview = document.getElementById(place);
-      var file    = document.getElementById(name).files[0];
-      var reader  = new FileReader();
+// Globalne varijable
+var licnostiCount = 1;
+var nagradeCount = 1;
 
-      reader.onloadend = function () {
-          preview.src = reader.result;
-      }
-
-      if (file) {
-          reader.readAsDataURL(file);
-      } else {
-          preview.src = "";
-      }
- }
- $(document).ready(function () {
-   
-});
+function previewFile(name, place, maxHeight, maxWidth, minHeight, minWidth) {
+    if (typeof(maxHeight) === 'undefined') maxHeight = null;
+    if (typeof(maxWidth) === 'undefined') maxWidth = null;
+    if (typeof(minHeight) === 'undefined') minHeight = null;
+    if (typeof(minWidth) === 'undefined') minWidth = null;
 
 
+    var preview = $(place);
+    var file_input = $(name);
+    var file = $(name).get(0).files;
+    var error = file_input.closest('.sadrzaj-slike').find('.info-upload-slike');
+    console.log(error);
+    var reader = new FileReader();
 
- $(function() {
-   // Multiple images preview in browser
-   
+    reader.onloadend = function (e) {
+        preview.attr('src', e.target.result);
 
-   var imagesPreview = function(input, placeToInsertImagePreview) {
-    console.log("pozvana");
-    var prvi = 0;
-   var gk = document.getElementById('galerija_klub');
-       if (input.files) {
-           var filesAmount = input.files.length;
+        var image = new Image();
+        image.src = e.target.result;
 
-           for (i = 0; i < filesAmount; i++) {
-               var reader = new FileReader();
+        image.onload = function () {
+            var height = this.height;
+            var width = this.width;
 
-               reader.onloadend = function(event) {
-                    if(prvi==0){
-                      var adnew = '<div class="album__item col-xs-6 col-sm-3"><div class="album__item-holder"><a href="'+event.target.result+'" class="album__item-link mp_gallery"><figure class="album__thumb"><img src="'+event.target.result+'" alt=""></figure><div class="album__item-desc"><img src="images/icons/expand-square.svg" class="pregled-slike" alt=""></img></div></a></div><div class="progress-stats upload-slike-statust-bar"><div class="progress"><div class="progress__bar progress__bar-width-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div></div></div>';
-                      //$(adnew).appendTo('#galerija_klub');
-                      $('#tab-galerija .form-objavi-klub-01').append(adnew);
-                      
-                    }
-               }
+            if(maxHeight && maxWidth && minHeight && minWidth) {
+                if ((height >= maxHeight || height <= minHeight) || (width >= maxWidth || width <= minWidth)) {
+                    error.animate({
+                        'color': 'red'
+                    });
+                    return false;
+                }
 
-               reader.readAsDataURL(input.files[i]);
-           }
-       }
-   };
+                error.animate({
+                    'color': 'green'
+                });
+                return true;
+            } else if (maxHeight && maxWidth) {
+                if (height >= maxHeight || width >= maxWidth) {
+                    error.animate({
+                        'color': 'red'
+                    });
+                    return false;
+                }
 
-  $('.galerija').on('change', function() {
-       var prvi = 0;
-       var input = $(this);
-       if (input.files) {
-           var filesAmount = input.files.length;
-           for (i = 0; i < filesAmount; i++) {
-               var reader = new FileReader();
+                error.animate({
+                    'color': 'green'
+                });
+                return true;
+            } else if (minHeight && minWidth) {
+                if (height <= minHeight || width <= minWidth) {
+                    error.animate({
+                        'color': 'red'
+                    });
+                    return false;
+                }
 
-               reader.onloadend = function(event) {
-                    if(prvi==0){
-                      var adnew = '<div class="album__item col-xs-6 col-sm-3"><div class="album__item-holder"><a href="'+event.target.result+'" class="album__item-link mp_gallery"><figure class="album__thumb"><img src="'+event.target.result+'" alt=""></figure><div class="album__item-desc"><img src="images/icons/expand-square.svg" class="pregled-slike" alt=""></img></div></a></div><div class="progress-stats upload-slike-statust-bar"><div class="progress"><div class="progress__bar progress__bar-width-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div></div></div>';
-                      //$(adnew).appendTo('#galerija_klub');
-                      $('#tab-galerija .form-objavi-klub-01').append(adnew);
-                      
-                    }
-               }
-
-               reader.readAsDataURL(input.files[i]);
-           }
-       }
-       //imagesPreview(this);
-      /*setTimeout(function(){
-        $('.album__item').last().remove();
-      },50);*/
-   });
-  $('.galerijak').on('change', function() {
-       var prvi = 0;
-       var input = $(this).context;
-       console.log(input.files);
-       if (input.files) {
-           var filesAmount = input.files.length;
-           for (i = 0; i < filesAmount; i++) {
-               var reader = new FileReader();
-
-               reader.onloadend = function(event) {
-                    if(prvi==0){
-                      var adnew = '<div class="album__item col-xs-6 col-sm-3"><div class="album__item-holder"><a href="'+event.target.result+'" class="album__item-link mp_gallery"><figure class="album__thumb"><img src="'+event.target.result+'" alt=""></figure><div class="album__item-desc"><img src="images/icons/expand-square.svg" class="pregled-slike" alt=""></img></div></a></div><div class="progress-stats upload-slike-statust-bar"><div class="progress"><div class="progress__bar progress__bar-width-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div></div></div>';
-                      //$(adnew).appendTo('#galerija_klub');
-                      $('#tab-galerija .form-objavi-klub-01').append(adnew);
-                      
-                    }
-               }
-
-               reader.readAsDataURL(input.files[i]);
-           }
-       }
-       //imagesPreview(this);
-      /*setTimeout(function(){
-        $('.album__item').last().remove();
-      },50);*/
-   });
-   $('.galerija_edit').on('change', function() {
-       imagesPreview(this);
-   });
-});
-
-      
-    $(document).ready(function(){
-
-
-        $('#entitet').change(function(){
-            var _entitet = $(this).val();
-            if(_entitet == "Federacija BiH"){
-                $('#kantonDiv').css({"display":"block"});
-                $('#opcineDiv').css({"display":"block"});
-                $('#regijaDiv').css({"display":"none"});
-                $('#opSrb').css({"display":"none"});
-            }else{
-                $('#kantonDiv').css({"display":"none"});
-                $('#opcineDiv').css({"display":"none"});
-                $('#regijaDiv').css({"display":"block"});
-                $('#opSrb').css({"display":"block"});
+                error.animate({
+                    'color': 'green'
+                });
+                return true;
             }
-        });
+        };
+    };
 
-        $('#tip-kluba').change(function(){
-            var _tipkluba = $(this).val();
-            if(_tipkluba == "Sportski klub"){
-                $('#sportoviDiv').css({"display":"block"});
-                $('#iSportoviDiv').css({"display":"none"});
-            }else{
-                $('#sportoviDiv').css({"display":"none"});
-                $('#iSportoviDiv').css({"display":"block"});
+    if (file.length > 0) {
+        reader.readAsDataURL(file[0]);
+    } else {
+        preview.attr('src', '');
+
+        error.animate({
+            'color': 'red'
+        });
+    }
+}
+$(function () {
+    // Multiple images preview in browser
+
+
+    var imagesPreview = function (input, placeToInsertImagePreview) {
+        console.log("pozvana");
+        var prvi = 0;
+        var gk = document.getElementById('galerija_klub');
+        if (input.files) {
+            var filesAmount = input.files.length;
+
+            for (i = 0; i < filesAmount; i++) {
+                var reader = new FileReader();
+
+                reader.onloadend = function (event) {
+                    if (prvi == 0) {
+                        var adnew = '<div class="album__item col-xs-6 col-sm-3"><div class="album__item-holder"><a href="' + event.target.result + '" class="album__item-link mp_gallery"><figure class="album__thumb"><img src="' + event.target.result + '" alt=""></figure><div class="album__item-desc"><img src="images/icons/expand-square.svg" class="pregled-slike" alt=""></img></div></a></div><div class="progress-stats upload-slike-statust-bar"><div class="progress"><div class="progress__bar progress__bar-width-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div></div></div>';
+                        //$(adnew).appendTo('#galerija_klub');
+                        $('#tab-galerija .form-objavi-klub-01').append(adnew);
+
+                    }
+                }
+
+                reader.readAsDataURL(input.files[i]);
             }
-        });
+        }
+    };
 
-        var trofej_new = `<div class="row">
-            <div class="row form-segment">
-              <header class="card__header">
-                <h4><i class="fa fa-plus-circle"></i> Unos osvojenog trofeja/nagrade</h4>
-              </header>
-             </div>
-                <div class="col-md-6">
-                  <div class="form-group col-md-6">
-                    <label for="vrsta-nagrade"><img class="flow-icons-013" src="{{asset('images/icons/medalja.svg')}}"></img> Vrsta nagrade</label>
-                    <select name="vrsta_nagrade[]" class="form-control" id="vrsta-nagrade">
-                        <option value="" selected>Izaberite vrstu osvojene nagrade</option>
-                        <option value="medalja">Medalja</option>
-                        <option value="trofej">Trofej/Pehar</option>
-                        <option value="priznanje">Priznanje</option>
-                        <option value="plaketa">Plaketa</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <label for="tip-nagrade"><img class="flow-icons-013" src="{{asset('images/icons/medalja.svg')}}"></img> Tip nagrade</label>
-                    <select name="tip_nagrade[]" class="form-control" id="tip-nagrade">
-                        <option value="" selected>Izaberite tip nagrade</option>
-                        <option value="zlato">Zlato (1. mjesto)</option>
-                        <option value="srebro">Srebro (2. mjesto)</option>
-                        <option value="bronza">Bronza (3. mjesto)</option>
-                        <option value="ostalo">Ostalo</option>
-                    </select>
-                  </div>
-                  <div class="form-group col-md-12">
-                    <label for="tip-nagrade"><img class="flow-icons-013" src="{{asset('images/icons/medalja.svg')}}"></img> Nivo takmiÄenja</label>
-                    <select name="nivo_nagrade[]" class="form-control" id="tip-nagrade">
-                        <option value="" selected>Izaberite nivo takmiÄenja</option>
-                        <option value="intl">Internacionalni nivo</option>
-                        <option value="regn">Regionalni nivo</option>
-                        <option value="drzv">DrÅ¾avni nivo</option>
-                        <option value="entt">Entitetski nivo</option>
-                        <option value="drg">Drugo</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="form-group">
-                    <label for="takmicenje"><img class="flow-icons-013" src="{{asset('images/icons/trophy.svg')}}"></img> Naziv takmiÄenja</label>
-                    <input type="text" name="trofej_takmicenja[]" id="takmicenje" class="form-control" placeholder="Unesite naziv takmicenja za koje je osvojena nagrada">
-                  </div>
-                  <div class="form-group col-md-6 col-xs-12">
-                    <label for="sezona"><img class="flow-icons-013" src="{{asset('images/icons/small-calendar.svg')}}"></img> Sezona/Godina</label>
-                    <input type="text" name="trofej_sezona[]" id="sezona" class="form-control" placeholder="Unesite Sezonu/Godinu osvajanja trofeja">
-                  </div>
-                  <div class="form-group col-md-6 col-xs-12">
-                    <label for="osvajanja"><img class="flow-icons-013" src="{{asset('images/icons/the-sum-of.svg')}}"></img> Broj osvajanja</label>
-                    <input type="number" name="trofej_osvajanja[]" id="osvajanja" class="form-control" placeholder="Unesite broj osvajanja trofeja">
-                  </div>
-                </div>
-            </div>`;
-            $('.btn-dodaj-trofej').click(function(){
-                $('.troffeji').append(trofej_new);
-            });
+    $('.galerija').on('change', function () {
+        var prvi = 0;
+        var input = $(this);
+        if (input.files) {
+            var filesAmount = input.files.length;
+            for (i = 0; i < filesAmount; i++) {
+                var reader = new FileReader();
 
+                reader.onloadend = function (event) {
+                    if (prvi == 0) {
+                        var adnew = '<div class="album__item col-xs-6 col-sm-3"><div class="album__item-holder"><a href="' + window.URL.createObjectURL(reader.result) + '" class="album__item-link mp_gallery"><figure class="album__thumb"><img src="' + window.URL.createObjectURL(reader.result) + '" alt=""></figure><div class="album__item-desc"><img src="images/icons/expand-square.svg" class="pregled-slike" alt=""></img></div></a></div><div class="progress-stats upload-slike-statust-bar"><div class="progress"><div class="progress__bar progress__bar-width-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div></div></div>';
+                        //$(adnew).appendTo('#galerija_klub');
+                        $('#tab-galerija .form-objavi-klub-01').append(adnew);
 
-      var date_input=$('input[name="date"]'); //our date input has the name "date"
-      var container=$('form').length>0 ? $('form').parent() : "body";
-      var options={
-        format: 'mm/dd/yyyy',
-        container: container,
-        todayHighlight: true,
-        autoclose: true,
-      };
-      date_input.datepicker(options);
+                    }
+                }
 
-       var date_input=$('input[name="dob"]'); //our date input has the name "date"
-      var container=$('form').length>0 ? $('form').parent() : "body";
-      var options={
-        format: 'mm/dd/yyyy',
-        container: container,
-        todayHighlight: true,
-        autoclose: true,
-      };
-      date_input.datepicker(options);
+                reader.readAsDataURL(input.files[i]);
+            }
+        }
+        //imagesPreview(this);
+        /*setTimeout(function(){
+          $('.album__item').last().remove();
+        },50);*/
     });
-     $('#registerForm').validate({
-      rules: {
-        password: "required",
-        password_confirmation: {
-          equalTo: "#password"
+    $('.galerijak').on('change', function () {
+        var prvi = 0;
+        var input = $(this).context;
+        console.log(input.files);
+        if (input.files) {
+            var filesAmount = input.files.length;
+            for (i = 0; i < filesAmount; i++) {
+                var reader = new FileReader();
+
+                reader.onloadend = function (event) {
+                    if (prvi == 0) {
+                        var adnew = '<div class="album__item col-xs-6 col-sm-3"><div class="album__item-holder"><a href="' + event.target.result + '" class="album__item-link mp_gallery"><figure class="album__thumb"><img src="' + event.target.result + '" alt=""></figure><div class="album__item-desc"><img src="images/icons/expand-square.svg" class="pregled-slike" alt=""></img></div></a></div><div class="progress-stats upload-slike-statust-bar"><div class="progress"><div class="progress__bar progress__bar-width-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div></div></div>';
+                        //$(adnew).appendTo('#galerija_klub');
+                        $('#tab-galerija .form-objavi-klub-01').append(adnew);
+
+                    }
+                }
+
+                reader.readAsDataURL(input.files[i]);
+            }
         }
-      }}
-    );
-      $('#settingsUpdateUser').validate({
-      rules: {
-        avatar: {
-          extension: 'png|jpg|jpeg'
+        //imagesPreview(this);
+        /*setTimeout(function(){
+          $('.album__item').last().remove();
+        },50);*/
+    });
+    $('.galerija_edit').on('change', function () {
+        imagesPreview(this);
+    });
+});
+
+$.validator.setDefaults({ ignore: '' });
+
+$(document).ready(function () {
+    $('#flash-overlay-modal').modal();
+
+    $('#editClubForm').validate({
+        ignore: ':not(:visible),:disabled',
+        rules: {
+            logo: {
+                extension: 'png|jpg|jpeg'
+            },
+            name: {
+                required: true,
+                string: true,
+                maxlength: 255
+            },
+            nature: {
+                required: true,
+                string: true,
+                maxlength: 255
+            },
+            continent: {
+                required: true,
+                digits: true
+            },
+            country: {
+                required: true,
+                digits: true
+            },
+            province: {
+                required: true,
+                digits: true
+            },
+            region: {
+                required: true,
+                digits: true
+            },
+            municipality: {
+                required: true,
+                digits: true
+            },
+            city: {
+                required: true,
+                string: true,
+                maxlength: 255
+            },
+            type: {
+                required: true,
+                digits: true
+            },
+            sport: {
+                required: true,
+                digits: true
+            },
+            category: {
+                required: true,
+                digits: true
+            },
+            established_in: {
+                digits: true,
+                range: [1800, new Date().getFullYear()]
+            },
+            home_field: {
+                string: true,
+                maxlength: 255
+            },
+            competition: {
+                string: true,
+                maxlength: 255
+            },
+            association: {
+                required: true,
+                digits: true
+            },
+            phone_1: {
+                digits: true,
+                maxlength: 255
+            },
+            phone_2: {
+                digits: true,
+                maxlength: 50
+            },
+            fax: {
+                digits: true,
+                maxlength: 50
+            },
+            email: {
+                email: true,
+                maxlength: 255
+            },
+            website: {
+                string: true,
+                maxlength: 255
+            },
+            address: {
+                string: true,
+                maxlength: 255
+            },
+            facebook: {
+                string: true,
+                maxlength: 255
+            },
+            instagram: {
+                string: true,
+                maxlength: 255
+            },
+            twitter: {
+                string: true,
+                maxlength: 255
+            },
+            youtube: {
+                string: true,
+                maxlength: 255
+            },
+            video: {
+                string: true,
+                maxlength: 255
+            }
         }
-      }}
+    });
 
-  
-    );
+    $('#editLicnosti').validate({
+        ignore: ':not(:visible),:disabled'
+    });
+
+    // Validacije forme za dodavanje kluba
+    $('#createNewClub').validate({
+        ignore: ':not(:visible),:disabled',
+        rules: {
+            logo: {
+                required: true,
+                extension: 'png|jpg|jpeg'
+            },
+            name: {
+                required: true,
+                string: true,
+                maxlength: 255
+            },
+            nature: {
+                required: true,
+                string: true,
+                maxlength: 255
+            },
+            continent: {
+                required: true,
+                digits: true
+            },
+            country: {
+                required: true,
+                digits: true
+            },
+            province: {
+                required: true,
+                digits: true
+            },
+            region: {
+                required: true,
+                digits: true
+            },
+            municipality: {
+                required: true,
+                digits: true
+            },
+            city: {
+                required: true,
+                string: true,
+                maxlength: 255
+            },
+            type: {
+                required: true,
+                digits: true
+            },
+            sport: {
+                required: true,
+                digits: true
+            },
+            category: {
+                required: true,
+                digits: true
+            },
+            established_in: {
+                digits: true,
+                range: [1800, new Date().getFullYear()]
+            },
+            home_field: {
+                string: true,
+                maxlength: 255
+            },
+            competition: {
+                string: true,
+                maxlength: 255
+            },
+            association: {
+                required: true,
+                digits: true
+            },
+            phone_1: {
+                digits: true,
+                maxlength: 255
+            },
+            phone_2: {
+                digits: true,
+                maxlength: 50
+            },
+            fax: {
+                digits: true,
+                maxlength: 50
+            },
+            email: {
+                email: true,
+                maxlength: 255
+            },
+            website: {
+                string: true,
+                maxlength: 255
+            },
+            address: {
+                string: true,
+                maxlength: 255
+            },
+            facebook: {
+                string: true,
+                maxlength: 255
+            },
+            instagram: {
+                string: true,
+                maxlength: 255
+            },
+            twitter: {
+                string: true,
+                maxlength: 255
+            },
+            youtube: {
+                string: true,
+                maxlength: 255
+            },
+            video: {
+                string: true,
+                maxlength: 255
+            },
+            history: {
+                string: true
+            },
+            'galerija[]' : {
+                extension: 'png|jpg|jpeg'
+            }
+        }
+    });
+
+    $('#editClubHistory').validate({
+        ignore: ':not(:visible),:disabled',
+        rules: {
+            history: {
+                string: true
+            }
+        }
+    });
+
+    $('#editClubTrophies').validate({
+        ignore: ':not(:visible),:disabled'
+    });
+
+    $('#editClubGallery').validate({
+        ignore: ''
+    });
+
+    addLicnostValidation();
+    addTrophyValidation();
+    addGalleryValidation();
+
+    // Select boxovi za regione
+    var continentSelect = $('select#continent');
+    var countrySelect = $('select#country');
+    var provinceSelect = $('select#province');
+    var regionSelect = $('select#region');
+    var municipalitySelect = $('select#municipality');
+
+    // Select boxes
+    var sportTypeSelect = $('select#club-type');
+    var sportSelect = $('select#sport');
+    var associationBox = $('#associations');
+    var associationRadio = $('input[name="association"]');
+
+    // Nadji najveci array key od old inputa za licnost ako postoji
+    if($('.licnostHover').length) {
+        var num = $('.licnostHover').map(function() {
+            return $(this).data('key');
+        }).get();
+
+        var highest = Math.max.apply(Math, num);
+
+        licnostiCount = highest + 1;
+    }
+
+    // Nadji najveci array key od old inputa za nagradu/trofej ako postoji
+    if($('.nagradaHover').length) {
+        var num1 = $('.nagradaHover').map(function() {
+            return $(this).data('key');
+        }).get();
+
+        var highest1 = Math.max.apply(Math, num1);
+
+        nagradeCount = highest1 + 1;
+    }
+
+    // Custom metode za validaciju
+    // Provjera stringa
+    jQuery.validator.addMethod("string", function(value, element){
+        if (typeof value === 'string' || value instanceof String) {
+            return true;
+        }
+        return false;
+    }, "Polje mora biti tipa string.");
+
+    // Dodavanje kluba - Dodaj ličnost
+    $('#dodajLicnost').on('click', function () {
+        var licnost_form_input = '<div class="row licnostHover"><div class="izbrisiLicnost"><i class="fa fa-times-circle-o"></i></div>' +
+            '<div class="row identitet-style">' +
+            '<div class="col-md-6 objavi-klub-logo-setup">' +
+            '<div class="col-md-7">' +
+            '<div class="alc-staff__photo">' +
+            '<img class="slika-edit-profil" id="slika-licnost-prikaz' + licnostiCount + '" src="/images/default_avatar.png" alt="">' +
+            '</div>' +
+            '</div>' +
+            '<div class="col-md-5 sadrzaj-slike">' +
+            '<p class="dodaj-sliku-naslov klub-a1">Slika ličnosti</p>' +
+            '<p class="dodaj-sliku-call">Odaberite sliku za istaknutu ličnost</p>' +
+            '<label class="btn btn-default btn-xs btn-file dodaj-sliku-button">' +
+            'Odaberi sliku... <input type="file" name="licnost[' + licnostiCount + '][avatar]" id="licnostAvatar' + licnostiCount + '" accept="image/*" style="display: none;" onchange="previewFile(\'#licnostAvatar' + licnostiCount + '\',\'#slika-licnost-prikaz' + licnostiCount + '\', 1080, 1920, 250, 312)">' +
+            '</label>' +
+            '<div class="info001">' +
+            '<p class="info-upload-slike">Preporučene dimenzije za sliku ličnosti:</p>' +
+            '<p class="info-upload-slike">Minimalno: 312x250 px</p>' +
+            '<p class="info-upload-slike">Maksimalno: 1920x1080 px</p>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '<div class="col-md-6">' +
+            '<div class="form-group col-md-6 col-xs-12">' +
+            '<label for="ime-kluba"><img class="flow-icons-013" src="/images/icons/edit.svg"> Ime</label>' +
+            '<input type="text" name="licnost[' + licnostiCount + '][ime]" class="form-control" placeholder="Unesite ime ličnosti">' +
+            '</div>' +
+            '<div class="form-group col-md-6 col-xs-12">' +
+            '<label for="ime-kluba"><img class="flow-icons-013" src="/images/icons/edit.svg"> Prezime</label>' +
+            '<input type="text" name="licnost[' + licnostiCount + '][prezime]" class="form-control" placeholder="Unesite prezime ime ličnosti">' +
+            '</div>' +
+            '<div class="form-group col-md-12">' +
+            '<label for="opis"><img class="flow-icons-013" src="/images/icons/edit.svg"> Opis i uloga</label>' +
+            '<textarea class="form-control" rows="4" name="licnost[' + licnostiCount + '][opis]" placeholder="Upišite kratak opis uloge i funkcije navedene ličnosti u klubu..."></textarea>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '</div>';
+
+        $(licnost_form_input).appendTo('#tab-licnosti #licnostiLista').hide().slideDown();
+        licnostiCount++;
+
+        addLicnostValidation();
+    });
+
+    // Dodavanje kluba - Obriši ličnost
+    $('#licnostiLista').on('click', '.izbrisiLicnost',function () {
+        $(this).closest('.licnostHover').slideUp('normal', function() { $(this).remove(); } );
+    });
+
+    // Dodavanje kluba - Dodaj nagradu
+    $('#dodajNagradu').on('click', function () {
+       var nagrada_form_input = '<div class="row nagradaHover"><div class="izbrisiNagradu"><i class="fa fa-times-circle-o"></i></div><div class="col-md-6">' +
+           '<div class="form-group col-md-6">' +
+           '<label for="vrsta-nagrade"><img class="flow-icons-013" src="/images/icons/medalja.svg"> Vrsta nagrade</label>' +
+           '<select name="nagrada[' + nagradeCount + '][vrsta]" class="form-control">' +
+           '<option value="" selected>Izaberite vrstu osvojene nagrade</option>' +
+           '<option value="Medalja">Medalja</option>' +
+           '<option value="Trofej/Pehar">Trofej/Pehar</option>' +
+           '<option value="Priznanje">Priznanje</option>' +
+           '<option value="Plaketa">Plaketa</option>' +
+           '</select>' +
+           '</div>' +
+           '<div class="form-group col-md-6">' +
+           '<label for="tip-nagrade"><img class="flow-icons-013" src="/images/icons/medalja.svg"> Tip nagrade</label>' +
+           '<select name="nagrada[' + nagradeCount + '][tip]" class="form-control">' +
+           '<option value="" selected>Izaberite tip nagrade</option>' +
+           '<option value="Zlato">Zlato (1. mjesto)</option>' +
+           '<option value="Srebro">Srebro (2. mjesto)</option>' +
+           '<option value="Bronza">Bronza (3. mjesto)</option>' +
+           '<option value="Ostalo">Ostalo</option>' +
+           '</select>' +
+           '</div>' +
+           '<div class="form-group col-md-12">' +
+           '<label for="tip-nagrade"><img class="flow-icons-013" src="/images/icons/medalja.svg"> Nivo takmičenja</label>' +
+           '<select name="nagrada[' + nagradeCount + '][nivo]" class="form-control">' +
+           '<option value="" selected>Izaberite nivo takmičenja</option>' +
+           '<option value="Internacionalni nivo">Internacionalni nivo</option>' +
+           '<option value="Regionalni nivo">Regionalni nivo</option>' +
+           '<option value="Državni nivo">Državni nivo</option>' +
+           '<option value="Entitetski nivo">Entitetski nivo</option>' +
+           '<option value="Drugo">Drugo</option>' +
+           '</select>' +
+           '</div>' +
+           '</div>' +
+           '<div class="col-md-6">' +
+           '<div class="form-group">' +
+           '<label for="takmicenje"><img class="flow-icons-013" src="/images/icons/trophy.svg"> Naziv takmičenja</label>' +
+           '<input type="text" name="nagrada[' + nagradeCount + '][takmicenje]" class="form-control" placeholder="Unesite naziv takmicenja za koje je osvojena nagrada">' +
+           '</div>' +
+           '<div class="form-group col-md-6 col-xs-12">' +
+           '<label for="sezona"><img class="flow-icons-013" src="/images/icons/small-calendar.svg"> Sezona/Godina</label>' +
+           '<input type="text" name="nagrada[' + nagradeCount + '][sezona]" class="form-control" placeholder="Unesite Sezonu/Godinu osvajanja trofeja">' +
+           '</div>' +
+           '<div class="form-group col-md-6 col-xs-12">' +
+           '<label for="osvajanja"><img class="flow-icons-013" src="/images/icons/the-sum-of.svg"> Broj osvajanja</label>' +
+           '<input type="number" name="nagrada[' + nagradeCount + '][osvajanja]" class="form-control" placeholder="Unesite broj osvajanja trofeja">' +
+           '</div>' +
+           '</div>' +
+           '</div>';
+
+        $(nagrada_form_input).appendTo('#tab-vitrina #nagradeLista').hide().slideDown();
+        nagradeCount++;
+
+        addTrophyValidation();
+    });
+
+    // Dodavanje kluba - Obriši nagradu
+    $('#nagradeLista').on('click', '.izbrisiNagradu',function () {
+        $(this).closest('.nagradaHover').slideUp('normal', function() { $(this).remove(); } );
+    });
+
+    // Dodavanje kluba - Promjena kontinenta
+    continentSelect.on('change', function () {
+        var itemsToShow = countrySelect.children("option[data-parent^=" + continentSelect.val() + "]");
+
+        if(itemsToShow.length > 0) {
+            countrySelect.prop('disabled', false);
+            countrySelect.children('option').hide();
+            countrySelect.children('option:first').show();
+            itemsToShow.show();
+        } else {
+            countrySelect.children('option:first').show();
+            countrySelect.prop('disabled', 'disabled');
+        }
+        // Resetuj sve selecte poslije ovog
+        countrySelect.prop("selectedIndex", 0);
+        provinceSelect.prop("selectedIndex", 0).prop('disabled', 'disabled');
+        regionSelect.prop("selectedIndex", 0).prop('disabled', 'disabled');
+        municipalitySelect.prop("selectedIndex", 0).prop('disabled', 'disabled');
+    });
+
+    // Dodavanje kluba - Promjena države
+    countrySelect.on('change', function () {
+        var itemsToShow = provinceSelect.children("option[data-parent^=" + countrySelect.val() + "]");
+
+        if(itemsToShow.length > 0) {
+            provinceSelect.prop('disabled', false);
+            provinceSelect.children('option').hide();
+            provinceSelect.children('option:first').show();
+            itemsToShow.show();
+        } else {
+            provinceSelect.children('option:first').show();
+            provinceSelect.prop('disabled', 'disabled');
+        }
+        // Resetuj sve selecte poslije ovog
+        provinceSelect.prop("selectedIndex", 0);
+        regionSelect.prop("selectedIndex", 0).prop('disabled', 'disabled');
+        municipalitySelect.prop("selectedIndex", 0).prop('disabled', 'disabled');
+
+        // Izlistaj sve saveze države ako postoje
+        var associationsToShow = associationBox.find("input[data-region^=" + countrySelect.val() + "]");
+        console.log(associationsToShow);
+        associationRadio.prop('checked', false);
+
+        if(associationsToShow.length > 0) {
+            associationRadio.closest('label').hide();
+            associationsToShow.closest('label').css('display', 'inline-block');
+            associationBox.show();
+        } else {
+            associationBox.hide();
+        }
+
+    });
+
+    // Dodavanje kluba - Promjena pokrajine
+    provinceSelect.on('change', function () {
+        var itemsToShow = regionSelect.children("option[data-parent^=" + provinceSelect.val() + "]");
+
+        if(itemsToShow.length > 0) {
+            regionSelect.prop('disabled', false);
+            regionSelect.children('option').hide();
+            regionSelect.children('option:first').show();
+            itemsToShow.show();
+        } else {
+            regionSelect.children('option:first').show();
+            regionSelect.prop('disabled', 'disabled');
+        }
+
+        // Resetuj sve selecte poslije ovog
+        regionSelect.prop("selectedIndex", 0);
+        municipalitySelect.prop("selectedIndex", 0).prop('disabled', 'disabled');
+    });
+
+    // Dodavanje kluba - Promjena regije
+    regionSelect.on('change', function () {
+        var itemsToShow = municipalitySelect.children("option[data-parent^=" + regionSelect.val() + "]");
+
+        if(itemsToShow.length > 0) {
+            municipalitySelect.prop('disabled', false);
+            municipalitySelect.children('option').hide();
+            municipalitySelect.children('option:first').show();
+            itemsToShow.show();
+        } else {
+            municipalitySelect.children('option:first').show();
+            municipalitySelect.prop('disabled', 'disabled');
+        }
+
+        // Resetuj sve selecte poslije ovog
+        municipalitySelect.prop("selectedIndex", 0);
+    });
+
+    // Selekt za sportove
+    sportTypeSelect.on('change', function () {
+        var itemsToShow;
+        if(sportTypeSelect.val() == 1 || sportTypeSelect.val() == 2) {
+           if(sportTypeSelect.val() == 1) {
+               itemsToShow = sportSelect.children("option[data-disabled^='0']");
+           } else if (sportTypeSelect.val() == 2) {
+               itemsToShow = sportSelect.children("option[data-disabled^='1']");
+           }
+           sportSelect.prop('selectedIndex', 0);
+           sportSelect.prop('disabled', false);
+           sportSelect.children('option').hide();
+           sportSelect.children('option:first').show();
+           itemsToShow.show();
+        } else {
+            sportSelect.prop('disabled', 'disabled');
+        }
+    });
+
+    var date_input = $('input[name="date"]'); //our date input has the name "date"
+    var container = $('form').length > 0 ? $('form').parent() : "body";
+    var options = {
+        format: 'mm/dd/yyyy',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+    };
+    date_input.datepicker(options);
+
+    var date_input = $('input[name="dob"]'); //our date input has the name "date"
+    var container = $('form').length > 0 ? $('form').parent() : "body";
+    var options = {
+        format: 'mm/dd/yyyy',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+    };
+    date_input.datepicker(options);
+});
 
 
-$('#createNewClub').validate({
-  rules: {
-    logo:{
-      extension: 'png|jpg|jpeg'
-    },
-    godina_osnivanja:{
-        required: true
-    },
-    name:{
-      required:true,
-    },
-    karakter:{
-      required:true,
-    },
-    kontinent:{
-      required:true,
-    },
-    drzava:{
-      required:true,
-    },
-    entitet:{
-      required:true,
-    },
-    kanton:{
-      required:true,
-    },
-    grad:{
-      required:true,
-    },
-    tip:{
-      required:true,
-    },
-    sport:{
-      required:true,
-    },
-    kategorija:{
-      required:true,
-    },
-    teren:{
-      required:true,
-    },
-    takmicenje:{
-      required:true,
-    },
-    savez:{
-      required:true,
-    },
-
-  }}
+$('#registerForm').validate({
+        rules: {
+            password: "required",
+            password_confirmation: {
+                equalTo: "#password"
+            }
+        }
+    }
 );
-$('#createNewDvorana').validate({
-  rules:{
-    profilna:{
-      extension: 'png|jpg|jpeg'
-    },
-    naziv:{
-      required:true
-    },
-    kontinent:{
-      required: true,
-    },
-    drzava:{
-      required:true,
-    },
-    entitet:{
-      required:true,
-    },
-    kanton:{
-      required:true,
-    },
-    grad:{
-      required:true,
-    },
+$('#settingsUpdateUser').validate({
+        rules: {
+            avatar: {
+                extension: 'png|jpg|jpeg'
+            }
+        }
+    }
+);
 
-  }
+
+$('#createNewDvorana').validate({
+    rules: {
+        profilna: {
+            extension: 'png|jpg|jpeg'
+        },
+        naziv: {
+            required: true
+        },
+        kontinent: {
+            required: true,
+        },
+        drzava: {
+            required: true,
+        },
+        entitet: {
+            required: true,
+        },
+        kanton: {
+            required: true,
+        },
+        grad: {
+            required: true,
+        },
+
+    }
 });
 $('.loginFormaVer').validate({
-  rules:{
-    name:{
-      required: true,
-    },
-    password:{
-      required:true,
+    rules: {
+        name: {
+            required: true,
+        },
+        password: {
+            required: true,
+        }
     }
-  }
 });
 $('#createNewFootballer').validate({
-  rules:{
-    logo:{
-      extension: 'png|jpg|jpeg'
-    },
-    ime:{
-      required:true,
-    },
-    prezime:{
-      required:true,
-    },
-    karakter:{
-      required:true,
-    },
-    drzava:{
-      required:true,
-    },
-    entitet: {
-      required:true,
-    },
-    kanton:{
-      required:true,
-    },
-    klub:{
-      required:true,
-    },
-    visina:{
-      required:true,
-    },
-    tezina:{
-      required: true,
+    rules: {
+        logo: {
+            extension: 'png|jpg|jpeg'
+        },
+        ime: {
+            required: true,
+        },
+        prezime: {
+            required: true,
+        },
+        karakter: {
+            required: true,
+        },
+        drzava: {
+            required: true,
+        },
+        entitet: {
+            required: true,
+        },
+        kanton: {
+            required: true,
+        },
+        klub: {
+            required: true,
+        },
+        visina: {
+            required: true,
+        },
+        tezina: {
+            required: true,
+        }
     }
-  }
 });
 $.validator.addMethod('filesize', function (value, element, param) {
     return this.optional(element) || (element.files[0].size <= param)
 }, 'File size must be less than {0}');
 
-$('#editClubForm').validate({
-  rules: {
-    logo: {
-      extension: 'png|jpg|jpeg',
-      filesize: 1,
-    }
-  }
-});
 
 /*$('.prvi_korak_end').on('click', function(){
   $('#createNewClub').valid();
@@ -372,72 +820,89 @@ $('#editClubForm').validate({
 /*$('.btn-dalje').on('click', function(){
   $('#createNewFootballer').valid();
 });*/
-$('.prvi_korak_end_obj').click(function(){
-  $('#createNewDvorana').valid();
-    if($('#createNewDvorana').validate().errorList.length < 1){
-      $('.nav-product-tabs li').removeClass('active');
-     
-      $('.preslic').closest('li').addClass('active');
-      $('.tab-pane').removeClass('active');
-      $('.tab-pane').removeClass('in');
-      $('#tab-predispozicije').addClass('in');
-      $('#tab-predispozicije').addClass('active');
+$('.prvi_korak_end_obj').click(function () {
+    $('#createNewDvorana').valid();
+    if ($('#createNewDvorana').validate().errorList.length < 1) {
+        $('.nav-product-tabs li').removeClass('active');
 
-      var sledeci = $('.nav-product-tabs').find('.preslic');
-      $('.nav-product-tabs li').removeClass('active');
+        $('.preslic').closest('li').addClass('active');
+        $('.tab-pane').removeClass('active');
+        $('.tab-pane').removeClass('in');
+        $('#tab-predispozicije').addClass('in');
+        $('#tab-predispozicije').addClass('active');
 
-      sledeci.addClass('active');
-      return false;
+        var sledeci = $('.nav-product-tabs').find('.preslic');
+        $('.nav-product-tabs li').removeClass('active');
+
+        sledeci.addClass('active');
+        return false;
     }
 });
-$('.btn-dalje').on('click', function(){
-  var sledeci = $('.nav-product-tabs').find('.active').next();
-  $('.nav-product-tabs li').removeClass('active');
+$('.btn-dalje').on('click', function () {
+    if ($(this).closest('form').valid()) {
+        var sledeci = $('.nav-product-tabs').find('.active').next();
+        var sljedeci_tab = $('.tab-pane.active').next();
 
-  sledeci.addClass('active');
-});
+        $('.nav-product-tabs li').removeClass('active');
+        $('.tab-pane').removeClass('active in');
 
-$('.btn-nazad').on('click', function(){
-  var prethodni = $('.nav-product-tabs').find('.active').prev();
-  $('.nav-product-tabs li').removeClass('active');
-
-  prethodni.addClass('active');
-});
-$('.btn-prijava').on('click', function(){
-  $('.loginFormaVer').valid();
-  if($('.loginFormaVer').validate().errorList.length < 1){
-    $('.loginFormaVer').submit();
-  }else{
-    return false;
-  }
-});
-
-$('.prvi_korak_end').click(function(){
-  if($('#createNewClub').length == 0){
-    $('#createNewFootballer').valid();
-    if($('#createNewFootballer').validate().errorList.length < 1){
-      $('.nav-product-tabs li').removeClass('active');
-     
-      $('.preslic').closest('li').addClass('active');
-      $('.tab-pane').removeClass('active');
-      $('.tab-pane').removeClass('in');
-      $('#tab-predispozicije').addClass('in');
-      $('#tab-predispozicije').addClass('active');
+        sljedeci_tab.addClass('active in');
+        sledeci.addClass('active');
     }
-  }else{
-     $('#createNewClub').valid();
-  if($('#createNewClub').validate().errorList.length < 1){
+});
+
+$('.btn-nazad').on('click', function () {
+    var prethodni = $('.nav-product-tabs').find('.active').prev();
     $('.nav-product-tabs li').removeClass('active');
-   
-    $('.preslic').closest('li').addClass('active');
-    $('.tab-pane').removeClass('active');
-    $('.tab-pane').removeClass('in');
-    $('#tab-licnosti').addClass('in');
-    $('#tab-licnosti').addClass('active');
-  }
-  }
- 
-  return false;
+
+    prethodni.addClass('active');
+});
+$('.btn-prijava').on('click', function () {
+    $('.loginFormaVer').valid();
+    if ($('.loginFormaVer').validate().errorList.length < 1) {
+        $('.loginFormaVer').submit();
+    } else {
+        return false;
+    }
+});
+
+$('.prvi_korak_end').click(function () {
+    var form = $('#createNewClub');
+
+    if (form.valid()) {
+        $('.nav-product-tabs li').removeClass('active');
+
+        $('.preslic').closest('li').addClass('active');
+        $('.tab-pane').removeClass('active');
+        $('.tab-pane').removeClass('in');
+        $('#tab-licnosti').addClass('in');
+        $('#tab-licnosti').addClass('active');
+    }
+    /*if($('#createNewClub').length == 0){
+      $('#createNewFootballer').valid();
+      if($('#createNewFootballer').validate().errorList.length < 1){
+        $('.nav-product-tabs li').removeClass('active');
+
+        $('.preslic').closest('li').addClass('active');
+        $('.tab-pane').removeClass('active');
+        $('.tab-pane').removeClass('in');
+        $('#tab-predispozicije').addClass('in');
+        $('#tab-predispozicije').addClass('active');
+      }
+    }else{
+       $('#createNewClub').valid();
+    if($('#createNewClub').validate().errorList.length < 1){
+      $('.nav-product-tabs li').removeClass('active');
+
+      $('.preslic').closest('li').addClass('active');
+      $('.tab-pane').removeClass('active');
+      $('.tab-pane').removeClass('in');
+      $('#tab-licnosti').addClass('in');
+      $('#tab-licnosti').addClass('active');
+    }
+    }
+
+    return false; */
 });
 
 
@@ -449,22 +914,115 @@ $('.prvi_korak_end').click(function(){
     $('#createNewClub').submit();
   }
 });*/
-      jQuery.extend(jQuery.validator.messages, {
+jQuery.extend(jQuery.validator.messages, {
     required: "Ovo polje je obavezno.",
     remote: "Please fix this field.",
     email: "Unesite validnu e-mail adresu.",
     url: "Please enter a valid URL.",
     date: "Unesite validan datum",
     dateISO: "Please enter a valid date (ISO).",
-    number: "Please enter a valid number.",
-    digits: "Please enter only digits.",
+    number: "Unesite validan broj.",
+    digits: "Ovo polje može sadržati samo cifre.",
     creditcard: "Please enter a valid credit card number.",
     equalTo: "Unesite istu vrijednost.",
     accept: "Please enter a value with a valid extension.",
     maxlength: jQuery.validator.format("Unesite manje od {0} karaktera."),
     minlength: jQuery.validator.format("Unesite najmanje {0} karaktera."),
-    rangelength: jQuery.validator.format("Please enter a value between {0} and {1} characters long."),
-    range: jQuery.validator.format("Please enter a value between {0} and {1}."),
-    max: jQuery.validator.format("Please enter a value less than or equal to {0}."),
-    min: jQuery.validator.format("Please enter a value greater than or equal to {0}.")
+    rangelength: jQuery.validator.format("Unesite između {0} i {1} karaktera."),
+    range: jQuery.validator.format("Molimo Vas unseite broj između {0} i {1}."),
+    max: jQuery.validator.format("Molimo vas unesite manji broj ili broj {0}."),
+    min: jQuery.validator.format("Molimo vas unserite veći broj ili broj {0}.")
 });
+
+function addLicnostValidation() {
+    var licnost = $('form').find('input[name^="licnost"]');
+
+    licnost.filter('input[name$="[ime]"]').each(function() {
+        $(this).rules("add", {
+            required: true,
+            string: true,
+            maxlength: 255
+        });
+    });
+
+    licnost.filter('input[name$="[prezime]"]').each(function() {
+        $(this).rules("add", {
+            required: true,
+            string: true,
+            maxlength: 255
+        });
+    });
+
+    licnost.filter('input[name$="[opis]"]').each(function() {
+        $(this).rules("add", {
+            string: true,
+            maxlength: 1000
+        });
+    });
+
+    licnost.filter('input[name$="[avatar]"]').each(function() {
+        $(this).rules("add", {
+            extension: 'png|jpg|jpeg'
+        });
+    });
+}
+
+function addTrophyValidation() {
+    var nagrada = $('form').find('input[name^="nagrada"], select[name^="nagrada"]');
+
+    nagrada.filter('select[name$="[vrsta]"]').each(function() {
+        $(this).rules("add", {
+            required: true,
+            string: true,
+            maxlength: 255
+        });
+    });
+
+    nagrada.filter('select[name$="[tip]"]').each(function() {
+        $(this).rules("add", {
+            required: true,
+            string: true,
+            maxlength: 255
+        });
+    });
+
+    nagrada.filter('select[name$="[nivo]"]').each(function() {
+        $(this).rules("add", {
+            required: true,
+            string: true,
+            maxlength: 255
+        });
+    });
+
+    nagrada.filter('input[name$="[takmicenje]"]').each(function() {
+        $(this).rules("add", {
+            required: true,
+            string: true,
+            maxlength: 255
+        });
+    });
+
+    nagrada.filter('input[name$="[sezona]"]').each(function() {
+        $(this).rules("add", {
+            required: true,
+            string: true,
+            maxlength: 9
+        });
+    });
+
+    nagrada.filter('input[name$="[osvajanja]"]').each(function() {
+        $(this).rules("add", {
+            digits: true
+        });
+    });
+}
+
+function addGalleryValidation() {
+    var gallery = $('form').find('input[name^="galerija"]');
+
+    gallery.each(function() {
+        $(this).rules("add", {
+            accept: 'image/*'
+        });
+    });
+}

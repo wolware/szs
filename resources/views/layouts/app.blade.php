@@ -35,12 +35,14 @@
   <link href="{{ asset('/fonts/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
   <link href="{{ asset('/vendor/magnific-popup/dist/magnific-popup.css') }}" rel="stylesheet">
   <link href="{{ asset('/vendor/slick/slick.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/selectize.css') }}" rel="stylesheet">
 
 
 
   <!-- Template CSS-->
   <link href="{{ asset('/css/datepicker.css?t=44') }}" rel="stylesheet">
   <link href="{{ asset('/css/style.css?t=') }}{{time()}}" rel="stylesheet">
+  <link href="{{ asset('/css/custom.css?t=') }}{{time()}}" rel="stylesheet">
 
 </head>
 <body>

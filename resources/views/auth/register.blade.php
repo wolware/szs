@@ -98,16 +98,10 @@
                   <div class="form-group col-md-6">
                     <label for="drzava"><i class="fa fa-globe"></i> Država:</label>
                     <select class="form-control" name="country" id="drzava" required>
-                      @if (old('country'))
-                        <option selected>{{old('country')}}</option>
-                      @else
                         <option disabled selected>Izaberite državu</option>
-                      @endif
-                        <option>Bosna i Hercegovina</option>
-                        <option>Srbija</option>
-                        <option>Hrvatska</option>
-                        <option>Crna Gora</option>
-                        <option>Ostalo</option>
+                        @foreach($countries as $country)
+                          <option value="{{ $country->id }}" {{ old('$country') === $country->id ? 'selected' : '' }}>{{ $country->name }}</option>
+                        @endforeach
                     </select>
                   </div>
                   <div class="form-group col-md-12">

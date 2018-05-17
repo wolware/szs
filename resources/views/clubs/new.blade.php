@@ -69,15 +69,6 @@
     ================================================== -->
       <div class="site-content">
       <div class="container">
-@if ($errors->any())
-                  <div class="alert alert-danger">
-                      <ul>
-                          @foreach ($errors->all() as $error)
-                              <li>{{ $error }}</li>
-                          @endforeach
-                      </ul>
-                  </div>
-              @endif
         <div class="row profil-content-b06">
           <!-- Main content -->
         <div class="sidebar col-md-12 overscreen">
@@ -94,872 +85,574 @@
 			<li role="presentation"><a href="#tab-galerija" role="tab" data-toggle="tab"><i class="fa fa-picture-o"></i><small>Foto</small>Galerija</a></li>
           </ul>
 
-          <!-- Tab panes -->
-          <div class="tab-content card__content">
-
-
-			<!-- Tab: Općenito -->
-            <div role="tabpanel" class="tab-pane fade in active" id="tab-opcenito">
-			<div class="row">
-				<form id="createNewClub" role="form" action="{{ url('/clubs/new/create') }}" method="POST" enctype="multipart/form-data" >
-				{!! csrf_field() !!}
-				<div class="row identitet-style">
-
-				 <div class="col-md-6 objavi-klub-logo-setup">
-
-				    <div class="col-md-7">
-
-                      <div class="alc-staff__photo">
-                        <img class="slika-upload-klub" id="slika-upload-klub" src="{{asset('images/SZS-club-logo.png')}}" alt="">
-                      </div>
-
-				    </div>
-
-                    <div class="col-md-5 sadrzaj-slike">
-
-						  <p class="dodaj-sliku-naslov klub-a1">Logo kluba*</p>
-						  <p class="dodaj-sliku-call">Identitet kluba</p>
-						  <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-							Odaberi logo... <input type="file" id="file_logo_kluba" name="logo" style="display: none;" required accept="image/*" onchange="previewFile('file_logo_kluba','slika-upload-klub')">
-						  </label>
-						  <div class="info001">
-							<p class="info-upload-slike">Preporučene dimenzije za logo:</p>
-							<p class="info-upload-slike">Minimalno: 512x512 px</p>
-							<p class="info-upload-slike">Maksimalno: 1024x1024 px</p>
-						  </div>
-
-					</div>
-				 </div>
-
-				 <div class="col-md-6">
-
-				  <div class="form-group col-md-12">
-                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Ime/Naziv kluba*</label>
-                    <input type="text" name="name" id="ime-kluba" class="form-control" placeholder="Unesite ime/naziv kluba" maxlength="255" required>
-                  </div>
-				  <div class="form-group has-success col-md-12">
-                    <label for="karakter-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Karakter kluba* <span>(izmjenjivo)</span></label>
-                    <input type="text" name="karakter" id="karakter-kluba" class="form-control" value="Fudbalski klub" placeholder="Unesite karakter kluba" maxlength="255" required>
-					<span>Prilikom unosa karaktera kluba ne unositi kratice kao što su: FK, NK, KK, OK i sl.</span>
-                  </div>
-
-				 </div>
-
-				</div>
-
-
-				<div class="row form-segment">
-				  <header class="card__header">
-					<h4><i class="fa fa-location-arrow"></i> Navigacija</h4>
-				  </header>
-				 </div>
-
-				  <div class="form-group col-md-4">
-                    <label for="kontinent"><img class="flow-icons-013" src="{{asset('images/icons/international-delivery.svg')}}"> Kontinent*</label>
-                    <select name="kontinent" class="form-control" id="kontinent" required>
-  						<option value="Evropa" selected>Evropa</option>
-  					</select>
-				  </div>
-
-				  <div class="form-group col-md-4">
-                    <label for="drzava"><img class="flow-icons-013" src="{{asset('images/icons/earth.svg')}}"> Država*</label>
-                    <select name="drzava" class="form-control" id="drzava" required>
-  						<option value="Bosna i Hercegovina" selected>Bosna i Hercegovina</option>
-  					</select>
-				  </div>
-
-				  <div class="form-group col-md-4">
-                    <label for="entitet"><img class="flow-icons-013" src="{{asset('images/icons/map.svg')}}"> Entitet/Distrikt*</label>
-                    <select name="entitet" class="form-control" id="entitet" required>
-  						<option value=""  selected>Izaberite entitet/distrikt</option>
-						<option value="Federacija BiH">Federacija BiH</option>
-    					<option value="Republika Srpska">Republika Srpska</option>
-						<option value="Distrikt Brcko" disabled>Distrikt Brčko</option>
-  					</select>
-				  </div>
-
-				  <div class="form-group col-md-4" id="kantonDiv">
-                    <label for="kanton"><img class="flow-icons-013" src="{{asset('images/icons/placeholder.svg')}}"> Kanton*</label>
-                    <select name="kanton" class="form-control" id="kanton" required>
-  						<option value="" disabled selected>Izaberite kanton</option>
-						<option value="Unsko-sanski Kanton" disabled>Unsko-sanski Kanton</option>
-    					<option value="Posavski Kanton" disabled>Posavski Kanton</option>
-						<option value="Tuzlanski Kanton" disabled>Tuzlanski Kanton</option>
-    					<option value="Zeničko-dobojski Kanton" disabled>Zeničko-dobojski Kanton</option>
-						<option value="Bosansko-podrinjski kanton" disabled>Bosansko-podrinjski Kanton</option>
-    					<option value="Srednjobosanski Kanton" disabled>Srednjobosanski Kanton</option>
-						<option value="Hercegovačko-neretvanski Kanton" disabled>Hercegovačko-neretvanski Kanton</option>
-    					<option value="Zapadnohercegovački Kanton" disabled>Zapadnohercegovački Kanton</option>
-						<option value="Kanton Sarajevo">Kanton Sarajevo</option>
-    					<option value="Kanton 10" disabled>Kanton 10</option>
-  					</select>
-				  </div>
-
-				  <div class="form-group col-md-4" id="opcineDiv">
-                    <label for="opcine-ks"><img class="flow-icons-013" src="{{asset('images/icons/opcina.svg')}}"> Općine Kantona Sarajevo*</label>
-                    <select name="opcina" class="form-control" id="opcine-ks" required>
-  						<option value="" disabled selected>Izaberite općinu</option>
-						<option value="Hadzici">Hadžići</option>
-    					<option value="Ilidza">Ilidža</option>
-						<option value="Ilijas">Ilijaš</option>
-    					<option value="Centar">Centar</option>
-						<option value="Novi-grad">Novi Grad</option>
-    					<option value="Novo-sarajevo">Novo Sarajevo</option>
-						<option value="Stari-grad">Stari Grad</option>
-    					<option value="Trnovo">Trnovo</option>
-						<option value="Vogosca">Vogošća</option>
-  					</select>
-				  </div>
-
-				  <div class="form-group col-md-4" id="regijaDiv" style="display:none;">
-                    <label for="regija"><img class="flow-icons-013" src="{{asset('images/icons/placeholder.svg')}}"> Regija*</label>
-                    <select name="kantonSrb" class="form-control" id="regija">
-  						<option value="" disabled selected>Izaberite regiju</option>
-						<option value="Banjalucka" disabled>Banjalučka</option>
-    					<option value="Dobojsko-bijeljinska" disabled>Dobojsko-bijeljinska</option>
-						<option value="Sarajevsko-zvornicka">Sarajevsko-zvornička</option>
-    					<option value="Trebinjsko-focanska" disabled>Trebinjsko-fočanska</option>
-  					</select>
-				  </div>
-
-				  <div class="form-group col-md-4" id="opSrb" style="display:none;">
-                    <label for="opcine-sz-reg"><img class="flow-icons-013" src="{{asset('images/icons/opcina.svg')}}"> Općine Sarajevsko-Zvorničke regije*</label>
-                    <select class="form-control" name="opcinaSrb">
-  						<option value="" disabled selected>Izaberite općinu</option>
-						<option value="Bratunac" disabled>Bratunac</option>
-    					<option value="Han Pijesak" disabled>Han Pijesak</option>
-						<option value="Ilijas">Ilijaš</option>
-    					<option value="Istocni Stari Grad">Istočni Stari Grad</option>
-						<option value="Kasindo">Kasindo</option>
-    					<option value="Kladanj" disabled>Kladanj</option>
-						<option value="Lukavica" disabled>Lukavica</option>
-    					<option value="Milici" disabled>Milići</option>
-						<option value="Olovo" disabled>Olovo</option>
-						<option value="Osmaci" disabled>Osmaci</option>
-    					<option value="Pale">Pale</option>
-						<option value="Rogatica" disabled>Rogatica</option>
-    					<option value="Rudo" disabled>Rudo</option>
-						<option value="Sarajevo Novi Grad">Sarajevo Novi Grad</option>
-    					<option value="Sokolac" disabled>Sokolac</option>
-						<option value="Srebrenica" disabled>Srebrenica</option>
-    					<option value="Trnovo">Trnovo</option>
-						<option value="Ustipraca">Ustiprača</option>
-						<option value="Visegrad" disabled>Višegrad</option>
-						<option value="Vlasenica" disabled>Vlasenica</option>
-						<option value="Zvornik" disabled>Zvornik</option>
-						<option value="Sekovici" disabled>Šekovići</option>
-						<option value="Zepa" disabled>Žepa</option>
-  					</select>
-				  </div>
-
-				  <div class="form-group col-md-4">
-                    <label for="mjesto"><img class="flow-icons-013" src="{{asset('images/icons/small-calendar.svg')}}"> Mjesto/Grad kluba*</label>
-                    <input name="grad" type="text" name="mjesto" id="mjesto" class="form-control" placeholder="Unesite mjesto kluba" onFocus="initAutocomplete()" required autocomplete="on">
-                  </div>
-
-				  <div class="form-group col-md-4">
-                    <label for="tip-kluba"><img class="flow-icons-013" src="{{asset('images/icons/klubovi-icon.svg')}}"> Tip kluba*</label>
-                    <select name="tip" class="form-control" id="tip-kluba" required>
-  						<option value="" disabled selected>Izaberite tip kluba</option>
-						<option value="Sportski klub">Sportski klub</option>
-    					<option value="Invalidski sportski klub">Invalidski sportski klub</option>
-  					</select>
-				  </div>
-
-				  <div class="form-group col-md-4" id="sportoviDiv">
-                    <label for="sport"><img class="flow-icons-013" src="{{asset('images/icons/menu-circular-button.svg')}}"> Sportovi*</label>
-                    <select name="sport" class="form-control" id="sport">
-  						<option value="" selected>Izaberite sport</option>
-						<option value="Aikido">Aikido</option>
-						<option value="Atletika">Atletika</option>
-						<option value="Auto-Moto">Auto-Moto</option>
-						<option value="Badminton">Badminton</option>
-						<option value="Biciklizam">Biciklizam</option>
-						<option value="Bob">Bob</option>
-						<option value="Bocanje">Boćanje</option>
-						<option value="Bodybuilding and Fitness">Bodybuilding & Fitness</option>
-						<option value="Boks">Boks</option>
-						<option value="Curling">Curling</option>
-						<option value="Dizanje tegova">Dizanje tegova</option>
-						<option value="Futsal">Futsal</option>
-						<option value="Gimnastika">Gimnastika</option>
-						<option value="Golf">Golf</option>
-						<option value="Hokej">Hokej</option>
-						<option value="Hrvanje">Hrvanje</option>
-						<option value="Jedrenje">Jedrenje</option>
-						<option value="Ju Jitsu">Ju Jitsu</option>
-						<option value="Judo">Judo</option>
-						<option value="Kajak Kanu i Rafting">Kajak Kanu i Rafting</option>
-						<option value="Karate">Karate</option>
-						<option value="Kick Box">Kick Box</option>
-						<option value="Klizanje">Klizanje</option>
-						<option value="Konjicki sportovi">Konjički sportovi</option>
-						<option value="Kosarka">Košarka</option>
-						<option value="Kung Fu">Kung Fu</option>
-						<option value="Kuglanje">Kuglanje</option>
-						<option value="Nogomet">Nogomet</option>
-						<option value="Macevanje">Mačevanje</option>
-						<option value="Odbojka">Odbojka</option>
-						<option value="Planinarstvo">Planinarstvo</option>
-						<option value="Plivanje">Plivanje</option>
-						<option value="Ragbi">Ragbi</option>
-						<option value="Ronjenje">Ronjenje</option>
-						<option value="Rukomet">Rukomet</option>
-						<option value="Skijanje">Skijanje</option>
-						<option value="Sportski ribolov">Sportski ribolov</option>
-						<option value="Stoni tenis">Stoni tenis</option>
-						<option value="Strelicarstvo">Streličarstvo</option>
-						<option value="Streljastvo">Streljaštvo</option>
-						<option value="Sah">Šah</option>
-						<option value="Teakwondo">Taekwondo</option>
-						<option value="Tenis">Tenis</option>
-						<option value="Triatlon">Triatlon</option>
-						<option value="Vaterpolo">Vaterpolo</option>
-						<option value="Vazduhoplovstvo">Vazduhoplovstvo</option>
-						<option value="Veslanje">Veslanje</option>
-					</select>
-				  </div>
-
-				  <div class="form-group col-md-4" id="iSportoviDiv" style="display: none;">
-                    <label for="invalidski-sport"><img class="flow-icons-013" src="{{asset('images/icons/disability.svg')}}"> Invalidski sportovi</label>
-                    <select name="invalidski_sport" class="form-control" id="invalidski-sport">
-  						<option value="" selected>Izaberite sport</option>
-						<option value="Alpsko skijanje">Alpsko skijanje</option>
-						<option value="Atletika">Atletika</option>
-						<option value="Global">Global</option>
-						<option value="Kosarka u kolicima">Košarka u kolicima</option>
-						<option value="Nordijsko skijanje">Nordijsko skijanje</option>
-						<option value="Plivanje">Plivanje</option>
-						<option value="Sjedeca odbojka">Sjedeća odbojka</option>
-						<option value="Stoni tenis">Stoni tenis</option>
-						<option value="Streljastvo">Streljaštvo</option>
-						<option value="Sah">Šah</option>
-					</select>
-				  </div>
-
-				  <div class="form-group col-md-4">
-                    <label for="kategorija-klub"><img class="flow-icons-013" src="{{asset('images/icons/gender-symbols.svg')}}"> Kategorija kluba*</label>
-                    <select name="kategorija" class="form-control" id="kategorija-klub" required>
-  						<option value="" selected>Izaberite kategoriju kluba</option>
-						<option value="Muski klub">Muški klub</option>
-						<option value="Zenski klub">Ženski klub</option>
-						<option value="Mjesovito">Mješovito</option>
-  					</select>
-				  </div>
-
-			</div>
-
-			<div class="row form-objavi-klub-01">
-			  <header class="card__header">
-                <h4><i class="fa fa-info-circle"></i> Osnovne informacije</h4>
-              </header>
-			 </div>
-			<div class="row">
-				  <div class="form-group col-md-6">
-                    <label for="godina-osnivanja"><img class="flow-icons-013" src="{{asset('images/icons/small-calendar.svg')}}"> Godina osnivanja kluba</label>
-                    <input name="godina_osnivanja" type="number" id="godina-osnivanja" class="form-control" placeholder="Unesite godinu osnivanja kluba" required="true">
-                  </div>
-
-				  <div class="form-group col-md-6">
-                    <label for="domaci-teren"><img class="flow-icons-013" src="{{asset('images/icons/stadium-icon.svg')}}"> Domaći teren</label>
-                    <input name="teren" type="text" name="domaci-teren" id="domaci-teren" class="form-control" placeholder="Unesite naziv domaćeg terena kluba" required>
-                  </div>
-
-				  <div class="form-group col-md-6">
-                    <label for="takmicenje"><img class="flow-icons-013" src="{{asset('images/icons/trophy.svg')}}"> Takmičenje</label>
-                    <input type="text" name="takmicenje" id="takmicenje" class="form-control" placeholder="Unesite naziv takmičenja u kojem klub nastupa" required>
-                  </div>
-
-				  <div class="form-group col-md-6">
-                    <label for="savez"><img class="flow-icons-013" src="{{asset('images/icons/savez.svg')}}"> Savez kojem klub pripada</label>
-					<div class="form-group">
-					  <label class="radio radio-inline">
-						<input type="radio" id="inlineCheckbox1" name="savez" value="option1"> Državni savez
-						<span class="radio-indicator"></span>
-					  </label>
-					  <label class="radio radio-inline">
-						<input type="radio" id="inlineCheckbox2" name="savez" value="option2"> Entitetski savez
-						<span class="radio-indicator"></span>
-					  </label>
-					  <label class="radio radio-inline">
-						<input type="radio" id="inlineCheckbox3" name="savez" value="option3"> Kantonalni savez
-						<span class="radio-indicator"></span>
-					  </label>
-					</div>
-				  </div>
-
-			</div>
-
-			<div class="row form-objavi-klub-01">
-              <header class="card__header">
-                <h4><i class="fa fa-info-circle"></i> Kontakt informacije</h4>
-              </header>
-			 </div>
-			 <div class="row">
-
-					<div class="form-group col-md-4">
-						<label for="tel1"><img class="flow-icons-013" src="{{asset('images/icons/phone-call.svg')}}"> Telefon 1</label>
-						<input type="number" name="telefon1" id="tel1" class="form-control" placeholder="Unesite broj za službeni telefon 1">
-					</div>
-
-					<div class="form-group col-md-4">
-						<label for="tel2"><img class="flow-icons-013" src="{{asset('images/icons/phone-call.svg')}}"> Telefon 2</label>
-						<input type="number" name="telefon2" id="tel2" class="form-control" placeholder="Unesite broj za službeni telefon 2">
-					</div>
-
-					<div class="form-group col-md-4">
-						<label for="fax"><img class="flow-icons-013" src="{{asset('images/icons/fax-with-phone.svg')}}"> Fax</label>
-						<input type="number" name="fax" id="fax" class="form-control" placeholder="Unesite broj za službeni fax">
-					</div>
-
-					<div class="form-group col-md-4">
-						<label for="mail"><img class="flow-icons-013" src="{{asset('images/icons/envelope.svg')}}"> E-mail</label>
-						<input type="email" name="email" id="mail" class="form-control" placeholder="Unesite službeni E-mail">
-					</div>
-
-					<div class="form-group col-md-4">
-						<label for="web"><img class="flow-icons-013" src="{{asset('images/icons/worldwide.svg')}}"> Web stranica</label>
-						<input type="text" name="web_stranica" id="web" class="form-control" placeholder="Unesite link službene web stranice">
-					</div>
-
-					<div class="form-group col-md-4">
-						<label for="adresa"><img class="flow-icons-013" src="{{asset('images/icons/icon.svg')}}"> Adresa (ne prikazuje se)</label>
-						<input type="text" name="adresa" id="adresa" onFocus="adresaAutoComp()" class="form-control" placeholder="Unesite adresu sjedišta kluba" required>
-					</div>
-
-			</div>
-
-			<div class="row form-objavi-klub-01">
-              <header class="card__header">
-                <h4><i class="fa fa-share-alt"></i> Socijalne mreže</h4>
-              </header>
-			 </div>
-			 <div class="row">
-
-					<div class="form-group col-md-6">
-						<label for="fcb"><img class="flow-icons-013" src="{{asset('images/icons/facebook.svg')}}"> Facebook stranica</label>
-						<input type="text" name="fb" id="fcb" class="form-control" placeholder="Unesite link službene facebook stranice">
-					</div>
-
-					<div class="form-group col-md-6">
-						<label for="twt"><img class="flow-icons-013" src="{{asset('images/icons/twitter.svg')}}"> Twitter profil</label>
-						<input type="text" name="twitter" id="twt" class="form-control" placeholder="Unesite link službenog twitter profila">
-					</div>
-
-					<div class="form-group col-md-6">
-						<label for="inst"><img class="flow-icons-013" src="{{asset('images/icons/instagram.svg')}}"> Instagram profil</label>
-						<input type="text" name="instagram" id="inst" class="form-control" placeholder="Unesite link službenog instagram profila">
-					</div>
-
-					<div class="form-group col-md-6">
-						<label for="yt"><img class="flow-icons-013" src="{{asset('images/icons/youtube.svg')}}"> YouTUBE pofil</label>
-						<input type="text" name="yt" id="yt" class="form-control" placeholder="Unesite link službenog YouTUBE kanala">
-					</div>
-
-			</div>
-
-			<div class="row form-objavi-klub-01">
-              <header class="card__header">
-                <h4><i class="fa fa-youtube-play"></i> Video prezentacija</h4>
-              </header>
-			 </div>
-			 <div class="row">
-
-					<div class="form-group col-md-12">
-						<label for="videoprez"><img class="flow-icons-013" src="{{asset('images/icons/play-button.svg')}}"> Video prezentacija</label>
-						<input type="text" name="video" id="videoprez" class="form-control" placeholder="Unesite link videa (YouTUBE)">
-					</div>
-
-
-				<div class="col-md-6">
-                </div>
-				<div class="form-group form-group--submit col-md-6" >
-                    <a type="submit" name="submit" class="btn btn-default btn-sm btn-block btn-dalje prvi_korak_end">Sljedeći korak <i class="fa fa-chevron-right"></i></a>
-                </div>
-
-			</div>
-
-            </div>
-            <!-- Tab: Općenito / End -->
-
-			<!-- Tab: Ličnosti -->
-
-			<div role="tabpanel" class="tab-pane fade neaktivno" id="tab-licnosti">
-		
-
-			<!-- Kadar 01 -->
-			<div class="row">
-
-				<div class="row identitet-style">
-
-				 <div class="col-md-6 objavi-klub-logo-setup">
-
-				    <div class="col-md-7">
-
-                      <div class="alc-staff__photo">
-                            <img class="slika-edit-profil" id="slika-edit-profil1" src="{{asset('images/default_avatar.png')}}" alt="">
-                          </div>
-
-				    </div>
-
-                    <div class="col-md-5 sadrzaj-slike">
-
-						  <p class="dodaj-sliku-naslov klub-a1">Slika ličnosti</p>
-						  <p class="dodaj-sliku-call">Odaberite sliku za istaknutu ličnost</p>
-						  <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-							Odaberi sliku... <input type="file" name="avatar_licnost[]" id="al1" accept="image/*" style="display: none;" onchange="previewFile('al1', 'slika-edit-profil1')">
-						  </label>
-						  <div class="info001">
-							<p class="info-upload-slike">Preporučene dimenzije za sliku ličnosti:</p>
-							<p class="info-upload-slike">Minimalno: 312x250 px</p>
-							<p class="info-upload-slike">Maksimalno: 1920x1080 px</p>
-						  </div>
-
-					</div>
-				 </div>
-
-				 <div class="col-md-6">
-
-				  <div class="form-group col-md-6 col-xs-12">
-                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Ime</label>
-                    <input type="text" name="licnost_ime[]" id="ime-kluba" class="form-control" placeholder="Unesite ime ličnosti">
-                  </div>
-				  <div class="form-group col-md-6 col-xs-12">
-                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Prezime</label>
-                    <input type="text" name="licnost_prezime[]" id="ime-kluba" class="form-control" placeholder="Unesite prezime ime ličnosti">
-                  </div>
-				  <div class="form-group col-md-12">
-					<label for="opis"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Opis i uloga</label>
-					<textarea class="form-control" rows="4" id="opis" name="licnost_opis[]" maxlength="350" placeholder="Upišite kratak opis uloge i funkcije navedene ličnosti u klubu..."></textarea>
-				  </div>
-
-				 </div>
-
-				</div>
-			</div>
-			<!-- Kadar 01 / End-->
-			<!-- Kadar 02 -->
-			<div class="row">
-
-				<div class="row identitet-style">
-
-				 <div class="col-md-6 objavi-klub-logo-setup">
-
-				    <div class="col-md-7">
-
-                      <div class="alc-staff__photo">
-                            <img class="slika-edit-profil" id="slika-edit-profil2" src="{{asset('images/default_avatar.png')}}" alt="">
-                          </div>
-
-				    </div>
-
-                    <div class="col-md-5 sadrzaj-slike">
-
-						  <p class="dodaj-sliku-naslov klub-a1">Slika ličnosti</p>
-						  <p class="dodaj-sliku-call">Odaberite sliku za istaknutu ličnost</p>
-						  <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-							Odaberi sliku... <input type="file" name="avatar_licnost[]" id="al2" accept="image/*" style="display: none;" onchange="previewFile('al2', 'slika-edit-profil2')">
-						  </label>
-						  <div class="info001">
-							<p class="info-upload-slike">Preporučene dimenzije za sliku ličnosti:</p>
-							<p class="info-upload-slike">Minimalno: 312x250 px</p>
-							<p class="info-upload-slike">Maksimalno: 1920x1080 px</p>
-						  </div>
-
-					</div>
-				 </div>
-
-				 <div class="col-md-6">
-
-				  <div class="form-group col-md-6 col-xs-12">
-                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Ime</label>
-                    <input type="text" name="licnost_ime[]" id="ime-kluba" class="form-control" placeholder="Unesite ime ličnosti">
-                  </div>
-				  <div class="form-group col-md-6 col-xs-12">
-                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Prezime</label>
-                    <input type="text" name="licnost_prezime[]" id="ime-kluba" class="form-control" placeholder="Unesite prezime ime ličnosti">
-                  </div>
-				  <div class="form-group col-md-12">
-					<label for="opis"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Opis i uloga</label>
-					<textarea class="form-control" rows="4" id="opis" name="licnost_opis[]" maxlength="350" placeholder="Upišite kratak opis uloge i funkcije navedene ličnosti u klubu..."></textarea>
-				  </div>
-
-				 </div>
-
-				</div>
-			</div>
-			<!-- Kadar 02 / End-->
-			<!-- Kadar 03 -->
-			<div class="row">
-
-				<div class="row identitet-style">
-
-				 <div class="col-md-6 objavi-klub-logo-setup">
-
-				    <div class="col-md-7">
-
-                      <div class="alc-staff__photo">
-                            <img class="slika-edit-profil" id="slika-edit-profil3" src="{{asset('images/default_avatar.png')}}" alt="">
-                          </div>
-
-				    </div>
-
-                    <div class="col-md-5 sadrzaj-slike">
-
-						  <p class="dodaj-sliku-naslov klub-a1">Slika ličnosti</p>
-						  <p class="dodaj-sliku-call">Odaberite sliku za istaknutu ličnost</p>
-						  <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-							Odaberi sliku... <input type="file" name="avatar_licnost[]" id="al3" accept="image/*" style="display: none;" onchange="previewFile('al3', 'slika-edit-profil3')">
-						  </label>
-						  <div class="info001">
-							<p class="info-upload-slike">Preporučene dimenzije za sliku ličnosti:</p>
-							<p class="info-upload-slike">Minimalno: 312x250 px</p>
-							<p class="info-upload-slike">Maksimalno: 1920x1080 px</p>
-						  </div>
-
-					</div>
-				 </div>
-
-				 <div class="col-md-6">
-
-				  <div class="form-group col-md-6 col-xs-12">
-                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Ime</label>
-                    <input type="text" name="licnost_ime[]" id="ime-kluba" class="form-control" placeholder="Unesite ime ličnosti">
-                  </div>
-				  <div class="form-group col-md-6 col-xs-12">
-                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Prezime</label>
-                    <input type="text" name="licnost_prezime[]" id="ime-kluba" class="form-control" placeholder="Unesite prezime ime ličnosti">
-                  </div>
-				  <div class="form-group col-md-12">
-					<label for="opis"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Opis i uloga</label>
-					<textarea class="form-control" rows="4" id="opis" name="licnost_opis[]" maxlength="350" placeholder="Upišite kratak opis uloge i funkcije navedene ličnosti u klubu..."></textarea>
-				  </div>
-
-				 </div>
-
-				</div>
-			</div>
-			<!-- Kadar 03 / End-->
-			<!-- Kadar 04 -->
-			<div class="row">
-
-				<div class="row identitet-style">
-
-				 <div class="col-md-6 objavi-klub-logo-setup">
-
-				    <div class="col-md-7">
-
-                      <div class="alc-staff__photo">
-                            <img class="slika-edit-profil" id="slika-edit-profil4" src="{{asset('images/default_avatar.png')}}" alt="">
-                          </div>
-
-				    </div>
-
-                    <div class="col-md-5 sadrzaj-slike">
-
-						  <p class="dodaj-sliku-naslov klub-a1">Slika ličnosti</p>
-						  <p class="dodaj-sliku-call">Odaberite sliku za istaknutu ličnost</p>
-						  <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-							Odaberi sliku... <input type="file" name="avatar_licnost[]" id="al4" accept="image/*" style="display: none;" onchange="previewFile('al4', 'slika-edit-profil4')">
-						  </label>
-						  <div class="info001">
-							<p class="info-upload-slike">Preporučene dimenzije za sliku ličnosti:</p>
-							<p class="info-upload-slike">Minimalno: 312x250 px</p>
-							<p class="info-upload-slike">Maksimalno: 1920x1080 px</p>
-						  </div>
-
-					</div>
-				 </div>
-
-				 <div class="col-md-6">
-
-				  <div class="form-group col-md-6 col-xs-12">
-                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Ime</label>
-                    <input type="text" name="licnost_ime[]" id="ime-kluba" class="form-control" placeholder="Unesite ime ličnosti">
-                  </div>
-				  <div class="form-group col-md-6 col-xs-12">
-                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Prezime</label>
-                    <input type="text" name="licnost_prezime[]" id="ime-kluba" class="form-control" placeholder="Unesite prezime ime ličnosti">
-                  </div>
-				  <div class="form-group col-md-12">
-					<label for="opis"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Opis i uloga</label>
-					<textarea class="form-control" rows="4" id="opis" name="licnost_opis[]" maxlength="350" placeholder="Upišite kratak opis uloge i funkcije navedene ličnosti u klubu..."></textarea>
-				  </div>
-
-				 </div>
-
-				</div>
-			</div>
-			<!-- Kadar 04 / End-->
-			<!-- Kadar 05 -->
-			<div class="row">
-
-				<div class="row identitet-style">
-
-				 <div class="col-md-6 objavi-klub-logo-setup">
-
-				    <div class="col-md-7">
-
-                      <div class="alc-staff__photo">
-                            <img class="slika-edit-profil" id="slika-edit-profil5" src="{{asset('images/default_avatar.png')}}" alt="">
-                          </div>
-
-				    </div>
-
-                    <div class="col-md-5 sadrzaj-slike">
-
-						  <p class="dodaj-sliku-naslov klub-a1">Slika ličnosti</p>
-						  <p class="dodaj-sliku-call">Odaberite sliku za istaknutu ličnost</p>
-						  <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-							Odaberi sliku... <input type="file" name="avatar_licnost[]" id="al5" accept="image/*" style="display: none;" onchange="previewFile('al5', 'slika-edit-profil5')">
-						  </label>
-						  <div class="info001">
-							<p class="info-upload-slike">Preporučene dimenzije za sliku ličnosti:</p>
-							<p class="info-upload-slike">Minimalno: 312x250 px</p>
-							<p class="info-upload-slike">Maksimalno: 1920x1080 px</p>
-						  </div>
-
-					</div>
-				 </div>
-
-				 <div class="col-md-6">
-
-				  <div class="form-group col-md-6 col-xs-12">
-                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Ime</label>
-                    <input type="text" name="licnost_ime[]" id="ime-kluba" class="form-control" placeholder="Unesite ime ličnosti">
-                  </div>
-				  <div class="form-group col-md-6 col-xs-12">
-                    <label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Prezime</label>
-                    <input type="text" name="licnost_prezime[]" id="ime-kluba" class="form-control" placeholder="Unesite prezime ime ličnosti">
-                  </div>
-				  <div class="form-group col-md-12">
-					<label for="opis"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Opis i uloga</label>
-					<textarea class="form-control" rows="4" id="opis" name="licnost_opis[]" maxlength="350" placeholder="Upišite kratak opis uloge i funkcije navedene ličnosti u klubu..."></textarea>
-				  </div>
-
-				 </div>
-
-				</div>
-				<div class="form-group form-group--submit col-md-6">
-                    <a href="#tab-opcenito" role="tab" data-toggle="tab" class="btn btn-default btn-sm btn-block btn-nazad"><i class="fa fa-chevron-left"></i> Nazad</a>
-                </div>
-				<div class="form-group form-group--submit col-md-6">
-                    <a href="#tab-vremeplov" role="tab" data-toggle="tab" class="btn btn-default btn-sm btn-block btn-dalje">Sljedeći korak <i class="fa fa-chevron-right"></i></a>
-                </div>
-
-			</div>
-
-			<!-- Kadar 05 / End-->
-			</div>
-
-			<!-- Tab: Ličnosti / End -->
-
-			<!-- Tab: Vremeplov -->
-
-			<div role="tabpanel" class="tab-pane fade neaktivno" id="tab-vremeplov">
-			
-			<div class="row">
-
-				<div class="row identitet-style">
-
-				 <div class="col-md-12">
-
-				  <div class="form-group col-md-12">
-					<label for="opis"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Vremeplov</label>
-					<textarea class="form-control" rows="20" id="opis" name="vremeplov" maxlength="1050" placeholder="Upišite ukratko informacije vezane za historijat vašeg kluba i njegovu tradiciju..."></textarea>
-				  </div>
-
-				 </div>
-
-				</div>
-
-			</div>
-
-			<div class="row">
-				<div class="form-group form-group--submit col-md-6">
-                    <a href="#tab-licnosti" role="tab" data-toggle="tab" class="btn btn-default btn-sm btn-block btn-nazad"><i class="fa fa-chevron-left"></i> Nazad</a>
-                </div>
-				<div class="form-group form-group--submit col-md-6">
-                    <a href="#tab-vitrina" role="tab" data-toggle="tab" class="btn btn-default btn-sm btn-block btn-dalje">Sljedeći korak <i class="fa fa-chevron-right"></i></a>
-                </div>
-			</div>
-
-			</div>
-
-			<!-- Tab: Vremeplov / End -->
-
-			<!-- Tab: Vitrina -->
-			<div role="tabpanel" class="tab-pane fade neaktivno" id="tab-vitrina">
-
-				
-
-			
-			<div class="row">
 			<div class="row form-segment">
-			  <header class="card__header">
-                <h4><i class="fa fa-plus-circle"></i> Unos osvojenog trofeja/nagrade</h4>
-              </header>
-			 </div>
-				<div class="col-md-6">
-				  <div class="form-group col-md-6">
-                    <label for="vrsta-nagrade"><img class="flow-icons-013" src="{{asset('images/icons/medalja.svg')}}"> Vrsta nagrade</label>
-                    <select name="vrsta_nagrade[]" class="form-control" id="vrsta-nagrade">
-  						<option value="" selected>Izaberite vrstu osvojene nagrade</option>
-						<option value="Medalja">Medalja</option>
-						<option value="Trofej">Trofej/Pehar</option>
-						<option value="Priznanje">Priznanje</option>
-						<option value="Plaketa">Plaketa</option>
-  					</select>
-                  </div>
-				  <div class="form-group col-md-6">
-                    <label for="tip-nagrade"><img class="flow-icons-013" src="{{asset('images/icons/medalja.svg')}}"> Tip nagrade</label>
-                    <select name="tip_nagrade[]" class="form-control" id="tip-nagrade">
-  						<option value="" selected>Izaberite tip nagrade</option>
-						<option value="Zlato">Zlato (1. mjesto)</option>
-						<option value="Srebro">Srebro (2. mjesto)</option>
-						<option value="Bronza">Bronza (3. mjesto)</option>
-						<option value="Ostalo">Ostalo</option>
-  					</select>
-                  </div>
-				  <div class="form-group col-md-12">
-                    <label for="tip-nagrade"><img class="flow-icons-013" src="{{asset('images/icons/medalja.svg')}}"> Nivo takmičenja</label>
-                    <select name="nivo_nagrade[]" class="form-control" id="tip-nagrade">
-  						<option value="" selected>Izaberite nivo takmičenja</option>
-						<option value="Internacionalni nivo">Internacionalni nivo</option>
-						<option value="Regionalni nivo">Regionalni nivo</option>
-						<option value="Drzavni nivo">Državni nivo</option>
-						<option value="Entitetski nivo">Entitetski nivo</option>
-						<option value="Drugo">Drugo</option>
-  					</select>
-                  </div>
-				</div>
-				<div class="col-md-6">
-				  <div class="form-group">
-                    <label for="takmicenje"><img class="flow-icons-013" src="{{asset('images/icons/trophy.svg')}}"> Naziv takmičenja</label>
-                    <input type="text" name="trofej_takmicenja[]" id="takmicenje" class="form-control" placeholder="Unesite naziv takmicenja za koje je osvojena nagrada">
-                  </div>
-				  <div class="form-group col-md-6 col-xs-12">
-                    <label for="sezona"><img class="flow-icons-013" src="{{asset('images/icons/small-calendar.svg')}}"> Sezona/Godina</label>
-                    <input type="text" name="trofej_sezona[]" id="sezona" class="form-control" placeholder="Unesite Sezonu/Godinu osvajanja trofeja">
-                  </div>
-				  <div class="form-group col-md-6 col-xs-12">
-                    <label for="osvajanja"><img class="flow-icons-013" src="{{asset('images/icons/the-sum-of.svg')}}"> Broj osvajanja</label>
-                    <input type="number" name="trofej_osvajanja[]" id="osvajanja" class="form-control" placeholder="Unesite broj osvajanja trofeja">
-                  </div>
-				</div>
-			</div>
-			<div class="troffeji"></div>
-			<div class="row">
-				<div class="col-md-4"></div>
-				<!--<div class="form-group form-group--submit col-md-4">
-                    <a href="javascript:void(0);" class="btn btn-default btn-sm btn-block btn-dodaj btn-dodaj-trofej"><i class="fa fa-database"></i> 2 Dodavanje trofeja </a>
-                </div>-->
-				<div class="col-md-4"></div>
-			</div>
-
-			<div class="row">
-				<div class="form-group form-group--submit col-md-6">
-                    <a href="#tab-vremeplov" role="tab" data-toggle="tab" class="btn btn-default btn-sm btn-block btn-nazad"><i class="fa fa-chevron-left"></i> Nazad</a>
-                </div>
-				<div class="form-group form-group--submit col-md-6">
-                    <a href="#tab-galerija" role="tab" data-toggle="tab" class="btn btn-default btn-sm btn-block btn-dalje">Sljedeći korak <i class="fa fa-chevron-right"></i></a>
-                </div>
-			</div>
-
-			</div>
-			<!-- Tab: Vitrina / End -->
-
-			<!-- Tab: Foto galerija -->
-			<div role="tabpanel" class="tab-pane fade neaktivno" id="tab-galerija">
-
-				
-
-
-				<div class="row dodavanje-slika">
-                      <div class="col-md-12 sadrzaj-slike">
-						  <p class="dodaj-sliku-naslov">Dodajte slike</p>
-						  <p class="dodaj-sliku-call">u Vašu galeriju</p>
-						  <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-							Odaberi slike... <input type="file" class="galerija" name="galerija[]" accept="image/*" accept="image/*" multiple style="display: none;">
-						  </label>
-						  <div class="info001">
-							<p class="info-upload-slike">Preporučena dimenzija za vaše slike:</p>
-							<p class="info-upload-slike">1920x1080 px</p>
-						  </div>
+				<div class="col-md-12">
+					@if ($errors->any())
+						<div class="alert alert-danger">
+							<ul>
+								@foreach ($errors->all() as $error)
+									<li>{{ $error }}</li>
+								@endforeach
+							</ul>
 						</div>
+					@endif
 				</div>
+			</div>
+		<form id="createNewClub" role="form" action="{{ url('/clubs/new/create') }}" method="POST" enctype="multipart/form-data" >
+			{!! csrf_field() !!}
+          	<!-- Tab panes -->
+			  <div class="tab-content card__content">
 
 
-				<div class="row form-objavi-klub-01" id="galerija_klub">
-					<div class="album__item col-xs-6 col-sm-3">
-						<div class="album__item-holder">
-							<a href="{{asset('images/banner-122.jpg')}}" class="album__item-link mp_gallery">
-							<figure class="album__thumb">
-								<img src="{{asset('images/banner-122.jpg')}}" alt="">
-							</figure>
-							<div class="album__item-desc">
-								<img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt="">
-							</div>
-							</a>
-						</div>
-						<div class="progress-stats upload-slike-statust-bar">
-                        <div class="progress">
-                          <div class="progress__bar progress__bar-width-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                          </div>
-                        </div>
-					</div>
+				<!-- Tab: Općenito -->
 
+					<div role="tabpanel" class="tab-pane fade in active" id="tab-opcenito">
+					<div class="row">
+						<div class="row identitet-style">
 
+						 <div class="col-md-6 objavi-klub-logo-setup">
 
+							<div class="col-md-7">
 
-				</div>
-
-				<div class="row">
-					<div class="col-md-4"></div>
-					<!--<div class="form-group form-group--submit col-md-4">
-						<a href="#" class="btn btn-default btn-sm btn-block btn-dodaj"><i class="fa fa-database"></i> 3 Dodavanje fotografije </a>
-					</div>-->
-					<div class="col-md-4"></div>
-				</div>
-
-				<div class="row">
-					<div class="form-group form-group--submit col-md-6">
-						<a href="#tab-vitrina" role="tab" data-toggle="tab" class="btn btn-default btn-sm btn-block btn-nazad"><i class="fa fa-chevron-left"></i> Nazad</a>
-					</div>
-					<div class="form-group form-group--submit col-md-6" >
-						<button  class="btn btn-default btn-sm btn-block btn-dalje bt-zavrsi" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus-circle"></i> Završi i objavi</button>
-
-				</form>
-						<!-- Modal -->
-						  <!--<div class="modal fade" id="myModal" role="dialog">
-							<div class="modal-dialog">
-
-							   Modal content
-							  <div class="modal-content">
-								<div class="modal-header">
-								  <h4 class="modal-title">USPJEŠNO STE KREIRALI KLUB</h4>
-								</div>
-								<div class="modal-body">
-								  <img class="ikona-modal" src="{{asset('images/icons/checked.svg')}}">
-								  <p class="bravo-info">Predložak koji ste napravili će biti u najkraćem mogućem vremenskom periodu pregledan od strane naše administracije, te ukoliko bude zadovoljavao sve uvjete koje nalaže Sve Za Sport, biti će i objavljen.</p>
-								  <p class="bravo-hello">Sportski pozdrav!</p>
-								</div>
-								<div class="modal-footer">
-								  <button type="button" class="btn btn-default btn-close-modal-01" data-dismiss="modal"><i class="fa fa-times"></i> Zatvori prozor</button>
-								</div>
+							  <div class="alc-staff__photo">
+								<img class="slika-upload-klub" id="slika-upload-klub" src="{{asset('images/SZS-club-logo.png')}}" alt="">
 							  </div>
 
 							</div>
-						  </div>-->
-						<!-- Modal content / End -->
+
+							<div class="col-md-5 sadrzaj-slike">
+
+								  <p class="dodaj-sliku-naslov klub-a1">Logo kluba*</p>
+								  <p class="dodaj-sliku-call">Identitet kluba</p>
+								  <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
+									Odaberi logo... <input type="file" id="file_logo_kluba" name="logo" style="display: none;" accept="image/*" onchange="previewFile('#file_logo_kluba', '#slika-upload-klub', 1024, 1024, 512, 512)">
+								  </label>
+								  <div class="info001">
+									<p class="info-upload-slike">Preporučene dimenzije za logo:</p>
+									<p class="info-upload-slike">Minimalno: 512x512 px</p>
+									<p class="info-upload-slike">Maksimalno: 1024x1024 px</p>
+								  </div>
+
+							</div>
+						 </div>
+
+						 <div class="col-md-6">
+
+						  <div class="form-group col-md-12">
+							<label for="ime-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Ime/Naziv kluba*</label>
+							<input type="text" name="name" id="ime-kluba" class="form-control" placeholder="Unesite ime/naziv kluba" value="{{ old('name') }}">
+						  </div>
+						  <div class="form-group has-success col-md-12">
+							<label for="karakter-kluba"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Karakter kluba* <span>(izmjenjivo)</span></label>
+							<input type="text" name="nature" id="karakter-kluba" class="form-control" placeholder="Unesite karakter kluba" value="{{ old('nature') ? old('nature') : 'Fudbalski klub' }}">
+							<span>Prilikom unosa karaktera kluba ne unositi kratice kao što su: FK, NK, KK, OK i sl.</span>
+						  </div>
+
+						 </div>
+
+						</div>
+
+
+						<div class="row form-segment">
+						  <header class="card__header">
+							<h4><i class="fa fa-location-arrow"></i> Navigacija</h4>
+						  </header>
+						 </div>
+						<div class="row">
+							  <div class="form-group col-md-4">
+								<label for="continent"><img class="flow-icons-013" src="{{asset('images/icons/international-delivery.svg')}}"> Kontinent*</label>
+								<select name="continent" class="form-control" id="continent">
+									<option selected disabled>Izaberite kontinent kluba</option>
+									@foreach($regions as $region)
+										@if($region->region_type->type == 'Continent')
+											<option data-parent="{{ $region->region_parent }}" value="{{ $region->id }}" {{ old('continent') == $region->id ? 'selected' : '' }}>{{ $region->name }}</option>
+										@endif
+									@endforeach
+								</select>
+							  </div>
+
+							  <div class="form-group col-md-4">
+								<label for="country"><img class="flow-icons-013" src="{{asset('images/icons/earth.svg')}}"> Država*</label>
+								<select name="country" class="form-control" id="country" {{ old('country') ? '' : 'disabled' }}>
+									<option selected disabled>Izaberite državu kluba</option>
+									@foreach($regions as $region)
+										@if($region->region_type->type == 'Country')
+											<option data-parent="{{ $region->region_parent }}" value="{{ $region->id }}" {{ old('country') == $region->id ? 'selected' : '' }}>{{ $region->name }}</option>
+										@endif
+									@endforeach
+								</select>
+							  </div>
+
+							  <div class="form-group col-md-4">
+								<label for="province"><img class="flow-icons-013" src="{{asset('images/icons/map.svg')}}"> Pokrajina*</label>
+								<select name="province" class="form-control" id="province" {{ old('province') ? '' : 'disabled' }}>
+									<option selected disabled>Izaberite pokrajinu kluba</option>
+									@foreach($regions as $region)
+										@if($region->region_type->type == 'Province')
+											<option data-parent="{{ $region->region_parent }}" value="{{ $region->id }}" {{ old('province') == $region->id ? 'selected' : '' }}>{{ $region->name }}</option>
+										@endif
+									@endforeach
+								</select>
+							  </div>
+						</div>
+						<div class="row">
+						  <div class="form-group col-md-4">
+							<label for="region"><img class="flow-icons-013" src="{{asset('images/icons/placeholder.svg')}}"> Regija*</label>
+							<select name="region" class="form-control" id="region" {{ old('region') ? '' : 'disabled' }}>
+								<option selected disabled>Izaberite regiju kluba</option>
+								@foreach($regions as $region)
+									@if($region->region_type->type == 'Region')
+										<option data-parent="{{ $region->region_parent }}" value="{{ $region->id }}" {{ old('region') == $region->id ? 'selected' : '' }}>{{ $region->name }}</option>
+									@endif
+								@endforeach
+							</select>
+						  </div>
+
+						  <div class="form-group col-md-4">
+							<label for="municipality"><img class="flow-icons-013" src="{{asset('images/icons/opcina.svg')}}"> Općina*</label>
+							<select name="municipality" class="form-control" id="municipality" {{ old('municipality') ? '' : 'disabled' }}>
+								<option selected disabled>Izaberite općinu kluba</option>
+								@foreach($regions as $region)
+									@if($region->region_type->type == 'Municipality')
+										<option data-parent="{{ $region->region_parent }}" value="{{ $region->id }}" {{ old('municipality') == $region->id ? 'selected' : '' }}>{{ $region->name }}</option>
+									@endif
+								@endforeach
+							</select>
+						  </div>
+
+						  <div class="form-group col-md-4">
+							<label for="mjesto"><img class="flow-icons-013" src="{{asset('images/icons/small-calendar.svg')}}"> Mjesto/Grad kluba*</label>
+							<input name="city" id="mjesto" class="form-control" placeholder="Unesite mjesto kluba" value="{{ old('city') }}">
+						  </div>
+						</div>
+						<div class="row">
+						  <div class="form-group col-md-4">
+							<label for="club-type"><img class="flow-icons-013" src="{{asset('images/icons/klubovi-icon.svg')}}"> Tip kluba*</label>
+							<select name="type" class="form-control" id="club-type">
+								<option value="" disabled {{ old('type') == '' ? 'selected' : '' }}>Izaberite tip kluba</option>
+								<option value="1" {{ old('type') == '1' ? 'selected' : '' }}>Sportski klub</option>
+								<option value="2" {{ old('type') == '2' ? 'selected' : '' }}>Invalidski sportski klub</option>
+							</select>
+						  </div>
+
+						  <div class="form-group col-md-4">
+							<label for="sport"><img class="flow-icons-013" src="{{asset('images/icons/menu-circular-button.svg')}}"> Sportovi*</label>
+							<select name="sport" class="form-control" id="sport" {{ old('sport') ? '' : 'disabled' }}>
+								<option selected disabled>Izaberite sport kluba</option>
+								@foreach($sports as $sport)
+									<option data-disabled="{{ $sport->with_disabilities }}" value="{{ $sport->id }}" {{ old('sport') == $sport->id ? 'selected' : '' }}>{{ $sport->name }}</option>
+								@endforeach
+							</select>
+						  </div>
+
+						  <div class="form-group col-md-4">
+							<label for="club-category"><img class="flow-icons-013" src="{{asset('images/icons/gender-symbols.svg')}}"> Kategorija kluba*</label>
+							<select name="category" class="form-control" id="club-category">
+								<option selected disabled>Izaberite sport kluba</option>
+								@foreach($clubCategories as $category)
+									<option value="{{ $category->id }}" {{ old('category') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+								@endforeach
+							</select>
+						  </div>
+						</div>
+
 					</div>
+
+					<div class="row form-objavi-klub-01">
+					  <header class="card__header">
+						<h4><i class="fa fa-info-circle"></i> Osnovne informacije</h4>
+					  </header>
+					 </div>
+					<div class="row">
+						  <div class="form-group col-md-6">
+							<label for="established_in"><img class="flow-icons-013" src="{{asset('images/icons/small-calendar.svg')}}"> Godina osnivanja kluba</label>
+							<input name="established_in" type="number" id="established_in" class="form-control" placeholder="Unesite godinu osnivanja kluba" value="{{ old('established_in') }}">
+						  </div>
+
+						  <div class="form-group col-md-6">
+							<label for="domaci-teren"><img class="flow-icons-013" src="{{asset('images/icons/stadium-icon.svg')}}"> Domaći teren</label>
+							<input name="home_field" type="text" id="domaci-teren" class="form-control" placeholder="Unesite naziv domaćeg terena kluba" value="{{ old('home_field') }}">
+						  </div>
+
+						  <div class="form-group col-md-6">
+							<label for="takmicenje"><img class="flow-icons-013" src="{{asset('images/icons/trophy.svg')}}"> Takmičenje</label>
+							<input type="text" name="competiton" id="takmicenje" class="form-control" placeholder="Unesite naziv takmičenja u kojem klub nastupa" value="{{ old('competiton') }}">
+						  </div>
+
+						  <div class="form-group col-md-6" id="associations" style="display: {{ old('country') ? 'block' : 'none' }};">
+							<label><img class="flow-icons-013" src="{{asset('images/icons/savez.svg')}}"> Savez kojem klub pripada</label>
+							  <div class="form-group">
+								  @foreach($associations as $association)
+									  <label class="radio radio-inline" style="display: {{ old('country') == $association->region_id ? 'inline-block' : 'none' }};">
+										  <input type="radio" data-region="{{ $association->region_id }}" name="association" value="{{ $association->id }}" {{ old('association') == $association->id ? 'checked' : '' }}> {{ $association->name }}
+										  <span class="radio-indicator"></span>
+									  </label>
+								  @endforeach
+							  </div>
+						  </div>
+
+					</div>
+
+					<div class="row form-objavi-klub-01">
+					  <header class="card__header">
+						<h4><i class="fa fa-info-circle"></i> Kontakt informacije</h4>
+					  </header>
+					 </div>
+					 <div class="row">
+
+							<div class="form-group col-md-4">
+								<label for="tel1"><img class="flow-icons-013" src="{{asset('images/icons/phone-call.svg')}}"> Telefon 1</label>
+								<input type="number" name="phone_1" id="tel1" class="form-control" placeholder="Unesite broj za službeni telefon 1" value="{{ old('phone_1') }}">
+							</div>
+
+							<div class="form-group col-md-4">
+								<label for="tel2"><img class="flow-icons-013" src="{{asset('images/icons/phone-call.svg')}}"> Telefon 2</label>
+								<input type="number" name="phone_2" id="tel2" class="form-control" placeholder="Unesite broj za službeni telefon 2" value="{{ old('phone_2') }}">
+							</div>
+
+							<div class="form-group col-md-4">
+								<label for="fax"><img class="flow-icons-013" src="{{asset('images/icons/fax-with-phone.svg')}}"> Fax</label>
+								<input type="number" name="fax" id="fax" class="form-control" placeholder="Unesite broj za službeni fax" value="{{ old('fax') }}">
+							</div>
+
+							<div class="form-group col-md-4">
+								<label for="mail"><img class="flow-icons-013" src="{{asset('images/icons/envelope.svg')}}"> E-mail</label>
+								<input type="email" name="email" id="mail" class="form-control" placeholder="Unesite službeni E-mail" value="{{ old('email') }}">
+							</div>
+
+							<div class="form-group col-md-4">
+								<label for="web"><img class="flow-icons-013" src="{{asset('images/icons/worldwide.svg')}}"> Web stranica</label>
+								<input type="text" name="website" id="web" class="form-control" placeholder="Unesite link službene web stranice" value="{{ old('website') }}">
+							</div>
+
+							<div class="form-group col-md-4">
+								<label for="adresa"><img class="flow-icons-013" src="{{asset('images/icons/icon.svg')}}"> Adresa (ne prikazuje se)</label>
+								<input type="text" name="address" id="adresa" class="form-control" placeholder="Unesite adresu sjedišta kluba" value="{{ old('address') }}">
+							</div>
+
+					</div>
+
+					<div class="row form-objavi-klub-01">
+					  <header class="card__header">
+						<h4><i class="fa fa-share-alt"></i> Socijalne mreže</h4>
+					  </header>
+					 </div>
+					 <div class="row">
+
+							<div class="form-group col-md-6">
+								<label for="facebook"><img class="flow-icons-013" src="{{asset('images/icons/facebook.svg')}}"> Facebook stranica</label>
+								<input type="text" name="facebook" id="facebook" class="form-control" placeholder="Unesite link službene facebook stranice" value="{{ old('facebook') }}">
+							</div>
+
+							<div class="form-group col-md-6">
+								<label for="twitter"><img class="flow-icons-013" src="{{asset('images/icons/twitter.svg')}}"> Twitter profil</label>
+								<input type="text" name="twitter" id="twitter" class="form-control" placeholder="Unesite link službenog twitter profila" value="{{ old('twitter') }}">
+							</div>
+
+							<div class="form-group col-md-6">
+								<label for="instagram"><img class="flow-icons-013" src="{{asset('images/icons/instagram.svg')}}"> Instagram profil</label>
+								<input type="text" name="instagram" id="instagram" class="form-control" placeholder="Unesite link službenog instagram profila" value="{{ old('instagram') }}">
+							</div>
+
+							<div class="form-group col-md-6">
+								<label for="youtube"><img class="flow-icons-013" src="{{asset('images/icons/youtube.svg')}}"> YouTUBE pofil</label>
+								<input type="text" name="youtube" id="youtube" class="form-control" placeholder="Unesite link službenog YouTUBE kanala" value="{{ old('youtube') }}">
+							</div>
+
+					</div>
+
+					<div class="row form-objavi-klub-01">
+					  <header class="card__header">
+						<h4><i class="fa fa-youtube-play"></i> Video prezentacija</h4>
+					  </header>
+					 </div>
+					 <div class="row">
+
+							<div class="form-group col-md-12">
+								<label for="video"><img class="flow-icons-013" src="{{asset('images/icons/play-button.svg')}}"> Video prezentacija</label>
+								<input type="text" name="video" id="video" class="form-control" placeholder="Unesite link videa (YouTUBE)" value="{{ old('video') }}">
+							</div>
+
+
+						<div class="col-md-6">
+						</div>
+						<div class="form-group form-group--submit col-md-6" >
+							<button type="button" class="btn btn-default btn-sm btn-block btn-dalje">Sljedeći korak <i class="fa fa-chevron-right"></i></button>
+						</div>
+
+					</div>
+
+					</div>
+					<!-- Tab: Općenito / End -->
+
+					<!-- Tab: Ličnosti -->
+
+					<div role="tabpanel" class="tab-pane fade" id="tab-licnosti">
+
+						<div id="dodajLicnostButtons" class="row">
+							<div id="licnostiLista">
+								@if(old('licnost'))
+									@foreach(old('licnost') as $key => $licnost)
+										<div class="row licnostHover" data-key="{{ $key }}">
+											<div class="izbrisiLicnost"><i class="fa fa-times-circle-o"></i></div>
+											<div class="row identitet-style">
+												<div class="col-md-6 objavi-klub-logo-setup">
+													<div class="col-md-7">
+														<div class="alc-staff__photo">
+															<img class="slika-edit-profil" id="slika-licnost-prikaz{{ $key }}" src="{{ asset('images/default_avatar.png') }}" alt="">
+															</div>
+														</div>
+													<div class="col-md-5 sadrzaj-slike">
+														<p class="dodaj-sliku-naslov klub-a1">Slika ličnosti</p>
+														<p class="dodaj-sliku-call">Odaberite sliku za istaknutu ličnost</p>
+														<label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
+															Odaberi sliku... <input type="file" name="licnost[{{ $key }}][avatar]" id="licnostAvatar{{ $key }}" accept="image/*" style="display: none;" onchange="previewFile('#licnostAvatar{{ $key }}', '#slika-licnost-prikaz{{ $key }}', 1080, 1920, 250, 312)">
+															</label>
+														<div class="info001">
+															<p class="info-upload-slike">Preporučene dimenzije za sliku ličnosti:</p>
+															<p class="info-upload-slike">Minimalno: 312x250 px</p>
+															<p class="info-upload-slike">Maksimalno: 1920x1080 px</p>
+															</div>
+														</div>
+													</div>
+												<div class="col-md-6">
+													<div class="form-group col-md-6 col-xs-12">
+														<label for="ime-kluba"><img class="flow-icons-013" src="{{ asset('images/icons/edit.svg') }}"> Ime</label>
+														<input type="text" name="licnost[{{ $key }}][ime]" class="form-control" placeholder="Unesite ime ličnosti" value="{{ old('licnost.' . $key . '.ime') }}">
+														</div>
+													<div class="form-group col-md-6 col-xs-12">
+														<label for="ime-kluba"><img class="flow-icons-013" src="{{ asset('images/icons/edit.svg') }}"> Prezime</label>
+														<input type="text" name="licnost[{{ $key }}][prezime]" class="form-control" placeholder="Unesite prezime ime ličnosti" value="{{ old('licnost.' . $key . '.prezime') }}">
+														</div>
+													<div class="form-group col-md-12">
+														<label for="opis"><img class="flow-icons-013" src="{{ asset('images/icons/edit.svg') }}"> Opis i uloga</label>
+														<textarea class="form-control" rows="4" name="licnost[{{ $key }}][opis]" placeholder="Upišite kratak opis uloge i funkcije navedene ličnosti u klubu...">{{ old('licnost.' . $key . '.opis') }}</textarea>
+														</div>
+													</div>
+												</div>
+											</div>
+									@endforeach
+								@endif
+							</div>
+							<div class="col-md-12 text-center">
+								<button class="btn btn-primary" type="button" id="dodajLicnost">Dodaj ličnost</button>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="form-group form-group--submit col-md-6">
+								<a href="#tab-opcenito" role="tab" data-toggle="tab" class="btn btn-default btn-sm btn-block btn-nazad"><i class="fa fa-chevron-left"></i> Nazad</a>
+							</div>
+							<div class="form-group form-group--submit col-md-6">
+								<button type="button" class="btn btn-default btn-sm btn-block btn-dalje">Sljedeći korak <i class="fa fa-chevron-right"></i></button>
+							</div>
+						</div>
+
+					</div>
+
+					<!-- Tab: Ličnosti / End -->
+
+					<!-- Tab: Vremeplov -->
+
+					<div role="tabpanel" class="tab-pane fade" id="tab-vremeplov">
+
+					<div class="row">
+
+						<div class="row identitet-style">
+
+						 <div class="col-md-12">
+
+						  <div class="form-group col-md-12">
+							<label for="opis"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Vremeplov</label>
+							<textarea class="form-control" rows="20" id="opis" name="history" placeholder="Upišite ukratko informacije vezane za historijat vašeg kluba i njegovu tradiciju...">{{ old('history') }}</textarea>
+						  </div>
+
+						 </div>
+
+						</div>
+
+					</div>
+
+					<div class="row">
+						<div class="form-group form-group--submit col-md-6">
+							<a href="#tab-licnosti" role="tab" data-toggle="tab" class="btn btn-default btn-sm btn-block btn-nazad"><i class="fa fa-chevron-left"></i> Nazad</a>
+						</div>
+						<div class="form-group form-group--submit col-md-6">
+							<button type="button" class="btn btn-default btn-sm btn-block btn-dalje">Sljedeći korak <i class="fa fa-chevron-right"></i></button>
+						</div>
+					</div>
+
+					</div>
+
+					<!-- Tab: Vremeplov / End -->
+
+					<!-- Tab: Vitrina -->
+					<div role="tabpanel" class="tab-pane fade" id="tab-vitrina">
+
+
+
+
+					<div class="row">
+						<div class="row form-segment">
+							<header class="card__header">
+								<h4><i class="fa fa-plus-circle"></i> Unos osvojenog trofeja/nagrade</h4>
+						  	</header>
+						</div>
+						<div id="nagradeLista">
+							@if(old('nagrada'))
+								@foreach(old('nagrada') as $key => $nagrada)
+									<div class="row nagradaHover" data-key="{{ $key }}">
+										<div class="izbrisiNagradu"><i class="fa fa-times-circle-o"></i></div>
+										<div class="col-md-6">
+											<div class="form-group col-md-6">
+												<label for="vrsta-nagrade"><img class="flow-icons-013" src="{{ asset('images/icons/medalja.svg') }}"> Vrsta nagrade</label>
+												<select name="nagrada[{{ $key }}][vrsta]" class="form-control">
+													<option value="" {{ old('nagrada.' . $key . '.vrsta') == '' ? 'selected' : '' }}>Izaberite vrstu osvojene nagrade</option>
+													<option value="Medalja" {{ old('nagrada.' . $key . '.vrsta') == 'Medalja' ? 'selected' : '' }}>Medalja</option>
+													<option value="Trofej/Pehar" {{ old('nagrada.' . $key . '.vrsta') == 'Trofej/Pehar' ? 'selected' : '' }}>Trofej/Pehar</option>
+													<option value="Priznanje" {{ old('nagrada.' . $key . '.vrsta') == 'Priznanje' ? 'selected' : '' }}>Priznanje</option>
+													<option value="Plaketa" {{ old('nagrada.' . $key . '.vrsta') == 'Plaketa' ? 'selected' : '' }}>Plaketa</option>
+													</select>
+												</div>
+											<div class="form-group col-md-6">
+												<label for="tip-nagrade"><img class="flow-icons-013" src="{{ asset('images/icons/medalja.svg') }}"> Tip nagrade</label>
+												<select name="nagrada[{{ $key }}][tip]" class="form-control">
+													<option value="" {{ old('nagrada.' . $key . '.tip') == '' ? 'selected' : '' }}>Izaberite tip nagrade</option>
+													<option value="Zlato" {{ old('nagrada.' . $key . '.tip') == 'Zlato' ? 'selected' : '' }}>Zlato (1. mjesto)</option>
+													<option value="Srebro" {{ old('nagrada.' . $key . '.tip') == 'Srebro' ? 'selected' : '' }}>Srebro (2. mjesto)</option>
+													<option value="Bronza" {{ old('nagrada.' . $key . '.tip') == 'Bronza' ? 'selected' : '' }}>Bronza (3. mjesto)</option>
+													<option value="Ostalo" {{ old('nagrada.' . $key . '.tip') == 'Ostalo' ? 'selected' : '' }}>Ostalo</option>
+												</select>
+											</div>
+											<div class="form-group col-md-12">
+												<label for="tip-nagrade"><img class="flow-icons-013" src="{{ asset('images/icons/medalja.svg') }}"> Nivo takmičenja</label>
+												<select name="nagrada[{{ $key }}][nivo]" class="form-control">
+													<option value="" {{ old('nagrada.' . $key . '.nivo') == '' ? 'selected' : '' }}>Izaberite nivo takmičenja</option>
+													<option value="Internacionalni nivo" {{ old('nagrada.' . $key . '.nivo') == 'Internacionalni nivo' ? 'selected' : '' }}>Internacionalni nivo</option>
+													<option value="Regionalni nivo" {{ old('nagrada.' . $key . '.nivo') == 'Regionalni nivo' ? 'selected' : '' }}>Regionalni nivo</option>
+													<option value="Državni nivo" {{ old('nagrada.' . $key . '.nivo') == 'Državni nivo' ? 'selected' : '' }}>Državni nivo</option>
+													<option value="Entitetski nivo" {{ old('nagrada.' . $key . '.nivo') == 'Entitetski nivo' ? 'selected' : '' }}>Entitetski nivo</option>
+													<option value="Drugo" {{ old('nagrada.' . $key . '.nivo') == 'Drugo' ? 'selected' : '' }}>Drugo</option>
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<label for="takmicenje"><img class="flow-icons-013" src="{{ asset('images/icons/trophy.svg') }}"> Naziv takmičenja</label>
+												<input type="text" name="nagrada[{{ $key }}][takmicenje]" class="form-control" placeholder="Unesite naziv takmicenja za koje je osvojena nagrada" value="{{ old('nagrada.' . $key . '.takmicenje') }}">
+											</div>
+											<div class="form-group col-md-6 col-xs-12">
+												<label for="sezona"><img class="flow-icons-013" src="{{ asset('images/icons/small-calendar.svg') }}"> Sezona/Godina</label>
+												<input type="text" name="nagrada[{{ $key }}][sezona]" class="form-control" placeholder="Unesite Sezonu/Godinu osvajanja trofeja" value="{{ old('nagrada.' . $key . '.sezona') }}">
+											</div>
+											<div class="form-group col-md-6 col-xs-12">
+												<label for="osvajanja"><img class="flow-icons-013" src="{{ asset('images/icons/the-sum-of.svg') }}"> Broj osvajanja</label>
+												<input type="number" name="nagrada[{{ $key }}][osvajanja]" class="form-control" placeholder="Unesite broj osvajanja trofeja" value="{{ old('nagrada.' . $key . '.osvajanja') }}">
+											</div>
+										</div>
+									</div>
+								@endforeach
+							@endif
+						</div>
+						<div class="col-md-12 text-center">
+							<button class="btn btn-primary" type="button" id="dodajNagradu">Dodaj trofej</button>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group form-group--submit col-md-6">
+							<a href="#tab-vremeplov" role="tab" data-toggle="tab" class="btn btn-default btn-sm btn-block btn-nazad"><i class="fa fa-chevron-left"></i> Nazad</a>
+						</div>
+						<div class="form-group form-group--submit col-md-6">
+							<button type="button" class="btn btn-default btn-sm btn-block btn-dalje">Sljedeći korak <i class="fa fa-chevron-right"></i></button>
+						</div>
+					</div>
+
+					</div>
+					<!-- Tab: Vitrina / End -->
+
+					<!-- Tab: Foto galerija -->
+					<div role="tabpanel" class="tab-pane fade" id="tab-galerija">
+						<div class="row dodavanje-slika">
+							  <div class="col-md-12 sadrzaj-slike">
+								  <p class="dodaj-sliku-naslov">Dodajte slike</p>
+								  <p class="dodaj-sliku-call">u Vašu galeriju</p>
+								  <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
+									Odaberi slike... <input type="file" class="galerija" name="galerija[]" accept="image/*" accept="image/*" multiple style="display: none;">
+								  </label>
+								  <div class="info001">
+									<p class="info-upload-slike">Preporučena dimenzija za vaše slike:</p>
+									<p class="info-upload-slike">1920x1080 px</p>
+								  </div>
+								</div>
+						</div>
+						<div class="row form-objavi-klub-01" id="galerija_klub">
+							<div class="album__item col-xs-6 col-sm-3">
+								<div class="album__item-holder">
+									<a href="{{asset('images/banner-122.jpg')}}" class="album__item-link mp_gallery">
+									<figure class="album__thumb">
+										<img src="{{asset('images/banner-122.jpg')}}" alt="">
+									</figure>
+									<div class="album__item-desc">
+										<img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt="">
+									</div>
+									</a>
+								</div>
+								<div class="progress-stats upload-slike-statust-bar">
+								<div class="progress">
+								  <div class="progress__bar progress__bar-width-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+								  </div>
+								</div>
+							</div>
+
+
+
+
+						</div>
+						<div class="row">
+							<div class="col-md-4"></div>
+							<!--<div class="form-group form-group--submit col-md-4">
+								<a href="#" class="btn btn-default btn-sm btn-block btn-dodaj"><i class="fa fa-database"></i> 3 Dodavanje fotografije </a>
+							</div>-->
+							<div class="col-md-4"></div>
+						</div>
+						<div class="row">
+							<div class="form-group form-group--submit col-md-6">
+								<a href="#tab-vitrina" role="tab" data-toggle="tab" class="btn btn-default btn-sm btn-block btn-nazad"><i class="fa fa-chevron-left"></i> Nazad</a>
+							</div>
+							<div class="form-group form-group--submit col-md-6" >
+								<button type="submit" class="btn btn-default btn-sm btn-block btn-dalje"><i class="fa fa-plus-circle"></i> Završi i objavi</button>
+
+
+								<!-- Modal -->
+								  <!--<div class="modal fade" id="myModal" role="dialog">
+									<div class="modal-dialog">
+
+									   Modal content
+									  <div class="modal-content">
+										<div class="modal-header">
+										  <h4 class="modal-title">USPJEŠNO STE KREIRALI KLUB</h4>
+										</div>
+										<div class="modal-body">
+										  <img class="ikona-modal" src="{{asset('images/icons/checked.svg')}}">
+										  <p class="bravo-info">Predložak koji ste napravili će biti u najkraćem mogućem vremenskom periodu pregledan od strane naše administracije, te ukoliko bude zadovoljavao sve uvjete koje nalaže Sve Za Sport, biti će i objavljen.</p>
+										  <p class="bravo-hello">Sportski pozdrav!</p>
+										</div>
+										<div class="modal-footer">
+										  <button type="button" class="btn btn-default btn-close-modal-01" data-dismiss="modal"><i class="fa fa-times"></i> Zatvori prozor</button>
+										</div>
+									  </div>
+
+									</div>
+								  </div>-->
+								<!-- Modal content / End -->
+							</div>
+						</div>
+					</div>
+					<!-- Tab: Foto galerija / End -->
+
+					<!-- Single Product Tabbed Content / End -->
 				</div>
-
-			</div>
-			<!-- Tab: Foto galerija / End -->
-
-        <!-- Single Product Tabbed Content / End -->
-		</div>
+		</form>
 		</div>
 		</div>
 		</div>
@@ -971,22 +664,7 @@
       <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
       <script src="https://cdn.ckeditor.com/4.7.3/standard/ckeditor.js"></script>
 <script type="text/javascript">
-	CKEDITOR.replace( 'vremeplov' );
-   function previewFile(name, place){
-       var preview = document.getElementById(place);
-       var file    = document.getElementById(name).files[0];
-       var reader  = new FileReader();
-
-       reader.onloadend = function () {
-           preview.src = reader.result;
-       }
-
-       if (file) {
-           reader.readAsDataURL(file);
-       } else {
-           preview.src = "";
-       }
-  }
+	CKEDITOR.replace('history');
 
   $(function() {
     // Multiple images preview in browser
