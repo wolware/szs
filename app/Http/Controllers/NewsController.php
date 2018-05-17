@@ -36,15 +36,18 @@ class NewsController extends Controller
                 ->withInput();
         }
 
-        // Ucitaj sliku i spasi u /public/images/vijesti/galerija
-        $photoName = auth()->user()->id . '_' . time() . '.' . $request->slika->getClientOriginalExtension();
-        $request->slika->move(public_path('images/vijesti/galerija'), $photoName);
+        $photoName = null;
 
-        // Izrezi i optimizuj sliku za naslovnu
-        $image_resize = Image::make(public_path('images/vijesti/galerija/' . $photoName));
-        $image_resize->crop(960, 600);
-        $image_resize->save(public_path('images/vijesti/galerija/' . 'naslovna' . $photoName));
+        if($request->filled('slika')) {
+            // Ucitaj sliku i spasi u /public/images/vijesti/galerija
+            $photoName = auth()->user()->id . '_' . time() . '.' . $request->slika->getClientOriginalExtension();
+            $request->slika->move(public_path('images/vijesti/galerija'), $photoName);
 
+            // Izrezi i optimizuj sliku za naslovnu
+            $image_resize = Image::make(public_path('images/vijesti/galerija/' . $photoName));
+            $image_resize->crop(960, 600);
+            $image_resize->save(public_path('images/vijesti/galerija/' . 'naslovna' . $photoName));
+        }
 
         $vijest = Vijest::create([
             'naslov' => $request->get('naslov'),
