@@ -26,7 +26,7 @@ class NewsController extends Controller
             'naslov' => 'required|unique:vijest|max:255',
             'kategorija' => 'required',
             'sadrzaj' => 'required',
-            'slika' => 'dimensions:min_width=980,min_height=720|max:5120'
+            'slika' => 'image|dimensions:min_width=980,min_height=720|max:5120'
         ]);
 
         if ($validatedData->fails())
@@ -35,10 +35,9 @@ class NewsController extends Controller
                 ->withErrors($validatedData->errors())
                 ->withInput();
         }
-
         $photoName = null;
 
-        if($request->filled('slika')) {
+        if($request->slika) {
             // Ucitaj sliku i spasi u /public/images/vijesti/galerija
             $photoName = auth()->user()->id . '_' . time() . '.' . $request->slika->getClientOriginalExtension();
             $request->slika->move(public_path('images/vijesti/galerija'), $photoName);
