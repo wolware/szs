@@ -37,7 +37,7 @@ class NewsController extends Controller
         }
         $photoName = null;
 
-        if($request->filled('slika')) {
+        if($request->slika) {
             // Ucitaj sliku i spasi u /public/images/vijesti/galerija
             $photoName = auth()->user()->id . '_' . time() . '.' . $request->slika->getClientOriginalExtension();
             $request->slika->move(public_path('images/vijesti/galerija'), $photoName);
