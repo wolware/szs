@@ -381,7 +381,7 @@
               <option value="9 Kju Bijeli">9 Kju Bijeli</option>
               <option value="8 Kju Žuti">8 Kju Žuti</option>
               <option value="7 Kju Narandžasti">7 Kju Narandžasti</option>
-              <option value="6 Kju Crveni">6 Kju Crveni</option>
+              <option value="6 Kju Crveni">7 Kju Narandžasti7 Kju Narandžasti</option>
               <option value="5 Kju Zeleni">5 Kju Zeleni</option>
               <option value="4 Kju Plavi">4 Kju Plavi</option>
               <option value="3 Kju Ljubičasti">3 Kju Ljubičasti</option>
