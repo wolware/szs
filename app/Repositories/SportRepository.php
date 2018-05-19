@@ -13,27 +13,24 @@ class SportRepository {
     }
 
     public function getAll() {
-        return $this->model->orderBy('name', 'asc')->get();
+        return $this->model
+            ->orderBy('name', 'asc')
+            ->get();
     }
 
-    public function getAllThatCanHavePlayers($list = [], $with_disabilities = false) {
-        $query = $this->model->select();
+    public function getAllActiveSports($with_disabilities = false) {
 
-        $query->where('with_disabilities', $with_disabilities);
-
-        $query->where(function ($query) use ($list) {
-            foreach ($list as $sport_name) {
-                $query->orWhere('name', $sport_name);
-            }
-        });
-
-        return $query
+        return $this->model
+            ->where('active', true)
+            ->where('with_disabilities', $with_disabilities)
             ->orderBy('name', 'asc')
             ->get();
 
     }
 
     public function getById($id) {
-        return $this->model->where('id', $id)->first();
+        return $this->model
+            ->where('id', $id)
+            ->first();
     }
 }

@@ -125,6 +125,7 @@ Route::middleware('auth')->group(function () {
     //ATHLETE
     Route::get('/athletes/add', 'PlayerController@displayAddPlayerCategories');
     Route::get('/athletes/{sport_id}/new', 'PlayerController@displayAddPlayer')->where('sport_id', '[0-9]+');
+    Route::post('/athletes/{sport_id}/create', 'PlayerController@createPlayer')->where('sport_id', '[0-9]+');
 
     //**FOOTBALLER
     Route::get('/athlete/footballer/new', 'FootballerController@index');

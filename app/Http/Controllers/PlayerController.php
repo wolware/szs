@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\ClubRepository;
+use App\Repositories\PlayerRepository;
+use App\Repositories\RegionRepository;
 use App\Repositories\SportRepository;
 use App\Sport;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Validator;
 
 class PlayerController extends Controller
 {
     protected $sportRepository;
-
-    protected $availableSports = ['Nogomet', 'Košarka', 'Odbojka', 'Rukomet', 'Skijanje', 'Badminton', 'Biciklizam', 'Gimnastika', 'Judo', 'Karate', 'Plivanje', 'Tenis', 'Atletika', 'Aikido'];
-    protected $availableTableNames = ['football_players', 'basketball_players', 'volleyball_players', 'handball_players', 'skiing_players', 'badminton_players', 'cycling_players', 'gymnastics_players', 'judo_players', 'karate_players', 'swimming_players', 'tennis_players', 'athletics_players', 'aikido_players'];
+    protected $playerRepository;
+    protected $regionRepository;
+    protected $clubRepository;
 
     protected $allAttributesInputs = [
         'preferred_leg' => 'label:Primarna noga|type:select|name:preffered_leg|options:Desna noga,Lijeva noga,Obje|default:Izaberite primarnu nogu sportiste',
@@ -34,27 +39,80 @@ class PlayerController extends Controller
         'best_rank' => 'label:Najbolji rank|type:input|name:best_rank|placeholder:Unesite najbolji rank sportiste',
     ];
 
-    public function __construct(SportRepository $sportRepository) {
+    protected $playerCommonValidationRules = [
+        'avatar' => 'image|dimensions:min_width=512,min_height=512,max_width=2048,max_height=2048',
+        'firstname' => 'required|string|max:255',
+        'lastname' => 'required|string|max:255',
+        'date_of_birth' => 'nullable|date',
+        'continent' => 'required|integer|exists:regions,id',
+        'country' => 'required|integer|exists:regions,id',
+        'province' => 'integer|exists:regions,id',
+        'region' => 'integer|exists:regions,id',
+        'municipality' => 'integer|exists:regions,id',
+        'city' => 'required|max:255|string',
+        'weight' => 'nullable|numeric',
+        'height' => 'nullable|numeric',
+        'facebook' => 'nullable|max:255|string',
+        'instagram' => 'nullable|max:255|string',
+        'twitter' => 'nullable|max:255|string',
+        'youtube' => 'nullable|max:255|string',
+        'video' => 'nullable|max:255|string',
+        'biography' => 'nullable|string',
+        'requested_club' => 'nullable|integer|exists:clubs,id',
+        'player_nature' => 'integer|exists:player_natures,id',
+        // History
+        'history' => 'array',
+        'history.*' => 'array',
+        'history.*.season' => 'required|max:255|string',
+        'history.*.club' => 'required|max:255|string',
+        // Slike
+        'galerija' => 'array',
+        'galerija.*' => 'required|image',
+    ];
+
+    protected $playerUniqueValidationRules = [
+        'preferred_leg' => 'nullable|max:255|string',
+        'preferred_arm' => 'nullable|max:255|string',
+        'rank' => 'nullable|integer',
+        'discipline' => 'nullable|max:255|string',
+        'best_result' => 'nullable|numeric',
+        'agent' => 'nullable|max:255|string',
+        'position' => 'nullable|max:255|string',
+        'competition' => 'nullable|max:255|string',
+        'category' => 'nullable|max:255|string',
+        'market_value' => 'nullable|integer',
+        'branch' => 'nullable|max:255|string',
+        'belt' => 'nullable|max:255|string',
+        'style' => 'nullable|max:255|string',
+        'distance' => 'nullable|integer',
+        'coach' => 'nullable|max:255|string',
+        'best_rank' => 'nullable|integer',
+    ];
+
+    public function __construct(SportRepository $sportRepository, PlayerRepository $playerRepository, RegionRepository $regionRepository, ClubRepository $clubRepository) {
         $this->sportRepository = $sportRepository;
+        $this->playerRepository = $playerRepository;
+        $this->regionRepository = $regionRepository;
+        $this->clubRepository = $clubRepository;
     }
 
     public function displayAddPlayerCategories() {
         $sports = $this->sportRepository
-            ->getAllThatCanHavePlayers($this->availableSports);
+            ->getAllActiveSports();
 
         return view('athlete.add', compact('sports'));
     }
 
     public function displayAddPlayer($sport_id) {
-        $sport = $this->sportRepository->getById($sport_id);
+        $sport = $this->sportRepository
+            ->getById($sport_id);
 
         // Provjera da li je sport dostupan za dodavanje
-        if(!in_array($sport->name, $this->availableSports)){
+        if(!$sport->active){
             abort(404);
         }
 
-        $keyOfSport = array_search($sport->name, $this->availableSports);
-        $columns = Schema::getColumnListing($this->availableTableNames[$keyOfSport]);
+        $columns = Schema::getColumnListing($sport->players_table);
         $to_delete = ['id', 'player_type_id', 'created_at', 'updated_at'];
         $columns = array_diff($columns, $to_delete);
 
@@ -103,6 +161,52 @@ class PlayerController extends Controller
 
         $inputs = json_decode(json_encode($inputs));
 
-        return view('athlete.new', compact('sport', 'inputs'));
+        $playerNatures = $this->playerRepository
+            ->getAllPlayerNatures();
+
+        $regions = $this->regionRepository
+            ->getAll();
+
+        $clubs = $this->clubRepository
+            ->getAllForSport($sport_id);
+
+        return view('athlete.new', compact('sport', 'inputs', 'playerNatures', 'regions', 'clubs'));
+    }
+
+    public function createPlayer(Request $request, $sport_id) {
+        $sport = $this->sportRepository
+            ->getById($sport_id);
+
+        // Provjera da li je sport dostupan za dodavanje
+        if(!$sport->active){
+            abort(404);
+        }
+
+        $columns = Schema::getColumnListing($sport->players_table);
+        $to_delete = ['id', 'player_type_id', 'created_at', 'updated_at'];
+        $columns = array_diff($columns, $to_delete);
+
+        $uniqueValidationRules = [];
+        foreach ($columns as $column) {
+            $uniqueValidationRules[$column] = $this->playerUniqueValidationRules[$column];
+        }
+
+        $completeValidationRules = array_merge($this->playerCommonValidationRules, $uniqueValidationRules);
+
+        $validator = Validator::make($request->all(), $completeValidationRules);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            $createPlayer = $this->playerRepository
+                ->createPlayer($request, $sport, $columns);
+
+            if($createPlayer) {
+                flash()->overlay('Uspješno ste dodali sportistu.', 'Čestitamo');
+                return back();
+            }
+        }
     }
 }

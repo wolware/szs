@@ -18,13 +18,15 @@ Description:  You can add your custom CSS here and it will overwrite template st
 }
 
 .licnostHover,
-.nagradaHover {
+.nagradaHover,
+.historyHover {
     position: relative;
     margin-bottom: 15px;
 }
 
 .izbrisiLicnost,
-.izbrisiNagradu {
+.izbrisiNagradu,
+.izbrisiHistory {
     font-size: 20px;
     opacity: 0;
     transition: 0.2s opacity ease-in;
@@ -35,12 +37,14 @@ Description:  You can add your custom CSS here and it will overwrite template st
 }
 
 .licnostHover:hover .izbrisiLicnost,
-.nagradaHover:hover .izbrisiNagradu{
+.nagradaHover:hover .izbrisiNagradu,
+.historyHover:hover .izbrisiHistory {
     opacity: 1;
 }
 
 .izbrisiLicnost:hover,
-.izbrisiNagradu:hover{
+.izbrisiNagradu:hover,
+.izbrisiHistory:hover {
     color: #f49222;
 }
 
