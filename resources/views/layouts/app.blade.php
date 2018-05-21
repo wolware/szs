@@ -72,7 +72,7 @@
             @if(isset(Auth::user()->name))
       <li class="nav-account__item"><a href="{{url('user/logout')}}"><i class="fa fa-sign-out"></i> Odjava</a></li>
       <li class="nav-account__item"><a href="{{url('profile/new')}}"><i class="fa fa-plus-circle"></i> Objavi</a></li>
-      <li class="nav-account__item"><a href="moj-profil.php"><i class="fa fa-user"></i> {{isset(Auth::user()->name) ? Auth::user()->name : 'MOJ SZS'}}</a>
+      <li class="nav-account__item"><a href="{{url('me/profile')}}"><i class="fa fa-user"></i> {{isset(Auth::user()->name) ? Auth::user()->name : 'MOJ SZS'}}</a>
               <ul class="main-nav__sub">
                 <li><a href="{{url('me/profile')}}"><i class="fa fa-id-card-o"></i> Pregled profila</a></li>
                 <li><a href="{{url('me/profiles')}}"><i class="fa fa-th-list"></i> Moji profili</a></li>
