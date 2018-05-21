@@ -10,6 +10,7 @@ use App\Sport;
 use App\Trophy;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 
@@ -17,22 +18,102 @@ class PlayerRepository {
     protected $model;
 
     protected $allAttributes = [
-        'preferred_leg' => 'Primarna noga',
-        'preferred_arm' => 'Primarna ruka',
-        'rank' => 'Rank',
-        'discipline' => 'Disciplina',
-        'best_result' => 'Najbolji rezultat',
-        'agent' => 'Agent',
-        'position' => 'Pozicija',
-        'competition' => 'Takmičenje',
-        'category' => 'Kategorija',
-        'market_value' => 'Vrijednost',
-        'branch' => 'Grana',
-        'belt' => 'Pojas',
-        'style' => 'Stil',
-        'distance' => 'Dionica stila',
-        'coach' => 'Trener',
-        'best_rank' => 'Najbolji rank',
+        'preferred_leg' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Primarna noga'
+            ]
+        ],
+        'preferred_arm' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Primarna ruka'
+            ]
+        ],
+        'rank' => [
+            'icon' => 'list-atp.svg',
+            'label' => [
+                'bs' => 'Rank'
+            ]
+        ],
+        'discipline' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Disciplina'
+            ]
+        ],
+        'best_result' => [
+            'icon' => 'najrez.svg',
+            'label' => [
+                'bs' => 'Najbolji rezultat'
+            ]
+        ],
+        'agent' => [
+            'icon' => 'agent.svg',
+            'label' => [
+                'bs' => 'Agent'
+            ]
+        ],
+        'position' => [
+            'icon' => 'icon.svg',
+            'label' => [
+                'bs' => 'Pozicija'
+            ]
+        ],
+        'competition' => [
+            'icon' => 'stadium-icon.svg',
+            'label' => [
+                'bs' => 'Takmičenje'
+            ]
+        ],
+        'category' => [
+            'icon' => 'list-atp.svg',
+            'label' => [
+                'bs' => 'Kategorija'
+            ]
+        ],
+        'market_value' => [
+            'icon' => 'money.svg',
+            'label' => [
+                'bs' => 'Vrijednost'
+            ]
+        ],
+        'branch' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Grana'
+            ]
+        ],
+        'belt' => [
+            'icon' => 'rang-pojas.svg',
+            'label' => [
+                'bs' => 'Pojas'
+            ]
+        ],
+        'style' => [
+            'icon' => 'swimming-figure.svg',
+            'label' => [
+                'bs' => 'Stil'
+            ]
+        ],
+        'distance' => [
+            'icon' => 'pool.svg',
+            'label' => [
+                'bs' => 'Dionica stila'
+            ]
+        ],
+        'coach' => [
+            'icon' => 'coach.svg',
+            'label' => [
+                'bs' => 'Trener'
+            ]
+        ],
+        'best_rank' => [
+            'icon' => 'list-atp-best.svg',
+            'label' => [
+                'bs' => 'Najbolji rank'
+            ]
+        ],
     ];
 
     public function __construct(Player $model)
@@ -57,8 +138,8 @@ class PlayerRepository {
     public function createPlayer(Request $request, Sport $sport, $unique_columns) {
         $newLogoName = 'default.png';
 
-        if($request->file('logo')){
-            $logo = $request->file('logo');
+        if($request->file('avatar')){
+            $logo = $request->file('avatar');
             $newLogoName = time() . '-' . Auth::user()->id . '.' . $logo->getClientOriginalExtension();
             $destinationPath = public_path('/images/athlete_avatars');
             $logo->move($destinationPath, $newLogoName);
@@ -95,7 +176,9 @@ class PlayerRepository {
             'player_type_id' => $sport->id,
             'requested_club' => $request->get('requested_club'),
             'player_nature' => $request->get('player_nature'),
-            'biography' => $request->get('biography')
+            'biography' => $request->get('biography'),
+            'user_id' => Auth::user()->id,
+            'city' => $request->get('city')
         ]);
 
         if($createPlayer) {
@@ -181,6 +264,7 @@ class PlayerRepository {
             if($playerData) {
                 $playerData = $this->unsetData(['id', 'player_type_id', 'created_at', 'updated_at'], $playerData);
                 $player->setAttribute('player_data', $playerData);
+                $player->setAttribute('player_data_names', $this->allAttributes);
             }
 
             return $player;

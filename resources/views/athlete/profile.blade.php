@@ -155,7 +155,7 @@
                                                 <img class="flow-icons-012" src="{{asset('images/icons/small-calendar.svg')}}" alt="">
                                             </td>
                                             <td class="lineup__num">Datum rođenja</td>
-                                            <td class="lineup__name">{{$player->date_of_birth}}</td>
+                                            <td class="lineup__name">{{\Carbon\Carbon::parse($player->date_of_birth)->format('d.m.Y.')}}</td>
                                         </tr>
                                         <tr>
                                             <td class="lineup__info">
@@ -169,7 +169,7 @@
                                                 <img class="flow-icons-012" src="{{asset('images/icons/trophy.svg')}}" alt="">
                                             </td>
                                             <td class="lineup__num">Takmičenje/Liga</td>
-                                            <td class="lineup__name"><a class="profil-poveznica" href="#">{{$personal->takmicenje}}</a></td>
+                                            <td class="lineup__name"><a class="profil-poveznica" href="#">{{$player->current_club->competition or 'Nema takmičenja'}}</a></td>
                                         </tr>
 
                                         </tbody>
@@ -237,29 +237,26 @@
                                                     <img class="flow-icons-012" src="{{asset('images/icons/height.svg')}}" alt="">
                                                 </td>
                                                 <td class="lineup__num">Visina</td>
-                                                <td class="lineup__name">{{$personal->visina}} cm</td>
+                                                <td class="lineup__name">{{$player->height}} cm</td>
                                             </tr>
                                             <tr>
                                                 <td class="lineup__info">
                                                     <img class="flow-icons-012" src="{{asset('images/icons/weight.svg')}}" alt="">
                                                 </td>
                                                 <td class="lineup__num">Težina</td>
-                                                <td class="lineup__name">{{$personal->tezina}} kg</td>
+                                                <td class="lineup__name">{{$player->weight}} kg</td>
                                             </tr>
-                                            <tr>
-                                                <td class="lineup__info">
-                                                    <img class="flow-icons-012" src="{{asset('images/icons/runer-silhouette-running-fast.svg')}}" alt="">
-                                                </td>
-                                                <td class="lineup__num">Primarni disciplina</td>
-                                                <td class="lineup__name">{{$personal->disciplina}}</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="lineup__info">
-                                                    <img class="flow-icons-012" src="{{asset('images/icons/agent.svg')}}" alt="">
-                                                </td>
-                                                <td class="lineup__num">Agent</td>
-                                                <td class="lineup__name">{{$personal->agent}}</td>
-                                            </tr>
+                                            @if($player->player_data)
+                                                @foreach($player->player_data as $name => $player_data)
+                                                    <tr>
+                                                        <td class="lineup__info">
+                                                            <img class="flow-icons-012" src="{{asset('images/icons/' . $player->player_data_names[$name]['icon'])}}" alt="">
+                                                        </td>
+                                                        <td class="lineup__num">{{ $player->player_data_names[$name]['label']['bs'] }}</td>
+                                                        <td class="lineup__name">{{ $player_data }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>
@@ -284,15 +281,15 @@
                                             <td class="lineup__info">
                                                 <img class="flow-icons-012" src="{{asset('images/icons/tag.svg')}}" alt="">
                                             </td>
-                                            <td class="lineup__num">ID kluba</td>
-                                            <td class="lineup__name">{{$personal->id}}</td>
+                                            <td class="lineup__num">ID igrača</td>
+                                            <td class="lineup__name">{{$player->id}}</td>
                                         </tr>
                                         <tr>
                                             <td class="lineup__info">
                                                 <img class="flow-icons-012" src="{{asset('images/icons/calendar-add-event-button-with-plus-sign.svg')}}" alt="">
                                             </td>
                                             <td class="lineup__num">Dio SveZaSport</td>
-                                            <td class="lineup__name">25. Oktobra, 2017.</td>
+                                            <td class="lineup__name">{{ \Carbon\Carbon::parse($player->created_at)->format('d. F, Y.') }}</td>
                                         </tr>
                                         <tr>
                                             <td class="lineup__info">
@@ -333,10 +330,10 @@
                                             <td class="team-leader__player">
                                                 <div class="team-leader__player-info">
                                                     <figure class="team-leader__player-img team-leader__player-img--sm">
-                                                        <img src="{{asset('images/tarik.jpg')}}" alt="">
+                                                        <img src="{{asset('images/avatars/' . $player->user->avatar)}}" alt="">
                                                     </figure>
                                                     <div class="team-leader__player-inner">
-                                                        <h5 class="team-leader__player-name autor-slika">Tarik Jašarević</h5>
+                                                        <h5 class="team-leader__player-name autor-slika">{{ $player->user->name }}</h5>
                                                         <span class="team-leader__player-position"><i class="fa fa-tag"></i> 00502565</span>
                                                         <a href="#"><i class="fa fa-eye"></i> Pregled profila</a>  |  <a href="#"><i class="fa fa-envelope-open-o"></i> Poruka</a>
                                                     </div>
@@ -391,23 +388,26 @@
                                                                     <img class="flow-icons-012" src="{{asset('images/icons/office-block.svg')}}" alt="">
                                                                 </td>
                                                                 <td class="lineup__num gadget-no-border">Grad/Mjesto</td>
-                                                                <td class="lineup__name gadget-no-border">{{$personal->grad}}</td>
+                                                                <td class="lineup__name gadget-no-border">{{$player->city}}</td>
                                                             </tr>
-                                                            <tr>
-                                                                <td class="lineup__info gadget-no-border">
-                                                                    <img class="flow-icons-012" src="{{asset('images/icons/opcina.svg')}}" alt="">
-                                                                </td>
-                                                                <td class="lineup__num gadget-no-border">Općina</td>
-                                                                <td class="lineup__name gadget-no-border">{{$personal->opcina}}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="lineup__info gadget-no-border">
-                                                                    <img class="flow-icons-012" src="{{asset('images/icons/placeholder.svg')}}" alt="">
-                                                                </td>
-                                                                <td class="lineup__num gadget-no-border">Kanton/Regija</td>
-                                                                <td class="lineup__name gadget-no-border">{{$personal->kanton}}</td>
-                                                            </tr>
-
+                                                            @if($player->regions->has('municipality'))
+                                                                <tr>
+                                                                    <td class="lineup__info gadget-no-border">
+                                                                        <img class="flow-icons-012" src="{{asset('images/icons/opcina.svg')}}" alt="">
+                                                                    </td>
+                                                                    <td class="lineup__num gadget-no-border">Općina</td>
+                                                                    <td class="lineup__name gadget-no-border">{{ $player->regions->get('municipality') }}</td>
+                                                                </tr>
+                                                            @endif
+                                                            @if($player->regions->has('region'))
+                                                                <tr>
+                                                                    <td class="lineup__info gadget-no-border">
+                                                                        <img class="flow-icons-012" src="{{asset('images/icons/placeholder.svg')}}" alt="">
+                                                                    </td>
+                                                                    <td class="lineup__num gadget-no-border">Kanton/Regija</td>
+                                                                    <td class="lineup__name gadget-no-border">{{ $player->regions->get('region') }}</td>
+                                                                </tr>
+                                                            @endif
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -428,29 +428,33 @@
                                                     <div class="table-responsive">
                                                         <table class="table lineup-table">
                                                             <tbody>
-
-                                                            <tr>
-                                                                <td class="lineup__info gadget-no-border">
-                                                                    <img class="flow-icons-012" src="{{asset('images/icons/map.svg')}}" alt="">
-                                                                </td>
-                                                                <td class="lineup__num gadget-no-border">Entitet</td>
-                                                                <td class="lineup__name gadget-no-border">{{$personal->entitet}}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="lineup__info gadget-no-border">
-                                                                    <img class="flow-icons-012" src="{{asset('images/icons/earth.svg')}}" alt="">
-                                                                </td>
-                                                                <td class="lineup__num gadget-no-border">Država</td>
-                                                                <td class="lineup__name gadget-no-border">{{$personal->drzava}}</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="lineup__info gadget-no-border">
-                                                                    <img class="flow-icons-012" src="{{asset('images/icons/international-delivery.svg')}}" alt="">
-                                                                </td>
-                                                                <td class="lineup__num gadget-no-border">Kontinent</td>
-                                                                <td class="lineup__name gadget-no-border">{{$personal->kontinent}}</td>
-                                                            </tr>
-
+                                                            @if($player->regions->has('province'))
+                                                                <tr>
+                                                                    <td class="lineup__info gadget-no-border">
+                                                                        <img class="flow-icons-012" src="{{asset('images/icons/map.svg')}}" alt="">
+                                                                    </td>
+                                                                    <td class="lineup__num gadget-no-border">Entitet/Pokrajina</td>
+                                                                    <td class="lineup__name gadget-no-border">{{ $player->regions->get('province') }}</td>
+                                                                </tr>
+                                                            @endif
+                                                            @if($player->regions->has('country'))
+                                                                <tr>
+                                                                    <td class="lineup__info gadget-no-border">
+                                                                        <img class="flow-icons-012" src="{{asset('images/icons/earth.svg')}}" alt="">
+                                                                    </td>
+                                                                    <td class="lineup__num gadget-no-border">Država</td>
+                                                                    <td class="lineup__name gadget-no-border">{{ $player->regions->get('country') }}</td>
+                                                                </tr>
+                                                            @endif
+                                                            @if($player->regions->has('continent'))
+                                                                <tr>
+                                                                    <td class="lineup__info gadget-no-border">
+                                                                        <img class="flow-icons-012" src="{{asset('images/icons/international-delivery.svg')}}" alt="">
+                                                                    </td>
+                                                                    <td class="lineup__num gadget-no-border">Kontinent</td>
+                                                                    <td class="lineup__name gadget-no-border">{{ $player->regions->get('continent') }}</td>
+                                                                </tr>
+                                                            @endif
                                                             </tbody>
                                                         </table>
                                                     </div>
@@ -486,49 +490,19 @@
 
                                                         <div class="df-timeline__event df-timeline__event--empty"></div>
 
-                                                        @foreach($klupska_historija as $kh)
+                                                        @foreach($player->club_history as $club)
 
                                                             <div class="df-timeline__event">
                                                                 <div class="df-timeline__team-1">
                                                                     <div class="df-timeline__event-info">
-                                                                        <div class="df-timeline__event-name">{{$kh->klub}}</div>
-                                                                        <div class="df-timeline__event-desc">{{$kh->sezona}}</div>
+                                                                        <div class="df-timeline__event-name">{{$club->club}}</div>
+                                                                        <div class="df-timeline__event-desc">{{$club->season}}</div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="df-timeline__time"><img src="{{asset('images/SZS-club-logo.png')}}" width="70" height="70" alt="" class="df-timeline__event-icon"></div>
                                                             </div>
 
                                                         @endforeach
-
-                                                        <div class="df-timeline__event">
-                                                            <div class="df-timeline__team-2">
-                                                                <div class="df-timeline__event-info">
-                                                                    <div class="df-timeline__event-name">FK Sve Za Sport</div>
-                                                                    <div class="df-timeline__event-desc">2014-2016</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="df-timeline__time"><img src="{{asset('images/SZS-club-logo.png')}}" width="70" height="70" alt="" class="df-timeline__event-icon"></div>
-                                                        </div>
-
-                                                        <div class="df-timeline__event">
-                                                            <div class="df-timeline__team-1">
-                                                                <div class="df-timeline__event-info">
-                                                                    <div class="df-timeline__event-name">FK Sve Za Sport</div>
-                                                                    <div class="df-timeline__event-desc">2014-2016</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="df-timeline__time"><img src="{{asset('images/SZS-club-logo.png')}}" width="70" height="70" alt="" class="df-timeline__event-icon"></div>
-                                                        </div>
-
-                                                        <div class="df-timeline__event">
-                                                            <div class="df-timeline__team-2">
-                                                                <div class="df-timeline__event-info">
-                                                                    <div class="df-timeline__event-name">FK Sve Za Sport</div>
-                                                                    <div class="df-timeline__event-desc">2014-2016</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="df-timeline__time"><img src="{{asset('images/SZS-club-logo.png')}}" width="70" height="70" alt="" class="df-timeline__event-icon"></div>
-                                                        </div>
 
                                                     </div>
                                                 </div>
@@ -538,7 +512,7 @@
 
                                             <div class="widget-game-result__section">
                                                 <header class="widget-game-result__subheader card__subheader-alt card__subheader card__subheader--sm card__subheader--nomargins">
-                                                    <h5 class="widget-game-result__subtitle">Aktuelni klub: <a href="#">{{$personal->klub}}</a></h5>
+                                                    <h5 class="widget-game-result__subtitle">Aktuelni klub: <a href="#">{{$player->current_club->name or 'Nema klub'}}</a></h5>
                                                 </header>
                                             </div>
 
@@ -552,15 +526,17 @@
                                         </div>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="widget__title card__header istaknute-licnosti-naslov">
-                                                <h4><i class="fa fa-play-circle-o"></i> Video prezentacija</h4>
+                                    @if($player->video)
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="widget__title card__header istaknute-licnosti-naslov">
+                                                    <h4><i class="fa fa-play-circle-o"></i> Video prezentacija</h4>
+                                                </div>
+                                                <embed class="video-home"
+                                                       src="{{ $player->video }}">
                                             </div>
-                                            <embed class="video-home"
-                                                   src="https://youtube.com/embed/0wCC3aLXdOw">
                                         </div>
-                                    </div>
+                                    @endif
 
 
                                 </div>
@@ -586,7 +562,7 @@
                                         </header>
 
                                         <div class="post__content">
-                                            {{$biografija->content}}
+                                            {{  $player->biography }}
                                         </div>
                                     </article>
                                     <!-- Article / End -->
@@ -604,7 +580,7 @@
                                     </div>
 
                                     <div class="row">
-                                        @foreach($sportista_trofej as $st)
+                                        @foreach($player->trophies as $trophy)
 
                                             <div class="col-md-3">
                                                 <div class="awards__item">
@@ -612,113 +588,13 @@
                                                         <img src="{{asset('images/trophies/trofej.svg')}}" alt="">
                                                     </figure>
                                                     <div class="awards__desc">
-                                                        <h5 class="awards__name">{{$st->naziv_takmicenja}}</h5>
-                                                        <div class="awards__date">{{$st->sezona}}</div>
+                                                        <h5 class="awards__name">{{$trophy->competition_name}}</h5>
+                                                        <div class="awards__date">{{$trophy->season}}</div>
                                                     </div>
                                                 </div>
                                             </div>
 
                                         @endforeach
-                                        <div class="col-md-3">
-                                            <div class="awards__item">
-                                                <figure class="awards__figure awards__figure--space">
-                                                    <img src="{{asset('images/trophies/medal-gold.png')}}" alt="">
-                                                </figure>
-                                                <div class="awards__desc">
-                                                    <h5 class="awards__name">Premier Liga BiH</h5>
-                                                    <div class="awards__date">Sezona 2016/2017</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="awards__item">
-                                                <figure class="awards__figure awards__figure--space">
-                                                    <img src="{{asset('images/trophies/medal-gold.png')}}" alt="">
-                                                </figure>
-                                                <div class="awards__desc">
-                                                    <h5 class="awards__name">Kup BiH 2016/2017</h5>
-                                                    <div class="awards__date">Sezona 2016/2017</div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-3">
-                                            <div class="awards__item">
-                                                <figure class="awards__figure awards__figure--space">
-                                                    <img src="{{asset('images/trophies/trofej.svg')}}" alt="">
-                                                </figure>
-                                                <div class="awards__desc">
-                                                    <h5 class="awards__name">Premier Liga BiH</h5>
-                                                    <div class="awards__date">2017/2018</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="awards__item">
-                                                <figure class="awards__figure awards__figure--space">
-                                                    <img src="{{asset('images/trophies/medal-bronze.png')}}" alt="">
-                                                </figure>
-                                                <div class="awards__desc">
-                                                    <h5 class="awards__name">Premier Liga BiH</h5>
-                                                    <div class="awards__date">2017/2018</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="awards__item">
-                                                <figure class="awards__figure awards__figure--space">
-                                                    <img src="{{asset('images/trophies/trofej.svg')}}" alt="">
-                                                </figure>
-                                                <div class="awards__desc">
-                                                    <h5 class="awards__name">Premier Liga BiH</h5>
-                                                    <div class="awards__date">2017/2018</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="awards__item">
-                                                <figure class="awards__figure awards__figure--space">
-                                                    <img src="{{asset('images/trophies/trofej.svg')}}" alt="">
-                                                </figure>
-                                                <div class="awards__desc">
-                                                    <h5 class="awards__name">Premier Liga BiH</h5>
-                                                    <div class="awards__date">2017/2018</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="awards__item">
-                                                <figure class="awards__figure awards__figure--space">
-                                                    <img src="{{asset('images/trophies/medal-silver.png')}}" alt="">
-                                                </figure>
-                                                <div class="awards__desc">
-                                                    <h5 class="awards__name">Premier Liga BiH</h5>
-                                                    <div class="awards__date">2017/2018</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="awards__item">
-                                                <figure class="awards__figure awards__figure--space">
-                                                    <img src="{{asset('images/trophies/trofej.svg')}}" alt="">
-                                                </figure>
-                                                <div class="awards__desc">
-                                                    <h5 class="awards__name">Premier Liga BiH</h5>
-                                                    <div class="awards__date">2017/2018</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="awards__item">
-                                                <figure class="awards__figure awards__figure--space">
-                                                    <img src="{{asset('images/trophies/trofej.svg')}}" alt="">
-                                                </figure>
-                                                <div class="awards__desc">
-                                                    <h5 class="awards__name">Premier Liga BiH</h5>
-                                                    <div class="awards__date">2017/2018</div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                     <!-- Widget: Awards / End -->
                                 </div>
@@ -916,13 +792,13 @@
                                     </div>
 
                                     <div class="row">
-                                        @foreach($sportista_galerija as $sg)
+                                        @foreach($player->images as $image)
 
                                             <div class="album__item col-xs-6 col-sm-4">
                                                 <div class="album__item-holder">
-                                                    <a href="{{asset('images/galerija_sportista/'.$sg->url)}}" class="album__item-link mp_gallery">
+                                                    <a href="{{asset('images/galerija_sportista/' . $image->image)}}" class="album__item-link mp_gallery">
                                                         <figure class="album__thumb">
-                                                            <img src="{{asset('images/galerija_sportista/'.$sg->url)}}" alt="">
+                                                            <img src="{{asset('images/galerija_sportista/' . $image->image)}}" alt="">
                                                         </figure>
                                                         <div class="album__item-desc">
                                                             <img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt="">
@@ -932,150 +808,6 @@
                                             </div>
 
                                         @endforeach
-
-                                        <div class="album__item col-xs-6 col-sm-4">
-                                            <div class="album__item-holder">
-                                                <a href="{{asset('images/banner-122.jpg')}}" class="album__item-link mp_gallery">
-                                                    <figure class="album__thumb">
-                                                        <img src="{{asset('images/banner-122.jpg')}}" alt="">
-                                                    </figure>
-                                                    <div class="album__item-desc">
-                                                        <img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt="">
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div class="album__item col-xs-6 col-sm-4">
-                                            <div class="album__item-holder">
-                                                <a href="{{asset('images/banner-122.jpg')}}" class="album__item-link mp_gallery">
-                                                    <figure class="album__thumb">
-                                                        <img src="{{asset('images/banner-122.jpg')}}" alt="">
-                                                    </figure>
-                                                    <div class="album__item-desc">
-                                                        <img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt="">
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div class="album__item col-xs-6 col-sm-4">
-                                            <div class="album__item-holder">
-                                                <a href="{{asset('images/banner-122.jpg')}}" class="album__item-link mp_gallery">
-                                                    <figure class="album__thumb">
-                                                        <img src="{{asset('images/banner-122.jpg')}}" alt="">
-                                                    </figure>
-                                                    <div class="album__item-desc">
-                                                        <img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt="">
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div class="album__item col-xs-6 col-sm-4">
-                                            <div class="album__item-holder">
-                                                <a href="{{asset('images/banner-122.jpg')}}" class="album__item-link mp_gallery">
-                                                    <figure class="album__thumb">
-                                                        <img src="{{asset('images/banner-122.jpg')}}" alt="">
-                                                    </figure>
-                                                    <div class="album__item-desc">
-                                                        <img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt="">
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div class="album__item col-xs-6 col-sm-4">
-                                            <div class="album__item-holder">
-                                                <a href="{{asset('images/banner-122.jpg')}}" class="album__item-link mp_gallery">
-                                                    <figure class="album__thumb">
-                                                        <img src="{{asset('images/banner-122.jpg')}}" alt="">
-                                                    </figure>
-                                                    <div class="album__item-desc">
-                                                        <img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt="">
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div class="album__item col-xs-6 col-sm-4">
-                                            <div class="album__item-holder">
-                                                <a href="{{asset('images/banner-122.jpg')}}" class="album__item-link mp_gallery">
-                                                    <figure class="album__thumb">
-                                                        <img src="{{asset('images/banner-122.jpg')}}" alt="">
-                                                    </figure>
-                                                    <div class="album__item-desc">
-                                                        <img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt="">
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div class="album__item col-xs-6 col-sm-4">
-                                            <div class="album__item-holder">
-                                                <a href="{{asset('images/banner-122.jpg')}}" class="album__item-link mp_gallery">
-                                                    <figure class="album__thumb">
-                                                        <img src="{{asset('images/banner-122.jpg')}}" alt="">
-                                                    </figure>
-                                                    <div class="album__item-desc">
-                                                        <img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt="">
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div class="album__item col-xs-6 col-sm-4">
-                                            <div class="album__item-holder">
-                                                <a href="{{asset('images/banner-122.jpg')}}" class="album__item-link mp_gallery">
-                                                    <figure class="album__thumb">
-                                                        <img src="{{asset('images/banner-122.jpg')}}" alt="">
-                                                    </figure>
-                                                    <div class="album__item-desc">
-                                                        <img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt="">
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div class="album__item col-xs-6 col-sm-4">
-                                            <div class="album__item-holder">
-                                                <a href="{{asset('images/banner-122.jpg')}}" class="album__item-link mp_gallery">
-                                                    <figure class="album__thumb">
-                                                        <img src="{{asset('images/banner-122.jpg')}}" alt="">
-                                                    </figure>
-                                                    <div class="album__item-desc">
-                                                        <img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt="">
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div class="album__item col-xs-6 col-sm-4">
-                                            <div class="album__item-holder">
-                                                <a href="{{asset('images/banner-122.jpg')}}" class="album__item-link mp_gallery">
-                                                    <figure class="album__thumb">
-                                                        <img src="{{asset('images/banner-122.jpg')}}" alt="">
-                                                    </figure>
-                                                    <div class="album__item-desc">
-                                                        <img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt="">
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-
-                                        <div class="album__item col-xs-6 col-sm-4">
-                                            <div class="album__item-holder">
-                                                <a href="{{asset('images/banner-122.jpg')}}" class="album__item-link mp_gallery">
-                                                    <figure class="album__thumb">
-                                                        <img src="{{asset('images/banner-122.jpg')}}" alt="">
-                                                    </figure>
-                                                    <div class="album__item-desc">
-                                                        <img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt="">
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-
 
                                     </div>
 

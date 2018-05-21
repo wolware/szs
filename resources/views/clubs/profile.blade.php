@@ -462,7 +462,7 @@
                               <img class="flow-icons-012" src="{{asset('images/icons/earth.svg')}}" alt="">
                             </td>
                             <td class="lineup__num gadget-no-border">Država</td>
-                            <td class="lineup__name gadget-no-border"><img class="zastava-drzave" alt="">{{ $club->regions->get('country') }}</td>
+                            <td class="lineup__name gadget-no-border">{{ $club->regions->get('country') }}</td>
                           </tr>
                         @endif
                         @if($club->regions->has('continent'))
@@ -851,7 +851,7 @@
 				</div>
 				
 				
-				<div ="row">
+				<div class="row">
 				<div class="alert alert-warning alert-dismissible">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Zatvori obavijest"><span aria-hidden="true">&times;</span></button>
 					<strong>Prikazuju se samo kadrovi koji posjeduju profile na Sve Za Sport mreži.</strong>

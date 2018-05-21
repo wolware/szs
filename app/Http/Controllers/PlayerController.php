@@ -20,8 +20,8 @@ class PlayerController extends Controller
     protected $clubRepository;
 
     protected $allAttributesInputs = [
-        'preferred_leg' => 'label:Primarna noga|type:select|name:preffered_leg|options:Desna noga,Lijeva noga,Obje|default:Izaberite primarnu nogu sportiste',
-        'preferred_arm' => 'label:Primarna ruka|type:select|name:preffered_arm|options:Desna ruka,Lijeva ruka,Obje|default:Izaberite primarnu ruku sportiste',
+        'preferred_leg' => 'label:Primarna noga|type:select|name:preferred_leg|options:Desna noga,Lijeva noga,Obje|default:Izaberite primarnu nogu sportiste',
+        'preferred_arm' => 'label:Primarna ruka|type:select|name:preferred_arm|options:Desna ruka,Lijeva ruka,Obje|default:Izaberite primarnu ruku sportiste',
         'rank' => 'label:Rank|type:input|name:rank|placeholder:Unesite trenutni rank sportiste',
         'discipline' => 'label:Disciplina|type:select|name:discipline|options:Kratke pruge,Srednje pruge,Duge pruge,Štafete,Preponske utrke,Brzo hodanje,Koplje,Disk,Kugla,Kladivo,Skok u dalj,Skok s motkom,Troskok,Sedmoboj (žene),Desetoboj (muškarci)|skijanje_options:Slalom,Veleslalom,Spust,Super-veleslalom,Alpska kombinacija,Paralelna natjecanja|default:Izaberite disciplinu sportiste',
         'best_result' => 'label:Najbolji rezultat|type:input|name:best_result|placeholder:Unesite najbolji rezultat sportiste',
@@ -215,6 +215,16 @@ class PlayerController extends Controller
             ->getByIdWithAllData($id);
 
         if($player) {
+            $regions = collect();
+            $currentRegion = $player->region;
+            while ($currentRegion) {
+                $regions->put(strtolower($currentRegion->region_type->type), $currentRegion->name);
+
+                $currentRegion = $currentRegion->parent_region;
+            }
+
+            $player->setAttribute('regions', $regions);
+
             return view('athlete.profile', compact('player'));
         }
 

@@ -160,7 +160,7 @@
           <div class="post-grid__item col-sm-4">
             <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
             <figure class="posts__thumb club-thumb-backgr">
-              <a href="#"><img class="logo-club-tab-index" src="{{asset('images/club_logo/'.$klub->logo)}}" alt=""></a>
+              <a href="{{url('/clubs/'.$klub->id)}}"><img class="logo-club-tab-index" src="{{asset('images/club_logo/'.$klub->logo)}}" alt=""></a>
             </figure>
             <div class="posts__inner card__content">
               <h6 class="posts__title ime-sportiste-klub-lista"><a href="#">{{$klub->name}}</a></h6>
@@ -282,18 +282,18 @@
       <!-- Tab: Sportisti -->
             <div role="tabpanel" class="tab-pane fade neaktivno" id="tab-sportisti">
         <div class="row igraci-grid">
-          @foreach($sportasi as $sportas)
+          @foreach($sportasi as $player)
           <div class="post-grid__item col-sm-4">
             <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
             <figure class="posts__thumb">
-              <a href="#"><img src="{{asset('images/athlete_avatars/'.$sportas->avatar)}}" alt=""></a>
+              <a href="{{url('/athletes/' . $player->id)}}"><img src="{{asset('images/athlete_avatars/' . $player->avatar)}}" alt=""></a>
             </figure>
             <div class="posts__inner card__content">
-              <h6 class="posts__title ime-sportiste-klub-lista"><a href="#">{{$sportas->ime}} {{$sportas->prezime}}</a></h6>
-              <div class="posts__excerpt">{{$sportas->grad}}</div>
+              <h6 class="posts__title ime-sportiste-klub-lista"><a href="#">{{$player->firstname}} {{$player->lastname}}</a></h6>
+              <div class="posts__excerpt">{{$player->city}}</div>
             </div>
             <footer class="posts__footer card__footer">
-              <a href="{{url('/athlete/footballer/'.$sportas->id)}}" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila igrača</a>
+              <a href="{{url('/athletes/' . $player->id)}}" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila igrača</a>
             </footer>
             </div>
           </div>
