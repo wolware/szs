@@ -16,6 +16,25 @@ use Illuminate\Support\Facades\DB;
 class PlayerRepository {
     protected $model;
 
+    protected $allAttributes = [
+        'preferred_leg' => 'Primarna noga',
+        'preferred_arm' => 'Primarna ruka',
+        'rank' => 'Rank',
+        'discipline' => 'Disciplina',
+        'best_result' => 'Najbolji rezultat',
+        'agent' => 'Agent',
+        'position' => 'Pozicija',
+        'competition' => 'Takmičenje',
+        'category' => 'Kategorija',
+        'market_value' => 'Vrijednost',
+        'branch' => 'Grana',
+        'belt' => 'Pojas',
+        'style' => 'Stil',
+        'distance' => 'Dionica stila',
+        'coach' => 'Trener',
+        'best_rank' => 'Najbolji rank',
+    ];
+
     public function __construct(Player $model)
     {
         $this->model = $model;
@@ -143,5 +162,42 @@ class PlayerRepository {
         }
 
         return null;
+    }
+
+    public function getById($id) {
+        return Player::where('id', $id)
+            ->with(['player_type', 'player_nature'])
+            ->first();
+    }
+
+    public function getByIdWithAllData($id) {
+        $player = $this->getById($id);
+
+        if($player) {
+            $playerData = DB::table($player->player_type->players_table)
+                ->where('id', $id)
+                ->first();
+
+            if($playerData) {
+                $playerData = $this->unsetData(['id', 'player_type_id', 'created_at', 'updated_at'], $playerData);
+                $player->setAttribute('player_data', $playerData);
+            }
+
+            return $player;
+        }
+
+        return null;
+    }
+
+    public function unsetData($dataToUnset = [], $array = []) {
+
+        $dataToUnset = json_decode(json_encode($dataToUnset), true);
+        $array = json_decode(json_encode($array), true);
+
+        foreach ($dataToUnset as $data) {
+            unset($array[$data]);
+        }
+
+        return $array;
     }
 }

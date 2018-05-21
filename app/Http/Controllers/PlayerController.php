@@ -209,4 +209,15 @@ class PlayerController extends Controller
             }
         }
     }
+
+    public function showPlayer($id) {
+        $player = $this->playerRepository
+            ->getByIdWithAllData($id);
+
+        if($player) {
+            return view('athlete.profile', compact('player'));
+        }
+
+        abort(404);
+    }
 }
