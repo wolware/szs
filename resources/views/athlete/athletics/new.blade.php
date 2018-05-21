@@ -392,7 +392,7 @@
               <option value="" selected>Disciplina trcanja</option>
               <option value="Kratke pruge">Kratke pruge</option>
               <option value="Srednje pruge">Srednje pruge</option>
-              <option value="Duge pruge">Duge pruge</option>
+              <option value="Duge pruge">Srednje pruge</option>
               <option value="Štafete">Štafete</option>
               <option value="Preponske utrke">Preponske utrke</option>
               <option value="Brzo hodanje">Brzo hodanje</option>
@@ -425,7 +425,7 @@
             <select class="form-control" id="ski-disciplina" name="disciplina_viseboja">
               <option value="" selected>Disciplina višeboja</option>
               <option value="Sedmoboj (žene)">Sedmoboj (žene)</option>
-              <option value="Desetoboj (muškarci)">Desetoboj (muškarci)</option>
+              <option value="Desetoboj (muškarci)"></option>
             </select>
           </div>
         

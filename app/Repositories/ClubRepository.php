@@ -19,4 +19,10 @@ class ClubRepository {
         return $this->clubCategoryModel->all();
     }
 
+    public function getAllForSport($sport_id) {
+        return $this->model
+            ->where('sport_id', $sport_id)
+            ->get();
+    }
+
 }

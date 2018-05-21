@@ -489,9 +489,6 @@
 					<!-- Tab: Vitrina -->
 					<div role="tabpanel" class="tab-pane fade" id="tab-vitrina">
 
-
-
-
 					<div class="row">
 						<div class="row form-segment">
 							<header class="card__header">
@@ -577,7 +574,7 @@
 								  <p class="dodaj-sliku-naslov">Dodajte slike</p>
 								  <p class="dodaj-sliku-call">u Vašu galeriju</p>
 								  <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-									Odaberi slike... <input type="file" class="galerija" name="galerija[]" accept="image/*" accept="image/*" multiple style="display: none;">
+									Odaberi slike... <input type="file" class="galerija" name="galerija[]" accept="image/*" multiple style="display: none;">
 								  </label>
 								  <div class="info001">
 									<p class="info-upload-slike">Preporučena dimenzija za vaše slike:</p>
@@ -585,29 +582,9 @@
 								  </div>
 								</div>
 						</div>
-						<div class="row form-objavi-klub-01" id="galerija_klub">
-							<div class="album__item col-xs-6 col-sm-3">
-								<div class="album__item-holder">
-									<a href="{{asset('images/banner-122.jpg')}}" class="album__item-link mp_gallery">
-									<figure class="album__thumb">
-										<img src="{{asset('images/banner-122.jpg')}}" alt="">
-									</figure>
-									<div class="album__item-desc">
-										<img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt="">
-									</div>
-									</a>
-								</div>
-								<div class="progress-stats upload-slike-statust-bar">
-								<div class="progress">
-								  <div class="progress__bar progress__bar-width-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-								  </div>
-								</div>
-							</div>
-
-
-
-
+						<div class="row form-objavi-klub-01" id="galerija_prikaz">
 						</div>
+
 						<div class="row">
 							<div class="col-md-4"></div>
 							<!--<div class="form-group form-group--submit col-md-4">

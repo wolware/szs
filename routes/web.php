@@ -123,7 +123,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/galerija/edit/{id}', 'ClubController@edit_galerija');
 
     //ATHLETE
-    Route::get('/athletes/add', 'AthletesController@athletes_add');
+    Route::get('/athletes/add', 'PlayerController@displayAddPlayerCategories');
+    Route::get('/athletes/{sport_id}/new', 'PlayerController@displayAddPlayer')->where('sport_id', '[0-9]+');
+    Route::post('/athletes/{sport_id}/create', 'PlayerController@createPlayer')->where('sport_id', '[0-9]+');
+
     //**FOOTBALLER
     Route::get('/athlete/footballer/new', 'FootballerController@index');
     Route::get('/athlete/footballer/{id}', 'FootballerController@show');

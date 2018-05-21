@@ -13,7 +13,24 @@ class SportRepository {
     }
 
     public function getAll() {
-        return $this->model->orderBy('name', 'asc')->get();
+        return $this->model
+            ->orderBy('name', 'asc')
+            ->get();
     }
 
+    public function getAllActiveSports($with_disabilities = false) {
+
+        return $this->model
+            ->where('active', true)
+            ->where('with_disabilities', $with_disabilities)
+            ->orderBy('name', 'asc')
+            ->get();
+
+    }
+
+    public function getById($id) {
+        return $this->model
+            ->where('id', $id)
+            ->first();
+    }
 }
