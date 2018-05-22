@@ -284,4 +284,50 @@ class PlayerRepository {
 
         return $array;
     }
+
+    public function updateGeneral(Request $request, Player $player){
+        $newLogoName = $player->avatar;
+
+        if($request->file('avatar')){
+            $logo = $request->file('avatar');
+            $newLogoName = time() . '-' . Auth::user()->id . '.' . $logo->getClientOriginalExtension();
+            $destinationPath = public_path('/images/athlete_avatars');
+            $logo->move($destinationPath, $newLogoName);
+        }
+
+        // Provjeri najmanji level regije
+        $region_id = $request->get('country');
+
+        if($request->has('province')) {
+            $region_id = $request->get('province');
+        }
+
+        if($request->has('region')) {
+            $region_id = $request->get('region');
+        }
+
+        if($request->has('municipality')) {
+            $region_id = $request->get('municipality');
+        }
+
+        $updatePlayerGeneral = $player->update([
+            'firstname' => $request->get('firstname'),
+            'lastname' => $request->get('lastname'),
+            'avatar' => $newLogoName,
+            'facebook' => $request->get('facebook'),
+            'twitter' => $request->get('twitter'),
+            'instagram' => $request->get('instagram'),
+            'youtube' => $request->get('youtube'),
+            'video' => $request->get('video'),
+            'region_id' => $region_id,
+            'player_nature' => $request->get('player_nature'),
+            'city' => $request->get('city')
+        ]);
+
+        if($updatePlayerGeneral) {
+            return $updatePlayerGeneral;
+        }
+
+        return null;
+    }
 }

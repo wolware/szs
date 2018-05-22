@@ -127,6 +127,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/athletes/add', 'PlayerController@displayAddPlayerCategories');
     Route::get('/athletes/{sport_id}/new', 'PlayerController@displayAddPlayer')->where('sport_id', '[0-9]+');
     Route::post('/athletes/{sport_id}/create', 'PlayerController@createPlayer')->where('sport_id', '[0-9]+');
+    Route::get('/athletes/{id}/edit', 'PlayerController@displayEditPlayer')->where('id', '[0-9]+');
+
+    Route::patch('/athletes/{id}/edit/general', 'PlayerController@editPlayerGeneral')->where('id', '[0-9]+');
 
     //LOGOUT
     Route::get('user/logout', 'Auth\LoginController@logout');

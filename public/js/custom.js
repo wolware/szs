@@ -536,6 +536,74 @@ $(document).ready(function () {
         }
     });
 
+    $('#editPlayerGeneral').validate({
+        ignore: ':not(:visible),:disabled',
+        rules: {
+            avatar: {
+                extension: 'png|jpg|jpeg'
+            },
+            firstname: {
+                required: true,
+                string: true,
+                maxlength: 255
+            },
+            lastname: {
+                required: true,
+                string: true,
+                maxlength: 255
+            },
+            player_nature: {
+                required: true,
+                digits: true
+            },
+            continent: {
+                required: true,
+                digits: true
+            },
+            country: {
+                required: true,
+                digits: true
+            },
+            province: {
+                required: true,
+                digits: true
+            },
+            region: {
+                required: true,
+                digits: true
+            },
+            municipality: {
+                required: true,
+                digits: true
+            },
+            city: {
+                required: true,
+                string: true,
+                maxlength: 255
+            },
+            facebook: {
+                string: true,
+                maxlength: 255
+            },
+            instagram: {
+                string: true,
+                maxlength: 255
+            },
+            twitter: {
+                string: true,
+                maxlength: 255
+            },
+            youtube: {
+                string: true,
+                maxlength: 255
+            },
+            video: {
+                string: true,
+                maxlength: 255
+            }
+        }
+    });
+
     addLicnostValidation();
     addTrophyValidation();
     addGalleryValidation();

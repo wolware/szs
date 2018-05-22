@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Club;
+use App\Player;
 use App\Repositories\ClubRepository;
 use App\Repositories\PlayerRepository;
 use App\Repositories\RegionRepository;
@@ -230,4 +232,138 @@ class PlayerController extends Controller
 
         abort(404);
     }
+
+    public function displayEditPlayer($id) {
+
+        $player = $this->playerRepository
+            ->getById($id);
+
+        if(!$player) {
+            abort(404);
+        }
+
+        // Provjera da li je user napravio igraca
+        $isOwner = Player::where('id', $id)->where('user_id', Auth::user()->id)->first();
+        if(!$isOwner) {
+            abort(404);
+        }
+
+        $columns = Schema::getColumnListing($player->player_type->players_table);
+        $to_delete = ['id', 'player_type_id', 'created_at', 'updated_at'];
+        $columns = array_diff($columns, $to_delete);
+
+        $inputs = [];
+        foreach ($this->allAttributesInputs as $key => $attribute) {
+            foreach ($columns as $column) {
+                if($key == $column) {
+                    $inputs[$key] = $attribute;
+                }
+            }
+        }
+
+        foreach ($inputs as $key => $input) {
+            $inputs[$key] = explode('|', $input);
+            foreach ($inputs[$key] as $key_in => $input_attribute) {
+                $newArray = explode(':', $input_attribute);
+
+                $inputs[$key][$newArray[0]] = $newArray[1];
+                unset($inputs[$key][$key_in]);
+            }
+        }
+
+        if($player->player_type->name == 'Atletika') {
+            unset($inputs['discipline']['skijanje_options']);
+        }
+
+        if($player->player_type->name == 'Skijanje') {
+            $inputs['discipline']['options'] = $inputs['discipline']['skijanje_options'];
+            unset($inputs['discipline']['skijanje_options']);
+        }
+
+        if($player->player_type->name == 'Biciklizam') {
+            unset($inputs['category']['karate_options']);
+        }
+
+        if($player->player_type->name == 'Karate') {
+            $inputs['category']['options'] = $inputs['category']['karate_options'];
+            unset($inputs['category']['karate_options']);
+        }
+
+        foreach ($inputs as $key => $input) {
+            if(array_key_exists('options', $input)){
+                $inputs[$key]['options'] = explode(',', $input['options']);
+            }
+        }
+
+        $inputs = json_decode(json_encode($inputs));
+
+        $playerNatures = $this->playerRepository
+            ->getAllPlayerNatures();
+
+        $regions = $this->regionRepository
+            ->getAll();
+
+        $clubs = $this->clubRepository
+            ->getAllForSport($player->player_type->id);
+
+        $clubRegions = collect();
+        $currentRegion = $player->region;
+        while ($currentRegion) {
+            $clubRegions->put(strtolower($currentRegion->region_type->type), $currentRegion->id);
+
+            $currentRegion = $currentRegion->parent_region;
+        }
+
+        $player->setAttribute('regions', $clubRegions);
+
+        return view('athlete.edit', compact('player', 'inputs', 'playerNatures', 'regions', 'clubs'));
+    }
+
+    public function editPlayerGeneral($id, Request $request) {
+        $player = $this->playerRepository
+            ->getById($id);
+
+        if(!$player) {
+            abort(404);
+        }
+
+        // Provjera da li je user napravio igraca
+        $isOwner = Player::where('id', $id)->where('user_id', Auth::user()->id)->first();
+        if(!$isOwner) {
+            abort(404);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'avatar' => 'image|dimensions:min_width=512,min_height=512,max_width=2048,max_height=2048',
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'continent' => 'required|integer|exists:regions,id',
+            'country' => 'required|integer|exists:regions,id',
+            'province' => 'integer|exists:regions,id',
+            'region' => 'integer|exists:regions,id',
+            'municipality' => 'integer|exists:regions,id',
+            'city' => 'required|max:255|string',
+            'facebook' => 'nullable|max:255|string',
+            'instagram' => 'nullable|max:255|string',
+            'twitter' => 'nullable|max:255|string',
+            'youtube' => 'nullable|max:255|string',
+            'video' => 'nullable|max:255|string'
+        ]);
+
+        if($validator->fails()){
+            return redirect('/athletes/' . $id . '/edit')
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            $updatePlayerGeneral = $this->playerRepository
+                ->updateGeneral($request, $player);
+
+            if($updatePlayerGeneral) {
+                flash()->overlay('Uspješno ste izmjenili "Općenito" sekciju igrača.', 'Čestitamo');
+                return back();
+            }
+        }
+
+    }
+
 }
