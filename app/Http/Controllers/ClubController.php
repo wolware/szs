@@ -501,6 +501,12 @@ class ClubController extends Controller
 
                 flash()->overlay('Uspješno ste editovali istaknute ličnosti kluba.', 'Čestitamo');
                 return redirect('clubs/' . $id . '/edit');
+            } else {
+                ClubStaff::where('club_id', $id)
+                    ->delete();
+
+                flash()->overlay('Uspješno ste editovali istaknute ličnosti kluba.', 'Čestitamo');
+                return redirect('clubs/' . $id . '/edit');
             }
         }
     }
@@ -595,6 +601,12 @@ class ClubController extends Controller
                 // Izbriši trofeje koje je user izbrisao
                 Trophy::where('club_id', $id)
                     ->whereNotIn('id', $oldIds)
+                    ->delete();
+
+                flash()->overlay('Uspješno ste editovali nagrade/trofeje kluba.', 'Čestitamo');
+                return redirect('clubs/' . $id . '/edit');
+            } else {
+                Trophy::where('club_id', $id)
                     ->delete();
 
                 flash()->overlay('Uspješno ste editovali nagrade/trofeje kluba.', 'Čestitamo');
