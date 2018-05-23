@@ -604,6 +604,97 @@ $(document).ready(function () {
         }
     });
 
+    $('#editPlayerStatus').validate({
+        ignore: ':not(:visible),:disabled',
+        rules: {
+            requested_club: {
+                digits: true
+            },
+            weight: {
+                number: true
+            },
+            height: {
+                number: true
+            },
+            preferred_leg: {
+                string: true,
+                maxlength: 255
+            },
+            preferred_arm: {
+                string: true,
+                maxlength: 255
+            },
+            rank: {
+                digits: true
+            },
+            discipline: {
+                string: true,
+                maxlength: 255
+            },
+            best_result: {
+                number: true
+            },
+            agent: {
+                string: true,
+                maxlength: 255
+            },
+            position: {
+                string: true,
+                maxlength: 255
+            },
+            competition: {
+                string: true,
+                maxlength: 255
+            },
+            category: {
+                string: true,
+                maxlength: 255
+            },
+            market_value: {
+                digits: true
+            },
+            branch: {
+                string: true,
+                maxlength: 255
+            },
+            belt: {
+                string: true,
+                maxlength: 255
+            },
+            stlye: {
+                string: true,
+                maxlength: 255
+            },
+            distance: {
+                digits: true
+            },
+            coach: {
+                string: true,
+                maxlength: 255
+            },
+            best_rank: {
+                digits: true
+            }
+        }
+    });
+
+    $('#editPlayerBiography').validate({
+        ignore: ':not(:visible),:disabled',
+        rules: {
+            biography: {
+                string: true
+            }
+        }
+    });
+
+    $('#editPlayerTrophies').validate({
+        ignore: ':not(:visible),:disabled'
+    });
+
+    $('#editPlayerGallery').validate({
+        ignore: ''
+    });
+
     addLicnostValidation();
     addTrophyValidation();
     addGalleryValidation();
@@ -914,7 +1005,7 @@ $(document).ready(function () {
     });
 
     var date_input1 = $('input[name="date_of_birth"]'); //our date input has the name "date"
-    var container1 = $('form').length > 0 ? $('form').parent() : "body";
+    var container1 = "body";
     var options1 = {
         format: 'mm/dd/yyyy',
         container: container1,

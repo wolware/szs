@@ -130,6 +130,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/athletes/{id}/edit', 'PlayerController@displayEditPlayer')->where('id', '[0-9]+');
 
     Route::patch('/athletes/{id}/edit/general', 'PlayerController@editPlayerGeneral')->where('id', '[0-9]+');
+    Route::patch('/athletes/{id}/edit/status', 'PlayerController@editPlayerStatus')->where('id', '[0-9]+');
+    Route::patch('/athletes/{id}/edit/biography', 'PlayerController@editPlayerBiography')->where('id', '[0-9]+');
+    Route::patch('/athletes/{id}/edit/trophies', 'PlayerController@editPlayerTrophies')->where('id', '[0-9]+');
+    Route::patch('/athletes/{id}/edit/gallery', 'PlayerController@editPlayerGallery')->where('id', '[0-9]+');
 
     //LOGOUT
     Route::get('user/logout', 'Auth\LoginController@logout');

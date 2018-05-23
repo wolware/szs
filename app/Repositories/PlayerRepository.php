@@ -330,4 +330,155 @@ class PlayerRepository {
 
         return null;
     }
+
+    public function updateStatus(Request $request, Player $player) {
+
+        $updatePlayerCommonStatus = Player::find($player->id)->update([
+            'date_of_birth' => Carbon::parse($request->get('date_of_birth')),
+            'weight' => $request->get('weight'),
+            'height' => $request->get('height'),
+            'requested_club' => $request->get('requested_club')
+        ]);
+
+        if($updatePlayerCommonStatus) {
+            $uniqueColumns = [];
+
+            foreach ($player->player_data as $key => $column) {
+                $uniqueColumns[$key] = $request->get($key);
+            }
+
+            $uniqueColumns['updated_at'] = Carbon::now();
+
+            $updatePlayerUniqueStatus = DB::table($player->player_type->players_table)
+                ->where('id', $player->id)
+                ->update($uniqueColumns);
+
+            if($updatePlayerUniqueStatus) {
+                $oldIds = [];
+
+                if($request->filled('history')){
+                    foreach($request->get('history') as $key => $history){
+                        if($history){
+                            if(!array_key_exists('id', $history)) {
+                                $newClub = PlayerClubHistory::create([
+                                    'season' => $history['season'],
+                                    'club' => $history['club'],
+                                    'player_id' => $player->id
+                                ]);
+
+                                $oldIds[] = $newClub->id;
+                            } else {
+                                $oldClub = PlayerClubHistory::where('id', $history['id'])->where('player_id', $player->id)->first();
+
+                                if($oldClub) {
+                                    $oldIds[] = $oldClub->id;
+
+                                    $oldClub->update([
+                                        'season' => $history['season'],
+                                        'club' => $history['club'],
+                                    ]);
+                                }
+                            }
+                        }
+                    }
+
+                    // Izbriši trofeje koje je user izbrisao
+                    PlayerClubHistory::where('player_id', $player->id)
+                        ->whereNotIn('id', $oldIds)
+                        ->delete();
+                } else {
+                    PlayerClubHistory::where('player_id', $player->id)
+                        ->delete();
+                }
+
+                return $updatePlayerCommonStatus;
+            }
+        }
+
+        return null;
+
+    }
+
+    public function updateBiography(Request $request, Player $player){
+
+        $updatePlayerBiography = $player->update([
+            'biography' => $request->get('biography')
+        ]);
+
+        if($updatePlayerBiography) {
+            return $updatePlayerBiography;
+        }
+
+        return null;
+    }
+
+    public function updateTrophies(Request $request, Player $player) {
+        $oldIds = [];
+
+        if($request->filled('nagrada')){
+            foreach($request->get('nagrada') as $key => $nagrada){
+                if($nagrada){
+                    if(!array_key_exists('id', $nagrada)) {
+                        $new_nagrada = Trophy::create([
+                            'type' => $nagrada['vrsta'],
+                            'place' => $nagrada['tip'],
+                            'competition_name' => $nagrada['takmicenje'],
+                            'level_of_competition' =>  $nagrada['nivo'],
+                            'season' =>  $nagrada['sezona'],
+                            'player_id' => $player->id
+                        ]);
+
+                        $oldIds[] = $new_nagrada->id;
+                    } else {
+                        $old_nagrada = Trophy::where('id', $nagrada['id'])->where('player_id', $player->id)->first();
+
+                        if($old_nagrada) {
+                            $oldIds[] = $old_nagrada->id;
+
+                            $old_nagrada->update([
+                                'type' => $nagrada['vrsta'],
+                                'place' => $nagrada['tip'],
+                                'competition_name' => $nagrada['takmicenje'],
+                                'level_of_competition' =>  $nagrada['nivo'],
+                                'season' =>  $nagrada['sezona'],
+                            ]);
+                        }
+                    }
+                }
+            }
+
+            // Izbriši trofeje koje je user izbrisao
+            Trophy::where('player_id', $player->id)
+                ->whereNotIn('id', $oldIds)
+                ->delete();
+
+            return true;
+        } else {
+            Trophy::where('player_id', $player->id)
+                ->delete();
+
+            return true;
+        }
+    }
+
+    public function updateGallery(Request $request, Player $player) {
+        if($request->file('galerija')){
+            $galerije = $request->file('galerija');
+            foreach($galerije as $key => $slika){
+                $newgalName = $key . '-' .time() . '-' .  $player->id . '.' . $slika->getClientOriginalExtension();
+                $destPath = public_path('/images/galerija_sportista');
+                $slika->move($destPath, $newgalName);
+
+                Gallery::create([
+                    'image' => $newgalName,
+                    'player_id' => $player->id
+                ]);
+            }
+
+            return true;
+        }
+
+        return null;
+    }
+
 }
