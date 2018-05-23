@@ -260,8 +260,8 @@
                                                 </div>
 
                                                 <div class="form-group col-md-4">
-                                                    <label for="mjesto"><img class="flow-icons-013" src="{{asset('images/icons/small-calendar.svg')}}"> Mjesto/Grad kluba*</label>
-                                                    <input name="city" id="mjesto" class="form-control" placeholder="Unesite mjesto kluba" value="{{ old('city') }}">
+                                                    <label for="mjesto"><img class="flow-icons-013" src="{{asset('images/icons/small-calendar.svg')}}"> Mjesto/Grad sportiste*</label>
+                                                    <input name="city" id="mjesto" class="form-control" placeholder="Unesite mjesto sportiste" value="{{ old('city') }}">
                                                 </div>
                                             </div>
 
