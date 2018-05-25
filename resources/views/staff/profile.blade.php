@@ -341,7 +341,7 @@
                         <!-- Widget: Marketing sidebar -->
                         <div class="row">
                             <div class="col-md-12">
-                                <img src="assets/images/reklama-sidebar.png" class="reklama-klubovi-sidebar"/>
+                                <img src="{{ asset('images/reklama-sidebar.png') }}" class="reklama-klubovi-sidebar"/>
                             </div>
                         </div>
                         <!-- Widget: Marketing sidebar / End -->
