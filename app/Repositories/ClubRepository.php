@@ -25,4 +25,8 @@ class ClubRepository {
             ->get();
     }
 
+    public function getAll() {
+        return $this->model->all();
+    }
+
 }

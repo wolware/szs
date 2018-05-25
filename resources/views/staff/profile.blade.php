@@ -1,15 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="site-wrapper clearfix">
         <div class="site-overlay"></div>
-
-
-        <!-- Header
-            ================================================== -->
-
-        <!-- Header / End -->
 
         <!-- Pushy Panel - Dark -->
         <aside class="pushy-panel pushy-panel--dark">
@@ -56,8 +49,8 @@
 
                 <div class="player-info__title player-info__title--mobile">
                     <h1 class="player-info__name">
-                        <span class="player-info__first-name">{{$player->nature->name}}</span>
-                        <span class="player-info__last-name">{{$player->firstname}} {{$player->lastname}}</span>
+                        <span class="player-info__first-name">{{ $staff->profession->name }}</span>
+                        <span class="player-info__last-name">{{ $staff->firstname . ' ' . $staff->lastname}}</span>
                     </h1>
                 </div>
 
@@ -66,7 +59,7 @@
                     <!-- Player Photo -->
                     <div class="player-info__item player-info__item--photo">
                         <figure class="player-info__photo">
-                            <img class="frontend-profilna-slika-a1" src="{{asset('images/athlete_avatars/' . $player->avatar)}}" alt="">
+                            <img class="frontend-profilna-slika-a1" src="{{ asset('images/staff_avatars/' . $staff->avatar) }}" alt="">
                         </figure>
                     </div>
                     <!-- Player Photo / End -->
@@ -76,8 +69,8 @@
 
                         <div class="player-info__title player-info__title--desktop">
                             <h1 class="player-info__name">
-                                <span class="player-info__first-name">{{$player->nature->name}}</span>
-                                <span class="player-info__last-name">{{$player->firstname}} {{$player->lastname}}</span>
+                                <span class="player-info__first-name">{{ $staff->profession->name }}</span>
+                                <span class="player-info__last-name">{{ $staff->firstname . ' ' . $staff->lastname}}</span>
                             </h1>
                         </div>
 
@@ -152,24 +145,31 @@
 
                                         <tr>
                                             <td class="lineup__info">
-                                                <img class="flow-icons-012" src="{{asset('images/icons/small-calendar.svg')}}" alt="">
+                                                <img class="flow-icons-012" src="{{ asset('images/icons/small-calendar.svg') }}" alt="">
                                             </td>
                                             <td class="lineup__num">Datum rođenja</td>
-                                            <td class="lineup__name">{{\Carbon\Carbon::parse($player->date_of_birth)->format('d.m.Y.')}}</td>
+                                            <td class="lineup__name">{{\Carbon\Carbon::parse($staff->date_of_birth)->format('d.m.Y.')}}</td>
                                         </tr>
                                         <tr>
                                             <td class="lineup__info">
-                                                <img class="flow-icons-012" src="{{asset('images/icons/klubovi-icon.svg')}}" alt="">
+                                                <img class="flow-icons-012" src="{{ asset('images/icons/klubovi-icon.svg') }}" alt="">
                                             </td>
                                             <td class="lineup__num">Klub</td>
-                                            <td class="lineup__name"><a class="profil-poveznica" href="#">{{$player->current_club->name or 'Nema klub'}}</a></td>
+                                            <td class="lineup__name"><a class="profil-poveznica" href="{{ isset($staff->current_club) ? '/clubs/' . $staff->current_club->id : '#' }}">{{ isset($staff->current_club) ? $staff->current_club->name : ( isset($staff->club_name) ? $staff->club_name : 'Nema klub')}}</a></td>
                                         </tr>
                                         <tr>
                                             <td class="lineup__info">
-                                                <img class="flow-icons-012" src="{{asset('images/icons/trophy.svg')}}" alt="">
+                                                <img class="flow-icons-012" src="{{ asset('images/icons/zanimanje.svg') }}" alt="">
                                             </td>
-                                            <td class="lineup__num">Takmičenje/Liga</td>
-                                            <td class="lineup__name">{{$player->current_club->competition or 'Nema takmičenja'}}</td>
+                                            <td class="lineup__num">Zanimanje</td>
+                                            <td class="lineup__name">{{ $staff->profession->name }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="lineup__info">
+                                                <img class="flow-icons-012" src="{{ asset('images/icons/graduation-cap.svg') }}" alt="">
+                                            </td>
+                                            <td class="lineup__num">Obrazovanje</td>
+                                            <td class="lineup__name">{{ $staff->education or 'Nema obrazovanje' }}</td>
                                         </tr>
 
                                         </tbody>
@@ -185,45 +185,45 @@
                         <!-- Socijalne mreze -->
                         <div class="row">
                             <div class="col-md-12">
-                            @if($player->facebook)
-                                <div class="col-md-6 profili-soc-mreza">
-                                    <a href="{{ $player->facebook }}" class="btn-social-counter btn-social-counter--fb" target="_blank">
-                                        <div class="btn-social-counter__icon">
-                                            <i class="fa fa-facebook"></i>
-                                        </div>
-                                        <h6 class="btn-social-counter__title">Facebook</h6>
-                                    </a>
-                                </div>
+                            @if($staff->facebook)
+                            <div class="col-md-6 profili-soc-mreza">
+                                <a href="{{ $staff->facebook }}" class="btn-social-counter btn-social-counter--fb" target="_blank">
+                                    <div class="btn-social-counter__icon">
+                                        <i class="fa fa-facebook"></i>
+                                    </div>
+                                    <h6 class="btn-social-counter__title">Facebook</h6>
+                                </a>
+                            </div>
                             @endif
-                            @if($player->twitter)
-                                <div class="col-md-6 profili-soc-mreza">
-                                    <a href="{{ $player->twitter }}" class="btn-social-counter btn-social-counter--twitter" target="_blank">
-                                        <div class="btn-social-counter__icon">
-                                            <i class="fa fa-twitter"></i>
-                                        </div>
-                                        <h6 class="btn-social-counter__title">Twitter</h6>
-                                    </a>
-                                </div>
+                            @if($staff->twitter)
+                            <div class="col-md-6 profili-soc-mreza">
+                                <a href="{{ $staff->twitter }}" class="btn-social-counter btn-social-counter--twitter" target="_blank">
+                                    <div class="btn-social-counter__icon">
+                                        <i class="fa fa-twitter"></i>
+                                    </div>
+                                    <h6 class="btn-social-counter__title">Twitter</h6>
+                                </a>
+                            </div>
                             @endif
-                            @if($player->instagram)
-                                <div class="col-md-6 profili-soc-mreza">
-                                    <a href="{{ $player->instagram }}" class="btn-social-counter btn-social-counter--instagram" target="_blank">
-                                        <div class="btn-social-counter__icon">
-                                            <i class="fa fa-instagram"></i>
-                                        </div>
-                                        <h6 class="btn-social-counter__title">Instagram</h6>
-                                    </a>
-                                </div>
+                            @if($staff->instagram)
+                            <div class="col-md-6 profili-soc-mreza">
+                                <a href="{{ $staff->instagram }}" class="btn-social-counter btn-social-counter--instagram" target="_blank">
+                                    <div class="btn-social-counter__icon">
+                                        <i class="fa fa-instagram"></i>
+                                    </div>
+                                    <h6 class="btn-social-counter__title">Instagram</h6>
+                                </a>
+                            </div>
                             @endif
-                            @if($player->youtube)
-                                <div class="col-md-6 profili-soc-mreza">
-                                    <a href="{{ $player->youtube }}" class="btn-social-counter btn-social-counter--yt" target="_blank">
-                                        <div class="btn-social-counter__icon">
-                                            <i class="fa fa-youtube-play"></i>
-                                        </div>
-                                        <h6 class="btn-social-counter__title">YouTUBE</h6>
-                                    </a>
-                                </div>
+                            @if($staff->youtube)
+                            <div class="col-md-6 profili-soc-mreza">
+                                <a href="{{ $staff->youtube }}" class="btn-social-counter btn-social-counter--yt" target="_blank">
+                                    <div class="btn-social-counter__icon">
+                                        <i class="fa fa-youtube-play"></i>
+                                    </div>
+                                    <h6 class="btn-social-counter__title">YouTUBE</h6>
+                                </a>
+                            </div>
                             @endif
                             </div>
                         </div>
@@ -242,31 +242,53 @@
                                 <div class="table-responsive">
                                     <table class="table lineup-table">
                                         <tbody>
-                                            <tr>
-                                                <td class="lineup__info">
-                                                    <img class="flow-icons-012" src="{{asset('images/icons/height.svg')}}" alt="">
-                                                </td>
-                                                <td class="lineup__num">Visina</td>
-                                                <td class="lineup__name">{{$player->height}} cm</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="lineup__info">
-                                                    <img class="flow-icons-012" src="{{asset('images/icons/weight.svg')}}" alt="">
-                                                </td>
-                                                <td class="lineup__num">Težina</td>
-                                                <td class="lineup__name">{{$player->weight}} kg</td>
-                                            </tr>
-                                            @if($player->player_data)
-                                                @foreach($player->player_data as $name => $player_data)
-                                                    <tr>
-                                                        <td class="lineup__info">
-                                                            <img class="flow-icons-012" src="{{asset('images/icons/' . $player->player_data_names[$name]['icon'])}}" alt="">
-                                                        </td>
-                                                        <td class="lineup__num">{{ $player->player_data_names[$name]['label']['bs'] }}</td>
-                                                        <td class="lineup__name">{{ $player_data }}</td>
-                                                    </tr>
-                                                @endforeach
-                                            @endif
+
+                                        <tr>
+                                            <td class="lineup__info">
+                                                <img class="flow-icons-012" src="{{ asset('images/icons/graduation-cap.svg') }}" alt="">
+                                            </td>
+                                            <td class="lineup__num">Dodatno obrazovanje</td>
+                                            <td class="lineup__name">{{ $staff->education or 'Nema dodatno obrazovanje' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="lineup__info">
+                                                <img class="flow-icons-012" src="{{ asset('images/icons/certifikat.svg') }}" alt="">
+                                            </td>
+                                            <td class="lineup__num">Certifikati</td>
+                                            <td class="lineup__name">{{ $staff->number_of_certificates or 'Nema' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="lineup__info">
+                                                <img class="flow-icons-012" src="{{ asset('images/icons/idea.svg') }}" alt="">
+                                            </td>
+                                            <td class="lineup__num">Sportski projekti</td>
+                                            <td class="lineup__name">{{ $staff->number_of_projects or 'Nema' }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="lineup__info">
+                                                <img class="flow-icons-012" src="{{ asset('images/icons/zanimanje.svg') }}" alt="">
+                                            </td>
+                                            <td class="lineup__num">Rad u struci</td>
+                                            <td class="lineup__name">{{ $staff->work_experience }} godine</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="lineup__info">
+                                                <img class="flow-icons-012" src="{{ asset('images/icons/translate.svg') }}" alt="">
+                                            </td>
+                                            <td class="lineup__num">Strani jezici</td>
+                                            <td class="lineup__name">
+                                                @if($staff->languages)
+                                                    @foreach($staff->languages as $key => $language)
+                                                        @if($key < sizeof($staff->languages) - 1)
+                                                            {{ $language->name . ',' }}
+                                                        @else
+                                                            {{ $language->name }}
+                                                        @endif
+                                                    @endforeach
+                                                @endif
+                                            </td>
+                                        </tr>
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -291,15 +313,15 @@
                                             <td class="lineup__info">
                                                 <img class="flow-icons-012" src="{{asset('images/icons/tag.svg')}}" alt="">
                                             </td>
-                                            <td class="lineup__num">ID igrača</td>
-                                            <td class="lineup__name">{{$player->id}}</td>
+                                            <td class="lineup__num">ID kadra</td>
+                                            <td class="lineup__name">{{$staff->id}}</td>
                                         </tr>
                                         <tr>
                                             <td class="lineup__info">
                                                 <img class="flow-icons-012" src="{{asset('images/icons/calendar-add-event-button-with-plus-sign.svg')}}" alt="">
                                             </td>
                                             <td class="lineup__num">Dio SveZaSport</td>
-                                            <td class="lineup__name">{{ \Carbon\Carbon::parse($player->created_at)->format('d. F, Y.') }}</td>
+                                            <td class="lineup__name">{{ \Carbon\Carbon::parse($staff->created_at)->format('d. F, Y.') }}</td>
                                         </tr>
                                         <tr>
                                             <td class="lineup__info">
@@ -319,7 +341,7 @@
                         <!-- Widget: Marketing sidebar -->
                         <div class="row">
                             <div class="col-md-12">
-                                <img src="{{ asset('images/reklama-sidebar.png') }}" class="reklama-klubovi-sidebar"/>
+                                <img src="assets/images/reklama-sidebar.png" class="reklama-klubovi-sidebar"/>
                             </div>
                         </div>
                         <!-- Widget: Marketing sidebar / End -->
@@ -340,10 +362,10 @@
                                             <td class="team-leader__player">
                                                 <div class="team-leader__player-info">
                                                     <figure class="team-leader__player-img team-leader__player-img--sm">
-                                                        <img src="{{asset('images/avatars/' . $player->user->avatar)}}" alt="">
+                                                        <img src="{{asset('images/avatars/' . $staff->user->avatar)}}" alt="">
                                                     </figure>
                                                     <div class="team-leader__player-inner">
-                                                        <h5 class="team-leader__player-name autor-slika">{{ $player->user->name }}</h5>
+                                                        <h5 class="team-leader__player-name autor-slika">{{ $staff->user->name }}</h5>
                                                         <span class="team-leader__player-position"><i class="fa fa-tag"></i> 00502565</span>
                                                         <a href="#"><i class="fa fa-eye"></i> Pregled profila</a>  |  <a href="#"><i class="fa fa-envelope-open-o"></i> Poruka</a>
                                                     </div>
@@ -398,24 +420,24 @@
                                                                     <img class="flow-icons-012" src="{{asset('images/icons/office-block.svg')}}" alt="">
                                                                 </td>
                                                                 <td class="lineup__num gadget-no-border">Grad/Mjesto</td>
-                                                                <td class="lineup__name gadget-no-border">{{$player->city}}</td>
+                                                                <td class="lineup__name gadget-no-border">{{$staff->city}}</td>
                                                             </tr>
-                                                            @if($player->regions->has('municipality'))
+                                                            @if($staff->regions->has('municipality'))
                                                                 <tr>
                                                                     <td class="lineup__info gadget-no-border">
                                                                         <img class="flow-icons-012" src="{{asset('images/icons/opcina.svg')}}" alt="">
                                                                     </td>
                                                                     <td class="lineup__num gadget-no-border">Općina</td>
-                                                                    <td class="lineup__name gadget-no-border">{{ $player->regions->get('municipality') }}</td>
+                                                                    <td class="lineup__name gadget-no-border">{{ $staff->regions->get('municipality') }}</td>
                                                                 </tr>
                                                             @endif
-                                                            @if($player->regions->has('region'))
+                                                            @if($staff->regions->has('region'))
                                                                 <tr>
                                                                     <td class="lineup__info gadget-no-border">
                                                                         <img class="flow-icons-012" src="{{asset('images/icons/placeholder.svg')}}" alt="">
                                                                     </td>
                                                                     <td class="lineup__num gadget-no-border">Kanton/Regija</td>
-                                                                    <td class="lineup__name gadget-no-border">{{ $player->regions->get('region') }}</td>
+                                                                    <td class="lineup__name gadget-no-border">{{ $staff->regions->get('region') }}</td>
                                                                 </tr>
                                                             @endif
                                                             </tbody>
@@ -438,31 +460,31 @@
                                                     <div class="table-responsive">
                                                         <table class="table lineup-table">
                                                             <tbody>
-                                                            @if($player->regions->has('province'))
+                                                            @if($staff->regions->has('province'))
                                                                 <tr>
                                                                     <td class="lineup__info gadget-no-border">
                                                                         <img class="flow-icons-012" src="{{asset('images/icons/map.svg')}}" alt="">
                                                                     </td>
                                                                     <td class="lineup__num gadget-no-border">Entitet/Pokrajina</td>
-                                                                    <td class="lineup__name gadget-no-border">{{ $player->regions->get('province') }}</td>
+                                                                    <td class="lineup__name gadget-no-border">{{ $staff->regions->get('province') }}</td>
                                                                 </tr>
                                                             @endif
-                                                            @if($player->regions->has('country'))
+                                                            @if($staff->regions->has('country'))
                                                                 <tr>
                                                                     <td class="lineup__info gadget-no-border">
                                                                         <img class="flow-icons-012" src="{{asset('images/icons/earth.svg')}}" alt="">
                                                                     </td>
                                                                     <td class="lineup__num gadget-no-border">Država</td>
-                                                                    <td class="lineup__name gadget-no-border">{{ $player->regions->get('country') }}</td>
+                                                                    <td class="lineup__name gadget-no-border">{{ $staff->regions->get('country') }}</td>
                                                                 </tr>
                                                             @endif
-                                                            @if($player->regions->has('continent'))
+                                                            @if($staff->regions->has('continent'))
                                                                 <tr>
                                                                     <td class="lineup__info gadget-no-border">
                                                                         <img class="flow-icons-012" src="{{asset('images/icons/international-delivery.svg')}}" alt="">
                                                                     </td>
                                                                     <td class="lineup__num gadget-no-border">Kontinent</td>
-                                                                    <td class="lineup__name gadget-no-border">{{ $player->regions->get('continent') }}</td>
+                                                                    <td class="lineup__name gadget-no-border">{{ $staff->regions->get('continent') }}</td>
                                                                 </tr>
                                                             @endif
                                                             </tbody>
@@ -485,8 +507,8 @@
                                             <div class="widget-game-result__section">
                                                 <div class="widget-game-result__section-inner">
                                                     <header class="widget-game-result__header">
-                                                        <h3 class="widget-game-result__title">Klupska historija</h3>
-                                                        <time class="widget-game-result__date" datetime="2016-03-24">Timeline promjena klubova</time>
+                                                        <h3 class="widget-game-result__title">Poslovna historija</h3>
+                                                        <time class="widget-game-result__date" datetime="2016-03-24">Timeline promjene poslovnih mjesta</time>
                                                     </header>
                                                 </div>
                                             </div>
@@ -500,18 +522,16 @@
 
                                                         <div class="df-timeline__event df-timeline__event--empty"></div>
 
-                                                        @foreach($player->club_history as $key => $club)
-
+                                                        @foreach($staff->work_history as $key => $history)
                                                             <div class="df-timeline__event">
                                                                 <div class="df-timeline__team-{{ $key % 2 == 0 ? '1' : '2' }}">
                                                                     <div class="df-timeline__event-info">
-                                                                        <div class="df-timeline__event-name">{{$club->club}}</div>
-                                                                        <div class="df-timeline__event-desc">{{$club->season}}</div>
+                                                                        <div class="df-timeline__event-name">{{ $history->club }}</div>
+                                                                        <div class="df-timeline__event-desc">{{ $history->season }}</div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="df-timeline__time"><img src="{{asset('images/SZS-club-logo.png')}}" width="70" height="70" alt="" class="df-timeline__event-icon"></div>
                                                             </div>
-
                                                         @endforeach
 
                                                     </div>
@@ -522,7 +542,7 @@
 
                                             <div class="widget-game-result__section">
                                                 <header class="widget-game-result__subheader card__subheader-alt card__subheader card__subheader--sm card__subheader--nomargins">
-                                                    <h5 class="widget-game-result__subtitle">Aktuelni klub: <a href="#">{{$player->current_club->name or 'Nema klub'}}</a></h5>
+                                                    <h5 class="widget-game-result__subtitle">Aktuelni klub/organizacija: <a href="{{ isset($staff->current_club) ? '/clubs/' . $staff->current_club->id : '#' }}">{{ isset($staff->current_club) ? $staff->current_club->name : ( isset($staff->club_name) ? $staff->club_name : 'Nema klub')}}</a></h5>
                                                 </header>
                                             </div>
 
@@ -536,14 +556,14 @@
                                         </div>
                                     </div>
 
-                                    @if($player->video)
+                                    @if($staff->video)
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="widget__title card__header istaknute-licnosti-naslov">
                                                     <h4><i class="fa fa-play-circle-o"></i> Video prezentacija</h4>
                                                 </div>
                                                 <embed class="video-home"
-                                                       src="{{ $player->video }}">
+                                                       src="{{ $staff->video }}">
                                             </div>
                                         </div>
                                     @endif
@@ -572,7 +592,7 @@
                                         </header>
 
                                         <div class="post__content">
-                                            {{  $player->biography or 'Biografija nije unesena.' }}
+                                            {{  $staff->biography or 'Biografija nije unesena.' }}
                                         </div>
                                     </article>
                                     <!-- Article / End -->
@@ -590,7 +610,7 @@
                                     </div>
 
                                     <div class="row">
-                                        @foreach($player->trophies as $trophy)
+                                        @foreach($staff->trophies as $trophy)
 
                                             <div class="col-md-3">
                                                 <div class="awards__item">
@@ -802,13 +822,13 @@
                                     </div>
 
                                     <div class="row">
-                                        @foreach($player->images as $image)
+                                        @foreach($staff->images as $image)
 
                                             <div class="album__item col-xs-6 col-sm-4">
                                                 <div class="album__item-holder">
-                                                    <a href="{{asset('images/galerija_sportista/' . $image->image)}}" class="album__item-link mp_gallery">
+                                                    <a href="{{asset('images/galerija_kadrovi/' . $image->image)}}" class="album__item-link mp_gallery">
                                                         <figure class="album__thumb">
-                                                            <img src="{{asset('images/galerija_sportista/' . $image->image)}}" alt="">
+                                                            <img src="{{asset('images/galerija_kadrovi/' . $image->image)}}" alt="">
                                                         </figure>
                                                         <div class="album__item-desc">
                                                             <img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt="">
@@ -834,6 +854,4 @@
         </div>
     </div>
     <!-- Content / End -->
-
-
 @endsection

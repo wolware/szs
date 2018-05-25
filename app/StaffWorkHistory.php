@@ -4,14 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Gallery extends Model
+class StaffWorkHistory extends Model
 {
-    protected $table = 'galeries';
-
     protected $fillable = [
-        'image',
-        'club_id',
-        'player_id',
+        'season',
+        'club',
         'staff_id'
     ];
 }

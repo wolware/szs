@@ -169,7 +169,7 @@
 							<div class="posts__excerpt">Dostupno: 2</div>
 						</div>
 						<footer class="posts__footer card__footer">
-							<a href="objavi-kadar.php" class="btn btn-warning btn1-objavi-kadar"><i class="fa fa-plus-circle"></i> Dodaj novi kadar</a>
+							<a href="{{ url('/staff/new') }}" class="btn btn-warning btn1-objavi-kadar"><i class="fa fa-plus-circle"></i> Dodaj novi kadar</a>
 						</footer>
 					  </div>
 					</div>

@@ -19,5 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ClubCategoriesTableSeeder::class);
         $this->call(AssociationsTableSeeder::class);
         $this->call(PlayerNaturesTableSeeder::class);
+        $this->call(ProfessionsTableSeeder::class);
+        $this->call(LanguagesTableSeeder::class);
     }
 }

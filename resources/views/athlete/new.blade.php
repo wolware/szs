@@ -5,13 +5,6 @@
     <div class="site-wrapper clearfix">
         <div class="site-overlay"></div>
 
-
-        <!-- Header
-            ================================================== -->
-
-
-        <!-- Header / End -->
-
         <!-- Pushy Panel - Dark -->
         <aside class="pushy-panel pushy-panel--dark">
             <div class="pushy-panel__inner">

@@ -28,6 +28,7 @@ Route::get('/schools', 'SchoolController@index_show');
 Route::get('/staff', 'StaffController@index_show');
 Route::get('/athletes', 'AthletesController@index_show');
 Route::get('/athletes/{id}', 'PlayerController@showPlayer')->where('id','[0-9]+');
+Route::get('/staff/{id}', 'StaffController@showStaff')->where('id', '[0-9]+');
 
 // Dodaje protekciju na rute samo za logovane korisnike
 Route::middleware('auth')->group(function () {
@@ -64,10 +65,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/messages/important', function(){
         return view('messages.important');
     });
-
-    //News for Auth
-    Route::get('/news/new', 'NewsController@addNewsForm');
-    Route::post('/news/new/create', 'NewsController@new');
 
     // PROFILE CREATE
     Route::get('/profile/new', function(){
@@ -111,6 +108,10 @@ Route::middleware('auth')->group(function () {
         return view('objects.skijaliste.profile');
     });
 
+    // NEWS
+    Route::get('/news/new', 'NewsController@addNewsForm');
+    Route::post('/news/new/create', 'NewsController@new');
+
     // CLUB
     Route::get('/clubs/add', 'ClubController@clubs_add');
     Route::get('/clubs/new', 'ClubController@new_show');
@@ -134,6 +135,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/athletes/{id}/edit/biography', 'PlayerController@editPlayerBiography')->where('id', '[0-9]+');
     Route::patch('/athletes/{id}/edit/trophies', 'PlayerController@editPlayerTrophies')->where('id', '[0-9]+');
     Route::patch('/athletes/{id}/edit/gallery', 'PlayerController@editPlayerGallery')->where('id', '[0-9]+');
+
+    // STAFF
+    Route::get('/staff/new', 'StaffController@displayAddStaff');
+    Route::post('/staff/create', 'StaffController@createStaff');
 
     //LOGOUT
     Route::get('user/logout', 'Auth\LoginController@logout');
