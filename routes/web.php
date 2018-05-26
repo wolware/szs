@@ -139,6 +139,13 @@ Route::middleware('auth')->group(function () {
     // STAFF
     Route::get('/staff/new', 'StaffController@displayAddStaff');
     Route::post('/staff/create', 'StaffController@createStaff');
+    Route::get('/staff/{id}/edit', 'StaffController@displayEditStaff')->where('id', '[0-9]+');
+
+    Route::patch('/staff/{id}/edit/general', 'StaffController@editStaffGeneral')->where('id', '[0-9]+');
+    Route::patch('/staff/{id}/edit/status', 'StaffController@editStaffStatus')->where('id', '[0-9]+');
+    Route::patch('/staff/{id}/edit/biography', 'StaffController@editStaffBiography')->where('id', '[0-9]+');
+    Route::patch('/staff/{id}/edit/trophies', 'StaffController@editStaffTrophies')->where('id', '[0-9]+');
+    Route::patch('/staff/{id}/edit/gallery', 'StaffController@editStaffGallery')->where('id', '[0-9]+');
 
     //LOGOUT
     Route::get('user/logout', 'Auth\LoginController@logout');

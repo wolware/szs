@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\PlayerRepository;
+use App\Repositories\StaffRepository;
 use App\Vijest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,14 +12,17 @@ use Illuminate\Support\Facades\DB;
 class HomeController extends Controller
 {
     protected $playerRepository;
+    protected $staffRepository;
 
     /**
      * Create a new controller instance.
      *
      * @param PlayerRepository $playerRepository
+     * @param StaffRepository $staffRepository
      */
-    public function __construct(PlayerRepository $playerRepository) {
+    public function __construct(PlayerRepository $playerRepository, StaffRepository $staffRepository) {
         $this->playerRepository = $playerRepository;
+        $this->staffRepository = $staffRepository;
     }
 
     /**
@@ -31,7 +35,8 @@ class HomeController extends Controller
         $sportasi = $this->playerRepository->getAll();
         $klubovi = DB::table('clubs')->limit(6)->orderBy('id', 'desc')->get();
         $vijesti = Vijest::where('odobreno', 1)->where('izbrisano', 0)->orderBy('id', 'DESC')->take(5)->get();
+        $staff = $this->staffRepository->getAll();
 
-        return view('welcome', ['sportasi' => $sportasi, 'klubovi' => $klubovi, 'vijesti' => $vijesti]);
+        return view('welcome', ['sportasi' => $sportasi, 'klubovi' => $klubovi, 'vijesti' => $vijesti, 'staff' => $staff]);
     }
 }

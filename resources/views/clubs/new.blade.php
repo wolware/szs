@@ -125,7 +125,7 @@
 								  <p class="dodaj-sliku-naslov klub-a1">Logo kluba*</p>
 								  <p class="dodaj-sliku-call">Identitet kluba</p>
 								  <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-									Odaberi logo... <input type="file" id="file_logo_kluba" name="logo" style="display: none;" accept="image/*" onchange="previewFile('#file_logo_kluba', '#slika-upload-klub', 1024, 1024, 512, 512)">
+									Odaberi logo... <input type="file" id="file_logo_kluba" name="logo" class="not-visible" accept="image/*" onchange="previewFile('#file_logo_kluba', '#slika-upload-klub', 1024, 1024, 512, 512)">
 								  </label>
 								  <div class="info001">
 									<p class="info-upload-slike">Preporučene dimenzije za logo:</p>
@@ -406,7 +406,7 @@
 														<p class="dodaj-sliku-naslov klub-a1">Slika ličnosti</p>
 														<p class="dodaj-sliku-call">Odaberite sliku za istaknutu ličnost</p>
 														<label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-															Odaberi sliku... <input type="file" name="licnost[{{ $key }}][avatar]" id="licnostAvatar{{ $key }}" accept="image/*" style="display: none;" onchange="previewFile('#licnostAvatar{{ $key }}', '#slika-licnost-prikaz{{ $key }}', 1080, 1920, 250, 312)">
+															Odaberi sliku... <input type="file" name="licnost[{{ $key }}][avatar]" id="licnostAvatar{{ $key }}" accept="image/*" class="not-visible" onchange="previewFile('#licnostAvatar{{ $key }}', '#slika-licnost-prikaz{{ $key }}', 1080, 1920, 250, 312)">
 															</label>
 														<div class="info001">
 															<p class="info-upload-slike">Preporučene dimenzije za sliku ličnosti:</p>
@@ -574,7 +574,7 @@
 								  <p class="dodaj-sliku-naslov">Dodajte slike</p>
 								  <p class="dodaj-sliku-call">u Vašu galeriju</p>
 								  <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-									Odaberi slike... <input type="file" class="galerija" name="galerija[]" accept="image/*" multiple style="display: none;">
+									Odaberi slike... <input type="file" class="galerija not-visible" name="galerija[]" accept="image/*" multiple>
 								  </label>
 								  <div class="info001">
 									<p class="info-upload-slike">Preporučena dimenzija za vaše slike:</p>

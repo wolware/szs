@@ -148,7 +148,7 @@
                                                         <p class="dodaj-sliku-naslov klub-a1">Slika sportiste</p>
                                                         <p class="dodaj-sliku-call">Vaš identitet</p>
                                                         <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-                                                            Odaberi sliku... <input type="file" id="slikaprof" name="avatar" style="display: none;" accept="image/*" onchange="previewFile('#slikaprof', '#slika_upload_klub', 2048, 2048, 512, 512)">
+                                                            Odaberi sliku... <input type="file" id="slikaprof" name="avatar" class="not-visible" accept="image/*" onchange="previewFile('#slikaprof', '#slika_upload_klub', 2048, 2048, 512, 512)">
                                                         </label>
                                                         <div class="info001">
                                                             <p class="info-upload-slike">Preporučene dimenzije za
@@ -543,7 +543,7 @@
                                                 <p class="dodaj-sliku-naslov">Dodajte slike</p>
                                                 <p class="dodaj-sliku-call">u Vašu galeriju</p>
                                                 <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-                                                    Odaberi slike... <input type="file" class="galerija" name="galerija[]" accept="image/*" multiple style="display: none;">
+                                                    Odaberi slike... <input type="file" class="galerija not-visible" name="galerija[]" accept="image/*" multiple>
                                                 </label>
                                                 <div class="info001">
                                                     <p class="info-upload-slike">Preporučena dimenzija za vaše

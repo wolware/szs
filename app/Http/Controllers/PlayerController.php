@@ -216,7 +216,7 @@ class PlayerController extends Controller
 
             if($createPlayer) {
                 flash()->overlay('Uspješno ste dodali sportistu.', 'Čestitamo');
-                return back();
+                return redirect('/athletes/' . $createPlayer->id);
             }
         }
     }
@@ -355,7 +355,8 @@ class PlayerController extends Controller
             'instagram' => 'nullable|max:255|string',
             'twitter' => 'nullable|max:255|string',
             'youtube' => 'nullable|max:255|string',
-            'video' => 'nullable|max:255|string'
+            'video' => 'nullable|max:255|string',
+            'player_nature' => 'integer|exists:player_natures,id'
         ]);
 
         if($validator->fails()){

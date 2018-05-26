@@ -137,7 +137,7 @@ $(document).ready(function () {
     $('#flash-overlay-modal').modal();
 
     $('#editClubForm').validate({
-        ignore: ':not(:visible),:disabled',
+        ignore: ':hidden,:disabled',
         rules: {
             logo: {
                 extension: 'png|jpg|jpeg'
@@ -253,12 +253,12 @@ $(document).ready(function () {
     });
 
     $('#editLicnosti').validate({
-        ignore: ':not(:visible),:disabled'
+        ignore: ':hidden,:disabled'
     });
 
     // Validacije forme za dodavanje kluba
     $('#createNewClub').validate({
-        ignore: ':not(:visible),:disabled',
+        ignore: ':hidden,:disabled',
         rules: {
             logo: {
                 required: true,
@@ -381,7 +381,7 @@ $(document).ready(function () {
     });
 
     $('#editClubHistory').validate({
-        ignore: ':not(:visible),:disabled',
+        ignore: ':hidden,:disabled',
         rules: {
             history: {
                 string: true
@@ -390,15 +390,18 @@ $(document).ready(function () {
     });
 
     $('#editClubTrophies').validate({
-        ignore: ':not(:visible),:disabled'
+        ignore: ':hidden,:disabled'
     });
 
     $('#editClubGallery').validate({
-        ignore: ''
+        ignore: ':hidden',
+        'galerija[]': {
+            extension: "jpg|jpeg|png"
+        }
     });
 
     $('#createNewPlayer').validate({
-        ignore: ':not(:visible),:disabled',
+        ignore: ':hidden,:disabled',
         rules: {
             avatar: {
                 extension: 'png|jpg|jpeg'
@@ -532,12 +535,15 @@ $(document).ready(function () {
             },
             biography: {
                 string: true
+            },
+            'galerija[]': {
+                extension: "jpg|jpeg|png"
             }
         }
     });
 
     $('#editPlayerGeneral').validate({
-        ignore: ':not(:visible),:disabled',
+        ignore: ':hidden,:disabled',
         rules: {
             avatar: {
                 extension: 'png|jpg|jpeg'
@@ -605,7 +611,7 @@ $(document).ready(function () {
     });
 
     $('#editPlayerStatus').validate({
-        ignore: ':not(:visible),:disabled',
+        ignore: ':hidden,:disabled',
         rules: {
             requested_club: {
                 digits: true
@@ -679,7 +685,7 @@ $(document).ready(function () {
     });
 
     $('#editPlayerBiography').validate({
-        ignore: ':not(:visible),:disabled',
+        ignore: ':hidden,:disabled',
         rules: {
             biography: {
                 string: true
@@ -688,15 +694,20 @@ $(document).ready(function () {
     });
 
     $('#editPlayerTrophies').validate({
-        ignore: ':not(:visible),:disabled'
+        ignore: ':hidden,:disabled'
     });
 
     $('#editPlayerGallery').validate({
-        ignore: ''
+        ignore: ':hidden',
+        rules: {
+            'galerija[]': {
+                extension: "jpg|jpeg|png"
+            }
+        }
     });
 
     $('#createNewStaff').validate({
-        ignore: ':not(:visible),:disabled',
+        ignore: ':hidden,:disabled',
         rules: {
             avatar: {
                 extension: 'png|jpg|jpeg'
@@ -786,13 +797,135 @@ $(document).ready(function () {
             },
             biography: {
                 string: true
+            },
+            'galerija[]': {
+                extension: "jpg|jpeg|png"
+            }
+        }
+    });
+
+    $('#editStaffGeneral').validate({
+        ignore: ':hidden,:disabled',
+        rules: {
+            avatar: {
+                extension: 'png|jpg|jpeg'
+            },
+            firstname: {
+                required: true,
+                string: true,
+                maxlength: 255
+            },
+            lastname: {
+                required: true,
+                string: true,
+                maxlength: 255
+            },
+            profession: {
+                required: true,
+                digits: true
+            },
+            continent: {
+                required: true,
+                digits: true
+            },
+            country: {
+                required: true,
+                digits: true
+            },
+            province: {
+                required: true,
+                digits: true
+            },
+            region: {
+                required: true,
+                digits: true
+            },
+            municipality: {
+                required: true,
+                digits: true
+            },
+            city: {
+                required: true,
+                string: true,
+                maxlength: 255
+            },
+            facebook: {
+                string: true,
+                maxlength: 255
+            },
+            instagram: {
+                string: true,
+                maxlength: 255
+            },
+            twitter: {
+                string: true,
+                maxlength: 255
+            },
+            youtube: {
+                string: true,
+                maxlength: 255
+            },
+            video: {
+                string: true,
+                maxlength: 255
+            }
+        }
+    });
+
+    $('#editStaffStatus').validate({
+        ignore: ':hidden,:disabled',
+        rules: {
+            requested_club: {
+                digits: true
+            },
+            club_name: {
+                string: true,
+                maxlength: 255
+            },
+            education: {
+                string: true,
+                maxlength: 255
+            },
+            additional_education: {
+                string: true,
+                maxlength: 255
+            },
+            number_of_certificates: {
+                digits: true
+            },
+            number_of_projects: {
+                digits: true
+            },
+            work_experience: {
+                number: true
+            }
+        }
+    });
+
+    $('#editStaffBiography').validate({
+        ignore: ':hidden,:disabled',
+        rules: {
+            biography: {
+                string: true
+            }
+        }
+    });
+
+    $('#editStaffTrophies').validate({
+        ignore: ':hidden,:disabled'
+    });
+
+    $('#editStaffGallery').validate({
+        ignore: ':hidden',
+        rules: {
+            'galerija[]': {
+                extension: "jpg|jpeg|png"
             }
         }
     });
 
     addLicnostValidation();
     addTrophyValidation();
-    addGalleryValidation();
     addHistoryValidation();
 
     // Select boxovi za regione
@@ -864,7 +997,7 @@ $(document).ready(function () {
             '<p class="dodaj-sliku-naslov klub-a1">Slika ličnosti</p>' +
             '<p class="dodaj-sliku-call">Odaberite sliku za istaknutu ličnost</p>' +
             '<label class="btn btn-default btn-xs btn-file dodaj-sliku-button">' +
-            'Odaberi sliku... <input type="file" name="licnost[' + licnostiCount + '][avatar]" id="licnostAvatar' + licnostiCount + '" accept="image/*" style="display: none;" onchange="previewFile(\'#licnostAvatar' + licnostiCount + '\',\'#slika-licnost-prikaz' + licnostiCount + '\', 1080, 1920, 250, 312)">' +
+            'Odaberi sliku... <input type="file" name="licnost[' + licnostiCount + '][avatar]" id="licnostAvatar' + licnostiCount + '" accept="image/*" class="not-visible" onchange="previewFile(\'#licnostAvatar' + licnostiCount + '\',\'#slika-licnost-prikaz' + licnostiCount + '\', 1080, 1920, 250, 312)">' +
             '</label>' +
             '<div class="info001">' +
             '<p class="info-upload-slike">Preporučene dimenzije za sliku ličnosti:</p>' +
@@ -1305,13 +1438,14 @@ jQuery.extend(jQuery.validator.messages, {
     digits: "Ovo polje može sadržati samo cifre.",
     creditcard: "Please enter a valid credit card number.",
     equalTo: "Unesite istu vrijednost.",
-    accept: "Please enter a value with a valid extension.",
+    accept: "Molimo vas da unesete fajl validne ekstenzije.",
     maxlength: jQuery.validator.format("Unesite manje od {0} karaktera."),
     minlength: jQuery.validator.format("Unesite najmanje {0} karaktera."),
     rangelength: jQuery.validator.format("Unesite između {0} i {1} karaktera."),
     range: jQuery.validator.format("Molimo Vas unseite broj između {0} i {1}."),
     max: jQuery.validator.format("Molimo vas unesite manji broj ili broj {0}."),
-    min: jQuery.validator.format("Molimo vas unserite veći broj ili broj {0}.")
+    min: jQuery.validator.format("Molimo vas unserite veći broj ili broj {0}."),
+    extension: "Molimo vas da unesete fajl validne ekstenzije."
 });
 
 function addLicnostValidation() {
