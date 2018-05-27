@@ -193,7 +193,7 @@
                                 <div class="form-group col-md-6">
                                     <label class="control-label" for="date"><i class="fa fa-calendar-o"></i> Datum
                                         rođenja</label>
-                                    <input class="form-control" id="date" name="dob" placeholder="{{$data->dob}}"
+                                    <input class="form-control" id="date" name="dob" placeholder="Unesite datum rođenja"
                                            value="{{$data->dob}}" type="text" required/>
                                 </div>
                                 <div class="form-group col-md-6">
@@ -208,12 +208,12 @@
                                     <label for="account-address-1"><i class="fa fa-map-marker"></i> Adresa
                                         stanovanja</label>
                                     <input type="text" class="form-control" name="address" onclick="adresaAutoComp()"
-                                           id="adresa" placeholder="{{$data->address}}" value="{{$data->address}}">
+                                           id="adresa" placeholder="Unesite adresu stanovanja" value="{{$data->address}}">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="telefon-1"><i class="fa fa-phone-square"></i> Kontakt telefon</label>
                                     <input type="text" class="form-control" name="phone" id="telefon-1"
-                                           placeholder="{{$data->phone}}" value="{{$data->phone}}">
+                                           placeholder="Unesite broj telefona" value="{{$data->phone}}">
                                 </div>
                                 <div class="form-group form-group--submit">
                                     <button type="submit"
