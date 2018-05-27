@@ -194,7 +194,7 @@
                                     <label class="control-label" for="date"><i class="fa fa-calendar-o"></i> Datum
                                         rođenja</label>
                                     <input class="form-control" id="date" name="dob" placeholder="Unesite datum rođenja"
-                                           value="{{$data->dob}}" type="text" required/>
+                                           value="{{ \Carbon\Carbon::parse($data->dob)->format('m/d/Y')  }}" type="text" required/>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="drzava"><i class="fa fa-globe"></i> Država:</label>

@@ -51,7 +51,9 @@ class UserController extends Controller
             'avatar' => 'nullable|image|mimes:jpg,png,jpeg|dimensions:min_width=64,min_height=64,max_width=700,max_height=700',
             'address' => 'nullable|string',
             'phone' => 'nullable|string|max:25',
-            'dob' => 'nullable|date'
+            'dob' => 'nullable|date',
+            'spol' => 'required|string|in:Muško,Žensko',
+            'country' => 'required|integer|exists:regions,id'
         ]);
         if($validator->fails()){
             return redirect('me/settings')
@@ -70,7 +72,9 @@ class UserController extends Controller
             $attributesToUpdate = [
                 'address' => $data->get('address'),
                 'phone' => $data->get('phone'),
-                'dob' => new Carbon($data->get('dob'))
+                'dob' => new Carbon($data->get('dob')),
+                'spol' => $data->get('spol'),
+                'country' => $data->get('country')
             ];
 
             if($newAvatarName) {
