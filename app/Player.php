@@ -12,8 +12,8 @@ class Player extends Model
         return $this->belongsTo('App\Sport');
     }
 
-    public function player_nature() {
-        return $this->belongsTo('App\PlayerNature');
+    public function nature() {
+        return $this->belongsTo('App\PlayerNature', 'player_nature');
     }
 
     public function club_history() {

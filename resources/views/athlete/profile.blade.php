@@ -56,8 +56,8 @@
 
                 <div class="player-info__title player-info__title--mobile">
                     <h1 class="player-info__name">
-                        <span class="player-info__first-name">Profesionalni sportista</span>
-                        <span class="player-info__last-name">Dino Šečić</span>
+                        <span class="player-info__first-name">{{$player->nature->name}}</span>
+                        <span class="player-info__last-name">{{$player->firstname}} {{$player->lastname}}</span>
                     </h1>
                 </div>
 
@@ -76,7 +76,7 @@
 
                         <div class="player-info__title player-info__title--desktop">
                             <h1 class="player-info__name">
-                                <span class="player-info__first-name">{{$player->nature}}</span>
+                                <span class="player-info__first-name">{{$player->nature->name}}</span>
                                 <span class="player-info__last-name">{{$player->firstname}} {{$player->lastname}}</span>
                             </h1>
                         </div>
@@ -169,7 +169,7 @@
                                                 <img class="flow-icons-012" src="{{asset('images/icons/trophy.svg')}}" alt="">
                                             </td>
                                             <td class="lineup__num">Takmičenje/Liga</td>
-                                            <td class="lineup__name"><a class="profil-poveznica" href="#">{{$player->current_club->competition or 'Nema takmičenja'}}</a></td>
+                                            <td class="lineup__name">{{$player->current_club->competition or 'Nema takmičenja'}}</td>
                                         </tr>
 
                                         </tbody>
@@ -183,40 +183,50 @@
                         <!-- Widget: Socijalne mreze -->
 
                         <!-- Socijalne mreze -->
-
-                        <div class="col-md-6 profili-soc-mreza">
-                            <a href="#" class="btn-social-counter btn-social-counter--fb" target="_blank">
-                                <div class="btn-social-counter__icon">
-                                    <i class="fa fa-facebook"></i>
+                        <div class="row">
+                            <div class="col-md-12">
+                            @if($player->facebook)
+                                <div class="col-md-6 profili-soc-mreza">
+                                    <a href="{{ $player->facebook }}" class="btn-social-counter btn-social-counter--fb" target="_blank">
+                                        <div class="btn-social-counter__icon">
+                                            <i class="fa fa-facebook"></i>
+                                        </div>
+                                        <h6 class="btn-social-counter__title">Facebook</h6>
+                                    </a>
                                 </div>
-                                <h6 class="btn-social-counter__title">Facebook</h6>
-                            </a>
-                        </div>
-                        <div class="col-md-6 profili-soc-mreza">
-                            <a href="#" class="btn-social-counter btn-social-counter--twitter" target="_blank">
-                                <div class="btn-social-counter__icon">
-                                    <i class="fa fa-twitter"></i>
+                            @endif
+                            @if($player->twitter)
+                                <div class="col-md-6 profili-soc-mreza">
+                                    <a href="{{ $player->twitter }}" class="btn-social-counter btn-social-counter--twitter" target="_blank">
+                                        <div class="btn-social-counter__icon">
+                                            <i class="fa fa-twitter"></i>
+                                        </div>
+                                        <h6 class="btn-social-counter__title">Twitter</h6>
+                                    </a>
                                 </div>
-                                <h6 class="btn-social-counter__title">Twitter</h6>
-                            </a>
-                        </div>
-                        <div class="col-md-6 profili-soc-mreza">
-                            <a href="#" class="btn-social-counter btn-social-counter--instagram" target="_blank">
-                                <div class="btn-social-counter__icon">
-                                    <i class="fa fa-instagram"></i>
+                            @endif
+                            @if($player->instagram)
+                                <div class="col-md-6 profili-soc-mreza">
+                                    <a href="{{ $player->instagram }}" class="btn-social-counter btn-social-counter--instagram" target="_blank">
+                                        <div class="btn-social-counter__icon">
+                                            <i class="fa fa-instagram"></i>
+                                        </div>
+                                        <h6 class="btn-social-counter__title">Instagram</h6>
+                                    </a>
                                 </div>
-                                <h6 class="btn-social-counter__title">Instagram</h6>
-                            </a>
-                        </div>
-                        <div class="col-md-6 profili-soc-mreza">
-                            <a href="#" class="btn-social-counter btn-social-counter--yt" target="_blank">
-                                <div class="btn-social-counter__icon">
-                                    <i class="fa fa-youtube-play"></i>
+                            @endif
+                            @if($player->youtube)
+                                <div class="col-md-6 profili-soc-mreza">
+                                    <a href="{{ $player->youtube }}" class="btn-social-counter btn-social-counter--yt" target="_blank">
+                                        <div class="btn-social-counter__icon">
+                                            <i class="fa fa-youtube-play"></i>
+                                        </div>
+                                        <h6 class="btn-social-counter__title">YouTUBE</h6>
+                                    </a>
                                 </div>
-                                <h6 class="btn-social-counter__title">YouTUBE</h6>
-                            </a>
+                            @endif
+                            </div>
                         </div>
-
                         <!-- Socijalne mreze / End -->
                         <!-- Widget: Socijalne mreze / End -->
 
@@ -490,10 +500,10 @@
 
                                                         <div class="df-timeline__event df-timeline__event--empty"></div>
 
-                                                        @foreach($player->club_history as $club)
+                                                        @foreach($player->club_history as $key => $club)
 
                                                             <div class="df-timeline__event">
-                                                                <div class="df-timeline__team-1">
+                                                                <div class="df-timeline__team-{{ $key % 2 == 0 ? '1' : '2' }}">
                                                                     <div class="df-timeline__event-info">
                                                                         <div class="df-timeline__event-name">{{$club->club}}</div>
                                                                         <div class="df-timeline__event-desc">{{$club->season}}</div>
@@ -562,7 +572,7 @@
                                         </header>
 
                                         <div class="post__content">
-                                            {{  $player->biography }}
+                                            {{  $player->biography or 'Biografija nije unesena.' }}
                                         </div>
                                     </article>
                                     <!-- Article / End -->

@@ -249,7 +249,7 @@ class PlayerRepository {
 
     public function getById($id) {
         return Player::where('id', $id)
-            ->with(['player_type', 'player_nature'])
+            ->with(['player_type', 'nature'])
             ->first();
     }
 

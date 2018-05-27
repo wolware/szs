@@ -280,7 +280,8 @@ class ClubController extends Controller
                     }
                 }
 
-                return redirect('/clubs/' . $club_id . '/edit');
+                flash()->overlay('Uspješno ste dodali klub.', 'Čestitamo');
+                return redirect('/clubs/' . $club_id);
             }
 
     	}

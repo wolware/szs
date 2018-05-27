@@ -62,3 +62,17 @@ Description:  You can add your custom CSS here and it will overwrite template st
 .overscreen {
     z-index: 1000!important;
 }
+
+.input-group-addon {
+    border: 0;
+}
+
+.not-visible{
+    visibility: hidden!important;
+    width: 0!important;
+    height: 0!important;
+}
+
+label {
+    white-space: normal;
+}

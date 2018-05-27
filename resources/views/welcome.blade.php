@@ -503,98 +503,24 @@
       
       <!-- Tab: Kadrovi -->
             <div role="tabpanel" class="tab-pane fade neaktivno" id="tab-kadrovi">
-        <div class="row igraci-grid">
-          <div class="post-grid__item col-sm-4">
-            <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
-            <figure class="posts__thumb">
-              <a href="#"><img src="{{asset('images/tarik.jpg')}}" alt=""></a>
-            </figure>
-            <div class="posts__inner card__content">
-              <h6 class="posts__title ime-sportiste-klub-lista"><a href="#">Tarik Jašarević</a></h6>
-              <div class="posts__excerpt">Sportski direktor</div>
-            </div>
-            <footer class="posts__footer card__footer">
-              <a href="#" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila kadra</a>
-            </footer>
-            </div>
-          </div>
-          
-          <div class="post-grid__item col-sm-4">
-            <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
-            <figure class="posts__thumb">
-              <a href="#"><img src="{{asset('images/dino-secic.jpg')}}" alt=""></a>
-            </figure>
-            <div class="posts__inner card__content">
-              <h6 class="posts__title ime-sportiste-klub-lista"><a href="#">Dino Šečić</a></h6>
-              <div class="posts__excerpt">PR Menadžer</div>
-            </div>
-            <footer class="posts__footer card__footer">
-              <a href="#" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila kadra</a>
-            </footer>
-            </div>
-          </div>
-          
-          <div class="post-grid__item col-sm-4">
-            <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
-            <figure class="posts__thumb">
-              <a href="#"><img src="{{asset('images/edin-music.JPG')}}" alt=""></a>
-            </figure>
-            <div class="posts__inner card__content">
-              <h6 class="posts__title ime-sportiste-klub-lista"><a href="#">Edin Musić</a></h6>
-              <div class="posts__excerpt">Nogometni trener</div>
-            </div>
-            <footer class="posts__footer card__footer">
-              <a href="#" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila kadra</a>
-            </footer>
-            </div>
-          </div>
-          
-          <div class="post-grid__item col-sm-4">
-            <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
-            <figure class="posts__thumb">
-              <a href="#"><img src="{{asset('images/irfan-garic.jpg')}}" alt=""></a>
-            </figure>
-            <div class="posts__inner card__content">
-              <h6 class="posts__title ime-sportiste-klub-lista"><a href="#">Irfan Garić</a></h6>
-              <div class="posts__excerpt">Projekt menadžer</div>
-            </div>
-            <footer class="posts__footer card__footer">
-              <a href="#" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila kadra</a>
-            </footer>
-            </div>
-          </div>
-          
-          <div class="post-grid__item col-sm-4">
-            <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
-            <figure class="posts__thumb">
-              <a href="#"><img src="{{asset('images/profilna.JPG')}}" alt=""></a>
-            </figure>
-            <div class="posts__inner card__content">
-              <h6 class="posts__title ime-sportiste-klub-lista"><a href="#">Nedim Tufekčić</a></h6>
-              <div class="posts__excerpt">Web & Grafički Dizajner</div>
-            </div>
-            <footer class="posts__footer card__footer">
-              <a href="#" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila kadra</a>
-            </footer>
-            </div>
-          </div>
-          
-          <div class="post-grid__item col-sm-4">
-            <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
-            <figure class="posts__thumb">
-              <a href="#"><img src="{{asset('images/tarik.jpg')}}" alt=""></a>
-            </figure>
-            <div class="posts__inner card__content">
-              <h6 class="posts__title ime-sportiste-klub-lista"><a href="#">Tarik Jašarević</a></h6>
-              <div class="posts__excerpt">Web Dizajner</div>
-            </div>
-            <footer class="posts__footer card__footer">
-              <a href="#" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila kadra</a>
-            </footer>
-            </div>
-          </div>
-          
-        </div>
+              <div class="row igraci-grid">
+                @foreach($staff as $s)
+                  <div class="post-grid__item col-sm-4">
+                    <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
+                      <figure class="posts__thumb">
+                        <a href="{{ url('/staff/' . $s->id) }}"><img src="{{asset('images/staff_avatars/' . $s->avatar)}}" alt=""></a>
+                      </figure>
+                      <div class="posts__inner card__content">
+                        <h6 class="posts__title ime-sportiste-klub-lista"><a href="#">{{ $s->firstname . ' ' . $s->lastname }}</a></h6>
+                        <div class="posts__excerpt">{{ $s->profession->name }}</div>
+                      </div>
+                      <footer class="posts__footer card__footer">
+                        <a href="{{ url('/staff/' . $s->id) }}" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila kadra</a>
+                      </footer>
+                    </div>
+                  </div>
+                @endforeach
+              </div>
         
             </div>
             <!-- Tab: Kadrovi / End -->
