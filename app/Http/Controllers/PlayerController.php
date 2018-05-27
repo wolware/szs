@@ -52,8 +52,8 @@ class PlayerController extends Controller
         'region' => 'integer|exists:regions,id',
         'municipality' => 'integer|exists:regions,id',
         'city' => 'required|max:255|string',
-        'weight' => 'nullable|numeric',
-        'height' => 'nullable|numeric',
+        'weight' => 'nullable|numeric|between:0,300.0',
+        'height' => 'nullable|numeric|between:0,300.0',
         'facebook' => 'nullable|max:255|string',
         'instagram' => 'nullable|max:255|string',
         'twitter' => 'nullable|max:255|string',
@@ -392,8 +392,8 @@ class PlayerController extends Controller
 
         $allValidators = [
             'date_of_birth' => 'nullable|date',
-            'weight' => 'nullable|numeric',
-            'height' => 'nullable|numeric',
+            'weight' => 'nullable|numeric|between:0,300.0',
+            'height' => 'nullable|numeric|between:0,300.0',
             'requested_club' => 'nullable|integer|exists:clubs,id',
             'history' => 'array',
             'history.*' => 'array',

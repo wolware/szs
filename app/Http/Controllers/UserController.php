@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\RegionRepository;
 use Illuminate\Http\Request;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -12,14 +13,16 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    protected $regionRepository;
+
     /**
      * Create a new controller instance.
      *
-     * @return void
+     * @param RegionRepository $regionRepository
      */
-    public function __construct()
+    public function __construct(RegionRepository $regionRepository)
     {
-        $this->middleware('auth');
+        $this->regionRepository = $regionRepository;
     }
 
     /**
@@ -29,16 +32,17 @@ class UserController extends Controller
      */
     public function settings_index()
     {
-    	if(isset(Auth::user()->name)){
-	    	$data = DB::table('users')->where('name', Auth::user()->name)->first();
-	        return view('profile.settings', ['data' => $data]);
-    	}else{
-    		return view('/login');
-    	}
+        $user = User::where('id', Auth::user()->id)->first();
+
+        $countries = $this->regionRepository
+            ->getCountries();
+
+        return view('profile.settings', ['data' => $user, 'countries' => $countries]);
     }
 
 
     public function settings_update(Request $data){
+        dd($data->all());
     	$validator = Validator::make($data->all(), [
             'name' => 'nullable|max:255|string',
             'email' => 'nullable|max:255|string',
