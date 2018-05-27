@@ -223,13 +223,17 @@
                   <tr>
                     <td class="player-season-avg__season">{{$club->name}}</td>
                     <td class="player-season-avg__gmp">{{$club->id}}</td>
-                    <td class="player-season-avg__min">{{date("jS F, Y", $club->objavljeno) }}</td>
-                    <td class="player-season-avg__tg">{{$club->views}}</td>
+                    <td class="player-season-avg__min">{{ \Carbon\Carbon::parse($club->created_at)->format("d F, Y") }}</td>
+                    <td class="player-season-avg__tg"></td>
                     <td class="player-season-avg__gg"><a style="color:#0288D1;">
-                      @if($club->status == 0)
+                      @if($club->status == 'waiting')
                         NA ČEKANJU
-                      @else
+                      @elseif($club->status == 'active')
                         AKTIVNO
+                      @elseif($club->status == 'refused')
+                        ODBIJENO
+                      @elseif($club->status == 'deleted')
+                        IZBRISANO
                       @endif
                     </a></td>
                     <td class="player-season-avg__ts"><a href="{{url('clubs/'.$club->id.'/edit')}}">Uredi</a></td>

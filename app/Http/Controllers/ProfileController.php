@@ -17,13 +17,11 @@ class ProfileController extends Controller
     public function profile_profiles(){
         $clubs = DB::table('clubs')->where('user_id', Auth::user()->id)->get();
 
-        $aktivnih = DB::table('clubs')->where('user_id', Auth::user()->id)->where('status', '1')->count();
-        $cekanje = DB::table('clubs')->where('user_id', Auth::user()->id)->where('status', '0')->count();
-        $odbijenih = DB::table('clubs')->where('user_id', Auth::user()->id)->where('status', '2')->count();
-        $uklonjenih = DB::table('clubs')->where('user_id', Auth::user()->id)->where('status', '3')->count();
+        $aktivnih = DB::table('clubs')->where('user_id', Auth::user()->id)->where('status', 'active')->count();
+        $cekanje = DB::table('clubs')->where('user_id', Auth::user()->id)->where('status', 'waiting')->count();
+        $odbijenih = DB::table('clubs')->where('user_id', Auth::user()->id)->where('status', 'refused')->count();
+        $uklonjenih = DB::table('clubs')->where('user_id', Auth::user()->id)->where('status', 'deleted')->count();
 
-
-        
 
         return view('profile.profiles', ['clubs' => $clubs, 'aktivnih' => $aktivnih, 'cekanje' => $cekanje, 'odbijenih' => $odbijenih, 'uklonjenih' => $uklonjenih]);
     }
