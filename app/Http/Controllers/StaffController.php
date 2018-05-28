@@ -85,7 +85,7 @@ class StaffController extends Controller
             'nagrada.*.tip' => 'required|max:255|string|in:Zlato,Srebro,Bronza,Ostalo',
             'nagrada.*.nivo' => 'required|max:255|string|in:Internacionalni nivo,Regionalni nivo,Državni nivo,Entitetski nivo,Drugo',
             'nagrada.*.takmicenje' => 'required|max:255|string',
-            'nagrada.*.sezona' => 'required|max:9|string',
+            'nagrada.*.sezona' => 'required|digits:4|integer|min:1800|max:'.date('Y'),
             'nagrada.*.osvajanja' => 'nullable|integer',
             // Slike
             'galerija' => 'array',
@@ -311,7 +311,7 @@ class StaffController extends Controller
             'nagrada.*.tip' => 'required|max:255|string|in:Zlato,Srebro,Bronza,Ostalo',
             'nagrada.*.nivo' => 'required|max:255|string|in:Internacionalni nivo,Regionalni nivo,Državni nivo,Entitetski nivo,Drugo',
             'nagrada.*.takmicenje' => 'required|max:255|string',
-            'nagrada.*.sezona' => 'required|max:9|string',
+            'nagrada.*.sezona' => 'required|digits:4|integer|min:1800|max:'.date('Y'),
             'nagrada.*.osvajanja' => 'nullable|integer',
         ]);
 

@@ -74,7 +74,6 @@ class PlayerController extends Controller
         'nagrada.*.tip' => 'required|max:255|string|in:Zlato,Srebro,Bronza,Ostalo',
         'nagrada.*.nivo' => 'required|max:255|string|in:Internacionalni nivo,Regionalni nivo,Državni nivo,Entitetski nivo,Drugo',
         'nagrada.*.takmicenje' => 'required|max:255|string',
-        'nagrada.*.sezona' => 'required|max:9|string',
         'nagrada.*.osvajanja' => 'nullable|integer',
         // Slike
         'galerija' => 'array',
@@ -106,6 +105,7 @@ class PlayerController extends Controller
         $this->regionRepository = $regionRepository;
         $this->clubRepository = $clubRepository;
         $this->playerCommonValidationRules['date_of_birth'] = 'nullable|date|before_or_equal:' . Carbon::now()->toDateString();
+        $this->playerCommonValidationRules['nagrada.*.sezona'] = 'required|digits:4|integer|min:1800|max:'.date('Y');
     }
 
     public function displayAddPlayerCategories() {
@@ -479,7 +479,7 @@ class PlayerController extends Controller
             'nagrada.*.tip' => 'required|max:255|string|in:Zlato,Srebro,Bronza,Ostalo',
             'nagrada.*.nivo' => 'required|max:255|string|in:Internacionalni nivo,Regionalni nivo,Državni nivo,Entitetski nivo,Drugo',
             'nagrada.*.takmicenje' => 'required|max:255|string',
-            'nagrada.*.sezona' => 'required|max:9|string',
+            'nagrada.*.sezona' => 'required|digits:4|integer|min:1800|max:'.date('Y'),
             'nagrada.*.osvajanja' => 'nullable|integer',
         ]);
 

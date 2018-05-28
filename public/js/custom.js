@@ -1521,9 +1521,8 @@ function addTrophyValidation() {
 
     nagrada.filter('input[name$="[sezona]"]').each(function() {
         $(this).rules("add", {
-            required: true,
-            string: true,
-            maxlength: 9
+            digits: true,
+            range: [1800, new Date().getFullYear()]
         });
     });
 
