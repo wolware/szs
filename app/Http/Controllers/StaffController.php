@@ -8,6 +8,7 @@ use App\Repositories\ClubRepository;
 use App\Repositories\RegionRepository;
 use App\Repositories\SportRepository;
 use App\Repositories\StaffRepository;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -46,10 +47,10 @@ class StaffController extends Controller
 
         $validator = Validator::make($request->all(), [
             'avatar' => 'image|dimensions:min_width=512,min_height=512,max_width=2048,max_height=2048',
-            'firstname' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
+            'firstname' => 'required|string|max:255|alpha',
+            'lastname' => 'required|string|max:255|alpha',
             'profession' => 'required|integer|exists:professions,id',
-            'date_of_birth' => 'nullable|date',
+            'date_of_birth' => 'nullable|date|before_or_equal:' . Carbon::now()->toDateString(),
             'continent' => 'required|integer|exists:regions,id',
             'country' => 'required|integer|exists:regions,id',
             'province' => 'integer|exists:regions,id',
@@ -84,7 +85,7 @@ class StaffController extends Controller
             'nagrada.*.tip' => 'required|max:255|string|in:Zlato,Srebro,Bronza,Ostalo',
             'nagrada.*.nivo' => 'required|max:255|string|in:Internacionalni nivo,Regionalni nivo,Državni nivo,Entitetski nivo,Drugo',
             'nagrada.*.takmicenje' => 'required|max:255|string',
-            'nagrada.*.sezona' => 'required|max:9|string',
+            'nagrada.*.sezona' => 'required|digits:4|integer|min:1800|max:'.date('Y'),
             'nagrada.*.osvajanja' => 'nullable|integer',
             // Slike
             'galerija' => 'array',
@@ -173,8 +174,8 @@ class StaffController extends Controller
 
         $validator = Validator::make($request->all(), [
             'avatar' => 'image|dimensions:min_width=512,min_height=512,max_width=2048,max_height=2048',
-            'firstname' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
+            'firstname' => 'required|string|max:255|alpha',
+            'lastname' => 'required|string|max:255|alpha',
             'profession' => 'required|integer|exists:professions,id',
             'continent' => 'required|integer|exists:regions,id',
             'country' => 'required|integer|exists:regions,id',
@@ -221,7 +222,7 @@ class StaffController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'date_of_birth' => 'nullable|date',
+            'date_of_birth' => 'nullable|date|before_or_equal:' . Carbon::now()->toDateString(),
             'requested_club' => 'nullable|integer|exists:clubs,id',
             'club_name' => 'nullable|max:255|string',
             'education' => 'nullable|max:255|string',
@@ -310,7 +311,7 @@ class StaffController extends Controller
             'nagrada.*.tip' => 'required|max:255|string|in:Zlato,Srebro,Bronza,Ostalo',
             'nagrada.*.nivo' => 'required|max:255|string|in:Internacionalni nivo,Regionalni nivo,Državni nivo,Entitetski nivo,Drugo',
             'nagrada.*.takmicenje' => 'required|max:255|string',
-            'nagrada.*.sezona' => 'required|max:9|string',
+            'nagrada.*.sezona' => 'required|digits:4|integer|min:1800|max:'.date('Y'),
             'nagrada.*.osvajanja' => 'nullable|integer',
         ]);
 

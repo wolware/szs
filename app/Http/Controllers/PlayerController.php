@@ -9,6 +9,7 @@ use App\Repositories\PlayerRepository;
 use App\Repositories\RegionRepository;
 use App\Repositories\SportRepository;
 use App\Sport;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
@@ -31,21 +32,20 @@ class PlayerController extends Controller
         'position' => 'label:Pozicija|type:input|name:position|placeholder:Unesite poziciju sportiste',
         'competition' => 'label:Takmičenje|type:input|name:competition|placeholder:Unesite ime takmičenja u kojem sportista nastupa',
         //'federation' => 'label:Federacija|type:input|name:federation|placeholder:Unesite trenutni rank sportiste',
-        'category' => 'label:Kategorija|type:select|name:category|options:Durmski biciklizam,Brdski biciklizam,BMX|karate_options:Kihon,Kate,Kumite|default:Izaberite kategoriju u kojoj se sportista natječe',
+        'category' => 'label:Kategorija|type:select|name:category|options:Drumski biciklizam,Brdski biciklizam,BMX|karate_options:Kihon,Kate,Kumite|default:Izaberite kategoriju u kojoj se sportista natječe',
         'market_value' => 'label:Vrijednost|type:input|name:market_value|placeholder:Unseite tržišnu vrijednost sportiste',
         'branch' => 'label:Grana|type:select|name:branch|options:Ritmička gimnastika,Sportska gimnastika|default:Izaberite granu gimnastike',
         'belt' => 'label:Pojas|type:select|name:belt|options:9 Kju Bijeli,8 Kju Žuti,7 Kju Narandžasti,6 Kju Crveni,5 Kju Zeleni,4 Kju Plavi,3 Kju Ljubičasti,2 Kju Smeđi,1 Kju Crni|default:Izaberite pojas sportiste',
         'style' => 'label:Stil|type:select|name:style|options:Slobodni stil,Prsni stil,Leđni stil,Delfin/Leptir stil,Mješovito|default:Izaberite stil plivanja sportiste',
-        'distance' => 'lable:Dionica stila|type:input|name:distance|placeholder:Unesite dionicu stila plivača',
+        'distance' => 'label:Dionica stila|type:input|name:distance|placeholder:Unesite dionicu stila plivača',
         'coach' => 'label:Trener|type:input|name:coach|placeholder:Unesite ime trenera sportiste',
         'best_rank' => 'label:Najbolji rank|type:input|name:best_rank|placeholder:Unesite najbolji rank sportiste',
     ];
 
     protected $playerCommonValidationRules = [
         'avatar' => 'image|dimensions:min_width=512,min_height=512,max_width=2048,max_height=2048',
-        'firstname' => 'required|string|max:255',
-        'lastname' => 'required|string|max:255',
-        'date_of_birth' => 'nullable|date',
+        'firstname' => 'required|string|max:255|alpha',
+        'lastname' => 'required|string|max:255|alpha',
         'continent' => 'required|integer|exists:regions,id',
         'country' => 'required|integer|exists:regions,id',
         'province' => 'integer|exists:regions,id',
@@ -74,7 +74,6 @@ class PlayerController extends Controller
         'nagrada.*.tip' => 'required|max:255|string|in:Zlato,Srebro,Bronza,Ostalo',
         'nagrada.*.nivo' => 'required|max:255|string|in:Internacionalni nivo,Regionalni nivo,Državni nivo,Entitetski nivo,Drugo',
         'nagrada.*.takmicenje' => 'required|max:255|string',
-        'nagrada.*.sezona' => 'required|max:9|string',
         'nagrada.*.osvajanja' => 'nullable|integer',
         // Slike
         'galerija' => 'array',
@@ -87,7 +86,7 @@ class PlayerController extends Controller
         'rank' => 'nullable|integer',
         'discipline' => 'nullable|max:255|string',
         'best_result' => 'nullable|numeric',
-        'agent' => 'nullable|max:255|string',
+        'agent' => 'nullable|max:255|string|alpha',
         'position' => 'nullable|max:255|string',
         'competition' => 'nullable|max:255|string',
         'category' => 'nullable|max:255|string',
@@ -96,7 +95,7 @@ class PlayerController extends Controller
         'belt' => 'nullable|max:255|string',
         'style' => 'nullable|max:255|string',
         'distance' => 'nullable|integer',
-        'coach' => 'nullable|max:255|string',
+        'coach' => 'nullable|max:255|string|alpha',
         'best_rank' => 'nullable|integer',
     ];
 
@@ -105,6 +104,8 @@ class PlayerController extends Controller
         $this->playerRepository = $playerRepository;
         $this->regionRepository = $regionRepository;
         $this->clubRepository = $clubRepository;
+        $this->playerCommonValidationRules['date_of_birth'] = 'nullable|date|before_or_equal:' . Carbon::now()->toDateString();
+        $this->playerCommonValidationRules['nagrada.*.sezona'] = 'required|digits:4|integer|min:1800|max:'.date('Y');
     }
 
     public function displayAddPlayerCategories() {
@@ -343,8 +344,8 @@ class PlayerController extends Controller
 
         $validator = Validator::make($request->all(), [
             'avatar' => 'image|dimensions:min_width=512,min_height=512,max_width=2048,max_height=2048',
-            'firstname' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
+            'firstname' => 'required|string|max:255|alpha',
+            'lastname' => 'required|string|max:255|alpha',
             'continent' => 'required|integer|exists:regions,id',
             'country' => 'required|integer|exists:regions,id',
             'province' => 'integer|exists:regions,id',
@@ -391,7 +392,7 @@ class PlayerController extends Controller
         }
 
         $allValidators = [
-            'date_of_birth' => 'nullable|date',
+            'date_of_birth' => 'nullable|date|before_or_equal:' . Carbon::now()->toDateString(),
             'weight' => 'nullable|numeric|between:0,300.0',
             'height' => 'nullable|numeric|between:0,300.0',
             'requested_club' => 'nullable|integer|exists:clubs,id',
@@ -478,7 +479,7 @@ class PlayerController extends Controller
             'nagrada.*.tip' => 'required|max:255|string|in:Zlato,Srebro,Bronza,Ostalo',
             'nagrada.*.nivo' => 'required|max:255|string|in:Internacionalni nivo,Regionalni nivo,Državni nivo,Entitetski nivo,Drugo',
             'nagrada.*.takmicenje' => 'required|max:255|string',
-            'nagrada.*.sezona' => 'required|max:9|string',
+            'nagrada.*.sezona' => 'required|digits:4|integer|min:1800|max:'.date('Y'),
             'nagrada.*.osvajanja' => 'nullable|integer',
         ]);
 

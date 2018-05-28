@@ -86,9 +86,9 @@ class RegisterController extends Controller
             'name' => 'required|unique:users|max:255|string',
             'email' => 'required|unique:users|max:255|string',
             'password' => 'required|max:255|min:6|string|confirmed',
-            'spol' => 'required',
-            'dob' => 'required',
-            'country' => 'required',
+            'spol' => 'required|string|in:Muško,Žensko',
+            'dob' => 'required|date|before_or_equal:' . Carbon::now()->toDateString(),
+            'country' => 'required|integer|exists:regions,id',
             'prihvatam' => 'required'
         ], $messages);
 

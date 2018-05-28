@@ -379,7 +379,7 @@
        }
    </script>
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAO6kDxfB19QkynnAGz5nlmX6Kbrb_pAsQ&libraries=places&region=BA&language=hr"></script>
-   
+        <script src="{{ asset('js/xregexp-all.js') }}"></script>
       <script src="{{ asset('js/custom.js?t='.time()) }}"></script>
 </body>
 </html>

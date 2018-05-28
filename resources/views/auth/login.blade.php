@@ -89,7 +89,7 @@
 
 
                 <!-- Login Form / End -->
-                <p class="reg-prijava">Ne posjedujem profil na SveZaSport, želim se <a href="/register">REGISTROVATI</a></p>
+                <p class="reg-prijava">Ne posjedujem profil na SveZaSport, želim se <a href="{{ url('/register') }}">REGISTROVATI</a></p>
                   </div>
                 </div>
               </div>

@@ -131,24 +131,4 @@
     <!-- Footer / End -->
 
   </div>
-  <!-- Bootstrap Date-Picker Plugin -->
-  <script type="text/javascript" src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
-  <script type="text/javascript" src="{{asset('http://code.jquery.com/ui/1.11.0/jquery-ui.js')}}"></script>
-  <script type="text/javascript" src="{{asset('js/bootstrap-datepicker.js?t=242')}}"></script>
-
-  <script>
-     $(document).ready(function(){
-       var date_input=$('input[name="dob"]'); //our date input has the name "date"
-       var container=$('form').length>0 ? $('form').parent() : "body";
-       var options={
-         format: 'mm/dd/yyyy',
-         container: container,
-         todayHighlight: true,
-         autoclose: true,
-       };
-       date_input.datepicker(options);
-     })
-   </script>
-
-
 @endsection

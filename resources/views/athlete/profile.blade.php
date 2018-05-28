@@ -82,7 +82,6 @@
                         </div>
 
                         <div class="player-info-details">
-                            <a href="#" class="btn btn-primary-inverse btn-icon product__add-to-cart stats-klub-middle"><i class="fa fa-heart-o"></i> Sviđa mi se</a>
                             <a href="#" class="btn btn-primary-inverse btn-icon product__add-to-cart"><i class="fa fa-share-alt"></i> Podijeli</a>
 
                         </div>

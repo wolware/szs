@@ -351,12 +351,12 @@
 
                                                 <div class="form-group col-md-4">
                                                     <label for="height"><img class="flow-icons-013" src="{{asset('images/icons/height.svg')}}"> Visina</label>
-                                                    <input type="number" name="height" id="height" class="form-control" placeholder="Unesite visinu u cm" value="{{ $player->height }}">
+                                                    <input type="number" name="height" id="height" class="form-control" placeholder="Unesite visinu u cm" value="{{ $player->height }}" min="0" max="300">
                                                 </div>
 
                                                 <div class="form-group col-md-4">
                                                     <label for="weight"><img class="flow-icons-013" src="{{asset('images/icons/weight.svg')}}"> Težina</label>
-                                                    <input type="number" name="weight" id="weight" class="form-control" placeholder="Unesite težinu u kg" value="{{ $player->weight }}">
+                                                    <input type="number" name="weight" id="weight" class="form-control" placeholder="Unesite težinu u kg" value="{{ $player->weight }}" min="0" max="300">
                                                 </div>
 
                                                 @foreach($inputs as $input)
