@@ -51,7 +51,7 @@ class UserController extends Controller
             'avatar' => 'nullable|image|mimes:jpg,png,jpeg|dimensions:min_width=64,min_height=64,max_width=700,max_height=700',
             'address' => 'nullable|string',
             'phone' => 'nullable|string|max:25',
-            'dob' => 'nullable|date',
+            'dob' => 'nullable|date|before_or_equal:' . Carbon::now()->toDateString(),
             'spol' => 'required|string|in:Muško,Žensko',
             'country' => 'required|integer|exists:regions,id'
         ]);

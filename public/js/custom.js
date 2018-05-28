@@ -1239,6 +1239,7 @@ $(document).ready(function () {
         container: container1,
         todayHighlight: true,
         autoclose: true,
+        maxDate: new Date()
     };
     date_input1.datepicker(options1);
 
@@ -1249,18 +1250,20 @@ $(document).ready(function () {
         container: container,
         todayHighlight: true,
         autoclose: true,
+        maxDate: new Date()
     };
     date_input.datepicker(options);
 
-    var date_input = $('input[name="dob"]'); //our date input has the name "date"
-    var container = $('form').length > 0 ? $('form').parent() : "body";
-    var options = {
+    var date_input2 = $('input[name="dob"]'); //our date input has the name "date"
+    var container2 = $('form').length > 0 ? $('form').parent() : "body";
+    var options2 = {
         format: 'mm/dd/yyyy',
-        container: container,
+        container: container2,
         todayHighlight: true,
         autoclose: true,
+        maxDate: new Date()
     };
-    date_input.datepicker(options);
+    date_input2.datepicker(options2);
 });
 
 

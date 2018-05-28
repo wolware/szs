@@ -9,6 +9,7 @@ use App\Repositories\PlayerRepository;
 use App\Repositories\RegionRepository;
 use App\Repositories\SportRepository;
 use App\Sport;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Schema;
@@ -45,7 +46,6 @@ class PlayerController extends Controller
         'avatar' => 'image|dimensions:min_width=512,min_height=512,max_width=2048,max_height=2048',
         'firstname' => 'required|string|max:255',
         'lastname' => 'required|string|max:255',
-        'date_of_birth' => 'nullable|date',
         'continent' => 'required|integer|exists:regions,id',
         'country' => 'required|integer|exists:regions,id',
         'province' => 'integer|exists:regions,id',
@@ -105,6 +105,7 @@ class PlayerController extends Controller
         $this->playerRepository = $playerRepository;
         $this->regionRepository = $regionRepository;
         $this->clubRepository = $clubRepository;
+        $this->playerCommonValidationRules['date_of_birth'] = 'nullable|date|before_or_equal:' . Carbon::now()->toDateString();
     }
 
     public function displayAddPlayerCategories() {
@@ -391,7 +392,7 @@ class PlayerController extends Controller
         }
 
         $allValidators = [
-            'date_of_birth' => 'nullable|date',
+            'date_of_birth' => 'nullable|date|before_or_equal:' . Carbon::now()->toDateString(),
             'weight' => 'nullable|numeric|between:0,300.0',
             'height' => 'nullable|numeric|between:0,300.0',
             'requested_club' => 'nullable|integer|exists:clubs,id',

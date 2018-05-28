@@ -8,6 +8,7 @@ use App\Repositories\ClubRepository;
 use App\Repositories\RegionRepository;
 use App\Repositories\SportRepository;
 use App\Repositories\StaffRepository;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -49,7 +50,7 @@ class StaffController extends Controller
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
             'profession' => 'required|integer|exists:professions,id',
-            'date_of_birth' => 'nullable|date',
+            'date_of_birth' => 'nullable|date|before_or_equal:' . Carbon::now()->toDateString(),
             'continent' => 'required|integer|exists:regions,id',
             'country' => 'required|integer|exists:regions,id',
             'province' => 'integer|exists:regions,id',
@@ -221,7 +222,7 @@ class StaffController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'date_of_birth' => 'nullable|date',
+            'date_of_birth' => 'nullable|date|before_or_equal:' . Carbon::now()->toDateString(),
             'requested_club' => 'nullable|integer|exists:clubs,id',
             'club_name' => 'nullable|max:255|string',
             'education' => 'nullable|max:255|string',
