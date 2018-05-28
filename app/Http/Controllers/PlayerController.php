@@ -37,7 +37,7 @@ class PlayerController extends Controller
         'branch' => 'label:Grana|type:select|name:branch|options:Ritmička gimnastika,Sportska gimnastika|default:Izaberite granu gimnastike',
         'belt' => 'label:Pojas|type:select|name:belt|options:9 Kju Bijeli,8 Kju Žuti,7 Kju Narandžasti,6 Kju Crveni,5 Kju Zeleni,4 Kju Plavi,3 Kju Ljubičasti,2 Kju Smeđi,1 Kju Crni|default:Izaberite pojas sportiste',
         'style' => 'label:Stil|type:select|name:style|options:Slobodni stil,Prsni stil,Leđni stil,Delfin/Leptir stil,Mješovito|default:Izaberite stil plivanja sportiste',
-        'distance' => 'lable:Dionica stila|type:input|name:distance|placeholder:Unesite dionicu stila plivača',
+        'distance' => 'label:Dionica stila|type:input|name:distance|placeholder:Unesite dionicu stila plivača',
         'coach' => 'label:Trener|type:input|name:coach|placeholder:Unesite ime trenera sportiste',
         'best_rank' => 'label:Najbolji rank|type:input|name:best_rank|placeholder:Unesite najbolji rank sportiste',
     ];
