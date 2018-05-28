@@ -32,7 +32,7 @@ class PlayerController extends Controller
         'position' => 'label:Pozicija|type:input|name:position|placeholder:Unesite poziciju sportiste',
         'competition' => 'label:Takmičenje|type:input|name:competition|placeholder:Unesite ime takmičenja u kojem sportista nastupa',
         //'federation' => 'label:Federacija|type:input|name:federation|placeholder:Unesite trenutni rank sportiste',
-        'category' => 'label:Kategorija|type:select|name:category|options:Durmski biciklizam,Brdski biciklizam,BMX|karate_options:Kihon,Kate,Kumite|default:Izaberite kategoriju u kojoj se sportista natječe',
+        'category' => 'label:Kategorija|type:select|name:category|options:Drumski biciklizam,Brdski biciklizam,BMX|karate_options:Kihon,Kate,Kumite|default:Izaberite kategoriju u kojoj se sportista natječe',
         'market_value' => 'label:Vrijednost|type:input|name:market_value|placeholder:Unseite tržišnu vrijednost sportiste',
         'branch' => 'label:Grana|type:select|name:branch|options:Ritmička gimnastika,Sportska gimnastika|default:Izaberite granu gimnastike',
         'belt' => 'label:Pojas|type:select|name:belt|options:9 Kju Bijeli,8 Kju Žuti,7 Kju Narandžasti,6 Kju Crveni,5 Kju Zeleni,4 Kju Plavi,3 Kju Ljubičasti,2 Kju Smeđi,1 Kju Crni|default:Izaberite pojas sportiste',
