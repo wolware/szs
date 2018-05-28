@@ -47,8 +47,8 @@ class StaffController extends Controller
 
         $validator = Validator::make($request->all(), [
             'avatar' => 'image|dimensions:min_width=512,min_height=512,max_width=2048,max_height=2048',
-            'firstname' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
+            'firstname' => 'required|string|max:255|alpha',
+            'lastname' => 'required|string|max:255|alpha',
             'profession' => 'required|integer|exists:professions,id',
             'date_of_birth' => 'nullable|date|before_or_equal:' . Carbon::now()->toDateString(),
             'continent' => 'required|integer|exists:regions,id',
@@ -174,8 +174,8 @@ class StaffController extends Controller
 
         $validator = Validator::make($request->all(), [
             'avatar' => 'image|dimensions:min_width=512,min_height=512,max_width=2048,max_height=2048',
-            'firstname' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
+            'firstname' => 'required|string|max:255|alpha',
+            'lastname' => 'required|string|max:255|alpha',
             'profession' => 'required|integer|exists:professions,id',
             'continent' => 'required|integer|exists:regions,id',
             'country' => 'required|integer|exists:regions,id',

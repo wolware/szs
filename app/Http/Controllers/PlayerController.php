@@ -44,8 +44,8 @@ class PlayerController extends Controller
 
     protected $playerCommonValidationRules = [
         'avatar' => 'image|dimensions:min_width=512,min_height=512,max_width=2048,max_height=2048',
-        'firstname' => 'required|string|max:255',
-        'lastname' => 'required|string|max:255',
+        'firstname' => 'required|string|max:255|alpha',
+        'lastname' => 'required|string|max:255|alpha',
         'continent' => 'required|integer|exists:regions,id',
         'country' => 'required|integer|exists:regions,id',
         'province' => 'integer|exists:regions,id',
@@ -86,7 +86,7 @@ class PlayerController extends Controller
         'rank' => 'nullable|integer',
         'discipline' => 'nullable|max:255|string',
         'best_result' => 'nullable|numeric',
-        'agent' => 'nullable|max:255|string',
+        'agent' => 'nullable|max:255|string|alpha',
         'position' => 'nullable|max:255|string',
         'competition' => 'nullable|max:255|string',
         'category' => 'nullable|max:255|string',
@@ -95,7 +95,7 @@ class PlayerController extends Controller
         'belt' => 'nullable|max:255|string',
         'style' => 'nullable|max:255|string',
         'distance' => 'nullable|integer',
-        'coach' => 'nullable|max:255|string',
+        'coach' => 'nullable|max:255|string|alpha',
         'best_rank' => 'nullable|integer',
     ];
 
@@ -344,8 +344,8 @@ class PlayerController extends Controller
 
         $validator = Validator::make($request->all(), [
             'avatar' => 'image|dimensions:min_width=512,min_height=512,max_width=2048,max_height=2048',
-            'firstname' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
+            'firstname' => 'required|string|max:255|alpha',
+            'lastname' => 'required|string|max:255|alpha',
             'continent' => 'required|integer|exists:regions,id',
             'country' => 'required|integer|exists:regions,id',
             'province' => 'integer|exists:regions,id',

@@ -409,11 +409,13 @@ $(document).ready(function () {
             firstname: {
                 required: true,
                 string: true,
+                lettersonly: true,
                 maxlength: 255
             },
             lastname: {
                 required: true,
                 string: true,
+                lettersonly: true,
                 maxlength: 255
             },
             player_nature: {
@@ -494,6 +496,7 @@ $(document).ready(function () {
             },
             agent: {
                 string: true,
+                lettersonly: true,
                 maxlength: 255
             },
             position: {
@@ -528,6 +531,7 @@ $(document).ready(function () {
             },
             coach: {
                 string: true,
+                lettersonly: true,
                 maxlength: 255
             },
             best_rank: {
@@ -551,11 +555,13 @@ $(document).ready(function () {
             firstname: {
                 required: true,
                 string: true,
+                lettersonly: true,
                 maxlength: 255
             },
             lastname: {
                 required: true,
                 string: true,
+                lettersonly: true,
                 maxlength: 255
             },
             player_nature: {
@@ -642,6 +648,7 @@ $(document).ready(function () {
             },
             agent: {
                 string: true,
+                lettersonly: true,
                 maxlength: 255
             },
             position: {
@@ -676,6 +683,7 @@ $(document).ready(function () {
             },
             coach: {
                 string: true,
+                lettersonly: true,
                 maxlength: 255
             },
             best_rank: {
@@ -715,11 +723,13 @@ $(document).ready(function () {
             firstname: {
                 required: true,
                 string: true,
+                lettersonly: true,
                 maxlength: 255
             },
             lastname: {
                 required: true,
                 string: true,
+                lettersonly: true,
                 maxlength: 255
             },
             profession: {
@@ -813,11 +823,13 @@ $(document).ready(function () {
             firstname: {
                 required: true,
                 string: true,
+                lettersonly: true,
                 maxlength: 255
             },
             lastname: {
                 required: true,
                 string: true,
+                lettersonly: true,
                 maxlength: 255
             },
             profession: {
@@ -982,6 +994,10 @@ $(document).ready(function () {
         }
         return false;
     }, "Polje mora biti tipa string.");
+
+    jQuery.validator.addMethod("lettersonly", function(value, element) {
+        return this.optional(element) || XRegExp('^\\p{L}*$').test(value);
+    }, "Polje mora sadržati samo slova");
 
     // Dodavanje kluba - Dodaj ličnost
     $('#dodajLicnost').on('click', function () {
