@@ -303,16 +303,13 @@
           <div class="footer-secondary__inner">
             <div class="row">
               <div class="col-md-4">
-                <div class="footer-copyright"><a href="index.php">SveZaSport</a> .alpha &nbsp; | &nbsp; &copy; 2017. Sva prava zadržana</div>
+                <div class="footer-copyright"><a href="{{url('/')}}">SveZaSport</a> .alpha &nbsp; | &nbsp; &copy; 2017. Sva prava zadržana</div>
               </div>
               <div class="col-md-8">
                 <ul class="footer-nav footer-nav--right footer-nav--condensed footer-nav--sm">
-                  <li class="footer-nav__item"><a href="#">Naslovna</a></li>
-                  <li class="footer-nav__item"><a href="#">Impressum</a></li>
-                  <li class="footer-nav__item"><a href="#">Naša misija</a></li>
-                  <li class="footer-nav__item"><a href="#">Feedback</a></li>
-                  <li class="footer-nav__item"><a href="#">Konsalting</a></li>
-                  <li class="footer-nav__item"><a href="#">Marketing</a></li>
+                  <li class="footer-nav__item"><a href="{{url('/')}}">Naslovna</a></li>
+                  <li class="footer-nav__item"><a href="{{url('/contact')}}">Marketing</a></li>
+                    <li class="footer-nav__item"><a href="{{url('/contact')}}">Kontakt</a></li>
                 </ul>
               </div>
             </div>
