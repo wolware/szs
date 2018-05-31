@@ -39,4 +39,7 @@ class HomeController extends Controller
 
         return view('welcome', ['sportasi' => $sportasi, 'klubovi' => $klubovi, 'vijesti' => $vijesti, 'staff' => $staff]);
     }
+    public function contact(){
+        return view('contact');
+    }
 }
