@@ -76,7 +76,7 @@
               <ul class="main-nav__sub">
                 <li><a href="{{url('me/profile')}}"><i class="fa fa-id-card-o"></i> Pregled profila</a></li>
                 <li><a href="{{url('me/profiles')}}"><i class="fa fa-th-list"></i> Moji profili</a></li>
-        <li><a href="{{url('me/medals')}}"><i class="fa fa-trophy"></i> Moje medalje</a></li>
+       {{-- <li><a href="{{url('me/medals')}}"><i class="fa fa-trophy"></i> Moje medalje</a></li>--}}
                 <li><a href="{{url('me/news')}}"><i class="fa fa-plus-square-o"></i> Moje vijesti</a></li>
                 {{--<li><a href="{{url('me/grades')}}"><i class="fa fa-star-o"></i> Moje ocjene</a></li>--}}
                 <li><a href="{{url('me/settings')}}"><i class="fa fa-cogs"></i> Postavke</a></li>
