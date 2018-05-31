@@ -67,7 +67,9 @@
               <li class="content-filter__item content-filter__item--active"><a href="{{url('me/profile')}}" class="content-filter__link"><i class="fa fa-address-card-o"></i><small>Pregled</small>Profila</a></li>
               <li class="content-filter__item "><a href="{{url('me/profiles')}}" class="content-filter__link"><i class="fa fa-th-list"></i><small>Moji</small>Profili</a></li>
               <li class="content-filter__item "><a href="{{url('me/news')}}" class="content-filter__link"><i class="fa fa-plus-square-o"></i><small>Moje</small>Vijesti</a></li>
+{{--
               <li class="content-filter__item "><a href="{{url('me/grades')}}" class="content-filter__link"><i class="fa fa-star-o"></i><small>Moje</small>Ocjene</a></li>
+--}}
               <li class="content-filter__item "><a href="{{url('me/settings')}}" class="content-filter__link"><i class="fa fa-cogs"></i><small>Postavke</small>Profila</a></li>
             </ul>
           </div>
@@ -101,8 +103,8 @@
                       <span class="profil-id"><i class="fa fa-tag"></i> {{Auth::user()->id}}</span>
                     </div>
                 </div>
-                <p class="info-racun"><i class="fa fa-check-circle"></i> Premium račun</p>
-                <p class="premium-info"><i class="fa fa-clock-o"></i> Premium ističe za 15 dana</p>
+                {{--<p class="info-racun"><i class="fa fa-check-circle"></i> Premium račun</p>--}}
+                {{--<p class="premium-info"><i class="fa fa-clock-o"></i> Premium ističe za 15 dana</p>--}}
                 <button type="button" class="btn btn-default btn-xs disabled">Aktiviraj Premium Račun</button> <p class="premium-info"><i class="fa fa-database"></i> 1000</p>
               </div>
             </div>
@@ -116,18 +118,11 @@
               <h6 class="btn-social-counter__title">Objavi novi profil</h6>
             </a>
 
-            <a href="#" class="objavi-profil2 btn-social-counter" target="_blank">
+            <a href="{{url('news/new')}}" class="objavi-profil2 btn-social-counter" target="_blank">
               <div class="btn-social-counter__icon">
                 <i class="fa fa-plus-square-o"></i>
               </div>
               <h6 class="btn-social-counter__title">Objavi novu vijest</h6>
-            </a>
-
-            <a href="#" class="pozovi-prijatelja btn-social-counter" target="_blank">
-              <div class="btn-social-counter__icon">
-                <i class="fa fa-envelope-open-o"></i>
-              </div>
-              <h6 class="btn-social-counter__title">Pošalji pozivnicu prijatelju</h6>
             </a>
 
             <!-- SZS Kredit -->
@@ -258,7 +253,7 @@
                       <img src="{{asset('images/oprema-fff.png')}}" alt="" class="team-stats__icon-primary">
                     </div>
                     <div class="team-stats__value">10/15</div>
-                    <div class="team-stats__label label-stats-profil">Aktivne prodavnice</div>
+                    <div class="team-stats__label label-stats-profil">Aktivne Vijesti</div>
                     <div class="team-stats__label">
                       <div class="progress-stats">
                         <div class="progress">
@@ -331,62 +326,7 @@
             </aside>
     </div>
 
-            <div class="card card--lg">
-              <div class="card__header card__header--has-btn">
-                <h4><i class="fa fa-star"></i> Moje zadnje ocjene</h4>
-                <a href="moje-ocjene.php" class="btn btn-default btn-outline btn-xs card-header__button">Pregled svih</a>
-              </div>
-              <div class="card__content lista-ocjena-moj-profil">
-                <div class="table-responsive">
-              <table class="table shop-table">
-                <tbody>
-                  <tr>
-                    <td class="product__photo">
-                      <figure class="product__thumb" width="10%">
-            <a href="#"><img class="img-ocjene" src="{{asset('images/gym-wallpaper-1280x800.jpg')}}" alt=""></a>
-                      </figure>
-                    </td>
-                    <td class="product__info" width="80%">
-                      <span class="product__cat">Teretana</span>
-                      <h5 class="product__name"><a href="#">SZS Royal Fitness Center</a></h5>
-                    </td>
-                    <td class="product__price" width="10%">
-                      9,8
-                    </td>
-                  </tr>
-          <tr>
-                    <td class="product__photo">
-                      <figure class="product__thumb" width="10%">
-            <a href="#"><img class="img-ocjene" src="{{asset('images/gym-wallpaper-1280x800.jpg')}}" alt=""></a>
-                      </figure>
-                    </td>
-                    <td class="product__info" width="80%">
-                      <span class="product__cat">Teretana</span>
-                      <h5 class="product__name"><a href="#">SZS Royal Fitness Center</a></h5>
-                    </td>
-                    <td class="product__price" width="10%">
-                      9,8
-                    </td>
-                  </tr>
-          <tr>
-                    <td class="product__photo">
-                      <figure class="product__thumb" width="10%">
-            <a href="#"><img class="img-ocjene" src="{{asset('images/gym-wallpaper-1280x800.jpg')}}" alt=""></a>
-                      </figure>
-                    </td>
-                    <td class="product__info" width="80%">
-                      <span class="product__cat">Teretana</span>
-                      <h5 class="product__name"><a href="#">SZS Royal Fitness Center</a></h5>
-                    </td>
-                    <td class="product__price" width="10%">
-                      9,8
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              </div>
-            </div>
-      </div>
+
           </div>
         </div>
       </div>

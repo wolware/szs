@@ -73,7 +73,9 @@
               <li class="content-filter__item "><a href="{{url('me/profiles')}}" class="content-filter__link"><i class="fa fa-th-list"></i><small>Moji</small>Profili</a></li>
               <li class="content-filter__item content-filter__item--active"><a href="{{url('me/medals')}}" class="content-filter__link"><i class="fa fa-trophy"></i><small>Moje</small>Medalje</a></li>
               <li class="content-filter__item "><a href="{{url('me/news')}}" class="content-filter__link"><i class="fa fa-plus-square-o"></i><small>Moje</small>Vijesti</a></li>
+{{--
               <li class="content-filter__item"><a href="{{url('me/grades')}}" class="content-filter__link"><i class="fa fa-star-o"></i><small>Moje</small>Ocjene</a></li>
+--}}
               <li class="content-filter__item "><a href="{{url('me/settings')}}" class="content-filter__link"><i class="fa fa-cogs"></i><small>Postavke</small>Profila</a></li>
             </ul>
           </div>
