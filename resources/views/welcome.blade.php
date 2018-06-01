@@ -5,53 +5,7 @@
 <div class="site-wrapper clearfix">
     <div class="site-overlay"></div>
 
-
-
-   
-   <!-- Pushy Panel - Dark -->
-    <aside class="pushy-panel pushy-panel--dark">
-      <div class="pushy-panel__inner">
-        <header class="pushy-panel__header">
-          <div class="pushy-panel__logo">
-            <a href="index.php"><img src="{{asset('images/soccer/logo.png')}}" srcset="assets/images/soccer/logo@2x.png 2x" alt="Alchemists"></a>
-          </div>
-        </header>
-        <div class="pushy-panel__content">
-    
-          <a href="www.rekreacija.svezasport.ba" class="push-rekreacija btn-social-counter" target="_blank">
-              <div class="btn-social-counter__icon">
-                <i class="fa fa-futbol-o"></i>
-              </div>
-              <h6 class="btn-social-counter__title">SZS Rekreacija</h6>
-            </a>
-
-            <a href="aplikacije.php" class="push-aplikacije btn-social-counter" target="_blank">
-              <div class="btn-social-counter__icon">
-                <i class="fa fa-file"></i>
-              </div>
-              <h6 class="btn-social-counter__title">SZS Aplikacije</h6>
-            </a>
-
-            <a href="sportski-turizam.php" class="push-turizam btn-social-counter" target="_blank">
-              <div class="btn-social-counter__icon">
-                <i class="fa fa-bus"></i>
-              </div>
-              <h6 class="btn-social-counter__title">Sportski turizam</h6>
-            </a>
-    
-        </div>
-        <a href="#" class="pushy-panel__back-btn"></a>
-      </div>
-    </aside>
-    <!-- Pushy Panel - Dark / End -->
-    
-    
-  
-
-    
-    
-      
-    
+  @include('includes.pushy-panel')
 
     <!-- Content
     ================================================== -->
@@ -200,98 +154,25 @@
       <!-- Tab: Škole -->
             <div role="tabpanel" class="tab-pane fade neaktivno" id="tab-skole">
         <div class="row igraci-grid">
-          <div class="post-grid__item col-sm-4">
-            <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
-            <figure class="posts__thumb club-thumb-backgr">
-              <a href="#"><img class="logo-club-tab-index" src="{{asset('images/SZS-club-logo.png')}}" alt=""></a>
-            </figure>
-            <div class="posts__inner card__content">
-              <h6 class="posts__title ime-sportiste-klub-lista"><a href="#">FK Sve Za Sport</a></h6>
-              <div class="posts__excerpt">Sarajevo, Federacija BiH</div>
+          @foreach($schools as $school)
+            <div class="post-grid__item col-sm-4">
+              <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
+                <figure class="posts__thumb club-thumb-backgr">
+                  <a href="{{url('/schools/'.$school->id)}}"><img class="logo-club-tab-index" src="{{asset('images/school_logo/'. $school->logo)}}" alt=""></a>
+                </figure>
+                <div class="posts__inner card__content">
+                  <h6 class="posts__title ime-sportiste-klub-lista"><a href="#">{{ $school->name }}</a></h6>
+                  <div class="posts__excerpt">{{ $school->city }}</div>
+                </div>
+                <footer class="posts__footer card__footer">
+                  <a href="{{url('/schools/'.$school->id)}}" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila škole</a>
+                </footer>
+              </div>
             </div>
-            <footer class="posts__footer card__footer">
-              <a href="#" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila škole</a>
-            </footer>
-            </div>
-          </div>
-          
-          <div class="post-grid__item col-sm-4">
-            <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
-            <figure class="posts__thumb club-thumb-backgr">
-              <a href="#"><img class="logo-club-tab-index" src="{{asset('images/SZS-club-logo.png')}}" alt=""></a>
-            </figure>
-            <div class="posts__inner card__content">
-              <h6 class="posts__title ime-sportiste-klub-lista"><a href="#">FK Sve Za Sport</a></h6>
-              <div class="posts__excerpt">Sarajevo, Federacija BiH</div>
-            </div>
-            <footer class="posts__footer card__footer">
-              <a href="#" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila škole</a>
-            </footer>
-            </div>
-          </div>
-          
-          <div class="post-grid__item col-sm-4">
-            <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
-            <figure class="posts__thumb club-thumb-backgr">
-              <a href="#"><img class="logo-club-tab-index" src="{{asset('images/SZS-club-logo.png')}}" alt=""></a>
-            </figure>
-            <div class="posts__inner card__content">
-              <h6 class="posts__title ime-sportiste-klub-lista"><a href="#">FK Sve Za Sport</a></h6>
-              <div class="posts__excerpt">Sarajevo, Federacija BiH</div>
-            </div>
-            <footer class="posts__footer card__footer">
-              <a href="#" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila škole</a>
-            </footer>
-            </div>
-          </div>
-          
-          <div class="post-grid__item col-sm-4">
-            <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
-            <figure class="posts__thumb club-thumb-backgr">
-              <a href="#"><img class="logo-club-tab-index" src="{{asset('images/SZS-club-logo.png')}}" alt=""></a>
-            </figure>
-            <div class="posts__inner card__content">
-              <h6 class="posts__title ime-sportiste-klub-lista"><a href="#">FK Sve Za Sport</a></h6>
-              <div class="posts__excerpt">Sarajevo, Federacija BiH</div>
-            </div>
-            <footer class="posts__footer card__footer">
-              <a href="#" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila škole</a>
-            </footer>
-            </div>
-          </div>
-          
-          <div class="post-grid__item col-sm-4">
-            <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
-            <figure class="posts__thumb club-thumb-backgr">
-              <a href="#"><img class="logo-club-tab-index" src="{{asset('images/SZS-club-logo.png')}}" alt=""></a>
-            </figure>
-            <div class="posts__inner card__content">
-              <h6 class="posts__title ime-sportiste-klub-lista"><a href="#">FK Sve Za Sport</a></h6>
-              <div class="posts__excerpt">Sarajevo, Federacija BiH</div>
-            </div>
-            <footer class="posts__footer card__footer">
-              <a href="#" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila škole</a>
-            </footer>
-            </div>
-          </div>
-          
-          <div class="post-grid__item col-sm-4">
-            <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
-            <figure class="posts__thumb club-thumb-backgr">
-              <a href="#"><img class="logo-club-tab-index" src="{{asset('images/SZS-club-logo.png')}}" alt=""></a>
-            </figure>
-            <div class="posts__inner card__content">
-              <h6 class="posts__title ime-sportiste-klub-lista"><a href="#">FK Sve Za Sport</a></h6>
-              <div class="posts__excerpt">Sarajevo, Federacija BiH</div>
-            </div>
-            <footer class="posts__footer card__footer">
-              <a href="#" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila škole</a>
-            </footer>
-            </div>
-          </div>
-          
+              @endforeach
+
         </div>
-        
+
             </div>
             <!-- Tab: Škole / End -->
       

@@ -16,6 +16,7 @@ class Trophy extends Model
         'season',
         'club_id',
         'player_id',
-        'staff_id'
+        'staff_id',
+        'school_id'
     ];
 }

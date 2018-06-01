@@ -936,6 +936,292 @@ $(document).ready(function () {
         }
     });
 
+    $('#createNewSchool').validate({
+        ignore: ':hidden,:disabled',
+        rules: {
+            logo: {
+                required: true,
+                extension: 'png|jpg|jpeg'
+            },
+            name: {
+                required: true,
+                string: true,
+                maxlength: 255
+            },
+            nature: {
+                required: true,
+                string: true,
+                maxlength: 255
+            },
+            continent: {
+                required: true,
+                digits: true
+            },
+            country: {
+                required: true,
+                digits: true
+            },
+            province: {
+                required: true,
+                digits: true
+            },
+            region: {
+                required: true,
+                digits: true
+            },
+            municipality: {
+                required: true,
+                digits: true
+            },
+            city: {
+                required: true,
+                string: true,
+                maxlength: 255
+            },
+            type: {
+                required: true,
+                digits: true
+            },
+            sport: {
+                required: true,
+                digits: true
+            },
+            category: {
+                required: true,
+                digits: true
+            },
+            established_in: {
+                digits: true,
+                range: [1800, new Date().getFullYear()]
+            },
+            home_field: {
+                string: true,
+                maxlength: 255
+            },
+            competition: {
+                string: true,
+                maxlength: 255
+            },
+            phone_1: {
+                digits: true,
+                maxlength: 255
+            },
+            phone_2: {
+                digits: true,
+                maxlength: 50
+            },
+            fax: {
+                digits: true,
+                maxlength: 50
+            },
+            email: {
+                email: true,
+                maxlength: 255
+            },
+            website: {
+                string: true,
+                maxlength: 255
+            },
+            address: {
+                string: true,
+                maxlength: 255
+            },
+            pioniri: {
+                required: true,
+                digits: true,
+                range: [0, 1]
+            },
+            kadeti: {
+                required: true,
+                digits: true,
+                range: [0, 1]
+            },
+            juniori: {
+                required: true,
+                digits: true,
+                range: [0, 1]
+            },
+            facebook: {
+                string: true,
+                maxlength: 255
+            },
+            instagram: {
+                string: true,
+                maxlength: 255
+            },
+            twitter: {
+                string: true,
+                maxlength: 255
+            },
+            youtube: {
+                string: true,
+                maxlength: 255
+            },
+            video: {
+                string: true,
+                maxlength: 255
+            },
+            history: {
+                string: true
+            },
+            'galerija[]': {
+                extension: 'png|jpg|jpeg'
+            }
+        }
+    });
+
+    $('#editSchoolGeneral').validate({
+        ignore: ':hidden,:disabled',
+        rules: {
+            logo: {
+                required: true,
+                extension: 'png|jpg|jpeg'
+            },
+            name: {
+                required: true,
+                string: true,
+                maxlength: 255
+            },
+            nature: {
+                required: true,
+                string: true,
+                maxlength: 255
+            },
+            continent: {
+                required: true,
+                digits: true
+            },
+            country: {
+                required: true,
+                digits: true
+            },
+            province: {
+                required: true,
+                digits: true
+            },
+            region: {
+                required: true,
+                digits: true
+            },
+            municipality: {
+                required: true,
+                digits: true
+            },
+            city: {
+                required: true,
+                string: true,
+                maxlength: 255
+            },
+            type: {
+                required: true,
+                digits: true
+            },
+            sport: {
+                required: true,
+                digits: true
+            },
+            category: {
+                required: true,
+                digits: true
+            },
+            established_in: {
+                digits: true,
+                range: [1800, new Date().getFullYear()]
+            },
+            home_field: {
+                string: true,
+                maxlength: 255
+            },
+            competition: {
+                string: true,
+                maxlength: 255
+            },
+            phone_1: {
+                digits: true,
+                maxlength: 255
+            },
+            phone_2: {
+                digits: true,
+                maxlength: 50
+            },
+            fax: {
+                digits: true,
+                maxlength: 50
+            },
+            email: {
+                email: true,
+                maxlength: 255
+            },
+            website: {
+                string: true,
+                maxlength: 255
+            },
+            address: {
+                string: true,
+                maxlength: 255
+            },
+            pioniri: {
+                required: true,
+                digits: true,
+                range: [0, 1]
+            },
+            kadeti: {
+                required: true,
+                digits: true,
+                range: [0, 1]
+            },
+            juniori: {
+                required: true,
+                digits: true,
+                range: [0, 1]
+            },
+            facebook: {
+                string: true,
+                maxlength: 255
+            },
+            instagram: {
+                string: true,
+                maxlength: 255
+            },
+            twitter: {
+                string: true,
+                maxlength: 255
+            },
+            youtube: {
+                string: true,
+                maxlength: 255
+            },
+            video: {
+                string: true,
+                maxlength: 255
+            }
+        }
+    });
+
+    $('#editSchoolMembers').validate({ignore: ':hidden,:disabled'});
+
+    $('#editSchoolHistory').validate({
+        ignore: ':hidden,:disabled',
+        rules: {
+            history: {
+                string: true
+            }
+        }
+    });
+
+    $('#editSchoolTrophies').validate({
+        ignore: ':hidden,:disabled'
+    });
+
+    $('#editSchoolGallery').validate({
+        ignore: ':hidden',
+        rules: {
+            'galerija[]': {
+                extension: "jpg|jpeg|png"
+            }
+        }
+    });
+
     addLicnostValidation();
     addTrophyValidation();
     addHistoryValidation();
@@ -1537,10 +1823,12 @@ function addTrophyValidation() {
 
     nagrada.filter('input[name$="[sezona]"]').each(function() {
         $(this).rules("add", {
+            required: true,
             digits: true,
             range: [1800, new Date().getFullYear()]
         });
     });
+
 
     nagrada.filter('input[name$="[osvajanja]"]').each(function() {
         $(this).rules("add", {
