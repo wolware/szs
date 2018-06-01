@@ -33,7 +33,9 @@
               <li class="content-filter__item "><a href="{{url('me/profile')}}" class="content-filter__link"><i class="fa fa-address-card-o"></i><small>Pregled</small>Profila</a></li>
               <li class="content-filter__item content-filter__item--active"><a href="{{url('me/profiles')}}" class="content-filter__link"><i class="fa fa-th-list"></i><small>Moji</small>Profili</a></li>
               <li class="content-filter__item "><a href="{{url('me/news')}}" class="content-filter__link"><i class="fa fa-plus-square-o"></i><small>Moje</small>Vijesti</a></li>
+{{--
               <li class="content-filter__item "><a href="{{url('me/grades')}}" class="content-filter__link"><i class="fa fa-star-o"></i><small>Moje</small>Ocjene</a></li>
+--}}
               <li class="content-filter__item "><a href="{{url('me/settings')}}" class="content-filter__link"><i class="fa fa-cogs"></i><small>Postavke</small>Profila</a></li>
             </ul>
           </div>
@@ -105,7 +107,7 @@
       
        
       
-      <div class="card">
+      {{--<div class="card">
               <div class="card__header">
                 <h4><i class="fa fa-check-circle-o"></i> Posjećenost mojih profila</h4>
               </div>
@@ -155,7 +157,7 @@
             
                 </div>
               </div>
-            </div>
+            </div>--}}
 
             <!-- Statistika mojih profila kraj -->
           </div>
@@ -361,10 +363,10 @@
           </div>
         </div>
         <!-- Aktivni sportski objekti / End -->
-        <!-- Aktivne prodavnice -->
+       {{-- <!-- Aktivne prodavnice -->
         <div class="card card--has-table">
           <div class="card__header">
-            <h4><i class="fa fa-bars"></i> Prodavnice sportske opreme</h4>
+            <h4><i class="fa fa-bars"></i> Vijes</h4>
           </div>
           <div class="card__content">
             <div class="table-responsive">
@@ -404,7 +406,7 @@
             </div>
           </div>
         </div>
-        <!-- Aktivne prodavnice / End -->
+        <!-- Aktivne prodavnice / End -->--}}
         <!-- Aktivni kadrovi -->
         <div class="card card--has-table">
           <div class="card__header">

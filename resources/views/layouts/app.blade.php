@@ -76,19 +76,14 @@
               <ul class="main-nav__sub">
                 <li><a href="{{url('me/profile')}}"><i class="fa fa-id-card-o"></i> Pregled profila</a></li>
                 <li><a href="{{url('me/profiles')}}"><i class="fa fa-th-list"></i> Moji profili</a></li>
-        <li><a href="{{url('me/medals')}}"><i class="fa fa-trophy"></i> Moje medalje</a></li>
+       {{-- <li><a href="{{url('me/medals')}}"><i class="fa fa-trophy"></i> Moje medalje</a></li>--}}
                 <li><a href="{{url('me/news')}}"><i class="fa fa-plus-square-o"></i> Moje vijesti</a></li>
-                <li><a href="{{url('me/grades')}}"><i class="fa fa-star-o"></i> Moje ocjene</a></li>
+                {{--<li><a href="{{url('me/grades')}}"><i class="fa fa-star-o"></i> Moje ocjene</a></li>--}}
                 <li><a href="{{url('me/settings')}}"><i class="fa fa-cogs"></i> Postavke</a></li>
                 </ul>
             </li>
-      <li class="nav-account__item"><a href="inbox.php"><i class="fa fa-envelope-o"></i> Poruke <span class="highlight">2</span></a>
-              <ul class="main-nav__sub">
-                <li><a href="{{url('messages/inbox')}}"><i class="fa fa-download"></i> Primljene</a></li>
-                <li><a href="{{url('messages/outbox')}}"><i class="fa fa-upload"></i> Poslane</a></li>
-                </ul>
-            </li>
-      <li class="nav-account__item"><a href="notifikacije.php"><i class="fa fa-bell-o"></i> Notifikacije <span class="highlight">5</span></a>
+
+      <li class="nav-account__item"><a href="#"><i class="fa fa-bell-o"></i> Notifikacije <span class="highlight">5</span></a>
               <ul class="main-nav__sub">
         <tr>
                   <td class="team-leader__player">
@@ -142,15 +137,15 @@
                     </div>
                   </td>
           <td>
-          <a class ="notifikacije-button" href="notifikacije.php">Pregled svih notifikacija <i class="fa fa-chevron-right"></i></a>
+          <a class ="notifikacije-button" href="#">Pregled svih notifikacija <i class="fa fa-chevron-right"></i></a>
           </td>
                 </tr>
                 </ul>
             </li>
             <li class="nav-account__item"><a href="#"><i class="fa fa-globe"></i> Jezik: <span class="highlight">BH</span></a>
               <ul class="main-nav__sub">
-                <li><a href="www.svezasport.ba"><i class="fa fa-language"></i> Bosanski</a></li>
-                  <li><a href="www.svezasport.ba/en/index.php"><i class="fa fa-language"></i> Engleski</a></li>
+                <li><a href="{{url('/')}}"><i class="fa fa-language"></i> Bosanski</a></li>
+                  <li><a href=""><i class="fa fa-language"></i> Engleski</a></li>
                 </ul>
             </li>
           </ul>
@@ -169,9 +164,9 @@
         <div class="container">
           <ul class="info-block info-block--header">
             <li class="info-block__item info-block__item--contact-secondary">
-              <a href="sportovi.php"><img src="{{asset('images/sportovi-fff.png')}}" class="df-icon df-icon--soccer-ball"></a>
+              <a href="#"><img src="{{asset('images/sportovi-fff.png')}}" class="df-icon df-icon--soccer-ball"></a>
               <h6 class="info-block__heading">Svi</h6>
-              <a href="sportovi.php" class="info-block__link">Sportovi</a>
+              <a href="#" class="info-block__link">Sportovi</a>
             </li>
             <li class="info-block__item info-block__item--contact-secondary">
               <a href="{{url('/clubs')}}"><img src="{{asset('images/klubovi-fff.png')}}" class="df-icon df-icon--soccer-ball"></a>
@@ -222,15 +217,13 @@
             <!-- Main Navigation -->
             <nav class="main-nav clearfix">
               <ul class="main-nav__list">
-                <li class=""><a href="edukacija.php">Edukacija</a></li>
-                <li class=""><a href="kalendar.php">Kalendar</a></li>
-                <li class=""><a href="reprezentacije.php">Reprezentacije BiH</a></li>
-                <li class=""><a href="dijaspora.php">Dijaspora</a></li>
-                <li class=""><a href="szs-fondacija.php">SZS Fondacija</a></li>
+                <li class=""><a href="#">Kalendar</a></li>
+                <li class=""><a href="#">Reprezentacije BiH</a></li>
+                <li class=""><a href="#">Dijaspora</a></li>
                 <li class="visible-xs"><a href="www.rekreacija.svezasport.ba">SZS Rekreacija</a></li>
-                <li class="visible-xs"><a href="aplikacije.php">SZS Aplikacije</a></li>
-                <li class="visible-xs"><a href="sportski-turizam.php">Sportski turizam</a></li>
-
+                <li class="visible-xs"><a href="#">SZS Aplikacije</a></li>
+                <li class="visible-xs"><a href="#">Sportski turizam</a></li>
+              </ul>
 
               <!-- Pushy Panel Toggle -->
               <a href="#" class="pushy-panel__toggle">
@@ -310,16 +303,13 @@
           <div class="footer-secondary__inner">
             <div class="row">
               <div class="col-md-4">
-                <div class="footer-copyright"><a href="index.php">SveZaSport</a> .alpha &nbsp; | &nbsp; &copy; 2017. Sva prava zadržana</div>
+                <div class="footer-copyright"><a href="{{url('/')}}">SveZaSport</a> .alpha &nbsp; | &nbsp; &copy; 2017. Sva prava zadržana</div>
               </div>
               <div class="col-md-8">
                 <ul class="footer-nav footer-nav--right footer-nav--condensed footer-nav--sm">
-                  <li class="footer-nav__item"><a href="#">Naslovna</a></li>
-                  <li class="footer-nav__item"><a href="#">Impressum</a></li>
-                  <li class="footer-nav__item"><a href="#">Naša misija</a></li>
-                  <li class="footer-nav__item"><a href="#">Feedback</a></li>
-                  <li class="footer-nav__item"><a href="#">Konsalting</a></li>
-                  <li class="footer-nav__item"><a href="#">Marketing</a></li>
+                  <li class="footer-nav__item"><a href="{{url('/')}}">Naslovna</a></li>
+                  <li class="footer-nav__item"><a href="{{url('/contact')}}">Marketing</a></li>
+                    <li class="footer-nav__item"><a href="{{url('/contact')}}">Kontakt</a></li>
                 </ul>
               </div>
             </div>

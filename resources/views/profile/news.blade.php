@@ -33,7 +33,9 @@
               <li class="content-filter__item "><a href="{{url('me/profile')}}" class="content-filter__link"><i class="fa fa-address-card-o"></i><small>Pregled</small>Profila</a></li>
               <li class="content-filter__item "><a href="{{url('me/profiles')}}" class="content-filter__link"><i class="fa fa-th-list"></i><small>Moji</small>Profili</a></li>
               <li class="content-filter__item content-filter__item--active"><a href="{{url('me/news')}}" class="content-filter__link"><i class="fa fa-plus-square-o"></i><small>Moje</small>Vijesti</a></li>
+{{--
               <li class="content-filter__item "><a href="{{url('me/grades')}}" class="content-filter__link"><i class="fa fa-star-o"></i><small>Moje</small>Ocjene</a></li>
+--}}
               <li class="content-filter__item "><a href="{{url('me/settings')}}" class="content-filter__link"><i class="fa fa-cogs"></i><small>Postavke</small>Profila</a></li>
             </ul>
           </div>
@@ -63,7 +65,7 @@
             <!-- SZS Vijesti status kraj -->
 			
 			<!-- SZS statistika vijesti -->
-			<div class="card">
+			{{--<div class="card">
               <div class="card__header">
                 <h4><i class="fa fa-pie-chart"></i> Statistika mojih vijesti</h4>
               </div>
@@ -113,12 +115,12 @@
             
                 </div>
               </div>
-            </div>
+            </div>--}}
 			<!-- SZS Statistika vijesti kraj -->
 			
 			<!-- SZS Kredit -->
 
-            <div class="card">
+         {{--   <div class="card">
               <div class="card__header">
                 <h4><i class="fa fa-database"></i> Zarađeni krediti</h4>
               </div>
@@ -126,7 +128,7 @@
                 <h2 class="profil-counter">84</h2>
                 <p class="counter-info">Zarađenih kredita od vijesti</p>
               </div>
-            </div>
+            </div>--}}
 
             <!-- SZS Kredit kraj -->
 

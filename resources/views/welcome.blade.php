@@ -67,12 +67,29 @@
               </div>
               <div class="widget__content card__content">
                 <div class="row text-center szs-dan-margin">
-                  <h4 class="szs-dan-dan">31.10.2017</h4>
+                  <h4 class="szs-dan-dan" id="dan"></h4>
                   <p class="szs-dan-call">Danas je savršen dan za</p>
                   <img src="{{asset('images/cardiogram.png')}}" class="szs-dan-icon" />
                   <h2 class="szs-dan-title">BodyBuilding &amp; Fitness</h2>
                   <p class="szs-dan-opis">Iskoristite današnji dan u sportskom duhu</p>
                   <img src="{{asset('images/straight-letters-szs.png')}}" class="szs-dan-footer" />
+                  <script>
+                      var today = new Date();
+                      var dd = today.getDate();
+                      var mm = today.getMonth()+1; //January is 0!
+                      var yyyy = today.getFullYear();
+
+                      if(dd<10) {
+                          dd = '0'+dd
+                      }
+
+                      if(mm<10) {
+                          mm = '0'+mm
+                      }
+
+                      today = dd + '.' + mm + '.' + yyyy;
+                      document.getElementById('dan').innerHTML=today;
+                  </script>
                 </div>
               </div>
             </aside>
