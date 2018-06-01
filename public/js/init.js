@@ -90,7 +90,7 @@
 
       this.InstagramFeed();
 
-      this.SocialCounters();
+      //this.SocialCounters();
 
       this.miscScripts();
 
@@ -1415,7 +1415,7 @@
 
     },
 
-
+ /*
     SocialCounters: function(){
 
       if ( $social_counters.exists() ) {
@@ -1439,7 +1439,7 @@
 
       }
 
-    },
+    }, */
 
 
     miscScripts: function() {

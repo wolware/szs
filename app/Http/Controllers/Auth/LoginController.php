@@ -83,7 +83,7 @@ class LoginController extends Controller
             }
         }
 
-        return redirect('/login');
+        return redirect('/login')->with('error', 'Uneseni podaci nisu tačni. Pokušajte ponovo.');
     }
 
     public function logout(){

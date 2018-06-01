@@ -50,6 +50,13 @@
                     <i class="fa fa-sign-in fa-5x"></i>
                   </div>
                   <div class="col-md-8">
+                    @if(Session::has('error'))
+                      <div class="alert alert-danger">
+                        <ul>
+                          <li>{!! Session::get('error') !!}</li>
+                        </ul>
+                      </div>
+                    @endif
                     <!-- Login Form -->
                 <form class="loginFormaVer" role="form" action="{{ url('/login') }}" method="POST">
                   {!! csrf_field() !!}
