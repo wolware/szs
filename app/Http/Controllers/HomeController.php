@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\PlayerRepository;
 use App\Repositories\StaffRepository;
+use App\School;
 use App\Vijest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -34,9 +35,10 @@ class HomeController extends Controller
     {
         $sportasi = $this->playerRepository->getAll();
         $klubovi = DB::table('clubs')->limit(6)->orderBy('id', 'desc')->get();
-        $vijesti = Vijest::where('odobreno', 1)->where('izbrisano', 0)->orderBy('id', 'DESC')->take(5)->get();
+        $vijesti = Vijest::where('izbrisano', 0)->orderBy('id', 'DESC')->take(5)->get();
         $staff = $this->staffRepository->getAll();
+        $schools = School::orderBy('id', 'DESC')->take(6)->get();
 
-        return view('welcome', ['sportasi' => $sportasi, 'klubovi' => $klubovi, 'vijesti' => $vijesti, 'staff' => $staff]);
+        return view('welcome', ['sportasi' => $sportasi, 'klubovi' => $klubovi, 'vijesti' => $vijesti, 'staff' => $staff, 'schools' => $schools]);
     }
 }

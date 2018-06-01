@@ -29,6 +29,7 @@ Route::get('/staff', 'StaffController@index_show');
 Route::get('/athletes', 'AthletesController@index_show');
 Route::get('/athletes/{id}', 'PlayerController@showPlayer')->where('id','[0-9]+');
 Route::get('/staff/{id}', 'StaffController@showStaff')->where('id', '[0-9]+');
+Route::get('/schools/{id}', 'SchoolController@showSchool')->where('id', '[0-9]+');
 
 // Dodaje protekciju na rute samo za logovane korisnike
 Route::middleware('auth')->group(function () {
@@ -146,6 +147,17 @@ Route::middleware('auth')->group(function () {
     Route::patch('/staff/{id}/edit/biography', 'StaffController@editStaffBiography')->where('id', '[0-9]+');
     Route::patch('/staff/{id}/edit/trophies', 'StaffController@editStaffTrophies')->where('id', '[0-9]+');
     Route::patch('/staff/{id}/edit/gallery', 'StaffController@editStaffGallery')->where('id', '[0-9]+');
+
+    // SCHOOLS
+    Route::get('/schools/new', 'SchoolController@displayAddSchool');
+    Route::post('/schools/create', 'SchoolController@createSchool');
+    Route::get('/schools/{id}/edit', 'SchoolController@displayEditSchool')->where('id', '[0-9]+');
+
+    Route::patch('/schools/{id}/edit/general', 'SchoolController@editSchoolGeneral')->where('id', '[0-9]+');
+    Route::patch('/schools/{id}/edit/staff', 'SchoolController@editSchoolStaff')->where('id', '[0-9]+');
+    Route::patch('/schools/{id}/edit/history', 'SchoolController@editSchoolHistory')->where('id', '[0-9]+');
+    Route::patch('/schools/{id}/edit/trophies', 'SchoolController@editSchoolTrophies')->where('id', '[0-9]+');
+    Route::patch('/schools/{id}/edit/gallery', 'SchoolController@editSchoolGallery')->where('id', '[0-9]+');
 
     //LOGOUT
     Route::get('user/logout', 'Auth\LoginController@logout');
