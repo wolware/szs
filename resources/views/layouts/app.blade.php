@@ -344,31 +344,43 @@
     );
 </script>
       <script src="{{ asset('js/init.js') }}"></script>
-      <script>
-       function initAutocomplete() {
-           autocomplete1 = new google.maps.places.Autocomplete(document.getElementById('mjesto'), {types: ['geocode']});
-           autocomplete1.addListener('place_changed', function () {
-               var place = autocomplete1.getPlace();
-               if (!place.geometry) {
-                   window.alert("Nismo mogli pronaći traženo mjesto!");
-                   return;
-               }
-           });
-           
-       }
-       function adresaAutoComp() {
-           autocomplete1 = new google.maps.places.Autocomplete(document.getElementById('adresa'), {types: ['geocode']});
-           autocomplete1.addListener('place_changed', function () {
-               var place = autocomplete1.getPlace();
-               if (!place.geometry) {
-                   window.alert("Nismo mogli pronaći traženo mjesto!");
-                   return;
-               }
-           });
-           
-       }
-   </script>
       <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAO6kDxfB19QkynnAGz5nlmX6Kbrb_pAsQ&libraries=places&region=BA&language=hr"></script>
+  <script>
+      Element.prototype.remove = function() {
+          this.parentElement.removeChild(this);
+      };
+      NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
+          for(var i = this.length - 1; i >= 0; i--) {
+              if(this[i] && this[i].parentElement) {
+                  this[i].parentElement.removeChild(this[i]);
+              }
+          }
+      };
+
+      function initAutocomplete() {
+          autocomplete1 = new google.maps.places.Autocomplete(document.getElementById('city'), {types: ['geocode']});
+          autocomplete1.addListener('place_changed', function () {
+              var place = autocomplete1.getPlace();
+              var lat = place.geometry.location.lat();
+              var lng = place.geometry.location.lng();
+
+              var form = document.getElementById('city').closest('form');
+
+              var lat_input = document.createElement('<input type="hidden" id="latitude" name="latitude" value="' + lat + '">');
+              var lng_input = document.createElement('<input type="hidden" id="longitude" name="longitude" value="' + lng + '">');
+              form.prepend(lat_input);
+              form.prepend(lng_input);
+
+              if (!place.geometry) {
+                  document.getElementById('latitude').remove();
+                  document.getElementById('longitude').remove();
+                  window.alert("Nismo mogli pronaći traženo mjesto!");
+                  return;
+              }
+          });
+
+      }
+  </script>
         <script src="{{ asset('js/xregexp-all.js') }}"></script>
       <script src="{{ asset('js/custom.js?t='.time()) }}"></script>
 </body>
