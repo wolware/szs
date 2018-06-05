@@ -205,96 +205,22 @@
       <!-- Tab: Objekti -->
             <div role="tabpanel" class="tab-pane fade neaktivno" id="tab-objekti">
         <div class="row igraci-grid">
-          <div class="post-grid__item col-sm-4">
-            <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
-            <figure class="posts__thumb">
-              <a href="#"><img src="{{asset('images/ALIM2987.jpg')}}" alt=""></a>
-            </figure>
-            <div class="posts__inner card__content">
-              <h6 class="posts__title ime-sportiste-klub-lista"><a href="#">ZETRA</a></h6>
-              <div class="posts__excerpt">Sarajevo, Federacija BiH</div>
+          @foreach($objects as $object)
+            <div class="post-grid__item col-sm-4">
+              <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
+              <figure class="posts__thumb">
+                <a href="{{ url('/objects/' . $object->id) }}"><img src="{{asset('images/object_avatars/' . $object->image)}}" alt=""></a>
+              </figure>
+              <div class="posts__inner card__content">
+                <h6 class="posts__title ime-sportiste-klub-lista"><a href="{{ url('/objects/' . $object->id) }}">{{ $object->name }}</a></h6>
+                <div class="posts__excerpt">{{ $object->city }}</div>
+              </div>
+              <footer class="posts__footer card__footer">
+                <a href="{{ url('/objects/' . $object->id) }}" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila objekta</a>
+              </footer>
+              </div>
             </div>
-            <footer class="posts__footer card__footer">
-              <a href="#" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila objekta</a>
-            </footer>
-            </div>
-          </div>
-          
-          <div class="post-grid__item col-sm-4">
-            <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
-            <figure class="posts__thumb">
-              <a href="#"><img src="{{asset('images/ALIM2987.jpg')}}" alt=""></a>
-            </figure>
-            <div class="posts__inner card__content">
-              <h6 class="posts__title ime-sportiste-klub-lista"><a href="#">ZETRA</a></h6>
-              <div class="posts__excerpt">Sarajevo, Federacija BiH</div>
-            </div>
-            <footer class="posts__footer card__footer">
-              <a href="#" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila objekta</a>
-            </footer>
-            </div>
-          </div>
-          
-          <div class="post-grid__item col-sm-4">
-            <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
-            <figure class="posts__thumb">
-              <a href="#"><img src="{{asset('images/ALIM2987.jpg')}}" alt=""></a>
-            </figure>
-            <div class="posts__inner card__content">
-              <h6 class="posts__title ime-sportiste-klub-lista"><a href="#">ZETRA</a></h6>
-              <div class="posts__excerpt">Sarajevo, Federacija BiH</div>
-            </div>
-            <footer class="posts__footer card__footer">
-              <a href="#" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila objekta</a>
-            </footer>
-            </div>
-          </div>
-          
-          <div class="post-grid__item col-sm-4">
-            <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
-            <figure class="posts__thumb">
-              <a href="#"><img src="{{asset('images/ALIM2987.jpg')}}" alt=""></a>
-            </figure>
-            <div class="posts__inner card__content">
-              <h6 class="posts__title ime-sportiste-klub-lista"><a href="#">ZETRA</a></h6>
-              <div class="posts__excerpt">Sarajevo, Federacija BiH</div>
-            </div>
-            <footer class="posts__footer card__footer">
-              <a href="#" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila objekta</a>
-            </footer>
-            </div>
-          </div>
-          
-          <div class="post-grid__item col-sm-4">
-            <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
-            <figure class="posts__thumb">
-              <a href="#"><img src="{{asset('images/ALIM2987.jpg')}}" alt=""></a>
-            </figure>
-            <div class="posts__inner card__content">
-              <h6 class="posts__title ime-sportiste-klub-lista"><a href="#">ZETRA</a></h6>
-              <div class="posts__excerpt">Sarajevo, Federacija BiH</div>
-            </div>
-            <footer class="posts__footer card__footer">
-              <a href="#" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila objekta</a>
-            </footer>
-            </div>
-          </div>
-          
-          <div class="post-grid__item col-sm-4">
-            <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
-            <figure class="posts__thumb">
-              <a href="#"><img src="{{asset('images/ALIM2987.jpg')}}" alt=""></a>
-            </figure>
-            <div class="posts__inner card__content">
-              <h6 class="posts__title ime-sportiste-klub-lista"><a href="#">ZETRA</a></h6>
-              <div class="posts__excerpt">Sarajevo, Federacija BiH</div>
-            </div>
-            <footer class="posts__footer card__footer">
-              <a href="#" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila objekta</a>
-            </footer>
-            </div>
-          </div>
-          
+          @endforeach
         </div>
         
             </div>

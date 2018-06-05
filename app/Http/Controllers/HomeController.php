@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Objects;
 use App\Repositories\PlayerRepository;
 use App\Repositories\StaffRepository;
 use App\School;
@@ -38,8 +39,9 @@ class HomeController extends Controller
         $vijesti = Vijest::where('izbrisano', 0)->orderBy('id', 'DESC')->take(5)->get();
         $staff = $this->staffRepository->getAll();
         $schools = School::orderBy('id', 'DESC')->take(6)->get();
+        $objects = Objects::orderBy('id', 'DESC')->take(6)->get();
 
-        return view('welcome', ['sportasi' => $sportasi, 'klubovi' => $klubovi, 'vijesti' => $vijesti, 'staff' => $staff, 'schools' => $schools]);
+        return view('welcome', ['sportasi' => $sportasi, 'klubovi' => $klubovi, 'vijesti' => $vijesti, 'staff' => $staff, 'schools' => $schools, 'objects' => $objects]);
     }
     public function contact(){
         return view('contact');
