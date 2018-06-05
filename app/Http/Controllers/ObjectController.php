@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Repositories\ObjectRepository;
 use App\Repositories\RegionRepository;
+use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Validator;
 
 class ObjectController extends Controller
 {
@@ -75,8 +78,128 @@ class ObjectController extends Controller
         'protective_equipment' => 'group:s|label:Zaštitna oprema|type:select|name:protective_equipment|options:Da,Ne|default:Odaberite',
     ];
 
+    protected $objectCommonValidationRules = [
+        'image' => 'required|image|dimensions:min_width=800,min_height=600,max_width=2048,max_height=2048',
+        'name' => 'required|string|max:255',
+        'continent' => 'required|integer|exists:regions,id',
+        'country' => 'required|integer|exists:regions,id',
+        'province' => 'integer|exists:regions,id',
+        'region' => 'integer|exists:regions,id',
+        'municipality' => 'integer|exists:regions,id',
+        'city' => 'required|max:255|string',
+        'latitude' => 'required|numeric',
+        'longitude' => 'required|numeric',
+        'facebook' => 'nullable|max:255|string',
+        'instagram' => 'nullable|max:255|string',
+        'twitter' => 'nullable|max:255|string',
+        'youtube' => 'nullable|max:255|string',
+        'history' => 'nullable|string',
+        // Slike
+        'galerija' => 'array',
+        'galerija.*' => 'required|image',
+    ];
 
+    protected $objectBalonAdditionalValidations = [
+        // Balon tereni
+        'tereni' => 'array',
+        'tereni.*' => 'array',
+        'tereni.*.name' => 'required|max:255|string',
+        'tereni.*.sports' => 'required|array',
+        'tereni.*.sports.*' => 'required|max:255|string|in:Nogomet,Mali nogomet,Košarka,Tenis,Stoni tenis,Odbojka,Badminton,Univerzalni teren',
+        'tereni.*.type_of_field' => 'required|max:255|string|in:Parket,Bitumen,Plastika,Guma,Zemlja,Ostalo',
+        'tereni.*.capacity' => 'nullable|integer',
+        'tereni.*.public_capacity' => 'nullable|integer',
+        'tereni.*.length' => 'nullable|integer',
+        'tereni.*.width' => 'nullable|integer',
+        // Balon cjenovnik
+        'cjenovnik' => 'array',
+        'cjenovnik.*' => 'array',
+        'cjenovnik.*.sport' => 'required|max:255|string|in:Nogomet,Mali nogomet,Košarka,Tenis,Stoni tenis,Odbojka,Badminton,Univerzalni teren',
+        'cjenovnik.*.name' => 'required|max:255|string',
+        'cjenovnik.*.price' => 'required|integer|between:1,1000',
+    ];
 
+    protected $objectSkiAdditionalValidations = [
+        // Skijaliste staze
+        'staze' => 'array',
+        'staze.*' => 'array',
+        'staze.*.name' => 'required|max:255|string',
+        'staze.*.level' => 'required|max:255|string|in:Lahko,Srednje,Teško',
+        'staze.*.length' => 'nullable|integer|between:1,30000',
+        'staze.*.time' => 'nullable|integer|between:1,1000',
+        'staze.*.start_point' => 'nullable|integer|between:1,8000',
+        'staze.*.end_point' => 'nullable|integer|between:1,8000',
+        // Skijaliste cjenovnik
+        'cjenovnik' => 'array',
+        'cjenovnik.*' => 'array',
+        'cjenovnik.*.description' => 'required|max:255|string',
+        'cjenovnik.*.price' => 'required|integer|between:1,10000',
+        'cjenovnik.*.price_kids' => 'required|integer|between:1,10000',
+    ];
+
+    protected $objectUniqueValidationRules = [
+        // General
+        'number_of_fields' => 'nullable|integer|between:1,50',
+        'number_of_pools' => 'nullable|integer|between:1,50',
+        'number_of_tracks' => 'nullable|integer|between:1,100',
+        'number_of_balls' => 'nullable|integer|between:1,500',
+        'number_of_shooting_places' => 'nullable|integer|between:1,500',
+        'type_of_grass' => 'nullable|max:255|string|in:Prirodna trava,Umjetna trava (plastika)',
+        'elevation' => 'nullable|integer|between:1,8000',
+        'stadium_length' => 'nullable|integer|between:1,300',
+        'stadium_width' => 'nullable|integer|between:1,300',
+        'number_of_ski_tracks' => 'nullable|integer|between:1,200',
+        'number_of_ski_lifts' => 'nullable|integer|between:1,200',
+        'water_effects' => 'nullable|boolean',
+        'type_of_field' => 'nullable|max:255|string|in:Parket,Bitumen,Plastika,Guma,Zemlja,Kombinovano',
+        'area' => 'nullable|integer',
+        'water_area' => 'nullable|integer',
+        'capacity' => 'nullable|integer',
+        'pool_capacity' => 'nullable|integer',
+        'stadium_capacity' => 'nullable|integer',
+        // Additional
+        'wifi' => 'nullable|max:255|string|in:Besplatan,Uz naplatu,Nema',
+        'parking' => 'nullable|max:255|string|in:Besplatan,Uz naplatu,Nema',
+        'restaurant' => 'nullable|max:255|string|in:U sklopu objekta,U blizini objekta,Nema',
+        'hotels' => 'nullable|boolean',
+        'cafe' => 'nullable|max:255|string|in:U sklopu objekta,U blizini objekta,Nema',
+        'access_to_disabled' => 'nullable|max:255|string|in:Obezbjeđen,Direktno sa platoa,Nije obezbjeđen',
+        'number_of_locker_rooms' => 'nullable|integer|between:0,50',
+        'rent_equipment' => 'nullable|boolean',
+        // SZS Attributes
+        'hot_water_showers' => 'nullable|boolean',
+        'result_board' => 'nullable|boolean',
+        'kids_playground' => 'nullable|boolean',
+        'wardrobe_with_key' => 'nullable|boolean',
+        'props' => 'nullable|boolean',
+        'air_conditioning' => 'nullable|boolean',
+        'protective_net' => 'nullable|boolean',
+        'optimum_temperature' => 'nullable|boolean',
+        'video_surveillance' => 'nullable|boolean',
+        'equipment_rent' => 'nullable|boolean',
+        'kid_pools' => 'nullable|boolean',
+        'entering_a_props' => 'nullable|boolean',
+        'urine_detector' => 'nullable|boolean',
+        'reservations' => 'nullable|boolean',
+        'child_equipment' => 'nullable|boolean',
+        'special_shoes' => 'nullable|boolean',
+        'hygiene_equipment' => 'nullable|boolean',
+        'member_card' => 'nullable|boolean',
+        'maintenance_service' => 'nullable|boolean',
+        'emergency_intervention' => 'nullable|boolean',
+        'skiing_school' => 'nullable|boolean',
+        'snowboarding_school' => 'nullable|boolean',
+        'skiing_equipment_shops' => 'nullable|boolean',
+        'mobile_rescue_team' => 'nullable|boolean',
+        'night_skiing' => 'nullable|boolean',
+        'commenting_cabins' => 'nullable|boolean',
+        'speaker_system' => 'nullable|boolean',
+        'fan_shop' => 'nullable|boolean',
+        'use_own_equipment' => 'nullable|boolean',
+        'equipment_service' => 'nullable|boolean',
+        'shooting_school' => 'nullable|boolean',
+        'protective_equipment' => 'nullable|boolean',
+    ];
 
     /**
      * ObjectController constructor.
@@ -86,6 +209,7 @@ class ObjectController extends Controller
     public function __construct(ObjectRepository $objectRepository, RegionRepository $regionRepository){
         $this->objectRepository = $objectRepository;
         $this->regionRepository = $regionRepository;
+        $this->objectCommonValidationRules['established_in'] = 'nullable|date|before_or_equal:' . Carbon::now()->toDateString();
     }
 
     /**
@@ -140,5 +264,44 @@ class ObjectController extends Controller
         // Dodaj value
 
         return view('objects.new', compact('object_type', 'inputs', 'regions'));
+    }
+
+    public function createObject(Request $request, $object_type_id) {
+        $object_type = $this->objectRepository
+            ->getObjectTypeById($object_type_id);
+
+        $columns = Schema::getColumnListing($object_type->object_table);
+        $to_delete = ['id', 'object_type_id', 'created_at', 'updated_at'];
+        $columns = array_diff($columns, $to_delete);
+
+        $uniqueValidationRules = [];
+        foreach ($columns as $column) {
+            $uniqueValidationRules[$column] = $this->objectUniqueValidationRules[$column];
+        }
+
+        $completeValidationRules = array_merge($this->objectCommonValidationRules, $uniqueValidationRules);
+
+        // Special cases for Skijaliste i Balon
+        if($object_type->type == 'Balon') {
+            $completeValidationRules = array_merge($completeValidationRules, $this->objectBalonAdditionalValidations);
+        } else if ($object_type->type == 'Skijalište') {
+            $completeValidationRules = array_merge($completeValidationRules, $this->objectSkiAdditionalValidations);
+        }
+
+        $validator = Validator::make($request->all(), $completeValidationRules);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            $createObject = $this->objectRepository
+                ->createObject($request, $object_type, $columns);
+
+            if($createObject) {
+                flash()->overlay('Uspješno ste dodali novi objekat.', 'Čestitamo');
+                return redirect('/objects/' . $createObject->id);
+            }
+        }
     }
 }

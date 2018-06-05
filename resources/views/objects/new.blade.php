@@ -41,11 +41,11 @@
                                 <li role="presentation"><a href="#tab-biografija" role="tab" data-toggle="tab"><i class="fa fa-history"></i><small>Vremeplov</small>Objekta</a></li>
                                 @if($object_type->type == 'Balon')
                                     <li role="presentation"><a href="#tab-tereni" role="tab" data-toggle="tab" aria-expanded="true"><i class="fa fa-window-restore"></i><small>Sale i</small>Tereni</a></li>
-                                    <li role="presentation" class=""><a href="#tab-cjenovnik" role="tab" data-toggle="tab" aria-expanded="false"><i class="fa fa-database"></i><small>Cjenovnik</small>Usluga</a></li>
+                                    <li role="presentation"><a href="#tab-cjenovnik-balon" role="tab" data-toggle="tab" aria-expanded="false"><i class="fa fa-database"></i><small>Cjenovnik</small>Usluga</a></li>
                                 @endif
                                 @if($object_type->type == 'Skijalište')
                                     <li role="presentation"><a href="#tab-staze" role="tab" data-toggle="tab" aria-expanded="true"><i class="fa fa-road"></i><small>Staze i</small>Liftovi</a></li>
-                                    <li role="presentation" class=""><a href="#tab-cjenovnik" role="tab" data-toggle="tab" aria-expanded="false"><i class="fa fa-database"></i><small>Cjenovnik</small>Usluga</a></li>
+                                    <li role="presentation"><a href="#tab-cjenovnik-skijaliste" role="tab" data-toggle="tab" aria-expanded="false"><i class="fa fa-database"></i><small>Cjenovnik</small>Usluga</a></li>
                                 @endif
                                 <li role="presentation"><a href="#tab-galerija" role="tab" data-toggle="tab"><i class="fa fa-picture-o"></i><small>Foto</small>Galerija</a></li>
                             </ul>
@@ -64,8 +64,10 @@
                                 </div>
                             </div>
 
-                            <form id="createNewObject" role="form" action="{{ url('/objects/create') }}" method="POST" enctype="multipart/form-data" >
+                            <form id="createNewObject" role="form" action="{{ url('/objects/' . $object_type->id . '/create') }}" method="POST" enctype="multipart/form-data" >
                             {!! csrf_field() !!}
+                                <input type="hidden" name="latitude" id="latitude" value="">
+                                <input type="hidden" name="longitude" id="longitude" value="">
                             <!-- Tab panes -->
                             <div class="tab-content card__content">
 
@@ -84,11 +86,11 @@
                                                         <p class="dodaj-sliku-naslov klub-a1">Slika profila</p>
                                                         <p class="dodaj-sliku-call">Identitet objekta</p>
                                                         <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-                                                            Odaberi sliku... <input type="file" id="slikaprof" name="image" class="not-visible" onchange="previewFile('#slikaprof','#slika_upload_klub',3000, 3000, 1080, 1920)">
+                                                            Odaberi sliku... <input type="file" id="slikaprof" name="image" class="not-visible" onchange="previewFile('#slikaprof','#slika_upload_klub',2048, 2048, 600, 800)">
                                                         </label>
                                                         <div class="info001">
                                                             <p class="info-upload-slike">Preporučene dimenzije za sliku:</p>
-                                                            <p class="info-upload-slike">Minimalno: 1920x1080 px</p>
+                                                            <p class="info-upload-slike">Minimalno: 800x600 px</p>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -204,12 +206,20 @@
                                         </div>
 
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                        </div>
+                                        <div class="form-group form-group--submit col-md-6">
+                                            <button type="button" class="btn btn-default btn-sm btn-block btn-dalje">Sljedeći korak <i class="fa fa-chevron-right"></i></button>
+                                        </div>
+
+                                    </div>
 
                                 </div>
                                 <!-- Tab: Općenito / End -->
 
                                 <!-- Tab: Predispozicije -->
-                                <div role="tabpanel" class="tab-pane fade neaktivno" id="tab-predispozicije">
+                                <div role="tabpanel" class="tab-pane fade" id="tab-predispozicije">
 
                                     <div class="row form-objavi-klub-01">
                                         <header class="card__header">
@@ -219,7 +229,7 @@
                                     <div class="row">
                                         <div class="form-group col-md-4">
                                             <label class="control-label" for="established_in"><i class="fa fa-calendar-o"></i> Datum otvorenja</label>
-                                            <input class="form-control" id="established_in" name="established_in" placeholder="Unesite datum otvorenja" type="date"/>
+                                            <input class="form-control pickDate" id="established_in" name="established_in" placeholder="Unesite datum otvorenja"/>
                                         </div>
 
                                         @foreach($inputs as $input)
@@ -327,7 +337,7 @@
                                 <!-- Tab: Predispozicije / End -->
 
                                 <!-- Tab: Vremeplov -->
-                                <div role="tabpanel" class="tab-pane fade neaktivno" id="tab-biografija">
+                                <div role="tabpanel" class="tab-pane fade" id="tab-biografija">
                                     <div class="row">
 
                                         <div class="row identitet-style">
@@ -363,7 +373,7 @@
 
                                 @if($object_type->type == 'Balon')
                                     <!-- Tab: Sale i Tereni -->
-                                    <div role="tabpanel" class="tab-pane fade neaktivno" id="tab-tereni">
+                                    <div role="tabpanel" class="tab-pane fade" id="tab-tereni">
 
                                             <div class="row">
                                                 <div class="row form-segment">
@@ -374,55 +384,56 @@
                                                 <div id="tereniLista">
                                                     @if(old('tereni'))
                                                         @foreach(old('tereni') as $key => $teren)
-                                                        <div class="row terenHover">
+                                                        <div class="row terenHover" data-key="{{ $key }}">
                                                             <div class="izbrisiTeren"><i class="fa fa-times-circle-o"></i></div>
                                                             <div class="col-md-6">
                                                                 <div class="form-group col-md-12">
                                                                     <label for="name">Naziv ili oznaka terena/sale</label>
-                                                                    <input type="text" name="tereni[{{ $key }}][name]" id="name" class="form-control" placeholder="Unesite naziv ili oznaku  terena" value="{{ old('tereni.' . $key . '.name') }}">
+                                                                    <input type="text" name="tereni[{{ $key }}][name]" id="name{{ $key }}" class="form-control" placeholder="Unesite naziv ili oznaku  terena" value="{{ old('tereni.' . $key . '.name') }}">
                                                                 </div>
 
                                                                 <div class="form-group col-md-12">
                                                                     <label for="sport">Sport</label>
                                                                     <div class="form-group">
                                                                         <label class="checkbox checkbox-inline">
-                                                                            <input type="checkbox" name="sport" value="Nogomet" {{ (is_array(old('sport')) and in_array('Nogomet', old('sport'))) ? ' checked' : '' }}> Nogomet
+                                                                            <input type="checkbox" name="tereni[{{ $key }}][sports][]" value="Nogomet" {{ (is_array(old('tereni.' . $key . '.sports')) and in_array('Nogomet', old('tereni.' . $key . '.sports'))) ? ' checked' : '' }}> Nogomet
                                                                             <span class="checkbox-indicator"></span>
                                                                         </label>
                                                                         <label class="checkbox checkbox-inline">
-                                                                            <input type="checkbox" name="sport" value="Mali nogomet" {{ (is_array(old('sport')) and in_array('Mali nogomet', old('sport'))) ? ' checked' : '' }}> Mali nogomet
+                                                                            <input type="checkbox" name="tereni[{{ $key }}][sports][]" value="Mali nogomet" {{ (is_array(old('tereni.' . $key . '.sports')) and in_array('Mali nogomet', old('tereni.' . $key . '.sports'))) ? ' checked' : '' }}> Mali nogomet
                                                                             <span class="checkbox-indicator"></span>
                                                                         </label>
                                                                         <label class="checkbox checkbox-inline">
-                                                                            <input type="checkbox" name="sport" value="Košarka" {{ (is_array(old('sport')) and in_array('Košarka', old('sport'))) ? ' checked' : '' }}> Košarka
+                                                                            <input type="checkbox" name="tereni[{{ $key }}][sports][]" value="Košarka" {{ (is_array(old('tereni.' . $key . '.sports')) and in_array('Košarka', old('tereni.' . $key . '.sports'))) ? ' checked' : '' }}> Košarka
                                                                             <span class="checkbox-indicator"></span>
                                                                         </label>
                                                                         <label class="checkbox checkbox-inline ">
-                                                                            <input type="checkbox" name="sport" value="Tenis" {{ (is_array(old('sport')) and in_array('Tenis', old('sport'))) ? ' checked' : '' }}> Tenis
+                                                                            <input type="checkbox" name="tereni[{{ $key }}][sports][]" value="Tenis" {{ (is_array(old('tereni.' . $key . '.sports')) and in_array('Tenis', old('tereni.' . $key . '.sports'))) ? ' checked' : '' }}> Tenis
                                                                             <span class="checkbox-indicator"></span>
                                                                         </label>
                                                                         <label class="checkbox checkbox-inline ">
-                                                                            <input type="checkbox" name="sport" value="Stoni tenis" {{ (is_array(old('sport')) and in_array('Stoni tenis', old('sport'))) ? ' checked' : '' }}> Stoni tenis
+                                                                            <input type="checkbox" name="tereni[{{ $key }}][sports][]" value="Stoni tenis" {{ (is_array(old('tereni.' . $key . '.sports')) and in_array('Stoni tenis', old('tereni.' . $key . '.sports'))) ? ' checked' : '' }}> Stoni tenis
                                                                             <span class="checkbox-indicator"></span>
                                                                         </label>
                                                                         <label class="checkbox checkbox-inline ">
-                                                                            <input type="checkbox" name="sport" value="Odbojka" {{ (is_array(old('sport')) and in_array('Odbojka', old('sport'))) ? ' checked' : '' }}> Odbojka
+                                                                            <input type="checkbox" name="tereni[{{ $key }}][sports][]" value="Odbojka" {{ (is_array(old('tereni.' . $key . '.sports')) and in_array('Odbojka', old('tereni.' . $key . '.sports'))) ? ' checked' : '' }}> Odbojka
                                                                             <span class="checkbox-indicator"></span>
                                                                         </label>
                                                                         <label class="checkbox checkbox-inline ">
-                                                                            <input type="checkbox" name="sport" value="Badminton" {{ (is_array(old('sport')) and in_array('Badminton', old('sport'))) ? ' checked' : '' }}> Badminton
+                                                                            <input type="checkbox" name="tereni[{{ $key }}][sports][]" value="Badminton" {{ (is_array(old('tereni.' . $key . '.sports')) and in_array('Badminton', old('tereni.' . $key . '.sports'))) ? ' checked' : '' }}> Badminton
                                                                             <span class="checkbox-indicator"></span>
                                                                         </label>
                                                                         <label class="checkbox checkbox-inline ">
-                                                                            <input type="checkbox" name="sport" value="Univerzalan teren" {{ (is_array(old('sport')) and in_array('Univerzalan teren', old('sport'))) ? ' checked' : '' }}> Univerzalan teren
+                                                                            <input type="checkbox" name="tereni[{{ $key }}][sports][]" value="Univerzalan teren" {{ (is_array(old('tereni.' . $key . '.sports')) and in_array('Univerzalan teren', old('tereni.' . $key . '.sports'))) ? ' checked' : '' }}> Univerzalan teren
                                                                             <span class="checkbox-indicator"></span>
                                                                         </label>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-6">
+                                                            </div>
+                                                            <div class="col-md-6">
                                                                     <div class="form-group col-md-6">
                                                                         <label for="type_of_field">Vrsta podloge</label>
-                                                                        <select class="form-control" id="type_of_field">
+                                                                        <select class="form-control" name="tereni[{{ $key }}][type_of_field]" id="type_of_field{{ $key }}">
                                                                             <option value="" disabled="" {{ old('tereni.' . $key . '.type_of_field') == '' ? 'selected' : '' }}>Izaberite podlogu terena</option>
                                                                             <option value="Parket" {{ old('tereni.' . $key . '.type_of_field') == 'Parket' ? 'selected' : '' }}>Parket</option>
                                                                             <option value="Bitumen" {{ old('tereni.' . $key . '.type_of_field') == 'Bitumen' ? 'selected' : '' }}>Bitumen</option>
@@ -434,22 +445,21 @@
                                                                     </div>
                                                                     <div class="form-group col-md-6 col-xs-12">
                                                                         <label for="capacity">Kapacitet korisnika</label>
-                                                                        <input type="number" name="capacity" id="capacity" class="form-control" placeholder="Unesite maksimalan broj korisnika" value="{{ old('tereni.' . $key . '.capacity') }}">
+                                                                        <input type="number" name="tereni[{{ $key }}][capacity]" id="capacity{{ $key }}" class="form-control" placeholder="Unesite maksimalan broj korisnika" value="{{ old('tereni.' . $key . '.capacity') }}">
                                                                     </div>
                                                                     <div class="form-group col-md-6 col-xs-12">
                                                                         <label for="public_capacity">Kapacitet gledaoca</label>
-                                                                        <input type="number" name="public_capacity" id="public_capacity" class="form-control" placeholder="Unesite maksimalan broj gledaoca" value="{{ old('tereni.' . $key . '.public_capacity') }}">
+                                                                        <input type="number" name="tereni[{{ $key }}][public_capacity]" id="public_capacity{{ $key }}" class="form-control" placeholder="Unesite maksimalan broj gledaoca" value="{{ old('tereni.' . $key . '.public_capacity') }}">
                                                                     </div>
                                                                     <div class="form-group col-md-6 col-xs-12">
                                                                         <label for="length">Dužina terena (m)</label>
-                                                                        <input type="number" name="length" id="length" class="form-control" placeholder="Unesite dužinu terena u metrima" value="{{ old('tereni.' . $key . '.length') }}">
+                                                                        <input type="number" name="tereni[{{ $key }}][length]" id="length{{ $key }}" class="form-control" placeholder="Unesite dužinu terena u metrima" value="{{ old('tereni.' . $key . '.length') }}">
                                                                     </div>
                                                                     <div class="form-group col-md-6 col-xs-12">
                                                                         <label for="width">Širina terena (m)</label>
-                                                                        <input type="number" name="width" id="width" class="form-control" placeholder="Unesite širinu terena u metrima" value="{{ old('tereni.' . $key . '.width') }}">
+                                                                        <input type="number" name="tereni[{{ $key }}][width]" id="width{{ $key }}" class="form-control" placeholder="Unesite širinu terena u metrima" value="{{ old('tereni.' . $key . '.width') }}">
                                                                     </div>
                                                                 </div>
-                                                            </div>
                                                         </div>
                                                         @endforeach
                                                     @endif
@@ -474,10 +484,198 @@
 
                                         </div>
                                     <!-- Tab: Sale i Tereni / End -->
+                                    <!-- Tab: Cjenovnik -->
+                                    <div role="tabpanel" class="tab-pane fade" id="tab-cjenovnik-balon">
+
+                                            <div class="row">
+                                                <div class="row form-segment">
+                                                    <header class="card__header">
+                                                        <h4><i class="fa fa-plus-circle"></i> Dodavanje cijene</h4>
+                                                    </header>
+                                                </div>
+                                                <div id="balonCjenovnikLista">
+                                                    @if(old('cjenovnik'))
+                                                        @foreach(old('cjenovnik') as $key => $cjenovnik)
+                                                            <div class="row balonCjenovnikHover" data-key="{{ $key }}">
+                                                                <div class="izbrisiBalonCjenovnik"><i class="fa fa-times-circle-o"></i></div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group col-md-12">
+                                                                        <label for="sport{{ $key }}">Sport</label>
+                                                                        <select class="form-control" id="sport{{ $key }}" name="cjenovnik[{{ $key }}][sport]">
+                                                                            <option disabled="" {{ old('cjenovnik.' . $key . '.sport') == '' ? 'selected' : '' }}>Izaberite sport</option>
+                                                                            <option value="Nogomet" {{ old('cjenovnik.' . $key . '.sport') == 'Nogomet' ? 'selected' : '' }}>Nogomet</option>
+                                                                            <option value="Mali nogomet" {{ old('cjenovnik.' . $key . '.sport') == 'Mali nogomet' ? 'selected' : '' }}>Mali nogomet</option>
+                                                                            <option value="Košarka" {{ old('cjenovnik.' . $key . '.sport') == 'Košarka' ? 'selected' : '' }}>Košarka</option>
+                                                                            <option value="Tenis" {{ old('cjenovnik.' . $key . '.sport') == 'Tenis' ? 'selected' : '' }}>Tenis</option>
+                                                                            <option value="Stoni Tenis" {{ old('cjenovnik.' . $key . '.sport') == 'Stoni Tenis' ? 'selected' : '' }}>Stoni Tenis</option>
+                                                                            <option value="Odbojka" {{ old('cjenovnik.' . $key . '.sport') == 'Odbojka' ? 'selected' : '' }}>Odbojka</option>
+                                                                            <option value="Badminton" {{ old('cjenovnik.' . $key . '.sport') == 'Badminton' ? 'selected' : '' }}>Badminton</option>
+                                                                            <option value="Univerzalan teren" {{ old('cjenovnik.' . $key . '.sport') == 'Univerzalan teren' ? 'selected' : '' }}>Univerzalan teren</option>
+                                                                        </select>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group col-md-6 col-xs-12">
+                                                                        <label for="name{{ $key }}">Naziv/oznaka terena</label>
+                                                                        <input type="text" name="cjenovnik[{{ $key }}][name]" id="name{{ $key }}" class="form-control" placeholder="Unesite naziv ili oznaku terena" value="{{ old('cjenovnik.' . $key . '.name') }}">
+                                                                    </div>
+                                                                    <div class="form-group col-md-6 col-xs-12">
+                                                                        <label for="price_per_hour{{ $key }}">Cijena termina (60 min)</label>
+                                                                        <input type="number" name="cjenovnik[{{ $key }}][price_per_hour]" id="price_per_hour{{ $key }}" class="form-control" placeholder="Unesite cijenu u KM" value="{{ old('cjenovnik.' . $key . '.price') }}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    @endif
+                                                </div>
+                                                <div class="col-md-12 text-center">
+                                                    <button class="btn btn-primary" type="button" id="balonDodajCjenovnik">Dodaj cjenovnik</button>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="form-group form-group--submit col-md-6">
+                                                    <a href="#tab-tereni" role="tab" data-toggle="tab" class="btn btn-default btn-sm btn-block btn-nazad" aria-expanded="true"><i class="fa fa-chevron-left"></i> Nazad</a>
+                                                </div>
+                                                <div class="form-group form-group--submit col-md-6">
+                                                    <button type="button" class="btn btn-default btn-sm btn-block btn-dalje">Sljedeći korak <i class="fa fa-chevron-right"></i></button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    <!-- Tab: Cjenovnik / End -->
                                 @endif
 
+                                @if($object_type->type == 'Skijalište')
+                                    <!-- Tab: Staze -->
+                                    <div role="tabpanel" class="tab-pane fade" id="tab-staze">
+
+                                        <div class="row">
+                                            <div class="row form-segment">
+                                                <header class="card__header">
+                                                    <h4><i class="fa fa-plus-circle"></i> Unos staze skijališta</h4>
+                                                </header>
+                                            </div>
+                                            <div id="stazeLista">
+                                                @if(old('staze'))
+                                                    @foreach(old('staze') as $key => $staza)
+                                                        <div class="row stazeHover" data-key="{{ $key }}">
+                                                            <div class="izbrisiStazu"><i class="fa fa-times-circle-o"></i></div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group col-md-12">
+                                                                    <label for="name{{ $key }}">Naziv staze</label>
+                                                                    <input type="text" name="staze[{{ $key }}][name]" id="name{{ $key }}" class="form-control" placeholder="Unesite naziv staze" value="{{ old('staze.' . $key . '.name') }}">
+                                                                </div>
+
+                                                                <div class="form-group col-md-12">
+                                                                    <label for="level{{ $key }}">Težina staze</label>
+                                                                    <select class="form-control" id="level{{ $key }}" name="staze[{{ $key }}][level]">
+                                                                        <option value="" disabled="" {{ old('staze.' . $key . '.level') == '' ? 'selected' : '' }}>Odaberite</option>
+                                                                        <option value="Lahko" {{ old('staze.' . $key . '.level') == 'Lahko' ? 'selected' : '' }}>Lahko</option>
+                                                                        <option value="Srednje" {{ old('staze.' . $key . '.level') == 'Srednje' ? 'selected' : '' }}>Srednje</option>
+                                                                        <option value="Teško" {{ old('staze.' . $key . '.level') == 'Teško' ? 'selected' : '' }}>Teško</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group col-md-6 col-xs-12">
+                                                                    <label for="length{{ $key }}">Dužina staze</label>
+                                                                    <input type="number" name="staze[{{ $key }}][length]" id="length{{ $key }}" class="form-control" placeholder="Unesite dužinu staze u metrima" value="{{ old('staze.' . $key . '.length') }}">
+                                                                </div>
+                                                                <div class="form-group col-md-6 col-xs-12">
+                                                                    <label for="time{{ $key }}">Trajanje spusta</label>
+                                                                    <input type="number" name="staze[{{ $key }}][time]" id="time{{ $key }}" class="form-control" placeholder="Unesite vrijeme trajanja spusta u minutama" value="{{ old('staze.' . $key . '.time') }}">
+                                                                </div>
+                                                                <div class="form-group col-md-6 col-xs-12">
+                                                                    <label for="start_point{{ $key }}">Tačka polazišta (m)</label>
+                                                                    <input type="number" name="staze[{{ $key }}][start_point]" id="start_point{{ $key }}" class="form-control" placeholder="Unesite nadmorsku visinu tačke polazišta" value="{{ old('staze.' . $key . '.start_point') }}">
+                                                                </div>
+                                                                <div class="form-group col-md-6 col-xs-12">
+                                                                    <label for="end_point{{ $key }}">Tačka izlaza (m)</label>
+                                                                    <input type="number" name="staze[{{ $key }}][end_point]" id="end_point{{ $key }}" class="form-control" placeholder="Unesite nadmorsku visinu tačke izlaza" value="{{ old('staze.' . $key . '.end_point') }}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @endif
+                                            </div>
+                                            <div class="col-md-12 text-center">
+                                                <button class="btn btn-primary" type="button" id="dodajStazu">Dodaj stazu</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group form-group--submit col-md-6">
+                                                <a href="#tab-biografija" role="tab" data-toggle="tab" class="btn btn-default btn-sm btn-block btn-nazad" aria-expanded="true">
+                                                    <i class="fa fa-chevron-left"></i> Nazad
+                                                </a>
+                                            </div>
+                                            <div class="form-group form-group--submit col-md-6">
+                                                <button type="button" class="btn btn-default btn-sm btn-block btn-dalje">
+                                                    Sljedeći korak <i class="fa fa-chevron-right"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- Tab: Staze / End -->
+                                    <!-- Tab: Cjenovnik -->
+                                    <div role="tabpanel" class="tab-pane fade" id="tab-cjenovnik-skijaliste">
+
+                                        <div class="row">
+                                            <div class="row form-segment">
+                                                <header class="card__header">
+                                                    <h4><i class="fa fa-plus-circle"></i> Dodavanje cijene</h4>
+                                                </header>
+                                            </div>
+                                            <div id="skiCjenovnikLista">
+                                                @if(old('cjenovnik'))
+                                                    @foreach(old('cjenovnik') as $key => $cjenovnik)
+                                                        <div class="row skiCjenovnikHover" data-key="{{ $key }}">
+                                                            <div class="izbrisiSkiCjenovnik"><i class="fa fa-times-circle-o"></i></div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group col-md-12">
+                                                                    <label for="description{{ $key }}">Opis karte</label>
+                                                                    <input type="text" name="cjenovnik[{{ $key }}][description]" id="description{{ $key }}" class="form-control" placeholder="Unesite opis karte" value="{{ old('cjenovnik.' . $key . '.description') }}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                <div class="form-group col-md-6 col-xs-12">
+                                                                    <label for="price{{ $key }}">Cijena karte odrasli</label>
+                                                                    <input type="text" name="cjenovnik[{{ $key }}][price]" id="price{{ $key }}" class="form-control" placeholder="Unesite cijenu u KM" value="{{ old('cjenovnik.' . $key . '.price') }}">
+                                                                </div>
+                                                                <div class="form-group col-md-6 col-xs-12">
+                                                                    <label for="price_kids{{ $key }}">Cijena karte djeca</label>
+                                                                    <input type="text" name="cjenovnik[{{ $key }}][price_kids]" id="price_kids{{ $key }}" class="form-control" placeholder="Unesite cijenu u KM" value="{{ old('cjenovnik.' . $key . '.price_kids') }}">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @endif
+                                            </div>
+                                            <div class="col-md-12 text-center">
+                                                <button class="btn btn-primary" type="button" id="skiDodajCjenovnik">Dodaj cjenovnik</button>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group form-group--submit col-md-6">
+                                                <a href="#tab-staze" role="tab" data-toggle="tab" class="btn btn-default btn-sm btn-block btn-nazad" aria-expanded="true"><i class="fa fa-chevron-left"></i> Nazad</a>
+                                            </div>
+                                            <div class="form-group form-group--submit col-md-6">
+                                                <button type="button" class="btn btn-default btn-sm btn-block btn-dalje">Sljedeći korak <i class="fa fa-chevron-right"></i></button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- Tab: Cjenovnik / End -->
+                                @endif
+
+
                                 <!-- Tab: Foto galerija -->
-                                <div role="tabpanel" class="tab-pane fade neaktivno" id="tab-galerija">
+                                <div role="tabpanel" class="tab-pane fade" id="tab-galerija">
 
 
                                     <div class="row dodavanje-slika">
@@ -506,11 +704,25 @@
                                     </div>
 
                                     <div class="row">
-                                        <div class="form-group form-group--submit col-md-6">
-                                            <a href="#tab-biografija" role="tab" data-toggle="tab" class="btn btn-default btn-sm btn-block btn-nazad">
-                                                <i class="fa fa-chevron-left"></i> Nazad
-                                            </a>
-                                        </div>
+                                        @if($object_type->type == 'Balon')
+                                            <div class="form-group form-group--submit col-md-6">
+                                                <a href="#tab-cjenovnik-balon" role="tab" data-toggle="tab" class="btn btn-default btn-sm btn-block btn-nazad">
+                                                    <i class="fa fa-chevron-left"></i> Nazad
+                                                </a>
+                                            </div>
+                                        @elseif($object_type->type == 'Skijalište')
+                                            <div class="form-group form-group--submit col-md-6">
+                                                <a href="#tab-cjenovnik-skijaliste" role="tab" data-toggle="tab" class="btn btn-default btn-sm btn-block btn-nazad">
+                                                    <i class="fa fa-chevron-left"></i> Nazad
+                                                </a>
+                                            </div>
+                                        @else
+                                            <div class="form-group form-group--submit col-md-6">
+                                                <a href="#tab-biografija" role="tab" data-toggle="tab" class="btn btn-default btn-sm btn-block btn-nazad">
+                                                    <i class="fa fa-chevron-left"></i> Nazad
+                                                </a>
+                                            </div>
+                                        @endif
                                         <div class="form-group form-group--submit col-md-6">
                                             <button type="submit" class="btn btn-default btn-sm btn-block btn-dalje">
                                                 <i class="fa fa-plus-circle"></i> Završi i objavi

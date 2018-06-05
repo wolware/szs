@@ -364,16 +364,15 @@
               var lat = place.geometry.location.lat();
               var lng = place.geometry.location.lng();
 
-              var form = document.getElementById('city').closest('form');
+              var lat_input = document.getElementById('latitude');
+              var lng_input = document.getElementById('longitude');
 
-              var lat_input = document.createElement('<input type="hidden" id="latitude" name="latitude" value="' + lat + '">');
-              var lng_input = document.createElement('<input type="hidden" id="longitude" name="longitude" value="' + lng + '">');
-              form.prepend(lat_input);
-              form.prepend(lng_input);
+              lat_input.value = lat;
+              lng_input.value = lng;
 
               if (!place.geometry) {
-                  document.getElementById('latitude').remove();
-                  document.getElementById('longitude').remove();
+                  lat_input.value = '';
+                  lng_input.value = '';
                   window.alert("Nismo mogli pronaći traženo mjesto!");
                   return;
               }

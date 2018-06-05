@@ -13,6 +13,7 @@ class Gallery extends Model
         'club_id',
         'player_id',
         'staff_id',
-        'school_id'
+        'school_id',
+        'object_id'
     ];
 }

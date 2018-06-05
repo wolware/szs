@@ -76,6 +76,7 @@ Route::middleware('auth')->group(function () {
     // OBJECTS
     Route::get('/objects/add', 'ObjectController@displayAddObjectCategories');
     Route::get('/objects/{object_id}/new', 'ObjectController@displayAddObject')->where('object_id', '[0-9]+');
+    Route::post('/objects/{object_id}/create', 'ObjectController@createObject')->where('object_id', '[0-9]+');
 
 
     // NEWS

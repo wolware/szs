@@ -19,14 +19,22 @@ Description:  You can add your custom CSS here and it will overwrite template st
 
 .licnostHover,
 .nagradaHover,
-.historyHover {
+.historyHover,
+.terenHover,
+.balonCjenovnikHover,
+.stazeHover,
+.skiCjenovnikHover{
     position: relative;
     margin-bottom: 15px;
 }
 
 .izbrisiLicnost,
 .izbrisiNagradu,
-.izbrisiHistory {
+.izbrisiHistory,
+.izbrisiTeren,
+.izbrisiBalonCjenovnik,
+.izbrisiStazu,
+.izbrisiSkiCjenovnik{
     font-size: 20px;
     opacity: 0;
     transition: 0.2s opacity ease-in;
@@ -38,13 +46,21 @@ Description:  You can add your custom CSS here and it will overwrite template st
 
 .licnostHover:hover .izbrisiLicnost,
 .nagradaHover:hover .izbrisiNagradu,
-.historyHover:hover .izbrisiHistory {
+.historyHover:hover .izbrisiHistory,
+.terenHover:hover .izbrisiTeren,
+.balonCjenovnikHover:hover .izbrisiBalonCjenovnik,
+.stazeHover:hover .izbrisiStazu,
+.skiCjenovnikHover:hover .izbrisiSkiCjenovnik{
     opacity: 1;
 }
 
 .izbrisiLicnost:hover,
 .izbrisiNagradu:hover,
-.izbrisiHistory:hover {
+.izbrisiHistory:hover,
+.izbrisiTeren:hover,
+.izbrisiBalonCjenovnik:hover,
+.izbrisiStazu:hover,
+.izbrisiSkiCjenovnik:hover{
     color: #f49222;
 }
 
