@@ -2,6 +2,10 @@
 var licnostiCount = 1;
 var nagradeCount = 1;
 var historyCount = 1;
+var terenCount = 1;
+var cjenovnikBalonCount = 1;
+var stazeCount = 1;
+var cjenovnikSkiCount = 1;
 
 function previewFile(name, place, maxHeight, maxWidth, minHeight, minWidth) {
     if (typeof(maxHeight) === 'undefined') maxHeight = null;
@@ -134,6 +138,14 @@ $(function () {
 $.validator.setDefaults({ ignore: '' });
 
 $(document).ready(function () {
+
+    $('form').keydown(function(event){
+        if(event.keyCode == 13) {
+            event.preventDefault();
+            return false;
+        }
+    });
+
     $('#flash-overlay-modal').modal();
 
     $('#editClubForm').validate({
@@ -1222,9 +1234,309 @@ $(document).ready(function () {
         }
     });
 
+    $('#createNewObject').validate({
+        ignore: ':hidden,:disabled',
+        rules: {
+            image: {
+                required: true,
+                extension: 'png|jpg|jpeg'
+            },
+            name: {
+                required: true,
+                string: true,
+                maxlength: 255
+            },
+            continent: {
+                required: true,
+                digits: true
+            },
+            country: {
+                required: true,
+                digits: true
+            },
+            province: {
+                required: true,
+                digits: true
+            },
+            region: {
+                required: true,
+                digits: true
+            },
+            municipality: {
+                required: true,
+                digits: true
+            },
+            city: {
+                required: true,
+                string: true,
+                maxlength: 255
+            },
+            facebook: {
+                string: true,
+                maxlength: 255
+            },
+            instagram: {
+                string: true,
+                maxlength: 255
+            },
+            twitter: {
+                string: true,
+                maxlength: 255
+            },
+            youtube: {
+                string: true,
+                maxlength: 255
+            },
+            number_of_fields: {
+                digits: true,
+                range: [1, 50]
+            },
+            number_of_pools: {
+                digits: true,
+                range: [1, 50]
+            },
+            number_of_tracks: {
+                digits: true,
+                range: [1, 100]
+            },
+            number_of_balls: {
+                digits: true,
+                range: [1, 500]
+            },
+            number_of_shooting_places: {
+                digits: true,
+                range: [1, 500]
+            },
+            type_of_grass: {
+                string: true,
+                maxlength: 255,
+                lettersonly: true
+            },
+            elevation: {
+                digits: true,
+                range: [1, 8000]
+            },
+            stadium_length: {
+                digits: true,
+                range: [1, 300]
+            },
+            stadium_width: {
+                digits: true,
+                range: [1, 300]
+            },
+            number_of_ski_tracks: {
+                digits: true,
+                range: [1, 200]
+            },
+            number_of_ski_lifts: {
+                digits: true,
+                range: [1, 200]
+            },
+            water_effects: {
+                digits: true,
+                range: [0, 1]
+            },
+            area: {
+                digits: true
+            },
+            water_area: {
+                digits: true
+            },
+            capacity: {
+                digits: true
+            },
+            pool_capacity: {
+                digits: true
+            },
+            stadium_capacity: {
+                digits: true
+            },
+            type_of_field: {
+                string: true,
+                maxlength: 255,
+                lettersonly: true
+            },
+            wifi: {
+                string: true,
+                maxlength: 255,
+                lettersonly: true
+            },
+            parking: {
+                string: true,
+                maxlength: 255,
+                lettersonly: true
+            },
+            restaurant: {
+                string: true,
+                maxlength: 255,
+                lettersonly: true
+            },
+            hotels: {
+                string: true,
+                maxlength: 255
+            },
+            cafe: {
+                string: true,
+                maxlength: 255,
+                lettersonly: true
+            },
+            access_to_disabled: {
+                string: true,
+                maxlength: 255,
+                lettersonly: true
+            },
+            number_of_locker_rooms: {
+                digits: true,
+                range: [0, 50]
+            },
+            rent_equipment: {
+                digits: true,
+                range: [0, 1]
+            },
+            hot_water_showers: {
+                digits: true,
+                range: [0, 1]
+            },
+            result_board: {
+                digits: true,
+                range: [0, 1]
+            },
+            kids_playground: {
+                digits: true,
+                range: [0, 1]
+            },
+            wardrobe_with_key: {
+                digits: true,
+                range: [0, 1]
+            },
+            props: {
+                digits: true,
+                range: [0, 1]
+            },
+            air_conditioning: {
+                digits: true,
+                range: [0, 1]
+            },
+            protective_net: {
+                digits: true,
+                range: [0, 1]
+            },
+            optimum_temperature: {
+                digits: true,
+                range: [0, 1]
+            },
+            video_surveillance: {
+                digits: true,
+                range: [0, 1]
+            },
+            equipment_rent: {
+                digits: true,
+                range: [0, 1]
+            },
+            kid_pools: {
+                digits: true,
+                range: [0, 1]
+            },
+            entering_a_props: {
+                digits: true,
+                range: [0, 1]
+            },
+            urine_detector: {
+                digits: true,
+                range: [0, 1]
+            },
+            reservations: {
+                digits: true,
+                range: [0, 1]
+            },
+            child_equipment: {
+                digits: true,
+                range: [0, 1]
+            },
+            special_shoes: {
+                digits: true,
+                range: [0, 1]
+            },
+            hygiene_equipment: {
+                digits: true,
+                range: [0, 1]
+            },
+            member_card: {
+                digits: true,
+                range: [0, 1]
+            },
+            maintenance_service: {
+                digits: true,
+                range: [0, 1]
+            },
+            emergency_intervention: {
+                digits: true,
+                range: [0, 1]
+            },
+            skiing_school: {
+                digits: true,
+                range: [0, 1]
+            },
+            snowboarding_school: {
+                digits: true,
+                range: [0, 1]
+            },
+            skiing_equipment_shops: {
+                digits: true,
+                range: [0, 1]
+            },
+            mobile_rescue_team: {
+                digits: true,
+                range: [0, 1]
+            },
+            night_skiing: {
+                digits: true,
+                range: [0, 1]
+            },
+            commenting_cabins: {
+                digits: true,
+                range: [0, 1]
+            },
+            speaker_system: {
+                digits: true,
+                range: [0, 1]
+            },
+            fan_shop: {
+                digits: true,
+                range: [0, 1]
+            },
+            use_own_equipment: {
+                digits: true,
+                range: [0, 1]
+            },
+            equipment_service: {
+                digits: true,
+                range: [0, 1]
+            },
+            shooting_school: {
+                digits: true,
+                range: [0, 1]
+            },
+            protective_equipment: {
+                digits: true,
+                range: [0, 1]
+            },
+            history: {
+                string: true
+            },
+            'galerija[]' : {
+                extension: 'png|jpg|jpeg'
+            }
+        }
+    });
+
     addLicnostValidation();
     addTrophyValidation();
     addHistoryValidation();
+    addTerenValidation();
+    addCjenovnikBalonValidation();
+    addStazeValidation();
+    addCjenovnikSkiValidation();
 
     // Select boxovi za regione
     var continentSelect = $('select#continent');
@@ -1272,17 +1584,65 @@ $(document).ready(function () {
         historyCount = highest2 + 1;
     }
 
+    // Nadji najveci array key od old inputa za teren/sala ako postoji
+    if($('.terenHover').length) {
+        var num3 = $('.terenHover').map(function() {
+            return $(this).data('key');
+        }).get();
+
+        var highest3 = Math.max.apply(Math, num3);
+
+        terenCount = highest3 + 1;
+    }
+
+    // Nadji najveci array key od old inputa za balon cjenovnik ako postoji
+    if($('.balonCjenovnikHover').length) {
+        var num4 = $('.balonCjenovnikHover').map(function() {
+            return $(this).data('key');
+        }).get();
+
+        var highest4 = Math.max.apply(Math, num4);
+
+        cjenovnikBalonCount = highest4 + 1;
+    }
+
+    // Nadji najveci array key od old inputa za staze ako postoji
+    if($('.stazeHover').length) {
+        var num5 = $('.stazeHover').map(function() {
+            return $(this).data('key');
+        }).get();
+
+        var highest5 = Math.max.apply(Math, num5);
+
+        stazeCount = highest5 + 1;
+    }
+
+    // Nadji najveci array key od old inputa za ski cjenovnik ako postoji
+    if($('.skiCjenovnikHover').length) {
+        var num6 = $('.skiCjenovnikHover').map(function() {
+            return $(this).data('key');
+        }).get();
+
+        var highest6 = Math.max.apply(Math, num6);
+
+        cjenovnikSkiCount = highest6 + 1;
+    }
+
+
     // Custom metode za validaciju
     // Provjera stringa
     jQuery.validator.addMethod("string", function(value, element){
-        if (typeof value === 'string' || value instanceof String) {
+        if(value === null) {
+            return true;
+        }
+        if ((typeof value === 'string' || value instanceof String)) {
             return true;
         }
         return false;
     }, "Polje mora biti tipa string.");
 
     jQuery.validator.addMethod("lettersonly", function(value, element) {
-        return this.optional(element) || XRegExp('^\\p{L}*$').test(value);
+        return this.optional(element) || XRegExp('^[\\p{L}|\\s]*$').test(value);
     }, "Polje mora sadržati samo slova");
 
     // Dodavanje kluba - Dodaj ličnost
@@ -1534,6 +1894,222 @@ $(document).ready(function () {
         $(this).closest('.historyHover').slideUp('normal', function() { $(this).remove(); } );
     });
 
+    // Dodavanje objekta - Dodaj teren/salu
+    $('#dodajTeren').on('click', function () {
+        var teren_form_input = '<div class="row terenHover"><div class="izbrisiTeren"><i class="fa fa-times-circle-o"></i></div>' +
+            '<div class="col-md-6">' +
+            '<div class="form-group col-md-12">' +
+            '<label for="name">Naziv ili oznaka terena/sale</label>' +
+            '<input type="text" name="tereni[' + terenCount + '][name]" id="name' + terenCount + '" class="form-control" placeholder="Unesite naziv ili oznaku  terena">' +
+            '</div>' +
+            '<div class="form-group col-md-12">' +
+            '<label for="sport">Sport</label>' +
+            '<div class="form-group">' +
+            '<label class="checkbox checkbox-inline">' +
+            '<input type="checkbox" name="tereni[' + terenCount + '][sports][]" value="Nogomet"> Nogomet' +
+            '<span class="checkbox-indicator"></span>' +
+            '</label>' +
+            '<label class="checkbox checkbox-inline">' +
+            '<input type="checkbox" name="tereni[' + terenCount + '][sports][]" value="Mali nogomet"> Mali nogomet' +
+            '<span class="checkbox-indicator"></span>' +
+            '</label>' +
+            '<label class="checkbox checkbox-inline">' +
+            '<input type="checkbox" name="tereni[' + terenCount + '][sports][]" value="Košarka"> Košarka' +
+            '<span class="checkbox-indicator"></span>' +
+            '</label>' +
+            '<label class="checkbox checkbox-inline ">' +
+            '<input type="checkbox" name="tereni[' + terenCount + '][sports][]" value="Tenis"> Tenis' +
+            '<span class="checkbox-indicator"></span>' +
+            '</label>' +
+            '<label class="checkbox checkbox-inline ">' +
+            '<input type="checkbox" name="tereni[' + terenCount + '][sports][]" value="Stoni tenis"> Stoni tenis' +
+            '<span class="checkbox-indicator"></span>' +
+            '</label>' +
+            '<label class="checkbox checkbox-inline ">' +
+            '<input type="checkbox" name="tereni[' + terenCount + '][sports][]" value="Odbojka"> Odbojka' +
+            '<span class="checkbox-indicator"></span>' +
+            '</label>' +
+            '<label class="checkbox checkbox-inline ">' +
+            '<input type="checkbox" name="tereni[' + terenCount + '][sports][]" value="Badminton"> Badminton' +
+            '<span class="checkbox-indicator"></span>' +
+            '</label>' +
+            '<label class="checkbox checkbox-inline ">' +
+            '<input type="checkbox" name="tereni[' + terenCount + '][sports][]" value="Univerzalan teren"> Univerzalan teren' +
+            '<span class="checkbox-indicator"></span>' +
+            '</label>' +
+            '</div>' +
+            '</div>' +
+            '</div>' +
+            '<div class="col-md-6">' +
+            '<div class="form-group col-md-6">' +
+            '<label for="type_of_field">Vrsta podloge</label>' +
+            '<select class="form-control" name="tereni[' + terenCount + '][type_of_field]" id="type_of_field' + terenCount + '">' +
+            '<option value="" disabled="" selected>Izaberite podlogu terena</option>' +
+            '<option value="Parket">Parket</option>' +
+            '<option value="Bitumen">Bitumen</option>' +
+            '<option value="Plastika">Plastika</option>' +
+            '<option value="Guma">Guma</option>' +
+            '<option value="Zemlja">Zemlja</option>' +
+            '<option value="Ostalo">Ostalo</option>' +
+            '</select>' +
+            '</div>' +
+            '<div class="form-group col-md-6 col-xs-12">' +
+            '<label for="capacity">Kapacitet korisnika</label>' +
+            '<input type="number" name="tereni[' + terenCount + '][capacity]" id="capacity' + terenCount + '" class="form-control" placeholder="Unesite maksimalan broj korisnika">' +
+            '</div>' +
+            '<div class="form-group col-md-6 col-xs-12">' +
+            '<label for="public_capacity">Kapacitet gledaoca</label>' +
+            '<input type="number" name="tereni[' + terenCount + '][public_capacity]" id="public_capacity' + terenCount + '" class="form-control" placeholder="Unesite maksimalan broj gledaoca">' +
+            '</div>' +
+            '<div class="form-group col-md-6 col-xs-12">' +
+            '<label for="length">Dužina terena (m)</label>' +
+            '<input type="number" name="tereni[' + terenCount + '][length]" id="length' + terenCount + '" class="form-control" placeholder="Unesite dužinu terena u metrima">' +
+            '</div>' +
+            '<div class="form-group col-md-6 col-xs-12">' +
+            '<label for="width">Širina terena (m)</label>' +
+            '<input type="number" name="tereni[' + terenCount + '][width]" id="width' + terenCount + '" class="form-control" placeholder="Unesite širinu terena u metrima">' +
+            '</div>' +
+            '</div>' +
+            '</div>';
+
+        $(teren_form_input).appendTo('#tab-tereni #tereniLista').hide().slideDown();
+        terenCount++;
+
+        addTerenValidation();
+    });
+
+    // Dodavanje objekta - Obriši teren/salu
+    $('#tereniLista').on('click', '.izbrisiTeren',function () {
+        $(this).closest('.terenHover').slideUp('normal', function() { $(this).remove(); } );
+    });
+
+    // Dodavanje objekta - Dodaj cjenovnik
+    $('#balonDodajCjenovnik').on('click', function () {
+        var cjenovnik_form_input = '<div class="row balonCjenovnikHover">' +
+            '<div class="izbrisiBalonCjenovnik"><i class="fa fa-times-circle-o"></i></div>' +
+            '<div class="col-md-6">' +
+            '<div class="form-group col-md-12">' +
+            '<label for="sport' + cjenovnikBalonCount + '">Sport</label>' +
+            '<select class="form-control" id="sport' + cjenovnikBalonCount + '" name="cjenovnik[' + cjenovnikBalonCount + '][sport]">' +
+            '<option disabled="" selected="">Izaberite sport</option>' +
+            '<option value="Nogomet">Nogomet</option>' +
+            '<option value="Mali nogomet">Mali nogomet</option>' +
+            '<option value="Košarka">Košarka</option>' +
+            '<option value="Tenis">Tenis</option>' +
+            '<option value="Stoni Tenis">Stoni Tenis</option>' +
+            '<option value="Odbojka">Odbojka</option>' +
+            '<option value="Badminton">Badminton</option>' +
+            '<option value="Univerzalan teren">Univerzalan teren</option>' +
+            '</select>' +
+            '</div>' +
+            '</div>' +
+            '<div class="col-md-6">' +
+            '<div class="form-group col-md-6 col-xs-12">' +
+            '<label for="name' + cjenovnikBalonCount + '">Naziv/oznaka terena</label>' +
+            '<input type="text" name="cjenovnik[' + cjenovnikBalonCount + '][name]" id="name' + cjenovnikBalonCount + '" class="form-control" placeholder="Unesite naziv ili oznaku terena">' +
+            '</div>' +
+            '<div class="form-group col-md-6 col-xs-12">' +
+            '<label for="price_per_hour' + cjenovnikBalonCount + '">Cijena termina (60 min)</label>' +
+            '<input type="number" name="cjenovnik[' + cjenovnikBalonCount + '][price_per_hour]" id="price_per_hour' + cjenovnikBalonCount + '" class="form-control" placeholder="Unesite cijenu u KM">' +
+            '</div>' +
+            '</div>' +
+            '</div>';
+
+        $(cjenovnik_form_input).appendTo('#tab-cjenovnik-balon #balonCjenovnikLista').hide().slideDown();
+        cjenovnikBalonCount++;
+
+        addCjenovnikBalonValidation();
+    });
+
+    // Dodavanje objekta - Obriši cjenovnik
+    $('#balonCjenovnikLista').on('click', '.izbrisiBalonCjenovnik',function () {
+        $(this).closest('.balonCjenovnikHover').slideUp('normal', function() { $(this).remove(); } );
+    });
+
+    // Dodavanje objekta - Dodaj stazu
+    $('#dodajStazu').on('click', function () {
+        var staze_form_input = '<div class="row stazeHover">' +
+            '<div class="izbrisiStazu"><i class="fa fa-times-circle-o"></i></div>' +
+            '<div class="col-md-6">' +
+            '<div class="form-group col-md-12">' +
+            '<label for="name' + stazeCount + '">Naziv staze</label>' +
+            '<input type="text" name="staze[' + stazeCount + '][name]" id="name' + stazeCount + '" class="form-control" placeholder="Unesite naziv staze">' +
+            '</div>' +
+            '<div class="form-group col-md-12">' +
+            '<label for="level' + stazeCount + '">Težina staze</label>' +
+            '<select class="form-control" id="level' + stazeCount + '" name="staze[' + stazeCount + '][level]">' +
+            '<option value="" disabled="" selected>Odaberite</option>' +
+            '<option value="Lahko">Lahko</option>' +
+            '<option value="Srednje">Srednje</option>' +
+            '<option value="Teško">Teško</option>' +
+            '</select>' +
+            '</div>' +
+            '</div>' +
+            '<div class="col-md-6">' +
+            '<div class="form-group col-md-6 col-xs-12">' +
+            '<label for="length' + stazeCount + '">Dužina staze</label>' +
+            '<input type="number" name="staze[' + stazeCount + '][length]" id="length' + stazeCount + '" class="form-control" placeholder="Unesite dužinu staze u metrima">' +
+            '</div>' +
+            '<div class="form-group col-md-6 col-xs-12">' +
+            '<label for="time' + stazeCount + '">Trajanje spusta</label>' +
+            '<input type="number" name="staze[' + stazeCount + '][time]" id="time' + stazeCount + '" class="form-control" placeholder="Unesite vrijeme trajanja spusta u minutama">' +
+            '</div>' +
+            '<div class="form-group col-md-6 col-xs-12">' +
+            '<label for="start_point' + stazeCount + '">Tačka polazišta (m)</label>' +
+            '<input type="number" name="staze[' + stazeCount + '][start_point]" id="start_point' + stazeCount + '" class="form-control" placeholder="Unesite nadmorsku visinu tačke polazišta">' +
+            '</div>' +
+            '<div class="form-group col-md-6 col-xs-12">' +
+            '<label for="end_point' + stazeCount + '">Tačka izlaza (m)</label>' +
+            '<input type="number" name="staze[' + stazeCount + '][end_point]" id="end_point' + stazeCount + '" class="form-control" placeholder="Unesite nadmorsku visinu tačke izlaza">' +
+            '</div>' +
+            '</div>' +
+            '</div>';
+
+        $(staze_form_input).appendTo('#tab-staze #stazeLista').hide().slideDown();
+        stazeCount++;
+
+        addStazeValidation();
+    });
+
+    // Dodavanje objekta - Obriši stazu
+    $('#stazeLista').on('click', '.izbrisiStazu',function () {
+        $(this).closest('.stazeHover').slideUp('normal', function() { $(this).remove(); } );
+    });
+
+    // Dodavanje objekta - Dodaj cjenovnik
+    $('#skiDodajCjenovnik').on('click', function () {
+        var cjenovnik_form_input = '<div class="row skiCjenovnikHover">' +
+            '<div class="izbrisiSkiCjenovnik"><i class="fa fa-times-circle-o"></i></div>' +
+            '<div class="col-md-6">' +
+            '<div class="form-group col-md-12">' +
+            '<label for="description' + cjenovnikSkiCount + '">Opis karte</label>' +
+            '<input type="text" name="cjenovnik[' + cjenovnikSkiCount + '][description]" id="description' + cjenovnikSkiCount + '" class="form-control" placeholder="Unesite opis karte">' +
+            '</div>' +
+            '</div>' +
+            '<div class="col-md-6">' +
+            '<div class="form-group col-md-6 col-xs-12">' +
+            '<label for="price' + cjenovnikSkiCount + '">Cijena karte odrasli</label>' +
+            '<input type="text" name="cjenovnik[' + cjenovnikSkiCount + '][price]" id="price' + cjenovnikSkiCount + '" class="form-control" placeholder="Unesite cijenu u KM" >' +
+            '</div>' +
+            '<div class="form-group col-md-6 col-xs-12">' +
+            '<label for="price_kid' + cjenovnikSkiCount + '">Cijena karte djeca</label>' +
+            '<input type="text" name="cjenovnik[' + cjenovnikSkiCount + '][price_kids]" id="price_kids' + cjenovnikSkiCount + '" class="form-control" placeholder="Unesite cijenu u KM">' +
+            '</div>' +
+            '</div>' +
+            '</div>';
+
+        $(cjenovnik_form_input).appendTo('#tab-cjenovnik-skijaliste #skiCjenovnikLista').hide().slideDown();
+        cjenovnikSkiCount++;
+
+        addCjenovnikSkiValidation();
+    });
+
+    // Dodavanje objekta - Obriši cjenovnik
+    $('#skiCjenovnikLista').on('click', '.izbrisiSkiCjenovnik',function () {
+        $(this).closest('.skiCjenovnikHover').slideUp('normal', function() { $(this).remove(); } );
+    });
+
+
     var date_input1 = $('input[name="date_of_birth"]'); //our date input has the name "date"
     var container1 = "body";
     var options1 = {
@@ -1566,6 +2142,19 @@ $(document).ready(function () {
         maxDate: new Date()
     };
     date_input2.datepicker(options2);
+
+    var date_input3 = $('input.pickDate'); //our date input has the name "date"
+    var container3 = $('form').length > 0 ? $('form').parent() : "body";
+    var options3 = {
+        format: 'mm/dd/yyyy',
+        container: container3,
+        todayHighlight: true,
+        autoclose: true,
+        maxDate: new Date()
+    };
+    date_input3.datepicker(options3);
+
+
 });
 
 
@@ -1587,33 +2176,6 @@ $('#settingsUpdateUser').validate({
     }
 );
 
-
-$('#createNewDvorana').validate({
-    rules: {
-        profilna: {
-            extension: 'png|jpg|jpeg'
-        },
-        naziv: {
-            required: true
-        },
-        kontinent: {
-            required: true,
-        },
-        drzava: {
-            required: true,
-        },
-        entitet: {
-            required: true,
-        },
-        kanton: {
-            required: true,
-        },
-        grad: {
-            required: true,
-        },
-
-    }
-});
 $('.loginFormaVer').validate({
     rules: {
         name: {
@@ -1629,33 +2191,6 @@ $.validator.addMethod('filesize', function (value, element, param) {
     return this.optional(element) || (element.files[0].size <= param)
 }, 'File size must be less than {0}');
 
-
-/*$('.prvi_korak_end').on('click', function(){
-  $('#createNewClub').valid();
-  return false;
-});*/
-
-/*$('.btn-dalje').on('click', function(){
-  $('#createNewFootballer').valid();
-});*/
-$('.prvi_korak_end_obj').click(function () {
-    $('#createNewDvorana').valid();
-    if ($('#createNewDvorana').validate().errorList.length < 1) {
-        $('.nav-product-tabs li').removeClass('active');
-
-        $('.preslic').closest('li').addClass('active');
-        $('.tab-pane').removeClass('active');
-        $('.tab-pane').removeClass('in');
-        $('#tab-predispozicije').addClass('in');
-        $('#tab-predispozicije').addClass('active');
-
-        var sledeci = $('.nav-product-tabs').find('.preslic');
-        $('.nav-product-tabs li').removeClass('active');
-
-        sledeci.addClass('active');
-        return false;
-    }
-});
 $('.btn-dalje').on('click', function () {
     if ($(this).closest('form').valid()) {
         var sledeci = $('.nav-product-tabs').find('.active').next();
@@ -1684,54 +2219,6 @@ $('.btn-prijava').on('click', function () {
     }
 });
 
-$('.prvi_korak_end').click(function () {
-    var form = $('#createNewClub');
-
-    if (form.valid()) {
-        $('.nav-product-tabs li').removeClass('active');
-
-        $('.preslic').closest('li').addClass('active');
-        $('.tab-pane').removeClass('active');
-        $('.tab-pane').removeClass('in');
-        $('#tab-licnosti').addClass('in');
-        $('#tab-licnosti').addClass('active');
-    }
-    /*if($('#createNewClub').length == 0){
-      $('#createNewFootballer').valid();
-      if($('#createNewFootballer').validate().errorList.length < 1){
-        $('.nav-product-tabs li').removeClass('active');
-
-        $('.preslic').closest('li').addClass('active');
-        $('.tab-pane').removeClass('active');
-        $('.tab-pane').removeClass('in');
-        $('#tab-predispozicije').addClass('in');
-        $('#tab-predispozicije').addClass('active');
-      }
-    }else{
-       $('#createNewClub').valid();
-    if($('#createNewClub').validate().errorList.length < 1){
-      $('.nav-product-tabs li').removeClass('active');
-
-      $('.preslic').closest('li').addClass('active');
-      $('.tab-pane').removeClass('active');
-      $('.tab-pane').removeClass('in');
-      $('#tab-licnosti').addClass('in');
-      $('#tab-licnosti').addClass('active');
-    }
-    }
-
-    return false; */
-});
-
-
-/*$('.bt-zavrsi').click(function(){
-  $('#createNewClub').valid();
-  if($('#createNewClub').validate().errorList.length > 1){
-    return false;
-  }else{
-    $('#createNewClub').submit();
-  }
-});*/
 jQuery.extend(jQuery.validator.messages, {
     required: "Ovo polje je obavezno.",
     remote: "Please fix this field.",
@@ -1863,6 +2350,164 @@ function addHistoryValidation() {
             required: true,
             string: true,
             maxlength: 255
+        });
+    });
+}
+
+function addTerenValidation() {
+    var teren = $('form').find('input[name^="tereni"], select[name^="tereni"]');
+
+    teren.filter('input[name$="[name]"]').each(function() {
+        $(this).rules("add", {
+            required: true,
+            string: true,
+            maxlength: 255
+        });
+    });
+
+    teren.filter('input[name$="[sports][]"]').each(function() {
+        $(this).rules("add", {
+            required: true,
+            string: true,
+            maxlength: 255
+        });
+    });
+
+    teren.filter('select[name$="[type_of_field]"]').each(function() {
+        $(this).rules("add", {
+            required: true,
+            string: true,
+            lettersonly: true,
+            maxlength: 255
+        });
+    });
+
+    teren.filter('input[name$="[capacity]"]').each(function() {
+        $(this).rules("add", {
+            digits: true
+        });
+    });
+
+    teren.filter('input[name$="[public_capacity]"]').each(function() {
+        $(this).rules("add", {
+            digits: true
+        });
+    });
+
+    teren.filter('input[name$="[length]"]').each(function() {
+        $(this).rules("add", {
+            digits: true
+        });
+    });
+
+    teren.filter('input[name$="[width]"]').each(function() {
+        $(this).rules("add", {
+            digits: true
+        });
+    });
+}
+
+function addCjenovnikBalonValidation() {
+    var cjenovnik = $('form').find('input[name^="cjenovnik"], select[name^="cjenovnik"]');
+
+    cjenovnik.filter('select[name$="[sport]"]').each(function() {
+        $(this).rules("add", {
+            required: true,
+            string: true,
+            maxlength: 255
+        });
+    });
+
+    cjenovnik.filter('input[name$="[name]"]').each(function() {
+        $(this).rules("add", {
+            required: true,
+            string: true,
+            maxlength: 255
+        });
+    });
+
+    cjenovnik.filter('input[name$="[price_per_hour]"]').each(function() {
+        $(this).rules("add", {
+            required: true,
+            digits: true,
+            range: [1, 1000]
+        });
+    });
+}
+
+function addStazeValidation() {
+    var staze = $('form').find('input[name^="staze"], select[name^="staze"]');
+
+    staze.filter('input[name$="[name]"]').each(function() {
+        $(this).rules("add", {
+            required: true,
+            string: true,
+            maxlength: 255
+        });
+    });
+
+    staze.filter('select[name$="[level]"]').each(function() {
+        $(this).rules("add", {
+            required: true,
+            string: true,
+            lettersonly: true,
+            maxlength: 255
+        });
+    });
+
+    staze.filter('input[name$="[length]"]').each(function() {
+        $(this).rules("add", {
+            digits: true,
+            range: [1, 30000]
+        });
+    });
+
+    staze.filter('input[name$="[time]"]').each(function() {
+        $(this).rules("add", {
+            digits: true,
+            range: [1, 1000]
+        });
+    });
+
+    staze.filter('input[name$="[start_point]"]').each(function() {
+        $(this).rules("add", {
+            digits: true,
+            range: [1, 8000]
+        });
+    });
+
+    staze.filter('input[name$="[end_point]"]').each(function() {
+        $(this).rules("add", {
+            digits: true,
+            range: [1, 8000]
+        });
+    });
+}
+
+function addCjenovnikSkiValidation() {
+    var cjenovnik = $('form').find('input[name^="cjenovnik"], select[name^="cjenovnik"]');
+
+    cjenovnik.filter('input[name$="[description]"]').each(function() {
+        $(this).rules("add", {
+            required: true,
+            string: true,
+            maxlength: 255
+        });
+    });
+
+    cjenovnik.filter('input[name$="[price]"]').each(function() {
+        $(this).rules("add", {
+            required: true,
+            digits: true,
+            range: [0, 10000]
+        });
+    });
+
+    cjenovnik.filter('input[name$="[price_kids]"]').each(function() {
+        $(this).rules("add", {
+            required: true,
+            digits: true,
+            range: [0, 10000]
         });
     });
 }

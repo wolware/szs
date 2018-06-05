@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBalonObjectsTable extends Migration
+class CreateBowlingObjectsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,28 +13,28 @@ class CreateBalonObjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('balon_objects', function (Blueprint $table) {
+        Schema::create('bowling_objects', function (Blueprint $table) {
             $table->unsignedInteger('id');
 
-            $table->integer('number_of_fields')->nullable();
-            $table->string('type_of_field')->nullable();
+            $table->integer('number_of_tracks')->nullable();
+            $table->integer('number_of_balls')->nullable();
             $table->integer('area')->nullable();
             $table->integer('capacity')->nullable();
-            $table->boolean('wifi')->nullable();
-            $table->boolean('parking')->nullable();
-            $table->boolean('restaurant')->nullable();
-            $table->boolean('cafe')->nullable();
-            $table->boolean('access_to_disabled')->nullable();
+            $table->string('wifi')->nullable();
+            $table->string('parking')->nullable();
+            $table->string('restaurant')->nullable();
+            $table->string('cafe')->nullable();
+            $table->string('access_to_disabled')->nullable();
             $table->integer('number_of_locker_rooms')->nullable();
 
-            $table->boolean('hot_water_showers')->nullable();
+            $table->boolean('reservations')->nullable();
             $table->boolean('result_board')->nullable();
-            $table->boolean('kids_playground')->nullable();
+            $table->boolean('child_equipment')->nullable();
             $table->boolean('wardrobe_with_key')->nullable();
-            $table->boolean('props')->nullable();
+            $table->boolean('special_shoes')->nullable();
             $table->boolean('air_conditioning')->nullable();
-            $table->boolean('protective_net')->nullable();
-            $table->boolean('optimum_temperature')->nullable();
+            $table->boolean('hygiene_equipment')->nullable();
+            $table->boolean('member_card')->nullable();
             $table->boolean('video_surveillance')->nullable();
 
             $table->unsignedInteger('object_type_id');
@@ -62,6 +62,6 @@ class CreateBalonObjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('balon_objects');
+        Schema::dropIfExists('bowling_objects');
     }
 }

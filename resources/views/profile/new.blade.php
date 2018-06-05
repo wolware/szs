@@ -98,7 +98,7 @@
 							<div class="posts__excerpt">Dostupno: 1</div>
 						</div>
 						<footer class="posts__footer card__footer">
-							<a href="objavi-objekat.php" class="btn btn-warning btn1-objavi-objekt"><i class="fa fa-plus-circle"></i> Dodaj novi objekt</a>
+							<a href="{{url('/objects/add')}}" class="btn btn-warning btn1-objavi-objekt"><i class="fa fa-plus-circle"></i> Dodaj novi objekt</a>
 						</footer>
 					  </div>
 					</div>

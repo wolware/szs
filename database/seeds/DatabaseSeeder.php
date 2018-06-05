@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PlayerNaturesTableSeeder::class);
         $this->call(ProfessionsTableSeeder::class);
         $this->call(LanguagesTableSeeder::class);
+        $this->call(ObjectTypesTableSeeder::class);
     }
 }
