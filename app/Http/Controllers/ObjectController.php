@@ -116,7 +116,7 @@ class ObjectController extends Controller
         'cjenovnik.*' => 'array',
         'cjenovnik.*.sport' => 'required|max:255|string|in:Nogomet,Mali nogomet,Košarka,Tenis,Stoni tenis,Odbojka,Badminton,Univerzalni teren',
         'cjenovnik.*.name' => 'required|max:255|string',
-        'cjenovnik.*.price' => 'required|integer|between:1,1000',
+        'cjenovnik.*.price_per_hour' => 'required|integer|between:1,1000',
     ];
 
     protected $objectSkiAdditionalValidations = [
@@ -303,5 +303,25 @@ class ObjectController extends Controller
                 return redirect('/objects/' . $createObject->id);
             }
         }
+    }
+
+    public function showObject($id) {
+        $object = $this->objectRepository
+            ->getByIdWithAllData($id);
+
+        if($object) {
+            $regions = collect();
+            $currentRegion = $object->region;
+            while ($currentRegion) {
+                $regions->put(strtolower($currentRegion->region_type->type), $currentRegion->name);
+
+                $currentRegion = $currentRegion->parent_region;
+            }
+
+            $object->setAttribute('regions', $regions);
+            return view('objects.profile', compact('object'));
+        }
+
+        abort(404);
     }
 }

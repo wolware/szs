@@ -25,4 +25,20 @@ class Objects extends Model
         'created_at',
         'updated_at'
     ];
+
+    public function type(){
+        return $this->belongsTo('App\ObjectTypes', 'object_type_id');
+    }
+
+    public function region() {
+        return $this->belongsTo('App\Region');
+    }
+
+    public function user() {
+        return $this->belongsTo('App\User');
+    }
+
+    public function images() {
+        return $this->hasMany('App\Gallery', 'object_id');
+    }
 }

@@ -795,7 +795,7 @@
       
       
       <!-- Tab: Staze i liftovi -->
-            <div role="tabpanel" class="tab-pane fade neaktivno" id="tab-staze-liftovi">
+              <div role="tabpanel" class="tab-pane fade neaktivno" id="tab-staze-liftovi">
       
         <div class="row">
           <div class="col-md-12">

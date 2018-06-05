@@ -14,6 +14,362 @@ class ObjectRepository {
     protected $model;
     protected $objectTypeModel;
 
+    protected $generalAttributes = [
+        'number_of_fields' => [
+            'icon' => 'field.svg',
+            'label' => [
+                'bs' => 'Broj terena (sala)'
+            ]
+        ],
+        'number_of_pools' => [
+            'icon' => 'swimming-pool2.svg',
+            'label' => [
+                'bs' => 'Broj bazena'
+            ]
+        ],
+        'number_of_tracks' => [
+            'icon' => 'lanes.svg',
+            'label' => [
+                'bs' => 'Broj staza'
+            ]
+        ],
+        'number_of_balls' => [
+            'icon' => 'bowling-ball.svg',
+            'label' => [
+                'bs' => 'Broj kugli'
+            ]
+        ],
+        'number_of_shooting_places' => [
+            'icon' => 'target1.svg',
+            'label' => [
+                'bs' => 'Broj strelišta'
+            ]
+        ],
+        'type_of_grass' => [
+            'icon' => 'grass.svg',
+            'label' => [
+                'bs' => 'Vrsta travnjaka'
+            ]
+        ],
+        'elevation' => [
+            'icon' => 'nadmorska.svg',
+            'label' => [
+                'bs' => 'Nadmorska visina (m)'
+            ]
+        ],
+        'stadium_length' => [
+            'icon' => 'duzina.svg',
+            'label' => [
+                'bs' => 'Dužina terena (m)'
+            ]
+        ],
+        'stadium_width' => [
+            'icon' => 'sirina.svg',
+            'label' => [
+                'bs' => 'Širina terena (m)'
+            ]
+        ],
+        'number_of_ski_tracks' => [
+            'icon' => 'river-trail.svg',
+            'label' => [
+                'bs' => 'Ukupno staza'
+            ]
+        ],
+        'number_of_ski_lifts' => [
+            'icon' => 'ski-lift.svg',
+            'label' => [
+                'bs' => 'Ukupno liftova'
+            ]
+        ],
+        'water_effects' => [
+            'icon' => 'water-effects.svg',
+            'label' => [
+                'bs' => 'Vodeni efekti'
+            ]
+        ],
+        'type_of_field' => [
+            'icon' => 'parquet.svg',
+            'label' => [
+                'bs' => 'Vrsta podloge'
+            ]
+        ],
+        'area' => [
+            'icon' => 'scale-screen.svg',
+            'label' => [
+                'bs' => 'Površina objekta (m2)'
+            ]
+        ],
+        'water_area' => [
+            'icon' => 'scale-screen.svg',
+            'label' => [
+                'bs' => 'Vodena površina (m2)'
+            ]
+        ],
+        'capacity' => [
+            'icon' => 'gledaoci.svg',
+            'label' => [
+                'bs' => 'Kapacitet korisnika'
+            ]
+        ],
+        'pool_capacity' => [
+            'icon' => 'swimmer.svg',
+            'label' => [
+                'bs' => 'Kapacitet kupača'
+            ]
+        ],
+        'stadium_capacity' => [
+            'icon' => 'gledaoci.svg',
+            'label' => [
+                'bs' => 'Kapacitet gledaoca'
+            ]
+        ],
+    ];
+
+    protected $additionalAttributes = [
+        'wifi' => [
+            'icon' => 'wifi.svg',
+            'label' => [
+                'bs' => 'Wi-Fi'
+            ]
+        ],
+        'parking' => [
+            'icon' => 'parking-sign.svg',
+            'label' => [
+                'bs' => 'Parking'
+            ]
+        ],
+        'restaurant' => [
+            'icon' => 'cutlery.svg',
+            'label' => [
+                'bs' => 'Restoran'
+            ]
+        ],
+        'hotels' => [
+            'icon' => 'bed.svg',
+            'label' => [
+                'bs' => 'Hoteli i prenoćišta'
+            ]
+        ],
+        'cafe' => [
+            'icon' => 'coffee-cup.svg',
+            'label' => [
+                'bs' => 'Kafeterija'
+            ]
+        ],
+        'access_to_disabled' => [
+            'icon' => 'accessibility-sign.svg',
+            'label' => [
+                'bs' => 'Pristup za osobe sa invaliditetom'
+            ]
+        ],
+        'number_of_locker_rooms' => [
+            'icon' => 'room-key.svg',
+            'label' => [
+                'bs' => 'Broj svlačionica'
+            ]
+        ],
+        'rent_equipment' => [
+            'icon' => 'ski-glasses.svg',
+            'label' => [
+                'bs' => 'Najam opreme'
+            ]
+        ],
+    ];
+
+    protected $szsAttributes = [
+        'hot_water_showers' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Tuševi sa toplom vodom'
+            ]
+        ],
+        'result_board' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Tabla za rezultate'
+            ]
+        ],
+        'kids_playground' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Igraona u sklopu objekta'
+            ]
+        ],
+        'wardrobe_with_key' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Ormarić za garderobu sa ključem'
+            ]
+        ],
+        'props' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Rekviziti za rekreaciju i trening'
+            ]
+        ],
+        'air_conditioning' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Klimatizacija'
+            ]
+        ],
+        'protective_net' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Zaštitne mreže'
+            ]
+        ],
+        'optimum_temperature' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Optimalna temperatura'
+            ]
+        ],
+        'video_surveillance' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Video nadzor'
+            ]
+        ],
+        'equipment_rent' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Najam opreme'
+            ]
+        ],
+        'kid_pools' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Bazeni za djecu'
+            ]
+        ],
+        'entering_a_props' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Unos rekvizita (lopte, jastuci...)'
+            ]
+        ],
+        'urine_detector' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Detektor urina'
+            ]
+        ],
+        'reservations' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Rezervacije termina'
+            ]
+        ],
+        'child_equipment' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Pomagala za djecu'
+            ]
+        ],
+        'special_shoes' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Specijalna obuća'
+            ]
+        ],
+        'hygiene_equipment' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Higijenska oprema (čarape)'
+            ]
+        ],
+        'member_card' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Članska kartica'
+            ]
+        ],
+        'maintenance_service' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Služba za održavanje'
+            ]
+        ],
+        'emergency_intervention' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Hitna interventna jedinica'
+            ]
+        ],
+        'skiing_school' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Škola skijanja'
+            ]
+        ],
+        'snowboarding_school' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Škola snowboarding-a'
+            ]
+        ],
+        'skiing_equipment_shops' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Prodavnice skijaške opreme'
+            ]
+        ],
+        'mobile_rescue_team' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Mobilna spasilačka ekipa'
+            ]
+        ],
+        'night_skiing' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Noćno skijanje'
+            ]
+        ],
+        'commenting_cabins' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Komentatorske kabine'
+            ]
+        ],
+        'speaker_system' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Razglas'
+            ]
+        ],
+        'fan_shop' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Fan shop'
+            ]
+        ],
+        'use_own_equipment' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Unos vlastite opreme'
+            ]
+        ],
+        'equipment_service' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Servis opreme'
+            ]
+        ],
+        'shooting_school' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Škola streljaštva'
+            ]
+        ],
+        'protective_equipment' => [
+            'icon' => '',
+            'label' => [
+                'bs' => 'Zaštitna oprema'
+            ]
+        ],
+    ];
     /**
      * ObjectRepository constructor.
      * @param Objects $model
@@ -30,6 +386,7 @@ class ObjectRepository {
 
     public function getById($id) {
         return $this->model
+            ->with(['type','images'])
             ->where('id', $id)
             ->first();
     }
@@ -193,6 +550,84 @@ class ObjectRepository {
         }
 
         return null;
+    }
+
+    public function getByIdWithAllData($id) {
+        $object = $this->getById($id);
+
+        if($object) {
+            $objectData = DB::table($object->type->object_table)
+                ->where('id', $id)
+                ->first();
+
+            if($objectData) {
+                $objectData = $this->unsetData(['id', 'object_id', 'created_at', 'updated_at'], $objectData);
+
+                $objectDataGeneral = [];
+                $objectDataAdditional = [];
+                $objectDataSZS = [];
+
+                foreach ($objectData as $key => $data) {
+                    if(array_key_exists($key, $this->generalAttributes)) {
+                        $objectDataGeneral[$key] = $data;
+                    } else if(array_key_exists($key, $this->additionalAttributes)) {
+                        $objectDataAdditional[$key] = $data;
+                    } else if(array_key_exists($key, $this->szsAttributes)) {
+                        $objectDataSZS[$key] = $data;
+                    }
+                }
+
+                $dataGeneral = [
+                    'data' => $objectDataGeneral,
+                    'names' => $this->generalAttributes
+                ];
+
+                $dataAdditional = [
+                    'data' => $objectDataAdditional,
+                    'names' => $this->additionalAttributes
+                ];
+
+                $dataSZS = [
+                    'data' => $objectDataSZS,
+                    'names' => $this->szsAttributes
+                ];
+
+                $object->setAttribute('object_data_general', $dataGeneral);
+                $object->setAttribute('object_data_additional', $dataAdditional);
+                $object->setAttribute('object_data_szs', $dataSZS);
+
+
+                if($object->type->type == 'Balon') {
+                    $fields = DB::table('balon_fields')->where('balon_objects_id', $object->id)->get();
+                    $object->setAttribute('fields', $fields);
+
+                    $prices = DB::table('balon_prices')->where('balon_objects_id', $object->id)->get();
+                    $object->setAttribute('prices', $prices);
+                } else if($object->type->type == 'Skijalište') {
+                    $tracks = DB::table('skiing_tracks')->where('skiing_objects_id', $object->id)->get();
+                    $object->setAttribute('tracks', $tracks);
+
+                    $prices = DB::table('skiing_prices')->where('skiing_objects_id', $object->id)->get();
+                    $object->setAttribute('prices', $prices);
+                }
+            }
+
+            return $object;
+        }
+
+        return null;
+    }
+
+    public function unsetData($dataToUnset = [], $array = []) {
+
+        $dataToUnset = json_decode(json_encode($dataToUnset), true);
+        $array = json_decode(json_encode($array), true);
+
+        foreach ($dataToUnset as $data) {
+            unset($array[$data]);
+        }
+
+        return $array;
     }
 
 }
