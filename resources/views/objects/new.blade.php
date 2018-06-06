@@ -98,7 +98,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group col-md-12">
                                                         <label for="name"><img class="flow-icons-013" src="{{asset('assets/images/icons/edit.svg')}}"> Naziv objekta*</label>
-                                                        <input type="text" name="name" id="name" class="form-control" placeholder="Unesite puni naziv objekta">
+                                                        <input type="text" name="name" id="name" class="form-control" placeholder="Unesite puni naziv objekta" value="{{ old('name') }}">
                                                     </div>
                                                 </div>
                                             </div>
@@ -229,7 +229,7 @@
                                     <div class="row">
                                         <div class="form-group col-md-4">
                                             <label class="control-label" for="established_in"><i class="fa fa-calendar-o"></i> Datum otvorenja</label>
-                                            <input class="form-control pickDate" id="established_in" name="established_in" placeholder="Unesite datum otvorenja"/>
+                                            <input class="form-control pickDate" id="established_in" name="established_in" placeholder="Unesite datum otvorenja" value="{{ old('established_in') }}"/>
                                         </div>
 
                                         @foreach($inputs as $input)
@@ -507,7 +507,7 @@
                                                                             <option value="Mali nogomet" {{ old('cjenovnik.' . $key . '.sport') == 'Mali nogomet' ? 'selected' : '' }}>Mali nogomet</option>
                                                                             <option value="Košarka" {{ old('cjenovnik.' . $key . '.sport') == 'Košarka' ? 'selected' : '' }}>Košarka</option>
                                                                             <option value="Tenis" {{ old('cjenovnik.' . $key . '.sport') == 'Tenis' ? 'selected' : '' }}>Tenis</option>
-                                                                            <option value="Stoni Tenis" {{ old('cjenovnik.' . $key . '.sport') == 'Stoni Tenis' ? 'selected' : '' }}>Stoni Tenis</option>
+                                                                            <option value="Stoni tenis" {{ old('cjenovnik.' . $key . '.sport') == 'Stoni tenis' ? 'selected' : '' }}>Stoni tenis</option>
                                                                             <option value="Odbojka" {{ old('cjenovnik.' . $key . '.sport') == 'Odbojka' ? 'selected' : '' }}>Odbojka</option>
                                                                             <option value="Badminton" {{ old('cjenovnik.' . $key . '.sport') == 'Badminton' ? 'selected' : '' }}>Badminton</option>
                                                                             <option value="Univerzalan teren" {{ old('cjenovnik.' . $key . '.sport') == 'Univerzalan teren' ? 'selected' : '' }}>Univerzalan teren</option>
