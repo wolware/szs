@@ -78,6 +78,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/objects/add', 'ObjectController@displayAddObjectCategories');
     Route::get('/objects/{object_id}/new', 'ObjectController@displayAddObject')->where('object_id', '[0-9]+');
     Route::post('/objects/{object_id}/create', 'ObjectController@createObject')->where('object_id', '[0-9]+');
+    Route::get('/objects/{id}/edit', 'ObjectController@displayEditObject')->where('id', '[0-9]+');
+
+    Route::patch('/objects/{id}/edit/general', 'ObjectController@editObjectGeneral')->where('id', '[0-9]+');
+    Route::patch('/objects/{id}/edit/status', 'ObjectController@editObjectStatus')->where('id', '[0-9]+');
+    Route::patch('/objects/{id}/edit/history', 'ObjectController@editObjectHistory')->where('id', '[0-9]+');
+    Route::patch('/objects/{id}/edit/balon-fields', 'ObjectController@editObjectBalonFields')->where('id', '[0-9]+');
+    Route::patch('/objects/{id}/edit/balon-prices', 'ObjectController@editObjectBalonPrices')->where('id', '[0-9]+');
+    Route::patch('/objects/{id}/edit/ski-tracks', 'ObjectController@editObjectSkiTracks')->where('id', '[0-9]+');
+    Route::patch('/objects/{id}/edit/ski-prices', 'ObjectController@editObjectSkiPrices')->where('id', '[0-9]+');
+    Route::patch('/objects/{id}/edit/gallery', 'ObjectController@editObjectGallery')->where('id', '[0-9]+');
 
 
     // NEWS

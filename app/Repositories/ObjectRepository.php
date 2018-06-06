@@ -386,7 +386,7 @@ class ObjectRepository {
 
     public function getById($id) {
         return $this->model
-            ->with(['type','images'])
+            ->with(['type','images','user'])
             ->where('id', $id)
             ->first();
     }
@@ -629,5 +629,320 @@ class ObjectRepository {
 
         return $array;
     }
+
+    public function updateGeneral(Request $request, Objects $object){
+        $newLogoName = $object->image;
+
+        if($request->file('image')){
+            $logo = $request->file('image');
+            $newLogoName = time() . '-' . Auth::user()->id . '.' . $logo->getClientOriginalExtension();
+            $destinationPath = public_path('/images/object_avatars');
+            $logo->move($destinationPath, $newLogoName);
+        }
+
+        // Provjeri najmanji level regije
+        $region_id = $request->get('country');
+
+        if($request->has('province')) {
+            $region_id = $request->get('province');
+        }
+
+        if($request->has('region')) {
+            $region_id = $request->get('region');
+        }
+
+        if($request->has('municipality')) {
+            $region_id = $request->get('municipality');
+        }
+
+        $updateObjectGeneral = $object->update([
+            'image' => $newLogoName,
+            'name' => $request->get('name'),
+            'region_id' => $region_id,
+            'city' => $request->get('city'),
+            'latitude' => $request->get('latitude'),
+            'longitude' => $request->get('longitude'),
+            'facebook' => $request->get('facebook'),
+            'instagram' => $request->get('instagram'),
+            'twitter' => $request->get('twitter'),
+            'youtube' => $request->get('youtube')
+        ]);
+
+        if($updateObjectGeneral) {
+            return $updateObjectGeneral;
+        }
+
+        return null;
+    }
+
+    public function updateStatus(Request $request, $object, $allUniqueAttributes) {
+
+        $updateObjectCommonStatus = Objects::find($object->id)->update([
+            'established_in' => Carbon::parse($request->get('established_in')),
+        ]);
+
+        if($updateObjectCommonStatus) {
+            $uniqueColumns = [];
+
+            $allUniqueAttributes['updated_at'] = Carbon::now();
+            foreach ($allUniqueAttributes as $column) {
+                if($request->has($column)) {
+                    $uniqueColumns[$column] = $request->get($column);
+                }
+            }
+
+            $updateObjectUniqueStatus = DB::table($object->type->object_table)
+                ->where('id', $object->id)
+                ->update($uniqueColumns);
+
+            if($updateObjectUniqueStatus) {
+
+                return $updateObjectUniqueStatus;
+            }
+        }
+
+        return null;
+
+    }
+
+    public function updateHistory(Request $request, Objects $object){
+
+        $updateObjectHistory= $object->update([
+            'history' => $request->get('history')
+        ]);
+
+        if($updateObjectHistory) {
+            return $updateObjectHistory;
+        }
+
+        return null;
+    }
+
+    public function updateGallery(Request $request, Objects $object) {
+        if($request->file('galerija')){
+            $galerije = $request->file('galerija');
+            foreach($galerije as $key => $slika){
+                $newgalName = $key . '-' .time() . '-' .  $object->id . '.' . $slika->getClientOriginalExtension();
+                $destPath = public_path('/images/galerija_objekti');
+                $slika->move($destPath, $newgalName);
+
+                Gallery::create([
+                    'image' => $newgalName,
+                    'object_id' => $object->id
+                ]);
+            }
+
+            return true;
+        }
+
+        return null;
+    }
+
+    public function updateBalonFields(Request $request, Objects $object) {
+        $oldIds = [];
+        if($request->filled('tereni')){
+            $tereni = $request->get('tereni');
+            foreach ($tereni as $teren) {
+                if($teren) {
+                    if(!array_key_exists('id', $teren)) {
+                        $new_field = DB::table('balon_fields')->insertGetId([
+                            'name' => $teren['name'],
+                            'sports' => implode(",",$teren['sports']),
+                            'type_of_field' => $teren['type_of_field'],
+                            'capacity' => $teren['capacity'] ? $teren['capacity'] : null,
+                            'public_capacity' => $teren['public_capacity'] ? $teren['public_capacity'] : null,
+                            'length' => $teren['length'] ? $teren['length'] : null,
+                            'width' => $teren['width'] ? $teren['width'] : null,
+                            'balon_objects_id' => $object->id,
+                            'created_at' => new Carbon(),
+                            'updated_at' => new Carbon()
+                        ]);
+
+                        $oldIds[] = $new_field;
+                    } else {
+                        $old_field = DB::table('balon_fields')->where('id', $teren['id'])->where('balon_objects_id', $object->id)->first();
+
+                        if($old_field) {
+                            $oldIds[] = $old_field->id;
+
+                            DB::table('balon_fields')->where('id', $teren['id'])->where('balon_objects_id', $object->id)->update([
+                                'name' => $teren['name'],
+                                'sports' => implode(",",$teren['sports']),
+                                'type_of_field' => $teren['type_of_field'],
+                                'capacity' => $teren['capacity'] ? $teren['capacity'] : null,
+                                'public_capacity' => $teren['public_capacity'] ? $teren['public_capacity'] : null,
+                                'length' => $teren['length'] ? $teren['length'] : null,
+                                'width' => $teren['width'] ? $teren['width'] : null,
+                                'updated_at' => new Carbon()
+                            ]);
+                        }
+                    }
+                }
+            }
+
+            // Izbriši trofeje koje je user izbrisao
+            DB::table('balon_fields')->where('balon_objects_id', $object->id)
+                ->whereNotIn('id', $oldIds)
+                ->delete();
+
+            return true;
+        } else {
+            DB::table('balon_fields')->where('balon_objects_id', $object->id)
+                ->delete();
+
+            return true;
+        }
+    }
+
+    public function updateBalonPrices(Request $request, Objects $object) {
+        $oldIds = [];
+        if($request->filled('cjenovnik')){
+            $cjenovnik = $request->get('cjenovnik');
+            foreach ($cjenovnik as $cijena) {
+                if($cijena) {
+                    if(!array_key_exists('id', $cijena)) {
+                        $new_field = DB::table('balon_prices')->insertGetId([
+                            'name' => $cijena['name'],
+                            'sport' => $cijena['sport'],
+                            'price_per_hour' => $cijena['price_per_hour'],
+                            'balon_objects_id' => $object->id,
+                            'created_at' => new Carbon(),
+                            'updated_at' => new Carbon()
+                        ]);
+
+                        $oldIds[] = $new_field;
+                    } else {
+                        $old_field = DB::table('balon_prices')->where('id', $cijena['id'])->where('balon_objects_id', $object->id)->first();
+
+                        if($old_field) {
+                            $oldIds[] = $old_field->id;
+
+                            DB::table('balon_prices')->where('id', $cijena['id'])->where('balon_objects_id', $object->id)->update([
+                                'name' => $cijena['name'],
+                                'sport' => $cijena['sport'],
+                                'price_per_hour' => $cijena['price_per_hour'],
+                                'updated_at' => new Carbon()
+                            ]);
+                        }
+                    }
+                }
+            }
+
+            // Izbriši trofeje koje je user izbrisao
+            DB::table('balon_prices')->where('balon_objects_id', $object->id)
+                ->whereNotIn('id', $oldIds)
+                ->delete();
+
+            return true;
+        } else {
+            DB::table('balon_prices')->where('balon_objects_id', $object->id)
+                ->delete();
+
+            return true;
+        }
+    }
+
+    public function updateSkiTracks(Request $request, Objects $object) {
+        $oldIds = [];
+        if($request->filled('staze')){
+            $staze = $request->get('staze');
+            foreach ($staze as $staza) {
+                if($staza) {
+                    if(!array_key_exists('id', $staza)) {
+                        $new_field = DB::table('skiing_tracks')->insertGetId([
+                            'name' => $staza['name'],
+                            'level' => $staza['level'],
+                            'length' => $staza['length'] ? $staza['length'] : null,
+                            'time' => $staza['time'] ? $staza['time'] : null,
+                            'start_point' => $staza['start_point'] ? $staza['start_point'] : null,
+                            'end_point' => $staza['end_point'] ? $staza['end_point'] : null,
+                            'skiing_objects_id' => $object->id,
+                            'created_at' => new Carbon(),
+                            'updated_at' => new Carbon()
+                        ]);
+
+                        $oldIds[] = $new_field;
+                    } else {
+                        $old_field = DB::table('skiing_tracks')->where('id', $staza['id'])->where('skiing_objects_id', $object->id)->first();
+
+                        if($old_field) {
+                            $oldIds[] = $old_field->id;
+
+                            DB::table('skiing_tracks')->where('id', $staza['id'])->where('skiing_objects_id', $object->id)->update([
+                                'name' => $staza['name'],
+                                'level' => $staza['level'],
+                                'length' => $staza['length'] ? $staza['length'] : null,
+                                'time' => $staza['time'] ? $staza['time'] : null,
+                                'start_point' => $staza['start_point'] ? $staza['start_point'] : null,
+                                'end_point' => $staza['end_point'] ? $staza['end_point'] : null,
+                                'updated_at' => new Carbon()
+                            ]);
+                        }
+                    }
+                }
+            }
+
+            // Izbriši trofeje koje je user izbrisao
+            DB::table('skiing_tracks')->where('skiing_objects_id', $object->id)
+                ->whereNotIn('id', $oldIds)
+                ->delete();
+
+            return true;
+        } else {
+            DB::table('skiing_tracks')->where('skiing_objects_id', $object->id)
+                ->delete();
+
+            return true;
+        }
+    }
+
+    public function updateSkiPrices(Request $request, Objects $object) {
+        $oldIds = [];
+        if($request->filled('cjenovnik')){
+            $cjenovnik = $request->get('cjenovnik');
+            foreach ($cjenovnik as $cijena) {
+                if($cijena) {
+                    if(!array_key_exists('id', $cijena)) {
+                        $new_field = DB::table('skiing_prices')->insertGetId([
+                            'description' => $cijena['description'],
+                            'price' => $cijena['price'],
+                            'price_kids' => $cijena['price_kids'],
+                            'skiing_objects_id' => $object->id,
+                            'created_at' => new Carbon(),
+                            'updated_at' => new Carbon()
+                        ]);
+
+                        $oldIds[] = $new_field;
+                    } else {
+                        $old_field = DB::table('skiing_prices')->where('id', $cijena['id'])->where('skiing_objects_id', $object->id)->first();
+
+                        if($old_field) {
+                            $oldIds[] = $old_field->id;
+
+                            DB::table('skiing_prices')->where('id', $cijena['id'])->where('skiing_objects_id', $object->id)->update([
+                                'description' => $cijena['description'],
+                                'price' => $cijena['price'],
+                                'price_kids' => $cijena['price_kids'],
+                                'updated_at' => new Carbon()
+                            ]);
+                        }
+                    }
+                }
+            }
+
+            // Izbriši trofeje koje je user izbrisao
+            DB::table('skiing_prices')->where('skiing_objects_id', $object->id)
+                ->whereNotIn('id', $oldIds)
+                ->delete();
+
+            return true;
+        } else {
+            DB::table('skiing_prices')->where('skiing_objects_id', $object->id)
+                ->delete();
+
+            return true;
+        }
+    }
+
 
 }
