@@ -27,7 +27,7 @@ Route::get('/clubs', 'ClubController@index_show');
 Route::get('/clubs/{id}', 'ClubController@club_show')->where('id', '[0-9]+');
 Route::get('/schools', 'SchoolController@index_show');
 Route::get('/staff', 'StaffController@index_show');
-Route::get('/athletes', 'AthletesController@index_show');
+Route::get('/athletes', 'PlayerController@searchPlayers');
 Route::get('/athletes/{id}', 'PlayerController@showPlayer')->where('id','[0-9]+');
 Route::get('/staff/{id}', 'StaffController@showStaff')->where('id', '[0-9]+');
 Route::get('/schools/{id}', 'SchoolController@showSchool')->where('id', '[0-9]+');

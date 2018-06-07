@@ -42,8 +42,10 @@
             </div>
 			
 			<div class="player-info-details">
-                @if(Auth::user()->id == $club->creator->id)
-                    <a href="{{ url('/clubs/' . $club->id . '/edit' ) }}" class="btn btn-primary-inverse btn-icon product__add-to-cart stats-klub-middle"><i class="fa fa-edit"></i> Uredi</a>
+                @if(Auth::check())
+                    @if(Auth::user()->id == $club->creator->id)
+                        <a href="{{ url('/clubs/' . $club->id . '/edit' ) }}" class="btn btn-primary-inverse btn-icon product__add-to-cart stats-klub-middle"><i class="fa fa-edit"></i> Uredi</a>
+                    @endif
                 @endif
 				<a href="#" class="btn btn-primary-inverse btn-icon product__add-to-cart"><i class="fa fa-share-alt"></i> Podijeli</a>
 					
