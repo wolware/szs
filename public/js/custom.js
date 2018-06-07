@@ -2149,15 +2149,18 @@ $(document).ready(function () {
             regionSelect.prop('disabled', false);
             regionSelect.children('option').hide();
             regionSelect.children('option:first').show();
+            regionSelect.parent().removeClass('search-input-disabled');
             itemsToShow.show();
         } else {
             regionSelect.children('option:first').show();
             regionSelect.prop('disabled', 'disabled');
+            regionSelect.parent().addClass('search-input-disabled');
         }
 
         // Resetuj sve selecte poslije ovog
         regionSelect.prop("selectedIndex", 0);
         municipalitySelect.prop("selectedIndex", 0).prop('disabled', 'disabled');
+        municipalitySelect.parent().addClass('search-input-disabled');
     });
 
     // Dodavanje kluba - Promjena regije
@@ -2168,10 +2171,12 @@ $(document).ready(function () {
             municipalitySelect.prop('disabled', false);
             municipalitySelect.children('option').hide();
             municipalitySelect.children('option:first').show();
+            municipalitySelect.parent().removeClass('search-input-disabled');
             itemsToShow.show();
         } else {
             municipalitySelect.children('option:first').show();
             municipalitySelect.prop('disabled', 'disabled');
+            municipalitySelect.parent().addClass('search-input-disabled');
         }
 
         // Resetuj sve selecte poslije ovog
@@ -2194,6 +2199,28 @@ $(document).ready(function () {
            itemsToShow.show();
         } else {
             sportSelect.prop('disabled', 'disabled');
+        }
+    });
+
+    // Selekt za sportove search
+    $("select#sport_type").on("change", function () {
+        var itemsToShow;
+        if($("select#sport_type").val() == 1 || $("select#sport_type").val() == 2) {
+            if($("select#sport_type").val() == 1) {
+                itemsToShow = sportSelect.children("option[data-disabled^='0']");
+            } else if ($("select#sport_type").val() == 2) {
+                itemsToShow = sportSelect.children("option[data-disabled^='1']");
+            }
+            sportSelect.prop('selectedIndex', 0);
+            sportSelect.prop('disabled', false);
+            sportSelect.parent().removeClass('search-input-disabled');
+            sportSelect.children('option').hide();
+            sportSelect.children('option:first').show();
+            itemsToShow.show();
+        } else {
+            sportSelect.prop('selectedIndex', 0);
+            sportSelect.prop('disabled', 'disabled');
+            sportSelect.parent().addClass('search-input-disabled');
         }
     });
 

@@ -12,6 +12,8 @@ use App\Sport;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 
@@ -532,6 +534,62 @@ class PlayerController extends Controller
                 return back();
             }
         }
+    }
+
+    public function searchPlayers(Request $request) {
+        $playerNatures = $this->playerRepository
+            ->getAllPlayerNatures();
+
+        $sports = $this->sportRepository
+            ->getAll();
+
+        $regions = $this->regionRepository
+            ->getAll();
+
+        // Dobije najmanji uneseni region
+
+        $region_id = null;
+
+        if(Input::filled('province')) {
+            $region_id = Input::get('province');
+        }
+
+        if(Input::filled('region')) {
+            $region_id = Input::get('region');
+        }
+
+        if(Input::filled('municipality')) {
+            $region_id = Input::get('municipality');
+        }
+
+        $query = Player::query();
+        if(Input::filled('nature')){
+            $query->where('player_nature', Input::get('nature'));
+        }
+
+        if(Input::filled('sport')){
+            $query->whereHas('club', function ($query) {
+                $query->where('clubs.sport_id', Input::get('sport'));
+            });
+        }
+
+        if($region_id){
+            $query->where('region_id', $region_id);
+        }
+
+        if(Input::filled('sort')){
+            $sort = Input::get('sort');
+            if($sort === 'name_desc') {
+                $query->orderBy('firstname', 'DESC')->orderBy('lastname', 'DESC');
+            } else if($sort === 'name_asc') {
+                $query->orderBy('firstname', 'ASC')->orderBy('lastname', 'ASC');
+            }
+        }
+
+        $results = $query
+            ->paginate(16);
+
+        return view('athlete.index', compact('playerNatures', 'sports', 'regions', 'results'));
     }
 
 }

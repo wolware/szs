@@ -7,8 +7,10 @@ use App\Repositories\ClubRepository;
 use App\Repositories\RegionRepository;
 use App\Repositories\SchoolRepository;
 use App\Repositories\SportRepository;
+use App\School;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 
 class SchoolController extends Controller
@@ -35,7 +37,61 @@ class SchoolController extends Controller
     }
     public function index_show()
     {
-        return view('schools.index');
+        $clubCategories = $this->clubRepository
+            ->getSportCategories();
+
+        $sports = $this->sportRepository
+            ->getAll();
+
+        $regions = $this->regionRepository
+            ->getAll();
+
+        // Dobije najmanji uneseni region
+
+        $region_id = null;
+
+        if(Input::filled('province')) {
+            $region_id = Input::get('province');
+        }
+
+        if(Input::filled('region')) {
+            $region_id = Input::get('region');
+        }
+
+        if(Input::filled('municipality')) {
+            $region_id = Input::get('municipality');
+        }
+
+        $query = School::query();
+        if(Input::filled('category')){
+            $query->where('club_category_id', Input::get('category'));
+        }
+
+        if(Input::filled('sport')){
+            $query->where('sport_id', Input::get('sport'));
+        }
+
+        if($region_id){
+            $query->where('region_id', $region_id);
+        }
+
+        if(Input::filled('sort')){
+            $sort = Input::get('sort');
+            if($sort === 'name_desc') {
+                $query->orderBy('name', 'DESC');
+            } else if($sort === 'name_asc') {
+                $query->orderBy('name', 'ASC');
+            } else if($sort === 'sport') {
+                $query->whereHas('sport', function ($query) {
+                    $query->orderBy('sports.name', 'DESC');
+                });
+            }
+        }
+
+        $results = $query
+            ->paginate(16);
+
+        return view('schools.index', compact('clubCategories', 'sports', 'regions', 'results'));
     }
 
     public function displayAddSchool(){

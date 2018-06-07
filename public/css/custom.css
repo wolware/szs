@@ -92,3 +92,38 @@ Description:  You can add your custom CSS here and it will overwrite template st
 label {
     white-space: normal;
 }
+
+.search-input-disabled {
+    background: repeating-linear-gradient(-55deg,rgba(34, 34, 34, 0.1),rgba(34, 34, 34, 0.1) 10px,rgba(70, 70, 70, 0.2)10px,rgba(70, 70, 70, 0.2) 20px)!important;
+}
+
+.post-filter__select {
+    padding: 20px;
+    border: 1px solid #e5e5e5;
+}
+
+.post-filter__select .post-filter__label {
+    position: relative;
+    display: block;
+    top: auto;
+    left: auto;
+}
+
+.post-filter__select select {
+    position: relative;
+    display: block;
+    border: 0;
+    font-size: 16px;
+    color: #000;
+    font-weight: bold;
+    border-bottom: none;
+    border-top: none;
+    transition: background 0.2s, border-color 0.2s;
+    font-family: "Fira sans", serif;
+    text-transform: none;
+}
+
+.post-filter__select select:focus {
+    border: 0;
+    outline: 0;
+}

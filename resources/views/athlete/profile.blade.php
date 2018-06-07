@@ -42,8 +42,10 @@
                         </div>
 
                         <div class="player-info-details">
-                            @if(Auth::user()->id == $player->user->id)
-                                <a href="{{ url('/athletes/' . $player->id . '/edit' ) }}" class="btn btn-primary-inverse btn-icon product__add-to-cart stats-klub-middle"><i class="fa fa-edit"></i> Uredi</a>
+                            @if(Auth::check())
+                                @if(Auth::user()-> id == $player->user->id)
+                                    <a href="{{ url('/athletes/' . $player->id . '/edit' ) }}" class="btn btn-primary-inverse btn-icon product__add-to-cart stats-klub-middle"><i class="fa fa-edit"></i> Uredi</a>
+                                @endif
                             @endif
                             <a href="#" class="btn btn-primary-inverse btn-icon product__add-to-cart"><i class="fa fa-share-alt"></i> Podijeli</a>
 
@@ -124,14 +126,14 @@
                                                 <img class="flow-icons-012" src="{{asset('images/icons/klubovi-icon.svg')}}" alt="">
                                             </td>
                                             <td class="lineup__num">Klub</td>
-                                            <td class="lineup__name"><a class="profil-poveznica" href="#">{{$player->current_club->name or 'Nema klub'}}</a></td>
+                                            <td class="lineup__name"><a class="profil-poveznica" href="#">{{$player->club->name or 'Nema klub'}}</a></td>
                                         </tr>
                                         <tr>
                                             <td class="lineup__info">
                                                 <img class="flow-icons-012" src="{{asset('images/icons/trophy.svg')}}" alt="">
                                             </td>
                                             <td class="lineup__num">Takmičenje/Liga</td>
-                                            <td class="lineup__name">{{$player->current_club->competition or 'Nema takmičenja'}}</td>
+                                            <td class="lineup__name">{{$player->club->competition or 'Nema takmičenja'}}</td>
                                         </tr>
 
                                         </tbody>
@@ -484,7 +486,7 @@
 
                                             <div class="widget-game-result__section">
                                                 <header class="widget-game-result__subheader card__subheader-alt card__subheader card__subheader--sm card__subheader--nomargins">
-                                                    <h5 class="widget-game-result__subtitle">Aktuelni klub: <a href="#">{{$player->current_club->name or 'Nema klub'}}</a></h5>
+                                                    <h5 class="widget-game-result__subtitle">Aktuelni klub: <a href="#">{{$player->club->name or 'Nema klub'}}</a></h5>
                                                 </header>
                                             </div>
 

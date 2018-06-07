@@ -24,7 +24,7 @@ class Player extends Model
         return $this->hasMany('App\Gallery');
     }
 
-    public function current_club() {
+    public function club() {
         return $this->belongsTo('App\Club');
     }
 

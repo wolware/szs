@@ -19,4 +19,5 @@ class Region extends Model
     public function parent_region() {
         return $this->belongsTo('App\Region', 'region_parent', 'id');
     }
+
 }
