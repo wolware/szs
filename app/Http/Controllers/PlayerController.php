@@ -587,7 +587,7 @@ class PlayerController extends Controller
         }
 
         $results = $query
-            ->paginate(1);
+            ->paginate(16);
 
         return view('athlete.index', compact('playerNatures', 'sports', 'regions', 'results'));
     }
