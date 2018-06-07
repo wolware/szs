@@ -8,9 +8,11 @@ use App\Repositories\ClubRepository;
 use App\Repositories\RegionRepository;
 use App\Repositories\SportRepository;
 use App\Repositories\StaffRepository;
+use App\Staff;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 
 class StaffController extends Controller
@@ -27,7 +29,53 @@ class StaffController extends Controller
     }
     public function index_show()
     {
-        return view('staff.index');
+        $professions = Profession::all();
+
+        $regions = $this->regionRepository
+            ->getAll();
+
+        // Dobije najmanji uneseni region
+
+        $region_id = null;
+
+        if(Input::filled('province')) {
+            $region_id = Input::get('province');
+        }
+
+        if(Input::filled('region')) {
+            $region_id = Input::get('region');
+        }
+
+        if(Input::filled('municipality')) {
+            $region_id = Input::get('municipality');
+        }
+
+        $query = Staff::query();
+        if(Input::filled('profession')){
+            $query->where('profession_id', Input::get('profession'));
+        }
+
+        if($region_id){
+            $query->where('region_id', $region_id);
+        }
+
+        if(Input::filled('sort')){
+            $sort = Input::get('sort');
+            if($sort === 'name_desc') {
+                $query->orderBy('name', 'DESC');
+            } else if($sort === 'name_asc') {
+                $query->orderBy('name', 'ASC');
+            } else if($sort === 'profession') {
+                $query->whereHas('profession', function ($query) {
+                    $query->orderBy('professions.name', 'DESC');
+                });
+            }
+        }
+
+        $results = $query
+            ->paginate(16);
+
+        return view('staff.index', compact('professions', 'regions', 'results'));
     }
 
     public function displayAddStaff() {

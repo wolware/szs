@@ -66,29 +66,61 @@ class ClubController extends Controller
     }
 
     public function index_show(Request $data){
-        $q = DB::table('clubs');
-        if(Input::has('kategorija')){
-            $q->where('kategorija', Input::get('kategorija'));
-        }
-        if(Input::has('tip')){
-            $q->where('tip', Input::get('tip'));
-        }
-        if(Input::has('sport')){
-            $q->where('sport', Input::get('sport'));
-        }
-        if(Input::has('entitet')){
-            $q->where('entitet', Input::get('entitet'));
-        }
-        if(Input::has('kanton')){
-            $q->where('kanton', Input::get('kanton'));
-        }
-        if(Input::has('opcina')){
-            $q->where('opcina', Input::get('opcina'));
+        $clubCategories = $this->clubRepository
+            ->getSportCategories();
+
+        $sports = $this->sportRepository
+            ->getAll();
+
+        $regions = $this->regionRepository
+            ->getAll();
+
+        // Dobije najmanji uneseni region
+
+        $region_id = null;
+
+        if(Input::filled('province')) {
+            $region_id = Input::get('province');
         }
 
+        if(Input::filled('region')) {
+            $region_id = Input::get('region');
+        }
 
-        $data = $q->get();
-        return view('clubs.index', ['data' => $data]);
+        if(Input::filled('municipality')) {
+            $region_id = Input::get('municipality');
+        }
+
+        $query = Club::query();
+        if(Input::filled('category')){
+            $query->where('club_category_id', Input::get('category'));
+        }
+
+        if(Input::filled('sport')){
+            $query->where('sport_id', Input::get('sport'));
+        }
+
+        if($region_id){
+            $query->where('region_id', $region_id);
+        }
+
+        if(Input::filled('sort')){
+            $sort = Input::get('sort');
+            if($sort === 'name_desc') {
+                $query->orderBy('name', 'DESC');
+            } else if($sort === 'name_asc') {
+                $query->orderBy('name', 'ASC');
+            } else if($sort === 'sport') {
+                $query->whereHas('sport', function ($query) {
+                    $query->orderBy('sports.name', 'DESC');
+                });
+            }
+        }
+
+        $results = $query
+            ->paginate(16);
+
+        return view('clubs.index', compact('clubCategories', 'sports', 'regions', 'results'));
     }
 
     public function club_show($id){

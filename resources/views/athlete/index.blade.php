@@ -123,7 +123,7 @@
                                         <div class="posts__excerpt">{{$result->city}}</div>
                                     </div>
                                     <footer class="posts__footer card__footer">
-                                        <a href="{{url('/athletes/' . $result->id)}}" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila kluba</a>
+                                        <a href="{{url('/athletes/' . $result->id)}}" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila sportiste</a>
                                     </footer>
                                 </div>
                             </div>

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Objects;
 use App\Repositories\ObjectRepository;
 use App\Repositories\RegionRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 
@@ -746,5 +748,53 @@ class ObjectController extends Controller
                 return back();
             }
         }
+    }
+
+    public function searchObjects()
+    {
+        $objectTypes = $this->objectRepository
+            ->getAllObjectTypes();
+
+        $regions = $this->regionRepository
+            ->getAll();
+
+        // Dobije najmanji uneseni region
+
+        $region_id = null;
+
+        if(Input::filled('province')) {
+            $region_id = Input::get('province');
+        }
+
+        if(Input::filled('region')) {
+            $region_id = Input::get('region');
+        }
+
+        if(Input::filled('municipality')) {
+            $region_id = Input::get('municipality');
+        }
+
+        $query = Objects::query();
+        if(Input::filled('type')){
+            $query->where('object_type_id', Input::get('type'));
+        }
+
+        if($region_id){
+            $query->where('region_id', $region_id);
+        }
+
+        if(Input::filled('sort')){
+            $sort = Input::get('sort');
+            if($sort === 'name_desc') {
+                $query->orderBy('name', 'DESC');
+            } else if($sort === 'name_asc') {
+                $query->orderBy('name', 'ASC');
+            }
+        }
+
+        $results = $query
+            ->paginate(16);
+
+        return view('objects.index', compact('objectTypes', 'regions', 'results'));
     }
 }

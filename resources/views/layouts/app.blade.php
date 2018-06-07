@@ -174,24 +174,24 @@
               <a href="{{url('/clubs')}}" class="info-block__link">Klubovi</a>
             </li>
       <li class="info-block__item info-block__item--contact-secondary">
-              <a href="/schools"><img src="{{asset('images/skole-fff.png')}}" class="df-icon df-icon--soccer-ball"></a>
+              <a href="{{ url('/schools') }}"><img src="{{asset('images/skole-fff.png')}}" class="df-icon df-icon--soccer-ball"></a>
               <h6 class="info-block__heading">Sportske</h6>
-              <a href="/schools" class="info-block__link">Škole</a>
+              <a href="{{ url('/schools') }}" class="info-block__link">Škole</a>
             </li>
             <li class="info-block__item info-block__item--contact-secondary">
-              <a href="/athletes"><img src="{{asset('images/sportisti-fff.png')}}" class="df-icon df-icon--soccer-ball"></a>
+              <a href="{{ url('/athletes') }}"><img src="{{asset('images/sportisti-fff.png')}}" class="df-icon df-icon--soccer-ball"></a>
               <h6 class="info-block__heading">BH</h6>
-              <a href="/athletes" class="info-block__link">Sportisti</a>
+              <a href="{{ url('/athletes') }}" class="info-block__link">Sportisti</a>
             </li>
             <li class="info-block__item info-block__item--contact-secondary">
-              <a href="/objects"><img src="{{asset('images/objekti-fff.png')}}" class="df-icon df-icon--soccer-ball"></a>
+              <a href="{{ url('/objects') }}"><img src="{{asset('images/objekti-fff.png')}}" class="df-icon df-icon--soccer-ball"></a>
               <h6 class="info-block__heading">Sportski</h6>
-              <a href="/objects" class="info-block__link">Objekti</a>
+              <a href="{{ url('/objects') }}" class="info-block__link">Objekti</a>
             </li>
             <li class="info-block__item info-block__item--contact-secondary">
-              <a href="/staff"><img src="{{asset('images/kadrovi-fff.png')}}" class="df-icon df-icon--soccer-ball"></a>
+              <a href="{{ url('/staff') }}"><img src="{{asset('images/kadrovi-fff.png')}}" class="df-icon df-icon--soccer-ball"></a>
               <h6 class="info-block__heading">Stručni</h6>
-              <a href="/staff" class="info-block__link">Kadrovi</a>
+              <a href="{{ url('/staff') }}" class="info-block__link">Kadrovi</a>
             </li>
             <li class="info-block__item info-block__item--contact-secondary">
                   <a href="#"><img src="{{asset('images/kadrovi-fff.png')}}" class="df-icon df-icon--soccer-ball"></a>
