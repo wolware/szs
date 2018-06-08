@@ -416,16 +416,18 @@
 			<!-- Tab: Vremeplov -->
 
               <div role="tabpanel" class="tab-pane fade neaktivno" id="tab-vremeplov">
-                  <form id="editClubHistory" role="form"
-                        action="{{ url('/vremeplov/edit/' . $club->histories[0]->id) }}" method="POST"
-                        enctype="multipart/form-data">
+				  	@if(count($club->histories))
+                  		<form id="editClubHistory" role="form" action="{{ url('/vremeplov/edit/' . $club->histories[0]->id) }}" method="POST" enctype="multipart/form-data">
+					@else
+						<form id="editClubHistory" role="form" action="{{ url('/vremeplov/add/' . $club->id) }}" method="POST" enctype="multipart/form-data">
+					@endif
                       {!! csrf_field() !!}
                       <div class="row">
                           <div class="row identitet-style">
                               <div class="col-md-12">
                                   <div class="form-group col-md-12">
                                       <label for="opis"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Vremeplov</label>
-                                      <textarea class="form-control" rows="20" name="history" id="opis" placeholder="Upišite ukratko informacije vezane za historijat vašeg kluba i njegovu tradiciju...">{{$club->histories[0]->content}}</textarea>
+                                      <textarea class="form-control" rows="20" name="history" id="opis" placeholder="Upišite ukratko informacije vezane za historijat vašeg kluba i njegovu tradiciju...">{{count($club->histories) ? $club->histories[0]->content : ''}}</textarea>
                                   </div>
                               </div>
                           </div>

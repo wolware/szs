@@ -597,6 +597,35 @@ class ClubController extends Controller
         }
     }
 
+    public function add_vremeplov(Request $data, $club_id){
+
+        // Provjera da li je user vlasnik kluba
+        $isOwner = Club::where('id', $club_id)->where('user_id', Auth::user()->id)->first();
+        if(!$isOwner) {
+            abort(404);
+        }
+
+        $validator = Validator::make($data->all(),[
+            'history' => 'nullable|string',
+        ]);
+
+        if($validator->fails()){
+            return redirect('clubs/' . $club_id . '/edit')
+                ->withErrors($validator)
+                ->withInput();
+        }else{
+            $addHistory = History::create([
+                    'content' => $data->history,
+                    'club_id' => $club_id
+                ]);
+
+            if($addHistory) {
+                flash()->overlay('Uspješno ste editovali historiju kluba.', 'Čestitamo');
+                return redirect('clubs/' . $club_id . '/edit');
+            }
+        }
+    }
+
     public function edit_trofej(Request $data, $id){
         // Provjera da li je user vlasnik kluba
         $isOwner = Club::where('id', $id)->where('user_id', Auth::user()->id)->first();

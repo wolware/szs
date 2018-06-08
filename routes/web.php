@@ -105,6 +105,7 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/licnost/edit/{id}', 'ClubController@edit_licnost');
     Route::post('/vremeplov/edit/{id}', 'ClubController@edit_vremeplov');
+    Route::post('/vremeplov/add/{club_id}', 'ClubController@add_vremeplov');
     Route::post('/trofej/edit/{id}', 'ClubController@edit_trofej');
     Route::post('/galerija/edit/{id}', 'ClubController@edit_galerija');
 

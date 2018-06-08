@@ -18,7 +18,6 @@ function previewFile(name, place, maxHeight, maxWidth, minHeight, minWidth) {
     var file_input = $(name);
     var file = $(name).get(0).files;
     var error = file_input.closest('.sadrzaj-slike').find('.info-upload-slike');
-    console.log(error);
     var reader = new FileReader();
 
     reader.onloadend = function (e) {
@@ -84,7 +83,6 @@ function previewFile(name, place, maxHeight, maxWidth, minHeight, minWidth) {
 $(function () {
     // Multiple images preview in browser
     var imagesPreview = function (input, placeToInsertImagePreview) {
-        console.log("pozvana");
         var prvi = 0;
         var gk = document.getElementById('galerija_klub');
         if (input.files) {
@@ -2127,7 +2125,6 @@ $(document).ready(function () {
 
         // Izlistaj sve saveze države ako postoje
         var associationsToShow = associationBox.find("input[data-region^=" + countrySelect.val() + "]");
-        console.log(associationsToShow);
         associationRadio.prop('checked', false);
 
         if(associationsToShow.length > 0) {

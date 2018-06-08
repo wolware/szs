@@ -296,7 +296,7 @@
                                             <td class="team-leader__player">
                                                 <div class="team-leader__player-info">
                                                     <figure class="team-leader__player-img team-leader__player-img--sm">
-                                                        <img src="{{asset('images/avatars/' . $object->user->avatar)}}" alt="">
+                                                        <img src="{{asset('images/avatars/' . ($object->user->avatar ? $object->user->avatar : 'default_avatar.png'))}}" class="user-picture" alt="">
                                                     </figure>
                                                     <div class="team-leader__player-inner">
                                                         <h5 class="team-leader__player-name autor-slika">{{ $object->user->name }}</h5>
