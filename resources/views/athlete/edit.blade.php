@@ -519,9 +519,6 @@
                                                                 <figure class="album__thumb">
                                                                     <img src="{{asset('images/galerija_sportista/' . $slika->image)}}" alt="">
                                                                 </figure>
-                                                                <div class="album__item-desc">
-                                                                    <img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt="">
-                                                                </div>
                                                             </a>
                                                         </div>
                                                     </div>

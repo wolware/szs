@@ -83,7 +83,7 @@
 
                     <div class="col-md-5 sadrzaj-slike">
 
-						  <p class="dodaj-sliku-naslov klub-a1"> Logo kluba*</p>
+						  <p class="dodaj-sliku-naslov klub-a1"> Logo kluba</p>
 						  <p class="dodaj-sliku-call">Identitet kluba</p>
 						  <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
 							Odaberi logo... <input type="file" id="file_logo_kluba" name="logo" class="not-visible" onchange="previewFile('#file_logo_kluba','#slika-upload-klub', 1024, 1024, 512, 512)" value="{{isset($club->logo) ? asset('images/club_logo/'.$club->logo) : asset('images/SZS-club.logo.png')}}">
@@ -948,9 +948,6 @@
                                 <figure class="album__thumb">
                                     <img src="{{asset('images/galerija_klub/' . $slika->image)}}" alt="">
                                 </figure>
-                                <div class="album__item-desc">
-                                    <img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt="">
-                                </div>
                                 </a>
                             </div>
                         </div>
