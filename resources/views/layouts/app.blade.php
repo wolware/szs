@@ -164,9 +164,9 @@
         <div class="container">
           <ul class="info-block info-block--header">
             <li class="info-block__item info-block__item--contact-secondary">
-              <a href="#"><img src="{{asset('images/sportovi-fff.png')}}" class="df-icon df-icon--soccer-ball"></a>
+              <a href="{{url('/sports')}}"><img src="{{asset('images/sportovi-fff.png')}}" class="df-icon df-icon--soccer-ball"></a>
               <h6 class="info-block__heading">Svi</h6>
-              <a href="#" class="info-block__link">Sportovi</a>
+              <a href="{{url('/sports')}}" class="info-block__link">Sportovi</a>
             </li>
             <li class="info-block__item info-block__item--contact-secondary">
               <a href="{{url('/clubs')}}"><img src="{{asset('images/klubovi-fff.png')}}" class="df-icon df-icon--soccer-ball"></a>

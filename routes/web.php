@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'HomeController@index');
+Route::get('/sports', 'HomeController@sportsList');
 Route::get('/contact', 'HomeController@contact');
 
 
