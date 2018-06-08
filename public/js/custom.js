@@ -1086,7 +1086,6 @@ $(document).ready(function () {
         ignore: ':hidden,:disabled',
         rules: {
             logo: {
-                required: true,
                 extension: 'png|jpg|jpeg'
             },
             name: {
