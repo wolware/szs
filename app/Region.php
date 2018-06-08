@@ -20,4 +20,8 @@ class Region extends Model
         return $this->belongsTo('App\Region', 'region_parent', 'id');
     }
 
+    public function child_regions() {
+        return $this->hasMany('App\Region', 'region_parent', 'id');
+    }
+
 }

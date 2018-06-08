@@ -28,4 +28,10 @@ class RegionRepository {
             ->orderBy('name', 'asc')
             ->get();
     }
+
+    public function getById($id){
+        return $this->model
+            ->where('id', $id)
+            ->first();
+    }
 }

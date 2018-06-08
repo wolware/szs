@@ -34,20 +34,43 @@ class StaffController extends Controller
         $regions = $this->regionRepository
             ->getAll();
 
-        // Dobije najmanji uneseni region
+        // Algoritam za dobijanje children ids od regija
+        $region_ids = [];
+        $province_filled = Input::filled('province');
+        $region_filled = Input::filled('region');
+        $municipality_filled = Input::filled('municipality');
 
-        $region_id = null;
+        if($province_filled) {
+            if(!$region_filled) {
+                $region_ids[] = Input::get('province');
+                $province = $this->regionRepository
+                    ->getById(Input::get('province'));
 
-        if(Input::filled('province')) {
-            $region_id = Input::get('province');
-        }
+                if($province) {
+                    foreach ($province->child_regions as $region) {
+                        $region_ids[] = $region->id;
 
-        if(Input::filled('region')) {
-            $region_id = Input::get('region');
-        }
+                        foreach ($region->child_regions as $municipality) {
+                            $region_ids[] = $municipality->id;
+                        }
+                    }
+                }
+            } else {
+                $region_ids[] = Input::get('region');
 
-        if(Input::filled('municipality')) {
-            $region_id = Input::get('municipality');
+                if($municipality_filled) {
+                    $region_ids[] = Input::get('municipality');
+                } else {
+                    $region = $this->regionRepository
+                        ->getById(Input::get('region'));
+
+                    if($region) {
+                        foreach ($region->child_regions as $region) {
+                            $region_ids[] = $region->id;
+                        }
+                    }
+                }
+            }
         }
 
         $query = Staff::query();
@@ -55,8 +78,8 @@ class StaffController extends Controller
             $query->where('profession_id', Input::get('profession'));
         }
 
-        if($region_id){
-            $query->where('region_id', $region_id);
+        if(!empty($region_ids)){
+            $query->whereIn('region_id', $region_ids);
         }
 
         if(Input::filled('sort')){
