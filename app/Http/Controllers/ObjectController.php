@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\MessageBag;
 
 class ObjectController extends Controller
 {
@@ -92,8 +93,6 @@ class ObjectController extends Controller
         'region' => 'integer|exists:regions,id',
         'municipality' => 'integer|exists:regions,id',
         'city' => 'required|max:255|string',
-        'latitude' => 'required|numeric',
-        'longitude' => 'required|numeric',
         'facebook' => 'nullable|max:255|string',
         'instagram' => 'nullable|max:255|string',
         'twitter' => 'nullable|max:255|string',
@@ -294,6 +293,16 @@ class ObjectController extends Controller
         }
 
         $validator = Validator::make($request->all(), $completeValidationRules);
+
+        $validator->after(function ($validator) use ($request){
+            if (!$request->has('latitude') || !$request->has('longitude')) {
+                $validator->errors()->add('google', 'Polje grad/mjesto mora biti popunjeno koristeći sugestije Google mjesta.');
+            } else {
+                if(!is_numeric($request->get('latitude')) || !is_numeric($request->get('longitude'))) {
+                    $validator->errors()->add('google', 'Polje grad/mjesto mora biti popunjeno koristeći sugestije Google mjesta.');
+                }
+            }
+        });
 
         if ($validator->fails()) {
             return back()
