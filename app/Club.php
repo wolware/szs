@@ -41,4 +41,12 @@ class Club extends Model
     public function club_staff() {
         return $this->hasMany('App\ClubStaff');
     }
+
+    public function players() {
+        return $this->hasMany('App\Player');
+    }
+
+    public function staff() {
+        return $this->hasMany('App\Staff');
+    }
 }

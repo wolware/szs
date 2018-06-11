@@ -83,65 +83,49 @@
                 </ul>
             </li>
 
-      <li class="nav-account__item"><a href="#"><i class="fa fa-bell-o"></i> Notifikacije <span class="highlight">5</span></a>
+            <li class="nav-account__item"><a href="{{ url('/me/notifications') }}"><i class="fa fa-bell-o"></i> Notifikacije <span class="highlight">{{ !empty($notifications) ? (count($notifications) == 0 ? '' : count($notifications)) : '' }}</span></a>
               <ul class="main-nav__sub">
-        <tr>
-                  <td class="team-leader__player">
-                    <div class="team-leader__player-info notifikacija">
-                     <figure class="team-leader__player-img team-leader__player-img--sm">
-                        <img src="{{asset('images/tarik.jpg')}}" alt="">
-                       </figure>
-                       <div class="team-leader__player-inner">
-                        <h5 class="team-leader__player-name">Tarik Jašarević vas je spomenuo u svom novom članku</h5>
-                        <span class="team-leader__player-position"><i class="fa fa-clock-o"></i> prije 45 min.</span>
-                     </div>
-                    </div>
-                  </td>
-                </tr>
-        <tr>
-                  <td class="team-leader__player">
-                    <div class="team-leader__player-info notifikacija">
-                     <figure class="team-leader__player-img team-leader__player-img--sm">
-                        <img src="{{asset('images/tarik.jpg')}}" alt="">
-                       </figure>
-                       <div class="team-leader__player-inner">
-                        <h5 class="team-leader__player-name">Tarik Jašarević vas je spomenuo u svom novom članku</h5>
-                        <span class="team-leader__player-position"><i class="fa fa-clock-o"></i> prije 45 min.</span>
-                     </div>
-                    </div>
-                  </td>
-                </tr>
-        <tr>
-                  <td class="team-leader__player">
-                    <div class="team-leader__player-info notifikacija">
-                     <figure class="team-leader__player-img team-leader__player-img--sm">
-                        <img src="{{asset('images/tarik.jpg')}}" alt="">
-                       </figure>
-                       <div class="team-leader__player-inner">
-                        <h5 class="team-leader__player-name">Tarik Jašarević vas je spomenuo u svom novom članku</h5>
-                        <span class="team-leader__player-position"><i class="fa fa-clock-o"></i> prije 45 min.</span>
-                     </div>
-                    </div>
-                  </td>
-                </tr>
-        <tr>
-                  <td class="team-leader__player">
-                    <div class="team-leader__player-info notifikacija">
-                     <figure class="team-leader__player-img team-leader__player-img--sm">
-                        <img src="{{asset('images/tarik.jpg')}}" alt="">
-                       </figure>
-                       <div class="team-leader__player-inner">
-                        <h5 class="team-leader__player-name">Tarik Jašarević vas je spomenuo u svom novom članku</h5>
-                        <span class="team-leader__player-position"><i class="fa fa-clock-o"></i> prije 45 min.</span>
-                     </div>
-                    </div>
-                  </td>
-          <td>
-          <a class ="notifikacije-button" href="#">Pregled svih notifikacija <i class="fa fa-chevron-right"></i></a>
-          </td>
-                </tr>
-                </ul>
-            </li>
+                  @if(!empty($notifications))
+                      @if(count($notifications))
+                          @foreach($notifications as $notification)
+                            @if($notification->player_id)
+                            <tr>
+                              <td class="team-leader__player">
+                                <div class="team-leader__player-info notifikacija">
+                                 <figure class="team-leader__player-img team-leader__player-img--sm">
+                                    <img src="{{asset('images/athlete_avatars/' . $notification->player->avatar)}}" class="user-picture" alt="">
+                                   </figure>
+                                   <div class="team-leader__player-inner">
+                                       <h5 class="team-leader__player-name">Sportista <b>{{ $notification->player->firstname . ' ' . $notification->player->lastname }}</b> želi postati dio vašeg kluba <b>{{ $notification->club->name }}</b></h5>
+                                    <span class="team-leader__player-position"><i class="fa fa-clock-o"></i> {{ $notification->created_at->diffForHumans() }}</span>
+                                 </div>
+                                </div>
+                              </td>
+                            </tr>
+                            @elseif($notification->staff_id)
+                            <tr>
+                              <td class="team-leader__player">
+                                <div class="team-leader__player-info notifikacija">
+                                  <figure class="team-leader__player-img team-leader__player-img--sm">
+                                    <img src="{{asset('images/staff_avatars/' . $notification->staff->avatar)}}" class="user-picture" alt="">
+                                  </figure>
+                                  <div class="team-leader__player-inner">
+                                    <h5 class="team-leader__player-name">Sportski kadar <b>{{ $notification->staff->firstname . ' ' . $notification->staff->lastname }}</b> želi postati dio vašeg kluba <b>{{ $notification->club->name }}</b></h5>
+                                    <span class="team-leader__player-position"><i class="fa fa-clock-o"></i> {{ $notification->created_at->diffForHumans() }}</span>
+                                  </div>
+                                </div>
+                              </td>
+                            </tr>
+                            @endif
+                          @endforeach
+                      @else
+                          <p class="text-center">Nemate novih notifikacija.</p>
+                      @endif
+                  @else
+                      <p class="text-center">Nemate novih notifikacija.</p> 
+                  @endif
+                  <a class ="notifikacije-button" href="{{ url('/me/notifications') }}">Pregled svih notifikacija <i class="fa fa-chevron-right"></i></a>
+              </ul>
             <li class="nav-account__item"><a href="#"><i class="fa fa-globe"></i> Jezik: <span class="highlight">BH</span></a>
               <ul class="main-nav__sub">
                 <li><a href="{{url('/')}}"><i class="fa fa-language"></i> Bosanski</a></li>

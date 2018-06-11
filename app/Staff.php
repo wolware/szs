@@ -29,8 +29,11 @@ class Staff extends Model
         'number_of_projects',
         'work_experience',
         'club_name',
-        'requested_club'
+        'requested_club',
+        'club_id'
     ];
+
+    protected $with = ['profession'];
 
     public function languages() {
         return $this->belongsToMany('App\Language');
