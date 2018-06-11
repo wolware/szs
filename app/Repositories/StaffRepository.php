@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\ClubRequest;
 use App\Gallery;
 use App\Language;
 use App\Staff;
@@ -80,6 +81,14 @@ class StaffRepository {
         $createStaff = $this->model->create($attributesToInsert);
 
         if($createStaff) {
+
+                if($request->filled('requested_club')) {
+                    ClubRequest::create([
+                        'club_id' => $request->get('requested_club'),
+                        'staff_id' => $createStaff->id
+                    ]);
+                }
+
                 if($request->filled('history')){
                     foreach($request->get('history') as $key => $history){
                         if($history){
@@ -197,9 +206,16 @@ class StaffRepository {
         ];
 
         if($request->has('requested_club')) {
+            ClubRequest::create([
+                'club_id' => $request->get('requested_club'),
+                'staff_id' => $staff->id
+            ]);
+
             $attributesToUpdate['requested_club'] = $request->get('requested_club');
+            $attributesToUpdate['club_id'] = null;
         } else {
             $attributesToUpdate['club_name'] = $request->get('club_name');
+            $attributesToUpdate['club_id'] = null;
         }
 
         $updateStaffStatus = $staff->update($attributesToUpdate);

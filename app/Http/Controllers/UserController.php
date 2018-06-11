@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ClubRequest;
 use App\Repositories\RegionRepository;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -94,5 +95,13 @@ class UserController extends Controller
             }
         }
         
+    }
+
+    public function displayNotifications() {
+        $notifys = ClubRequest::with(['club', 'player', 'staff'])->whereHas('club', function ($query) {
+            $query->where('clubs.user_id', Auth::user()->id);
+        })->paginate(10);
+
+        return view('profile.notifications', compact('notifys'));
     }
 }

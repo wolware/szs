@@ -76,6 +76,8 @@ Route::middleware('auth')->group(function () {
         return view('profile.new');
     });
 
+    Route::get('/me/notifications', 'UserController@displayNotifications');
+
     // OBJECTS
     Route::get('/objects/add', 'ObjectController@displayAddObjectCategories');
     Route::get('/objects/{object_id}/new', 'ObjectController@displayAddObject')->where('object_id', '[0-9]+');
@@ -108,6 +110,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/vremeplov/add/{club_id}', 'ClubController@add_vremeplov');
     Route::post('/trofej/edit/{id}', 'ClubController@edit_trofej');
     Route::post('/galerija/edit/{id}', 'ClubController@edit_galerija');
+
+    Route::get('/clubs/{id}/approve/player/{player_id}/{notify_id}', 'ClubController@approvePlayer');
+    Route::get('/clubs/{id}/approve/staff/{staff_id}/{notify_id}', 'ClubController@approveStaff');
 
     //ATHLETE
     Route::get('/athletes/add', 'PlayerController@displayAddPlayerCategories');

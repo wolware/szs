@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ClubRequest;
 use App\Objects;
 use App\Repositories\PlayerRepository;
 use App\Repositories\StaffRepository;
@@ -9,6 +10,7 @@ use App\School;
 use App\Vijest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -41,7 +43,15 @@ class HomeController extends Controller
         $schools = School::orderBy('id', 'DESC')->take(6)->get();
         $objects = Objects::orderBy('id', 'DESC')->take(6)->get();
 
-        return view('welcome', ['sportasi' => $sportasi, 'klubovi' => $klubovi, 'vijesti' => $vijesti, 'staff' => $staff, 'schools' => $schools, 'objects' => $objects]);
+        if(Auth::check()) {
+            $notifications = ClubRequest::with(['club', 'player', 'staff'])->whereHas('club', function ($query) {
+                $query->where('clubs.user_id', Auth::user()->id);
+            })->take(5)->get();
+        } else {
+            $notifications = collect([]);
+        }
+
+        return view('welcome', ['sportasi' => $sportasi, 'klubovi' => $klubovi, 'vijesti' => $vijesti, 'staff' => $staff, 'schools' => $schools, 'objects' => $objects, 'notifications' => $notifications]);
     }
     public function contact(){
         return view('contact');

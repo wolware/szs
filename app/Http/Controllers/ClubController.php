@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\ClubRequest;
 use App\ClubStaff;
 use App\Gallery;
 use App\History;
+use App\Player;
 use App\Repositories\AssociationRepository;
 use App\Repositories\ClubRepository;
 use App\Repositories\RegionRepository;
 use App\Repositories\SportRepository;
+use App\Staff;
 use App\Trophy;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -151,6 +154,7 @@ class ClubController extends Controller
             ->where('id', $id)
             ->first();
 
+
         if($club) {
             $regions = collect();
             $currentRegion = $club->region;
@@ -161,7 +165,11 @@ class ClubController extends Controller
             }
 
             $club->setAttribute('regions', $regions);
-            return view('clubs.profile', compact('club'));
+
+            $players = $club->players()->paginate(12);
+            $staff = $club->staff()->paginate(12);
+
+            return view('clubs.profile', compact('club','players', 'staff'));
         }
 
         abort(404);
@@ -733,6 +741,110 @@ class ClubController extends Controller
 
             flash()->overlay('Uspješno ste editovali galeriju kluba.', 'Čestitamo');
             return redirect('clubs/' . $id . '/edit');
+        }
+    }
+
+    public function approvePlayer($id, $player_id, $notify_id) {
+        // Provjera da li je user vlasnik kluba
+        $isOwner = Club::where('id', $id)->where('user_id', Auth::user()->id)->first();
+        if(!$isOwner) {
+            abort(404);
+        }
+
+        $player = Player::find($player_id);
+
+        if(!$player) {
+            abort(404);
+        }
+
+        $request = ClubRequest::find($notify_id);
+
+        $isApproved = false;
+
+        if($request) {
+            if(!$request->approved){
+                $approveRequest = $request->update([
+                    'approved' => true
+                ]);
+                $isApproved = true;
+            } else {
+                $approveRequest = $request->update([
+                    'approved' => false
+                ]);
+            }
+
+            if ($approveRequest) {
+                if($isApproved) {
+                    $updatePlayer = $player->update([
+                        'club_id' => $id
+                    ]);
+                } else {
+                    $updatePlayer = $player->update([
+                        'club_id' => null
+                    ]);
+                }
+
+                if ($updatePlayer) {
+                    if($isApproved) {
+                        flash()->overlay('Uspješno ste prihvatili zahtjev sportiste za pridruživanje klubu.', 'Čestitamo');
+                    } else {
+                        flash()->overlay('Uspješno ste vratili na čekanje zahtjev sportiste za pridruživanje klubu.', 'Čestitamo');
+                    }
+                    return redirect('me/notifications');
+                }
+            }
+        }
+    }
+
+    public function approveStaff($id, $staff_id, $notify_id) {
+        // Provjera da li je user vlasnik kluba
+        $isOwner = Club::where('id', $id)->where('user_id', Auth::user()->id)->first();
+        if(!$isOwner) {
+            abort(404);
+        }
+
+        $staff = Staff::find($staff_id);
+
+        if(!$staff) {
+            abort(404);
+        }
+
+        $request = ClubRequest::find($notify_id);
+
+        $isApproved = false;
+
+        if($request) {
+            if(!$request->approved){
+                $approveRequest = $request->update([
+                    'approved' => true
+                ]);
+                $isApproved = true;
+            } else {
+                $approveRequest = $request->update([
+                    'approved' => false
+                ]);
+            }
+
+            if ($approveRequest) {
+                if($isApproved) {
+                    $updateStaff = $staff->update([
+                        'club_id' => $id
+                    ]);
+                } else {
+                    $updateStaff = $staff->update([
+                        'club_id' => null
+                    ]);
+                }
+
+                if ($updateStaff) {
+                    if($isApproved) {
+                        flash()->overlay('Uspješno ste prihvatili zahtjev stručnog kadra za pridruživanje klubu.', 'Čestitamo');
+                    } else {
+                        flash()->overlay('Uspješno ste vratili na čekanje zahtjev stručnog kadra za pridruživanje klubu.', 'Čestitamo');
+                    }
+                    return redirect('me/notifications');
+                }
+            }
         }
     }
 }

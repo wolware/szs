@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\ClubRequest;
 use App\Gallery;
 use App\Player;
 use App\PlayerClubHistory;
@@ -196,6 +197,12 @@ class PlayerRepository {
             $createPlayerUnique = DB::table($sport->players_table)->insert($attributesToInsert);
 
             if($createPlayerUnique) {
+                if($request->filled('requested_club')) {
+                    ClubRequest::create([
+                        'club_id' => $request->get('requested_club'),
+                        'player_id' => $createPlayer->id
+                    ]);
+                }
                 if($request->filled('history')){
                     foreach($request->get('history') as $key => $history){
                         if($history){
@@ -333,12 +340,23 @@ class PlayerRepository {
 
     public function updateStatus(Request $request, Player $player) {
 
-        $updatePlayerCommonStatus = Player::find($player->id)->update([
+        $fieldsToUpdate = [
             'date_of_birth' => Carbon::parse($request->get('date_of_birth')),
             'weight' => $request->get('weight'),
             'height' => $request->get('height'),
             'requested_club' => $request->get('requested_club')
-        ]);
+        ];
+
+        if($request->filled('requested_club')) {
+            ClubRequest::create([
+                'club_id' => $request->get('requested_club'),
+                'player_id' => $player->id
+            ]);
+
+            $fieldsToUpdate['club_id'] = null;
+        }
+
+        $updatePlayerCommonStatus = Player::find($player->id)->update($fieldsToUpdate);
 
         if($updatePlayerCommonStatus) {
             $uniqueColumns = [];
