@@ -59,7 +59,7 @@
               <div class="card__header">
                 <h4><i class="fa fa-address-card-o"></i> Osnovne informacije</h4>
               </div>
-              <div class="card__content text-center">
+              <div style="min-height: 5em;" class="card__content text-center">
 
                 <div class="form-group__avatar">
                   <img src="{{ isset(Auth::user()->avatar) ? asset('images/avatars/'.Auth::user()->avatar) : asset('images/default_avatar.png')}}" alt="">
@@ -70,7 +70,8 @@
                 </div>
                 {{--<p class="info-racun"><i class="fa fa-check-circle"></i> Premium račun</p>--}}
                 {{--<p class="premium-info"><i class="fa fa-clock-o"></i> Premium ističe za 15 dana</p>--}}
-                <button type="button" class="btn btn-default btn-xs disabled">Aktiviraj Premium Račun</button> <p class="premium-info"><i class="fa fa-database"></i> 1000</p>
+                {{--<button type="button" class="btn btn-default btn-xs disabled">Aktiviraj Premium Račun</button> <p class="premium-info"><i class="fa fa-database"></i> 1000</p>--}}
+                <span></span>
               </div>
             </div>
 

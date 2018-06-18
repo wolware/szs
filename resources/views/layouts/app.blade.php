@@ -134,8 +134,8 @@
             </li>
           </ul>
           @else
-            <li class="nav-account__item"><a href="{{url('login')}}"><i class="fa fa-sign-out"></i> Prijava</a></li>
-              <li class="nav-account__item"><a href="{{url('register')}}"><i class="fa fa-sign-out"></i> Registracija</a></li>
+            <li class="nav-account__item"><a href="{{url('login')}}"><i class="fa fa-sign-in"></i> Prijava</a></li>
+              <li class="nav-account__item"><a href="{{url('register')}}"><i class="fa fa-user"></i> Registracija</a></li>
           @endif
           <!-- Account Navigation / End -->
 
@@ -178,7 +178,7 @@
               <a href="{{ url('/staff') }}" class="info-block__link">Kadrovi</a>
             </li>
             <li class="info-block__item info-block__item--contact-secondary">
-                  <a href="#"><img src="{{asset('images/kadrovi-fff.png')}}" class="df-icon df-icon--soccer-ball"></a>
+                  <a href="#"><img src="{{asset('images/bus-fff.png')}}" class="df-icon df-icon--soccer-ball"></a>
                   <h6 class="info-block__heading">Sportski</h6>
                   <a href="#" class="info-block__link">Turizam</a>
             </li>
