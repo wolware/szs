@@ -18,10 +18,10 @@ class CreateSkiingTracksTable extends Migration
 
             $table->string('name');
             $table->string('level');
-            $table->decimal('length');
-            $table->decimal('time');
-            $table->decimal('start_point');
-            $table->decimal('end_point');
+            $table->decimal('length')->nullable();
+            $table->decimal('time')->nullable();
+            $table->decimal('start_point')->nullable();
+            $table->decimal('end_point')->nullable();
 
             $table->unsignedInteger('skiing_objects_id')->nullable();
 
