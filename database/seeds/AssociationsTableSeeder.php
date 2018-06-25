@@ -2,6 +2,7 @@
 
 use App\Association;
 use App\Region;
+use App\Sport;
 use Illuminate\Database\Seeder;
 
 class AssociationsTableSeeder extends Seeder
@@ -16,14 +17,17 @@ class AssociationsTableSeeder extends Seeder
         $associations = [
             [
                 'region' => 'Bosnia and Herzegovina',
+                'sport' => 'Nogomet',
                 'name' => 'Državni savez'
             ],
             [
                 'region' => 'Bosnia and Herzegovina',
+                'sport' => 'Nogomet',
                 'name' => 'Kantonalni savez'
             ],
             [
                 'region' => 'Bosnia and Herzegovina',
+                'sport' => 'Nogomet',
                 'name' => 'Entitetski savez'
             ],
         ];
@@ -32,11 +36,14 @@ class AssociationsTableSeeder extends Seeder
 
         foreach ($associations as $association) {
             $region = Region::where('name', $association->region)->first();
+            $sport = Sport::where('name', $association->sport)->first();
 
-            if($region) {
+            if($region && $sport) {
                 Association::create([
-                   'name' => $association->name,
-                   'region_id' => $region->id
+                    'name' => $association->name,
+                    'region_id' => $region->id,
+                    'sport_id' => $sport->id,
+                    'image' => 'default.png'
                 ]);
             }
         }
