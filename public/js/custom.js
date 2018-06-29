@@ -1878,6 +1878,8 @@ $(document).ready(function () {
     var associationBox = $('#associations');
     var associationRadio = $('input[name="association"]');
 
+    setSelectedSports(sportTypeSelect, sportSelect);
+
     // Nadji najveci array key od old inputa za licnost ako postoji
     if($('.licnostHover').length) {
         var num = $('.licnostHover').map(function() {
@@ -2882,5 +2884,24 @@ function updateAssociationsList(sport, country, associationBox, associationRadio
         associationBox.show();
     } else {
         associationBox.hide();
+    }
+}
+
+function setSelectedSports(sportTypeSelect, sportSelect) {
+    var selectedOption = sportSelect.val();
+    var itemsToShow;
+    if(sportTypeSelect.val() == 1 || sportTypeSelect.val() == 2) {
+        if(sportTypeSelect.val() == 1) {
+            itemsToShow = sportSelect.children("option[data-disabled^='0']");
+        } else if (sportTypeSelect.val() == 2) {
+            itemsToShow = sportSelect.children("option[data-disabled^='1']");
+        }
+        sportSelect.prop('disabled', false);
+        sportSelect.children('option').hide();
+        sportSelect.children('option:first').show();
+        sportSelect.find('option[value=' + selectedOption + ']').attr('selected', 'selected');
+        itemsToShow.show();
+    } else {
+        sportSelect.prop('disabled', 'disabled');
     }
 }
