@@ -202,6 +202,7 @@
             <nav class="main-nav clearfix">
               <ul class="main-nav__list">
                 <li class=""><a href="#">Kalendar</a></li>
+                <li class=""><a href="{{ url('associations') }}">Savezi</a></li>
                 <li class=""><a href="#">Reprezentacije BiH</a></li>
                 <li class=""><a href="#">Dijaspora</a></li>
                 <li class="visible-xs"><a href="www.rekreacija.svezasport.ba">SZS Rekreacija</a></li>

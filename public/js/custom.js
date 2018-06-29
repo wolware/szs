@@ -2124,16 +2124,10 @@ $(document).ready(function () {
         municipalitySelect.prop("selectedIndex", 0).prop('disabled', 'disabled');
 
         // Izlistaj sve saveze države ako postoje
-        var associationsToShow = associationBox.find("input[data-region^=" + countrySelect.val() + "]");
-        associationRadio.prop('checked', false);
+        var sportValue = sportSelect.val();
+        var countryValue = countrySelect.val();
 
-        if(associationsToShow.length > 0) {
-            associationRadio.closest('label').hide();
-            associationsToShow.closest('label').css('display', 'inline-block');
-            associationBox.show();
-        } else {
-            associationBox.hide();
-        }
+        updateAssociationsList(sportValue, countryValue, associationBox, associationRadio);
 
     });
 
@@ -2196,6 +2190,14 @@ $(document).ready(function () {
         } else {
             sportSelect.prop('disabled', 'disabled');
         }
+    });
+
+    sportSelect.on('change', function () {
+        // Izlistaj sve saveze države ako postoje
+        var sportValue = sportSelect.val();
+        var countryValue = countrySelect.val();
+
+        updateAssociationsList(sportValue, countryValue, associationBox, associationRadio);
     });
 
     // Selekt za sportove search
@@ -2863,4 +2865,22 @@ function addCjenovnikSkiValidation() {
             range: [0, 10000]
         });
     });
+}
+
+function updateAssociationsList(sport, country, associationBox, associationRadio) {
+    if(!sport || !country) {
+        associationBox.hide();
+        return;
+    }
+
+    var associationsToShow = associationBox.find("input[data-region=" + country + "][data-sport=" + sport + "]");
+    associationRadio.prop('checked', false);
+
+    if(associationsToShow.length > 0) {
+        associationRadio.closest('label').hide();
+        associationsToShow.closest('label').css('display', 'inline-block');
+        associationBox.show();
+    } else {
+        associationBox.hide();
+    }
 }

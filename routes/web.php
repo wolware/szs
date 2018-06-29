@@ -34,6 +34,8 @@ Route::get('/staff/{id}', 'StaffController@showStaff')->where('id', '[0-9]+');
 Route::get('/schools/{id}', 'SchoolController@showSchool')->where('id', '[0-9]+');
 Route::get('/objects/{id}', 'ObjectController@showObject')->where('id', '[0-9]+');
 Route::get('/objects', 'ObjectController@searchObjects');
+Route::get('/associations', 'AssociationController@index');
+Route::get('/associations/{id}', 'AssociationController@showAssociation')->where('id', '[0-9]+');
 
 // Dodaje protekciju na rute samo za logovane korisnike
 Route::middleware('auth')->group(function () {
@@ -147,6 +149,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/schools/{id}/edit/history', 'SchoolController@editSchoolHistory')->where('id', '[0-9]+');
     Route::patch('/schools/{id}/edit/trophies', 'SchoolController@editSchoolTrophies')->where('id', '[0-9]+');
     Route::patch('/schools/{id}/edit/gallery', 'SchoolController@editSchoolGallery')->where('id', '[0-9]+');
+
+    // ASSOCIATIONS
+
 
     //LOGOUT
     Route::get('user/logout', 'Auth\LoginController@logout');

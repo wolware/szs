@@ -244,12 +244,12 @@
 							<input type="text" name="competiton" id="takmicenje" class="form-control" placeholder="Unesite naziv takmičenja u kojem klub nastupa" value="{{ old('competiton') }}">
 						  </div>
 
-						  <div class="form-group col-md-6" id="associations" style="display: {{ old('country') ? 'block' : 'none' }};">
+						  <div class="form-group col-md-6" id="associations" style="display: {{ old('country') && old('sport') ? 'block' : 'none' }};">
 							<label><img class="flow-icons-013" src="{{asset('images/icons/savez.svg')}}"> Savez kojem klub pripada</label>
 							  <div class="form-group">
 								  @foreach($associations as $association)
-									  <label class="radio radio-inline" style="display: {{ old('country') == $association->region_id ? 'inline-block' : 'none' }};">
-										  <input type="radio" data-region="{{ $association->region_id }}" name="association" value="{{ $association->id }}" {{ old('association') == $association->id ? 'checked' : '' }}> {{ $association->name }}
+									  <label class="radio radio-inline" style="display: {{ old('country') == $association->region_id && old('sport') == $association->sport_id ? 'inline-block' : 'none' }};">
+										  <input type="radio" data-region="{{ $association->region_id }}" data-sport="{{ $association->sport_id }}" name="association" value="{{ $association->id }}" {{ old('association') == $association->id ? 'checked' : '' }}> {{ $association->name }}
 										  <span class="radio-indicator"></span>
 									  </label>
 								  @endforeach
