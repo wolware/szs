@@ -20,8 +20,12 @@ class Player extends Model
         return $this->hasMany('App\PlayerClubHistory');
     }
 
-    public function images() {
+    public function all_images() {
         return $this->hasMany('App\Gallery');
+    }
+
+    public function images() {
+        return $this->all_images()->where('is_proof', '=', false);
     }
 
     public function club() {

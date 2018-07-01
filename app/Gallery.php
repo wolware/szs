@@ -14,6 +14,7 @@ class Gallery extends Model
         'player_id',
         'staff_id',
         'school_id',
-        'object_id'
+        'object_id',
+        'is_proof'
     ];
 }

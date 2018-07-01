@@ -38,7 +38,15 @@ class Objects extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function images() {
+    public function all_images() {
         return $this->hasMany('App\Gallery', 'object_id');
+    }
+
+    public function images() {
+        return $this->all_images()->where('is_proof', '=', false);
+    }
+
+    public function proof_images() {
+        return $this->all_images()->where('is_proof', '=', true);
     }
 }

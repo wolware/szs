@@ -44,6 +44,7 @@
             <li role="presentation"><a href="#tab-vremeplov" role="tab" data-toggle="tab"><i class="fa fa-history"></i><small>Klupski</small>Vremeplov</a></li>
             <li role="presentation"><a href="#tab-vitrina" role="tab" data-toggle="tab"><i class="fa fa-trophy"></i><small>Trofejna</small>Vitrina</a></li>
 			<li role="presentation"><a href="#tab-galerija" role="tab" data-toggle="tab"><i class="fa fa-picture-o"></i><small>Foto</small>Galerija</a></li>
+			  <li role="presentation"><a href="#tab-dokaz" role="tab" data-toggle="tab"><i class="fa fa-picture-o"></i><small>Dokaz</small>Vlasništva</a></li>
 			<li role="presentation"><a href="#tab-pozivnice" role="tab" data-toggle="tab"><i class="fa fa-envelope-open-o"></i><small>Pozivnice i</small>Zahtjevi</a></li>
           </ul>
             <div class="row form-segment">
@@ -516,413 +517,6 @@
 			</div>
 			<!-- Tab: Vitrina / End -->
 
-
-		<!-- Tab: Pozivnice i Zahtjevi -->
-			<div role="tabpanel" class="tab-pane fade neaktivno" id="tab-pozivnice">
-				<div class="row obavijesti-racun">
-					<div class="card col-md-6">
-					  <div class="card__header">
-						<h4><i class="fa fa-envelope-open-o"></i>  Zahtjevi poslani od strane igrača</h4>
-					  </div>
-					  <div class="card__content kartica-ev-ocjene">
-
-						<div class="table-responsive">
-						  <table class="table shop-table pozivnice-list">
-							<tbody>
-							  <tr>
-								<td class="product__photo">
-								  <figure class="product__thumb" width="10%">
-									<a href="#"><img class="img-ocjene" src="assets/images/dino-secic.jpg" alt=""></a>
-								  </figure>
-								</td>
-								<td class="product__info" width="70%">
-								  <span class="product__cat">Nogometaš</span>
-								  <h5 class="product__name"><a href="#">Dino Šečić</a></h5>
-								</td>
-								<td class="product__remove" width="10%">
-								  <a href="#" class="fa fa-check product__accept-icon"></a>
-								</td>
-								<td class="product__remove" width="10%">
-								  <a href="#" class="fa fa-times product__remove-icon"></a>
-								</td>
-							  </tr>
-
-							  <tr>
-								<td class="product__photo">
-								  <figure class="product__thumb" width="10%">
-									<a href="#"><img class="img-ocjene" src="assets/images/dino-secic.jpg" alt=""></a>
-								  </figure>
-								</td>
-								<td class="product__info" width="70%">
-								  <span class="product__cat">Nogometaš</span>
-								  <h5 class="product__name"><a href="#">Dino Šečić</a></h5>
-								</td>
-								<td class="product__remove" width="10%">
-								  <a href="#" class="fa fa-check product__accept-icon"></a>
-								</td>
-								<td class="product__remove" width="10%">
-								  <a href="#" class="fa fa-times product__remove-icon"></a>
-								</td>
-							  </tr>
-
-							  <tr>
-								<td class="product__photo">
-								  <figure class="product__thumb" width="10%">
-									<a href="#"><img class="img-ocjene" src="assets/images/dino-secic.jpg" alt=""></a>
-								  </figure>
-								</td>
-								<td class="product__info" width="70%">
-								  <span class="product__cat">Nogometaš</span>
-								  <h5 class="product__name"><a href="#">Dino Šečić</a></h5>
-								</td>
-								<td class="product__remove" width="10%">
-								  <a href="#" class="fa fa-check product__accept-icon"></a>
-								</td>
-								<td class="product__remove" width="10%">
-								  <a href="#" class="fa fa-times product__remove-icon"></a>
-								</td>
-							  </tr>
-
-							  <tr>
-								<td class="product__photo">
-								  <figure class="product__thumb" width="10%">
-									<a href="#"><img class="img-ocjene" src="assets/images/dino-secic.jpg" alt=""></a>
-								  </figure>
-								</td>
-								<td class="product__info" width="70%">
-								  <span class="product__cat">Nogometaš</span>
-								  <h5 class="product__name"><a href="#">Dino Šečić</a></h5>
-								</td>
-								<td class="product__remove" width="10%">
-								  <a href="#" class="fa fa-check product__accept-icon"></a>
-								</td>
-								<td class="product__remove" width="10%">
-								  <a href="#" class="fa fa-times product__remove-icon"></a>
-								</td>
-							  </tr>
-
-							  <tr>
-								<td class="product__photo">
-								  <figure class="product__thumb" width="10%">
-									<a href="#"><img class="img-ocjene" src="assets/images/dino-secic.jpg" alt=""></a>
-								  </figure>
-								</td>
-								<td class="product__info" width="70%">
-								  <span class="product__cat">Nogometaš</span>
-								  <h5 class="product__name"><a href="#">Dino Šečić</a></h5>
-								</td>
-								<td class="product__remove" width="10%">
-								  <a href="#" class="fa fa-check product__accept-icon"></a>
-								</td>
-								<td class="product__remove" width="10%">
-								  <a href="#" class="fa fa-times product__remove-icon"></a>
-								</td>
-							  </tr>
-
-							</tbody>
-						  </table>
-						</div>
-
-					  </div>
-					</div>
-
-					<div class="card col-md-6">
-					  <div class="card__header">
-						<h4><i class="fa fa-envelope-o"></i>  Vaši zahtjevi igračima</h4>
-					  </div>
-					  <div class="card__content kartica-ev-ocjene">
-
-						<div class="table-responsive">
-						  <table class="table shop-table">
-							<tbody>
-							  <tr>
-								<td class="product__photo">
-								  <figure class="product__thumb" width="10%">
-									<a href="#"><img class="img-ocjene" src="assets/images/profilna.JPG" alt=""></a>
-								  </figure>
-								</td>
-								<td class="product__info" width="80%">
-								  <span class="product__cat">Nogometaš</span>
-								  <h5 class="product__name"><a href="#">Nedim Tufekčić</a></h5>
-								</td>
-								<td class="product__remove" width="10%">
-								  <a href="#" class="fa fa-times product__remove-icon"></a>
-								</td>
-							  </tr>
-
-							  <tr>
-								<td class="product__photo">
-								  <figure class="product__thumb" width="10%">
-									<a href="#"><img class="img-ocjene" src="assets/images/profilna.JPG" alt=""></a>
-								  </figure>
-								</td>
-								<td class="product__info" width="80%">
-								  <span class="product__cat">Nogometaš</span>
-								  <h5 class="product__name"><a href="#">Nedim Tufekčić</a></h5>
-								</td>
-								<td class="product__remove" width="10%">
-								  <a href="#" class="fa fa-times product__remove-icon"></a>
-								</td>
-							  </tr>
-
-							  <tr>
-								<td class="product__photo">
-								  <figure class="product__thumb" width="10%">
-									<a href="#"><img class="img-ocjene" src="assets/images/profilna.JPG" alt=""></a>
-								  </figure>
-								</td>
-								<td class="product__info" width="80%">
-								  <span class="product__cat">Nogometaš</span>
-								  <h5 class="product__name"><a href="#">Nedim Tufekčić</a></h5>
-								</td>
-								<td class="product__remove" width="10%">
-								  <a href="#" class="fa fa-times product__remove-icon"></a>
-								</td>
-							  </tr>
-
-							  <tr>
-								<td class="product__photo">
-								  <figure class="product__thumb" width="10%">
-									<a href="#"><img class="img-ocjene" src="assets/images/profilna.JPG" alt=""></a>
-								  </figure>
-								</td>
-								<td class="product__info" width="80%">
-								  <span class="product__cat">Nogometaš</span>
-								  <h5 class="product__name"><a href="#">Nedim Tufekčić</a></h5>
-								</td>
-								<td class="product__remove" width="10%">
-								  <a href="#" class="fa fa-times product__remove-icon"></a>
-								</td>
-							  </tr>
-
-							  <tr>
-								<td class="product__photo">
-								  <figure class="product__thumb" width="10%">
-									<a href="#"><img class="img-ocjene" src="assets/images/profilna.JPG" alt=""></a>
-								  </figure>
-								</td>
-								<td class="product__info" width="80%">
-								  <span class="product__cat">Nogometaš</span>
-								  <h5 class="product__name"><a href="#">Nedim Tufekčić</a></h5>
-								</td>
-								<td class="product__remove" width="10%">
-								  <a href="#" class="fa fa-times product__remove-icon"></a>
-								</td>
-							  </tr>
-
-							</tbody>
-						  </table>
-						</div>
-
-					  </div>
-					</div>
-				</div>
-
-
-
-				<div class="row obavijesti-racun">
-					<div class="card col-md-6">
-					  <div class="card__header">
-						<h4><i class="fa fa-envelope-open-o"></i>  Zahtjevi poslani od strane kadrova</h4>
-					  </div>
-					  <div class="card__content kartica-ev-ocjene">
-
-						<div class="table-responsive">
-						  <table class="table shop-table pozivnice-list">
-							<tbody>
-							  <tr>
-								<td class="product__photo">
-								  <figure class="product__thumb" width="10%">
-									<a href="#"><img class="img-ocjene" src="assets/images/dino-secic.jpg" alt=""></a>
-								  </figure>
-								</td>
-								<td class="product__info" width="70%">
-								  <span class="product__cat">Nogometaš</span>
-								  <h5 class="product__name"><a href="#">Dino Šečić</a></h5>
-								</td>
-								<td class="product__remove" width="10%">
-								  <a href="#" class="fa fa-check product__accept-icon"></a>
-								</td>
-								<td class="product__remove" width="10%">
-								  <a href="#" class="fa fa-times product__remove-icon"></a>
-								</td>
-							  </tr>
-
-							  <tr>
-								<td class="product__photo">
-								  <figure class="product__thumb" width="10%">
-									<a href="#"><img class="img-ocjene" src="assets/images/dino-secic.jpg" alt=""></a>
-								  </figure>
-								</td>
-								<td class="product__info" width="70%">
-								  <span class="product__cat">Nogometaš</span>
-								  <h5 class="product__name"><a href="#">Dino Šečić</a></h5>
-								</td>
-								<td class="product__remove" width="10%">
-								  <a href="#" class="fa fa-check product__accept-icon"></a>
-								</td>
-								<td class="product__remove" width="10%">
-								  <a href="#" class="fa fa-times product__remove-icon"></a>
-								</td>
-							  </tr>
-
-							  <tr>
-								<td class="product__photo">
-								  <figure class="product__thumb" width="10%">
-									<a href="#"><img class="img-ocjene" src="assets/images/dino-secic.jpg" alt=""></a>
-								  </figure>
-								</td>
-								<td class="product__info" width="70%">
-								  <span class="product__cat">Nogometaš</span>
-								  <h5 class="product__name"><a href="#">Dino Šečić</a></h5>
-								</td>
-								<td class="product__remove" width="10%">
-								  <a href="#" class="fa fa-check product__accept-icon"></a>
-								</td>
-								<td class="product__remove" width="10%">
-								  <a href="#" class="fa fa-times product__remove-icon"></a>
-								</td>
-							  </tr>
-
-							  <tr>
-								<td class="product__photo">
-								  <figure class="product__thumb" width="10%">
-									<a href="#"><img class="img-ocjene" src="assets/images/dino-secic.jpg" alt=""></a>
-								  </figure>
-								</td>
-								<td class="product__info" width="70%">
-								  <span class="product__cat">Nogometaš</span>
-								  <h5 class="product__name"><a href="#">Dino Šečić</a></h5>
-								</td>
-								<td class="product__remove" width="10%">
-								  <a href="#" class="fa fa-check product__accept-icon"></a>
-								</td>
-								<td class="product__remove" width="10%">
-								  <a href="#" class="fa fa-times product__remove-icon"></a>
-								</td>
-							  </tr>
-
-							  <tr>
-								<td class="product__photo">
-								  <figure class="product__thumb" width="10%">
-									<a href="#"><img class="img-ocjene" src="assets/images/dino-secic.jpg" alt=""></a>
-								  </figure>
-								</td>
-								<td class="product__info" width="70%">
-								  <span class="product__cat">Nogometaš</span>
-								  <h5 class="product__name"><a href="#">Dino Šečić</a></h5>
-								</td>
-								<td class="product__remove" width="10%">
-								  <a href="#" class="fa fa-check product__accept-icon"></a>
-								</td>
-								<td class="product__remove" width="10%">
-								  <a href="#" class="fa fa-times product__remove-icon"></a>
-								</td>
-							  </tr>
-
-							</tbody>
-						  </table>
-						</div>
-
-					  </div>
-					</div>
-
-					<div class="card col-md-6">
-					  <div class="card__header">
-						<h4><i class="fa fa-envelope-o"></i>  Vaši zahtjevi kadrovima</h4>
-					  </div>
-					  <div class="card__content kartica-ev-ocjene">
-
-						<div class="table-responsive">
-						  <table class="table shop-table">
-							<tbody>
-							  <tr>
-								<td class="product__photo">
-								  <figure class="product__thumb" width="10%">
-									<a href="#"><img class="img-ocjene" src="assets/images/profilna.JPG" alt=""></a>
-								  </figure>
-								</td>
-								<td class="product__info" width="80%">
-								  <span class="product__cat">Nogometaš</span>
-								  <h5 class="product__name"><a href="#">Nedim Tufekčić</a></h5>
-								</td>
-								<td class="product__remove" width="10%">
-								  <a href="#" class="fa fa-times product__remove-icon"></a>
-								</td>
-							  </tr>
-
-							  <tr>
-								<td class="product__photo">
-								  <figure class="product__thumb" width="10%">
-									<a href="#"><img class="img-ocjene" src="assets/images/profilna.JPG" alt=""></a>
-								  </figure>
-								</td>
-								<td class="product__info" width="80%">
-								  <span class="product__cat">Nogometaš</span>
-								  <h5 class="product__name"><a href="#">Nedim Tufekčić</a></h5>
-								</td>
-								<td class="product__remove" width="10%">
-								  <a href="#" class="fa fa-times product__remove-icon"></a>
-								</td>
-							  </tr>
-
-							  <tr>
-								<td class="product__photo">
-								  <figure class="product__thumb" width="10%">
-									<a href="#"><img class="img-ocjene" src="assets/images/profilna.JPG" alt=""></a>
-								  </figure>
-								</td>
-								<td class="product__info" width="80%">
-								  <span class="product__cat">Nogometaš</span>
-								  <h5 class="product__name"><a href="#">Nedim Tufekčić</a></h5>
-								</td>
-								<td class="product__remove" width="10%">
-								  <a href="#" class="fa fa-times product__remove-icon"></a>
-								</td>
-							  </tr>
-
-							  <tr>
-								<td class="product__photo">
-								  <figure class="product__thumb" width="10%">
-									<a href="#"><img class="img-ocjene" src="assets/images/profilna.JPG" alt=""></a>
-								  </figure>
-								</td>
-								<td class="product__info" width="80%">
-								  <span class="product__cat">Nogometaš</span>
-								  <h5 class="product__name"><a href="#">Nedim Tufekčić</a></h5>
-								</td>
-								<td class="product__remove" width="10%">
-								  <a href="#" class="fa fa-times product__remove-icon"></a>
-								</td>
-							  </tr>
-
-							  <tr>
-								<td class="product__photo">
-								  <figure class="product__thumb" width="10%">
-									<a href="#"><img class="img-ocjene" src="assets/images/profilna.JPG" alt=""></a>
-								  </figure>
-								</td>
-								<td class="product__info" width="80%">
-								  <span class="product__cat">Nogometaš</span>
-								  <h5 class="product__name"><a href="#">Nedim Tufekčić</a></h5>
-								</td>
-								<td class="product__remove" width="10%">
-								  <a href="#" class="fa fa-times product__remove-icon"></a>
-								</td>
-							  </tr>
-
-							</tbody>
-						  </table>
-						</div>
-
-					  </div>
-					</div>
-				</div>
-
-
-			</div>
-			<!-- Tab: Pozivnice i Zahtjevi / End -->
-
 			<!-- Tab: Foto galerija -->
 			<div role="tabpanel" class="tab-pane fade neaktivno" id="tab-galerija">
                 <form id="editClubGallery" role="form" action="{{ url('/galerija/edit/' . $club->id) }}" method="POST" enctype="multipart/form-data" >
@@ -942,7 +536,7 @@
                     </div>
                     <div class="row form-objavi-klub-01">
                         @foreach($club->images as $slika)
-                        <div class="album__item col-xs-6 col-sm-3" id="galerija_klub">
+                        <div class="album__item col-xs-6 col-sm-3">
                             <div class="album__item-holder">
                                 <a href="{{asset('images/galerija_klub/' . $slika->image)}}" class="album__item-link mp_gallery">
                                 <figure class="album__thumb">
@@ -984,6 +578,451 @@
 
 			</div>
 			<!-- Tab: Foto galerija / End -->
+
+			  <!-- Tab: Dokaz vlasništva -->
+			  <div role="tabpanel" class="tab-pane fade" id="tab-dokaz">
+				  <form id="editClubProof" role="form" action="{{ url('/proof/edit/' . $club->id) }}" method="POST" enctype="multipart/form-data" >
+					  {!! csrf_field() !!}
+					  <div class="row">
+						  <div class="col-md-12">
+							  <div class="alert alert-warning alert-dismissible">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Zatvori obavijest"><span aria-hidden="true">&times;</span></button>
+								  <strong>Unesite sliku ili slike koje dokazuje da ste baš Vi vlasnik ovog kluba kako bi naša administracija odobrila Vaš klub na mreži Sve Za Sport.</strong>
+							  </div>
+						  </div>
+					  </div>
+					  <div class="row dodavanje-slika">
+						  <div class="col-md-12 sadrzaj-slike">
+							  <p class="dodaj-sliku-naslov">Dodajte slike *</p>
+							  <p class="dodaj-sliku-call">koje dokazuju da ste Vi vlasnik kluba</p>
+							  <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
+								  Odaberi slike... <input type="file" class="galerija_dokaz not-visible" name="proof[]" accept="image/*" multiple>
+							  </label>
+						  </div>
+					  </div>
+					  <div class="row form-objavi-klub-01" id="galerija_dokaz_prikaz">
+						  @foreach($club->proof_images as $slika)
+							  <div class="album__item col-xs-6 col-sm-3" >
+								  <div class="album__item-holder">
+									  <a href="{{asset('images/club_proof/' . $slika->image)}}" class="album__item-link mp_gallery">
+										  <figure class="album__thumb">
+											  <img src="{{asset('images/club_proof/' . $slika->image)}}" alt="">
+										  </figure>
+									  </a>
+								  </div>
+							  </div>
+						  @endforeach
+					  </div>
+					  <button type="submit" class="btn btn-default btn-sm btn-block btn-spasi" ><i class="fa fa-plus-circle"></i> Spremi dokaze</button>
+				  </form>
+			  </div>
+			  <!-- Tab: Dokaz vlasništva / End -->
+
+			  <!-- Tab: Pozivnice i Zahtjevi -->
+			  <div role="tabpanel" class="tab-pane fade neaktivno" id="tab-pozivnice">
+				  <div class="row obavijesti-racun">
+					  <div class="card col-md-6">
+						  <div class="card__header">
+							  <h4><i class="fa fa-envelope-open-o"></i>  Zahtjevi poslani od strane igrača</h4>
+						  </div>
+						  <div class="card__content kartica-ev-ocjene">
+
+							  <div class="table-responsive">
+								  <table class="table shop-table pozivnice-list">
+									  <tbody>
+									  <tr>
+										  <td class="product__photo">
+											  <figure class="product__thumb" width="10%">
+												  <a href="#"><img class="img-ocjene" src="assets/images/dino-secic.jpg" alt=""></a>
+											  </figure>
+										  </td>
+										  <td class="product__info" width="70%">
+											  <span class="product__cat">Nogometaš</span>
+											  <h5 class="product__name"><a href="#">Dino Šečić</a></h5>
+										  </td>
+										  <td class="product__remove" width="10%">
+											  <a href="#" class="fa fa-check product__accept-icon"></a>
+										  </td>
+										  <td class="product__remove" width="10%">
+											  <a href="#" class="fa fa-times product__remove-icon"></a>
+										  </td>
+									  </tr>
+
+									  <tr>
+										  <td class="product__photo">
+											  <figure class="product__thumb" width="10%">
+												  <a href="#"><img class="img-ocjene" src="assets/images/dino-secic.jpg" alt=""></a>
+											  </figure>
+										  </td>
+										  <td class="product__info" width="70%">
+											  <span class="product__cat">Nogometaš</span>
+											  <h5 class="product__name"><a href="#">Dino Šečić</a></h5>
+										  </td>
+										  <td class="product__remove" width="10%">
+											  <a href="#" class="fa fa-check product__accept-icon"></a>
+										  </td>
+										  <td class="product__remove" width="10%">
+											  <a href="#" class="fa fa-times product__remove-icon"></a>
+										  </td>
+									  </tr>
+
+									  <tr>
+										  <td class="product__photo">
+											  <figure class="product__thumb" width="10%">
+												  <a href="#"><img class="img-ocjene" src="assets/images/dino-secic.jpg" alt=""></a>
+											  </figure>
+										  </td>
+										  <td class="product__info" width="70%">
+											  <span class="product__cat">Nogometaš</span>
+											  <h5 class="product__name"><a href="#">Dino Šečić</a></h5>
+										  </td>
+										  <td class="product__remove" width="10%">
+											  <a href="#" class="fa fa-check product__accept-icon"></a>
+										  </td>
+										  <td class="product__remove" width="10%">
+											  <a href="#" class="fa fa-times product__remove-icon"></a>
+										  </td>
+									  </tr>
+
+									  <tr>
+										  <td class="product__photo">
+											  <figure class="product__thumb" width="10%">
+												  <a href="#"><img class="img-ocjene" src="assets/images/dino-secic.jpg" alt=""></a>
+											  </figure>
+										  </td>
+										  <td class="product__info" width="70%">
+											  <span class="product__cat">Nogometaš</span>
+											  <h5 class="product__name"><a href="#">Dino Šečić</a></h5>
+										  </td>
+										  <td class="product__remove" width="10%">
+											  <a href="#" class="fa fa-check product__accept-icon"></a>
+										  </td>
+										  <td class="product__remove" width="10%">
+											  <a href="#" class="fa fa-times product__remove-icon"></a>
+										  </td>
+									  </tr>
+
+									  <tr>
+										  <td class="product__photo">
+											  <figure class="product__thumb" width="10%">
+												  <a href="#"><img class="img-ocjene" src="assets/images/dino-secic.jpg" alt=""></a>
+											  </figure>
+										  </td>
+										  <td class="product__info" width="70%">
+											  <span class="product__cat">Nogometaš</span>
+											  <h5 class="product__name"><a href="#">Dino Šečić</a></h5>
+										  </td>
+										  <td class="product__remove" width="10%">
+											  <a href="#" class="fa fa-check product__accept-icon"></a>
+										  </td>
+										  <td class="product__remove" width="10%">
+											  <a href="#" class="fa fa-times product__remove-icon"></a>
+										  </td>
+									  </tr>
+
+									  </tbody>
+								  </table>
+							  </div>
+
+						  </div>
+					  </div>
+
+					  <div class="card col-md-6">
+						  <div class="card__header">
+							  <h4><i class="fa fa-envelope-o"></i>  Vaši zahtjevi igračima</h4>
+						  </div>
+						  <div class="card__content kartica-ev-ocjene">
+
+							  <div class="table-responsive">
+								  <table class="table shop-table">
+									  <tbody>
+									  <tr>
+										  <td class="product__photo">
+											  <figure class="product__thumb" width="10%">
+												  <a href="#"><img class="img-ocjene" src="assets/images/profilna.JPG" alt=""></a>
+											  </figure>
+										  </td>
+										  <td class="product__info" width="80%">
+											  <span class="product__cat">Nogometaš</span>
+											  <h5 class="product__name"><a href="#">Nedim Tufekčić</a></h5>
+										  </td>
+										  <td class="product__remove" width="10%">
+											  <a href="#" class="fa fa-times product__remove-icon"></a>
+										  </td>
+									  </tr>
+
+									  <tr>
+										  <td class="product__photo">
+											  <figure class="product__thumb" width="10%">
+												  <a href="#"><img class="img-ocjene" src="assets/images/profilna.JPG" alt=""></a>
+											  </figure>
+										  </td>
+										  <td class="product__info" width="80%">
+											  <span class="product__cat">Nogometaš</span>
+											  <h5 class="product__name"><a href="#">Nedim Tufekčić</a></h5>
+										  </td>
+										  <td class="product__remove" width="10%">
+											  <a href="#" class="fa fa-times product__remove-icon"></a>
+										  </td>
+									  </tr>
+
+									  <tr>
+										  <td class="product__photo">
+											  <figure class="product__thumb" width="10%">
+												  <a href="#"><img class="img-ocjene" src="assets/images/profilna.JPG" alt=""></a>
+											  </figure>
+										  </td>
+										  <td class="product__info" width="80%">
+											  <span class="product__cat">Nogometaš</span>
+											  <h5 class="product__name"><a href="#">Nedim Tufekčić</a></h5>
+										  </td>
+										  <td class="product__remove" width="10%">
+											  <a href="#" class="fa fa-times product__remove-icon"></a>
+										  </td>
+									  </tr>
+
+									  <tr>
+										  <td class="product__photo">
+											  <figure class="product__thumb" width="10%">
+												  <a href="#"><img class="img-ocjene" src="assets/images/profilna.JPG" alt=""></a>
+											  </figure>
+										  </td>
+										  <td class="product__info" width="80%">
+											  <span class="product__cat">Nogometaš</span>
+											  <h5 class="product__name"><a href="#">Nedim Tufekčić</a></h5>
+										  </td>
+										  <td class="product__remove" width="10%">
+											  <a href="#" class="fa fa-times product__remove-icon"></a>
+										  </td>
+									  </tr>
+
+									  <tr>
+										  <td class="product__photo">
+											  <figure class="product__thumb" width="10%">
+												  <a href="#"><img class="img-ocjene" src="assets/images/profilna.JPG" alt=""></a>
+											  </figure>
+										  </td>
+										  <td class="product__info" width="80%">
+											  <span class="product__cat">Nogometaš</span>
+											  <h5 class="product__name"><a href="#">Nedim Tufekčić</a></h5>
+										  </td>
+										  <td class="product__remove" width="10%">
+											  <a href="#" class="fa fa-times product__remove-icon"></a>
+										  </td>
+									  </tr>
+
+									  </tbody>
+								  </table>
+							  </div>
+
+						  </div>
+					  </div>
+				  </div>
+
+
+
+				  <div class="row obavijesti-racun">
+					  <div class="card col-md-6">
+						  <div class="card__header">
+							  <h4><i class="fa fa-envelope-open-o"></i>  Zahtjevi poslani od strane kadrova</h4>
+						  </div>
+						  <div class="card__content kartica-ev-ocjene">
+
+							  <div class="table-responsive">
+								  <table class="table shop-table pozivnice-list">
+									  <tbody>
+									  <tr>
+										  <td class="product__photo">
+											  <figure class="product__thumb" width="10%">
+												  <a href="#"><img class="img-ocjene" src="assets/images/dino-secic.jpg" alt=""></a>
+											  </figure>
+										  </td>
+										  <td class="product__info" width="70%">
+											  <span class="product__cat">Nogometaš</span>
+											  <h5 class="product__name"><a href="#">Dino Šečić</a></h5>
+										  </td>
+										  <td class="product__remove" width="10%">
+											  <a href="#" class="fa fa-check product__accept-icon"></a>
+										  </td>
+										  <td class="product__remove" width="10%">
+											  <a href="#" class="fa fa-times product__remove-icon"></a>
+										  </td>
+									  </tr>
+
+									  <tr>
+										  <td class="product__photo">
+											  <figure class="product__thumb" width="10%">
+												  <a href="#"><img class="img-ocjene" src="assets/images/dino-secic.jpg" alt=""></a>
+											  </figure>
+										  </td>
+										  <td class="product__info" width="70%">
+											  <span class="product__cat">Nogometaš</span>
+											  <h5 class="product__name"><a href="#">Dino Šečić</a></h5>
+										  </td>
+										  <td class="product__remove" width="10%">
+											  <a href="#" class="fa fa-check product__accept-icon"></a>
+										  </td>
+										  <td class="product__remove" width="10%">
+											  <a href="#" class="fa fa-times product__remove-icon"></a>
+										  </td>
+									  </tr>
+
+									  <tr>
+										  <td class="product__photo">
+											  <figure class="product__thumb" width="10%">
+												  <a href="#"><img class="img-ocjene" src="assets/images/dino-secic.jpg" alt=""></a>
+											  </figure>
+										  </td>
+										  <td class="product__info" width="70%">
+											  <span class="product__cat">Nogometaš</span>
+											  <h5 class="product__name"><a href="#">Dino Šečić</a></h5>
+										  </td>
+										  <td class="product__remove" width="10%">
+											  <a href="#" class="fa fa-check product__accept-icon"></a>
+										  </td>
+										  <td class="product__remove" width="10%">
+											  <a href="#" class="fa fa-times product__remove-icon"></a>
+										  </td>
+									  </tr>
+
+									  <tr>
+										  <td class="product__photo">
+											  <figure class="product__thumb" width="10%">
+												  <a href="#"><img class="img-ocjene" src="assets/images/dino-secic.jpg" alt=""></a>
+											  </figure>
+										  </td>
+										  <td class="product__info" width="70%">
+											  <span class="product__cat">Nogometaš</span>
+											  <h5 class="product__name"><a href="#">Dino Šečić</a></h5>
+										  </td>
+										  <td class="product__remove" width="10%">
+											  <a href="#" class="fa fa-check product__accept-icon"></a>
+										  </td>
+										  <td class="product__remove" width="10%">
+											  <a href="#" class="fa fa-times product__remove-icon"></a>
+										  </td>
+									  </tr>
+
+									  <tr>
+										  <td class="product__photo">
+											  <figure class="product__thumb" width="10%">
+												  <a href="#"><img class="img-ocjene" src="assets/images/dino-secic.jpg" alt=""></a>
+											  </figure>
+										  </td>
+										  <td class="product__info" width="70%">
+											  <span class="product__cat">Nogometaš</span>
+											  <h5 class="product__name"><a href="#">Dino Šečić</a></h5>
+										  </td>
+										  <td class="product__remove" width="10%">
+											  <a href="#" class="fa fa-check product__accept-icon"></a>
+										  </td>
+										  <td class="product__remove" width="10%">
+											  <a href="#" class="fa fa-times product__remove-icon"></a>
+										  </td>
+									  </tr>
+
+									  </tbody>
+								  </table>
+							  </div>
+
+						  </div>
+					  </div>
+
+					  <div class="card col-md-6">
+						  <div class="card__header">
+							  <h4><i class="fa fa-envelope-o"></i>  Vaši zahtjevi kadrovima</h4>
+						  </div>
+						  <div class="card__content kartica-ev-ocjene">
+
+							  <div class="table-responsive">
+								  <table class="table shop-table">
+									  <tbody>
+									  <tr>
+										  <td class="product__photo">
+											  <figure class="product__thumb" width="10%">
+												  <a href="#"><img class="img-ocjene" src="assets/images/profilna.JPG" alt=""></a>
+											  </figure>
+										  </td>
+										  <td class="product__info" width="80%">
+											  <span class="product__cat">Nogometaš</span>
+											  <h5 class="product__name"><a href="#">Nedim Tufekčić</a></h5>
+										  </td>
+										  <td class="product__remove" width="10%">
+											  <a href="#" class="fa fa-times product__remove-icon"></a>
+										  </td>
+									  </tr>
+
+									  <tr>
+										  <td class="product__photo">
+											  <figure class="product__thumb" width="10%">
+												  <a href="#"><img class="img-ocjene" src="assets/images/profilna.JPG" alt=""></a>
+											  </figure>
+										  </td>
+										  <td class="product__info" width="80%">
+											  <span class="product__cat">Nogometaš</span>
+											  <h5 class="product__name"><a href="#">Nedim Tufekčić</a></h5>
+										  </td>
+										  <td class="product__remove" width="10%">
+											  <a href="#" class="fa fa-times product__remove-icon"></a>
+										  </td>
+									  </tr>
+
+									  <tr>
+										  <td class="product__photo">
+											  <figure class="product__thumb" width="10%">
+												  <a href="#"><img class="img-ocjene" src="assets/images/profilna.JPG" alt=""></a>
+											  </figure>
+										  </td>
+										  <td class="product__info" width="80%">
+											  <span class="product__cat">Nogometaš</span>
+											  <h5 class="product__name"><a href="#">Nedim Tufekčić</a></h5>
+										  </td>
+										  <td class="product__remove" width="10%">
+											  <a href="#" class="fa fa-times product__remove-icon"></a>
+										  </td>
+									  </tr>
+
+									  <tr>
+										  <td class="product__photo">
+											  <figure class="product__thumb" width="10%">
+												  <a href="#"><img class="img-ocjene" src="assets/images/profilna.JPG" alt=""></a>
+											  </figure>
+										  </td>
+										  <td class="product__info" width="80%">
+											  <span class="product__cat">Nogometaš</span>
+											  <h5 class="product__name"><a href="#">Nedim Tufekčić</a></h5>
+										  </td>
+										  <td class="product__remove" width="10%">
+											  <a href="#" class="fa fa-times product__remove-icon"></a>
+										  </td>
+									  </tr>
+
+									  <tr>
+										  <td class="product__photo">
+											  <figure class="product__thumb" width="10%">
+												  <a href="#"><img class="img-ocjene" src="assets/images/profilna.JPG" alt=""></a>
+											  </figure>
+										  </td>
+										  <td class="product__info" width="80%">
+											  <span class="product__cat">Nogometaš</span>
+											  <h5 class="product__name"><a href="#">Nedim Tufekčić</a></h5>
+										  </td>
+										  <td class="product__remove" width="10%">
+											  <a href="#" class="fa fa-times product__remove-icon"></a>
+										  </td>
+									  </tr>
+
+									  </tbody>
+								  </table>
+							  </div>
+
+						  </div>
+					  </div>
+				  </div>
+
+
+			  </div>
+			  <!-- Tab: Pozivnice i Zahtjevi / End -->
 
         <!-- Single Product Tabbed Content / End -->
 		</div>

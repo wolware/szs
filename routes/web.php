@@ -94,6 +94,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/objects/{id}/edit/ski-tracks', 'ObjectController@editObjectSkiTracks')->where('id', '[0-9]+');
     Route::patch('/objects/{id}/edit/ski-prices', 'ObjectController@editObjectSkiPrices')->where('id', '[0-9]+');
     Route::patch('/objects/{id}/edit/gallery', 'ObjectController@editObjectGallery')->where('id', '[0-9]+');
+    Route::patch('/objects/{id}/edit/proof', 'ObjectController@editObjectProof')->where('id', '[0-9]+');
 
 
     // NEWS
@@ -112,6 +113,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/vremeplov/add/{club_id}', 'ClubController@add_vremeplov');
     Route::post('/trofej/edit/{id}', 'ClubController@edit_trofej');
     Route::post('/galerija/edit/{id}', 'ClubController@edit_galerija');
+    Route::post('/proof/edit/{id}', 'ClubController@edit_proof');
 
     Route::get('/clubs/{id}/approve/player/{player_id}/{notify_id}', 'ClubController@approvePlayer');
     Route::get('/clubs/{id}/approve/staff/{staff_id}/{notify_id}', 'ClubController@approveStaff');

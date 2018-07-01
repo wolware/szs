@@ -48,6 +48,7 @@
                                     <li role="presentation"><a href="#tab-cjenovnik-skijaliste" role="tab" data-toggle="tab" aria-expanded="false"><i class="fa fa-database"></i><small>Cjenovnik</small>Usluga</a></li>
                                 @endif
                                 <li role="presentation"><a href="#tab-galerija" role="tab" data-toggle="tab"><i class="fa fa-picture-o"></i><small>Foto</small>Galerija</a></li>
+                                <li role="presentation"><a href="#tab-dokaz" role="tab" data-toggle="tab"><i class="fa fa-picture-o"></i><small>Dokaz</small>Vlasništva</a></li>
                             </ul>
 
                             <div class="row form-segment">
@@ -724,13 +725,75 @@
                                             </div>
                                         @endif
                                         <div class="form-group form-group--submit col-md-6">
-                                            <button type="submit" class="btn btn-default btn-sm btn-block btn-dalje">
-                                                <i class="fa fa-plus-circle"></i> Završi i objavi
-                                            </button>
+                                            <button type="button" class="btn btn-default btn-sm btn-block btn-dalje">Sljedeći korak <i class="fa fa-chevron-right"></i></button>
                                         </div>
                                     </div>
                                 </div>
                                 <!-- Tab: Foto galerija / End -->
+
+                                <!-- Tab: Dokaz vlasništva -->
+                                <div role="tabpanel" class="tab-pane fade" id="tab-dokaz">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="alert alert-warning alert-dismissible">
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Zatvori obavijest"><span aria-hidden="true">&times;</span></button>
+                                                <strong>Unesite sliku ili slike koje dokazuje da ste baš Vi vlasnik ovog kluba kako bi naša administracija odobrila Vaš klub na mreži Sve Za Sport.</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row dodavanje-slika">
+                                        <div class="col-md-12 sadrzaj-slike">
+                                            <p class="dodaj-sliku-naslov">Dodajte slike *</p>
+                                            <p class="dodaj-sliku-call">koje dokazuju da ste Vi vlasnik kluba</p>
+                                            <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
+                                                Odaberi slike... <input type="file" class="galerija_dokaz not-visible" name="proof[]" accept="image/*" multiple>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="row form-objavi-klub-01" id="galerija_dokaz_prikaz">
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-4"></div>
+                                        <!--<div class="form-group form-group--submit col-md-4">
+                                            <a href="#" class="btn btn-default btn-sm btn-block btn-dodaj"><i class="fa fa-database"></i> 3 Dodavanje fotografije </a>
+                                        </div>-->
+                                        <div class="col-md-4"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group form-group--submit col-md-6">
+                                            <a href="#tab-galerija" role="tab" data-toggle="tab" class="btn btn-default btn-sm btn-block btn-nazad"><i class="fa fa-chevron-left"></i> Nazad</a>
+                                        </div>
+                                        <div class="form-group form-group--submit col-md-6" >
+                                            <button type="submit" class="btn btn-default btn-sm btn-block btn-dalje"><i class="fa fa-plus-circle"></i> Završi i objavi</button>
+
+
+                                            <!-- Modal -->
+                                        <!--<div class="modal fade" id="myModal" role="dialog">
+									<div class="modal-dialog">
+
+									   Modal content
+									  <div class="modal-content">
+										<div class="modal-header">
+										  <h4 class="modal-title">USPJEŠNO STE KREIRALI KLUB</h4>
+										</div>
+										<div class="modal-body">
+										  <img class="ikona-modal" src="{{asset('images/icons/checked.svg')}}">
+										  <p class="bravo-info">Predložak koji ste napravili će biti u najkraćem mogućem vremenskom periodu pregledan od strane naše administracije, te ukoliko bude zadovoljavao sve uvjete koje nalaže Sve Za Sport, biti će i objavljen.</p>
+										  <p class="bravo-hello">Sportski pozdrav!</p>
+										</div>
+										<div class="modal-footer">
+										  <button type="button" class="btn btn-default btn-close-modal-01" data-dismiss="modal"><i class="fa fa-times"></i> Zatvori prozor</button>
+										</div>
+									  </div>
+
+									</div>
+								  </div>-->
+                                            <!-- Modal content / End -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Tab: Dokaz vlasništva / End -->
 
                             </div>
                             <!-- Single Product Tabbed Content / End -->

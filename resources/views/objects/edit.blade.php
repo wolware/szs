@@ -48,6 +48,7 @@
                                     <li role="presentation"><a href="#tab-cjenovnik-skijaliste" role="tab" data-toggle="tab" aria-expanded="false"><i class="fa fa-database"></i><small>Cjenovnik</small>Usluga</a></li>
                                 @endif
                                 <li role="presentation"><a href="#tab-galerija" role="tab" data-toggle="tab"><i class="fa fa-picture-o"></i><small>Foto</small>Galerija</a></li>
+                                <li role="presentation"><a href="#tab-dokaz" role="tab" data-toggle="tab"><i class="fa fa-picture-o"></i><small>Dokaz</small>Vlasništva</a></li>
                             </ul>
 
                             <div class="row form-segment">
@@ -683,6 +684,46 @@
                                         </form>
                                     </div>
                                     <!-- Tab: Foto galerija / End -->
+
+                                    <!-- Tab: Dokaz vlasništva -->
+                                    <div role="tabpanel" class="tab-pane fade" id="tab-dokaz">
+                                        <form id="editObjectProof" role="form" action="{{ url('/objects/' . $object->id . '/edit/proof') }}" method="POST" enctype="multipart/form-data" >
+                                            {!! csrf_field() !!}
+                                            <input type="hidden" name="_method" value="PATCH">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="alert alert-warning alert-dismissible">
+                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Zatvori obavijest"><span aria-hidden="true">&times;</span></button>
+                                                        <strong>Unesite sliku ili slike koje dokazuje da ste baš Vi vlasnik ovog kluba kako bi naša administracija odobrila Vaš klub na mreži Sve Za Sport.</strong>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row dodavanje-slika">
+                                                <div class="col-md-12 sadrzaj-slike">
+                                                    <p class="dodaj-sliku-naslov">Dodajte slike *</p>
+                                                    <p class="dodaj-sliku-call">koje dokazuju da ste Vi vlasnik kluba</p>
+                                                    <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
+                                                        Odaberi slike... <input type="file" class="galerija_dokaz not-visible" name="proof[]" accept="image/*" multiple>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="row form-objavi-klub-01" id="galerija_dokaz_prikaz">
+                                                @foreach($object->proof_images as $slika)
+                                                    <div class="album__item col-xs-6 col-sm-3" >
+                                                        <div class="album__item-holder">
+                                                            <a href="{{asset('images/object_proof/' . $slika->image)}}" class="album__item-link mp_gallery">
+                                                                <figure class="album__thumb">
+                                                                    <img src="{{asset('images/object_proof/' . $slika->image)}}" alt="">
+                                                                </figure>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                            <button type="submit" class="btn btn-default btn-sm btn-block btn-spasi" ><i class="fa fa-plus-circle"></i> Spremi dokaze</button>
+                                        </form>
+                                    </div>
+                                    <!-- Tab: Dokaz vlasništva / End -->
 
                                 </div>
                                 <!-- Single Product Tabbed Content / End -->

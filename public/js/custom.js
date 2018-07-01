@@ -80,23 +80,23 @@ function previewFile(name, place, maxHeight, maxWidth, minHeight, minWidth) {
         });
     }
 }
-$(function () {
-    // Multiple images preview in browser
+
+$.validator.setDefaults({ ignore: '' });
+
+$(document).ready(function () {
+
     var imagesPreview = function (input, placeToInsertImagePreview) {
-        var prvi = 0;
-        var gk = document.getElementById('galerija_klub');
         if (input.files) {
             var filesAmount = input.files.length;
+
+            $(placeToInsertImagePreview).find('.newly-added').remove();
 
             for (i = 0; i < filesAmount; i++) {
                 var reader = new FileReader();
 
                 reader.onloadend = function (event) {
-                    if (prvi == 0) {
-                        var adnew = '<div class="album__item col-xs-6 col-sm-3"><div class="album__item-holder"><a href="' + event.target.result + '" class="album__item-link mp_gallery"><figure class="album__thumb"><img src="' + event.target.result + '" alt=""></figure></a></div><div class="progress-stats upload-slike-statust-bar"><div class="progress"><div class="progress__bar progress__bar-width-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div></div></div>';
-                        $('#tab-galerija .form-objavi-klub-01').append(adnew);
-
-                    }
+                    var adnew = '<div class="album__item col-xs-6 col-sm-3 newly-added"><div class="hover">Novo</div><div class="album__item-holder"><a href="' + event.target.result + '" class="album__item-link mp_gallery"><figure class="album__thumb"><img src="' + event.target.result + '" alt=""></figure></a></div></div>';
+                    $(placeToInsertImagePreview).append(adnew);
                 }
 
                 reader.readAsDataURL(input.files[i]);
@@ -104,38 +104,17 @@ $(function () {
         }
     };
 
-    $('.galerija').on('change', function () {
-        var prvi = 0;
-        var input = $(this);
-
-        $('#galerija_prikaz').html('');
-
-        if (input["0"].files) {
-            var filesAmount = input["0"].files.length;
-            for (i = 0; i < filesAmount; i++) {
-                var reader = new FileReader();
-                reader.onloadend = function (event) {
-                    if (prvi === 0) {
-                        var adnew = '<div class="album__item col-xs-6 col-sm-3"><div class="album__item-holder"><a href="' + event.target.result + '" class="album__item-link mp_gallery"><figure class="album__thumb"><img src="' + event.target.result + '" alt=""></figure></a></div><div class="progress-stats upload-slike-statust-bar"><div class="progress"><div class="progress__bar progress__bar-width-100" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div></div></div></div>';
-                        $('#galerija_prikaz').append(adnew);
-
-                    }
-                };
-
-                reader.readAsDataURL(input["0"].files[i]);
-            }
-        }
-
+    $('body').on('change', '.galerija', function () {
+        imagesPreview(this, '#galerija_prikaz');
     });
 
-    $('.galerija_edit').on('change', function () {
-        imagesPreview(this);
+    $('body').on('change', '.galerija_edit', function () {
+        imagesPreview(this, '#tab-galerija .form-objavi-klub-01');
     });
-});
 
-$.validator.setDefaults({ ignore: '' });
-
-$(document).ready(function () {
+    $('body').on('change', '.galerija_dokaz', function () {
+        imagesPreview(this, '#galerija_dokaz_prikaz');
+    });
 
     $('form').keydown(function(event){
         if(event.keyCode == 13) {
@@ -386,6 +365,10 @@ $(document).ready(function () {
             },
             'galerija[]' : {
                 extension: 'png|jpg|jpeg'
+            },
+            'proof[]' : {
+                required: true,
+                extension: 'png|jpg|jpeg'
             }
         }
     });
@@ -405,8 +388,20 @@ $(document).ready(function () {
 
     $('#editClubGallery').validate({
         ignore: ':hidden',
-        'galerija[]': {
-            extension: "jpg|jpeg|png"
+        rules: {
+            'galerija[]': {
+                extension: "jpg|jpeg|png"
+            }
+        }
+    });
+
+    $('#editClubProof').validate({
+        ignore: ':hidden',
+        rules: {
+            'proof[]': {
+                required: true,
+                extension: "jpg|jpeg|png"
+            }
         }
     });
 
@@ -1523,6 +1518,20 @@ $(document).ready(function () {
             },
             'galerija[]' : {
                 extension: 'png|jpg|jpeg'
+            },
+            'proof[]' : {
+                required: true,
+                extension: 'png|jpg|jpeg'
+            }
+        }
+    });
+
+    $('#editObjectProof').validate({
+        ignore: ':hidden',
+        rules: {
+            'proof[]': {
+                required: true,
+                extension: "jpg|jpeg|png"
             }
         }
     });

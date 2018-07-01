@@ -55,8 +55,12 @@ class School extends Model
         return $this->hasMany('App\Trophy');
     }
 
-    public function images() {
+    public function all_images() {
         return $this->hasMany('App\Gallery');
+    }
+
+    public function images() {
+        return $this->all_images()->where('is_proof', '=', false);
     }
 
     public function members() {

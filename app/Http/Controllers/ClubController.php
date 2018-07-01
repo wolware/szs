@@ -224,6 +224,9 @@ class ClubController extends Controller
             // Slike
             'galerija' => 'array',
             'galerija.*' => 'required|image',
+            // Dokazi
+            'proof' => 'required|array',
+            'proof.*' => 'required|image',
     	]);
 
     	if ($validator->fails()) {
@@ -339,6 +342,21 @@ class ClubController extends Controller
                         Gallery::create([
                             'image' => $newgalName,
                             'club_id' => $club_id
+                        ]);
+                    }
+                }
+
+                if($data->file('proof')){
+                    $galerije = $data->file('proof');
+                    foreach($galerije as $key => $slika){
+                        $newgalName = 'proof-' . $key . '-' .time() . '-' .  $club_id . '.' . $slika->getClientOriginalExtension();
+                        $destPath = public_path('/images/club_proof');
+                        $slika->move($destPath, $newgalName);
+
+                        Gallery::create([
+                            'image' => $newgalName,
+                            'club_id' => $club_id,
+                            'is_proof' => true
                         ]);
                     }
                 }
@@ -740,6 +758,43 @@ class ClubController extends Controller
             }
 
             flash()->overlay('Uspješno ste editovali galeriju kluba.', 'Čestitamo');
+            return redirect('clubs/' . $id . '/edit');
+        }
+    }
+
+    public function edit_proof(Request $data, $id){
+        // Provjera da li je user vlasnik kluba
+        $isOwner = Club::where('id', $id)->where('user_id', Auth::user()->id)->first();
+        if(!$isOwner) {
+            abort(404);
+        }
+
+        $validator = Validator::make($data->all(),[
+            'proof' => 'required|array',
+            'proof.*' => 'required|image',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('clubs/' . $id . '/edit')
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            if($data->file('proof')){
+                $galerije = $data->file('proof');
+                foreach($galerije as $key => $slika){
+                    $newgalName = 'proof-' . $key . '-' .time() . '-' .  $id . '.' . $slika->getClientOriginalExtension();
+                    $destPath = public_path('/images/club_proof');
+                    $slika->move($destPath, $newgalName);
+
+                    Gallery::create([
+                        'image' => $newgalName,
+                        'club_id' => $id,
+                        'is_proof' => true
+                    ]);
+                }
+            }
+
+            flash()->overlay('Uspješno ste izmjenili dokaze o vlasništvu kluba kluba.', 'Čestitamo');
             return redirect('clubs/' . $id . '/edit');
         }
     }

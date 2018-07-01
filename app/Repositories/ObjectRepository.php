@@ -469,6 +469,21 @@ class ObjectRepository {
                     }
                 }
 
+                if($request->file('proof')){
+                    $galerije = $request->file('proof');
+                    foreach($galerije as $key => $slika){
+                        $newgalName = 'proof-' . $key . '-' .time() . '-' .  $createGeneralObject->id . '.' . $slika->getClientOriginalExtension();
+                        $destPath = public_path('/images/object_proof');
+                        $slika->move($destPath, $newgalName);
+
+                        Gallery::create([
+                            'image' => $newgalName,
+                            'object_id' => $createGeneralObject->id,
+                            'is_proof' => true
+                        ]);
+                    }
+                }
+
                 // Ovdje handle za dodavanje staza cijena i ostalog
                 if($object_type->type == 'Balon') {
                     if($request->filled('tereni')){
@@ -737,6 +752,28 @@ class ObjectRepository {
 
         return null;
     }
+
+    public function updateProof(Request $request, Objects $object) {
+        if($request->file('proof')){
+            $galerije = $request->file('proof');
+            foreach($galerije as $key => $slika){
+                $newgalName = 'proof-' . $key . '-' .time() . '-' .  $object->id . '.' . $slika->getClientOriginalExtension();
+                $destPath = public_path('/images/object_proof');
+                $slika->move($destPath, $newgalName);
+
+                Gallery::create([
+                    'image' => $newgalName,
+                    'object_id' => $object->id,
+                    'is_proof' => true
+                ]);
+            }
+
+            return true;
+        }
+
+        return null;
+    }
+
 
     public function updateBalonFields(Request $request, Objects $object) {
         $oldIds = [];

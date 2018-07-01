@@ -584,6 +584,41 @@ class ObjectController extends Controller
         }
     }
 
+    public function editObjectProof($id, Request $request) {
+        $object = $this->objectRepository
+            ->getById($id);
+
+        if(!$object) {
+            abort(404);
+        }
+
+        // Provjera da li je user napravio objekat
+        $isOwner = $object->user->id == Auth::user()->id;
+        if(!$isOwner) {
+            abort(404);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'proof' => 'required|array',
+            'proof.*' => 'required|image'
+        ]);
+
+        if($validator->fails()){
+            return redirect('/objects/' . $id . '/edit')
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+
+            $updateObjectGallery = $this->objectRepository
+                ->updateProof($request, $object);
+
+            if($updateObjectGallery) {
+                flash()->overlay('Uspješno ste izmjenili dokaze o vlasništvu kluba kluba.', 'Čestitamo');
+                return back();
+            }
+        }
+    }
+
     public function editObjectBalonFields($id, Request $request) {
         $object = $this->objectRepository
             ->getById($id);
