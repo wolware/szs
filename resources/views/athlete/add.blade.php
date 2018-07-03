@@ -31,7 +31,7 @@
                                     class="fa fa-bars"></i>
                             <small>Svi</small>
                             Sportovi</a></li>
-                    <li class="content-filter__item "><a href="sportovi-zosi.php" class="content-filter__link"><i
+                    <li class="content-filter__item "><a href="#" class="content-filter__link"><i
                                     class="fa fa-wheelchair"></i>
                             <small>Sportovi za osobe sa</small>
                             Invaliditetom</a></li>

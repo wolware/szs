@@ -39,6 +39,12 @@ Route::get('/associations/{id}', 'AssociationController@showAssociation')->where
 
 // Dodaje protekciju na rute samo za logovane korisnike
 Route::middleware('auth')->group(function () {
+
+    //EVENTS
+    Route::get('/event/new',function (){
+        return view('events.add');
+    });
+
     // PROFILE
     Route::get('/me/profile', function(){
         return view('profile.me');
