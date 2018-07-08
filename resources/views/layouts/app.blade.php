@@ -41,6 +41,8 @@
 
   <!-- Template CSS-->
   <link href="{{ asset('/css/datepicker.css?t=44') }}" rel="stylesheet">
+  <link href="{{ asset('/css/timepicki.css') }}" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" rel="stylesheet">
   <link href="{{ asset('/css/style.css?t=') }}{{time()}}" rel="stylesheet">
   <link href="{{ asset('/css/custom.css?t=') }}{{time()}}" rel="stylesheet">
 
@@ -201,7 +203,7 @@
             <!-- Main Navigation -->
             <nav class="main-nav clearfix">
               <ul class="main-nav__list">
-                <li class=""><a href="#">Kalendar</a></li>
+                <li class=""><a href="{{ url('events') }}">Kalendar</a></li>
                 <li class=""><a href="{{ url('associations') }}">Savezi</a></li>
                 <li class=""><a href="#">Reprezentacije BiH</a></li>
                 <li class=""><a href="#">Dijaspora</a></li>
@@ -366,6 +368,10 @@
       }
   </script>
         <script src="{{ asset('js/xregexp-all.js') }}"></script>
+      <script src="{{ asset('/js/timepicki.js') }}"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/locale/bs.js"></script>
       <script src="{{ asset('js/custom.js?t='.time()) }}"></script>
 </body>
 </html>

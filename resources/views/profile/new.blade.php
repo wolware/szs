@@ -143,7 +143,7 @@
 							<div class="posts__excerpt">Dostupno: Neograničeno</div>
 						</div>
 						<footer class="posts__footer card__footer">
-							<a href="objavi-event.php" class="btn btn-warning btn1-objavi-event"><i class="fa fa-plus-circle"></i> Dodaj novi event</a>
+							<a href="{{ url('/events/add') }}" class="btn btn-warning btn1-objavi-event"><i class="fa fa-plus-circle"></i> Dodaj novi event</a>
 						</footer>
 					  </div>
 					</div>

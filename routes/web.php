@@ -36,14 +36,12 @@ Route::get('/objects/{id}', 'ObjectController@showObject')->where('id', '[0-9]+'
 Route::get('/objects', 'ObjectController@searchObjects');
 Route::get('/associations', 'AssociationController@index');
 Route::get('/associations/{id}', 'AssociationController@showAssociation')->where('id', '[0-9]+');
+Route::get('/events', 'EventController@getEvents');
+Route::get('/getEventsByDate', 'EventController@getEventsByDate');
+Route::get('/events/{id}', 'EventController@showEvent')->where('id', '[0-9]+');
 
 // Dodaje protekciju na rute samo za logovane korisnike
 Route::middleware('auth')->group(function () {
-
-    //EVENTS
-    Route::get('/event/new',function (){
-        return view('events.add');
-    });
 
     // PROFILE
     Route::get('/me/profile', function(){
@@ -160,6 +158,11 @@ Route::middleware('auth')->group(function () {
 
     // ASSOCIATIONS
 
+
+    // EVENTS
+    Route::get('/events/add', 'EventController@displayAddEvent');
+    Route::post('/events/create', 'EventController@createEvent');
+    Route::get('/events/{id}/edit', 'EventController@displayEditEvent')->where('id', '[0-9]+');
 
     //LOGOUT
     Route::get('user/logout', 'Auth\LoginController@logout');

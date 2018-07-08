@@ -1866,6 +1866,87 @@ $(document).ready(function () {
     });
 
 
+    $('#createNewEvent').validate({
+        ignore: ':hidden,:disabled',
+        rules: {
+            image: {
+                required: true,
+                extension: 'png|jpg|jpeg'
+            },
+            name: {
+                required: true,
+                string: true,
+                maxlength: 255
+            },
+            type: {
+                required: true,
+                digits: true
+            },
+            sport: {
+                required: true,
+                digits: true
+            },
+            continent: {
+                required: true,
+                digits: true
+            },
+            country: {
+                required: true,
+                digits: true
+            },
+            province: {
+                required: true,
+                digits: true
+            },
+            region: {
+                required: true,
+                digits: true
+            },
+            municipality: {
+                required: true,
+                digits: true
+            },
+            city: {
+                required: true,
+                string: true,
+                maxlength: 255
+            },
+            date_start: {
+                required: true,
+                date: true
+            },
+            time_start: {
+                required: true
+            },
+            event_type_id: {
+                required: true,
+                digits: true
+            },
+            max_participants: {
+                digits: true,
+                range: [1, 10000]
+            },
+            registration_fee: {
+                required: true,
+                number: true,
+                range: [1, 1000]
+            },
+            first_place_award: {
+                required: true,
+                number: true,
+                range: [1, 100000]
+            },
+            duration: {
+                digits: true,
+                range: [1, 50]
+            },
+            description: {
+                string: true,
+                maxlength: 2000
+            }
+        }
+    });
+
     addLicnostValidation();
     addTrophyValidation();
     addHistoryValidation();
@@ -1886,6 +1967,7 @@ $(document).ready(function () {
     var sportSelect = $('select#sport');
     var associationBox = $('#associations');
     var associationRadio = $('input[name="association"]');
+    var eventType = $('select#event_type');
 
     setSelectedSports(sportTypeSelect, sportSelect);
 
@@ -2520,6 +2602,47 @@ $(document).ready(function () {
     };
     date_input3.datepicker(options3);
 
+    var date_input4 = $('input[name="date_start"]'); //our date input has the name "date"
+    var container4 = $('form').length > 0 ? $('form').parent() : "body";
+    var options4 = {
+        format: 'mm/dd/yyyy',
+        container: container4,
+        todayHighlight: true,
+        autoclose: true,
+        minDate: new Date()
+    };
+    date_input4.datepicker(options4);
+
+    $('#time_start').timepicki({
+        min_hour_value:0,
+        max_hour_value:23,
+        show_meridian:false
+    });
+
+    eventType.on('change', function () {
+       var type = eventType.val();
+
+       if(type == 1) {
+           $('.turnir-options').show();
+       } else {
+           $('.turnir-options').hide();
+       }
+    });
+
+    $('#eventsCalendar').fullCalendar({
+        locale: 'bs',
+        header: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+        },
+        events: '/getEventsByDate',
+        eventClick: function(calEvent) {
+            var event_id = calEvent.id;
+
+            $(location).attr('href', '/events/' + event_id);
+        }
+    });
 
 });
 
