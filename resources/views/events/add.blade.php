@@ -232,7 +232,7 @@
                                     <div class="row">
                                             <div class="form-group col-md-6">
                                                 <label class="control-label" for="date_start"><i class="fa fa-calendar-o"></i> Datum početka*</label>
-                                                <input class="form-control" id="date_start" name="date_start" placeholder="Izaberite datum početka eventa" value="{{ old('date_start') }}"/>
+                                                <input class="form-control" type="text" id="date_start" name="date_start" placeholder="Izaberite datum početka eventa" value="{{ old('date_start') }}"/>
                                             </div>
 
                                             <div class="form-group col-md-6">

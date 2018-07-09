@@ -163,6 +163,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/events/add', 'EventController@displayAddEvent');
     Route::post('/events/create', 'EventController@createEvent');
     Route::get('/events/{id}/edit', 'EventController@displayEditEvent')->where('id', '[0-9]+');
+    Route::patch('/events/{id}/edit/general', 'EventController@editEventGeneral')->where('id', '[0-9]+');
+    Route::patch('/events/{id}/edit/info', 'EventController@editEventInfo')->where('id', '[0-9]+');
 
     //LOGOUT
     Route::get('user/logout', 'Auth\LoginController@logout');

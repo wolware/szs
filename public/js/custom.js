@@ -1865,7 +1865,6 @@ $(document).ready(function () {
         ignore: ':hidden,:disabled'
     });
 
-
     $('#createNewEvent').validate({
         ignore: ':hidden,:disabled',
         rules: {
@@ -1911,6 +1910,92 @@ $(document).ready(function () {
                 string: true,
                 maxlength: 255
             },
+            date_start: {
+                required: true,
+                date: true
+            },
+            time_start: {
+                required: true
+            },
+            event_type_id: {
+                required: true,
+                digits: true
+            },
+            max_participants: {
+                digits: true,
+                range: [1, 10000]
+            },
+            registration_fee: {
+                required: true,
+                number: true,
+                range: [1, 1000]
+            },
+            first_place_award: {
+                required: true,
+                number: true,
+                range: [1, 100000]
+            },
+            duration: {
+                digits: true,
+                range: [1, 50]
+            },
+            description: {
+                string: true,
+                maxlength: 2000
+            }
+        }
+    });
+
+    $('#editEventGeneral').validate({
+        ignore: ':hidden,:disabled',
+        rules: {
+            image: {
+                extension: 'png|jpg|jpeg'
+            },
+            name: {
+                required: true,
+                string: true,
+                maxlength: 255
+            },
+            type: {
+                required: true,
+                digits: true
+            },
+            sport: {
+                required: true,
+                digits: true
+            },
+            continent: {
+                required: true,
+                digits: true
+            },
+            country: {
+                required: true,
+                digits: true
+            },
+            province: {
+                required: true,
+                digits: true
+            },
+            region: {
+                required: true,
+                digits: true
+            },
+            municipality: {
+                required: true,
+                digits: true
+            },
+            city: {
+                required: true,
+                string: true,
+                maxlength: 255
+            }
+        }
+    });
+
+    $('#editEventInfo').validate({
+        ignore: ':hidden,:disabled',
+        rules: {
             date_start: {
                 required: true,
                 date: true
@@ -2557,62 +2642,6 @@ $(document).ready(function () {
         $(this).closest('.skiCjenovnikHover').slideUp('normal', function() { $(this).remove(); } );
     });
 
-
-    var date_input1 = $('input[name="date_of_birth"]'); //our date input has the name "date"
-    var container1 = "body";
-    var options1 = {
-        format: 'mm/dd/yyyy',
-        container: container1,
-        todayHighlight: true,
-        autoclose: true,
-        maxDate: new Date()
-    };
-    date_input1.datepicker(options1);
-
-    var date_input = $('input[name="date"]'); //our date input has the name "date"
-    var container = $('form').length > 0 ? $('form').parent() : "body";
-    var options = {
-        format: 'mm/dd/yyyy',
-        container: container,
-        todayHighlight: true,
-        autoclose: true,
-        maxDate: new Date()
-    };
-    date_input.datepicker(options);
-
-    var date_input2 = $('input[name="dob"]'); //our date input has the name "date"
-    var container2 = $('form').length > 0 ? $('form').parent() : "body";
-    var options2 = {
-        format: 'mm/dd/yyyy',
-        container: container2,
-        todayHighlight: true,
-        autoclose: true,
-        maxDate: new Date()
-    };
-    date_input2.datepicker(options2);
-
-    var date_input3 = $('input.pickDate'); //our date input has the name "date"
-    var container3 = $('form').length > 0 ? $('form').parent() : "body";
-    var options3 = {
-        format: 'mm/dd/yyyy',
-        container: container3,
-        todayHighlight: true,
-        autoclose: true,
-        maxDate: new Date()
-    };
-    date_input3.datepicker(options3);
-
-    var date_input4 = $('input[name="date_start"]'); //our date input has the name "date"
-    var container4 = $('form').length > 0 ? $('form').parent() : "body";
-    var options4 = {
-        format: 'mm/dd/yyyy',
-        container: container4,
-        todayHighlight: true,
-        autoclose: true,
-        minDate: new Date()
-    };
-    date_input4.datepicker(options4);
-
     $('#time_start').timepicki({
         min_hour_value:0,
         max_hour_value:23,
@@ -2643,6 +2672,61 @@ $(document).ready(function () {
             $(location).attr('href', '/events/' + event_id);
         }
     });
+
+    var date_input1 = $('input[name="date_of_birth"]'); //our date input has the name "date"
+    var container1 = "body";
+    var options1 = {
+        dateFormat: 'mm/dd/yy',
+        container: container1,
+        todayHighlight: true,
+        autoClose: true,
+        maxDate: new Date()
+    };
+    date_input1.datepicker(options1);
+
+    var date_input = $('input[name="date"]'); //our date input has the name "date"
+    var container = $('form').length > 0 ? $('form').parent() : "body";
+    var options = {
+        dateFormat: 'mm/dd/yy',
+        container: container,
+        todayHighlight: true,
+        autoClose: true,
+        maxDate: new Date()
+    };
+    date_input.datepicker(options);
+
+    var date_input2 = $('input[name="dob"]'); //our date input has the name "date"
+    var container2 = $('form').length > 0 ? $('form').parent() : "body";
+    var options2 = {
+        dateFormat: 'mm/dd/yy',
+        container: container2,
+        todayHighlight: true,
+        autoClose: true,
+        maxDate: new Date()
+    };
+    date_input2.datepicker(options2);
+
+    var date_input3 = $('input.pickDate'); //our date input has the name "date"
+    var container3 = $('form').length > 0 ? $('form').parent() : "body";
+    var options3 = {
+        dateFormat: 'mm/dd/yy',
+        container: container3,
+        todayHighlight: true,
+        autoClose: true,
+        maxDate: new Date()
+    };
+    date_input3.datepicker(options3);
+
+    var date_input4 = $('input[name="date_start"]'); //our date input has the name "date"
+    var container4 = $('form').length > 0 ? $('form').parent() : "body";
+    var options4 = {
+        dateFormat: 'mm/dd/yy',
+        container: container4,
+        todayHighlight: true,
+        autoClose: true,
+        minDate: new Date()
+    };
+    date_input4.datepicker(options4);
 
 });
 

@@ -96,4 +96,65 @@ class EventRepository {
             ->first();
     }
 
+    public function updateGeneral(Request $request, Event $event){
+        $newLogoName = $event->image;
+
+        if($request->file('image')){
+            $logo = $request->file('image');
+            $newLogoName = time() . '-' . Auth::user()->id . '.' . $logo->getClientOriginalExtension();
+            $destinationPath = public_path('/images/event_images');
+            $logo->move($destinationPath, $newLogoName);
+        }
+
+        $region_id = $request->get('country');
+
+        if($request->has('province')) {
+            $region_id = $request->get('province');
+        }
+
+        if($request->has('region')) {
+            $region_id = $request->get('region');
+        }
+
+        if($request->has('municipality')) {
+            $region_id = $request->get('municipality');
+        }
+
+        $updateEventGeneral = $event->update([
+            'image' => $newLogoName,
+            'name' => $request->get('name'),
+            'sport_id' => $request->get('sport'),
+            'region_id' => $region_id,
+            'city' => $request->get('city'),
+            'latitude' => $request->get('latitude'),
+            'longitude' => $request->get('longitude')
+        ]);
+
+        if($updateEventGeneral) {
+            return $updateEventGeneral;
+        }
+
+        return null;
+    }
+
+    public function updateInfo(Request $request, Event $event){
+
+        $updateEventInfo = $event->update([
+            'date_start' => new Carbon($request->get('date_start')),
+            'time_start' => $request->get('time_start'),
+            'event_type_id' => $request->get('event_type_id'),
+            'max_participants' => $request->get('max_participants'),
+            'registration_fee' => $request->get('event_type_id') == 1 ? $request->get('registration_fee') : null,
+            'first_place_award' => $request->get('event_type_id') == 1 ? $request->get('first_place_award') : null,
+            'duration' => $request->get('event_type_id') == 1 ? $request->get('duration') : null,
+            'description' => $request->get('description')
+        ]);
+
+        if($updateEventInfo) {
+            return $updateEventInfo;
+        }
+
+        return null;
+    }
+
 }
