@@ -154,3 +154,31 @@ label {
     line-height: 50px;
     z-index: 1;
 }
+
+.profil-waiting {
+    color: #0288D1!important;
+}
+
+.profil-refused {
+    color: #d1ba3c !important;
+}
+
+.profil-deleted {
+    color: #d1472f !important;
+}
+
+.profil-active {
+    color: #50d13d !important;
+}
+
+.progress__bar-width-15 {
+    width: 15%!important;
+}
+
+.progress__bar-width-10 {
+    width: 10%!important;
+}
+
+.progress__bar-width-5 {
+    width: 5%!important;
+}

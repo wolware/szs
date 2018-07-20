@@ -44,9 +44,7 @@ Route::get('/events/{id}', 'EventController@showEvent')->where('id', '[0-9]+');
 Route::middleware('auth')->group(function () {
 
     // PROFILE
-    Route::get('/me/profile', function(){
-        return view('profile.me');
-    });
+    Route::get('/me/profile', 'ProfileController@profile_me');
     Route::get('/me/profiles', 'ProfileController@profile_profiles');
     Route::get('/me/saved', function(){
         return view('profile.saved');
@@ -54,9 +52,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/me/medals', function(){
         return view('profile.medals');
     });
-    Route::get('/me/news', function(){
-        return view('profile.news');
-    });
+    Route::get('/me/news', 'ProfileController@profile_news');
+
     Route::get('/me/grades', function(){
         return view('profile.grades');
     });

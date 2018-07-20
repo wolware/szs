@@ -446,7 +446,7 @@
                                     <div class="card">
                                         <header class="card__header card__header--has-btn podesavanje-razmaka">
                                             <h4><i class="fa fa-star-o"></i> Ocjene za sportski objekt</h4>
-                                            <a href="#" class="btn btn-default btn-outline btn-xs card-header__button" data-toggle="modal" data-target="#ostaviOCJENU">Ostavi svoju ocjenu</a>
+                                            <!-- <a href="#" class="btn btn-default btn-outline btn-xs card-header__button" data-toggle="modal" data-target="#ostaviOCJENU">Ostavi svoju ocjenu</a> -->
                                             <!-- Modal -->
                                             <div class="modal fade" id="ostaviOCJENU" role="dialog">
                                                 <div class="modal-dialog">
@@ -509,7 +509,7 @@
                                                     <div class="game-result__content mb-0">
                                                         <div class="game-result__stats">
                                                             <div class="row">
-                                                                <div class="col-xs-12 col-md-8">
+                                                                <div class="col-xs-12 col-md-12">
                                                                     <div class="game-result__table-stats game-result__table-stats--soccer">
                                                                         <table class="table table-wrap-bordered table-thead-color tabela-szs-standardi">
                                                                             <thead>
@@ -533,7 +533,7 @@
                                                                     </div>
                                                                 </div>
 
-                                                                <div class="col-xs-12 col-md-4 game-result__stats-team-2">
+                                                                <!--<div class="col-xs-12 col-md-4 game-result__stats-team-2">
                                                                     <table class="table table-wrap-bordered table-thead-color">
                                                                         <thead>
                                                                         <tr>
@@ -573,7 +573,7 @@
 
                                                                     </div>
 
-                                                                </div>
+                                                                </div> -->
 
 
                                                             </div>

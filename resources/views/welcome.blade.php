@@ -67,7 +67,7 @@
                             <aside class="widget card widget--sidebar widget-standings szs-dan-sport">
                                 <div class="widget__title card__header card__header--has-btn">
                                     <h4><i class="fa fa-cloud"></i> Dan za sport</h4>
-                                    <a href="#" class="btn btn-default btn-outline btn-xs card-header__button">Nađi
+                                    <a href="{{ url('/objects') }}" class="btn btn-default btn-outline btn-xs card-header__button">Nađi
                                         termin za rekreaciju</a>
                                 </div>
                                 <div class="widget__content card__content">
@@ -348,126 +348,138 @@
                                 <h4><i class="fa fa-bookmark"></i> Izdvojeni profili</h4>
                             </header>
                         </div>
-                        <!-- kartica -->
-                        <aside class="widget card widget--sidebar widget-player widget-player--soccer">
+                        @if($newProfiles)
+                            @if($newProfiles->player)
+                                <!-- kartica -->
+                                <a href="{{ url('/athletes/' . $newProfiles->player->id) }}">
+                                    <aside class="widget card widget--sidebar widget-player widget-player--soccer">
 
-                            <div class="widget__content card__content">
-                                <div class="widget-player__ribbon">
-                                    <div class="fa fa-star"></div>
-                                </div>
-                                <figure class="widget-player__photo">
-                                    <img src="{{asset('images/edo.JPG')}}" alt class="widget-player__photo">
-                                </figure>
-                                <header class="widget-player__header clearfix">
-                                    <h4 class="widget-player__name">
-                                        <span class="widget-player__first-name">Edin</span>
-                                        <span class="widget-player__last-name">Musić</span>
-                                    </h4>
-                                </header>
-                                <div class="widget-player__content">
-                                    <div class="widget-player__content-inner">
-                                        <div class="posts__excerpt">
-                                            Sarajevo, Federacija BiH
+                                        <div class="widget__content card__content">
+                                            <div class="widget-player__ribbon">
+                                                <div class="fa fa-star"></div>
+                                            </div>
+                                            <figure class="widget-player__photo">
+                                                <img src="{{asset('images/athlete_avatars/' . $newProfiles->player->avatar )}}" alt class="widget-player__photo">
+                                            </figure>
+                                            <header class="widget-player__header clearfix">
+                                                <h4 class="widget-player__name">
+                                                    <span class="widget-player__first-name">Sportista</span>
+                                                    <span class="widget-player__last-name">{{ $newProfiles->player->firstname }} {{ $newProfiles->player->lastname }}</span>
+                                                </h4>
+                                            </header>
+                                            <div class="widget-player__content">
+                                                <div class="widget-player__content-inner">
+                                                    <div class="posts__excerpt">
+                                                        {{ $newProfiles->player->city }}
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="posts__excerpt">
-                                            FK Sve Za Sport
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </aside>
-                        <!-- kartica end-->
-                        <!-- kartica -->
-                        <aside class="widget card widget--sidebar widget-player widget-player--soccer">
+                                    </aside>
+                                </a>
+                                <!-- kartica end-->
+                            @endif
+                            @if($newProfiles->club)
+                                <!-- kartica -->
+                                    <a href="{{ url('/clubs/' . $newProfiles->club->id) }}">
+                                        <aside class="widget card widget--sidebar widget-player widget-player--soccer">
 
-                            <div class="widget__content card__content">
-                                <div class="widget-player__ribbon">
-                                    <div class="fa fa-star"></div>
-                                </div>
-                                <figure class="widget-player__photo">
-                                    <img src="{{asset('images/grid-photo.png')}}" alt class="widget-player__photo">
-                                </figure>
-                                <header class="widget-player__header clearfix">
-                                    <h4 class="widget-player__name">
-                                        <span class="widget-player__first-name">Fudbalski klub</span>
-                                        <span class="widget-player__last-name">Sve Za Sport</span>
-                                    </h4>
-                                </header>
-                                <div class="widget-player__content">
-                                    <div class="widget-player__content-inner">
-                                        <div class="posts__excerpt">
-                                            Sarajevo, Federacija BiH
-                                        </div>
-                                        <div class="posts__excerpt">
-                                            Stadion Grbavica
-                                        </div>
-                                    </div>
-                                </div>
+                                            <div class="widget__content card__content">
+                                                <div class="widget-player__ribbon">
+                                                    <div class="fa fa-star"></div>
+                                                </div>
+                                                <figure class="widget-player__photo">
+                                                    <img src="{{asset('images/club_logo/' . $newProfiles->club->logo )}}" alt class="widget-player__photo">
+                                                </figure>
+                                                <header class="widget-player__header clearfix">
+                                                    <h4 class="widget-player__name">
+                                                        <span class="widget-player__first-name">{{ $newProfiles->club->nature }}</span>
+                                                        <span class="widget-player__last-name">{{ $newProfiles->club->name }}</span>
+                                                    </h4>
+                                                </header>
+                                                <div class="widget-player__content">
+                                                    <div class="widget-player__content-inner">
+                                                        <div class="posts__excerpt">
+                                                            {{ $newProfiles->club->city }}
+                                                        </div>
+                                                        @if($newProfiles->club->home_field)
+                                                            <div class="posts__excerpt">
+                                                                {{ $newProfiles->club->home_field }}
+                                                            </div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </aside>
+                                    </a>
+                                    <!-- kartica end-->
+                            @endif
+                            @if($newProfiles->staff)
+                                <!-- kartica -->
+                                    <a href="{{ url('/staff/' . $newProfiles->staff->id) }}">
+                                        <aside class="widget card widget--sidebar widget-player widget-player--soccer">
 
-                            </div>
-                        </aside>
-                        <!-- kartica end-->
-                        <!-- kartica -->
-                        <aside class="widget card widget--sidebar widget-player widget-player--soccer">
+                                            <div class="widget__content card__content">
+                                                <div class="widget-player__ribbon">
+                                                    <div class="fa fa-star"></div>
+                                                </div>
+                                                <figure class="widget-player__photo">
+                                                    <img src="{{asset('images/staff_avatars/' . $newProfiles->staff->avatar )}}" alt class="widget-player__photo">
+                                                </figure>
+                                                <header class="widget-player__header clearfix">
+                                                    <h4 class="widget-player__name">
+                                                        <span class="widget-player__first-name">Sportski kadar</span>
+                                                        <span class="widget-player__last-name">{{ $newProfiles->staff->firstname }} {{ $newProfiles->staff->lastname }}</span>
+                                                    </h4>
+                                                </header>
+                                                <div class="widget-player__content">
+                                                    <div class="widget-player__content-inner">
+                                                        <div class="posts__excerpt">
+                                                            {{ $newProfiles->staff->city }}
+                                                        </div>
+                                                        <div class="posts__excerpt">
+                                                            {{ $newProfiles->staff->profession->name }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </aside>
+                                    </a>
+                                    <!-- kartica end-->
+                            @endif
+                            @if($newProfiles->object)
+                                <!-- kartica -->
+                                    <a href="{{ url('/object/' . $newProfiles->object->id) }}">
+                                        <aside class="widget card widget--sidebar widget-player widget-player--soccer">
 
-                            <div class="widget__content card__content">
-                                <div class="widget-player__ribbon">
-                                    <div class="fa fa-star"></div>
-                                </div>
-                                <figure class="widget-player__photo">
-                                    <img src="{{asset('images/gym-wallpaper-1280x800.jpg')}}" alt
-                                         class="widget-player__photo">
-                                </figure>
-                                <header class="widget-player__header clearfix">
-                                    <h4 class="widget-player__name">
-                                        <span class="widget-player__first-name">Teretana</span>
-                                        <span class="widget-player__last-name">SZS Royal Fitness Center</span>
-                                    </h4>
-                                </header>
-                                <div class="widget-player__content">
-                                    <div class="widget-player__content-inner">
-                                        <div class="posts__excerpt">
-                                            Sarajevo, Federacija BiH
-                                        </div>
-                                        <div class="posts__excerpt">
-                                            Ocjena: 5,0
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </aside>
-                        <!-- kartica end-->
-                        <!-- kartica -->
-                        <aside class="widget card widget--sidebar widget-player widget-player--soccer">
-
-                            <div class="widget__content card__content">
-                                <div class="widget-player__ribbon">
-                                    <div class="fa fa-star"></div>
-                                </div>
-                                <figure class="widget-player__photo">
-                                    <img src="{{asset('images/profilna.JPG')}}" alt class="widget-player__photo">
-                                </figure>
-                                <header class="widget-player__header clearfix">
-                                    <h4 class="widget-player__name">
-                                        <span class="widget-player__first-name">Nedim</span>
-                                        <span class="widget-player__last-name">Tufekčić</span>
-                                    </h4>
-                                </header>
-                                <div class="widget-player__content">
-                                    <div class="widget-player__content-inner">
-                                        <div class="posts__excerpt">
-                                            Tuzla, Federacija BiH
-                                        </div>
-                                        <div class="posts__excerpt">
-                                            Web & Grafički Dizajner
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </aside>
-                        <!-- kartica end-->
+                                            <div class="widget__content card__content">
+                                                <div class="widget-player__ribbon">
+                                                    <div class="fa fa-star"></div>
+                                                </div>
+                                                <figure class="widget-player__photo">
+                                                    <img src="{{asset('images/object_avatars/' . $newProfiles->object->image )}}" alt class="widget-player__photo">
+                                                </figure>
+                                                <header class="widget-player__header clearfix">
+                                                    <h4 class="widget-player__name">
+                                                        <span class="widget-player__first-name">{{ $newProfiles->object->type->type }}</span>
+                                                        <span class="widget-player__last-name">{{ $newProfiles->object->name }}</span>
+                                                    </h4>
+                                                </header>
+                                                <div class="widget-player__content">
+                                                    <div class="widget-player__content-inner">
+                                                        <div class="posts__excerpt">
+                                                            {{ $newProfiles->staff->city }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </aside>
+                                    </a>
+                                    <!-- kartica end-->
+                                @endif
+                        @else
+                            <p class="text-center">Trenutno nema izdvojenih profila</p>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -481,7 +493,7 @@
                             <div class="team-stats__icon team-stats__icon--circle">
                                 <img src="{{asset('images/klubovi-fff.png')}}" alt="" class="team-stats__icon-primary">
                             </div>
-                            <div class="team-stats__value">15200</div>
+                            <div class="team-stats__value">{{ $statistics->clubs or '-' }}</div>
                             <div class="team-stats__label">Sportskih Klubova</div>
                         </li>
                     </ul>
@@ -492,7 +504,7 @@
                             <div class="team-stats__icon team-stats__icon--circle">
                                 <img src="{{asset('images/skole-fff.png')}}" alt="" class="team-stats__icon-primary">
                             </div>
-                            <div class="team-stats__value">8500</div>
+                            <div class="team-stats__value">{{ $statistics->schools or '-' }}</div>
                             <div class="team-stats__label">Škola Sporta</div>
                         </li>
                     </ul>
@@ -503,7 +515,7 @@
                             <div class="team-stats__icon team-stats__icon--circle">
                                 <img src="{{asset('images/objekti-fff.png')}}" alt="" class="team-stats__icon-primary">
                             </div>
-                            <div class="team-stats__value">5221</div>
+                            <div class="team-stats__value">{{ $statistics->objects or '-' }}</div>
                             <div class="team-stats__label">Sportskih Objekata</div>
                         </li>
                     </ul>
@@ -515,19 +527,8 @@
                                 <img src="{{asset('images/sportisti-fff.png')}}" alt=""
                                      class="team-stats__icon-primary">
                             </div>
-                            <div class="team-stats__value">82557</div>
+                            <div class="team-stats__value">{{ $statistics->players or '-' }}</div>
                             <div class="team-stats__label">BH Sportista</div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-2 col-xs-6">
-                    <ul class="team-stats-box">
-                        <li class="team-stats__item team-stats__item--clean">
-                            <div class="team-stats__icon team-stats__icon--circle">
-                                <img src="{{asset('images/oprema-fff.png')}}" alt="" class="team-stats__icon-primary">
-                            </div>
-                            <div class="team-stats__value">221</div>
-                            <div class="team-stats__label">Prodavnica Opreme</div>
                         </li>
                     </ul>
                 </div>
@@ -537,8 +538,19 @@
                             <div class="team-stats__icon team-stats__icon--circle">
                                 <img src="{{asset('images/kadrovi-fff.png')}}" alt="" class="team-stats__icon-primary">
                             </div>
-                            <div class="team-stats__value">6200</div>
+                            <div class="team-stats__value">{{ $statistics->staff or '-' }}</div>
                             <div class="team-stats__label">Stručnih Kadrova</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-2 col-xs-6">
+                    <ul class="team-stats-box">
+                        <li class="team-stats__item team-stats__item--clean">
+                            <div class="team-stats__icon team-stats__icon--circle">
+                                <img src="{{asset('images/oprema-fff.png')}}" alt="" class="team-stats__icon-primary">
+                            </div>
+                            <div class="team-stats__value">{{ $statistics->news or '-' }}</div>
+                            <div class="team-stats__label">Sportskih Vijesti</div>
                         </li>
                     </ul>
                 </div>

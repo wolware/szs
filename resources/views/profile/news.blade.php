@@ -57,7 +57,7 @@
                 <h4><i class="fa fa-plus-square-o"></i> Status vijesti</h4>
               </div>
               <div class="card__content text-center">
-                <h2 class="profil-counter">42</h2>
+                <h2 class="profil-counter">{{ $vijesti->count() }}</h2>
                 <p class="counter-info">Objavljenih vijesti</p>
               </div>
             </div>
@@ -142,80 +142,33 @@
 			<!-- Lista vijesti -->
               <div class="widget__content card__content">
                 <ul class="posts posts--simple-list">
-                  <li class="posts__item posts__item--category-2">
-                    <figure class="posts__thumb"><img class="slika-vijesti-01" src="{{asset('images/vijesti-slika-test.jpg')}}" alt="">
-                    </figure>
-                    <div class="posts__inner">
-                      <div class="posts__cat kategorija-vijesti">
-                        <span class="label posts__cat-label">FK Sve Za Sport</span>
-                      </div>
-                      <h6 class="posts__title"><a href="#">FK Sve Za Sport je na domaćem terenu ostvario ubjedljivu pobjedu nad FK All For Sport</a></h6>
-                      <time datetime="2016-08-23" class="posts__date">23.10.2017.</time> <a href="#" class="btn btn-default btn-outline btn-uredi-vijest card-header__button">Uredi</a> <a href="#" class="btn btn-default btn-outline btn-uredi-vijest card-header__button">Ukloni</a>
-                    </div>
-                  </li>
-				  <li class="posts__item posts__item--category-2">
-                    <figure class="posts__thumb"><img class="slika-vijesti-01" src="{{asset('images/vijesti-slika-test.jpg')}}" alt="">
-                    </figure>
-                    <div class="posts__inner">
-                      <div class="posts__cat kategorija-vijesti">
-                        <span class="label posts__cat-label">FK Sve Za Sport</span>
-                      </div>
-                      <h6 class="posts__title"><a href="#">FK Sve Za Sport je na domaćem terenu ostvario ubjedljivu pobjedu nad FK All For Sport</a></h6>
-                      <time datetime="2016-08-23" class="posts__date">23.10.2017.</time> <a href="#" class="btn btn-default btn-outline btn-uredi-vijest card-header__button">Uredi</a> <a href="#" class="btn btn-default btn-outline btn-uredi-vijest card-header__button">Ukloni</a>
-                    </div>
-                  </li>
-				  <li class="posts__item posts__item--category-2">
-                    <figure class="posts__thumb"><img class="slika-vijesti-01" src="{{asset('images/vijesti-slika-test.jpg')}}" alt="">
-                    </figure>
-                    <div class="posts__inner">
-                      <div class="posts__cat kategorija-vijesti">
-                        <span class="label posts__cat-label">FK Sve Za Sport</span>
-                      </div>
-                      <h6 class="posts__title"><a href="#">FK Sve Za Sport je na domaćem terenu ostvario ubjedljivu pobjedu nad FK All For Sport</a></h6>
-                      <time datetime="2016-08-23" class="posts__date">23.10.2017.</time> <a href="#" class="btn btn-default btn-outline btn-uredi-vijest card-header__button">Uredi</a> <a href="#" class="btn btn-default btn-outline btn-uredi-vijest card-header__button">Ukloni</a>
-                    </div>
-                  </li>
-				  <li class="posts__item posts__item--category-2">
-                    <figure class="posts__thumb"><img class="slika-vijesti-01" src="{{asset('images/vijesti-slika-test.jpg')}}" alt="">
-                    </figure>
-                    <div class="posts__inner">
-                      <div class="posts__cat kategorija-vijesti">
-                        <span class="label posts__cat-label">FK Sve Za Sport</span>
-                      </div>
-                      <h6 class="posts__title"><a href="#">FK Sve Za Sport je na domaćem terenu ostvario ubjedljivu pobjedu nad FK All For Sport</a></h6>
-                      <time datetime="2016-08-23" class="posts__date">23.10.2017.</time> <a href="#" class="btn btn-default btn-outline btn-uredi-vijest card-header__button">Uredi</a> <a href="#" class="btn btn-default btn-outline btn-uredi-vijest card-header__button">Ukloni</a>
-                    </div>
-                  </li>
-				  <li class="posts__item posts__item--category-2">
-                    <figure class="posts__thumb"><img class="slika-vijesti-01" src="{{asset('images/vijesti-slika-test.jpg')}}" alt="">
-                    </figure>
-                    <div class="posts__inner">
-                      <div class="posts__cat kategorija-vijesti">
-                        <span class="label posts__cat-label">FK Sve Za Sport</span>
-                      </div>
-                      <h6 class="posts__title"><a href="#">FK Sve Za Sport je na domaćem terenu ostvario ubjedljivu pobjedu nad FK All For Sport</a></h6>
-                      <time datetime="2016-08-23" class="posts__date">23.10.2017.</time> <a href="#" class="btn btn-default btn-outline btn-uredi-vijest card-header__button">Uredi</a> <a href="#" class="btn btn-default btn-outline btn-uredi-vijest card-header__button">Ukloni</a>
-                    </div>
-                  </li>
-                  
+                  @if($vijesti)
+                    @foreach($vijesti as $vijest)
+                      <li class="posts__item posts__item--category-2">
+                        <figure class="posts__thumb"><img class="slika-vijesti-01" src="{{asset('images/vijesti/galerija/' . $vijest->slika)}}" alt="">
+                        </figure>
+                        <div class="posts__inner">
+                          <div class="posts__cat">
+                            <span class="label posts__cat-label">{{ $vijest->kategorija->naziv }}</span>
+                          </div>
+                          <h6 class="posts__title"><a href="{{ url('news/' . $vijest->id) }}">{{ $vijest->naslov }}</a></h6>
+                          <time datetime="2016-08-23" class="posts__date">{{ \Carbon\Carbon::parse($vijest->created_at)->format("d.m.Y") }}</time>
+                          <!-- <a href="#" class="btn btn-default btn-outline btn-uredi-vijest card-header__button">Uredi</a> -->
+                        </div>
+                      </li>
+                    @endforeach
+                  @else
+                    <p class="text-center">Trenutno nemate objavljenih vijesti.</p>
+                  @endif
                 </ul>
-				
-				
-			  
-			<!-- Navigacija -->
-            <nav class="post-pagination text-center">
-              <ul class="pagination pagination--condensed pagination--lg">
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><span>...</span></li>
-                <li><a href="#">16</a></li>
-              </ul>
-            </nav>
-            <!-- Navigacija / End -->
+
+
+
+                <div class="text-center">
+                  {{ $vijesti->links() }}
+                </div>
 
               </div>
-            </aside>
             <!-- Lista vijesti / End -->
 			
 		  </div>

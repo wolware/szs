@@ -177,20 +177,18 @@
                     <th class="player-season-avg__season"><i class="fa fa-info-circle"></i> Naziv/Ime kluba</th>
                     <th class="player-season-avg__gmp"><i class="fa fa-tag"></i> ID kluba</th>
                     <th class="player-season-avg__min"><i class="fa fa-calendar-plus-o"></i> Objavljeno</th>
-                    <th class="player-season-avg__tg"><i class="fa fa-eye"></i> Pregledi</th>
                     <th class="player-season-avg__gg"><i class="fa fa-question-circle-o"></i> Status</th>
                     <th class="player-season-avg__ts"><i class="fa fa-pencil-square-o"></i></th>
                     <th class="player-season-avg__ts"><i class="fa fa-external-link"></i></th>
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach($clubs as $club)
+                  @foreach(Auth::user()->clubs as $club)
                   <tr>
                     <td class="player-season-avg__season">{{$club->name}}</td>
                     <td class="player-season-avg__gmp">{{$club->id}}</td>
                     <td class="player-season-avg__min">{{ \Carbon\Carbon::parse($club->created_at)->format("d F, Y") }}</td>
-                    <td class="player-season-avg__tg"></td>
-                    <td class="player-season-avg__gg"><a style="color:#0288D1;">
+                    <td class="player-season-avg__gg"><a class="profil-{{ $club->status }}">
                       @if($club->status == 'waiting')
                         NA ČEKANJU
                       @elseif($club->status == 'active')
@@ -225,40 +223,32 @@
                     <th class="player-season-avg__season"><i class="fa fa-info-circle"></i> Naziv/Ime škole</th>
                     <th class="player-season-avg__gmp"><i class="fa fa-tag"></i> ID škole</th>
                     <th class="player-season-avg__min"><i class="fa fa-calendar-plus-o"></i> Objavljeno</th>
-                    <th class="player-season-avg__tg"><i class="fa fa-eye"></i> Pregledi</th>
                     <th class="player-season-avg__gg"><i class="fa fa-question-circle-o"></i> Status</th>
                     <th class="player-season-avg__ts"><i class="fa fa-pencil-square-o"></i></th>
                     <th class="player-season-avg__ts"><i class="fa fa-external-link"></i></th>
                   </tr>
                 </thead>
                 <tbody>
+                @foreach(Auth::user()->schools as $school)
                   <tr>
-                    <td class="player-season-avg__season">FK Sve Za Sport</td>
-                    <td class="player-season-avg__gmp">01012456</td>
-                    <td class="player-season-avg__min">20. Novembar, 2017.</td>
-                    <td class="player-season-avg__tg">441</td>
-                    <td class="player-season-avg__gg"><a style="color:#388E3C;">Aktivno</a></td>
-                    <td class="player-season-avg__ts"><a href="#">Uredi</a></td>
-                    <td class="player-season-avg__st"><a href="#">Pregledaj</a></td>
+                    <td class="player-season-avg__season">{{$school->name}}</td>
+                    <td class="player-season-avg__gmp">{{$school->id}}</td>
+                    <td class="player-season-avg__min">{{ \Carbon\Carbon::parse($school->created_at)->format("d F, Y") }}</td>
+                    <td class="player-season-avg__gg"><a class="profil-{{ $school->status }}">
+                        @if($school->status == 'waiting')
+                          NA ČEKANJU
+                        @elseif($school->status == 'active')
+                          AKTIVNO
+                        @elseif($school->status == 'refused')
+                          ODBIJENO
+                        @elseif($school->status == 'deleted')
+                          IZBRISANO
+                        @endif
+                      </a></td>
+                    <td class="player-season-avg__ts"><a href="{{url('schools/'.$school->id.'/edit')}}">Uredi</a></td>
+                    <td class="player-season-avg__st"><a href="{{url('schools/'.$school->id)}}">Pregledaj</a></td>
                   </tr>
-                  <tr>
-                    <td class="player-season-avg__season">RK Sve Za Sport</td>
-                    <td class="player-season-avg__gmp">01012457</td>
-                    <td class="player-season-avg__min">18. Novembar, 2017.</td>
-                    <td class="player-season-avg__tg">5545</td>
-                    <td class="player-season-avg__gg"><a style="color:#388E3C;">AKTIVNO</a></td>
-                    <td class="player-season-avg__ts"><a href="#">Uredi</a></td>
-                    <td class="player-season-avg__st"><a href="#">Pregledaj</a></td>
-                  </tr>
-                  <tr>
-                    <td class="player-season-avg__season">KK Sve Za Sport</td>
-                    <td class="player-season-avg__gmp">01012488</td>
-                    <td class="player-season-avg__min">17. Novembar, 2017.</td>
-                    <td class="player-season-avg__tg">0</td>
-                    <td class="player-season-avg__gg"><a style="color:#B71C1C;">ODBIJENO</a></td>
-                    <td class="player-season-avg__ts"><a href="#">Uredi</a></td>
-                    <td class="player-season-avg__st"><a href="#">Pregledaj</a></td>
-                  </tr>
+                @endforeach
                 </tbody>
               </table>
             </div>
@@ -278,40 +268,32 @@
                     <th class="player-season-avg__season"><i class="fa fa-info-circle"></i> Ime i prezime</th>
                     <th class="player-season-avg__gmp"><i class="fa fa-tag"></i> ID sportiste</th>
                     <th class="player-season-avg__min"><i class="fa fa-calendar-plus-o"></i> Objavljeno</th>
-                    <th class="player-season-avg__tg"><i class="fa fa-eye"></i> Pregledi</th>
                     <th class="player-season-avg__gg"><i class="fa fa-question-circle-o"></i> Status</th>
                     <th class="player-season-avg__ts"><i class="fa fa-pencil-square-o"></i></th>
                     <th class="player-season-avg__ts"><i class="fa fa-external-link"></i></th>
                   </tr>
                 </thead>
                 <tbody>
+                @foreach(Auth::user()->players as $player)
                   <tr>
-                    <td class="player-season-avg__season">Dino Šečić</td>
-                    <td class="player-season-avg__gmp">01012456</td>
-                    <td class="player-season-avg__min">20. Novembar, 2017.</td>
-                    <td class="player-season-avg__tg">21441</td>
-                    <td class="player-season-avg__gg"><a style="color:#388E3C;">Aktivno</a></td>
-                    <td class="player-season-avg__ts"><a href="#">Uredi</a></td>
-                    <td class="player-season-avg__st"><a href="#">Pregledaj</a></td>
+                    <td class="player-season-avg__season">{{$player->firstname . ' ' . $player->lastname}}</td>
+                    <td class="player-season-avg__gmp">{{$player->id}}</td>
+                    <td class="player-season-avg__min">{{ \Carbon\Carbon::parse($player->created_at)->format("d F, Y") }}</td>
+                    <td class="player-season-avg__gg"><a class="profil-{{ $player->status }}">
+                        @if($player->status == 'waiting')
+                          NA ČEKANJU
+                        @elseif($player->status == 'active')
+                          AKTIVNO
+                        @elseif($player->status == 'refused')
+                          ODBIJENO
+                        @elseif($player->status == 'deleted')
+                          IZBRISANO
+                        @endif
+                      </a></td>
+                    <td class="player-season-avg__ts"><a href="{{url('athletes/'.$player->id.'/edit')}}">Uredi</a></td>
+                    <td class="player-season-avg__st"><a href="{{url('athletes/'.$player->id)}}">Pregledaj</a></td>
                   </tr>
-                  <tr>
-                    <td class="player-season-avg__season">Edin Musić</td>
-                    <td class="player-season-avg__gmp">01012457</td>
-                    <td class="player-season-avg__min">18. Novembar, 2017.</td>
-                    <td class="player-season-avg__tg">5004</td>
-                    <td class="player-season-avg__gg"><a style="color:#388E3C;">AKTIVNO</a></td>
-                    <td class="player-season-avg__ts"><a href="#">Uredi</a></td>
-                    <td class="player-season-avg__st"><a href="#">Pregledaj</a></td>
-                  </tr>
-                  <tr>
-                    <td class="player-season-avg__season">Irfan Garić</td>
-                    <td class="player-season-avg__gmp">01012488</td>
-                    <td class="player-season-avg__min">17. Novembar, 2017.</td>
-                    <td class="player-season-avg__tg">5442</td>
-                    <td class="player-season-avg__gg"><a style="color:#388E3C;">AKTIVNO</a></td>
-                    <td class="player-season-avg__ts"><a href="#">Uredi</a></td>
-                    <td class="player-season-avg__st"><a href="#">Pregledaj</a></td>
-                  </tr>
+                @endforeach
                 </tbody>
               </table>
             </div>
@@ -332,31 +314,32 @@
                     <th class="player-season-avg__season"><i class="fa fa-info-circle"></i> Naziv/Ime objekta</th>
                     <th class="player-season-avg__gmp"><i class="fa fa-tag"></i> ID objekta</th>
                     <th class="player-season-avg__min"><i class="fa fa-calendar-plus-o"></i> Objavljeno</th>
-                    <th class="player-season-avg__tg"><i class="fa fa-eye"></i> Pregledi</th>
                     <th class="player-season-avg__gg"><i class="fa fa-question-circle-o"></i> Status</th>
                     <th class="player-season-avg__ts"><i class="fa fa-pencil-square-o"></i></th>
                     <th class="player-season-avg__ts"><i class="fa fa-external-link"></i></th>
                   </tr>
                 </thead>
                 <tbody>
+                @foreach(Auth::user()->objects as $object)
                   <tr>
-                    <td class="player-season-avg__season">SZS Royal Fitness Club</td>
-                    <td class="player-season-avg__gmp">01012456</td>
-                    <td class="player-season-avg__min">20. Novembar, 2017.</td>
-                    <td class="player-season-avg__tg">17745</td>
-                    <td class="player-season-avg__gg"><a style="color:#388E3C;">Aktivno</a></td>
-                    <td class="player-season-avg__ts"><a href="#">Uredi</a></td>
-                    <td class="player-season-avg__st"><a href="#">Pregledaj</a></td>
+                    <td class="player-season-avg__season">{{$object->name}}</td>
+                    <td class="player-season-avg__gmp">{{$object->id}}</td>
+                    <td class="player-season-avg__min">{{ \Carbon\Carbon::parse($object->created_at)->format("d F, Y") }}</td>
+                    <td class="player-season-avg__gg"><a class="profil-{{ $object->status }}">
+                        @if($object->status == 'waiting')
+                          NA ČEKANJU
+                        @elseif($object->status == 'active')
+                          AKTIVNO
+                        @elseif($object->status == 'refused')
+                          ODBIJENO
+                        @elseif($object->status == 'deleted')
+                          IZBRISANO
+                        @endif
+                      </a></td>
+                    <td class="player-season-avg__ts"><a href="{{url('objects/'.$object->id.'/edit')}}">Uredi</a></td>
+                    <td class="player-season-avg__st"><a href="{{url('objects/'.$object->id)}}">Pregledaj</a></td>
                   </tr>
-                  <tr>
-                    <td class="player-season-avg__season">SKPC Mejdan</td>
-                    <td class="player-season-avg__gmp">01012457</td>
-                    <td class="player-season-avg__min">18. Novembar, 2017.</td>
-                    <td class="player-season-avg__tg">5449</td>
-                    <td class="player-season-avg__gg"><a style="color:#388E3C;">AKTIVNO</a></td>
-                    <td class="player-season-avg__ts"><a href="#">Uredi</a></td>
-                    <td class="player-season-avg__st"><a href="#">Pregledaj</a></td>
-                  </tr>
+                @endforeach
                 </tbody>
               </table>
             </div>
@@ -420,31 +403,32 @@
                     <th class="player-season-avg__season"><i class="fa fa-info-circle"></i> Naziv/Ime kadra</th>
                     <th class="player-season-avg__gmp"><i class="fa fa-tag"></i> ID kadra</th>
                     <th class="player-season-avg__min"><i class="fa fa-calendar-plus-o"></i> Objavljeno</th>
-                    <th class="player-season-avg__tg"><i class="fa fa-eye"></i> Pregledi</th>
                     <th class="player-season-avg__gg"><i class="fa fa-question-circle-o"></i> Status</th>
                     <th class="player-season-avg__ts"><i class="fa fa-pencil-square-o"></i></th>
                     <th class="player-season-avg__ts"><i class="fa fa-external-link"></i></th>
                   </tr>
                 </thead>
                 <tbody>
+                @foreach(Auth::user()->staff as $staff)
                   <tr>
-                    <td class="player-season-avg__season">Tarik jašarević</td>
-                    <td class="player-season-avg__gmp">01012456</td>
-                    <td class="player-season-avg__min">26. Oktobar, 2017.</td>
-                    <td class="player-season-avg__tg">1551</td>
-                    <td class="player-season-avg__gg"><a style="color:#388E3C;">Aktivno</a></td>
-                    <td class="player-season-avg__ts"><a href="#">Uredi</a></td>
-                    <td class="player-season-avg__st"><a href="#">Pregledaj</a></td>
+                    <td class="player-season-avg__season">{{$staff->firstname . ' ' . $staff->lastname }}</td>
+                    <td class="player-season-avg__gmp">{{$staff->id}}</td>
+                    <td class="player-season-avg__min">{{ \Carbon\Carbon::parse($staff->created_at)->format("d F, Y") }}</td>
+                    <td class="player-season-avg__gg"><a class="profil-{{ $staff->status }}">
+                        @if($staff->status == 'waiting')
+                          NA ČEKANJU
+                        @elseif($staff->status == 'active')
+                          AKTIVNO
+                        @elseif($staff->status == 'refused')
+                          ODBIJENO
+                        @elseif($staff->status == 'deleted')
+                          IZBRISANO
+                        @endif
+                      </a></td>
+                    <td class="player-season-avg__ts"><a href="{{url('staff/'.$staff->id.'/edit')}}">Uredi</a></td>
+                    <td class="player-season-avg__st"><a href="{{url('staff/'.$staff->id)}}">Pregledaj</a></td>
                   </tr>
-                  <tr>
-                    <td class="player-season-avg__season">Nedim Tufekčić</td>
-                    <td class="player-season-avg__gmp">01012457</td>
-                    <td class="player-season-avg__min">18. Novembar, 2017.</td>
-                    <td class="player-season-avg__tg">9652</td>
-                    <td class="player-season-avg__gg"><a style="color:#388E3C;">AKTIVNO</a></td>
-                    <td class="player-season-avg__ts"><a href="#">Uredi</a></td>
-                    <td class="player-season-avg__st"><a href="#">Pregledaj</a></td>
-                  </tr>
+                @endforeach
                 </tbody>
               </table>
             </div>

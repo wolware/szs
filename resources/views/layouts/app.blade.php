@@ -131,7 +131,7 @@
             <li class="nav-account__item"><a href="#"><i class="fa fa-globe"></i> Jezik: <span class="highlight">BH</span></a>
               <ul class="main-nav__sub">
                 <li><a href="{{url('/')}}"><i class="fa fa-language"></i> Bosanski</a></li>
-                  <li><a href=""><i class="fa fa-language"></i> Engleski</a></li>
+
                 </ul>
             </li>
           </ul>
@@ -179,11 +179,11 @@
               <h6 class="info-block__heading">Stručni</h6>
               <a href="{{ url('/staff') }}" class="info-block__link">Kadrovi</a>
             </li>
-            <li class="info-block__item info-block__item--contact-secondary">
+            <!--<li class="info-block__item info-block__item--contact-secondary">
                   <a href="#"><img src="{{asset('images/bus-fff.png')}}" class="df-icon df-icon--soccer-ball"></a>
                   <h6 class="info-block__heading">Sportski</h6>
                   <a href="#" class="info-block__link">Turizam</a>
-            </li>
+            </li>-->
           </ul>
         </div>
       </div>
@@ -205,8 +205,6 @@
               <ul class="main-nav__list">
                 <li class=""><a href="{{ url('events') }}">Kalendar</a></li>
                 <li class=""><a href="{{ url('associations') }}">Savezi</a></li>
-                <li class=""><a href="#">Reprezentacije BiH</a></li>
-                <li class=""><a href="#">Dijaspora</a></li>
                 <li class="visible-xs"><a href="www.rekreacija.svezasport.ba">SZS Rekreacija</a></li>
                 <li class="visible-xs"><a href="#">SZS Aplikacije</a></li>
                 <li class="visible-xs"><a href="#">Sportski turizam</a></li>

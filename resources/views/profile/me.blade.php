@@ -160,12 +160,12 @@
                     <div class="team-stats__icon team-stats__icon--circle">
                       <img src="{{asset('images/klubovi-fff.png')}}" alt="" class="team-stats__icon-primary">
                     </div>
-                    <div class="team-stats__value">35/40</div>
+                    <div class="team-stats__value">{{ $active->clubs }}/40</div>
                     <div class="team-stats__label label-stats-profil">Aktivni klubovi</div>
                     <div class="team-stats__label">
                       <div class="progress-stats">
                         <div class="progress">
-                          <div class="progress__bar progress__bar-width-80" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                          <div class="progress__bar progress__bar-width-{{ ceil((($active->clubs / 40) * 100) / 5) * 5  }}" role="progressbar" aria-valuenow="{{ ceil((($active->clubs / 40) * 100) / 5) * 5  }}" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         </div>
                     </div>
@@ -174,12 +174,12 @@
                     <div class="team-stats__icon team-stats__icon--circle">
                       <img src="{{asset('images/skole-fff.png')}}" alt="" class="team-stats__icon-primary">
                     </div>
-                    <div class="team-stats__value">35/40</div>
+                    <div class="team-stats__value">{{ $active->schools }}/40</div>
                     <div class="team-stats__label label-stats-profil">Aktivne škole</div>
                     <div class="team-stats__label">
                       <div class="progress-stats">
                         <div class="progress">
-                          <div class="progress__bar progress__bar-width-80" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                          <div class="progress__bar progress__bar-width-{{ ceil((($active->schools / 40) * 100) / 5) * 5  }}" role="progressbar" aria-valuenow="{{ ceil((($active->schools / 40) * 100) / 5) * 5  }}" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         </div>
                     </div>
@@ -188,12 +188,12 @@
                     <div class="team-stats__icon team-stats__icon--circle">
                       <img src="{{asset('images/sportisti-fff.png')}}" alt="" class="team-stats__icon-primary">
                     </div>
-                    <div class="team-stats__value">11/15</div>
+                    <div class="team-stats__value">{{ $active->players }}/15</div>
                     <div class="team-stats__label label-stats-profil">Aktivni sportisti</div>
                     <div class="team-stats__label">
                       <div class="progress-stats">
                         <div class="progress">
-                          <div class="progress__bar progress__bar-width-90" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                          <div class="progress__bar progress__bar-width-{{ ceil((($active->players / 15) * 100) / 5) * 5  }}" role="progressbar" aria-valuenow="{{ ceil((($active->players / 15) * 100) / 5) * 5  }}" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         </div>
                     </div>
@@ -204,12 +204,12 @@
                     <div class="team-stats__icon team-stats__icon--circle">
                       <img src="{{asset('images/objekti-fff.png')}}" alt="" class="team-stats__icon-primary">
                     </div>
-                    <div class="team-stats__value">22/25</div>
+                    <div class="team-stats__value">{{ $active->objects }}/25</div>
                     <div class="team-stats__label label-stats-profil">Aktivni objekti</div>
                     <div class="team-stats__label">
                       <div class="progress-stats">
                         <div class="progress">
-                          <div class="progress__bar progress__bar-width-90" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                          <div class="progress__bar progress__bar-width-{{ ceil((($active->objects / 25) * 100) / 5) * 5  }}" role="progressbar" aria-valuenow="{{ ceil((($active->objects / 25) * 100) / 5) * 5  }}" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         </div>
                     </div>
@@ -218,12 +218,12 @@
                     <div class="team-stats__icon team-stats__icon--circle">
                       <img src="{{asset('images/oprema-fff.png')}}" alt="" class="team-stats__icon-primary">
                     </div>
-                    <div class="team-stats__value">10/15</div>
+                    <div class="team-stats__value">{{ $active->news }}/15</div>
                     <div class="team-stats__label label-stats-profil">Aktivne Vijesti</div>
                     <div class="team-stats__label">
                       <div class="progress-stats">
                         <div class="progress">
-                          <div class="progress__bar progress__bar-width-90" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                          <div class="progress__bar progress__bar-width-{{ ceil((($active->news / 15) * 100) / 5) * 5  }}" role="progressbar" aria-valuenow="{{ ceil((($active->news / 15) * 100) / 5) * 5  }}" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         </div>
                     </div>
@@ -232,12 +232,12 @@
                     <div class="team-stats__icon team-stats__icon--circle">
                       <img src="{{asset('images/kadrovi-fff.png')}}" alt="" class="team-stats__icon-primary">
                     </div>
-                    <div class="team-stats__value">15/20</div>
+                    <div class="team-stats__value">{{ $active->staff }}/20</div>
                     <div class="team-stats__label label-stats-profil">Aktivni kadrovi</div>
                     <div class="team-stats__label">
                       <div class="progress-stats">
                         <div class="progress">
-                          <div class="progress__bar progress__bar-width-70" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
+                          <div class="progress__bar progress__bar-width-{{ ceil((($active->staff / 20) * 100) / 5) * 5  }}" role="progressbar" aria-valuenow="{{ ceil((($active->staff / 20) * 100) / 5) * 5  }}" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                         </div>
                     </div>
@@ -249,50 +249,30 @@
             <div class="card card--lg">
               <div class="card__header card__header--has-btn">
                 <h4><i class="fa fa-plus-square-o"></i> Moje zadnje vijesti</h4>
-                <a href="moje-vijesti.php" class="btn btn-default btn-outline btn-xs card-header__button">Pregled svih</a>
+                <a href="{{ url('/me/news') }}" class="btn btn-default btn-outline btn-xs card-header__button">Pregled svih</a>
               </div>
               <div class="widget__content card__content">
                 <ul class="posts posts--simple-list">
-                  <li class="posts__item posts__item--category-2">
-                    <figure class="posts__thumb"><img class="slika-vijesti-01" src="{{asset('images/vijesti-slika-test.jpg')}}" alt="">
-                    </figure>
-                    <div class="posts__inner">
-                      <div class="posts__cat">
-                        <span class="label posts__cat-label">FK Sve Za Sport</span>
-                      </div>
-                      <h6 class="posts__title"><a href="#">FK Sve Za Sport je na domaćem terenu ostvario ubjedljivu pobjedu nad FK All For Sport</a></h6>
-                      <time datetime="2016-08-23" class="posts__date">23.10.2017.</time>
-                    </div>
-                  </li>
-          <li class="posts__item posts__item--category-2">
-                    <figure class="posts__thumb"><img class="slika-vijesti-01" src="{{asset('images/vijesti-slika-test.jpg')}}" alt="">
-                    </figure>
-                    <div class="posts__inner">
-                      <div class="posts__cat">
-                        <span class="label posts__cat-label">FK Sve Za Sport</span>
-                      </div>
-                      <h6 class="posts__title"><a href="#">FK Sve Za Sport je na domaćem terenu ostvario ubjedljivu pobjedu nad FK All For Sport</a></h6>
-                      <time datetime="2016-08-23" class="posts__date">23.10.2017.</time>
-                    </div>
-                  </li>
-          <li class="posts__item posts__item--category-2">
-                    <figure class="posts__thumb"><img class="slika-vijesti-01" src="{{asset('images/vijesti-slika-test.jpg')}}" alt="">
-                    </figure>
-                    <div class="posts__inner">
-                      <div class="posts__cat">
-                        <span class="label posts__cat-label">FK Sve Za Sport</span>
-                      </div>
-                      <h6 class="posts__title"><a href="#">FK Sve Za Sport je na domaćem terenu ostvario ubjedljivu pobjedu nad FK All For Sport</a></h6>
-                      <time datetime="2016-08-23" class="posts__date">23.10.2017.</time>
-                    </div>
-                  </li>
-          
+                  @if($vijesti)
+                    @foreach($vijesti as $vijest)
+                      <li class="posts__item posts__item--category-2">
+                        <figure class="posts__thumb"><img class="slika-vijesti-01" src="{{asset('images/vijesti/galerija/' . $vijest->slika)}}" alt="">
+                        </figure>
+                        <div class="posts__inner">
+                          <div class="posts__cat">
+                            <span class="label posts__cat-label">{{ $vijest->kategorija->naziv }}</span>
+                          </div>
+                          <h6 class="posts__title"><a href="{{ url('news/' . $vijest->id) }}">{{ $vijest->naslov }}</a></h6>
+                          <time datetime="2016-08-23" class="posts__date">{{ \Carbon\Carbon::parse($vijest->created_at)->format("d.m.Y") }}</time>
+                        </div>
+                      </li>
+                    @endforeach
+                  @else
+                    <p class="text-center">Niste objavili niti jednu vijest do sada.</p>
+                  @endif
                 </ul>
               </div>
-            </aside>
-    </div>
-
-
+            </div>
           </div>
         </div>
       </div>
