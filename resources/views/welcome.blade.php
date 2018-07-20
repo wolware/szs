@@ -348,7 +348,7 @@
                                 <h4><i class="fa fa-bookmark"></i> Izdvojeni profili</h4>
                             </header>
                         </div>
-                        @if($newProfiles)
+                        @if(!empty($newProfiles))
                             @if($newProfiles->player)
                                 <!-- kartica -->
                                 <a href="{{ url('/athletes/' . $newProfiles->player->id) }}">
