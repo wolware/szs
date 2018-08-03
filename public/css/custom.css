@@ -182,3 +182,15 @@ label {
 .progress__bar-width-5 {
     width: 5%!important;
 }
+
+@media only screen and (max-width: 991px) {
+    .site-wrapper--has-overlay .main-nav {
+        transform: translateX(0);
+        transition: all .4s ease-in-out;
+    }
+
+    .info-block__item.info-block__item--contact-secondary a:first-child {
+        padding: 0!important;
+        border: 0!important;
+    }
+}

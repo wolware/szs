@@ -48,6 +48,8 @@
 
 </head>
 <body>
+  <div class="site-wrapper clearfix">
+    <div class="site-overlay"></div>
   <!-- Header
     ================================================== -->
 
@@ -303,6 +305,7 @@
       </div>
       <!-- Footer Secondary / End -->
     </footer>
+  </div>
     <!-- Footer / End -->
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
