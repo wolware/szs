@@ -50,7 +50,7 @@
 						</figure>
 						<div class="posts__inner card__content">
 							<h6 class="posts__title ime-sportiste-klub-lista"><a href="#">Sportski Klub</a></h6>
-							<div class="posts__excerpt">Dostupno: 5</div>
+							<div class="posts__excerpt">Dostupno</div>
 						</div>
 						<footer class="posts__footer card__footer">
 							<a href="{{url('clubs/new')}}" class="btn btn-warning btn1-objavi-klub"><i class="fa fa-plus-circle"></i> Dodaj novi klub</a>
@@ -65,7 +65,7 @@
 						</figure>
 						<div class="posts__inner card__content">
 							<h6 class="posts__title ime-sportiste-klub-lista"><a href="#">Škola sporta</a></h6>
-							<div class="posts__excerpt">Dostupno: 0</div>
+							<div class="posts__excerpt">Dostupno</div>
 						</div>
 						<footer class="posts__footer card__footer">
 							<a href="{{url('/schools/new')}}" class="btn btn-warning btn1-objavi-skolu"><i class="fa fa-plus-circle"></i> Dodaj novu školu</a>
@@ -80,7 +80,7 @@
 						</figure>
 						<div class="posts__inner card__content">
 							<h6 class="posts__title ime-sportiste-klub-lista"><a href="#">Sportista</a></h6>
-							<div class="posts__excerpt">Dostupno: 14</div>
+							<div class="posts__excerpt">Dostupno: 15</div>
 						</div>
 						<footer class="posts__footer card__footer">
 							<a href="{{url('/athletes/add')}}" class="btn btn-warning btn1-objavi-sportistu"><i class="fa fa-plus-circle"></i> Dodaj novog sportistu</a>
@@ -95,7 +95,7 @@
 						</figure>
 						<div class="posts__inner card__content">
 							<h6 class="posts__title ime-sportiste-klub-lista"><a href="#">Sportski Objekt</a></h6>
-							<div class="posts__excerpt">Dostupno: 1</div>
+							<div class="posts__excerpt">Dostupno: 7</div>
 						</div>
 						<footer class="posts__footer card__footer">
 							<a href="{{url('/objects/add')}}" class="btn btn-warning btn1-objavi-objekt"><i class="fa fa-plus-circle"></i> Dodaj novi objekt</a>
@@ -125,7 +125,7 @@
 						</figure>
 						<div class="posts__inner card__content">
 							<h6 class="posts__title ime-sportiste-klub-lista"><a href="#">Stručni Kadar</a></h6>
-							<div class="posts__excerpt">Dostupno: 2</div>
+							<div class="posts__excerpt">Dostupno</div>
 						</div>
 						<footer class="posts__footer card__footer">
 							<a href="{{ url('/staff/new') }}" class="btn btn-warning btn1-objavi-kadar"><i class="fa fa-plus-circle"></i> Dodaj novi kadar</a>

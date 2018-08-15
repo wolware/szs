@@ -31,10 +31,10 @@
                                     class="fa fa-bars"></i>
                             <small>Svi</small>
                             Sportovi</a></li>
-                    <li class="content-filter__item "><a href="#" class="content-filter__link"><i
+                    {{--<li class="content-filter__item "><a href="#" class="content-filter__link"><i
                                     class="fa fa-wheelchair"></i>
                             <small>Sportovi za osobe sa</small>
-                            Invaliditetom</a></li>
+                            Invaliditetom</a></li>--}}
                 </ul>
             </div>
         </nav>
@@ -50,7 +50,7 @@
                         <div class="post-grid__item col-sm-3">
                             <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
                                 <figure class="posts__thumb">
-                                    <img src="{{url('assets/images/wpps/oprema-wp.png')}}" alt="">
+                                    <img src="{{url('assets/images/'.$sport->icon)}}" alt="">
                                 </figure>
                                 <div class="posts__inner card__content">
                                     <h6 class="posts__title ime-sportiste-klub-lista"><a href="#">{{ $sport->name }}</a>
