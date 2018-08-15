@@ -4,13 +4,13 @@
 
   <!-- Basic Page Needs
   ================================================== -->
-  <title>{{ config('app.name', 'SveZaSport.ba') }}</title>
+  <title>{{   'Sve Za Sport' }}</title>
   <meta charset="utf-8">
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="Alchemists - Sports News HTML Template">
-  <meta name="author" content="Dan Fisher">
-  <meta name="keywords" content="Sports News HTML Template">
+  <meta name="description" content="Sve za sport - Bosanska socijalna mreža namijenjena spajanju svih sportista unutar Bosne i Hercegovine">
+  <meta name="author" content="Sve Za Sport">
+  <meta name="keywords" content="sve za sport, vijesti, sport, bih, bosna i hercegovina, rekreacija, szs, svezasport.ba">
 
   <!-- Favicons
   ================================================== -->

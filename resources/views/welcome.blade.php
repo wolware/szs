@@ -68,9 +68,10 @@
                                 <div class="widget__title card__header card__header--has-btn">
                                     <h4><i class="fa fa-cloud"></i> Dan za sport</h4>
                                     <a href="{{ url('/objects') }}" class="btn btn-default btn-outline btn-xs card-header__button">Nađi
-                                        termin za rekreaciju</a>
+                                        objekat za rekreaciju</a>
                                 </div>
                                 <div class="widget__content card__content">
+                                    @if(isset(Auth::user()->name))
                                     <div class="row text-center szs-dan-margin">
                                         <h4 class="szs-dan-dan" id="dan"></h4>
                                         <p class="szs-dan-call">Danas je savršen dan za</p>
@@ -96,6 +97,16 @@
                                             document.getElementById('dan').innerHTML = today;
                                         </script>
                                     </div>
+                                        @else
+                                        <div class="row text-center szs-dan-margin">
+                                            <h4 class="szs-dan-dan" id="dan"></h4>
+                                            <a href="#" ><img src="{{asset('images/sportisti-000.png')}}" class="szs-dan-icon"/></a>
+                                            <a href="#" class=""> <h2 class="szs-dan-title">Registrujte se &amp; uplovite u svijet<br>sporta</h2></a>
+                                            <img src="{{asset('images/straight-letters-szs.png')}}" class="szs-dan-footer"/>
+
+                                        </div>
+                                    @endif
+
                                 </div>
                             </aside>
                         </div>
@@ -312,13 +323,12 @@
 
                         <!-- Widget: Social Buttons - Condensed-->
                         <aside class="widget widget--sidebar widget-social widget-social--condensed">
-                            <a href="#" class="btn-social-counter btn-social-counter--fb" target="_blank">
+                            <a href="https://www.facebook.com/svezasport.ba/?ref=bookmarks" class="btn-social-counter btn-social-counter--fb" target="_blank">
                                 <div class="btn-social-counter__icon">
                                     <i class="fa fa-facebook"></i>
                                 </div>
                                 <h6 class="btn-social-counter__title">Pratite nas na Facebooku</h6>
-                                <span class="btn-social-counter__count"><span
-                                            class="btn-social-counter__count-num"></span></span>
+
                                 <span class="btn-social-counter__add-icon"></span>
                             </a>
                             <a href="https://twitter.com/danfisher_dev"
@@ -326,18 +336,14 @@
                                 <div class="btn-social-counter__icon">
                                     <i class="fa fa-twitter"></i>
                                 </div>
-                                <h6 class="btn-social-counter__title">Pratite nas na twitteru</h6>
-                                <span class="btn-social-counter__count"><span
-                                            class="btn-social-counter__count-num">142</span></span>
+                                <h6 class="btn-social-counter__title">Pratite nas na Twitteru</h6>
                                 <span class="btn-social-counter__add-icon"></span>
                             </a>
                             <a href="#" class="btn-social-counter btn-social-counter--instagram" target="_blank">
                                 <div class="btn-social-counter__icon">
                                     <i class="fa fa-instagram"></i>
                                 </div>
-                                <h6 class="btn-social-counter__title">Pratite naš instagram</h6>
-                                <span class="btn-social-counter__count"><span
-                                            class="btn-social-counter__count-num">1000</span></span>
+                                <h6 class="btn-social-counter__title">Pratite naš Instagram</h6>
                                 <span class="btn-social-counter__add-icon"></span>
                             </a>
                         </aside>

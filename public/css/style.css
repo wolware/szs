@@ -22082,6 +22082,10 @@ td.team-leader__goals {
 	margin-bottom: 20px;
 }
 
+.szs-dan-title:hover {
+  color: #f49222;
+}
+
 .szs-dan-opis {
 	color: #9e9e9e;
     margin: 0 0 20px 0;
