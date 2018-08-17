@@ -81,6 +81,7 @@
                                 Odjava</a></li>
                         <li class="nav-account__item"><a href="{{url('profile/new')}}"><i class="fa fa-plus-circle"></i>
                                 Objavi</a></li>
+                        <li class="nav-account__item"><a href="{{url('/messages')}}"><i class="fa fa-envelope"></i> Poruke</a></li>
                         <li class="nav-account__item"><a href="{{url('me/profile')}}"><i
                                         class="fa fa-user"></i> {{isset(Auth::user()->name) ? Auth::user()->name : 'MOJ SZS'}}
                             </a>
