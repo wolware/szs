@@ -118,6 +118,7 @@ class PlayerController extends Controller
     }
 
     public function displayAddPlayer($sport_id) {
+        /*TODO on vuce slike na dodavanju playera iz baze,dodaj drugu kolonu za to*/
         $sport = $this->sportRepository
             ->getById($sport_id);
 

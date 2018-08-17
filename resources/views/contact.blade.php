@@ -18,7 +18,7 @@
                 </header>
                 <div class="pushy-panel__content">
 
-                    <a href="www.rekreacija.svezasport.ba" class="push-rekreacija btn-social-counter" target="_blank">
+                    <a href="rekreacija.svezasport.ba" class="push-rekreacija btn-social-counter" target="_blank">
                         <div class="btn-social-counter__icon">
                             <i class="fa fa-futbol-o"></i>
                         </div>
@@ -59,10 +59,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1">
-                        <h1 class="page-heading__title">Contact <span class="highlight">Us</span></h1>
+                        <h1 class="page-heading__title">Kontaktirajte <span class="highlight">Nas</span></h1>
                         <ol class="page-heading__breadcrumb breadcrumb">
-                            <li><a href="_soccer_index.html">Home</a></li>
-                            <li class="active">Contact Us</li>
+                            <li><a href="{{url('/')}}">Početna</a></li>
+                            <li class="active">Kontaktirajte Nas</li>
                         </ol>
                     </div>
                 </div>
@@ -76,22 +76,19 @@
                 <!-- Contact Area -->
                 <div class="card">
                     <header class="card__header">
-                        <h4>Contact Form</h4>
+                        <h4>Kontakt Forma</h4>
                     </header>
                     <div class="card__content">
 
                         <div class="row">
                             <div class="col-md-4">
-                                <h5>Questions? Send us a Message!</h5>
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, remeriam, eaque ipsa quae ab illo et quasi architecto.</p>
+                                <h5>Pitanja? Pošaljite nam poruku!</h5>
+                                <p>Ukoliko imate bilo kakvih nejasnoća ili možda želite prijaviti neke nepravilnosti na našem sistemu, slobodno nam pošaljite poruku.</p>
 
                                 <div class="spacer-sm"></div>
 
-                                <h5>Open Practices</h5>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor doloremque incididunt ut labore et dolore magna.</p>
-
                                 <address>
-                                    <strong>Mondays to Fridays:</strong> 9:00am to 12:00pm
+                                    <strong>Ponedjeljak - Petak:</strong> 9:00 do 00:00
                                 </address>
                             </div>
                             <div class="col-md-8">
@@ -101,29 +98,29 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="contact-form-name">Your Name <span class="required">*</span></label>
-                                                <input type="text" name="contact-form-name" id="contact-form-name" class="form-control" placeholder="Your full name...">
+                                                <label for="contact-form-name">Vaše ime <span class="required">*</span></label>
+                                                <input type="text" name="contact-form-name" id="contact-form-name" class="form-control" placeholder="Vaše ime...">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="contact-form-email">Your Email <span class="required">*</span></label>
-                                                <input type="email" name="contact-form-email" id="contact-form-email" class="form-control" placeholder="Your email...">
+                                                <label for="contact-form-email">Vaš Email <span class="required">*</span></label>
+                                                <input type="email" name="contact-form-email" id="contact-form-email" class="form-control" placeholder="Vaš email...">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="contact-form-subject">Subject</label>
-                                                <input type="text" name="contact-form-subject" id="contact-form-subject" class="form-control" placeholder="Your subject...">
+                                                <label for="contact-form-subject">Predmet poruke</label>
+                                                <input type="text" name="contact-form-subject" id="contact-form-subject" class="form-control" placeholder="Predmet poruke...">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="contact-form-message">Your Message <span class="required">*</span></label>
-                                        <textarea name="name" rows="5" class="form-control" placeholder="Enter your message here..."></textarea>
+                                        <label for="contact-form-message">Vaša poruka <span class="required">*</span></label>
+                                        <textarea name="name" rows="5" class="form-control" placeholder="Unesite vašu poruku ovde..."></textarea>
                                     </div>
                                     <div class="form-group form-group--submit">
-                                        <button type="submit" class="btn btn-primary-inverse btn-lg btn-block">Send Your Message</button>
+                                        <button type="submit" class="btn btn-primary-inverse btn-lg btn-block">Pošaljite vašu poruku</button>
                                     </div>
                                 </form>
                                 <!-- Contact Form / End -->

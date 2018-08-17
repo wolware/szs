@@ -179,6 +179,7 @@ return [
         Laravel\Socialite\SocialiteServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Cmgmyr\Messenger\MessengerServiceProvider::class
     ],
 
     /*

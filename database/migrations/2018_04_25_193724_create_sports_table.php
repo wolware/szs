@@ -18,6 +18,7 @@ class CreateSportsTable extends Migration
 
             $table->string('name');
             $table->boolean('with_disabilities')->default(0);
+            $table->string('icon_on_adding')->default('');
 
             $table->timestamps();
         });

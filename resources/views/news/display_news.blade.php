@@ -38,9 +38,11 @@
 
                         <figure class="post__thumbnail">
                             @if($novost->slika)
-                                <img class="image-responsive-width" src="{{ asset('images/vijesti/galerija/' . $novost->slika) }}" alt="">
+                                <img class="image-responsive-width"
+                                     src="{{ asset('images/vijesti/galerija/' . $novost->slika) }}" alt="">
                             @else
-                                <img class="image-responsive-width" src="{{ asset('images/vijesti/' . 'vijesti-dodaj-sliku.png') }}" alt="">
+                                <img class="image-responsive-width"
+                                     src="{{ asset('images/vijesti/' . 'vijesti-dodaj-sliku.png') }}" alt="">
                             @endif
                         </figure>
 
@@ -77,11 +79,17 @@
                         <div class="card__content">
                             <header class="post-author__header">
                                 <figure class="post-author__avatar">
-                                    <img src="{{ asset('images/avatars/' . $novost->user->avatar) }}" alt="Post Author Avatar">
+                                    @if($novost->user->avatar != null)
+                                        <img src="{{ asset('images/avatars/' . $novost->user->avatar) }}"
+                                             alt="Post Author Avatar">
+                                    @else
+                                        <img src="{{ asset('images/dino-secic.jpg') }}" alt="Post Author Avatar">
+                                    @endif
+
                                 </figure>
                                 <div class="post-author__info">
                                     <h4 class="post-author__name">{{ $novost->user->name }}</h4>
-                                    <span class="post-author__slogan">The Alchemists Ninja</span>
+                                    <span class="post-author__slogan"> </span>
                                 </div>
                                 <ul class="post-author__social-links social-links social-links--btn">
                                     <li class="social-links__item">
@@ -94,12 +102,6 @@
                                     </li>
                                 </ul>
                             </header>
-                            <div class="post-author__description">
-                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
-                                architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas
-                                sit aspernatur.
-                            </div>
                         </div>
                     </div>
                     <!-- Post Author / End -->
@@ -165,7 +167,6 @@
                         </div>
                     </div>
                     <!-- Related Posts / End -->
-
 
 
                 </div>
@@ -310,26 +311,26 @@
                     <!-- Widget: Trending News / End -->
 
                     <!-- Widget: Newsletter -->
-                    <aside class="widget widget--sidebar card widget-newsletter">
-                        <div class="widget__title card__header">
-                            <h4>SZS Magazin</h4>
+                {{--<aside class="widget widget--sidebar card widget-newsletter">
+                    <div class="widget__title card__header">
+                        <h4>SZS Magazin</h4>
+                    </div>
+                    <div class="widget__content card__content">
+                        <h5 class="widget-newsletter__subtitle">Pretplatite se!</h5>
+                        <div class="widget-newsletter__desc">
+                            <p>Primajte novosti i obavijesti od strane SveZaSport.ba dnevno putem e-mail usluge.</p>
                         </div>
-                        <div class="widget__content card__content">
-                            <h5 class="widget-newsletter__subtitle">Pretplatite se!</h5>
-                            <div class="widget-newsletter__desc">
-                                <p>Primajte novosti i obavijesti od strane SveZaSport.ba dnevno putem e-mail usluge.</p>
+                        <form action="#" id="newsletter" class="inline-form">
+                            <div class="input-group">
+                                <input type="email" class="form-control" placeholder="Vaša e-mail adresa">
+                                <span class="input-group-btn">
+                  <button class="btn btn-lg btn-default" type="button">PRETPLATA</button>
+                </span>
                             </div>
-                            <form action="#" id="newsletter" class="inline-form">
-                                <div class="input-group">
-                                    <input type="email" class="form-control" placeholder="Vaša e-mail adresa">
-                                    <span class="input-group-btn">
-                      <button class="btn btn-lg btn-default" type="button">PRETPLATA</button>
-                    </span>
-                                </div>
-                            </form>
-                        </div>
-                    </aside>
-                    <!-- Widget: Newsletter / End -->
+                        </form>
+                    </div>
+                </aside>--}}
+                <!-- Widget: Newsletter / End -->
 
                     <!-- Widget: Marketing sidebar -->
                     <div class="row">

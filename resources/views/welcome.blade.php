@@ -339,7 +339,7 @@
                                 <h6 class="btn-social-counter__title">Pratite nas na Twitteru</h6>
                                 <span class="btn-social-counter__add-icon"></span>
                             </a>
-                            <a href="#" class="btn-social-counter btn-social-counter--instagram" target="_blank">
+                            <a href="https://www.instagram.com/svezasport.ba/" class="btn-social-counter btn-social-counter--instagram" target="_blank">
                                 <div class="btn-social-counter__icon">
                                     <i class="fa fa-instagram"></i>
                                 </div>

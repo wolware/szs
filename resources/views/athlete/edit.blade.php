@@ -138,7 +138,7 @@
                                                         <div class="form-group col-md-12">
                                                             <label for="player_nature"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Karakter sportiste*</label>
                                                             <select class="form-control" id="player_nature" name="player_nature">
-                                                                <option selected disabled>Izberite karakter sportiste</option>
+                                                                <option selected disabled>Izaberite karakter sportiste</option>
                                                                 @foreach($playerNatures as $nature)
                                                                     <option value="{{ $nature->id }}" {{ $player->player_nature == $nature->id ? 'selected' : '' }}>{{ $nature->name }}</option>
                                                                 @endforeach
@@ -291,7 +291,7 @@
                                                 <div class="form-group col-md-4">
                                                     <label for="requested_club"><img class="flow-icons-013" src="{{asset('images/icons/klubovi-icon.svg')}}"> Klub</label>
                                                     <select class="form-control" id="requested_club" name="requested_club">
-                                                        <option selected disabled>Izberite trenutni klub sportiste</option>
+                                                        <option selected disabled>Izaberite trenutni klub sportiste</option>
                                                         @foreach($clubs as $club)
                                                             <option value="{{ $club->id }}" {{ $player->requested_club == $club->id ? 'selected' : '' }}>{{ $club->name }}</option>
                                                         @endforeach

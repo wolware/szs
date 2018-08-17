@@ -238,6 +238,9 @@ $(document).ready(function () {
                 string: true,
                 maxlength: 255
             }
+        },
+        invalidHandler: function(form, validator) {
+            $('html, body').animate({scrollTop: '500em'}, 300);
         }
     });
 
@@ -370,6 +373,9 @@ $(document).ready(function () {
                 required: true,
                 extension: 'png|jpg|jpeg'
             }
+        },
+        invalidHandler: function(form, validator) {
+            $('html, body').animate({scrollTop: '500em'}, 300);
         }
     });
 
@@ -548,6 +554,9 @@ $(document).ready(function () {
             'galerija[]': {
                 extension: "jpg|jpeg|png"
             }
+        },
+        invalidHandler: function(form, validator) {
+            $('html, body').animate({scrollTop: '500em'}, 300);
         }
     });
 
@@ -618,6 +627,9 @@ $(document).ready(function () {
                 string: true,
                 maxlength: 255
             }
+        } ,
+        invalidHandler: function(form, validator) {
+            $('html, body').animate({scrollTop: '500em'}, 300);
         }
     });
 
@@ -694,6 +706,9 @@ $(document).ready(function () {
             best_rank: {
                 digits: true
             }
+        },
+        invalidHandler: function(form, validator) {
+            $('html, body').animate({scrollTop: '500em'}, 300);
         }
     });
 
@@ -816,6 +831,9 @@ $(document).ready(function () {
             'galerija[]': {
                 extension: "jpg|jpeg|png"
             }
+        },
+        invalidHandler: function(form, validator) {
+            $('html, body').animate({scrollTop: '500em'}, 300);
         }
     });
 
@@ -886,6 +904,9 @@ $(document).ready(function () {
                 string: true,
                 maxlength: 255
             }
+        },
+        invalidHandler: function(form, validator) {
+            $('html, body').animate({scrollTop: '500em'}, 300);
         }
     });
 
@@ -916,6 +937,9 @@ $(document).ready(function () {
             work_experience: {
                 number: true
             }
+        },
+        invalidHandler: function(form, validator) {
+            $('html, body').animate({scrollTop: '500em'}, 300);
         }
     });
 
@@ -1072,6 +1096,9 @@ $(document).ready(function () {
             'galerija[]': {
                 extension: 'png|jpg|jpeg'
             }
+        },
+        invalidHandler: function(form, validator) {
+            $('html, body').animate({scrollTop: '500em'}, 300);
         }
     });
 
@@ -1199,6 +1226,9 @@ $(document).ready(function () {
                 string: true,
                 maxlength: 255
             }
+        },
+        invalidHandler: function(form, validator) {
+            $('html, body').animate({scrollTop: '500em'}, 300);
         }
     });
 
@@ -1523,6 +1553,9 @@ $(document).ready(function () {
                 required: true,
                 extension: 'png|jpg|jpeg'
             }
+        },
+        invalidHandler: function(form, validator) {
+            $('html, body').animate({scrollTop: '500em'}, 300);
         }
     });
 
@@ -1588,6 +1621,9 @@ $(document).ready(function () {
                 string: true,
                 maxlength: 255
             }
+        },
+        invalidHandler: function(form, validator) {
+            $('html, body').animate({scrollTop: '500em'}, 300);
         }
     });
 
@@ -1828,6 +1864,9 @@ $(document).ready(function () {
                 digits: true,
                 range: [0, 1]
             }
+        },
+        invalidHandler: function(form, validator) {
+            $('html, body').animate({scrollTop: '500em'}, 300);
         }
     });
 
@@ -1943,6 +1982,9 @@ $(document).ready(function () {
                 string: true,
                 maxlength: 2000
             }
+        },
+        invalidHandler: function(form, validator) {
+            $('html, body').animate({scrollTop: '500em'}, 300);
         }
     });
 
@@ -1990,6 +2032,9 @@ $(document).ready(function () {
                 string: true,
                 maxlength: 255
             }
+        },
+        invalidHandler: function(form, validator) {
+            $('html, body').animate({scrollTop: '500em'}, 300);
         }
     });
 
@@ -2029,6 +2074,9 @@ $(document).ready(function () {
                 string: true,
                 maxlength: 2000
             }
+        },
+        invalidHandler: function(form, validator) {
+            $('html, body').animate({scrollTop: '500em'}, 300);
         }
     });
 

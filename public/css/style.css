@@ -2830,6 +2830,15 @@ select.form-control--clean {
     width: 100%;
   }
 }
+.media .pull-left img{
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 13px;
+  border-radius: 50%;
+  width:60px;
+  height:60px;
+  object-fit:cover;
+}
 
 .form-group__avatar img {
   display: inline-block;

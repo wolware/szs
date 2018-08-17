@@ -22,6 +22,7 @@ Route::get('login/facebook/callback', 'Auth\LoginController@handleProviderCallba
 
 Auth::routes();
 
+
 // Lista ruta za guest korisnike
 Route::get('/news/{id}', 'NewsController@displayNews')->where('id', '[0-9]+');
 Route::get('/clubs', 'ClubController@index_show');
@@ -43,6 +44,14 @@ Route::get('/events/{id}', 'EventController@showEvent')->where('id', '[0-9]+');
 // Dodaje protekciju na rute samo za logovane korisnike
 Route::middleware('auth')->group(function () {
 
+    Route::group(['prefix' => '/messages'], function () {
+        Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
+        Route::get('/create', ['as' => 'messages.create', 'uses' => 'MessagesController@create']);
+        Route::post('/', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
+        Route::get('{id}', ['as' => 'messages.show', 'uses' => 'MessagesController@show']);
+        Route::put('{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
+    });
+
     // PROFILE
     Route::get('/me/profile', 'ProfileController@profile_me');
     Route::get('/me/profiles', 'ProfileController@profile_profiles');
@@ -63,16 +72,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/me/settings', 'UserController@settings_index');
     Route::post('/me/settings/update', 'UserController@settings_update');
 
-    // MESSAGES
-    Route::get('/messages/inbox', function(){
-        return view('messages.inbox');
-    });
-    Route::get('/messages/outbox', function(){
-        return view('messages.outbox');
-    });
-    Route::get('/messages/important', function(){
-        return view('messages.important');
-    });
 
     // PROFILE CREATE
     Route::get('/profile/new', function(){
