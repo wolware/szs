@@ -422,7 +422,7 @@
 <script>
     var options = {
 
-        url: "http://szs/autocomplete-users",
+        url: window.location.protocol+'//'+window.location.hostname+"/autocomplete-users",
         getValue: "email",
         list: {
             match: {
