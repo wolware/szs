@@ -104,4 +104,9 @@ class UserController extends Controller
 
         return view('profile.notifications', compact('notifys'));
     }
+
+    public function getAllUsers(){
+        $users = User::all('id','email');
+        return response()->json($users);
+    }
 }

@@ -49,7 +49,12 @@
                 <!-- Inbox list -->
                 <div class="post-comments card card--lg messages-start-col">
                     <div class="post-comments__content card__content">
-
+                        <div class="row">
+                            <div class="col-md-offset-5 col-md-12">
+                                <a class="btn btn-info" href="{{url('/messages/create')}}">Nova poruka</a>
+                            </div>
+                        </div>
+                        <hr>
                         <ul class="comments">
 
                             @each('messenger.partials.thread', $threads, 'thread', 'messenger.partials.no-threads')
@@ -72,6 +77,7 @@
                 <!-- Inbox list / End -->
 
             </div>
+
         </div>
     </div>
 </div>

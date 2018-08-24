@@ -1,1 +1,1 @@
-<p>Sorry, no threads.</p>
+<p>Trenutno nemate nikakvih poruka.</p>

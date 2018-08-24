@@ -9,6 +9,7 @@ use Cmgmyr\Messenger\Models\Participant;
 use Cmgmyr\Messenger\Models\Thread;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 
@@ -31,6 +32,7 @@ class MessagesController extends Controller
 
         return view('messenger.inbox', compact('threads'));
     }
+
     /**
      * Shows a message thread.
      *
@@ -49,10 +51,14 @@ class MessagesController extends Controller
         // $users = User::whereNotIn('id', $thread->participantsUserIds())->get();
         // don't show the current user in list
         $userId = Auth::id();
+        if (!$thread->hasParticipant($userId))
+            return redirect('/messages');
+
         $users = User::whereNotIn('id', $thread->participantsUserIds($userId))->get();
         $thread->markAsRead($userId);
         return view('messenger.show', compact('thread', 'users'));
     }
+
     /**
      * Creates a new message thread.
      *
@@ -63,6 +69,7 @@ class MessagesController extends Controller
         $users = User::where('id', '!=', Auth::id())->get();
         return view('messenger.create', compact('users'));
     }
+
     /**
      * Stores a new message thread.
      *
@@ -70,28 +77,50 @@ class MessagesController extends Controller
      */
     public function store()
     {
-        $input = Input::all();
-        $thread = Thread::create([
-            'subject' => $input['subject'],
-        ]);
-        // Message
-        Message::create([
-            'thread_id' => $thread->id,
-            'user_id' => Auth::id(),
-            'body' => $input['message'],
-        ]);
-        // Sender
-        Participant::create([
-            'thread_id' => $thread->id,
-            'user_id' => Auth::id(),
-            'last_read' => new Carbon,
-        ]);
-        // Recipients
-        if (Input::has('recipients')) {
-            $thread->addParticipant($input['recipients']);
+
+        $thread = Thread::between([Auth::id(), Input::get('recipients')])->first();
+        if ($thread != null) {
+            $thread->activateAllParticipants();
+            // Message
+            Message::create([
+                'thread_id' => $thread->id,
+                'user_id' => Auth::id(),
+                'body' => Input::get('message'),
+            ]);
+            // Add replier as a participant
+            $participant = Participant::firstOrCreate([
+                'thread_id' => $thread->id,
+                'user_id' => Auth::id(),
+            ]);
+            $participant->last_read = new Carbon;
+            $participant->save();
+            return redirect()->route('messages.show', $thread->id);
+        } else {
+            $input = Input::all();
+            $thread = Thread::create([
+                'subject' => $input['subject'],
+            ]);
+
+            // Message
+            Message::create([
+                'thread_id' => $thread->id,
+                'user_id' => Auth::id(),
+                'body' => $input['message'],
+            ]);
+            // Sender
+            Participant::create([
+                'thread_id' => $thread->id,
+                'user_id' => Auth::id(),
+                'last_read' => new Carbon,
+            ]);
+            // Recipients
+            if (Input::has('recipients')) {
+                $thread->addParticipant($input['recipients']);
+            }
+            return redirect()->route('messages');
         }
-        return redirect()->route('messages');
     }
+
     /**
      * Adds a new message to a current thread.
      *
@@ -100,10 +129,15 @@ class MessagesController extends Controller
      */
     public function update($id)
     {
+        $message = Input::get('message');
+        if ($message == null || $message == '') {
+            Session::flash('error_message', 'Poruka mora sadržavati tekst.');
+            return back();
+        }
         try {
             $thread = Thread::findOrFail($id);
         } catch (ModelNotFoundException $e) {
-            Session::flash('error_message', 'The thread with ID: ' . $id . ' was not found.');
+            Session::flash('error_message', 'Poruka s tim ID-em: ' . $id . ' nije pronađena.');
             return redirect()->route('messages');
         }
         $thread->activateAllParticipants();
@@ -111,7 +145,7 @@ class MessagesController extends Controller
         Message::create([
             'thread_id' => $thread->id,
             'user_id' => Auth::id(),
-            'body' => Input::get('message'),
+            'body' => $message,
         ]);
         // Add replier as a participant
         $participant = Participant::firstOrCreate([
@@ -120,10 +154,7 @@ class MessagesController extends Controller
         ]);
         $participant->last_read = new Carbon;
         $participant->save();
-        // Recipients
-        if (Input::has('recipients')) {
-            $thread->addParticipant(Input::get('recipients'));
-        }
+
         return redirect()->route('messages.show', $id);
     }
 }

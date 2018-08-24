@@ -46,6 +46,11 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" rel="stylesheet">
     <link href="{{ asset('/css/style.css?t=') }}{{time()}}" rel="stylesheet">
     <link href="{{ asset('/css/custom.css?t=') }}{{time()}}" rel="stylesheet">
+    <!-- CSS file -->
+    <link rel="stylesheet" href="{{asset('css/easy-autocomplete.min.css')}}">
+
+    <!-- Additional CSS Themes file - not required-->
+    <link rel="stylesheet" href="{{asset('css/easy-autocomplete.themes.min.css')}}">
 
 </head>
 <body>
@@ -411,6 +416,30 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/locale/bs.js"></script>
 <script src="{{ asset('js/custom.js?t='.time()) }}"></script>
+
+@if(str_contains(Request::url(),'messages'))
+<script src="{{asset('js/jquery.easy-autocomplete.min.js')}}"></script>
+<script>
+    var options = {
+
+        url: "http://szs/autocomplete-users",
+        getValue: "email",
+        list: {
+            match: {
+                enabled: true
+            },
+            onSelectItemEvent: function() {
+                var value = $("#primalac").getSelectedItemData().id; //get the id associated with the selected value
+                $("#recipient").val(value).trigger("change"); //copy it to the hidden field
+            }
+        },
+
+        theme: "square"
+    };
+
+    $("#primalac").easyAutocomplete(options);
+</script>
+@endif
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124046232-1"></script>
 <script>

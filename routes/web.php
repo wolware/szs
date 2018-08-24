@@ -52,6 +52,8 @@ Route::middleware('auth')->group(function () {
         Route::put('{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
     });
 
+    Route::get('/autocomplete-users','UserController@getAllUsers');
+
     // PROFILE
     Route::get('/me/profile', 'ProfileController@profile_me');
     Route::get('/me/profiles', 'ProfileController@profile_profiles');
