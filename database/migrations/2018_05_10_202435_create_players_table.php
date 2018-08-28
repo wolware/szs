@@ -32,6 +32,7 @@ class CreatePlayersTable extends Migration
             $table->unsignedInteger('region_id');
             $table->unsignedInteger('club_id')->nullable();
             $table->unsignedInteger('player_type_id');
+            $table->unsignedInteger('number_of_views')->default(0);
 
             $table->foreign('region_id')
                 ->references('id')

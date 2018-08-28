@@ -26,6 +26,7 @@ class CreateObjectsTable extends Migration
             $table->string('twitter')->nullable();
             $table->string('youtube')->nullable();
             $table->string('video')->nullable();
+            $table->unsignedInteger('number_of_views')->default(0);
 
             $table->unsignedInteger('region_id');
             $table->unsignedInteger('object_type_id');

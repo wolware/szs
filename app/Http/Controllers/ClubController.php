@@ -15,12 +15,9 @@ use App\Staff;
 use App\Trophy;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use App\User;
 use App\Club;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 
@@ -168,6 +165,11 @@ class ClubController extends Controller
 
             $players = $club->players()->paginate(12);
             $staff = $club->staff()->paginate(12);
+
+            $authId = Auth::user() != null ? Auth::user()->id : 0;
+            if($club->user_id != $authId)
+                DB::update('update clubs set number_of_views = ? where id= ?',[$club->number_of_views+1,$club->id]);
+
 
             return view('clubs.profile', compact('club','players', 'staff'));
         }

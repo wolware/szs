@@ -2743,7 +2743,7 @@ $(document).ready(function () {
     };
     date_input.datepicker(options);
 
-    var date_input2 = $('input[name="dob"]'); //our date input has the name "date"
+/*    var date_input2 = $('input[name="dob"]'); //our date input has the name "date"
     var container2 = $('form').length > 0 ? $('form').parent() : "body";
     var options2 = {
         dateFormat: 'mm/dd/yy',
@@ -2752,7 +2752,7 @@ $(document).ready(function () {
         autoClose: true,
         maxDate: new Date()
     };
-    date_input2.datepicker(options2);
+    date_input2.datepicker(options2);*/
 
     var date_input3 = $('input.pickDate'); //our date input has the name "date"
     var container3 = $('form').length > 0 ? $('form').parent() : "body";

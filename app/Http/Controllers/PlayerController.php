@@ -118,7 +118,6 @@ class PlayerController extends Controller
     }
 
     public function displayAddPlayer($sport_id) {
-        /*TODO on vuce slike na dodavanju playera iz baze,dodaj drugu kolonu za to*/
         $sport = $this->sportRepository
             ->getById($sport_id);
 
@@ -239,6 +238,11 @@ class PlayerController extends Controller
             }
 
             $player->setAttribute('regions', $regions);
+
+            $authId = Auth::user() != null ? Auth::user()->id : 0;
+
+            if($player->user_id != $authId)
+            DB::update('update players set number_of_views = ? where id= ?',[$player->number_of_views+1,$player->id]);
 
             return view('athlete.profile', compact('player'));
         }

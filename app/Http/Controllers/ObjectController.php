@@ -333,6 +333,11 @@ class ObjectController extends Controller
             }
 
             $object->setAttribute('regions', $regions);
+
+            $authId = Auth::user() != null ? Auth::user()->id : 0;
+            if($object->user_id != $authId)
+                DB::update('update objects set number_of_views = ? where id= ?',[$object->number_of_views+1,$object->id]);
+
             return view('objects.profile', compact('object'));
         }
 

@@ -19,6 +19,7 @@ class CreateVijestTable extends Migration
             $table->text('sadrzaj');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('vijest_kategorija_id');
+            $table->unsignedInteger('number_of_views')->default(0);
 
             $table->foreign('user_id')
                 ->references('id')

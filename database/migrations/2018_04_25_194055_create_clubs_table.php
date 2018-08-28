@@ -39,6 +39,7 @@ class CreateClubsTable extends Migration
             $table->unsignedInteger('sport_id');
             $table->unsignedInteger('region_id');
             $table->unsignedInteger('user_id');
+            $table->unsignedInteger('number_of_views')->default(0);
 
             $table->foreign('association_id')
                 ->references('id')

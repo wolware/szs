@@ -77,6 +77,10 @@ class MessagesController extends Controller
      */
     public function store()
     {
+        if(is_numeric(Input::get('recipients')) || User::find(Input::get('recipients')) == null){
+            Session::flash('error_message', 'Dogodila se greška. Molimo izaberite jedan od ponuđenih emailova za primaoca.');
+            return back();
+        }
 
         $thread = Thread::between([Auth::id(), Input::get('recipients')])->first();
         if ($thread != null) {

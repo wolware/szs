@@ -10,6 +10,7 @@ use App\Repositories\SportRepository;
 use App\School;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 
@@ -209,6 +210,12 @@ class SchoolController extends Controller
             }
 
             $school->setAttribute('regions', $regions);
+
+            $authId = Auth::user() != null ? Auth::user()->id : 0;
+
+            if($school->user_id != $authId)
+                DB::update('update schools set number_of_views = ? where id= ?',[$school->number_of_views+1,$school->id]);
+
 
             return view('schools.profile', compact('school'));
         }

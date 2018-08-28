@@ -87,7 +87,7 @@ class RegisterController extends Controller
             'email' => 'required|unique:users|max:255|string',
             'password' => 'required|max:255|min:6|string|confirmed',
             'spol' => 'required|string|in:Muško,Žensko',
-            'dob' => 'required|date|before_or_equal:' . Carbon::now()->toDateString(),
+            'birth_date' => 'required|date|before_or_equal:' . Carbon::now()->toDateString(),
             'country' => 'required|integer|exists:regions,id',
             'prihvatam' => 'required'
         ], $messages);
@@ -103,7 +103,7 @@ class RegisterController extends Controller
             $user->email = $data->email;
             $user->password = bcrypt($data->password);
             $user->spol = $data->spol;
-            $user->dob = Carbon::parse($data->dob)->toDateString();
+            $user->dob = Carbon::parse($data->birth_date)->toDateString();
             $user->country = $data->country;
 
             if($user->save()) {

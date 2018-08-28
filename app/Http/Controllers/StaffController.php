@@ -12,6 +12,7 @@ use App\Staff;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 
@@ -192,6 +193,12 @@ class StaffController extends Controller
             }
 
             $staff->setAttribute('regions', $regions);
+
+            $authId = Auth::user() != null ? Auth::user()->id : 0;
+
+            if($staff->user_id != $authId)
+                DB::update('update staff set number_of_views = ? where id= ?',[$staff->number_of_views+1, $staff->id]);
+
 
             return view('staff.profile', compact('staff'));
         }

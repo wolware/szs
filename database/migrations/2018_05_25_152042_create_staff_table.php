@@ -34,6 +34,7 @@ class CreateStaffTable extends Migration
             $table->decimal('work_experience', 3, 1)->nullable();
             $table->mediumText('biography')->nullable();
             $table->string('club_name')->nullable();
+            $table->unsignedInteger('number_of_views')->default(0);
 
             $table->unsignedInteger('profession_id');
             $table->unsignedInteger('region_id');

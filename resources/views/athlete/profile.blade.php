@@ -64,7 +64,7 @@
                                     <div class="btn-social-counter__icon">
                                         <i class="fa fa-eye"></i>
                                     </div>
-                                    <h6 class="btn-social-counter__title brojac-profil">256589</h6>
+                                    <h6 class="btn-social-counter__title brojac-profil">{{$player->number_of_views}}</h6>
                                     <span class="btn-social-counter__count"><span class="btn-social-counter__count-num"></span> Pregleda</span>
                                 </a>
                                 <a class="btn-widget-stats">
@@ -336,7 +336,6 @@
                                 <li role="presentation" class="active"><a href="#tab-opcenito" role="tab" data-toggle="tab"><i class="fa fa-info-circle"></i><small>O klubu</small>Općenito</a></li>
                                 <li role="presentation"><a href="#tab-vremeplov" role="tab" data-toggle="tab"><i class="fa fa-history"></i><small>Auto</small>Biografija</a></li>
                                 <li role="presentation"><a href="#tab-vitrina" role="tab" data-toggle="tab"><i class="fa fa-trophy"></i><small>Osobna</small>Vitrina</a></li>
-                                <li role="presentation"><a href="#tab-vijesti2" role="tab" data-toggle="tab"><i class="fa fa-newspaper-o"></i><small>Povezane</small>Vijesti</a></li>
                                 <li role="presentation"><a href="#tab-galerija" role="tab" data-toggle="tab"><i class="fa fa-picture-o"></i><small>Foto</small>Galerija</a></li>
                             </ul>
 
@@ -575,188 +574,7 @@
                                 <!-- Tab: Vitrina / End -->
 
 
-                                <!-- Tab: Vijesti -->
-                                <div role="tabpanel" class="tab-pane fade neaktivno" id="tab-vijesti2">
 
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <img src="{{asset('images/REKLAMA-752-100.png')}}" class="reklama-klubovi-igraci"/>
-                                        </div>
-                                    </div>
-
-
-                                    <!-- Posts List -->
-                                    <div class="posts posts--cards posts--cards-thumb-left post-list">
-
-                                        <div class="post-list__item">
-                                            <div class="posts__item vijest-col-col posts__item--card posts__item--category-1 card">
-                                                <figure class="vijesti__thumb">
-                                                    <a href="#"><img class="slika-vijest-tab" src="{{asset('images/newspaper-laptop-hd-wallpaper_1920x1080.jpg')}}" alt=""></a>
-                                                </figure>
-                                                <div class="posts__inner">
-                                                    <div class="card__content osn-vijest-tab">
-                                                        <div class="posts__cat">
-                                                            <span class="label posts__cat-label">Premier Liga BiH</span>
-                                                        </div>
-                                                        <h6 class="posts__title"><a href="#">FK Sve Za Sport nanizao četiri ligaške pobjede za redom</a></h6>
-                                                        <time datetime="2016-08-23" class="posts__date">25. Oktobar, 2017.</time>
-                                                    </div>
-                                                    <footer class="posts__footer card__footer">
-                                                        <div class="post-author">
-                                                            <figure class="post-author__avatar">
-                                                                <img src="{{asset('images/tarik.jpg')}}" alt="Post Author Avatar">
-                                                            </figure>
-                                                            <div class="post-author__info">
-                                                                <h4 class="post-author__name">Tarik Jašarević</h4>
-                                                            </div>
-                                                        </div>
-                                                        <ul class="post__meta vijesti_profili meta">
-                                                            <li class="meta__item meta__item--views">2369</li>
-                                                        </ul>
-                                                    </footer>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="post-list__item">
-                                            <div class="posts__item vijest-col-col posts__item--card posts__item--category-1 card">
-                                                <figure class="vijesti__thumb">
-                                                    <a href="#"><img class="slika-vijest-tab" src="{{asset('images/newspaper-laptop-hd-wallpaper_1920x1080.jpg')}}" alt=""></a>
-                                                </figure>
-                                                <div class="posts__inner">
-                                                    <div class="card__content osn-vijest-tab">
-                                                        <div class="posts__cat">
-                                                            <span class="label posts__cat-label">Premier Liga BiH</span>
-                                                        </div>
-                                                        <h6 class="posts__title"><a href="#">FK Sve Za Sport nanizao četiri ligaške pobjede za redom</a></h6>
-                                                        <time datetime="2016-08-23" class="posts__date">25. Oktobar, 2017.</time>
-                                                    </div>
-                                                    <footer class="posts__footer card__footer">
-                                                        <div class="post-author">
-                                                            <figure class="post-author__avatar">
-                                                                <img src="{{asset('images/tarik.jpg')}}" alt="Post Author Avatar">
-                                                            </figure>
-                                                            <div class="post-author__info">
-                                                                <h4 class="post-author__name">Tarik Jašarević</h4>
-                                                            </div>
-                                                        </div>
-                                                        <ul class="post__meta vijesti_profili meta">
-                                                            <li class="meta__item meta__item--views">2369</li>
-                                                        </ul>
-                                                    </footer>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="post-list__item">
-                                            <div class="posts__item vijest-col-col posts__item--card posts__item--category-1 card">
-                                                <figure class="vijesti__thumb">
-                                                    <a href="#"><img class="slika-vijest-tab" src="{{asset('images/newspaper-laptop-hd-wallpaper_1920x1080.jpg')}}" alt=""></a>
-                                                </figure>
-                                                <div class="posts__inner">
-                                                    <div class="card__content osn-vijest-tab">
-                                                        <div class="posts__cat">
-                                                            <span class="label posts__cat-label">Premier Liga BiH</span>
-                                                        </div>
-                                                        <h6 class="posts__title"><a href="#">FK Sve Za Sport nanizao četiri ligaške pobjede za redom</a></h6>
-                                                        <time datetime="2016-08-23" class="posts__date">25. Oktobar, 2017.</time>
-                                                    </div>
-                                                    <footer class="posts__footer card__footer">
-                                                        <div class="post-author">
-                                                            <figure class="post-author__avatar">
-                                                                <img src="{{asset('images/tarik.jpg')}}" alt="Post Author Avatar">
-                                                            </figure>
-                                                            <div class="post-author__info">
-                                                                <h4 class="post-author__name">Tarik Jašarević</h4>
-                                                            </div>
-                                                        </div>
-                                                        <ul class="post__meta vijesti_profili meta">
-                                                            <li class="meta__item meta__item--views">2369</li>
-                                                        </ul>
-                                                    </footer>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="post-list__item">
-                                            <div class="posts__item vijest-col-col posts__item--card posts__item--category-1 card">
-                                                <figure class="vijesti__thumb">
-                                                    <a href="#"><img class="slika-vijest-tab" src="{{asset('images/newspaper-laptop-hd-wallpaper_1920x1080.jpg')}}" alt=""></a>
-                                                </figure>
-                                                <div class="posts__inner">
-                                                    <div class="card__content osn-vijest-tab">
-                                                        <div class="posts__cat">
-                                                            <span class="label posts__cat-label">Premier Liga BiH</span>
-                                                        </div>
-                                                        <h6 class="posts__title"><a href="#">FK Sve Za Sport nanizao četiri ligaške pobjede za redom</a></h6>
-                                                        <time datetime="2016-08-23" class="posts__date">25. Oktobar, 2017.</time>
-                                                    </div>
-                                                    <footer class="posts__footer card__footer">
-                                                        <div class="post-author">
-                                                            <figure class="post-author__avatar">
-                                                                <img src="{{asset('images/tarik.jpg')}}" alt="Post Author Avatar">
-                                                            </figure>
-                                                            <div class="post-author__info">
-                                                                <h4 class="post-author__name">Tarik Jašarević</h4>
-                                                            </div>
-                                                        </div>
-                                                        <ul class="post__meta vijesti_profili meta">
-                                                            <li class="meta__item meta__item--views">2369</li>
-                                                        </ul>
-                                                    </footer>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="post-list__item">
-                                            <div class="posts__item vijest-col-col posts__item--card posts__item--category-1 card">
-                                                <figure class="vijesti__thumb">
-                                                    <a href="#"><img class="slika-vijest-tab" src="{{asset('images/newspaper-laptop-hd-wallpaper_1920x1080.jpg')}}" alt=""></a>
-                                                </figure>
-                                                <div class="posts__inner">
-                                                    <div class="card__content osn-vijest-tab">
-                                                        <div class="posts__cat">
-                                                            <span class="label posts__cat-label">Premier Liga BiH</span>
-                                                        </div>
-                                                        <h6 class="posts__title"><a href="#">FK Sve Za Sport nanizao četiri ligaške pobjede za redom</a></h6>
-                                                        <time datetime="2016-08-23" class="posts__date">25. Oktobar, 2017.</time>
-                                                    </div>
-                                                    <footer class="posts__footer card__footer">
-                                                        <div class="post-author">
-                                                            <figure class="post-author__avatar">
-                                                                <img src="{{asset('images/tarik.jpg')}}" alt="Post Author Avatar">
-                                                            </figure>
-                                                            <div class="post-author__info">
-                                                                <h4 class="post-author__name">Tarik Jašarević</h4>
-                                                            </div>
-                                                        </div>
-                                                        <ul class="post__meta vijesti_profili meta">
-                                                            <li class="meta__item meta__item--views">2369</li>
-                                                        </ul>
-                                                    </footer>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-
-                                    </div>
-
-                                    <!-- Vijesti stranice -->
-                                    <nav class="post-pagination text-center">
-                                        <ul class="pagination pagination--condensed pagination--lg">
-                                            <li class="active"><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                        </ul>
-                                    </nav>
-                                    <!-- Vijesti stranice / End -->
-
-                                    <!-- Posts List / End -->
-                                </div>
-                                <!-- Tab: Vijesti / End -->
                                 <!-- Tab: Galerija -->
                                 <div role="tabpanel" class="tab-pane fade neaktivno" id="tab-galerija">
                                     <div class="row">

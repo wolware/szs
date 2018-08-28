@@ -28,10 +28,10 @@
                                     <li class="meta__item meta__item--date"><i class="fa fa-calendar-o"></i>
                                         <time datetime="{{ Carbon\Carbon::parse($novost->created_at)->format('Y-m-d') }}">{{ Carbon\Carbon::parse($novost->created_at)->format('d. F, Y.') }}</time>
                                     </li>
-                                    <li class="meta__item meta__item--views">2369</li>
-                                    <li class="meta__item meta__item--likes"><i class="meta-like icon-heart"></i> 530
+                                    <li class="meta__item meta__item--views">{{$novost->number_of_views}}</li>
+                                    {{--<li class="meta__item meta__item--likes"><i class="meta-like icon-heart"></i> 530
                                     </li>
-                                    <li class="meta__item meta__item--comments">18</li>
+                                    <li class="meta__item meta__item--comments">18</li>--}}
                                 </ul>
                             </header>
                         </div>
@@ -174,53 +174,6 @@
 
                 <!-- Sidebar -->
                 <div id="sidebar" class="sidebar col-md-4">
-
-
-                    <!-- Widget: Popular News -->
-                    <aside class="widget widget--sidebar card widget-popular-posts">
-                        <div class="widget__title card__header">
-                            <h4>Oznake na vijest</h4>
-                        </div>
-                        <div class="widget__content card__content">
-                            <ul class="posts posts--simple-list">
-                                <li class="posts__item posts__item--category-2">
-                                    <figure class="posts__thumb">
-                                        <a href="#"><img src="assets/images/samples/post-img1-xs.jpg" alt=""></a>
-                                    </figure>
-                                    <div class="posts__inner">
-                                        <div class="posts__cat">
-                                            <span class="label posts__cat-label">Sportski objekt</span>
-                                        </div>
-                                        <h6 class="posts__title"><a href="#">Bjelašnica</a></h6>
-                                    </div>
-                                </li>
-                                <li class="posts__item posts__item--category-1">
-                                    <figure class="posts__thumb">
-                                        <a href="#"><img src="assets/images/samples/post-img2-xs.jpg" alt=""></a>
-                                    </figure>
-                                    <div class="posts__inner">
-                                        <div class="posts__cat">
-                                            <span class="label posts__cat-label">Sportista</span>
-                                        </div>
-                                        <h6 class="posts__title"><a href="#">Edin Džeko</a></h6>
-                                    </div>
-                                </li>
-                                <li class="posts__item posts__item--category-1">
-                                    <figure class="posts__thumb">
-                                        <a href="#"><img src="assets/images/samples/post-img3-xs.jpg" alt=""></a>
-                                    </figure>
-                                    <div class="posts__inner">
-                                        <div class="posts__cat">
-                                            <span class="label posts__cat-label">Škola sporta</span>
-                                        </div>
-                                        <h6 class="posts__title"><a href="#">Škola skijanja VUČKO</a></h6>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </aside>
-                    <!-- Widget: Popular News / End -->
-
 
                     <!-- Widget: Tag Cloud -->
                     <aside class="widget widget--sidebar card widget-tagcloud">

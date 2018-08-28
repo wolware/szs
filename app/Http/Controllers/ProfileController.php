@@ -81,7 +81,7 @@ class ProfileController extends Controller
 
     public function profile_news() {
 
-        $vijesti = Auth::user()->vijesti()->with(['kategorija'])->where('izbrisano', 0)->where('odobreno', 1)->orderBy('id', 'DESC')->paginate(5);
+        $vijesti = Auth::user()->vijesti()->with(['kategorija'])->where('izbrisano', 0)->orWhere('odobreno', 1)->orWhere('odobreno', 0)->orderBy('id', 'DESC')->paginate(5);
 
         return view('profile.news', compact('vijesti'));
     }

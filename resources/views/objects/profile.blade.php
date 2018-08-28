@@ -61,7 +61,7 @@
                                     <div class="btn-social-counter__icon">
                                         <i class="fa fa-eye"></i>
                                     </div>
-                                    <h6 class="btn-social-counter__title brojac-profil">256589</h6>
+                                    <h6 class="btn-social-counter__title brojac-profil">{{$object->number_of_views}}</h6>
                                     <span class="btn-social-counter__count"><span class="btn-social-counter__count-num"></span> Pregleda</span>
                                 </a>
                                 <a class="btn-widget-stats">

@@ -39,13 +39,13 @@
     <link href="{{ asset('/vendor/slick/slick.css') }}" rel="stylesheet">
     <link href="{{ asset('css/selectize.css') }}" rel="stylesheet">
 
-
     <!-- Template CSS-->
     <link href="{{ asset('/css/datepicker.css?t=44') }}" rel="stylesheet">
-    <link href="{{ asset('/css/timepicki.css') }}" rel="stylesheet">
+   {{-- <link href="{{ asset('/css/timepicki.css') }}" rel="stylesheet">--}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" rel="stylesheet">
     <link href="{{ asset('/css/style.css?t=') }}{{time()}}" rel="stylesheet">
     <link href="{{ asset('/css/custom.css?t=') }}{{time()}}" rel="stylesheet">
+    <link href="{{asset('/css/bootstrap-datetimepicker.min.css')}}" rel="stylesheet">
     <!-- CSS file -->
     <link rel="stylesheet" href="{{asset('css/easy-autocomplete.min.css')}}">
 
@@ -357,7 +357,9 @@
 <script src="{{ asset('js/core-min.js') }}"></script>
 
 <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+{{--<script type="text/javascript" src={{asset('js/bootstrap.min.js')}}></script>--}}
 
+{{--<script type="text/javascript" src={{asset('js/jquery-1.8.3.min.js')}}></script>--}}
 
 <!-- Template JS -->
 <script type="text/javascript" src={{asset('js/validate.js')}}></script>
@@ -440,7 +442,8 @@
     $("#primalac").easyAutocomplete(options);
 </script>
 @endif
-<!-- Global site tag (gtag.js) - Google Analytics -->
+<script type="text/javascript" src="{{asset('/js/bootstrap-datetimepicker.min.js')}}.." charset="UTF-8"></script>
+<script type="text/javascript" src="{{asset('/js/bootstrap-datetimepicker.hr.js')}}" charset="UTF-8"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124046232-1"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
@@ -452,6 +455,17 @@
     gtag('js', new Date());
 
     gtag('config', 'UA-124046232-1');
+    $('.form_date').datetimepicker({
+        language:  'hr',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0,
+        endDate: new Date()
+    });
 </script>
 </body>
 </html>

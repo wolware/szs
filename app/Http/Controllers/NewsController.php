@@ -85,6 +85,11 @@ class NewsController extends Controller
         if(!$novost) {
             abort(404);
         }
+        $authId = Auth::user() != null ? Auth::user()->id : 0;
+        if($novost->user_id != $authId){
+            $novost->number_of_views = $novost->number_of_views + 1;
+            $novost->save();
+        }
 
         return view('news.display_news', compact('novost'));
     }
