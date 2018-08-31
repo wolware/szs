@@ -334,6 +334,9 @@
                                         </header>
 
                                         <div class="post__content">
+                                            @foreach($sport->sportsEvents() as $event)
+                                                {{$event->name}}
+                                            @endforeach
                                         </div>
                                     </article>
                                     <!-- Article / End -->
@@ -352,7 +355,9 @@
                                     </div>
 
                                     <div class="row">
-
+                                        @foreach($sport->sportTrophies() as $trophy)
+                                            {{$trophy->name}}
+                                        @endforeach
 
                                     </div>
                                     <!-- Widget: Awards / End -->
@@ -369,7 +374,26 @@
                                         </div>
                                     </div>
                                     <div class="row igraci-grid">
-
+                                        @if($sport->sportPeople->count())
+                                            @foreach($sport->sportPeople as $sportPerson)
+                                                <div class="post-grid__item col-sm-4">
+                                                    <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
+                                                        <figure class="posts__thumb">
+                                                            <img src="{{asset('images/staff_avatars/' . $sportPerson->img)}}" alt="">
+                                                        </figure>
+                                                        <div class="posts__inner card__content">
+                                                            <h6 class="posts__title ime-sportiste-klub-lista">{{ $sportPerson->fName . ' ' . $sportPerson->lName }}</h6>
+                                                            <div class="posts__excerpt">{{ $sportPerson->dob }}</div>
+                                                        </div>
+                                                        <footer class="posts__footer card__footer">
+                                                            <a href="#" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila kadra</a>
+                                                        </footer>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        @else
+                                            <p class="text-center">Klub trenutno nema aktivnih stručnih kadrova na Sve Za Sport mreži.</p>
+                                        @endif
                                     </div>
 
                                     <div class="text-center">
@@ -390,26 +414,26 @@
                                     </div>
 
                                     <div class="row igraci-grid">
-                                        {{-- @if(count($staff))
-                                             @foreach($staff as $staf)
+                                         @if($sport->sportsMenagement->count())
+                                             @foreach($sport->sportsMenagement as $staf)
                                                  <div class="post-grid__item col-sm-4">
                                                      <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
                                                          <figure class="posts__thumb">
-                                                             <a href="{{ url('/staff/' . $staf->id) }}"><img src="{{asset('images/staff_avatars/' . $staf->avatar)}}" alt=""></a>
+                                                             <img src="{{asset('images/staff_avatars/' . $staf->img)}}" alt="">
                                                          </figure>
                                                          <div class="posts__inner card__content">
-                                                             <h6 class="posts__title ime-sportiste-klub-lista"><a href="{{ url('/staff/' . $staf->id) }}">{{ $staf->firstname . ' ' . $staf->lastname }}</a></h6>
-                                                             <div class="posts__excerpt">{{ $staf->city }}</div>
+                                                             <h6 class="posts__title ime-sportiste-klub-lista">{{ $staf->fName . ' ' . $staf->lName }}</h6>
+                                                             <div class="posts__excerpt">{{ $staf->dob }}</div>
                                                          </div>
                                                          <footer class="posts__footer card__footer">
-                                                             <a href="{{ url('/staff/' . $staf->id) }}" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila kadra</a>
+                                                             <a href="#" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila kadra</a>
                                                          </footer>
                                                      </div>
                                                  </div>
                                              @endforeach
                                          @else
                                              <p class="text-center">Klub trenutno nema aktivnih stručnih kadrova na Sve Za Sport mreži.</p>
-                                         @endif--}}
+                                         @endif
 
                                     </div>
 
