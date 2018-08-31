@@ -103,7 +103,4 @@ class HomeController extends Controller
         return view('contact');
     }
 
-    public function sportsList(){
-        return view('sports-list');
-    }
 }

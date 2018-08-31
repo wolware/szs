@@ -28,9 +28,26 @@ class SportRepository {
 
     }
 
+    public function getAllSportWithoutDisabilities(){
+        return $this->model
+            ->where('with_disabilities', false)
+            ->orderBy('name', 'asc')
+            ->get();
+    }
+
     public function getById($id) {
         return $this->model
             ->where('id', $id)
+            ->first();
+    }
+    public function getByIdWithAllDetails($id) {
+        return $this->model
+            ->where('id', $id)
+            ->with('sportDetails')
+            ->with('sportsEvents')
+            ->with('sportsMenagement')
+            ->with('sportPeople')
+            ->with('sportTrophies')
             ->first();
     }
 }
