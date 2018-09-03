@@ -15,7 +15,7 @@
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1">
                         <h1 class="page-heading__title"><i class="fa fa-user-circle fa-2x"></i></h1>
-                        <h1 class="page-heading__title">Moj profil</h1>
+                        <h1 class="page-heading__title">Profil korisnika</h1>
                         <ol class="page-heading__breadcrumb breadcrumb">
                             <li class="registracija-podnaslov">Sve za sport</li>
                         </ol>
@@ -34,21 +34,6 @@
                                     class="fa fa-address-card-o"></i>
                             <small>Pregled</small>
                             Profila</a></li>
-                    <li class="content-filter__item "><a href="{{url('me/profiles')}}" class="content-filter__link"><i
-                                    class="fa fa-th-list"></i>
-                            <small>Moji</small>
-                            Profili</a></li>
-                    <li class="content-filter__item "><a href="{{url('me/news')}}" class="content-filter__link"><i
-                                    class="fa fa-plus-square-o"></i>
-                            <small>Moje</small>
-                            Vijesti</a></li>
-                    {{--
-                                  <li class="content-filter__item "><a href="{{url('me/grades')}}" class="content-filter__link"><i class="fa fa-star-o"></i><small>Moje</small>Ocjene</a></li>
-                    --}}
-                    <li class="content-filter__item "><a href="{{url('me/settings')}}" class="content-filter__link"><i
-                                    class="fa fa-cogs"></i>
-                            <small>Postavke</small>
-                            Profila</a></li>
                 </ul>
             </div>
         </nav>
@@ -58,10 +43,6 @@
         ================================================== -->
         <div class="site-content">
             <div class="container">
-
-                {{--<div class="alert alert-warning">
-                      <strong>Ovaj pregled i statistiku vidite samo Vi. Ne preporučujemo da svoje podatke dijelite sa drugim korisnicima.</strong>
-                    </div>--}}
 
                 <div class="row">
 
@@ -75,90 +56,16 @@
                             <div style="min-height: 5em;" class="card__content text-center">
 
                                 <div class="form-group__avatar">
-                                    <img src="{{ isset(Auth::user()->avatar) ? asset('images/avatars/'.Auth::user()->avatar) : asset('images/default_avatar.png')}}"
+                                    <img src="{{ isset($user->avatar) ? asset('images/avatars/'.$user->avatar) : asset('images/default_avatar.png')}}"
                                          alt="">
                                     <div class="form-group__label">
-                                        <h6 class="profil-ime">{{Auth::user()->name}}</h6>
-                                        <span class="profil-id"><i class="fa fa-tag"></i> {{Auth::user()->id}}</span>
+                                        <h6 class="profil-ime">{{$user->name}}</h6>
+                                        <span class="profil-id"><i class="fa fa-tag"></i> {{$user->id}}</span>
                                     </div>
                                 </div>
-                                {{--<p class="info-racun"><i class="fa fa-check-circle"></i> Premium račun</p>--}}
-                                {{--<p class="premium-info"><i class="fa fa-clock-o"></i> Premium ističe za 15 dana</p>--}}
-                                {{--<button type="button" class="btn btn-default btn-xs disabled">Aktiviraj Premium Račun</button> <p class="premium-info"><i class="fa fa-database"></i> 1000</p>--}}
-                                <span></span>
+                          <span>Račun kreiran: {{ Carbon\Carbon::parse($user->created_at)->format('d.m.Y') }}</span>
                             </div>
                         </div>
-
-                        <!-- Osnovne informacije kraj -->
-
-                        <a href="{{url('/profile/new')}}" class="objavi-profil1 btn-social-counter" target="_blank">
-                            <div class="btn-social-counter__icon">
-                                <i class="fa fa-plus"></i>
-                            </div>
-                            <h6 class="btn-social-counter__title">Objavi novi profil</h6>
-                        </a>
-
-                        <a href="{{url('news/new')}}" class="objavi-profil2 btn-social-counter" target="_blank">
-                            <div class="btn-social-counter__icon">
-                                <i class="fa fa-plus-square-o"></i>
-                            </div>
-                            <h6 class="btn-social-counter__title">Objavi novu vijest</h6>
-                        </a>
-
-                        <!-- SZS Kredit -->
-
-                        <!--<div class="card">
-                          <div class="card__header">
-                            <h4><i class="fa fa-database"></i> SZS Kredit</h4>
-                          </div>
-                          <div class="card__content text-center">
-                            <h2 class="profil-counter">750</h2>
-                            <p class="counter-info">Osvojenih kredita</p>
-                          </div>
-                        </div>-->
-
-                        <!-- SZS Kredit kraj -->
-
-                        <!-- Recenzije -->
-
-                        <!--<div class="card">
-                          <div class="card__header">
-                            <h4><i class="fa fa-star"></i> Ocjene</h4>
-                          </div>
-                          <div class="card__content text-center">
-                            <h2 class="profil-counter">314</h2>
-                            <p class="counter-info">Objavljenih ocjena</p>
-                          </div>
-                        </div>-->
-
-                        <!-- Recenzije kraj -->
-
-                        <!-- Vijesti -->
-
-                        <!--<div class="card">
-                          <div class="card__header">
-                            <h4><i class="fa fa-plus-square-o"></i> Vijesti</h4>
-                          </div>
-                          <div class="card__content text-center">
-                            <h2 class="profil-counter">42</h2>
-                            <p class="counter-info">Objavljenih vijesti</p>
-                          </div>
-                        </div>-->
-                        <!-- Vijesti kraj -->
-
-                        <!-- Spašeni profili -->
-
-                        <!--<div class="card">
-                          <div class="card__header">
-                            <h4><i class="fa fa-bookmark-o"></i> Spašeni profili</h4>
-                          </div>
-                          <div class="card__content text-center">
-                            <h2 class="profil-counter">150</h2>
-                            <p class="counter-info">Spašenih profila</p>
-                          </div>
-                        </div>-->
-
-                        <!-- Spašeni profili kraj -->
                     </div>
 
                     <div class="col-md-8">
@@ -283,46 +190,12 @@
                                 </ul>
                             </div>
                         </div>
-                        <!-- Personal Information / End -->
-                        <div class="card card--lg">
-                            <div class="card__header card__header--has-btn">
-                                <h4><i class="fa fa-plus-square-o"></i> Moje zadnje vijesti</h4>
-                                <a href="{{ url('/me/news') }}"
-                                   class="btn btn-default btn-outline btn-xs card-header__button">Pregled svih</a>
-                            </div>
-                            <div class="widget__content card__content">
-                                <ul class="posts posts--simple-list">
-                                    @if($vijesti)
-                                        @foreach($vijesti as $vijest)
-                                            <li class="posts__item posts__item--category-2">
-                                                <figure class="posts__thumb"><img class="slika-vijesti-01"
-                                                                                  src="{{asset('images/vijesti/galerija/' . $vijest->slika)}}"
-                                                                                  alt="">
-                                                </figure>
-                                                <div class="posts__inner">
-                                                    <div class="posts__cat">
-                                                        <span class="label posts__cat-label">{{ $vijest->kategorija->naziv }}</span>
-                                                    </div>
-                                                    <h6 class="posts__title"><a
-                                                                href="{{ url('news/' . $vijest->id) }}">{{ $vijest->naslov }}</a>
-                                                    </h6>
-                                                    <time datetime="2016-08-23"
-                                                          class="posts__date">{{ \Carbon\Carbon::parse($vijest->created_at)->format("d.m.Y") }}</time>
-                                                </div>
-                                            </li>
-                                        @endforeach
-                                    @else
-                                        <p class="text-center">Niste objavili niti jednu vijest do sada.</p>
-                                    @endif
-                                </ul>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-        <!-- Content / End -->
+    <!-- Content / End -->
 
 @endsection

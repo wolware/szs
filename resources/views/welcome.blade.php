@@ -100,8 +100,8 @@
                                         @else
                                         <div class="row text-center szs-dan-margin">
                                             <h4 class="szs-dan-dan" id="dan"></h4>
-                                            <a href="#" ><img src="{{asset('images/sportisti-000.png')}}" class="szs-dan-icon"/></a>
-                                            <a href="#" class=""> <h2 class="szs-dan-title">Registrujte se &amp; uplovite u svijet<br>sporta</h2></a>
+                                            <a href="{{url('/register')}}" ><img src="{{asset('images/sportisti-000.png')}}" class="szs-dan-icon"/></a>
+                                            <a href="{{url('/register')}}" class=""> <h2 class="szs-dan-title">Registrujte se &amp; uplovite u svijet<br>sporta</h2></a>
                                             <img src="{{asset('images/straight-letters-szs.png')}}" class="szs-dan-footer"/>
 
                                         </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Profile;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use App\User;
 use App\Club;
@@ -77,6 +78,32 @@ class ProfileController extends Controller
         $vijesti = Auth::user()->vijesti()->with(['kategorija'])->where('izbrisano', 0)->where('odobreno', 1)->orderBy('id', 'DESC')->take(3)->get();
 
         return view('profile.me', compact('active', 'vijesti'));
+    }
+
+    public function profile_guests($id){
+        try {
+            $user = User::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+           abort(404);
+        }
+        $clubs = $user->clubs;
+        $school = $user->schools;
+        $players = $user->players;
+        $objects = $user->objects;
+        $staff = $user->staff;
+        $news = $user->vijesti;
+
+        $active = [
+            'clubs' => $clubs->where('status', 'active')->count(),
+            'schools' => $school->where('status', 'active')->count(),
+            'players' => $players->where('status', 'active')->count(),
+            'objects' => $objects->where('status', 'active')->count(),
+            'staff' => $staff->where('status', 'active')->count(),
+            'news' => $news->where('izbrisano', 0)->where('odobreno', 1)->count()
+        ];
+
+        $active = json_decode(json_encode($active), FALSE);
+        return view('profile.profile', compact('active','user'));
     }
 
     public function profile_news() {

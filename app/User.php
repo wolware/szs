@@ -3,12 +3,14 @@
 namespace App;
 
 use Cmgmyr\Messenger\Traits\Messagable;
+use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use CanResetPassword;
     use Messagable;
 
     /**

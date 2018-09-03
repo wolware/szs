@@ -18,7 +18,7 @@
                         <h1 class="page-heading__title"><i class="fa fa-user-plus fa-2x"></i></h1>
                         <h1 class="page-heading__title">Registracija novog korisnika</h1>
                         <ol class="page-heading__breadcrumb breadcrumb">
-                            <li class="registracija-podnaslov"><a href="index.html">Sve za sport</a></li>
+                            <li class="registracija-podnaslov"><a href="{{url('/')}}">Sve za sport</a></li>
                         </ol>
                     </div>
                 </div>

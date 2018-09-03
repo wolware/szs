@@ -58,6 +58,7 @@ Route::middleware('auth')->group(function () {
     // PROFILE
     Route::get('/me/profile', 'ProfileController@profile_me');
     Route::get('/me/profiles', 'ProfileController@profile_profiles');
+
     Route::get('/me/saved', function(){
         return view('profile.saved');
     });
@@ -75,6 +76,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/me/settings', 'UserController@settings_index');
     Route::post('/me/settings/update', 'UserController@settings_update');
 
+    Route::get('/profile/{id}', 'ProfileController@profile_guests');
 
     // PROFILE CREATE
     Route::get('/profile/new', function(){
@@ -169,3 +171,7 @@ Route::middleware('auth')->group(function () {
     Route::get('user/logout', 'Auth\LoginController@logout');
 });
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

@@ -149,11 +149,15 @@
                                         </option>
                                     </select>
                                 </div>
-                                <div class="form-group col-md-6">
+                                <div class="form-group col-md-6 input-group date form_date" data-date="{{ \Carbon\Carbon::parse($data->dob)->format('m/d/Y')  }}"
+                                     data-date-format="mm/dd/yy" data-link-field="dtp_input2"
+                                     data-link-format="mm/dd/yy">
                                     <label class="control-label" for="date"><i class="fa fa-calendar-o"></i> Datum
                                         rođenja</label>
                                     <input class="form-control" id="date" name="dob" placeholder="Unesite datum rođenja"
-                                           value="{{ \Carbon\Carbon::parse($data->dob)->format('m/d/Y')  }}" type="text" required/>
+                                           value="{{ \Carbon\Carbon::parse($data->dob)->format('m/d/Y')  }}" type="text" required readonly=""/>
+                                    <span class="input-group-addon" style="display: inline;"><span
+                                                class="glyphicon glyphicon-remove"></span></span>
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="drzava"><i class="fa fa-globe"></i> Država:</label>

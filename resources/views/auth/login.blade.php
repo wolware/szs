@@ -74,22 +74,6 @@
                     <button type="submit" class="btn btn-default btn-lg btn-block btn-register btn-prijava">Prijava <i class="fa fa-chevron-right"></i> </button>
                   </div>
 
-                  <!--<div class="form-group col-md-6">
-                    <a href="#" class="btn-social-counter btn-social-counter--fb" target="_blank">
-                      <div class="btn-social-counter__icon">
-                        <i class="fa fa-facebook"></i>
-                      </div>
-                      <h6 class="btn-social-counter__title">Facebook prijava</h6>
-                    </a>
-                  </div>
-                  <div class="form-group col-md-6">
-                    <a href="#" class="btn-social-counter btn-social-counter--gplus" target="_blank">
-                      <div class="btn-social-counter__icon">
-                        <i class="fa fa-google"></i>
-                      </div>
-                      <h6 class="btn-social-counter__title">Google prijava</h6>
-                    </a>
-                  </div>-->
                 </form>
               </div>
 
@@ -97,7 +81,9 @@
 
                 <!-- Login Form / End -->
                 <p class="reg-prijava">Ne posjedujem profil na SveZaSport, želim se <a href="{{ url('/register') }}">REGISTROVATI</a></p>
-                  </div>
+                <p class="reg-prijava">Zaboravljena šifra?<a href="{{ url('/password/reset') }}">Kliknite ovdje</a></p>
+
+                </div>
                 </div>
               </div>
             </div>

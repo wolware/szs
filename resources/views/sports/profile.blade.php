@@ -47,9 +47,6 @@
                                      <a href="{{ url('/clubs/' . $sport->id . '/edit' ) }}" class="btn btn-primary-inverse btn-icon product__add-to-cart stats-klub-middle"><i class="fa fa-edit"></i> Uredi</a>
                                  @endif
                              @endif--}}
-                            <a href="#" class="btn btn-primary-inverse btn-icon product__add-to-cart"><i
-                                        class="fa fa-share-alt"></i> Podijeli</a>
-
                         </div>
 
                     </div>
@@ -132,7 +129,7 @@
                                                      alt="">
                                             </td>
                                             <td class="lineup__num">Sjedište</td>
-                                            <td class="lineup__name"><a class="profil-poveznica" href="#">{{$sport->sportDetails->place}}</a>
+                                            <td class="lineup__name">{{$sport->sportDetails->place}}
                                             </td>
                                         </tr>
                                         <tr>
@@ -141,7 +138,7 @@
                                                      alt="">
                                             </td>
                                             <td class="lineup__num">Savez</td>
-                                            <td class="lineup__name"><a class="profil-poveznica">{{$sport->sportDetails->alliance}}</a>
+                                            <td class="lineup__name">{{$sport->sportDetails->alliance}}
                                             </td>
                                         </tr>
 
@@ -229,7 +226,9 @@
                                                      alt="">
                                             </td>
                                             <td class="lineup__num">E-mail</td>
-                                            <td class="lineup__name"><a href="mailto:{{$sport->sportDetails->email}}?Subject=Pozdrav" target="_top"> {{$sport->sportDetails->email}}</a></td>
+                                            <td class="lineup__name"><a
+                                                        href="mailto:{{$sport->sportDetails->email}}?Subject=Pozdrav"
+                                                        target="_top"> {{$sport->sportDetails->email}}</a></td>
                                         </tr>
                                         <tr>
                                             <td class="lineup__info">
@@ -237,7 +236,8 @@
                                                      src="{{asset('images/icons/worldwide.svg')}}" alt="">
                                             </td>
                                             <td class="lineup__num">Web stranica</td>
-                                            <td class="lineup__name"><a class="profil-poveznica" href="#">{{$sport->sportDetails->website}}</a>
+                                            <td class="lineup__name"><a class="profil-poveznica"
+                                                                        href="#">{{$sport->sportDetails->website}}</a>
                                             </td>
                                         </tr>
 
@@ -296,7 +296,8 @@
                                 <div role="tabpanel" class="tab-pane fade in active" id="tab-opcenito">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <img src="{{asset('images/REKLAMA-752-100.png')}}" class="reklama-klubovi-vitrina"/>
+                                            <img src="{{asset('images/REKLAMA-752-100.png')}}"
+                                                 class="reklama-klubovi-vitrina"/>
                                         </div>
                                     </div>
 
@@ -330,12 +331,18 @@
                                     <article class="card card--lg post post--single">
 
                                         <header class="post__header">
-                                            <h2 class="post__title">Događaji koji su obilježili sport u BiH</h2>
+                                            <h2 class="post__title text-center">Događaji koji su obilježili sport u
+                                                BiH</h2>
                                         </header>
 
                                         <div class="post__content">
-                                            @foreach($sport->sportsEvents() as $event)
-                                                {{$event->name}}
+                                            @foreach($sport->sportsEvents as $event)
+                                                <p class="pull-right">{!!$event->date_of_event!!}</p>
+                                                <h3 class="pull-left">{!!$event->name_of_event!!}</h3>
+                                                <div class="clearfix"></div>
+                                                <img src="{{asset('images/'.$event->img)}}" class="img-responsive">
+                                                <p>{!!$event->description_of_event!!}</p>
+                                                <hr>
                                             @endforeach
                                         </div>
                                     </article>
@@ -355,10 +362,21 @@
                                     </div>
 
                                     <div class="row">
-                                        @foreach($sport->sportTrophies() as $trophy)
-                                            {{$trophy->name}}
-                                        @endforeach
+                                        @foreach($sport->sportTrophies as $t)
 
+                                            <div class="col-md-3">
+                                                <div class="awards__item">
+                                                    <figure class="awards__figure awards__figure--space">
+                                                        <img src="{{asset('images/trophies/trofej.svg')}}" alt="">
+                                                    </figure>
+                                                    <div class="awards__desc">
+                                                        <h5 class="awards__name">{{$t->name}}</h5>
+                                                        <div class="awards__date">Sezona {{$t->date}}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        @endforeach
                                     </div>
                                     <!-- Widget: Awards / End -->
                                 </div>
@@ -379,20 +397,24 @@
                                                 <div class="post-grid__item col-sm-4">
                                                     <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
                                                         <figure class="posts__thumb">
-                                                            <img src="{{asset('images/staff_avatars/' . $sportPerson->img)}}" alt="">
+                                                            <img src="{{asset('images/staff_avatars/' . $sportPerson->img)}}"
+                                                                 alt="">
                                                         </figure>
                                                         <div class="posts__inner card__content">
                                                             <h6 class="posts__title ime-sportiste-klub-lista">{{ $sportPerson->fName . ' ' . $sportPerson->lName }}</h6>
                                                             <div class="posts__excerpt">{{ $sportPerson->dob }}</div>
                                                         </div>
                                                         <footer class="posts__footer card__footer">
-                                                            <a href="#" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila kadra</a>
+                                                            <p>
+                                                                <i class="fa fa-pencil-square-o"></i> {{ $sportPerson->description }}
+                                                            </p>
                                                         </footer>
                                                     </div>
                                                 </div>
                                             @endforeach
                                         @else
-                                            <p class="text-center">Klub trenutno nema aktivnih stručnih kadrova na Sve Za Sport mreži.</p>
+                                            <p class="text-center">Sport trenutno nema istaknutih osoba na Sve
+                                                Za Sport mreži.</p>
                                         @endif
                                     </div>
 
@@ -414,26 +436,28 @@
                                     </div>
 
                                     <div class="row igraci-grid">
-                                         @if($sport->sportsMenagement->count())
-                                             @foreach($sport->sportsMenagement as $staf)
-                                                 <div class="post-grid__item col-sm-4">
-                                                     <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
-                                                         <figure class="posts__thumb">
-                                                             <img src="{{asset('images/staff_avatars/' . $staf->img)}}" alt="">
-                                                         </figure>
-                                                         <div class="posts__inner card__content">
-                                                             <h6 class="posts__title ime-sportiste-klub-lista">{{ $staf->fName . ' ' . $staf->lName }}</h6>
-                                                             <div class="posts__excerpt">{{ $staf->dob }}</div>
-                                                         </div>
-                                                         <footer class="posts__footer card__footer">
-                                                             <a href="#" class="btn btn-warning btn-profil-igraca"><i class="fa fa-eye"></i> Pregled profila kadra</a>
-                                                         </footer>
-                                                     </div>
-                                                 </div>
-                                             @endforeach
-                                         @else
-                                             <p class="text-center">Klub trenutno nema aktivnih stručnih kadrova na Sve Za Sport mreži.</p>
-                                         @endif
+                                        @if($sport->sportsMenagement->count())
+                                            @foreach($sport->sportsMenagement as $staf)
+                                                <div class="post-grid__item col-sm-4">
+                                                    <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
+                                                        <figure class="posts__thumb">
+                                                            <img src="{{asset('images/staff_avatars/' . $staf->img)}}"
+                                                                 alt="">
+                                                        </figure>
+                                                        <div class="posts__inner card__content">
+                                                            <h6 class="posts__title ime-sportiste-klub-lista">{{ $staf->fName . ' ' . $staf->lName }}</h6>
+                                                            <div class="posts__excerpt">{{ $staf->dob }}</div>
+                                                        </div>
+                                                        <footer class="posts__footer card__footer">
+                                                            <i class="fa fa-pencil-square-o"></i> {{$staf->description}}
+                                                        </footer>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        @else
+                                            <p class="text-center">Sport trenutno nema aktivnih stručnih kadrova na Sve
+                                                Za Sport mreži.</p>
+                                        @endif
 
                                     </div>
 
