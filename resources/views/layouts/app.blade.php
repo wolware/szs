@@ -442,7 +442,7 @@
     $("#primalac").easyAutocomplete(options);
 </script>
 @endif
-<script type="text/javascript" src="{{asset('/js/bootstrap-datetimepicker.min.js')}}.." charset="UTF-8"></script>
+<script type="text/javascript" src="{{asset('/js/bootstrap-datetimepicker.min.js')}}" charset="UTF-8"></script>
 <script type="text/javascript" src="{{asset('/js/bootstrap-datetimepicker.hr.js')}}" charset="UTF-8"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124046232-1"></script>
 <script>
