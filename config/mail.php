@@ -1,28 +1,27 @@
 <?php
 
 return [
-    'driver' => env('MAIL_DRIVER', 'smtp'),
+    'driver' => 'smtp',
 
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => 'smtp.ipage.com',
 
 
-    'port' => env('MAIL_PORT', 587),
+    'port' => 587,
 
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => 'submit@svezasport.ba',
+        'name' => 'SveZaSport',
     ],
 
 
-    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+    'encryption' => 'tls',
 
 
-    'username' => env('MAIL_USERNAME'),
+    'username' => 'submit@svezasport.ba',
 
-    'password' => env('MAIL_PASSWORD'),
-
+    'password' => 'Svezasport01',
 
     'sendmail' => '/usr/sbin/sendmail -bs',
 

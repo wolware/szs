@@ -4,6 +4,7 @@ namespace App;
 
 use Cmgmyr\Messenger\Traits\Messagable;
 use Illuminate\Auth\Passwords\CanResetPassword;
+use App\Notifications\ResetPassword as ResetPasswordNotification;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -31,27 +32,39 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function clubs(){
+    public function clubs()
+    {
         return $this->hasMany('App\Club');
     }
 
-    public function schools(){
+    public function schools()
+    {
         return $this->hasMany('App\School');
     }
 
-    public function players(){
+    public function players()
+    {
         return $this->hasMany('App\Player');
     }
 
-    public function objects(){
+    public function objects()
+    {
         return $this->hasMany('App\Objects');
     }
 
-    public function staff(){
+    public function staff()
+    {
         return $this->hasMany('App\Staff');
     }
 
-    public function vijesti() {
+    public function vijesti()
+    {
         return $this->hasMany('App\Vijest');
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        // Your your own implementation.
+        $this->notify(new ResetPasswordNotification($token));
     }
 }

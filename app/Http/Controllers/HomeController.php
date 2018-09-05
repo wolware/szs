@@ -12,9 +12,9 @@ use App\School;
 use App\Staff;
 use App\Vijest;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
@@ -27,7 +27,8 @@ class HomeController extends Controller
      * @param PlayerRepository $playerRepository
      * @param StaffRepository $staffRepository
      */
-    public function __construct(PlayerRepository $playerRepository, StaffRepository $staffRepository) {
+    public function __construct(PlayerRepository $playerRepository, StaffRepository $staffRepository)
+    {
         $this->playerRepository = $playerRepository;
         $this->staffRepository = $staffRepository;
     }
@@ -39,10 +40,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $sportasi =  Player::where('status', 'active')->orderBy('id', 'desc')->take(6)->get();
+        $sportasi = Player::where('status', 'active')->orderBy('id', 'desc')->take(6)->get();
         $klubovi = Club::where('status', 'active')->orderBy('id', 'desc')->take(6)->get();
         $vijesti = Vijest::where('izbrisano', false)->where('odobreno', true)->orderBy('id', 'DESC')->take(6)->get();
-        $staff =  Staff::where('status', 'active')->orderBy('id', 'desc')->take(6)->get();
+        $staff = Staff::where('status', 'active')->orderBy('id', 'desc')->take(6)->get();
         $schools = School::where('status', 'active')->orderBy('id', 'desc')->take(6)->get();
         $objects = Objects::where('status', 'active')->orderBy('id', 'desc')->take(6)->get();
 
@@ -78,7 +79,7 @@ class HomeController extends Controller
 
         $newProfiles = json_decode(json_encode($newProfiles), FALSE);
 
-        if(Auth::check()) {
+        if (Auth::check()) {
             $notifications = ClubRequest::with(['club', 'player', 'staff'])->whereHas('club', function ($query) {
                 $query->where('clubs.user_id', Auth::user()->id);
             })->take(5)->get();
@@ -99,8 +100,39 @@ class HomeController extends Controller
         ]);
     }
 
-    public function contact(){
+    public function contact()
+    {
         return view('contact');
+    }
+
+    public function contactPost(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'name' => 'required|max:55|string',
+            'email' => 'required|max:55|string|email',
+            'subject' => 'required|max:55|string',
+            'poruka' => 'required|max:255|string',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+        $data = array(
+            'name' => $request->get('name'),
+            'email' => $request->get('email'),
+            'subject' => $request->get('subject'),
+            'poruka' => $request->get('poruka')
+        );
+
+        Mail::send('mailtemplate', $data, function ($message) use ($data) {
+            $message->from($data['email'], 'SZS');
+            $message->to('submit@svezasport.ba')->subject($data['subject']);
+        });
+
+        flash()->overlay('Uspješno ste poslali poruku. Očekujte skori odgovor', 'Čestitamo');
+        return back();
     }
 
 }

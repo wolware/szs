@@ -13,7 +13,7 @@
             <div class="pushy-panel__inner">
                 <header class="pushy-panel__header">
                     <div class="pushy-panel__logo">
-                        <a href="#"><img src="{{asset('images/soccer/logo.png')}}" srcset="assets/images/soccer/logo@2x.png 2x" alt="Alchemists"></a>
+                        <a href="#"><img src="{{asset('images/soccer/logo.png')}}" alt=""></a>
                     </div>
                 </header>
                 <div class="pushy-panel__content">
@@ -79,6 +79,23 @@
                         <h4>Kontakt Forma</h4>
                     </header>
                     <div class="card__content">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="row form-segment">
+                                    <div class="col-md-12">
+                                        @if ($errors->any())
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="row">
                             <div class="col-md-4">
@@ -94,30 +111,31 @@
                             <div class="col-md-8">
 
                                 <!-- Contact Form -->
-                                <form action="#" class="contact-form">
+                                <form action="{{url('/contact')}}" method="POST" class="contact-form">
+                                    {{ csrf_field() }}
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="contact-form-name">Vaše ime <span class="required">*</span></label>
-                                                <input type="text" name="contact-form-name" id="contact-form-name" class="form-control" placeholder="Vaše ime...">
+                                                <input type="text" name="name" id="contact-form-name" class="form-control" value="{{old('name')}}" placeholder="Vaše ime...">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
                                                 <label for="contact-form-email">Vaš Email <span class="required">*</span></label>
-                                                <input type="email" name="contact-form-email" id="contact-form-email" class="form-control" placeholder="Vaš email...">
+                                                <input type="email" name="email" id="contact-form-email" class="form-control" value="{{old('email')}}" placeholder="Vaš email...">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="form-group">
-                                                <label for="contact-form-subject">Predmet poruke</label>
-                                                <input type="text" name="contact-form-subject" id="contact-form-subject" class="form-control" placeholder="Predmet poruke...">
+                                                <label for="contact-form-subject">Predmet poruke <span class="required">*</span></label>
+                                                <input type="text" name="subject" id="contact-form-subject" class="form-control" value="{{old('subject')}}" placeholder="Predmet poruke...">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="contact-form-message">Vaša poruka <span class="required">*</span></label>
-                                        <textarea name="name" rows="5" class="form-control" placeholder="Unesite vašu poruku ovde..."></textarea>
+                                        <textarea name="poruka" rows="5" class="form-control" placeholder="Unesite vašu poruku ovde...">{{old('message')}}</textarea>
                                     </div>
                                     <div class="form-group form-group--submit">
                                         <button type="submit" class="btn btn-primary-inverse btn-lg btn-block">Pošaljite vašu poruku</button>
