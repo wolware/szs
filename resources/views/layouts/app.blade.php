@@ -13,8 +13,29 @@
     <meta name="author" content="Sve Za Sport">
     <meta name="keywords"
           content="sve za sport, vijesti, sport, bih, bosna i hercegovina, rekreacija, szs, svezasport.ba">
+@php
+    $className = isset($data) ? get_class($data) : 'none';
+@endphp
+@if(strcmp($className,"App/Club"))
+    @include('layouts.club-layout',$data)
+@elseif(strcmp($className,"App/Event"))
+    @include('layouts.club-layout',$data)
+@elseif(strcmp($className,"App/Objects"))
+    @include('layouts.club-layout',$data)
+@elseif(strcmp($className,"App/Player"))
+    @include('layouts.club-layout',$data)
+@elseif(strcmp($className,"App/School"))
+    @include('layouts.club-layout',$data)
+@elseif(strcmp($className,"App/Sport"))
+    @include('layouts.club-layout',$data)
+@elseif(strcmp($className,"App/Staff"))
+    @include('layouts.club-layout',$data)
+@elseif(strcmp($className,"App/Vijesti"))
+    @include('layouts.club-layout',$data)
+@endif
 
-    <!-- Favicons
+
+<!-- Favicons
     ================================================== -->
     <link rel="shortcut icon" href="{{asset('assets/images/soccer/favicons/favicon.ico')}}">
     <link rel="apple-touch-icon" sizes="120x120" href="{{asset('assets/images/soccer/favicons/favicon-120.png')}}">
@@ -41,7 +62,7 @@
 
     <!-- Template CSS-->
     <link href="{{ asset('/css/datepicker.css?t=44') }}" rel="stylesheet">
-   {{-- <link href="{{ asset('/css/timepicki.css') }}" rel="stylesheet">--}}
+    {{-- <link href="{{ asset('/css/timepicki.css') }}" rel="stylesheet">--}}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" rel="stylesheet">
     <link href="{{ asset('/css/style.css?t=') }}{{time()}}" rel="stylesheet">
     <link href="{{ asset('/css/custom.css?t=') }}{{time()}}" rel="stylesheet">
@@ -58,7 +79,6 @@
     <div class="site-overlay"></div>
     <!-- Header
       ================================================== -->
-
     <!-- Header Mobile -->
     <div class="header-mobile clearfix" id="header-mobile">
         <div class="header-mobile__logo">
@@ -86,7 +106,8 @@
                                 Odjava</a></li>
                         <li class="nav-account__item"><a href="{{url('profile/new')}}"><i class="fa fa-plus-circle"></i>
                                 Objavi</a></li>
-                        <li class="nav-account__item"><a href="{{url('/messages')}}"><i class="fa fa-envelope"></i> Poruke</a></li>
+                        <li class="nav-account__item"><a href="{{url('/messages')}}"><i class="fa fa-envelope"></i>
+                                Poruke</a></li>
                         <li class="nav-account__item"><a href="{{url('me/profile')}}"><i
                                         class="fa fa-user"></i> {{isset(Auth::user()->name) ? Auth::user()->name : 'MOJ SZS'}}
                             </a>
@@ -420,27 +441,27 @@
 <script src="{{ asset('js/custom.js?t='.time()) }}"></script>
 
 @if(str_contains(Request::url(),'messages'))
-<script src="{{asset('js/jquery.easy-autocomplete.min.js')}}"></script>
-<script>
-    var options = {
+    <script src="{{asset('js/jquery.easy-autocomplete.min.js')}}"></script>
+    <script>
+        var options = {
 
-        url: window.location.protocol+'//'+window.location.hostname+"/autocomplete-users",
-        getValue: "email",
-        list: {
-            match: {
-                enabled: true
+            url: window.location.protocol + '//' + window.location.hostname + "/autocomplete-users",
+            getValue: "email",
+            list: {
+                match: {
+                    enabled: true
+                },
+                onSelectItemEvent: function () {
+                    var value = $("#primalac").getSelectedItemData().id; //get the id associated with the selected value
+                    $("#recipient").val(value).trigger("change"); //copy it to the hidden field
+                }
             },
-            onSelectItemEvent: function() {
-                var value = $("#primalac").getSelectedItemData().id; //get the id associated with the selected value
-                $("#recipient").val(value).trigger("change"); //copy it to the hidden field
-            }
-        },
 
-        theme: "square"
-    };
+            theme: "square"
+        };
 
-    $("#primalac").easyAutocomplete(options);
-</script>
+        $("#primalac").easyAutocomplete(options);
+    </script>
 @endif
 <script type="text/javascript" src="{{asset('/js/bootstrap-datetimepicker.min.js')}}" charset="UTF-8"></script>
 <script type="text/javascript" src="{{asset('/js/bootstrap-datetimepicker.hr.js')}}" charset="UTF-8"></script>
@@ -456,9 +477,9 @@
 
     gtag('config', 'UA-124046232-1');
     $('.form_date').datetimepicker({
-        language:  'hr',
+        language: 'hr',
         weekStart: 1,
-        todayBtn:  1,
+        todayBtn: 1,
         autoclose: 1,
         todayHighlight: 1,
         startView: 2,

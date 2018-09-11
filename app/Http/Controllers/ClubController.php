@@ -179,7 +179,7 @@ class ClubController extends Controller
 
     public function new(Request $data){
     	$validator = Validator::make($data->all(),[
-    	    'logo' => 'required|image|dimensions:min_width=200,min_height=200,max_width=1024,max_height=1024',
+    	    'logo' => 'image|dimensions:min_width=200,min_height=200,max_width=1024,max_height=1024',
     		'name' => 'required|max:255|string',
     		'nature' => 'required|max:255|string',
     		'continent' => 'required|integer|exists:regions,id',

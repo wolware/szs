@@ -6,10 +6,10 @@
         <div class="site-overlay"></div>
 
 
-        @include('includes.pushy-panel')
+    @include('includes.pushy-panel')
 
 
-        <!-- Player Heading
+    <!-- Player Heading
         ================================================== -->
         <div class="player-heading">
             <div class="container">
@@ -26,7 +26,8 @@
                     <!-- Player Photo -->
                     <div class="player-info__item player-info__item--photo">
                         <figure class="player-info__photo">
-                            <img class="frontend-profilna-slika-a1" src="{{asset('images/athlete_avatars/' . $player->avatar)}}" alt="">
+                            <img class="frontend-profilna-slika-a1"
+                                 src="{{asset('images/athlete_avatars/' . $player->avatar)}}" alt="">
                         </figure>
                     </div>
                     <!-- Player Photo / End -->
@@ -44,10 +45,13 @@
                         <div class="player-info-details">
                             @if(Auth::check())
                                 @if(Auth::user()-> id == $player->user->id)
-                                    <a href="{{ url('/athletes/' . $player->id . '/edit' ) }}" class="btn btn-primary-inverse btn-icon product__add-to-cart stats-klub-middle"><i class="fa fa-edit"></i> Uredi</a>
+                                    <a href="{{ url('/athletes/' . $player->id . '/edit' ) }}"
+                                       class="btn btn-primary-inverse btn-icon product__add-to-cart stats-klub-middle"><i
+                                                class="fa fa-edit"></i> Uredi</a>
                                 @endif
                             @endif
-                            <a href="#" class="btn btn-primary-inverse btn-icon product__add-to-cart"><i class="fa fa-share-alt"></i> Podijeli</a>
+                            <a href="#" class="btn btn-primary-inverse btn-icon product__add-to-cart"><i
+                                        class="fa fa-share-alt"></i> Podijeli</a>
 
                         </div>
 
@@ -65,21 +69,24 @@
                                         <i class="fa fa-eye"></i>
                                     </div>
                                     <h6 class="btn-social-counter__title brojac-profil">{{$player->number_of_views}}</h6>
-                                    <span class="btn-social-counter__count"><span class="btn-social-counter__count-num"></span> Pregleda</span>
+                                    <span class="btn-social-counter__count"><span
+                                                class="btn-social-counter__count-num"></span> Pregleda</span>
                                 </a>
                                 <a class="btn-widget-stats">
                                     <div class="btn-social-counter__icon">
                                         <i class="fa fa-share-alt"></i>
                                     </div>
                                     <h6 class="btn-social-counter__title brojac-profil">4645</h6>
-                                    <span class="btn-social-counter__count"><span class="btn-social-counter__count-num"></span> Podjela</span>
+                                    <span class="btn-social-counter__count"><span
+                                                class="btn-social-counter__count-num"></span> Podjela</span>
                                 </a>
                                 <a class="btn-widget-stats">
                                     <div class="btn-social-counter__icon">
                                         <i class="fa fa-heart-o"></i>
                                     </div>
                                     <h6 class="btn-social-counter__title brojac-profil">55212</h6>
-                                    <span class="btn-social-counter__count"><span class="btn-social-counter__count-num"></span> Sviđanja</span>
+                                    <span class="btn-social-counter__count"><span
+                                                class="btn-social-counter__count-num"></span> Sviđanja</span>
                                 </a>
                             </aside>
                             <!-- Profil stats / End -->
@@ -116,21 +123,26 @@
 
                                         <tr>
                                             <td class="lineup__info">
-                                                <img class="flow-icons-012" src="{{asset('images/icons/small-calendar.svg')}}" alt="">
+                                                <img class="flow-icons-012"
+                                                     src="{{asset('images/icons/small-calendar.svg')}}" alt="">
                                             </td>
                                             <td class="lineup__num">Datum rođenja</td>
                                             <td class="lineup__name">{{\Carbon\Carbon::parse($player->date_of_birth)->format('d.m.Y.')}}</td>
                                         </tr>
                                         <tr>
                                             <td class="lineup__info">
-                                                <img class="flow-icons-012" src="{{asset('images/icons/klubovi-icon.svg')}}" alt="">
+                                                <img class="flow-icons-012"
+                                                     src="{{asset('images/icons/klubovi-icon.svg')}}" alt="">
                                             </td>
                                             <td class="lineup__num">Klub</td>
-                                            <td class="lineup__name"><a class="profil-poveznica" href="#">{{$player->club->name or 'Nema klub'}}</a></td>
+                                            <td class="lineup__name"><a class="profil-poveznica"
+                                                                        href="#">{{$player->club->name or 'Nema klub'}}</a>
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td class="lineup__info">
-                                                <img class="flow-icons-012" src="{{asset('images/icons/trophy.svg')}}" alt="">
+                                                <img class="flow-icons-012" src="{{asset('images/icons/trophy.svg')}}"
+                                                     alt="">
                                             </td>
                                             <td class="lineup__num">Takmičenje/Liga</td>
                                             <td class="lineup__name">{{$player->club->competition or 'Nema takmičenja'}}</td>
@@ -149,46 +161,50 @@
                         <!-- Socijalne mreze -->
                         <div class="row">
                             <div class="col-md-12">
-                            @if($player->facebook)
-                                <div class="col-md-6 profili-soc-mreza">
-                                    <a href="{{ $player->facebook }}" class="btn-social-counter btn-social-counter--fb" target="_blank">
-                                        <div class="btn-social-counter__icon">
-                                            <i class="fa fa-facebook"></i>
-                                        </div>
-                                        <h6 class="btn-social-counter__title">Facebook</h6>
-                                    </a>
-                                </div>
-                            @endif
-                            @if($player->twitter)
-                                <div class="col-md-6 profili-soc-mreza">
-                                    <a href="{{ $player->twitter }}" class="btn-social-counter btn-social-counter--twitter" target="_blank">
-                                        <div class="btn-social-counter__icon">
-                                            <i class="fa fa-twitter"></i>
-                                        </div>
-                                        <h6 class="btn-social-counter__title">Twitter</h6>
-                                    </a>
-                                </div>
-                            @endif
-                            @if($player->instagram)
-                                <div class="col-md-6 profili-soc-mreza">
-                                    <a href="{{ $player->instagram }}" class="btn-social-counter btn-social-counter--instagram" target="_blank">
-                                        <div class="btn-social-counter__icon">
-                                            <i class="fa fa-instagram"></i>
-                                        </div>
-                                        <h6 class="btn-social-counter__title">Instagram</h6>
-                                    </a>
-                                </div>
-                            @endif
-                            @if($player->youtube)
-                                <div class="col-md-6 profili-soc-mreza">
-                                    <a href="{{ $player->youtube }}" class="btn-social-counter btn-social-counter--yt" target="_blank">
-                                        <div class="btn-social-counter__icon">
-                                            <i class="fa fa-youtube-play"></i>
-                                        </div>
-                                        <h6 class="btn-social-counter__title">YouTUBE</h6>
-                                    </a>
-                                </div>
-                            @endif
+                                @if($player->facebook)
+                                    <div class="col-md-6 profili-soc-mreza">
+                                        <a href="{{ $player->facebook }}"
+                                           class="btn-social-counter btn-social-counter--fb" target="_blank">
+                                            <div class="btn-social-counter__icon">
+                                                <i class="fa fa-facebook"></i>
+                                            </div>
+                                            <h6 class="btn-social-counter__title">Facebook</h6>
+                                        </a>
+                                    </div>
+                                @endif
+                                @if($player->twitter)
+                                    <div class="col-md-6 profili-soc-mreza">
+                                        <a href="{{ $player->twitter }}"
+                                           class="btn-social-counter btn-social-counter--twitter" target="_blank">
+                                            <div class="btn-social-counter__icon">
+                                                <i class="fa fa-twitter"></i>
+                                            </div>
+                                            <h6 class="btn-social-counter__title">Twitter</h6>
+                                        </a>
+                                    </div>
+                                @endif
+                                @if($player->instagram)
+                                    <div class="col-md-6 profili-soc-mreza">
+                                        <a href="{{ $player->instagram }}"
+                                           class="btn-social-counter btn-social-counter--instagram" target="_blank">
+                                            <div class="btn-social-counter__icon">
+                                                <i class="fa fa-instagram"></i>
+                                            </div>
+                                            <h6 class="btn-social-counter__title">Instagram</h6>
+                                        </a>
+                                    </div>
+                                @endif
+                                @if($player->youtube)
+                                    <div class="col-md-6 profili-soc-mreza">
+                                        <a href="{{ $player->youtube }}"
+                                           class="btn-social-counter btn-social-counter--yt" target="_blank">
+                                            <div class="btn-social-counter__icon">
+                                                <i class="fa fa-youtube-play"></i>
+                                            </div>
+                                            <h6 class="btn-social-counter__title">YouTUBE</h6>
+                                        </a>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <!-- Socijalne mreze / End -->
@@ -206,31 +222,35 @@
                                 <div class="table-responsive">
                                     <table class="table lineup-table">
                                         <tbody>
-                                            <tr>
-                                                <td class="lineup__info">
-                                                    <img class="flow-icons-012" src="{{asset('images/icons/height.svg')}}" alt="">
-                                                </td>
-                                                <td class="lineup__num">Visina</td>
-                                                <td class="lineup__name">{{$player->height}} cm</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="lineup__info">
-                                                    <img class="flow-icons-012" src="{{asset('images/icons/weight.svg')}}" alt="">
-                                                </td>
-                                                <td class="lineup__num">Težina</td>
-                                                <td class="lineup__name">{{$player->weight}} kg</td>
-                                            </tr>
-                                            @if($player->player_data)
-                                                @foreach($player->player_data as $name => $player_data)
-                                                    <tr>
-                                                        <td class="lineup__info">
-                                                            <img class="flow-icons-012" src="{{asset('images/icons/' . $player->player_data_names[$name]['icon'])}}" alt="">
-                                                        </td>
-                                                        <td class="lineup__num">{{ $player->player_data_names[$name]['label']['bs'] }}</td>
-                                                        <td class="lineup__name">{{ $player_data }}</td>
-                                                    </tr>
-                                                @endforeach
-                                            @endif
+                                        <tr>
+                                            <td class="lineup__info">
+                                                <img class="flow-icons-012" src="{{asset('images/icons/height.svg')}}"
+                                                     alt="">
+                                            </td>
+                                            <td class="lineup__num">Visina</td>
+                                            <td class="lineup__name">{{$player->height}} cm</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="lineup__info">
+                                                <img class="flow-icons-012" src="{{asset('images/icons/weight.svg')}}"
+                                                     alt="">
+                                            </td>
+                                            <td class="lineup__num">Težina</td>
+                                            <td class="lineup__name">{{$player->weight}} kg</td>
+                                        </tr>
+                                        @if($player->player_data)
+                                            @foreach($player->player_data as $name => $player_data)
+                                                <tr>
+                                                    <td class="lineup__info">
+                                                        <img class="flow-icons-012"
+                                                             src="{{asset('images/icons/' . $player->player_data_names[$name]['icon'])}}"
+                                                             alt="">
+                                                    </td>
+                                                    <td class="lineup__num">{{ $player->player_data_names[$name]['label']['bs'] }}</td>
+                                                    <td class="lineup__name">{{ $player_data }}</td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
                                         </tbody>
                                     </table>
                                 </div>
@@ -253,21 +273,25 @@
 
                                         <tr>
                                             <td class="lineup__info">
-                                                <img class="flow-icons-012" src="{{asset('images/icons/tag.svg')}}" alt="">
+                                                <img class="flow-icons-012" src="{{asset('images/icons/tag.svg')}}"
+                                                     alt="">
                                             </td>
                                             <td class="lineup__num">ID igrača</td>
                                             <td class="lineup__name">{{$player->id}}</td>
                                         </tr>
                                         <tr>
                                             <td class="lineup__info">
-                                                <img class="flow-icons-012" src="{{asset('images/icons/calendar-add-event-button-with-plus-sign.svg')}}" alt="">
+                                                <img class="flow-icons-012"
+                                                     src="{{asset('images/icons/calendar-add-event-button-with-plus-sign.svg')}}"
+                                                     alt="">
                                             </td>
                                             <td class="lineup__num">Dio SveZaSport</td>
                                             <td class="lineup__name">{{ \Carbon\Carbon::parse($player->created_at)->format('d. F, Y.') }}</td>
                                         </tr>
                                         <tr>
                                             <td class="lineup__info">
-                                                <img class="flow-icons-012" src="{{asset('images/icons/security-badge.svg')}}" alt="">
+                                                <img class="flow-icons-012"
+                                                     src="{{asset('images/icons/security-badge.svg')}}" alt="">
                                             </td>
                                             <td class="lineup__num">SZS Klub mjeseca</td>
                                             <td class="lineup__name">5</td>
@@ -304,12 +328,17 @@
                                             <td class="team-leader__player">
                                                 <div class="team-leader__player-info">
                                                     <figure class="team-leader__player-img team-leader__player-img--sm">
-                                                        <img src="{{asset('images/avatars/' . ($player->user->avatar ? $player->user->avatar : 'default_avatar.png'))}}" class="user-picture" alt="">
+                                                        <img src="{{asset('images/avatars/' . ($player->user->avatar ? $player->user->avatar : 'default_avatar.png'))}}"
+                                                             class="user-picture" alt="">
                                                     </figure>
                                                     <div class="team-leader__player-inner">
-                                                        <h5 class="team-leader__player-name autor-slika">{{ $player->user->name }}</h5>
-                                                        <span class="team-leader__player-position"><i class="fa fa-tag"></i> 00502565</span>
-                                                        <a href="#"><i class="fa fa-eye"></i> Pregled profila</a>  |  <a href="#"><i class="fa fa-envelope-open-o"></i> Poruka</a>
+                                                        <a href="{{url('/profile/'.$player->user->id)}}"><h5
+                                                                    class="team-leader__player-name autor-slika">{{ $player->user->name }}</h5>
+                                                        </a>
+                                                        <span class="team-leader__player-position"><i
+                                                                    class="fa fa-tag"></i> {{$player->user->id}}</span>
+                                                        <a href="{{url('/profile/'.$player->user->id)}}"><i
+                                                                    class="fa fa-eye"></i> Pregled profila</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -333,10 +362,23 @@
 
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs nav-justified nav-product-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#tab-opcenito" role="tab" data-toggle="tab"><i class="fa fa-info-circle"></i><small>O klubu</small>Općenito</a></li>
-                                <li role="presentation"><a href="#tab-vremeplov" role="tab" data-toggle="tab"><i class="fa fa-history"></i><small>Auto</small>Biografija</a></li>
-                                <li role="presentation"><a href="#tab-vitrina" role="tab" data-toggle="tab"><i class="fa fa-trophy"></i><small>Osobna</small>Vitrina</a></li>
-                                <li role="presentation"><a href="#tab-galerija" role="tab" data-toggle="tab"><i class="fa fa-picture-o"></i><small>Foto</small>Galerija</a></li>
+                                <li role="presentation" class="active"><a href="#tab-opcenito" role="tab"
+                                                                          data-toggle="tab"><i
+                                                class="fa fa-info-circle"></i>
+                                        <small>O klubu</small>
+                                        Općenito</a></li>
+                                <li role="presentation"><a href="#tab-vremeplov" role="tab" data-toggle="tab"><i
+                                                class="fa fa-history"></i>
+                                        <small>Auto</small>
+                                        Biografija</a></li>
+                                <li role="presentation"><a href="#tab-vitrina" role="tab" data-toggle="tab"><i
+                                                class="fa fa-trophy"></i>
+                                        <small>Osobna</small>
+                                        Vitrina</a></li>
+                                <li role="presentation"><a href="#tab-galerija" role="tab" data-toggle="tab"><i
+                                                class="fa fa-picture-o"></i>
+                                        <small>Foto</small>
+                                        Galerija</a></li>
                             </ul>
 
                             <!-- Tab panes -->
@@ -358,15 +400,20 @@
 
                                                             <tr>
                                                                 <td class="lineup__info gadget-no-border">
-                                                                    <img class="flow-icons-012" src="{{asset('images/icons/office-block.svg')}}" alt="">
+                                                                    <img class="flow-icons-012"
+                                                                         src="{{asset('images/icons/office-block.svg')}}"
+                                                                         alt="">
                                                                 </td>
-                                                                <td class="lineup__num gadget-no-border">Grad/Mjesto</td>
+                                                                <td class="lineup__num gadget-no-border">Grad/Mjesto
+                                                                </td>
                                                                 <td class="lineup__name gadget-no-border">{{$player->city}}</td>
                                                             </tr>
                                                             @if($player->regions->has('municipality'))
                                                                 <tr>
                                                                     <td class="lineup__info gadget-no-border">
-                                                                        <img class="flow-icons-012" src="{{asset('images/icons/opcina.svg')}}" alt="">
+                                                                        <img class="flow-icons-012"
+                                                                             src="{{asset('images/icons/opcina.svg')}}"
+                                                                             alt="">
                                                                     </td>
                                                                     <td class="lineup__num gadget-no-border">Općina</td>
                                                                     <td class="lineup__name gadget-no-border">{{ $player->regions->get('municipality') }}</td>
@@ -375,9 +422,13 @@
                                                             @if($player->regions->has('region'))
                                                                 <tr>
                                                                     <td class="lineup__info gadget-no-border">
-                                                                        <img class="flow-icons-012" src="{{asset('images/icons/placeholder.svg')}}" alt="">
+                                                                        <img class="flow-icons-012"
+                                                                             src="{{asset('images/icons/placeholder.svg')}}"
+                                                                             alt="">
                                                                     </td>
-                                                                    <td class="lineup__num gadget-no-border">Kanton/Regija</td>
+                                                                    <td class="lineup__num gadget-no-border">
+                                                                        Kanton/Regija
+                                                                    </td>
                                                                     <td class="lineup__name gadget-no-border">{{ $player->regions->get('region') }}</td>
                                                                 </tr>
                                                             @endif
@@ -404,16 +455,22 @@
                                                             @if($player->regions->has('province'))
                                                                 <tr>
                                                                     <td class="lineup__info gadget-no-border">
-                                                                        <img class="flow-icons-012" src="{{asset('images/icons/map.svg')}}" alt="">
+                                                                        <img class="flow-icons-012"
+                                                                             src="{{asset('images/icons/map.svg')}}"
+                                                                             alt="">
                                                                     </td>
-                                                                    <td class="lineup__num gadget-no-border">Entitet/Pokrajina</td>
+                                                                    <td class="lineup__num gadget-no-border">
+                                                                        Entitet/Pokrajina
+                                                                    </td>
                                                                     <td class="lineup__name gadget-no-border">{{ $player->regions->get('province') }}</td>
                                                                 </tr>
                                                             @endif
                                                             @if($player->regions->has('country'))
                                                                 <tr>
                                                                     <td class="lineup__info gadget-no-border">
-                                                                        <img class="flow-icons-012" src="{{asset('images/icons/earth.svg')}}" alt="">
+                                                                        <img class="flow-icons-012"
+                                                                             src="{{asset('images/icons/earth.svg')}}"
+                                                                             alt="">
                                                                     </td>
                                                                     <td class="lineup__num gadget-no-border">Država</td>
                                                                     <td class="lineup__name gadget-no-border">{{ $player->regions->get('country') }}</td>
@@ -422,9 +479,12 @@
                                                             @if($player->regions->has('continent'))
                                                                 <tr>
                                                                     <td class="lineup__info gadget-no-border">
-                                                                        <img class="flow-icons-012" src="{{asset('images/icons/international-delivery.svg')}}" alt="">
+                                                                        <img class="flow-icons-012"
+                                                                             src="{{asset('images/icons/international-delivery.svg')}}"
+                                                                             alt="">
                                                                     </td>
-                                                                    <td class="lineup__num gadget-no-border">Kontinent</td>
+                                                                    <td class="lineup__num gadget-no-border">Kontinent
+                                                                    </td>
                                                                     <td class="lineup__name gadget-no-border">{{ $player->regions->get('continent') }}</td>
                                                                 </tr>
                                                             @endif
@@ -449,7 +509,9 @@
                                                 <div class="widget-game-result__section-inner">
                                                     <header class="widget-game-result__header">
                                                         <h3 class="widget-game-result__title">Klupska historija</h3>
-                                                        <time class="widget-game-result__date" datetime="2016-03-24">Timeline promjena klubova</time>
+                                                        <time class="widget-game-result__date" datetime="2016-03-24">
+                                                            Timeline promjena klubova
+                                                        </time>
                                                     </header>
                                                 </div>
                                             </div>
@@ -472,7 +534,10 @@
                                                                         <div class="df-timeline__event-desc">{{$club->season}}</div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="df-timeline__time"><img src="{{asset('images/SZS-club-logo.png')}}" width="70" height="70" alt="" class="df-timeline__event-icon"></div>
+                                                                <div class="df-timeline__time"><img
+                                                                            src="{{asset('images/SZS-club-logo.png')}}"
+                                                                            width="70" height="70" alt=""
+                                                                            class="df-timeline__event-icon"></div>
                                                             </div>
 
                                                         @endforeach
@@ -485,7 +550,8 @@
 
                                             <div class="widget-game-result__section">
                                                 <header class="widget-game-result__subheader card__subheader-alt card__subheader card__subheader--sm card__subheader--nomargins">
-                                                    <h5 class="widget-game-result__subtitle">Aktuelni klub: <a href="#">{{$player->club->name or 'Nema klub'}}</a></h5>
+                                                    <h5 class="widget-game-result__subtitle">Aktuelni klub: <a
+                                                                href="#">{{$player->club->name or 'Nema klub'}}</a></h5>
                                                 </header>
                                             </div>
 
@@ -495,7 +561,8 @@
 
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <img src="{{asset('images/REKLAMA-752-100.png')}}" class="reklama-klubovi-alt1"/>
+                                            <img src="{{asset('images/REKLAMA-752-100.png')}}"
+                                                 class="reklama-klubovi-alt1"/>
                                         </div>
                                     </div>
 
@@ -520,7 +587,8 @@
 
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <img src="{{asset('images/REKLAMA-752-100.png')}}" class="reklama-klubovi-vitrina"/>
+                                            <img src="{{asset('images/REKLAMA-752-100.png')}}"
+                                                 class="reklama-klubovi-vitrina"/>
                                         </div>
                                     </div>
 
@@ -528,7 +596,8 @@
                                     <article class="card card--lg post post--single">
 
                                         <figure class="post__thumbnail">
-                                            <img class="vitrina-slika" src="{{asset('images/a1-photo-vremeplov.png')}}" alt="">
+                                            <img class="vitrina-slika" src="{{asset('images/a1-photo-vremeplov.png')}}"
+                                                 alt="">
                                         </figure>
                                         <header class="post__header">
                                             <h2 class="post__title">Auto biografija</h2>
@@ -548,7 +617,8 @@
 
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <img src="{{asset('images/REKLAMA-752-100.png')}}" class="reklama-klubovi-vitrina"/>
+                                            <img src="{{asset('images/REKLAMA-752-100.png')}}"
+                                                 class="reklama-klubovi-vitrina"/>
                                         </div>
                                     </div>
 
@@ -574,12 +644,12 @@
                                 <!-- Tab: Vitrina / End -->
 
 
-
                                 <!-- Tab: Galerija -->
                                 <div role="tabpanel" class="tab-pane fade neaktivno" id="tab-galerija">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <img src="{{asset('images/REKLAMA-752-100.png')}}" class="reklama-klubovi-igraci"/>
+                                            <img src="{{asset('images/REKLAMA-752-100.png')}}"
+                                                 class="reklama-klubovi-igraci"/>
                                         </div>
                                     </div>
 
@@ -588,12 +658,15 @@
 
                                             <div class="album__item col-xs-6 col-sm-4">
                                                 <div class="album__item-holder">
-                                                    <a href="{{asset('images/galerija_sportista/' . $image->image)}}" class="album__item-link mp_gallery">
+                                                    <a href="{{asset('images/galerija_sportista/' . $image->image)}}"
+                                                       class="album__item-link mp_gallery">
                                                         <figure class="album__thumb">
-                                                            <img src="{{asset('images/galerija_sportista/' . $image->image)}}" alt="">
+                                                            <img src="{{asset('images/galerija_sportista/' . $image->image)}}"
+                                                                 alt="">
                                                         </figure>
                                                         <div class="album__item-desc">
-                                                            <img src="{{asset('images/icons/expand-square.svg')}}" class="pregled-slike" alt="">
+                                                            <img src="{{asset('images/icons/expand-square.svg')}}"
+                                                                 class="pregled-slike" alt="">
                                                         </div>
                                                     </a>
                                                 </div>

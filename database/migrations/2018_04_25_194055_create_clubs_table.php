@@ -17,7 +17,7 @@ class CreateClubsTable extends Migration
             $table->increments('id');
 
             $table->string('name');
-            $table->string('logo');
+            $table->string('logo')->default('SZS-club-logo.png');
             $table->string('nature');
             $table->string('city');
             $table->date('established_in');

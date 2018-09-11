@@ -365,7 +365,7 @@
                                                         <img src="{{asset('images/avatars/' . ($school->user->avatar ? $school->user->avatar : 'default_avatar.png'))}}" class="user-picture" alt="">
                                                     </figure>
                                                     <div class="team-leader__player-inner">
-                                                        <h5 class="team-leader__player-name autor-slika">{{$school->user->name}}</h5>
+                                                        <a href="{{url('/profile/'.$school->user->id)}}"> <h5 class="team-leader__player-name autor-slika">{{$school->user->name}}</h5></a>
                                                         <span class="team-leader__player-position"><i class="fa fa-tag"></i> {{$school->user->id}}</span>
                                                     </div>
                                                 </div>

@@ -299,9 +299,9 @@
                                                         <img src="{{asset('images/avatars/' . ($object->user->avatar ? $object->user->avatar : 'default_avatar.png'))}}" class="user-picture" alt="">
                                                     </figure>
                                                     <div class="team-leader__player-inner">
-                                                        <h5 class="team-leader__player-name autor-slika">{{ $object->user->name }}</h5>
-                                                        <span class="team-leader__player-position"><i class="fa fa-tag"></i> 00502565</span>
-                                                        <a href="#"><i class="fa fa-eye"></i> Pregled profila</a>  |  <a href="#"><i class="fa fa-envelope-open-o"></i> Poruka</a>
+                                                        <a href="{{url('/profile/'.$object->user->id)}}"><h5 class="team-leader__player-name autor-slika">{{ $object->user->name }}</h5></a>
+                                                        <span class="team-leader__player-position"><i class="fa fa-tag"></i> {{$object->user->id}}</span>
+                                                        <a href="{{url('/profile/'.$object->user->id)}}"><i class="fa fa-eye"></i> Pregled profila</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -882,6 +882,7 @@
                                                                     <h6 class="team-meta__name"><a href="#">ŽOK Smeč Živinice - Žok Smeč Lukavac</a></h6>
                                                                 </div>
                                                             </div>
+                                                        </div>
                                                     </td>
                                                     <td class="team-schedule__time">14:00</td>
                                                     <td class="team-schedule__venue">8. Kolo Premijer Lige BiH</td>
@@ -895,6 +896,7 @@
                                                                     <h6 class="team-meta__name"><a href="#">ŽOK Smeč Živinice - Žok Smeč Lukavac</a></h6>
                                                                 </div>
                                                             </div>
+                                                        </div>
                                                     </td>
                                                     <td class="team-schedule__time">14:00</td>
                                                     <td class="team-schedule__venue">8. Kolo Premijer Lige BiH</td>
@@ -908,6 +910,7 @@
                                                                     <h6 class="team-meta__name"><a href="#">ŽOK Smeč Živinice - Žok Smeč Lukavac</a></h6>
                                                                 </div>
                                                             </div>
+                                                        </div>
                                                     </td>
                                                     <td class="team-schedule__time">14:00</td>
                                                     <td class="team-schedule__venue">8. Kolo Premijer Lige BiH</td>
@@ -921,6 +924,7 @@
                                                                     <h6 class="team-meta__name"><a href="#">ŽOK Smeč Živinice - Žok Smeč Lukavac</a></h6>
                                                                 </div>
                                                             </div>
+                                                        </div>
                                                     </td>
                                                     <td class="team-schedule__time">14:00</td>
                                                     <td class="team-schedule__venue">8. Kolo Premijer Lige BiH</td>
@@ -934,6 +938,7 @@
                                                                     <h6 class="team-meta__name"><a href="#">ŽOK Smeč Živinice - Žok Smeč Lukavac</a></h6>
                                                                 </div>
                                                             </div>
+                                                        </div>
                                                     </td>
                                                     <td class="team-schedule__time">14:00</td>
                                                     <td class="team-schedule__venue">8. Kolo Premijer Lige BiH</td>
@@ -947,6 +952,7 @@
                                                                     <h6 class="team-meta__name"><a href="#">ŽOK Smeč Živinice - Žok Smeč Lukavac</a></h6>
                                                                 </div>
                                                             </div>
+                                                        </div>
                                                     </td>
                                                     <td class="team-schedule__time">14:00</td>
                                                     <td class="team-schedule__venue">8. Kolo Premijer Lige BiH</td>
@@ -960,6 +966,7 @@
                                                                     <h6 class="team-meta__name"><a href="#">ŽOK Smeč Živinice - Žok Smeč Lukavac</a></h6>
                                                                 </div>
                                                             </div>
+                                                        </div>
                                                     </td>
                                                     <td class="team-schedule__time">14:00</td>
                                                     <td class="team-schedule__venue">8. Kolo Premijer Lige BiH</td>
@@ -973,6 +980,7 @@
                                                                     <h6 class="team-meta__name"><a href="#">ŽOK Smeč Živinice - Žok Smeč Lukavac</a></h6>
                                                                 </div>
                                                             </div>
+                                                        </div>
                                                     </td>
                                                     <td class="team-schedule__time">14:00</td>
                                                     <td class="team-schedule__venue">8. Kolo Premijer Lige BiH</td>
@@ -987,189 +995,6 @@
                                 </div>
                                 <!-- Tab: Vitrina / End -->
 
-
-                                <!-- Tab: Vijesti -->
-                                <div role="tabpanel" class="tab-pane fade neaktivno" id="tab-vijesti2">
-
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <img src="{{asset('assets/images/REKLAMA-752-100.png')}}" class="reklama-klubovi-igraci"/>
-                                        </div>
-                                    </div>
-
-
-                                    <!-- Posts List -->
-                                    <div class="posts posts--cards posts--cards-thumb-left post-list">
-
-                                        <div class="post-list__item">
-                                            <div class="posts__item vijest-col-col posts__item--card posts__item--category-1 card">
-                                                <figure class="vijesti__thumb">
-                                                    <a href="#"><img class="slika-vijest-tab" src="{{asset('assets/images/newspaper-laptop-hd-wallpaper_1920x1080.jpg')}}" alt=""></a>
-                                                </figure>
-                                                <div class="posts__inner">
-                                                    <div class="card__content osn-vijest-tab">
-                                                        <div class="posts__cat">
-                                                            <span class="label posts__cat-label">Premier Liga BiH</span>
-                                                        </div>
-                                                        <h6 class="posts__title"><a href="#">FK Sve Za Sport nanizao četiri ligaške pobjede za redom</a></h6>
-                                                        <time datetime="2016-08-23" class="posts__date">25. Oktobar, 2017.</time>
-                                                    </div>
-                                                    <footer class="posts__footer card__footer">
-                                                        <div class="post-author">
-                                                            <figure class="post-author__avatar">
-                                                                <img src="{{asset('assets/images/tarik.jpg')}}" alt="Post Author Avatar">
-                                                            </figure>
-                                                            <div class="post-author__info">
-                                                                <h4 class="post-author__name">Tarik Jašarević</h4>
-                                                            </div>
-                                                        </div>
-                                                        <ul class="post__meta vijesti_profili meta">
-                                                            <li class="meta__item meta__item--views">2369</li>
-                                                        </ul>
-                                                    </footer>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="post-list__item">
-                                            <div class="posts__item vijest-col-col posts__item--card posts__item--category-1 card">
-                                                <figure class="vijesti__thumb">
-                                                    <a href="#"><img class="slika-vijest-tab" src="{{asset('assets/images/newspaper-laptop-hd-wallpaper_1920x1080.jpg')}}" alt=""></a>
-                                                </figure>
-                                                <div class="posts__inner">
-                                                    <div class="card__content osn-vijest-tab">
-                                                        <div class="posts__cat">
-                                                            <span class="label posts__cat-label">Premier Liga BiH</span>
-                                                        </div>
-                                                        <h6 class="posts__title"><a href="#">FK Sve Za Sport nanizao četiri ligaške pobjede za redom</a></h6>
-                                                        <time datetime="2016-08-23" class="posts__date">25. Oktobar, 2017.</time>
-                                                    </div>
-                                                    <footer class="posts__footer card__footer">
-                                                        <div class="post-author">
-                                                            <figure class="post-author__avatar">
-                                                                <img src="{{asset('assets/images/tarik.jpg')}}" alt="Post Author Avatar">
-                                                            </figure>
-                                                            <div class="post-author__info">
-                                                                <h4 class="post-author__name">Tarik Jašarević</h4>
-                                                            </div>
-                                                        </div>
-                                                        <ul class="post__meta vijesti_profili meta">
-                                                            <li class="meta__item meta__item--views">2369</li>
-                                                        </ul>
-                                                    </footer>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="post-list__item">
-                                            <div class="posts__item vijest-col-col posts__item--card posts__item--category-1 card">
-                                                <figure class="vijesti__thumb">
-                                                    <a href="#"><img class="slika-vijest-tab" src="{{asset('assets/images/newspaper-laptop-hd-wallpaper_1920x1080.jpg')}}" alt=""></a>
-                                                </figure>
-                                                <div class="posts__inner">
-                                                    <div class="card__content osn-vijest-tab">
-                                                        <div class="posts__cat">
-                                                            <span class="label posts__cat-label">Premier Liga BiH</span>
-                                                        </div>
-                                                        <h6 class="posts__title"><a href="#">FK Sve Za Sport nanizao četiri ligaške pobjede za redom</a></h6>
-                                                        <time datetime="2016-08-23" class="posts__date">25. Oktobar, 2017.</time>
-                                                    </div>
-                                                    <footer class="posts__footer card__footer">
-                                                        <div class="post-author">
-                                                            <figure class="post-author__avatar">
-                                                                <img src="{{asset('assets/images/tarik.jpg')}}" alt="Post Author Avatar">
-                                                            </figure>
-                                                            <div class="post-author__info">
-                                                                <h4 class="post-author__name">Tarik Jašarević</h4>
-                                                            </div>
-                                                        </div>
-                                                        <ul class="post__meta vijesti_profili meta">
-                                                            <li class="meta__item meta__item--views">2369</li>
-                                                        </ul>
-                                                    </footer>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="post-list__item">
-                                            <div class="posts__item vijest-col-col posts__item--card posts__item--category-1 card">
-                                                <figure class="vijesti__thumb">
-                                                    <a href="#"><img class="slika-vijest-tab" src="{{asset('assets/images/newspaper-laptop-hd-wallpaper_1920x1080.jpg')}}" alt=""></a>
-                                                </figure>
-                                                <div class="posts__inner">
-                                                    <div class="card__content osn-vijest-tab">
-                                                        <div class="posts__cat">
-                                                            <span class="label posts__cat-label">Premier Liga BiH</span>
-                                                        </div>
-                                                        <h6 class="posts__title"><a href="#">FK Sve Za Sport nanizao četiri ligaške pobjede za redom</a></h6>
-                                                        <time datetime="2016-08-23" class="posts__date">25. Oktobar, 2017.</time>
-                                                    </div>
-                                                    <footer class="posts__footer card__footer">
-                                                        <div class="post-author">
-                                                            <figure class="post-author__avatar">
-                                                                <img src="{{asset('assets/images/tarik.jpg')}}" alt="Post Author Avatar">
-                                                            </figure>
-                                                            <div class="post-author__info">
-                                                                <h4 class="post-author__name">Tarik Jašarević</h4>
-                                                            </div>
-                                                        </div>
-                                                        <ul class="post__meta vijesti_profili meta">
-                                                            <li class="meta__item meta__item--views">2369</li>
-                                                        </ul>
-                                                    </footer>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="post-list__item">
-                                            <div class="posts__item vijest-col-col posts__item--card posts__item--category-1 card">
-                                                <figure class="vijesti__thumb">
-                                                    <a href="#"><img class="slika-vijest-tab" src="{{asset('assets/images/newspaper-laptop-hd-wallpaper_1920x1080.jpg')}}" alt=""></a>
-                                                </figure>
-                                                <div class="posts__inner">
-                                                    <div class="card__content osn-vijest-tab">
-                                                        <div class="posts__cat">
-                                                            <span class="label posts__cat-label">Premier Liga BiH</span>
-                                                        </div>
-                                                        <h6 class="posts__title"><a href="#">FK Sve Za Sport nanizao četiri ligaške pobjede za redom</a></h6>
-                                                        <time datetime="2016-08-23" class="posts__date">25. Oktobar, 2017.</time>
-                                                    </div>
-                                                    <footer class="posts__footer card__footer">
-                                                        <div class="post-author">
-                                                            <figure class="post-author__avatar">
-                                                                <img src="{{asset('assets/images/tarik.jpg')}}" alt="Post Author Avatar">
-                                                            </figure>
-                                                            <div class="post-author__info">
-                                                                <h4 class="post-author__name">Tarik Jašarević</h4>
-                                                            </div>
-                                                        </div>
-                                                        <ul class="post__meta vijesti_profili meta">
-                                                            <li class="meta__item meta__item--views">2369</li>
-                                                        </ul>
-                                                    </footer>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-
-                                    </div>
-
-                                    <!-- Vijesti stranice -->
-                                    <nav class="post-pagination text-center">
-                                        <ul class="pagination pagination--condensed pagination--lg">
-                                            <li class="active"><a href="#">1</a></li>
-                                            <li><a href="#">2</a></li>
-                                            <li><a href="#">3</a></li>
-                                            <li><a href="#">4</a></li>
-                                        </ul>
-                                    </nav>
-                                    <!-- Vijesti stranice / End -->
-
-                                    <!-- Posts List / End -->
-                                </div>
-                                <!-- Tab: Vijesti / End -->
                                 <!-- Tab: Galerija -->
                                 <div role="tabpanel" class="tab-pane fade neaktivno" id="tab-galerija">
                                     <div class="row">
