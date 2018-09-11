@@ -16,22 +16,25 @@
 @php
     $className = isset($data) ? get_class($data) : 'none';
 @endphp
-@if(strcmp($className,"App/Club"))
+
+@if($className == "none")
+    @include('layouts.default-layout')
+@elseif($className == "App\Club")
     @include('layouts.club-layout',$data)
-@elseif(strcmp($className,"App/Event"))
-    @include('layouts.club-layout',$data)
-@elseif(strcmp($className,"App/Objects"))
-    @include('layouts.club-layout',$data)
-@elseif(strcmp($className,"App/Player"))
-    @include('layouts.club-layout',$data)
-@elseif(strcmp($className,"App/School"))
-    @include('layouts.club-layout',$data)
-@elseif(strcmp($className,"App/Sport"))
-    @include('layouts.club-layout',$data)
-@elseif(strcmp($className,"App/Staff"))
-    @include('layouts.club-layout',$data)
-@elseif(strcmp($className,"App/Vijesti"))
-    @include('layouts.club-layout',$data)
+@elseif($className == "App\Event")
+    @include('layouts.event-layout',$data)
+@elseif($className == "App\Objects")
+    @include('layouts.object-layout',$data)
+@elseif($className == "App\Player")
+    @include('layouts.player-layout',$data)
+@elseif($className == "App\School")
+    @include('layouts.school-layout',$data)
+@elseif($className == "App\Sport")
+    @include('layouts.sport-layout',$data)
+@elseif($className == "App\Staff")
+    @include('layouts.staff-layout',$data)
+@elseif($className == "App\Vijest")
+    @include('layouts.vijesti-layout',$data)
 @endif
 
 

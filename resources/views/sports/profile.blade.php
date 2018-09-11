@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app',array('data' => $sport))
 
 @section('content')
 

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app',array('data' => $novost))
 
 @section('content')
     <div class="site-wrapper clearfix">

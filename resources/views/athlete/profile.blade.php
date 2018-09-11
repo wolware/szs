@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app',array('data' => $player))
 
 @section('content')
 
