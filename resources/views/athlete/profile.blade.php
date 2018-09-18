@@ -335,10 +335,11 @@
                                                         <a href="{{url('/profile/'.$player->user->id)}}"><h5
                                                                     class="team-leader__player-name autor-slika">{{ $player->user->name }}</h5>
                                                         </a>
+                                                        @if(Auth::check() && Auth::user()->id != $player->user->id)
+                                                            <a href="{{url('/messages/create?user='.$player->user->id.'&email='.$player->user->email)}}"><i class="fa fa-envelope"></i> Pošalji poruku</a>
+                                                        @endif
                                                         <span class="team-leader__player-position"><i
                                                                     class="fa fa-tag"></i> {{$player->user->id}}</span>
-                                                        <a href="{{url('/profile/'.$player->user->id)}}"><i
-                                                                    class="fa fa-eye"></i> Pregled profila</a>
                                                     </div>
                                                 </div>
                                             </td>

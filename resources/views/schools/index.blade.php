@@ -31,18 +31,18 @@
             <div class="container">
                 <form role="form" method="GET" class="post-filter__form clearfix forma-filteri">
                     <div class="post-filter__select">
-                        <label class="post-filter__label" for="category">Tip kluba</label>
+                        <label class="post-filter__label" for="category">Tip škole</label>
                         <select id="category" name="category">
-                            <option selected value="">Izaberite tip kluba</option>
+                            <option selected value="">Izaberite tip škole</option>
                             @foreach($clubCategories as $category)
                                 <option value="{{ $category->id }}" {{ app('request')->input('category') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="post-filter__select">
-                        <label class="post-filter__label" for="sport_type">Tip sporta</label>
+                        <label class="post-filter__label" for="sport_type">Tip škole</label>
                         <select id="sport_type" name="sport_type">
-                            <option value="" {{ app('request')->input('sport_type') == '' ? 'selected' : '' }}>Izaberite tip kluba</option>
+                            <option value="" {{ app('request')->input('sport_type') == '' ? 'selected' : '' }}>Izaberite tip škole</option>
                             <option value="1" {{ app('request')->input('sport_type') == '1' ? 'selected' : '' }}>Sportski klub</option>
                             <option value="2" {{ app('request')->input('sport_type') == '2' ? 'selected' : '' }}>Invalidski sportski klub</option>
                         </select>

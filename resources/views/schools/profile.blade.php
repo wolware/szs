@@ -366,7 +366,10 @@
                                                     </figure>
                                                     <div class="team-leader__player-inner">
                                                         <a href="{{url('/profile/'.$school->user->id)}}"> <h5 class="team-leader__player-name autor-slika">{{$school->user->name}}</h5></a>
-                                                        <span class="team-leader__player-position"><i class="fa fa-tag"></i> {{$school->user->id}}</span>
+                                                        @if(Auth::check() && Auth::user()->id != $school->user->id)
+                                                            <a href="{{url('/messages/create?user='.$school->user->id.'&email='.$school->user->email)}}"><i
+                                                                        class="fa fa-envelope"></i> Pošalji poruku</a>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </td>

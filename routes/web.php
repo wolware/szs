@@ -2,9 +2,9 @@
 
 
 Route::get('/', 'HomeController@index');
+Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/contact', 'HomeController@contact');
 Route::post('/contact', 'HomeController@contactPost');
-
 
 // Socialite loign
 Route::get('login/facebook', 'Auth\LoginController@redirectToProvider');
@@ -20,7 +20,7 @@ Route::get('/clubs/{id}', 'ClubController@club_show')->where('id', '[0-9]+');
 Route::get('/schools', 'SchoolController@index_show');
 Route::get('/staff', 'StaffController@index_show');
 Route::get('/athletes', 'PlayerController@searchPlayers');
-Route::get('/athletes/{id}', 'PlayerController@showPlayer')->where('id','[0-9]+');
+Route::get('/athletes/{id}', 'PlayerController@showPlayer')->where('id', '[0-9]+');
 Route::get('/staff/{id}', 'StaffController@showStaff')->where('id', '[0-9]+');
 Route::get('/schools/{id}', 'SchoolController@showSchool')->where('id', '[0-9]+');
 Route::get('/objects/{id}', 'ObjectController@showObject')->where('id', '[0-9]+');
@@ -36,32 +36,24 @@ Route::get('/sports/{id}', 'SportController@displaySport')->where('id', '[0-9]+'
 // Dodaje protekciju na rute samo za logovane korisnike
 Route::middleware('auth')->group(function () {
 
-    Route::group(['prefix' => '/messages'], function () {
-        Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
-        Route::get('/create', ['as' => 'messages.create', 'uses' => 'MessagesController@create']);
-        Route::post('/', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
-        Route::get('{id}', ['as' => 'messages.show', 'uses' => 'MessagesController@show']);
-        Route::put('{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
-    });
-
-    Route::get('/autocomplete-users','UserController@getAllUsers');
+    Route::get('/autocomplete-users', 'UserController@getAllUsers');
 
     // PROFILE
     Route::get('/me/profile', 'ProfileController@profile_me');
     Route::get('/me/profiles', 'ProfileController@profile_profiles');
 
-    Route::get('/me/saved', function(){
+    Route::get('/me/saved', function () {
         return view('profile.saved');
     });
-    Route::get('/me/medals', function(){
+    Route::get('/me/medals', function () {
         return view('profile.medals');
     });
     Route::get('/me/news', 'ProfileController@profile_news');
 
-    Route::get('/me/grades', function(){
+    Route::get('/me/grades', function () {
         return view('profile.grades');
     });
-    Route::get('/me/transactions', function(){
+    Route::get('/me/transactions', function () {
         return view('profile.transactions');
     });
     Route::get('/me/settings', 'UserController@settings_index');
@@ -70,9 +62,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/{id}', 'ProfileController@profile_guests');
 
     // PROFILE CREATE
-    Route::get('/profile/new', function(){
-        return view('profile.new');
-    });
+    Route::get('/profile/new', 'HomeController@newProfile');
 
     Route::get('/me/notifications', 'UserController@displayNotifications');
 
@@ -158,11 +148,14 @@ Route::middleware('auth')->group(function () {
     Route::patch('/events/{id}/edit/general', 'EventController@editEventGeneral')->where('id', '[0-9]+');
     Route::patch('/events/{id}/edit/info', 'EventController@editEventInfo')->where('id', '[0-9]+');
 
+    Route::group(['prefix' => '/messages'], function () {
+        Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
+        Route::get('/create', ['as' => 'messages.create', 'uses' => 'MessagesController@create']);
+        Route::post('/', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
+        Route::get('{id}', ['as' => 'messages.show', 'uses' => 'MessagesController@show']);
+        Route::put('{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
+    });
+
     //LOGOUT
     Route::get('user/logout', 'Auth\LoginController@logout');
 });
-
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

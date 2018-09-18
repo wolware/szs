@@ -33,6 +33,10 @@ class HomeController extends Controller
         $this->staffRepository = $staffRepository;
     }
 
+    public function newProfile(){
+        return view('profile.new');
+    }
+
     /**
      * Show the application dashboard.
      *

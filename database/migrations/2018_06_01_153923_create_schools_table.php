@@ -45,6 +45,7 @@ class CreateSchoolsTable extends Migration
             $table->unsignedInteger('region_id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('number_of_views')->default(0);
+            $table->enum('school_type', ['disabled', 'normal'])->default('normal');
 
             $table->foreign('club_category_id')
                 ->references('id')

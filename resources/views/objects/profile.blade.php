@@ -300,8 +300,10 @@
                                                     </figure>
                                                     <div class="team-leader__player-inner">
                                                         <a href="{{url('/profile/'.$object->user->id)}}"><h5 class="team-leader__player-name autor-slika">{{ $object->user->name }}</h5></a>
-                                                        <span class="team-leader__player-position"><i class="fa fa-tag"></i> {{$object->user->id}}</span>
-                                                        <a href="{{url('/profile/'.$object->user->id)}}"><i class="fa fa-eye"></i> Pregled profila</a>
+                                                        @if(Auth::check() && Auth::user()->id != $object->user->id)
+                                                            <a href="{{url('/messages/create?user='.$object->user->id.'&email='.$object->user->email)}}"><i
+                                                                        class="fa fa-envelope"></i> Pošalji poruku</a>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </td>

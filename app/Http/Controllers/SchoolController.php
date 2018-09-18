@@ -86,9 +86,14 @@ class SchoolController extends Controller
             }
         }
 
-        $query = School::query();
+        $query = School::query()->where('status','active');
         if(Input::filled('category')){
             $query->where('club_category_id', Input::get('category'));
+        }
+
+        if(Input::filled('sport_type')) {
+            $type = Input::get('sport_type') == '1' ? 'normal' : 'disabled';
+            $query->where('school_type', $type);
         }
 
         if(Input::filled('sport')){

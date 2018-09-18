@@ -78,6 +78,23 @@
 
 </head>
 <body>
+<!-- Facebook script for Sharing -->
+<div id="fb-root"></div>
+<script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- Place this tag in your head or just before your close body tag. -->
+<script src="https://apis.google.com/js/platform.js" async defer>
+    {lang: 'hr'}
+</script>
+
 <div class="site-wrapper clearfix">
     <div class="site-overlay"></div>
     <!-- Header
@@ -400,7 +417,7 @@
     );
 </script>
 <script src="{{ asset('js/init.js') }}"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAO6kDxfB19QkynnAGz5nlmX6Kbrb_pAsQ&libraries=places&region=BA&language=hr"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmi40ZDQOH7C-IoehR0_DSk0QrMdXrPi4&libraries=places&region=BA&language=hr"></script>
 <script>
     Element.prototype.remove = function () {
         this.parentElement.removeChild(this);

@@ -63,7 +63,8 @@
                                 <!-- Message Form Input -->
                                 <div class="form-group">
                                     <label for="poruka" class="control-label">Poruka</label>
-                                    <textarea name="message" id="poruka" class="form-control">{{ old('message') }}</textarea>
+                                    <textarea name="message" id="poruka"
+                                              class="form-control">{{ old('message') }}</textarea>
                                 </div>
 
                                 <div class="form-group">
@@ -72,17 +73,7 @@
                                 </div>
                                 <input name="recipients" id="recipient" type="hidden">
 
-                            {{--@if($users->count() > 0)
-                                    <div class="checkbox">
-                                        @foreach($users as $user)
-                                            <label title="{{ $user->name }}"><input type="checkbox" name="recipients[]"
-                                                                                    value="{{ $user->id }}">{!!$user->name!!}
-                                            </label>
-                                        @endforeach
-                                    </div>
-                            @endif--}}
-
-                            <!-- Submit Form Input -->
+                                <!-- Submit Form Input -->
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary form-control">Pošalji</button>
                                 </div>
@@ -95,5 +86,10 @@
     </div>
     <!-- Content / End -->
 
-
+    @if(Request::get('user') && is_numeric(Request::get('user')))
+    <script>
+        document.getElementById('recipient').value = '{{Request::get('user')}}';
+        document.getElementById('primalac').value = '{{Request::get('email')}}';
+    </script>
+    @endif
 @endsection

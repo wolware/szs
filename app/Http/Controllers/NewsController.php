@@ -81,6 +81,10 @@ class NewsController extends Controller
 
     public function displayNews($id) {
         $novost = Vijest::where('odobreno', 1)->where('izbrisano', 0)->with('tagovi', 'kategorija', 'user')->find($id);
+        $novosti = Vijest::where('odobreno',1)->with('kategorija')->orderBy('id', 'desc')->take(5)->get();
+        $preporuceneNovosti = Vijest::where('odobreno',1)->with(['kategorija' => function ($query) use ($novost) {
+            $query->where('naziv','=',$novost->kategorija->naziv);
+        }])->take(2)->get();
 
         if(!$novost) {
             abort(404);
@@ -91,6 +95,6 @@ class NewsController extends Controller
             $novost->save();
         }
 
-        return view('news.display_news', compact('novost'));
+        return view('news.display_news', compact('novost','novosti','preporuceneNovosti'));
     }
 }

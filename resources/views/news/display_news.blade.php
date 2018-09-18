@@ -64,16 +64,31 @@
 
                     <!-- Post Sharing Buttons -->
                     <div class="post-sharing">
-                        <a href="#" class="btn btn-default btn-facebook btn-icon btn-block"><i
-                                    class="fa fa-facebook"></i> <span class="post-sharing__label hidden-xs">Podijeli na Facebook</span></a>
+                        <div class="fb-share-button"
+                             data-href="{{Request::url()}}"
+                             data-layout="button_count">
+                        </div>
+                        {{--
+                                                <a href="https://www.facebook.com/sharer/sharer.php?u=" class="btn btn-default btn-facebook btn-icon btn-block fb-share-button"
+                                                   data-layout="button_count"
+                                                   data-href="{{Request::url()}}"><i
+                                                            class="fa fa-facebook"></i> <span class="post-sharing__label hidden-xs">Podijeli na Facebook</span></a>--}}
                         <a href="#" class="btn btn-default btn-twitter btn-icon btn-block"><i class="fa fa-twitter"></i>
                             <span class="post-sharing__label hidden-xs">Podijeli na Twitter</span></a>
-                        <a href="#" class="btn btn-default btn-gplus btn-icon btn-block"><i
+                       {{-- <a href="#" class="btn btn-default btn-gplus btn-icon btn-block"><i
                                     class="fa fa-google-plus"></i> <span class="post-sharing__label hidden-xs">Podijeli na Google+</span></a>
+                 --}}
+                        <div class="g-plus" data-action="share" data-annotation="bubble" data-height="24"></div>
                     </div>
                     <!-- Post Sharing Buttons / End -->
 
+{{--<!-- Place this tag in your head or just before your close body tag. -->
+<script src="https://apis.google.com/js/platform.js" async defer>
+  {lang: 'hr'}
+</script>
 
+<!-- Place this tag where you want the share button to render. -->
+<div class="g-plus" data-action="share" data-annotation="bubble" data-height="24"></div>--}}
                     <!-- Post Author -->
                     <div class="post-author card card--lg">
                         <div class="card__content">
@@ -88,19 +103,11 @@
 
                                 </figure>
                                 <div class="post-author__info">
-                                    <h4 class="post-author__name">{{ $novost->user->name }}</h4>
-                                    <span class="post-author__slogan"> </span>
+                                    <h4 class="post-author__name"><a href="{{url('profile/'.$novost->user->id)}}"> {{ $novost->user->name }} </a></h4>
+                                    @if(Auth::check() && Auth::user()->id != $novost->user->id)
+                                    <a href="{{url('/messages/create?user='.$novost->user->id.'&email='.$novost->user->email)}}"><i class="fa fa-envelope"></i> Pošalji poruku</a>
+                                    @endif
                                 </div>
-                                <ul class="post-author__social-links social-links social-links--btn">
-                                    <li class="social-links__item">
-                                        <a href="#" class="social-links__link social-links__link--fb"><i
-                                                    class="fa fa-facebook"></i></a>
-                                    </li>
-                                    <li class="social-links__item">
-                                        <a href="#" class="social-links__link social-links__link--twitter"><i
-                                                    class="fa fa-twitter"></i></a>
-                                    </li>
-                                </ul>
                             </header>
                         </div>
                     </div>
@@ -109,35 +116,39 @@
 
                     <!-- Related Posts -->
                     <div class="post-related row">
-                        <div class="col-xs-6">
-                            <!-- Prev Post -->
-                            <div class="card post-related__prev">
-                                <div class="card__content">
+                        @if(isset($preporuceneNovosti) && $preporuceneNovosti!= null)
+                            @foreach($preporuceneNovosti as $item)
+                                <div class="col-xs-6">
+                                    <!-- Prev Post -->
+                                    <div class="card post-related__prev">
+                                        <div class="card__content">
 
-                                    <!-- Prev Post Links -->
-                                    <a href="#" class="btn-nav">
-                                        <i class="fa fa-chevron-left"></i>
-                                    </a>
-                                    <!-- Prev Post Links / End -->
-
-                                    <ul class="posts posts--simple-list">
-                                        <li class="posts__item posts__item--category-1">
-                                            <div class="posts__inner">
-                                                <div class="posts__cat">
-                                                    <span class="label posts__cat-label">Injuries</span>
-                                                </div>
-                                                <h6 class="posts__title"><a href="#">The new eco friendly stadium won a
-                                                        Leafy Award in 2016</a></h6>
-                                                <time datetime="2016-08-23" class="posts__date">23. Avgust, 2018.</time>
-                                            </div>
-                                        </li>
-                                    </ul>
-
+                                            <!-- Prev Post Links -->
+                                            <a href="{{url('/news/'.$item->id)}}" class="btn-nav">
+                                                <i class="fa fa-newspaper-o"></i>
+                                            </a>
+                                            <!-- Prev Post Links / End -->
+                                            <ul class="posts posts--simple-list">
+                                                <li class="posts__item posts__item--category-1">
+                                                    <div class="posts__inner">
+                                                        <div class="posts__cat">
+                                                            <span class="label posts__cat-label">{{$item->kategorija->naziv}}</span>
+                                                        </div>
+                                                        <h6 class="posts__title"><a
+                                                                    href="{{url('/news/'.$item->id)}}">{{$item->naslov}}</a>
+                                                        </h6>
+                                                        <time datetime="{{$item->created_at}}"
+                                                              class="posts__date">{{ Carbon\Carbon::parse($item->created_at)->format('d. F, Y.') }}</time>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- Prev Post / End -->
                                 </div>
-                            </div>
-                            <!-- Prev Post / End -->
-                        </div>
-                        <div class="col-xs-6">
+                            @endforeach
+                        @endif
+                        {{--<div class="col-xs-6">
                             <div class="card post-related__next">
                                 <!-- Next Post -->
                                 <div class="card__content">
@@ -157,14 +168,14 @@
 
                                     <!-- Next Post Link -->
                                     <a href="#" class="btn-nav">
-                                        <i class="fa fa-chevron-right"></i>
+                                        <i class="fa fa-newspaper-o"></i>
                                     </a>
                                     <!-- Next Post Link / End -->
 
                                 </div>
                                 <!-- Next Post / End -->
                             </div>
-                        </div>
+                        </div>--}}
                     </div>
                     <!-- Related Posts / End -->
 
@@ -203,62 +214,27 @@
                     <!-- Widget: Trending News -->
                     <aside class="widget widget--sidebar card widget-tabbed">
                         <div class="widget__title card__header">
-                            <h4>TOP 8 vijesti ove sedmice</h4>
+                            <h4>Zadnjih 5 vijesti ove sedmice</h4>
                         </div>
                         <div class="widget__content card__content">
                             <ul class="posts posts--simple-list">
-                                <li class="posts__item posts__item--category-1">
-                                    <div class="posts__inner">
-                                        <div class="posts__cat">
-                                            <span class="label posts__cat-label">Kategorija vijesti</span>
-                                        </div>
-                                        <h6 class="posts__title"><a href="#">Jake Dribbler Announced that he is retiring
-                                                next mnonth</a></h6>
-                                        <time datetime="2016-08-23" class="posts__date">23. Avgust, 2018.</time>
-                                    </div>
-                                </li>
-                                <li class="posts__item posts__item--category-1">
-                                    <div class="posts__inner">
-                                        <div class="posts__cat">
-                                            <span class="label posts__cat-label">Kategorija vijesti</span>
-                                        </div>
-                                        <h6 class="posts__title"><a href="#">Jake Dribbler Announced that he is retiring
-                                                next mnonth</a></h6>
-                                        <time datetime="2016-08-23" class="posts__date">23. Avgust, 2018.</time>
-                                    </div>
-                                </li>
-                                <li class="posts__item posts__item--category-1">
-                                    <div class="posts__inner">
-                                        <div class="posts__cat">
-                                            <span class="label posts__cat-label">Kategorija vijesti</span>
-                                        </div>
-                                        <h6 class="posts__title"><a href="#">Jake Dribbler Announced that he is retiring
-                                                next mnonth</a></h6>
-                                        <time datetime="2016-08-23" class="posts__date">23. Avgust, 2018.</time>
-                                    </div>
-                                </li>
-                                <li class="posts__item posts__item--category-1">
-                                    <div class="posts__inner">
-                                        <div class="posts__cat">
-                                            <span class="label posts__cat-label">Kategorija vijesti</span>
-                                        </div>
-                                        <h6 class="posts__title"><a href="#">Jake Dribbler Announced that he is retiring
-                                                next mnonth</a></h6>
-                                        <time datetime="2016-08-23" class="posts__date">23. Avgust, 2018.</time>
-                                    </div>
-                                </li>
-                                <li class="posts__item posts__item--category-1">
-                                    <div class="posts__inner">
-                                        <div class="posts__cat">
-                                            <span class="label posts__cat-label">Kategorija vijesti</span>
-                                        </div>
-                                        <h6 class="posts__title"><a href="#">Jake Dribbler Announced that he is retiring
-                                                next mnonth</a></h6>
-                                        <time datetime="2016-08-23" class="posts__date">23. Avgust, 2018.</time>
-                                    </div>
-                                </li>
+                                @if(isset($novosti) && $novosti!= null)
+                                    @foreach($novosti as $item)
+                                        <li class="posts__item posts__item--category-1">
+                                            <div class="posts__inner">
+                                                <div class="posts__cat">
+                                                    <span class="label posts__cat-label">Kategorija {{$item->kategorija->naziv}}</span>
+                                                </div>
+                                                <h6 class="posts__title"><a
+                                                            href="{{url('/news/'.$item->id)}}">{{$item->naslov}}</a>
+                                                </h6>
+                                                <time datetime="{{$item->created_at}}"
+                                                      class="posts__date">{{ \Carbon\Carbon::parse($item->created_at)->format("d F, Y") }}</time>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                @endif
                             </ul>
-
                         </div>
                     </aside>
                     <!-- Widget: Trending News / End -->
@@ -285,13 +261,6 @@
                 </aside>--}}
                 <!-- Widget: Newsletter / End -->
 
-                    <!-- Widget: Marketing sidebar -->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <img src="{{url('images/reklama-sidebar.png')}}" class="reklama-klubovi-sidebar"/>
-                        </div>
-                    </div>
-                    <!-- Widget: Marketing sidebar / End -->
                     <!-- Widget: Marketing sidebar -->
                     <div class="row">
                         <div class="col-md-12">

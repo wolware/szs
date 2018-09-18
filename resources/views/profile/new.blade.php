@@ -15,7 +15,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-10 col-md-offset-1">
-            <h1 class="page-icon-objavi-title"><img src="{{asset('images/icons/add-new-main.png')}}"></img></h1>
+            <h1 class="page-icon-objavi-title"><img src="{{asset('images/icons/add-new-main.png')}}"></h1>
             <h1 class="page-heading__title">Objavi novi profil</h1>
             <ol class="page-heading__breadcrumb breadcrumb">
               <li class="registracija-podnaslov">Izaberi kategoriju profila</li>
