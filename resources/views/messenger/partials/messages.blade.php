@@ -4,11 +4,12 @@
              alt="{{ $message->user->name }}" class="img-circle img-responsive">
     </a>
     <div class="media-body">
-        <h5 class="media-heading">{{ $message->user->name }}</h5>
+       {{-- <h5 class="media-heading">--}}{{--{{ $message->user->name }}--}}{{--</h5>--}}
         <p>{{ $message->body }}</p>
         <div class="text-muted">
             {{--<small>Posted {{ $message->created_at->diffForHumans() }}</small>--}}
-            <small>Posted {{ $message->created_at }}</small>
+            <small>Poslano {{ $message->created_at }}</small>
         </div>
+        <hr>
     </div>
 </div>

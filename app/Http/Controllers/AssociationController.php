@@ -7,6 +7,7 @@ use App\Repositories\AssociationRepository;
 use App\Repositories\ClubRepository;
 use App\Repositories\SportRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
 class AssociationController extends Controller
@@ -55,6 +56,8 @@ class AssociationController extends Controller
         $association = Association::with(['clubs', 'region', 'sport'])
             ->where('id', $id)
             ->first();
+
+        DB::update('update associations set number_of_views = ? where id= ?',[$association->number_of_views+1,$association->id]);
 
 
         if($association) {

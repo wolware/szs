@@ -91,7 +91,7 @@
 
                         <!-- Osnovne informacije kraj -->
 
-                        <a href="{{url('/profile/new')}}" class="objavi-profil1 btn-social-counter" target="_blank">
+                        <a href="{{url('/new/profile')}}" class="objavi-profil1 btn-social-counter" target="_blank">
                             <div class="btn-social-counter__icon">
                                 <i class="fa fa-plus"></i>
                             </div>

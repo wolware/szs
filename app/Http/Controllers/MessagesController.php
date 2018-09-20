@@ -44,7 +44,7 @@ class MessagesController extends Controller
         try {
             $thread = Thread::findOrFail($id);
         } catch (ModelNotFoundException $e) {
-            Session::flash('error_message', 'The thread with ID: ' . $id . ' was not found.');
+            Session::flash('error_message', 'Konverzacija nije pronađena.');
             return redirect()->route('messages');
         }
         // show current user in list if not a current participant
@@ -56,7 +56,8 @@ class MessagesController extends Controller
 
         $users = User::whereNotIn('id', $thread->participantsUserIds($userId))->get();
         $thread->markAsRead($userId);
-        return view('messenger.show', compact('thread', 'users'));
+        $participants = explode(",",$thread->participantsString());
+        return view('messenger.show', compact('thread', 'users', 'participants'));
     }
 
     /**

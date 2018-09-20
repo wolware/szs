@@ -43,8 +43,13 @@
                 <!-- Inbox list -->
                     <div class="post-comments card card--lg messages-start-col">
                         <div class="post-comments__content card__content">
-
+                            @php
+                            $firstParticipant = array_key_exists(0, $participants) ? $participants[0] : ' ';
+                            $secondParticipant = array_key_exists(1, $participants) ? $participants[1] : ' ';
+                            @endphp
+                        <h4 class="text-center">Konverzacija između {{$firstParticipant.' i '. $secondParticipant}}</h4>
                             <ul class="comments">
+
                                 @each('messenger.partials.messages', $thread->messages, 'message')
                             </ul>
                         </div>

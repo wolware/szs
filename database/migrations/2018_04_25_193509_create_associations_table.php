@@ -18,6 +18,7 @@ class CreateAssociationsTable extends Migration
 
             $table->string('name')->unique();
             $table->unsignedInteger('region_id');
+            $table->unsignedInteger('number_of_views')->default(0);
 
             $table->foreign('region_id')->references('id')
                 ->on('regions');

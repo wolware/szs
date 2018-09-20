@@ -124,7 +124,7 @@
                     @if(isset(Auth::user()->name))
                         <li class="nav-account__item"><a href="{{url('user/logout')}}"><i class="fa fa-sign-out"></i>
                                 Odjava</a></li>
-                        <li class="nav-account__item"><a href="{{url('profile/new')}}"><i class="fa fa-plus-circle"></i>
+                        <li class="nav-account__item"><a href="{{url('new/profile')}}"><i class="fa fa-plus-circle"></i>
                                 Objavi</a></li>
                         <li class="nav-account__item"><a href="{{url('/messages')}}"><i class="fa fa-envelope"></i>
                                 Poruke</a></li>

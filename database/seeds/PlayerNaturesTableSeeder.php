@@ -16,7 +16,8 @@ class PlayerNaturesTableSeeder extends Seeder
             ['name' => 'Profesionalni sportista'],
             ['name' => 'Sportista amater'],
             ['name' => 'Sportista rekreativac'],
-            ['name' => 'Vrhunski sportista']
+            ['name' => 'Vrhunski sportista'],
+            ['name' => 'Maloljetni sportista']
         ];
 
         PlayerNature::insert($playerNatures);

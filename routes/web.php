@@ -62,7 +62,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/{id}', 'ProfileController@profile_guests');
 
     // PROFILE CREATE
-    Route::get('/profile/new', 'HomeController@newProfile');
+    Route::get('/new/profile', 'HomeController@newProfile');
 
     Route::get('/me/notifications', 'UserController@displayNotifications');
 
