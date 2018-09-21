@@ -21,6 +21,13 @@ class SportController extends Controller
         return view('sports.sports-list', compact('sports'));
     }
 
+    public function displayDisabilitySports()
+    {
+        $sports = $this->sportRepository->getAllSportWithDisabilities();
+       //dd($sports);
+        return view('sports.sports-list-disability', compact('sports'));
+    }
+
     public function displaySport($id)
     {
         $sport = $this->sportRepository->getByIdWithAllDetails($id);

@@ -35,6 +35,13 @@ class SportRepository {
             ->get();
     }
 
+    public function getAllSportWithDisabilities(){
+        return $this->model
+            ->where('with_disabilities', true)
+            ->orderBy('name', 'asc')
+            ->get();
+    }
+
     public function getById($id) {
         return $this->model
             ->where('id', $id)

@@ -309,7 +309,7 @@
                                         </header>
 
                                         <div class="post__content">
-                                            {{$sport->about_sport}}
+                                            {!!$sport->about_sport!!}
                                         </div>
                                     </article>
                                     <!-- Article / End -->

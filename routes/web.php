@@ -31,6 +31,7 @@ Route::get('/events', 'EventController@getEvents');
 Route::get('/getEventsByDate', 'EventController@getEventsByDate');
 Route::get('/events/{id}', 'EventController@showEvent')->where('id', '[0-9]+');
 Route::get('/sports', 'SportController@displaySports');
+Route::get('/sports-disability', 'SportController@displayDisabilitySports');
 Route::get('/sports/{id}', 'SportController@displaySport')->where('id', '[0-9]+');
 
 // Dodaje protekciju na rute samo za logovane korisnike
