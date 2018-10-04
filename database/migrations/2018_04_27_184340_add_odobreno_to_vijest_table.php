@@ -14,6 +14,7 @@ class AddOdobrenoToVijestTable extends Migration
     public function up()
     {
         Schema::table('vijest', function(Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->boolean('odobreno')->default(0);
         });
     }

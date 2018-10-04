@@ -14,6 +14,7 @@ class CreateSportsEventsTable extends Migration
     public function up()
     {
         Schema::create('sports_events', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('date_of_event');
             $table->string('name_of_event');

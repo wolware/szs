@@ -14,6 +14,7 @@ class AddHomeFieldToClubs extends Migration
     public function up()
     {
         Schema::table('clubs', function(Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->string('home_field')->nullable();
         });
     }

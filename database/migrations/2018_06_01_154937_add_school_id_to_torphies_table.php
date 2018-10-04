@@ -14,6 +14,7 @@ class AddSchoolIdToTorphiesTable extends Migration
     public function up()
     {
         Schema::table('trophies', function (Blueprint $table){
+            $table->engine = 'InnoDB';
             $table->unsignedInteger('school_id')->nullable();
 
             $table->foreign('school_id')

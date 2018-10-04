@@ -14,6 +14,7 @@ class AddPlayerIdToGaleriesTable extends Migration
     public function up()
     {
         Schema::table('galeries', function (Blueprint $table){
+            $table->engine = 'InnoDB';
             $table->unsignedInteger('player_id')->nullable();
 
             $table->foreign('player_id')

@@ -14,6 +14,7 @@ class DropCurrentClubAndCompetitionFromPlayersTable extends Migration
     public function up()
     {
         Schema::table('players', function (Blueprint $table){
+            $table->engine = 'InnoDB';
             $table->dropColumn('current_club');
             $table->dropColumn('competition');
         });

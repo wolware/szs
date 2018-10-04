@@ -14,6 +14,7 @@ class CreateSportsTrophiesTable extends Migration
     public function up()
     {
         Schema::create('sports_trophies', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('date');
             $table->string('name');

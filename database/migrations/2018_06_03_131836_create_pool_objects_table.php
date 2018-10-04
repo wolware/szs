@@ -14,6 +14,7 @@ class CreatePoolObjectsTable extends Migration
     public function up()
     {
         Schema::create('pool_objects', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->unsignedInteger('id');
 
             $table->integer('number_of_pools')->nullable();

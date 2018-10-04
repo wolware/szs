@@ -14,6 +14,7 @@ class CreateSportsPeopleTable extends Migration
     public function up()
     {
         Schema::create('sports_people', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('fName');
             $table->string('lName');

@@ -14,6 +14,7 @@ class ChangeAssociationsTable extends Migration
     public function up()
     {
         Schema::table('associations', function (Blueprint $table){
+            $table->engine = 'InnoDB';
            $table->date('established_in')->nullable();
            $table->mediumText('description')->nullable();
            $table->string('image');

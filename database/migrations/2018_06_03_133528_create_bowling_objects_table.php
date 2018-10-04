@@ -14,6 +14,7 @@ class CreateBowlingObjectsTable extends Migration
     public function up()
     {
         Schema::create('bowling_objects', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->unsignedInteger('id');
 
             $table->integer('number_of_tracks')->nullable();

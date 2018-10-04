@@ -15,6 +15,7 @@ class AddSoftDeletesToMessagesTable extends Migration
     public function up()
     {
         Schema::table(Models::table('messages'), function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->softDeletes();
         });
     }

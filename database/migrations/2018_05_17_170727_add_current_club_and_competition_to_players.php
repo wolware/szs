@@ -14,6 +14,7 @@ class AddCurrentClubAndCompetitionToPlayers extends Migration
     public function up()
     {
         Schema::table('players', function (Blueprint $table){
+            $table->engine = 'InnoDB';
            $table->string('current_club')->nullable();
            $table->string('competition')->nullable();
         });

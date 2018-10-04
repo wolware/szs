@@ -14,6 +14,7 @@ class CreateSkiingPricesTable extends Migration
     public function up()
     {
         Schema::create('skiing_prices', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
 
             $table->string('description');

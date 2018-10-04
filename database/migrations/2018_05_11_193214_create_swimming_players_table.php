@@ -14,6 +14,7 @@ class CreateSwimmingPlayersTable extends Migration
     public function up()
     {
         Schema::create('swimming_players', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->unsignedInteger('id');
 
             $table->string('style')->nullable();

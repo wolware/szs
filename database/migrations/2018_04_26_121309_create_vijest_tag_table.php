@@ -14,6 +14,7 @@ class CreateVijestTagTable extends Migration
     public function up()
     {
         Schema::create('vijest_tag', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
 
             $table->unsignedInteger('vijest_id');

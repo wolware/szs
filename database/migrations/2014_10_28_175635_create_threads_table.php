@@ -15,6 +15,7 @@ class CreateThreadsTable extends Migration
     public function up()
     {
         Schema::create(Models::table('threads'), function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('subject');
             $table->timestamps();

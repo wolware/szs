@@ -14,6 +14,7 @@ class AddRequestedClubToStaffTable extends Migration
     public function up()
     {
         Schema::table('staff', function (Blueprint $table){
+            $table->engine = 'InnoDB';
             $table->unsignedInteger('requested_club')->nullable();
 
             $table->foreign('requested_club')

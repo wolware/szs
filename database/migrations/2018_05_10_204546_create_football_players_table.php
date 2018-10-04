@@ -14,6 +14,7 @@ class CreateFootballPlayersTable extends Migration
     public function up()
     {
         Schema::create('football_players', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->unsignedInteger('id');
 
             $table->string('preferred_leg')->nullable();

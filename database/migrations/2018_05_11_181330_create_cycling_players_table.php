@@ -14,6 +14,7 @@ class CreateCyclingPlayersTable extends Migration
     public function up()
     {
         Schema::create('cycling_players', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->unsignedInteger('id');
 
             $table->string('category')->nullable();

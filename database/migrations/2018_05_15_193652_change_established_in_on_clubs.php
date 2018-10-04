@@ -14,6 +14,7 @@ class ChangeEstablishedInOnClubs extends Migration
     public function up()
     {
         Schema::table('clubs', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->integer('established_in')->nullable()->change();
         });
     }

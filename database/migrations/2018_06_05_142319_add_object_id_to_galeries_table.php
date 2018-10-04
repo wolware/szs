@@ -14,6 +14,7 @@ class AddObjectIdToGaleriesTable extends Migration
     public function up()
     {
         Schema::table('galeries', function (Blueprint $table){
+            $table->engine = 'InnoDB';
             $table->unsignedInteger('object_id')->nullable();
 
             $table->foreign('object_id')

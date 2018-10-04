@@ -14,6 +14,7 @@ class CreateStadiumObjectsTable extends Migration
     public function up()
     {
         Schema::create('stadium_objects', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->unsignedInteger('id');
 
             $table->string('type_of_grass')->nullable();

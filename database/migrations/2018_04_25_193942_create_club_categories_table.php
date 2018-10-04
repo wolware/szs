@@ -14,6 +14,7 @@ class CreateClubCategoriesTable extends Migration
     public function up()
     {
         Schema::create('club_categories', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
 
             $table->string('name');

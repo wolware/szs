@@ -14,6 +14,7 @@ class CreatePlayerTypesTable extends Migration
     public function up()
     {
         Schema::create('player_types', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
 
             $table->string('type');

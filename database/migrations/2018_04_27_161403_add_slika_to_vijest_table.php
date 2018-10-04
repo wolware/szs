@@ -14,6 +14,7 @@ class AddSlikaToVijestTable extends Migration
     public function up()
     {
         Schema::table('vijest', function(Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->string('slika', 1000)->nullable();
         });
     }

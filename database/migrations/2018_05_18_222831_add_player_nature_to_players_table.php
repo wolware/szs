@@ -14,6 +14,7 @@ class AddPlayerNatureToPlayersTable extends Migration
     public function up()
     {
         Schema::table('players', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
            $table->unsignedInteger('player_nature');
 
            $table->foreign('player_nature')

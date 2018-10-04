@@ -14,6 +14,7 @@ class AddImageToObjectTypesTable extends Migration
     public function up()
     {
         Schema::table('object_types', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->string('image')->nullable();
         });
     }

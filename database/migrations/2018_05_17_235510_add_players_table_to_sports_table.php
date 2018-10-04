@@ -14,6 +14,7 @@ class AddPlayersTableToSportsTable extends Migration
     public function up()
     {
         Schema::table('sports', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->string('players_table')->nullable();
         });
     }

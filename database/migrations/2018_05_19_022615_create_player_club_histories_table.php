@@ -14,6 +14,7 @@ class CreatePlayerClubHistoriesTable extends Migration
     public function up()
     {
         Schema::create('player_club_histories', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
 
             $table->string('season');

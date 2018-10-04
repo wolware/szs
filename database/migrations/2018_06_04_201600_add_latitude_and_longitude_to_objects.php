@@ -14,6 +14,7 @@ class AddLatitudeAndLongitudeToObjects extends Migration
     public function up()
     {
         Schema::table('objects', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->decimal('latitude', 9, 6);
             $table->decimal('longitude', 9, 6);
         });

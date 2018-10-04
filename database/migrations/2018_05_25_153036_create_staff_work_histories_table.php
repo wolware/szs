@@ -14,6 +14,7 @@ class CreateStaffWorkHistoriesTable extends Migration
     public function up()
     {
         Schema::create('staff_work_histories', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
 
             $table->string('season');

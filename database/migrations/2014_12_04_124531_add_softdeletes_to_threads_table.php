@@ -15,6 +15,7 @@ class AddSoftdeletesToThreadsTable extends Migration
     public function up()
     {
         Schema::table(Models::table('threads'), function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->softDeletes();
         });
     }

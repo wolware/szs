@@ -14,6 +14,7 @@ class CreateVijestTable extends Migration
     public function up()
     {
         Schema::create('vijest', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('naslov', 255);
             $table->text('sadrzaj');

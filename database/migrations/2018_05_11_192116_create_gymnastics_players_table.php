@@ -14,6 +14,7 @@ class CreateGymnasticsPlayersTable extends Migration
     public function up()
     {
         Schema::create('gymnastics_players', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->unsignedInteger('id');
 
             $table->string('branch')->nullable();

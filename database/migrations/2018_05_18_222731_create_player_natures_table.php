@@ -14,6 +14,7 @@ class CreatePlayerNaturesTable extends Migration
     public function up()
     {
         Schema::create('player_natures', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
 
             $table->string('name');

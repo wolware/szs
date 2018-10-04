@@ -14,6 +14,7 @@ class ChangePlayerTypesForeignOnPlayers extends Migration
     public function up()
     {
         Schema::table('players', function (Blueprint $table){
+            $table->engine = 'InnoDB';
             $table->dropForeign(['player_type_id']);
 
             $table->foreign('player_type_id')

@@ -14,6 +14,7 @@ class AddHistoryInObjectsTable extends Migration
     public function up()
     {
         Schema::table('objects', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->mediumText('history')->nullable();
         });
     }

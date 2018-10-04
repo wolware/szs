@@ -14,6 +14,7 @@ class CreateHallObjectsTable extends Migration
     public function up()
     {
         Schema::create('hall_objects', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->unsignedInteger('id');
 
             $table->integer('number_of_fields')->nullable();

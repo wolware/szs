@@ -15,6 +15,7 @@ class AddSoftDeletesToParticipantsTable extends Migration
     public function up()
     {
         Schema::table(Models::table('participants'), function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->softDeletes();
         });
     }

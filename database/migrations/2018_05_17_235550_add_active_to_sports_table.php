@@ -14,6 +14,7 @@ class AddActiveToSportsTable extends Migration
     public function up()
     {
         Schema::table('sports', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->boolean('active')->default(false);
         });
     }

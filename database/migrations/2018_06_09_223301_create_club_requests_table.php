@@ -14,6 +14,7 @@ class CreateClubRequestsTable extends Migration
     public function up()
     {
         Schema::create('club_requests', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->unsignedInteger('club_id');
             $table->unsignedInteger('player_id')->nullable();

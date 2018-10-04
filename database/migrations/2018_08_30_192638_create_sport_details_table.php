@@ -14,6 +14,7 @@ class CreateSportDetailsTable extends Migration
     public function up()
     {
         Schema::create('sport_details', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->unsignedInteger('sport_id');
             $table->foreign('sport_id')

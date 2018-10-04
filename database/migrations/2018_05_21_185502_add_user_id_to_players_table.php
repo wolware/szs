@@ -14,6 +14,7 @@ class AddUserIdToPlayersTable extends Migration
     public function up()
     {
         Schema::table('players', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
            $table->unsignedInteger('user_id');
 
            $table->foreign('user_id')

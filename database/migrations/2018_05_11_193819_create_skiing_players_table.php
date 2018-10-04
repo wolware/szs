@@ -14,6 +14,7 @@ class CreateSkiingPlayersTable extends Migration
     public function up()
     {
         Schema::create('skiing_players', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->unsignedInteger('id');
 
             $table->string('discipline')->nullable();

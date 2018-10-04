@@ -14,6 +14,7 @@ class CreateVijestKategorijaTable extends Migration
     public function up()
     {
         Schema::create('vijest_kategorija', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
             $table->string('naziv',255);
             $table->timestamps();

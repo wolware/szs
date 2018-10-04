@@ -14,6 +14,7 @@ class CreateRegionTypesTable extends Migration
     public function up()
     {
         Schema::create('region_types', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
 
             $table->string('type')->unique();

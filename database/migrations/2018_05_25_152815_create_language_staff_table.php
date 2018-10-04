@@ -14,6 +14,7 @@ class CreateLanguageStaffTable extends Migration
     public function up()
     {
         Schema::create('language_staff', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->increments('id');
 
             $table->unsignedInteger('language_id');

@@ -14,6 +14,7 @@ class ChangeColumnsInBalonObjectsTable extends Migration
     public function up()
     {
         Schema::table('balon_objects', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->string('wifi')->change();
             $table->string('parking')->change();
             $table->string('restaurant')->change();
