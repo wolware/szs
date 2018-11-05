@@ -96,7 +96,7 @@
 
                                                     <div class="form-group col-md-12">
                                                         <label for="name"><img class="flow-icons-013" src="{{url('images/icons/edit.svg')}}"> Naziv eventa*</label>
-                                                        <input type="text" name="name" id="name" class="form-control" placeholder="Turnir">
+                                                        <input type="text" name="name" id="name" class="form-control" value="{{old('name')}}" placeholder="Turnir">
                                                     </div>
 
                                                     <div class="row">
@@ -231,8 +231,17 @@
                                     </div>
                                     <div class="row">
                                             <div class="form-group col-md-6">
-                                                <label class="control-label" for="date_start"><i class="fa fa-calendar-o"></i> Datum početka*</label>
-                                                <input class="form-control" type="text" id="date_start" name="date_start" placeholder="Izaberite datum početka eventa" value="{{ old('date_start') }}"/>
+                                                <label class="control-label" for="date_start"><i class="fa fa-calendar-o"></i>
+                                                    Datum početka*</label>
+                                                <div class="input-group date form_date" data-date=""
+                                                     data-date-format="mm/dd/yy" data-link-field="dtp_input2"
+                                                     data-link-format="mm/dd/yy">
+                                                    <input class="form-control" id="date_start" name="date_start" size="16"
+                                                           type="text"  placeholder="Izaberite datum početka eventa" value="{{old('date_start')}}" readonly>
+
+                                                    <span class="input-group-addon"><span
+                                                                class="glyphicon glyphicon-calendar"></span></span>
+                                                </div>
                                             </div>
 
                                             <div class="form-group col-md-6">

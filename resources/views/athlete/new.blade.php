@@ -138,7 +138,7 @@
                                                     <div class="form-group col-md-12">
                                                         <label for="player_nature"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Karakter sportiste*</label>
                                                         <select class="form-control" id="player_nature" name="player_nature">
-                                                            <option selected disabled>Izberite karakter sportiste</option>
+                                                            <option selected disabled>Izaberite karakter sportiste</option>
                                                             @foreach($playerNatures as $nature)
                                                                 <option value="{{ $nature->id }}" {{ old('player_nature') == $nature->id ? 'selected' : '' }}>{{ $nature->name }}</option>
                                                             @endforeach

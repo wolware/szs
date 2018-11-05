@@ -256,8 +256,17 @@
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-md-4">
-                                            <label class="control-label" for="date_of_birth"><i class="fa fa-calendar-o"></i> Datum rođenja</label>
-                                            <input class="form-control" id="date" name="date_of_birth" placeholder="Izaberite datum rođenja" value="{{ old('date_of_birth') }}">
+                                            <label class="control-label" for="date_of_birth"><i class="fa fa-calendar-o"></i>
+                                                Datum rođenja</label>
+                                            <div class="input-group date form_date" data-date=""
+                                                 data-date-format="mm/dd/yy" data-link-field="dtp_input2"
+                                                 data-link-format="mm/dd/yy">
+                                                <input class="form-control" id="date_of_birth" name="date_of_birth" size="16"
+                                                       type="text"  placeholder="Izaberite datum rođenja" value="{{old('date_of_birth')}}" readonly>
+
+                                                <span class="input-group-addon"><span
+                                                            class="glyphicon glyphicon-calendar"></span></span>
+                                            </div>
                                         </div>
 
                                         <div class="form-group col-md-8">

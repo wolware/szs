@@ -229,8 +229,17 @@
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-md-4">
-                                            <label class="control-label" for="established_in"><i class="fa fa-calendar-o"></i> Datum otvorenja</label>
-                                            <input class="form-control pickDate" id="established_in" name="established_in" placeholder="Unesite datum otvorenja" value="{{ old('established_in') }}"/>
+                                            <label class="control-label" for="established_in"><i class="fa fa-calendar-o"></i>
+                                                Datum otvorenja</label>
+                                            <div class="input-group date form_date" data-date=""
+                                                 data-date-format="mm/dd/yy" data-link-field="dtp_input2"
+                                                 data-link-format="mm/dd/yy">
+                                                <input class="form-control" id="established_in" name="established_in" size="16"
+                                                       type="text"  placeholder="Unesite datum otvorenja" value="{{old('established_in')}}" readonly>
+
+                                                <span class="input-group-addon"><span
+                                                            class="glyphicon glyphicon-calendar"></span></span>
+                                            </div>
                                         </div>
 
                                         @foreach($inputs as $input)

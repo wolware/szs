@@ -31,7 +31,8 @@ class SportController extends Controller
     public function displaySport($id)
     {
         $sport = $this->sportRepository->getByIdWithAllDetails($id);
-        DB::update('UPDATE sport_details SET number_of_views = ? WHERE sport_id= ?',[$sport->sportDetails->number_of_views+1,$sport->id]);
+        $numberOfViews = isset($sport->sportDetails->number_of_views) ? $sport->sportDetails->number_of_views + 1 : 0;
+        DB::update('UPDATE sport_details SET number_of_views = ? WHERE sport_id= ?',[$numberOfViews,$sport->id]);
         return view('sports.profile', compact('sport'));
     }
 }
