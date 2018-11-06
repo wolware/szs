@@ -18,7 +18,7 @@ class CreateAthleticsPlayersTable extends Migration
             $table->unsignedInteger('id');
 
             $table->string('discipline')->nullable();
-            $table->integer('best_result')->nullable();
+            $table->string('best_result',50)->nullable();
             $table->integer('rank')->nullable();
 
             $table->unsignedInteger('player_type_id');

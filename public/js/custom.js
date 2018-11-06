@@ -253,7 +253,7 @@ $(document).ready(function () {
         ignore: ':hidden,:disabled',
         rules: {
             logo: {
-                required: true,
+                required: false,
                 extension: 'png|jpg|jpeg'
             },
             name: {
@@ -503,7 +503,8 @@ $(document).ready(function () {
                 maxlength: 255
             },
             best_result: {
-                number: true
+                string: true,
+                maxlength: 255
             },
             agent: {
                 string: true,
@@ -661,7 +662,8 @@ $(document).ready(function () {
                 maxlength: 255
             },
             best_result: {
-                number: true
+                string: true,
+                maxlength: 255
             },
             agent: {
                 string: true,

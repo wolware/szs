@@ -87,7 +87,7 @@ class PlayerController extends Controller
         'preferred_arm' => 'nullable|max:255|string',
         'rank' => 'nullable|integer',
         'discipline' => 'nullable|max:255|string',
-        'best_result' => 'nullable|numeric',
+        'best_result' => 'nullable|string',
         'agent' => 'nullable|max:255|string|alpha',
         'position' => 'nullable|max:255|string',
         'competition' => 'nullable|max:255|string',

@@ -20,7 +20,7 @@ class CreateSwimmingPlayersTable extends Migration
             $table->string('style')->nullable();
             $table->integer('distance')->nullable();
             $table->string('coach')->nullable();
-            $table->integer('best_result')->nullable();
+            $table->string('best_result',50)->nullable();
             $table->string('agent')->nullable();
 
             $table->unsignedInteger('player_type_id');

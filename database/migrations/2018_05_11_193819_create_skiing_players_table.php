@@ -18,7 +18,7 @@ class CreateSkiingPlayersTable extends Migration
             $table->unsignedInteger('id');
 
             $table->string('discipline')->nullable();
-            $table->integer('best_result')->nullable();
+            $table->string('best_result',50)->nullable();
             $table->string('agent')->nullable();
 
             $table->unsignedInteger('player_type_id');

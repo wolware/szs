@@ -306,7 +306,7 @@
                                             <div class="form-group col-md-4">
                                                 <label for="requested_club"><img class="flow-icons-013" src="{{asset('images/icons/klubovi-icon.svg')}}"> Klub</label>
                                                 <select class="form-control" id="requested_club" name="requested_club">
-                                                    <option selected disabled>Izberite trenutni klub sportiste</option>
+                                                    <option selected disabled>Izaberite trenutni klub sportiste</option>
                                                     @foreach($clubs as $club)
                                                         <option value="{{ $club->id }}" {{ old('requested_club') == $club->id ? 'selected' : '' }}>{{ $club->name }}</option>
                                                     @endforeach
