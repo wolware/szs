@@ -552,7 +552,7 @@
                                             <div class="widget-game-result__section">
                                                 <header class="widget-game-result__subheader card__subheader-alt card__subheader card__subheader--sm card__subheader--nomargins">
                                                     <h5 class="widget-game-result__subtitle">Aktuelni klub: <a
-                                                                href="#">{{$player->club->name or 'Nema klub'}}</a></h5>
+                                                                href="{{url('clubs/'.$player->club->id) or '#'}}">{{$player->club->name or 'Nema klub'}}</a></h5>
                                                 </header>
                                             </div>
 
