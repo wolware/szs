@@ -127,7 +127,7 @@
 
                                             <div class="form-group col-md-12">
                                                 <label for="sadrzaj"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Sadržaj</label>
-                                                <textarea class="form-control" rows="20" id="sadrzaj" name="sadrzaj" value="{{ old('sadrzaj') }}"></textarea>
+                                                <textarea class="form-control" rows="20" id="sadrzaj" name="sadrzaj">{{ old('sadrzaj') }}</textarea>
                                             </div>
 
                                             <div class="form-group col-md-12">

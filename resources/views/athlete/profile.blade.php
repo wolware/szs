@@ -288,14 +288,14 @@
                                             <td class="lineup__num">Dio SveZaSport</td>
                                             <td class="lineup__name">{{ \Carbon\Carbon::parse($player->created_at)->format('d. F, Y.') }}</td>
                                         </tr>
-                                        <tr>
+                                       {{-- <tr>
                                             <td class="lineup__info">
                                                 <img class="flow-icons-012"
                                                      src="{{asset('images/icons/security-badge.svg')}}" alt="">
                                             </td>
                                             <td class="lineup__num">SZS Klub mjeseca</td>
                                             <td class="lineup__name">5</td>
-                                        </tr>
+                                        </tr>--}}
 
                                         </tbody>
                                     </table>
@@ -552,7 +552,7 @@
                                             <div class="widget-game-result__section">
                                                 <header class="widget-game-result__subheader card__subheader-alt card__subheader card__subheader--sm card__subheader--nomargins">
                                                     <h5 class="widget-game-result__subtitle">Aktuelni klub: <a
-                                                                href="{{url('clubs/'.$player->club->id) or '#'}}">{{$player->club->name or 'Nema klub'}}</a></h5>
+                                                                href="{{ isset($player->club->id) ? url('clubs/'.$player->club->id) : '#' }}">{{$player->club->name or 'Nema klub'}}</a></h5>
                                                 </header>
                                             </div>
 

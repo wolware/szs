@@ -58,7 +58,7 @@
                             <div class="posts__inner card__content">
                                 <div class="row">
                                     <div class="col-md-9">
-                                        <h6 class="posts__title ime-sportiste-klub-lista"><a href="">{{$sport->name}}</a></h6>
+                                        <h6 class="posts__title ime-sportiste-klub-lista"><a href="{{url('/sports/'.$sport->id)}}">{{$sport->name}}</a></h6>
                                     </div>
                                     <div class="col-md-3">
                                         <a href="{{url('/sports/'.$sport->id)}}" class="posts__title ime-sportiste-klub-lista flatter"> <i class="fa fa-plus-circle"></i></a>

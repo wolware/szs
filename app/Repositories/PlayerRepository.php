@@ -38,7 +38,7 @@ class PlayerRepository {
             ]
         ],
         'discipline' => [
-            'icon' => '',
+            'icon' => 'planning.svg',
             'label' => [
                 'bs' => 'Disciplina'
             ]
@@ -273,7 +273,7 @@ class PlayerRepository {
                 $player->setAttribute('player_data', $playerData);
                 $player->setAttribute('player_data_names', $this->allAttributes);
             }
-
+            //dd($player);
             return $player;
         }
 

@@ -27,7 +27,7 @@
         <nav class="content-filter">
             <div class="container">
                 <ul class="content-filter__list">
-                    <li class="content-filter__item content-filter__item--active"><a class="content-filter__link"><i
+                    <li class="content-filter__item content-filter__item--active"><a href="{{url('/sports')}}" style="cursor: pointer;" class="content-filter__link"><i
                                     class="fa fa-soccer-ball-o"></i>
                             <small></small>
                             Sportovi</a></li>
@@ -58,7 +58,7 @@
                             <div class="posts__inner card__content">
                                 <div class="row">
                                     <div class="col-md-9">
-                                        <h6 class="posts__title ime-sportiste-klub-lista"><a href="">{{$sport->name}}</a></h6>
+                                        <h6 class="posts__title ime-sportiste-klub-lista"><a href="{{url('/sports/'.$sport->id)}}">{{$sport->name}}</a></h6>
                                     </div>
                                     <div class="col-md-3">
                                         <a href="{{url('/sports/'.$sport->id)}}" class="posts__title ime-sportiste-klub-lista flatter"> <i class="fa fa-plus-circle"></i></a>
