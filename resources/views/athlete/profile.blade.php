@@ -573,8 +573,23 @@
                                                 <div class="widget__title card__header istaknute-licnosti-naslov">
                                                     <h4><i class="fa fa-play-circle-o"></i> Video prezentacija</h4>
                                                 </div>
-                                                <embed class="video-home"
-                                                       src="{{ $player->video }}">
+                                                @php
+                                                    $query_str = parse_url($player->video, PHP_URL_QUERY);
+                                                    parse_str($query_str, $query_params);
+                                                    $youtubeUrlId = $query_params['v'];
+                                                @endphp
+                                                <iframe class="video-home" src="{{'https://www.youtube.com/embed/'.$youtubeUrlId}}"
+                                                        width="560" height="315" frameborder="0" allowfullscreen></iframe>
+                                            </div>
+                                        </div>
+                                        @else
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="widget__title card__header istaknute-licnosti-naslov">
+                                                    <h4><i class="fa fa-play-circle-o"></i> Video prezentacija</h4>
+                                                </div>
+                                                <iframe class="video-home" src="{{'https://www.youtube.com/embed/fKugdghAqVU'}}"
+                                                width="560" height="315" frameborder="0" allowfullscreen></iframe>
                                             </div>
                                         </div>
                                     @endif
