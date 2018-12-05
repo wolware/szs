@@ -45,7 +45,7 @@ class PlayerController extends Controller
     ];
 
     protected $playerCommonValidationRules = [
-        'avatar' => 'image|dimensions:min_width=512,min_height=512,max_width=2048,max_height=2048',
+        'avatar' => 'image|dimensions:min_width=512,min_height=512',
         'firstname' => 'required|string|max:255|alpha',
         'lastname' => 'required|string|max:255|alpha',
         'continent' => 'required|integer|exists:regions,id',
@@ -350,7 +350,7 @@ class PlayerController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'avatar' => 'image|dimensions:min_width=512,min_height=512,max_width=2048,max_height=2048',
+            'avatar' => 'image|dimensions:min_width=512,min_height=512',
             'firstname' => 'required|string|max:255|alpha',
             'lastname' => 'required|string|max:255|alpha',
             'continent' => 'required|integer|exists:regions,id',

@@ -135,7 +135,7 @@ class SchoolController extends Controller
 
     public function createSchool(Request $data) {
         $validator = Validator::make($data->all(),[
-            'logo' => 'required|image|dimensions:min_width=200,min_height=200,max_width=1024,max_height=1024',
+            'logo' => 'required|image|dimensions:min_width=200,min_height=200',
             'name' => 'required|max:255|string',
             'nature' => 'required|max:255|string',
             'continent' => 'required|integer|exists:regions,id',
@@ -168,7 +168,7 @@ class SchoolController extends Controller
             // Licnosti
             'licnost' => 'array',
             'licnost.*' => 'array',
-            'licnost.*.avatar' => 'image|dimensions:min_width=312,min_height=250,max_width=1920,max_height=1080',
+            'licnost.*.avatar' => 'image|dimensions:min_width=312,min_height=250',
             'licnost.*.ime' => 'required|max:255|string',
             'licnost.*.prezime' => 'required|max:255|string',
             'licnost.*.opis' => 'nullable|max:1000|string',
@@ -267,7 +267,7 @@ class SchoolController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'logo' => 'image|dimensions:min_width=200,min_height=200,max_width=1024,max_height=1024',
+            'logo' => 'image|dimensions:min_width=200,min_height=200',
             'name' => 'required|max:255|string',
             'nature' => 'required|max:255|string',
             'continent' => 'required|integer|exists:regions,id',
@@ -332,7 +332,7 @@ class SchoolController extends Controller
         $validator = Validator::make($request->all(), [
             'licnost' => 'array',
             'licnost.*' => 'array',
-            'licnost.*.avatar' => 'image|dimensions:min_width=312,min_height=250,max_width=1920,max_height=1080',
+            'licnost.*.avatar' => 'image|dimensions:min_width=312,min_height=250',
             'licnost.*.ime' => 'required|max:255|string',
             'licnost.*.prezime' => 'required|max:255|string',
             'licnost.*.opis' => 'nullable|max:1000|string',

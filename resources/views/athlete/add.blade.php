@@ -50,16 +50,18 @@
                         <div class="post-grid__item col-sm-3">
                             <div class="posts__item posts__item--card posts__item--category-1 card kartica-igraca-klub">
                                 <figure class="posts__thumb">
-                                    <img src="{{url('assets/images/'.$sport->icon)}}" alt="">
+                                    <a href="{{url('/athletes/' . $sport->id . '/new')}}">
+                                        <img src="{{url('assets/images/'.$sport->icon)}}" alt="">
+                                    </a>
                                 </figure>
                                 <div class="posts__inner card__content">
-                                    <h6 class="posts__title ime-sportiste-klub-lista"><a href="#">{{ $sport->name }}</a>
+                                    <h6 class="posts__title ime-sportiste-klub-lista"><a href="{{url('/athletes/' . $sport->id . '/new')}}">{{ $sport->name }}</a>
                                     </h6>
                                     <div class="posts__excerpt"></div>
                                 </div>
                                 <footer class="posts__footer card__footer">
                                     <a href="{{url('/athletes/' . $sport->id . '/new')}}"
-                                       class="btn btn-warning btn1-objavi-prodavnicu">Pregled karte sporta <i
+                                       class="btn btn-warning btn1-objavi-prodavnicu">Dodaj novog sportistu <i
                                                 class="fa fa-chevron-right"></i></a>
                                 </footer>
                             </div>

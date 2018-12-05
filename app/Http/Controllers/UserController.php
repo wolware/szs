@@ -49,7 +49,7 @@ class UserController extends Controller
             'name' => 'nullable|max:255|string',
             'email' => 'nullable|max:255|string',
             'password' => 'nullable|max:255|min:6|string|confirmed',
-            'avatar' => 'nullable|image|mimes:jpg,png,jpeg|dimensions:min_width=64,min_height=64,max_width=700,max_height=700',
+            'avatar' => 'nullable|image|mimes:jpg,png,jpeg|dimensions:min_width=64,min_height=64',
             'address' => 'nullable|string',
             'phone' => 'nullable|string|max:25',
             'dob' => 'nullable|date|before_or_equal:' . Carbon::now()->toDateString(),

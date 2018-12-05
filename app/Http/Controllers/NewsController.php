@@ -26,7 +26,7 @@ class NewsController extends Controller
             'naslov' => 'required|unique:vijest|max:255',
             'kategorija' => 'required',
             'sadrzaj' => 'required',
-            'slika' => 'image|dimensions:min_width=980,min_height=720|max:5120'
+            'slika' => 'image|dimensions:min_width=800,min_height=600'
         ]);
 
         if ($validatedData->fails())

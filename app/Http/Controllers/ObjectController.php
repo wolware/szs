@@ -85,7 +85,7 @@ class ObjectController extends Controller
     ];
 
     protected $objectCommonValidationRules = [
-        'image' => 'required|image|dimensions:min_width=800,min_height=600,max_width=2048,max_height=2048',
+        'image' => 'required|image|dimensions:min_width=800,min_height=600',
         'name' => 'required|string|max:255',
         'continent' => 'required|integer|exists:regions,id',
         'country' => 'required|integer|exists:regions,id',
@@ -434,7 +434,7 @@ class ObjectController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'image' => 'image|dimensions:min_width=800,min_height=600,max_width=2048,max_height=2048',
+            'image' => 'image|dimensions:min_width=800,min_height=600',
             'name' => 'required|string|max:255',
             'continent' => 'required|integer|exists:regions,id',
             'country' => 'required|integer|exists:regions,id',

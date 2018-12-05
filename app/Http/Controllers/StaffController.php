@@ -118,7 +118,7 @@ class StaffController extends Controller
     public function createStaff(Request $request) {
 
         $validator = Validator::make($request->all(), [
-            'avatar' => 'image|dimensions:min_width=512,min_height=512,max_width=2048,max_height=2048',
+            'avatar' => 'image|dimensions:min_width=512,min_height=512',
             'firstname' => 'required|string|max:255|alpha',
             'lastname' => 'required|string|max:255|alpha',
             'profession' => 'required|integer|exists:professions,id',
@@ -251,7 +251,7 @@ class StaffController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'avatar' => 'image|dimensions:min_width=512,min_height=512,max_width=2048,max_height=2048',
+            'avatar' => 'image|dimensions:min_width=512,min_height=512',
             'firstname' => 'required|string|max:255|alpha',
             'lastname' => 'required|string|max:255|alpha',
             'profession' => 'required|integer|exists:professions,id',

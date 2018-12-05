@@ -97,7 +97,6 @@
                                         <div class="info001">
                                             <p class="info-upload-slike">Preporučene dimenzije za vašu sliku:</p>
                                             <p class="info-upload-slike">Minimalno: 64x64 px</p>
-                                            <p class="info-upload-slike">Maksimalno: 700x700 px</p>
                                         </div>
                                     </div>
                                     <div class="col-md-5 osnovna-polja">

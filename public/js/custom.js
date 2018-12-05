@@ -2844,11 +2844,11 @@ $('.btn-prijava').on('click', function () {
 
 jQuery.extend(jQuery.validator.messages, {
     required: "Ovo polje je obavezno.",
-    remote: "Please fix this field.",
+    remote: "Molimo popravite ovo polje.",
     email: "Unesite validnu e-mail adresu.",
-    url: "Please enter a valid URL.",
+    url: "Molimo unesite validan URL.",
     date: "Unesite validan datum",
-    dateISO: "Please enter a valid date (ISO).",
+    dateISO: "Unesite validan datum (ISO).",
     number: "Unesite validan broj.",
     digits: "Ovo polje može sadržati samo cifre.",
     creditcard: "Please enter a valid credit card number.",

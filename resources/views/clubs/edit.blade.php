@@ -92,7 +92,6 @@
 						  <div class="info001">
 							<p class="info-upload-slike">Preporučene dimenzije za logo:</p>
 							<p class="info-upload-slike">Minimalno: 512x512 px</p>
-							<p class="info-upload-slike">Maksimalno: 1024x1024 px</p>
 						  </div>
 
 					</div>
@@ -374,7 +373,6 @@
 													  <div class="info001">
 														  <p class="info-upload-slike">Preporučene dimenzije za sliku ličnosti:</p>
 														  <p class="info-upload-slike">Minimalno: 312x250 px</p>
-														  <p class="info-upload-slike">Maksimalno: 1920x1080 px</p>
 													  </div>
 												  </div>
 											  </div>
