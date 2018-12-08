@@ -441,7 +441,7 @@
                                                 <div class="widget-player__content">
                                                     <div class="widget-player__content-inner">
                                                         <div class="posts__excerpt">
-                                                            {{ $newProfiles->staff->city }}
+                                                            {{ $newProfiles->staff->city || '' }}
                                                         </div>
                                                         <div class="posts__excerpt">
                                                             {{ $newProfiles->staff->profession->name }}
