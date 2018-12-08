@@ -441,7 +441,10 @@
                                                 <div class="widget-player__content">
                                                     <div class="widget-player__content-inner">
                                                         <div class="posts__excerpt">
-                                                            {{ $newProfiles->staff->city || '' }}
+                                                            {{-- TODO FIX THIS! --}}
+                                                            @if(isset($newProfiles->staff->city))
+                                                                {{ $newProfiles->staff->city }}
+                                                            @endif
                                                         </div>
                                                         <div class="posts__excerpt">
                                                             {{ $newProfiles->staff->profession->name }}
