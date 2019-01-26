@@ -176,14 +176,6 @@
                     <div class="table-responsive">
                       <table class="table lineup-table">
                         <tbody>
-
-                          <tr>
-							<td class="lineup__info">
-                              <img class="flow-icons-012" src="{{asset('images/icons/tag.svg')}}" alt="">
-                            </td>
-                            <td class="lineup__num">ID eventa</td>
-                            <td class="lineup__name">{{$event->id}}</td>
-                          </tr>
 						  <tr>
 							<td class="lineup__info">
                               <img class="flow-icons-012" src="{{asset('images/icons/calendar-add-event-button-with-plus-sign.svg')}}" alt="">

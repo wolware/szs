@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Club;
 use App\Player;
 use App\Repositories\ClubRepository;
 use App\Repositories\PlayerRepository;
 use App\Repositories\RegionRepository;
 use App\Repositories\SportRepository;
-use App\Sport;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -101,28 +99,31 @@ class PlayerController extends Controller
         'best_rank' => 'nullable|integer',
     ];
 
-    public function __construct(SportRepository $sportRepository, PlayerRepository $playerRepository, RegionRepository $regionRepository, ClubRepository $clubRepository) {
+    public function __construct(SportRepository $sportRepository, PlayerRepository $playerRepository, RegionRepository $regionRepository, ClubRepository $clubRepository)
+    {
         $this->sportRepository = $sportRepository;
         $this->playerRepository = $playerRepository;
         $this->regionRepository = $regionRepository;
         $this->clubRepository = $clubRepository;
         $this->playerCommonValidationRules['date_of_birth'] = 'nullable|date|before_or_equal:' . Carbon::now()->toDateString();
-        $this->playerCommonValidationRules['nagrada.*.sezona'] = 'required|digits:4|integer|min:1800|max:'.date('Y');
+        $this->playerCommonValidationRules['nagrada.*.sezona'] = 'required|digits:4|integer|min:1800|max:' . date('Y');
     }
 
-    public function displayAddPlayerCategories() {
+    public function displayAddPlayerCategories()
+    {
         $sports = $this->sportRepository
             ->getAllActiveSports();
 
         return view('athlete.add', compact('sports'));
     }
 
-    public function displayAddPlayer($sport_id) {
+    public function displayAddPlayer($sport_id)
+    {
         $sport = $this->sportRepository
             ->getById($sport_id);
 
         // Provjera da li je sport dostupan za dodavanje
-        if(!$sport->active){
+        if (!$sport->active) {
             abort(404);
         }
 
@@ -133,7 +134,7 @@ class PlayerController extends Controller
         $inputs = [];
         foreach ($this->allAttributesInputs as $key => $attribute) {
             foreach ($columns as $column) {
-                if($key == $column) {
+                if ($key == $column) {
                     $inputs[$key] = $attribute;
                 }
             }
@@ -149,26 +150,26 @@ class PlayerController extends Controller
             }
         }
 
-        if($sport->name == 'Atletika') {
+        if ($sport->name == 'Atletika') {
             unset($inputs['discipline']['skijanje_options']);
         }
 
-        if($sport->name == 'Skijanje') {
+        if ($sport->name == 'Skijanje') {
             $inputs['discipline']['options'] = $inputs['discipline']['skijanje_options'];
             unset($inputs['discipline']['skijanje_options']);
         }
 
-        if($sport->name == 'Biciklizam') {
+        if ($sport->name == 'Biciklizam') {
             unset($inputs['category']['karate_options']);
         }
 
-        if($sport->name == 'Karate') {
+        if ($sport->name == 'Karate') {
             $inputs['category']['options'] = $inputs['category']['karate_options'];
             unset($inputs['category']['karate_options']);
         }
 
         foreach ($inputs as $key => $input) {
-            if(array_key_exists('options', $input)){
+            if (array_key_exists('options', $input)) {
                 $inputs[$key]['options'] = explode(',', $input['options']);
             }
         }
@@ -187,12 +188,13 @@ class PlayerController extends Controller
         return view('athlete.new', compact('sport', 'inputs', 'playerNatures', 'regions', 'clubs'));
     }
 
-    public function createPlayer(Request $request, $sport_id) {
+    public function createPlayer(Request $request, $sport_id)
+    {
         $sport = $this->sportRepository
             ->getById($sport_id);
 
         // Provjera da li je sport dostupan za dodavanje
-        if(!$sport->active){
+        if (!$sport->active) {
             abort(404);
         }
 
@@ -217,18 +219,19 @@ class PlayerController extends Controller
             $createPlayer = $this->playerRepository
                 ->createPlayer($request, $sport, $columns);
 
-            if($createPlayer) {
+            if ($createPlayer) {
                 flash()->overlay('Uspješno ste dodali sportistu.', 'Čestitamo');
                 return redirect('/athletes/' . $createPlayer->id);
             }
         }
     }
 
-    public function showPlayer($id) {
+    public function showPlayer($id)
+    {
         $player = $this->playerRepository
             ->getByIdWithAllData($id);
 
-        if($player) {
+        if ($player) {
             $regions = collect();
             $currentRegion = $player->region;
             while ($currentRegion) {
@@ -241,8 +244,8 @@ class PlayerController extends Controller
 
             $authId = Auth::user() != null ? Auth::user()->id : 0;
 
-            if($player->user_id != $authId)
-            DB::update('update players set number_of_views = ? where id= ?',[$player->number_of_views+1,$player->id]);
+            if ($player->user_id != $authId)
+                DB::update('update players set number_of_views = ? where id= ?', [$player->number_of_views + 1, $player->id]);
 
             return view('athlete.profile', compact('player'));
         }
@@ -250,18 +253,19 @@ class PlayerController extends Controller
         abort(404);
     }
 
-    public function displayEditPlayer($id) {
+    public function displayEditPlayer($id)
+    {
 
         $player = $this->playerRepository
             ->getByIdWithAllData($id);
 
-        if(!$player) {
+        if (!$player) {
             abort(404);
         }
 
         // Provjera da li je user napravio igraca
         $isOwner = $player->user->id == Auth::user()->id;
-        if(!$isOwner) {
+        if (!$isOwner) {
             abort(404);
         }
 
@@ -272,7 +276,7 @@ class PlayerController extends Controller
         $inputs = [];
         foreach ($this->allAttributesInputs as $key => $attribute) {
             foreach ($columns as $column) {
-                if($key == $column) {
+                if ($key == $column) {
                     $inputs[$key] = $attribute;
                 }
             }
@@ -288,26 +292,26 @@ class PlayerController extends Controller
             }
         }
 
-        if($player->player_type->name == 'Atletika') {
+        if ($player->player_type->name == 'Atletika') {
             unset($inputs['discipline']['skijanje_options']);
         }
 
-        if($player->player_type->name == 'Skijanje') {
+        if ($player->player_type->name == 'Skijanje') {
             $inputs['discipline']['options'] = $inputs['discipline']['skijanje_options'];
             unset($inputs['discipline']['skijanje_options']);
         }
 
-        if($player->player_type->name == 'Biciklizam') {
+        if ($player->player_type->name == 'Biciklizam') {
             unset($inputs['category']['karate_options']);
         }
 
-        if($player->player_type->name == 'Karate') {
+        if ($player->player_type->name == 'Karate') {
             $inputs['category']['options'] = $inputs['category']['karate_options'];
             unset($inputs['category']['karate_options']);
         }
 
         foreach ($inputs as $key => $input) {
-            if(array_key_exists('options', $input)){
+            if (array_key_exists('options', $input)) {
                 $inputs[$key]['options'] = explode(',', $input['options']);
             }
         }
@@ -335,17 +339,18 @@ class PlayerController extends Controller
         return view('athlete.edit', compact('player', 'inputs', 'playerNatures', 'regions', 'clubs'));
     }
 
-    public function editPlayerGeneral($id, Request $request) {
+    public function editPlayerGeneral($id, Request $request)
+    {
         $player = $this->playerRepository
             ->getById($id);
 
-        if(!$player) {
+        if (!$player) {
             abort(404);
         }
 
         // Provjera da li je user napravio igraca
         $isOwner = $player->user->id == Auth::user()->id;
-        if(!$isOwner) {
+        if (!$isOwner) {
             abort(404);
         }
 
@@ -367,7 +372,7 @@ class PlayerController extends Controller
             'player_nature' => 'integer|exists:player_natures,id'
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect('/athletes/' . $id . '/edit')
                 ->withErrors($validator)
                 ->withInput();
@@ -376,7 +381,7 @@ class PlayerController extends Controller
             $updatePlayerGeneral = $this->playerRepository
                 ->updateGeneral($request, $player);
 
-            if($updatePlayerGeneral) {
+            if ($updatePlayerGeneral) {
                 flash()->overlay('Uspješno ste izmjenili "Općenito" sekciju sportiste.', 'Čestitamo');
                 return back();
             }
@@ -384,17 +389,18 @@ class PlayerController extends Controller
 
     }
 
-    public function editPlayerStatus($id, Request $request) {
+    public function editPlayerStatus($id, Request $request)
+    {
         $player = $this->playerRepository
             ->getByIdWithAllData($id);
 
-        if(!$player) {
+        if (!$player) {
             abort(404);
         }
 
         // Provjera da li je user napravio igraca
         $isOwner = $player->user->id == Auth::user()->id;
-        if(!$isOwner) {
+        if (!$isOwner) {
             abort(404);
         }
 
@@ -415,7 +421,7 @@ class PlayerController extends Controller
 
         $validator = Validator::make($request->all(), $allValidators);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect('/athletes/' . $id . '/edit')
                 ->withErrors($validator)
                 ->withInput();
@@ -424,24 +430,25 @@ class PlayerController extends Controller
             $updatePlayerStatus = $this->playerRepository
                 ->updateStatus($request, $player);
 
-            if($updatePlayerStatus) {
+            if ($updatePlayerStatus) {
                 flash()->overlay('Uspješno ste izmjenili predispozicije sportiste.', 'Čestitamo');
                 return back();
             }
         }
     }
 
-    public function editPlayerBiography($id, Request $request) {
+    public function editPlayerBiography($id, Request $request)
+    {
         $player = $this->playerRepository
             ->getById($id);
 
-        if(!$player) {
+        if (!$player) {
             abort(404);
         }
 
         // Provjera da li je user napravio igraca
         $isOwner = $player->user->id == Auth::user()->id;
-        if(!$isOwner) {
+        if (!$isOwner) {
             abort(404);
         }
 
@@ -449,7 +456,7 @@ class PlayerController extends Controller
             'biography' => 'nullable|string'
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect('/athletes/' . $id . '/edit')
                 ->withErrors($validator)
                 ->withInput();
@@ -458,24 +465,25 @@ class PlayerController extends Controller
             $updatePlayerBiography = $this->playerRepository
                 ->updateBiography($request, $player);
 
-            if($updatePlayerBiography) {
+            if ($updatePlayerBiography) {
                 flash()->overlay('Uspješno ste izmjenili biografiju sportiste.', 'Čestitamo');
                 return back();
             }
         }
     }
 
-    public function editPlayerTrophies($id, Request $request) {
+    public function editPlayerTrophies($id, Request $request)
+    {
         $player = $this->playerRepository
             ->getById($id);
 
-        if(!$player) {
+        if (!$player) {
             abort(404);
         }
 
         // Provjera da li je user napravio igraca
         $isOwner = $player->user->id == Auth::user()->id;
-        if(!$isOwner) {
+        if (!$isOwner) {
             abort(404);
         }
 
@@ -486,11 +494,11 @@ class PlayerController extends Controller
             'nagrada.*.tip' => 'required|max:255|string|in:Zlato,Srebro,Bronza,Ostalo',
             'nagrada.*.nivo' => 'required|max:255|string|in:Internacionalni nivo,Regionalni nivo,Državni nivo,Entitetski nivo,Drugo',
             'nagrada.*.takmicenje' => 'required|max:255|string',
-            'nagrada.*.sezona' => 'required|digits:4|integer|min:1800|max:'.date('Y'),
+            'nagrada.*.sezona' => 'required|digits:4|integer|min:1800|max:' . date('Y'),
             'nagrada.*.osvajanja' => 'nullable|integer',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect('/athletes/' . $id . '/edit')
                 ->withErrors($validator)
                 ->withInput();
@@ -499,24 +507,25 @@ class PlayerController extends Controller
             $updatePlayerTrophies = $this->playerRepository
                 ->updateTrophies($request, $player);
 
-            if($updatePlayerTrophies) {
+            if ($updatePlayerTrophies) {
                 flash()->overlay('Uspješno ste izmjenili trofeje/nagrade sportiste.', 'Čestitamo');
                 return back();
             }
         }
     }
 
-    public function editPlayerGallery($id, Request $request) {
+    public function editPlayerGallery($id, Request $request)
+    {
         $player = $this->playerRepository
             ->getById($id);
 
-        if(!$player) {
+        if (!$player) {
             abort(404);
         }
 
         // Provjera da li je user napravio igraca
         $isOwner = $player->user->id == Auth::user()->id;
-        if(!$isOwner) {
+        if (!$isOwner) {
             abort(404);
         }
 
@@ -525,7 +534,7 @@ class PlayerController extends Controller
             'galerija.*' => 'required|image'
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect('/athletes/' . $id . '/edit')
                 ->withErrors($validator)
                 ->withInput();
@@ -534,14 +543,15 @@ class PlayerController extends Controller
             $updatePlayerGallery = $this->playerRepository
                 ->updateGallery($request, $player);
 
-            if($updatePlayerGallery) {
+            if ($updatePlayerGallery) {
                 flash()->overlay('Uspješno ste izmjenili galeriju sportiste.', 'Čestitamo');
                 return back();
             }
         }
     }
 
-    public function searchPlayers(Request $request) {
+    public function searchPlayers(Request $request)
+    {
         $playerNatures = $this->playerRepository
             ->getAllPlayerNatures();
 
@@ -557,13 +567,13 @@ class PlayerController extends Controller
         $region_filled = Input::filled('region');
         $municipality_filled = Input::filled('municipality');
 
-        if($province_filled) {
-            if(!$region_filled) {
+        if ($province_filled) {
+            if (!$region_filled) {
                 $region_ids[] = Input::get('province');
                 $province = $this->regionRepository
                     ->getById(Input::get('province'));
 
-                if($province) {
+                if ($province) {
                     foreach ($province->child_regions as $region) {
                         $region_ids[] = $region->id;
 
@@ -575,13 +585,13 @@ class PlayerController extends Controller
             } else {
                 $region_ids[] = Input::get('region');
 
-                if($municipality_filled) {
+                if ($municipality_filled) {
                     $region_ids[] = Input::get('municipality');
                 } else {
                     $region = $this->regionRepository
                         ->getById(Input::get('region'));
 
-                    if($region) {
+                    if ($region) {
                         foreach ($region->child_regions as $region) {
                             $region_ids[] = $region->id;
                         }
@@ -591,25 +601,25 @@ class PlayerController extends Controller
         }
 
         $query = Player::query();
-        if(Input::filled('nature')){
+        if (Input::filled('nature')) {
             $query->where('player_nature', Input::get('nature'));
         }
 
-        if(Input::filled('sport')){
+        if (Input::filled('sport')) {
             $query->whereHas('club', function ($query) {
                 $query->where('clubs.sport_id', Input::get('sport'));
             });
         }
 
-        if(!empty($region_ids)){
+        if (!empty($region_ids)) {
             $query->whereIn('region_id', $region_ids);
         }
 
-        if(Input::filled('sort')){
+        if (Input::filled('sort')) {
             $sort = Input::get('sort');
-            if($sort === 'name_desc') {
+            if ($sort === 'name_desc') {
                 $query->orderBy('firstname', 'DESC')->orderBy('lastname', 'DESC');
-            } else if($sort === 'name_asc') {
+            } else if ($sort === 'name_asc') {
                 $query->orderBy('firstname', 'ASC')->orderBy('lastname', 'ASC');
             }
         }

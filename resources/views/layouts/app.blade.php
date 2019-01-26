@@ -66,6 +66,7 @@
     <!-- Template CSS-->
     <link href="{{ asset('/css/datepicker.css?t=44') }}" rel="stylesheet">
     {{-- <link href="{{ asset('/css/timepicki.css') }}" rel="stylesheet">--}}
+    <link type="text/css" href="{{ asset('/css/bootstrap-timepicker.min.css') }}" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" rel="stylesheet">
     <link href="{{ asset('/css/style.css?t=') }}{{time()}}" rel="stylesheet">
     <link href="{{ asset('/css/custom.css?t=') }}{{time()}}" rel="stylesheet">
@@ -485,6 +486,7 @@
 @endif
 <script type="text/javascript" src="{{asset('/js/bootstrap-datetimepicker.min.js')}}" charset="UTF-8"></script>
 <script type="text/javascript" src="{{asset('/js/bootstrap-datetimepicker.hr.js')}}" charset="UTF-8"></script>
+<script type="text/javascript" src="{{asset('/js/bootstrap-timepicker.min.js')}}"></script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-124046232-1"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
@@ -496,6 +498,12 @@
     gtag('js', new Date());
 
     gtag('config', 'UA-124046232-1');
+
+        $('#timepicker').timepicker({
+            minuteStep: 5,
+            showMeridian: false
+        });
+
     $('.form_date').datetimepicker({
         language: 'hr',
         weekStart: 1,
@@ -507,6 +515,19 @@
         forceParse: 0,
         endDate: new Date()
     });
+    $('.form_date_event').datetimepicker({
+        language: 'hr',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0,
+        startDate: new Date()
+    });
+
 </script>
+
 </body>
 </html>

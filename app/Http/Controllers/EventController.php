@@ -36,7 +36,7 @@ class EventController extends Controller
     }
 
     public function createEvent(Request $request) {
-
+        dd($request->all());
         $validator = Validator::make($request->all(), [
             'image' => 'required|image|dimensions:min_width=512,min_height=512',
             'name' => 'required|string|max:255',

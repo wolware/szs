@@ -270,15 +270,6 @@
                                 <div class="table-responsive">
                                     <table class="table lineup-table">
                                         <tbody>
-
-                                        <tr>
-                                            <td class="lineup__info">
-                                                <img class="flow-icons-012" src="{{asset('images/icons/tag.svg')}}"
-                                                     alt="">
-                                            </td>
-                                            <td class="lineup__num">ID igrača</td>
-                                            <td class="lineup__name">{{$player->id}}</td>
-                                        </tr>
                                         <tr>
                                             <td class="lineup__info">
                                                 <img class="flow-icons-012"
@@ -338,8 +329,6 @@
                                                         @if(Auth::check() && Auth::user()->id != $player->user->id)
                                                             <a href="{{url('/messages/create?user='.$player->user->id.'&email='.$player->user->email)}}"><i class="fa fa-envelope"></i> Pošalji poruku</a>
                                                         @endif
-                                                        <span class="team-leader__player-position"><i
-                                                                    class="fa fa-tag"></i> {{$player->user->id}}</span>
                                                     </div>
                                                 </div>
                                             </td>

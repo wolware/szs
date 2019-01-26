@@ -67,8 +67,8 @@
 
                             <form id="createNewObject" role="form" action="{{ url('/objects/' . $object_type->id . '/create') }}" method="POST" enctype="multipart/form-data" >
                             {!! csrf_field() !!}
-                                <input type="hidden" name="latitude" id="latitude" value="">
-                                <input type="hidden" name="longitude" id="longitude" value="">
+                                <input type="hidden" name="latitude" id="latitude" value="{{old('latitude')}}">
+                                <input type="hidden" name="longitude" id="longitude" value="{{old('longitude')}}">
                             <!-- Tab panes -->
                             <div class="tab-content card__content">
 

@@ -88,7 +88,7 @@
                                                 @if (old('spol'))
                                                     <option selected>{{old('spol')}}</option>
                                                 @else
-                                                    <option disabled selected>Izaberite pol</option>
+                                                    <option disabled selected>Izaberite spol</option>
                                                 @endif
                                                 <option>Muško</option>
                                                 <option>Žensko</option>

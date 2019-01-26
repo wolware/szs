@@ -74,7 +74,7 @@ class NewsController extends Controller
 
                 $vijest->tagovi()->sync($tagoviIds);
             }
-
+            flash()->overlay('Uspješno ste dodali vijest.', 'Čestitamo');
             return redirect()->back()->with('success', 'Vijest "' . $vijest->naslov . '" je kreirana uspješno.');
         }
     }

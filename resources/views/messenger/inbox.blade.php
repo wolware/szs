@@ -60,7 +60,7 @@
                             @each('messenger.partials.thread', $threads, 'thread', 'messenger.partials.no-threads')
                         </ul>
 
-                        <!-- Inbox Pagination -->
+                       {{-- <!-- Inbox Pagination -->
                         <nav aria-label="Comments Pavigation" class="post__comments-pagination">
                             <ul class="pagination">
                                 <li class="active"><a href="#">1</a></li>
@@ -70,7 +70,7 @@
                                 <li><a href="#">16</a></li>
                             </ul>
                         </nav>
-                        <!-- Inbox Pagination / End -->
+                        <!-- Inbox Pagination / End -->--}}
 
                     </div>
                 </div>

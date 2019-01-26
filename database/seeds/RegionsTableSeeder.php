@@ -14,11 +14,11 @@ class RegionsTableSeeder extends Seeder
         // Adding regions (Bosnia only for now)
         $regions = [
             [
-                'name' => 'Europe',
+                'name' => 'Europa',
                 'region_type' => 1,
                 'countries' => [
                     [
-                        'name' => 'Bosnia and Herzegovina',
+                        'name' => 'Bosna i Hercegovina',
                         'region_type' => 2,
                         'provinces' => [
                             [

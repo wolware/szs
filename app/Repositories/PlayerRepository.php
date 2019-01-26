@@ -273,7 +273,6 @@ class PlayerRepository {
                 $player->setAttribute('player_data', $playerData);
                 $player->setAttribute('player_data_names', $this->allAttributes);
             }
-            //dd($player);
             return $player;
         }
 

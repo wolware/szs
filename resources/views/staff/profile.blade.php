@@ -300,14 +300,6 @@
 
                                         <tr>
                                             <td class="lineup__info">
-                                                <img class="flow-icons-012" src="{{asset('images/icons/tag.svg')}}"
-                                                     alt="">
-                                            </td>
-                                            <td class="lineup__num">ID kadra</td>
-                                            <td class="lineup__name">{{$staff->id}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="lineup__info">
                                                 <img class="flow-icons-012"
                                                      src="{{asset('images/icons/calendar-add-event-button-with-plus-sign.svg')}}"
                                                      alt="">
@@ -593,7 +585,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <img src="{{asset('images/REKLAMA-752-100.png')}}"
-                                                 class="reklama-klubovi-alt1"/>
+                                                 class="reklama-klubovi-alt1" />
                                         </div>
                                     </div>
                                     @if($staff->video)

@@ -242,27 +242,12 @@
                                 <div class="table-responsive">
                                     <table class="table lineup-table">
                                         <tbody>
-
-                                        <tr>
-                                            <td class="lineup__info">
-                                                <img class="flow-icons-012" src="{{asset('images/icons/tag.svg')}}" alt="">
-                                            </td>
-                                            <td class="lineup__num">ID objekta</td>
-                                            <td class="lineup__name">{{$object->id}}</td>
-                                        </tr>
                                         <tr>
                                             <td class="lineup__info">
                                                 <img class="flow-icons-012" src="{{asset('images/icons/calendar-add-event-button-with-plus-sign.svg')}}" alt="">
                                             </td>
-                                            <td class="lineup__num">Dio SveZaSport</td>
-                                            <td class="lineup__name">{{ \Carbon\Carbon::parse($object->created_at)->format('d. F, Y.') }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="lineup__info">
-                                                <img class="flow-icons-012" src="{{asset('images/icons/security-badge.svg')}}" alt="">
-                                            </td>
-                                            <td class="lineup__num">SZS Klub mjeseca</td>
-                                            <td class="lineup__name">5</td>
+                                            <td class="lineup__num">Kreiran</td>
+                                            <td class="lineup__name">{{ \Carbon\Carbon::parse($object->created_at)->format('d.m.Y.') }}</td>
                                         </tr>
 
                                         </tbody>
@@ -337,8 +322,6 @@
                                     <li role="presentation"><a href="#tab-staze" role="tab" data-toggle="tab" aria-expanded="true"><i class="fa fa-road"></i><small>Staze i</small>Liftovi</a></li>
                                     <li role="presentation"><a href="#tab-cjenovnik-skijaliste" role="tab" data-toggle="tab" aria-expanded="false"><i class="fa fa-database"></i><small>Cjenovnik</small>Usluga</a></li>
                                 @endif
-                                <li role="presentation"><a href="#tab-eventi" role="tab" data-toggle="tab"><i class="fa fa-calendar-o"></i><small>Nadolazeći</small>Događaji</a></li>
-                                <li role="presentation"><a href="#tab-vijesti2" role="tab" data-toggle="tab"><i class="fa fa-newspaper-o"></i><small>Povezane</small>Vijesti</a></li>
                                 <li role="presentation"><a href="#tab-galerija" role="tab" data-toggle="tab"><i class="fa fa-picture-o"></i><small>Foto</small>Galerija</a></li>
                             </ul>
 
@@ -852,150 +835,6 @@
                                         <!-- Tab: cjenovnik / End -->
 
                                 @endif
-
-                                <!-- Tab: Vitrina -->
-                                <div role="tabpanel" class="tab-pane fade neaktivno" id="tab-eventi">
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <img src="{{asset('assets/images/REKLAMA-752-100.png')}}" class="reklama-klubovi-vitrina"/>
-                                        </div>
-                                    </div>
-
-                                    <!-- Schedule & Tickets -->
-                                    <div class="card card--has-table">
-                                        <div class="table-responsive">
-                                            <table class="table table-hover team-schedule">
-                                                <thead>
-                                                <tr>
-                                                    <th class="team-schedule__date">Datum</th>
-                                                    <th class="team-schedule__versus">Događaj</th>
-                                                    <th class="team-schedule__time">Vrijeme</th>
-                                                    <th class="team-schedule__venue">Opis događaja</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr>
-                                                    <td class="team-schedule__date">23. Februar, 2018.</td>
-                                                    <td class="team-schedule__versus">
-                                                        <div class="team-meta">
-                                                            <div class="team-meta__info">
-                                                                <div class="team-meta__info">
-                                                                    <h6 class="team-meta__name"><a href="#">ŽOK Smeč Živinice - Žok Smeč Lukavac</a></h6>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="team-schedule__time">14:00</td>
-                                                    <td class="team-schedule__venue">8. Kolo Premijer Lige BiH</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="team-schedule__date">23. Februar, 2018.</td>
-                                                    <td class="team-schedule__versus">
-                                                        <div class="team-meta">
-                                                            <div class="team-meta__info">
-                                                                <div class="team-meta__info">
-                                                                    <h6 class="team-meta__name"><a href="#">ŽOK Smeč Živinice - Žok Smeč Lukavac</a></h6>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="team-schedule__time">14:00</td>
-                                                    <td class="team-schedule__venue">8. Kolo Premijer Lige BiH</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="team-schedule__date">23. Februar, 2018.</td>
-                                                    <td class="team-schedule__versus">
-                                                        <div class="team-meta">
-                                                            <div class="team-meta__info">
-                                                                <div class="team-meta__info">
-                                                                    <h6 class="team-meta__name"><a href="#">ŽOK Smeč Živinice - Žok Smeč Lukavac</a></h6>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="team-schedule__time">14:00</td>
-                                                    <td class="team-schedule__venue">8. Kolo Premijer Lige BiH</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="team-schedule__date">23. Februar, 2018.</td>
-                                                    <td class="team-schedule__versus">
-                                                        <div class="team-meta">
-                                                            <div class="team-meta__info">
-                                                                <div class="team-meta__info">
-                                                                    <h6 class="team-meta__name"><a href="#">ŽOK Smeč Živinice - Žok Smeč Lukavac</a></h6>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="team-schedule__time">14:00</td>
-                                                    <td class="team-schedule__venue">8. Kolo Premijer Lige BiH</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="team-schedule__date">23. Februar, 2018.</td>
-                                                    <td class="team-schedule__versus">
-                                                        <div class="team-meta">
-                                                            <div class="team-meta__info">
-                                                                <div class="team-meta__info">
-                                                                    <h6 class="team-meta__name"><a href="#">ŽOK Smeč Živinice - Žok Smeč Lukavac</a></h6>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="team-schedule__time">14:00</td>
-                                                    <td class="team-schedule__venue">8. Kolo Premijer Lige BiH</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="team-schedule__date">23. Februar, 2018.</td>
-                                                    <td class="team-schedule__versus">
-                                                        <div class="team-meta">
-                                                            <div class="team-meta__info">
-                                                                <div class="team-meta__info">
-                                                                    <h6 class="team-meta__name"><a href="#">ŽOK Smeč Živinice - Žok Smeč Lukavac</a></h6>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="team-schedule__time">14:00</td>
-                                                    <td class="team-schedule__venue">8. Kolo Premijer Lige BiH</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="team-schedule__date">23. Februar, 2018.</td>
-                                                    <td class="team-schedule__versus">
-                                                        <div class="team-meta">
-                                                            <div class="team-meta__info">
-                                                                <div class="team-meta__info">
-                                                                    <h6 class="team-meta__name"><a href="#">ŽOK Smeč Živinice - Žok Smeč Lukavac</a></h6>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="team-schedule__time">14:00</td>
-                                                    <td class="team-schedule__venue">8. Kolo Premijer Lige BiH</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="team-schedule__date">23. Februar, 2018.</td>
-                                                    <td class="team-schedule__versus">
-                                                        <div class="team-meta">
-                                                            <div class="team-meta__info">
-                                                                <div class="team-meta__info">
-                                                                    <h6 class="team-meta__name"><a href="#">ŽOK Smeč Živinice - Žok Smeč Lukavac</a></h6>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="team-schedule__time">14:00</td>
-                                                    <td class="team-schedule__venue">8. Kolo Premijer Lige BiH</td>
-                                                </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <!-- Schedule & Tickets / End -->
-
-
-                                </div>
-                                <!-- Tab: Vitrina / End -->
 
                                 <!-- Tab: Galerija -->
                                 <div role="tabpanel" class="tab-pane fade neaktivno" id="tab-galerija">

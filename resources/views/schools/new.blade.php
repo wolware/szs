@@ -119,7 +119,7 @@
                                                     <div class="form-group col-md-4">
                                                         <label for="continent"><img class="flow-icons-013" src="{{asset('images/icons/international-delivery.svg')}}"> Kontinent*</label>
                                                         <select name="continent" class="form-control" id="continent">
-                                                            <option selected disabled>Izaberite kontinent kluba</option>
+                                                            <option selected disabled>Izaberite kontinent škole</option>
                                                             @foreach($regions as $region)
                                                                 @if($region->region_type->type == 'Continent')
                                                                     <option data-parent="{{ $region->region_parent }}" value="{{ $region->id }}" {{ old('continent') == $region->id ? 'selected' : '' }}>{{ $region->name }}</option>
@@ -131,7 +131,7 @@
                                                     <div class="form-group col-md-4">
                                                         <label for="country"><img class="flow-icons-013" src="{{asset('images/icons/earth.svg')}}"> Država*</label>
                                                         <select name="country" class="form-control" id="country" {{ old('country') ? '' : 'disabled' }}>
-                                                            <option selected disabled>Izaberite državu kluba</option>
+                                                            <option selected disabled>Izaberite državu škole</option>
                                                             @foreach($regions as $region)
                                                                 @if($region->region_type->type == 'Country')
                                                                     <option data-parent="{{ $region->region_parent }}" value="{{ $region->id }}" {{ old('country') == $region->id ? 'selected' : '' }}>{{ $region->name }}</option>
@@ -143,7 +143,7 @@
                                                     <div class="form-group col-md-4">
                                                         <label for="province"><img class="flow-icons-013" src="{{asset('images/icons/map.svg')}}"> Pokrajina*</label>
                                                         <select name="province" class="form-control" id="province" {{ old('province') ? '' : 'disabled' }}>
-                                                            <option selected disabled>Izaberite pokrajinu kluba</option>
+                                                            <option selected disabled>Izaberite pokrajinu škole</option>
                                                             @foreach($regions as $region)
                                                                 @if($region->region_type->type == 'Province')
                                                                     <option data-parent="{{ $region->region_parent }}" value="{{ $region->id }}" {{ old('province') == $region->id ? 'selected' : '' }}>{{ $region->name }}</option>
@@ -156,7 +156,7 @@
                                                     <div class="form-group col-md-4">
                                                         <label for="region"><img class="flow-icons-013" src="{{asset('images/icons/placeholder.svg')}}"> Regija*</label>
                                                         <select name="region" class="form-control" id="region" {{ old('region') ? '' : 'disabled' }}>
-                                                            <option selected disabled>Izaberite regiju kluba</option>
+                                                            <option selected disabled>Izaberite regiju škole</option>
                                                             @foreach($regions as $region)
                                                                 @if($region->region_type->type == 'Region')
                                                                     <option data-parent="{{ $region->region_parent }}" value="{{ $region->id }}" {{ old('region') == $region->id ? 'selected' : '' }}>{{ $region->name }}</option>
@@ -168,7 +168,7 @@
                                                     <div class="form-group col-md-4">
                                                         <label for="municipality"><img class="flow-icons-013" src="{{asset('images/icons/opcina.svg')}}"> Općina*</label>
                                                         <select name="municipality" class="form-control" id="municipality" {{ old('municipality') ? '' : 'disabled' }}>
-                                                            <option selected disabled>Izaberite općinu kluba</option>
+                                                            <option selected disabled>Izaberite općinu škole</option>
                                                             @foreach($regions as $region)
                                                                 @if($region->region_type->type == 'Municipality')
                                                                     <option data-parent="{{ $region->region_parent }}" value="{{ $region->id }}" {{ old('municipality') == $region->id ? 'selected' : '' }}>{{ $region->name }}</option>
@@ -187,16 +187,16 @@
                                                     <div class="form-group col-md-4">
                                                         <label for="club-type"><img class="flow-icons-013" src="{{asset('images/icons/klubovi-icon.svg')}}"> Tip škole*</label>
                                                         <select name="type" class="form-control" id="club-type">
-                                                            <option value="" disabled {{ old('type') == '' ? 'selected' : '' }}>Izaberite tip kluba</option>
-                                                            <option value="1" {{ old('type') == '1' ? 'selected' : '' }}>Sportski klub</option>
-                                                            <option value="2" {{ old('type') == '2' ? 'selected' : '' }}>Invalidski sportski klub</option>
+                                                            <option value="" disabled {{ old('type') == '' ? 'selected' : '' }}>Izaberite tip škole</option>
+                                                            <option value="1" {{ old('type') == '1' ? 'selected' : '' }}>Sportska škola</option>
+                                                            <option value="2" {{ old('type') == '2' ? 'selected' : '' }}>Invalidska škola</option>
                                                         </select>
                                                     </div>
 
                                                     <div class="form-group col-md-4">
                                                         <label for="sport"><img class="flow-icons-013" src="{{asset('images/icons/menu-circular-button.svg')}}"> Sport škole*</label>
                                                         <select name="sport" class="form-control" id="sport" {{ old('sport') ? '' : 'disabled' }}>
-                                                            <option selected disabled>Izaberite sport kluba</option>
+                                                            <option selected disabled>Izaberite sport škole</option>
                                                             @foreach($sports as $sport)
                                                                 <option data-disabled="{{ $sport->with_disabilities }}" value="{{ $sport->id }}" {{ old('sport') == $sport->id ? 'selected' : '' }}>{{ $sport->name }}</option>
                                                             @endforeach
@@ -206,7 +206,7 @@
                                                     <div class="form-group col-md-4">
                                                         <label for="club-category"><img class="flow-icons-013" src="{{asset('images/icons/gender-symbols.svg')}}"> Tip škole*</label>
                                                         <select name="category" class="form-control" id="club-category">
-                                                            <option selected disabled>Izaberite sport kluba</option>
+                                                            <option selected disabled>Izaberite tip škole</option>
                                                             @foreach($clubCategories as $category)
                                                                 <option value="{{ $category->id }}" {{ old('category') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                                                             @endforeach
@@ -222,18 +222,18 @@
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-md-6">
-                                                <label for="established_in"><img class="flow-icons-013" src="{{asset('images/icons/small-calendar.svg')}}"> Godina osnivanja kluba</label>
-                                                <input name="established_in" type="number" id="established_in" class="form-control" placeholder="Unesite godinu osnivanja kluba" value="{{ old('established_in') }}">
+                                                <label for="established_in"><img class="flow-icons-013" src="{{asset('images/icons/small-calendar.svg')}}"> Godina osnivanja škole</label>
+                                                <input name="established_in" type="number" id="established_in" class="form-control" placeholder="Unesite godinu osnivanja škole" value="{{ old('established_in') }}">
                                             </div>
 
                                             <div class="form-group col-md-6">
                                                 <label for="domaci-teren"><img class="flow-icons-013" src="{{asset('images/icons/stadium-icon.svg')}}"> Domaći teren</label>
-                                                <input name="home_field" type="text" id="domaci-teren" class="form-control" placeholder="Unesite naziv domaćeg terena kluba" value="{{ old('home_field') }}">
+                                                <input name="home_field" type="text" id="domaci-teren" class="form-control" placeholder="Unesite naziv domaćeg terena škole" value="{{ old('home_field') }}">
                                             </div>
 
                                             <div class="form-group col-md-6">
                                                 <label for="takmicenje"><img class="flow-icons-013" src="{{asset('images/icons/trophy.svg')}}"> Takmičenje</label>
-                                                <input type="text" name="competiton" id="takmicenje" class="form-control" placeholder="Unesite naziv takmičenja u kojem klub nastupa" value="{{ old('competiton') }}">
+                                                <input type="text" name="competiton" id="takmicenje" class="form-control" placeholder="Unesite naziv takmičenja u kojem škola nastupa" value="{{ old('competiton') }}">
                                             </div>
                                         </div>
 
@@ -271,7 +271,7 @@
 
                                             <div class="form-group col-md-4">
                                                 <label for="adresa"><img class="flow-icons-013" src="{{asset('images/icons/icon.svg')}}"> Adresa (ne prikazuje se)</label>
-                                                <input type="text" name="address" id="adresa" class="form-control" placeholder="Unesite adresu sjedišta kluba" value="{{ old('address') }}">
+                                                <input type="text" name="address" id="adresa" class="form-control" placeholder="Unesite adresu sjedišta škole" value="{{ old('address') }}">
                                             </div>
 
                                         </div>
@@ -441,7 +441,7 @@
 
                                                     <div class="form-group col-md-12">
                                                         <label for="opis"><img class="flow-icons-013" src="{{asset('images/icons/edit.svg')}}"> Vremeplov</label>
-                                                        <textarea class="form-control" rows="20" id="opis" name="history" placeholder="Upišite ukratko informacije vezane za historijat vašeg kluba i njegovu tradiciju...">{{ old('history') }}</textarea>
+                                                        <textarea class="form-control" rows="20" id="opis" name="history" placeholder="Upišite ukratko informacije vezane za historijat vaše škole i njenu tradiciju...">{{ old('history') }}</textarea>
                                                     </div>
 
                                                 </div>

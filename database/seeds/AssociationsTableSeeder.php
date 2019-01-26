@@ -16,17 +16,17 @@ class AssociationsTableSeeder extends Seeder
     {
         $associations = [
             [
-                'region' => 'Bosnia and Herzegovina',
+                'region' => 'Bosna i Hercegovina',
                 'sport' => 'Nogomet',
                 'name' => 'Državni savez'
             ],
             [
-                'region' => 'Bosnia and Herzegovina',
+                'region' => 'Bosna i Hercegovina',
                 'sport' => 'Nogomet',
                 'name' => 'Kantonalni savez'
             ],
             [
-                'region' => 'Bosnia and Herzegovina',
+                'region' => 'Bosna i Hercegovina',
                 'sport' => 'Nogomet',
                 'name' => 'Entitetski savez'
             ],

@@ -140,7 +140,7 @@
                                            id="repeat-password" class="form-control" placeholder="Ponovite lozinku">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="pol"><i class="fa fa-venus-mars"></i> Pol:</label>
+                                    <label for="pol"><i class="fa fa-venus-mars"></i> Spol:</label>
                                     <select class="form-control" name="spol" id="pol" required>
                                         <option value="Žensko" {{ $data->spol == 'Žensko' ? 'selected' : '' }}>Žensko
                                         </option>

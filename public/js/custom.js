@@ -2770,7 +2770,7 @@ $(document).ready(function () {
     var date_input4 = $('input[name="date_start"]'); //our date input has the name "date"
     var container4 = $('form').length > 0 ? $('form').parent() : "body";
     var options4 = {
-        dateFormat: 'mm/dd/yy',
+        dateFormat: 'dd.mm.yy',
         container: container4,
         todayHighlight: true,
         autoClose: true,

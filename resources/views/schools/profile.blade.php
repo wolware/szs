@@ -308,14 +308,6 @@
                                 <div class="table-responsive">
                                     <table class="table lineup-table">
                                         <tbody>
-
-                                        <tr>
-                                            <td class="lineup__info">
-                                                <img class="flow-icons-012" src="{{asset('images/icons/tag.svg')}}" alt="">
-                                            </td>
-                                            <td class="lineup__num">ID škole</td>
-                                            <td class="lineup__name">{{$school->id}}</td>
-                                        </tr>
                                         <tr>
                                             <td class="lineup__info">
                                                 <img class="flow-icons-012" src="{{asset('images/icons/calendar-add-event-button-with-plus-sign.svg')}}" alt="">
@@ -330,7 +322,6 @@
                                             <td class="lineup__num">SZS Klub mjeseca</td>
                                             <td class="lineup__name">5</td>
                                         </tr>
-
                                         </tbody>
                                     </table>
                                 </div>

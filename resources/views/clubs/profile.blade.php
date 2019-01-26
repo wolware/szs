@@ -281,15 +281,6 @@
                                 <div class="table-responsive">
                                     <table class="table lineup-table">
                                         <tbody>
-
-                                        <tr>
-                                            <td class="lineup__info">
-                                                <img class="flow-icons-012" src="{{asset('images/icons/tag.svg')}}"
-                                                     alt="">
-                                            </td>
-                                            <td class="lineup__num">ID kluba</td>
-                                            <td class="lineup__name">{{$club->id}}</td>
-                                        </tr>
                                         <tr>
                                             <td class="lineup__info">
                                                 <img class="flow-icons-012"
@@ -350,8 +341,6 @@
                                                             <a href="{{url('/messages/create?user='.$club->creator->id.'&email='.$club->creator->email)}}"><i
                                                                         class="fa fa-envelope"></i> Pošalji poruku</a>
                                                         @endif
-                                                        <span class="team-leader__player-position"><i
-                                                                    class="fa fa-tag"></i> {{$club->creator->id}}</span>
                                                     </div>
                                                 </div>
                                             </td>

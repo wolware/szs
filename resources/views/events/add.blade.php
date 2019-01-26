@@ -133,7 +133,7 @@
                                                 <div class="form-group col-md-4">
                                                     <label for="continent"><img class="flow-icons-013" src="{{asset('images/icons/international-delivery.svg')}}"> Kontinent*</label>
                                                     <select name="continent" class="form-control" id="continent">
-                                                        <option selected disabled>Izaberite kontinent kluba</option>
+                                                        <option selected disabled>Izaberite kontinent eventa</option>
                                                         @foreach($regions as $region)
                                                             @if($region->region_type->type == 'Continent')
                                                                 <option data-parent="{{ $region->region_parent }}" value="{{ $region->id }}" {{ old('continent') == $region->id ? 'selected' : '' }}>{{ $region->name }}</option>
@@ -145,7 +145,7 @@
                                                 <div class="form-group col-md-4">
                                                     <label for="country"><img class="flow-icons-013" src="{{asset('images/icons/earth.svg')}}"> Država*</label>
                                                     <select name="country" class="form-control" id="country" {{ old('country') ? '' : 'disabled' }}>
-                                                        <option selected disabled>Izaberite državu kluba</option>
+                                                        <option selected disabled>Izaberite državu eventa</option>
                                                         @foreach($regions as $region)
                                                             @if($region->region_type->type == 'Country')
                                                                 <option data-parent="{{ $region->region_parent }}" value="{{ $region->id }}" {{ old('country') == $region->id ? 'selected' : '' }}>{{ $region->name }}</option>
@@ -157,7 +157,7 @@
                                                 <div class="form-group col-md-4">
                                                     <label for="province"><img class="flow-icons-013" src="{{asset('images/icons/map.svg')}}"> Pokrajina*</label>
                                                     <select name="province" class="form-control" id="province" {{ old('province') ? '' : 'disabled' }}>
-                                                        <option selected disabled>Izaberite pokrajinu kluba</option>
+                                                        <option selected disabled>Izaberite pokrajinu eventa</option>
                                                         @foreach($regions as $region)
                                                             @if($region->region_type->type == 'Province')
                                                                 <option data-parent="{{ $region->region_parent }}" value="{{ $region->id }}" {{ old('province') == $region->id ? 'selected' : '' }}>{{ $region->name }}</option>
@@ -170,7 +170,7 @@
                                                 <div class="form-group col-md-4">
                                                     <label for="region"><img class="flow-icons-013" src="{{asset('images/icons/placeholder.svg')}}"> Regija*</label>
                                                     <select name="region" class="form-control" id="region" {{ old('region') ? '' : 'disabled' }}>
-                                                        <option selected disabled>Izaberite regiju kluba</option>
+                                                        <option selected disabled>Izaberite regiju eventa</option>
                                                         @foreach($regions as $region)
                                                             @if($region->region_type->type == 'Region')
                                                                 <option data-parent="{{ $region->region_parent }}" value="{{ $region->id }}" {{ old('region') == $region->id ? 'selected' : '' }}>{{ $region->name }}</option>
@@ -182,7 +182,7 @@
                                                 <div class="form-group col-md-4">
                                                     <label for="municipality"><img class="flow-icons-013" src="{{asset('images/icons/opcina.svg')}}"> Općina*</label>
                                                     <select name="municipality" class="form-control" id="municipality" {{ old('municipality') ? '' : 'disabled' }}>
-                                                        <option selected disabled>Izaberite općinu kluba</option>
+                                                        <option selected disabled>Izaberite općinu eventa</option>
                                                         @foreach($regions as $region)
                                                             @if($region->region_type->type == 'Municipality')
                                                                 <option data-parent="{{ $region->region_parent }}" value="{{ $region->id }}" {{ old('municipality') == $region->id ? 'selected' : '' }}>{{ $region->name }}</option>
@@ -232,9 +232,9 @@
                                             <div class="form-group col-md-6">
                                                 <label class="control-label" for="date_start"><i class="fa fa-calendar-o"></i>
                                                     Datum početka*</label>
-                                                <div class="input-group date form_date" data-date=""
+                                                <div class="input-group date form_date_event" data-date=""
                                                      data-date-format="mm/dd/yy" data-link-field="dtp_input2"
-                                                     data-link-format="mm/dd/yy">
+                                                     data-link-format="dd.mm.yyyy">
                                                     <input class="form-control" id="date_start" name="date_start" size="16"
                                                            type="text"  placeholder="Izaberite datum početka eventa" value="{{old('date_start')}}" readonly>
 
@@ -245,7 +245,11 @@
 
                                             <div class="form-group col-md-6">
                                                 <label for="time_start">Vrijeme početka*</label>
-                                                <input type="text" name="time_start" id="time_start" class="form-control" placeholder="Unesite vrijeme početka eventa" value="{{ old('time_start') }}">
+                                                {{--<input type="text" name="time_start" id="time_start" class="form-control" placeholder="Unesite vrijeme početka eventa" value="{{ old('time_start') }}">--}}
+                                                <div class="input-group bootstrap-timepicker timepicker">
+                                                    <input id="timepicker" type="text" class="form-control input-small">
+                                                    <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                                </div>
                                             </div>
 
                                             <div class="form-group col-md-6">
