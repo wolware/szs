@@ -288,8 +288,8 @@
                         <ul class="main-nav__list">
                             <li class=""><a href="{{ url('events') }}">Kalendar</a></li>
                             <li class=""><a href="{{ url('associations') }}">Savezi</a></li>
+                            <li class=""><a target="_blank" href="http://157.230.123.77/">Sportski turizam</a></li>
                             <li class="visible-xs"><a href="www.rekreacija.svezasport.ba">SZS Rekreacija</a></li>
-                            <li class="visible-xs"><a href="#">SZS Aplikacije</a></li>
                             <li class="visible-xs"><a href="#">Sportski turizam</a></li>
                         </ul>
 
