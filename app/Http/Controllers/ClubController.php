@@ -58,6 +58,9 @@ class ClubController extends Controller
         $clubCategories = $this->clubRepository->getSportCategories();
         $associations = $this->associationRepository->getAll();
 
+        $scripts[] = '/js/validation/clubs-tab-validation.js';
+        view()->share('scripts', $scripts);
+
         return view('clubs.new', compact('regions', 'sports', 'clubCategories', 'associations'));
     }
 

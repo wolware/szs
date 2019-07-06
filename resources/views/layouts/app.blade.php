@@ -66,7 +66,7 @@
     <!-- Template CSS-->
     <link href="{{ asset('/css/datepicker.css?t=44') }}" rel="stylesheet">
     {{-- <link href="{{ asset('/css/timepicki.css') }}" rel="stylesheet">--}}
-    <link type="text/css" href="{{ asset('/css/bootstrap-timepicker.min.css') }}" />
+    <link type="text/css" href="{{ asset('/css/bootstrap-timepicker.min.css') }}"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css" rel="stylesheet">
     <link href="{{ asset('/css/style.css?t=') }}{{time()}}" rel="stylesheet">
     <link href="{{ asset('/css/custom.css?t=') }}{{time()}}" rel="stylesheet">
@@ -93,7 +93,9 @@
 </script>
 <!-- Place this tag in your head or just before your close body tag. -->
 <script src="https://apis.google.com/js/platform.js" async defer>
-    {lang: 'hr'}
+    {
+        lang: 'hr'
+    }
 </script>
 
 <div class="site-wrapper clearfix">
@@ -499,10 +501,10 @@
 
     gtag('config', 'UA-124046232-1');
 
-        $('#timepicker').timepicker({
-            minuteStep: 5,
-            showMeridian: false
-        });
+    $('#timepicker').timepicker({
+        minuteStep: 5,
+        showMeridian: false
+    });
 
     $('.form_date').datetimepicker({
         language: 'hr',
@@ -528,6 +530,10 @@
     });
 
 </script>
-
+@if(isset($scripts))
+    @foreach($scripts as $script)
+        <script src="{{$script}}" type="text/javascript"></script>
+    @endforeach
+@endif
 </body>
 </html>
