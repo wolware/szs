@@ -185,6 +185,9 @@ class PlayerController extends Controller
         $clubs = $this->clubRepository
             ->getAllForSport($sport_id);
 
+        $scripts[] = '/js/validation/athletes-tab-validation.js';
+        view()->share('scripts', $scripts);
+
         return view('athlete.new', compact('sport', 'inputs', 'playerNatures', 'regions', 'clubs'));
     }
 

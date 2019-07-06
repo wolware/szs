@@ -13,4 +13,4 @@ yarn-error.log
 package-lock.json
 
 public/js/validation
-mix-manifest.json
+public/mix-manifest.json
