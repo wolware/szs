@@ -60,7 +60,7 @@
                             <input type="hidden" name="latitude" id="latitude" value="{{ old('latitude') }}">
                             <input type="hidden" name="longitude" id="longitude" value="{{ old('longitude') }}">
                         <!-- Tab panes -->
-                            <div class="tab-content card__content">
+                            <div class="tab-content card__content" id="tabs">
                                 <!-- Tab: Općenito -->
                                 <div role="tabpanel" class="tab-pane fade in active" id="tab-opcenito">
                                     <div class="row">

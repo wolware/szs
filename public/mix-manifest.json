@@ -4,6 +4,7 @@
     "/js/validation/staff-tab-validation.js": "/js/validation/staff-tab-validation.js",
     "/js/validation/schools-tab-validation.js": "/js/validation/schools-tab-validation.js",
     "/js/validation/objects-tab-validation.js": "/js/validation/objects-tab-validation.js",
+    "/js/validation/event-tab-validation.js": "/js/validation/event-tab-validation.js",
     "/js/validation/clubs-tab-validation.js": "/js/validation/clubs-tab-validation.js",
     "/js/validation/athletes-tab-validation.js": "/js/validation/athletes-tab-validation.js"
 }
