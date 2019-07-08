@@ -15,5 +15,6 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .js('resources/assets/js/clubs-tab-validation.js', 'public/js/validation')
     .js('resources/assets/js/athletes-tab-validation.js', 'public/js/validation')
     .js('resources/assets/js/objects-tab-validation.js', 'public/js/validation')
+    .js('resources/assets/js/staff-tab-validation.js', 'public/js/validation')
     .js('resources/assets/js/schools-tab-validation.js', 'public/js/validation')
    .sass('resources/assets/sass/app.scss', 'public/css');
