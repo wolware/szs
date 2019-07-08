@@ -129,7 +129,7 @@ class SchoolController extends Controller
         $sports = $this->sportRepository->getAll();
         $clubCategories = $this->clubRepository->getSportCategories();
 
-        $scripts[] = '/js/validation/schools-tab-validation.js';
+        $scripts[] = '/js/validation/schools-validation.js';
         view()->share('scripts', $scripts);
 
         return view('schools.new', compact('regions', 'sports', 'clubCategories'));

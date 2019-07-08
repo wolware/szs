@@ -104,7 +104,7 @@ class StaffController extends Controller
 
     public function displayAddStaff() {
 
-        $scripts[] = '/js/validation/staff-tab-validation.js';
+        $scripts[] = '/js/validation/staff-validation.js';
         view()->share('scripts', $scripts);
 
         $languages = Language::all();

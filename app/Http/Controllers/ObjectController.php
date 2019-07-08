@@ -229,7 +229,7 @@ class ObjectController extends Controller
     public function displayAddObject($object_id)
     {
 
-        $scripts[] = '/js/validation/objects-tab-validation.js';
+        $scripts[] = '/js/validation/objects-validation.js';
         view()->share('scripts', $scripts);
 
         $object_type = $this->objectRepository

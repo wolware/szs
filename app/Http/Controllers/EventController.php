@@ -24,7 +24,7 @@ class EventController extends Controller
 
     public function displayAddEvent(){
 
-        $scripts[] = '/js/validation/event-tab-validation.js';
+        $scripts[] = '/js/validation/event-validation.js';
         view()->share('scripts', $scripts);
 
         $regions = $this->regionRepository

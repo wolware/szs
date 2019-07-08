@@ -119,7 +119,7 @@ class PlayerController extends Controller
 
     public function displayAddPlayer($sport_id)
     {
-        $scripts[] = '/js/validation/athletes-tab-validation.js';
+        $scripts[] = '/js/validation/athletes-validation.js';
         view()->share('scripts', $scripts);
 
         $sport = $this->sportRepository

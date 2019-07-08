@@ -1,10 +1,10 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/js/validation/staff-tab-validation.js": "/js/validation/staff-tab-validation.js",
-    "/js/validation/schools-tab-validation.js": "/js/validation/schools-tab-validation.js",
-    "/js/validation/objects-tab-validation.js": "/js/validation/objects-tab-validation.js",
-    "/js/validation/event-tab-validation.js": "/js/validation/event-tab-validation.js",
-    "/js/validation/clubs-tab-validation.js": "/js/validation/clubs-tab-validation.js",
-    "/js/validation/athletes-tab-validation.js": "/js/validation/athletes-tab-validation.js"
+    "/js/validation/staff-validation.js": "/js/validation/staff-validation.js",
+    "/js/validation/objects-validation.js": "/js/validation/objects-validation.js",
+    "/js/validation/event-validation.js": "/js/validation/event-validation.js",
+    "/js/validation/clubs-validation.js": "/js/validation/clubs-validation.js",
+    "/js/validation/athletes-validation.js": "/js/validation/athletes-validation.js",
+    "/js/validation/schools-validation.js": "/js/validation/schools-validation.js"
 }
