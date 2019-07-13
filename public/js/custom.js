@@ -8,10 +8,10 @@ var stazeCount = 1;
 var cjenovnikSkiCount = 1;
 
 function previewFile(name, place, maxHeight, maxWidth, minHeight, minWidth) {
-    if (typeof(maxHeight) === 'undefined') maxHeight = null;
-    if (typeof(maxWidth) === 'undefined') maxWidth = null;
-    if (typeof(minHeight) === 'undefined') minHeight = null;
-    if (typeof(minWidth) === 'undefined') minWidth = null;
+    if (typeof (maxHeight) === 'undefined') maxHeight = null;
+    if (typeof (maxWidth) === 'undefined') maxWidth = null;
+    if (typeof (minHeight) === 'undefined') minHeight = null;
+    if (typeof (minWidth) === 'undefined') minWidth = null;
 
 
     var preview = $(place);
@@ -30,7 +30,7 @@ function previewFile(name, place, maxHeight, maxWidth, minHeight, minWidth) {
             var height = this.height;
             var width = this.width;
 
-            if(maxHeight && maxWidth && minHeight && minWidth) {
+            if (maxHeight && maxWidth && minHeight && minWidth) {
                 if ((height >= maxHeight || height <= minHeight) || (width >= maxWidth || width <= minWidth)) {
                     error.animate({
                         'color': 'red'
@@ -81,7 +81,7 @@ function previewFile(name, place, maxHeight, maxWidth, minHeight, minWidth) {
     }
 }
 
-$.validator.setDefaults({ ignore: '' });
+$.validator.setDefaults({ignore: ''});
 
 $(document).ready(function () {
 
@@ -116,8 +116,8 @@ $(document).ready(function () {
         imagesPreview(this, '#galerija_dokaz_prikaz');
     });
 
-    $('form').keydown(function(event){
-        if(event.keyCode == 13) {
+    $('form').keydown(function (event) {
+        if (event.keyCode == 13) {
             event.preventDefault();
             return false;
         }
@@ -239,7 +239,7 @@ $(document).ready(function () {
                 maxlength: 255
             }
         },
-        invalidHandler: function(form, validator) {
+        invalidHandler: function (form, validator) {
             $('html, body').animate({scrollTop: '500em'}, 300);
         }
     });
@@ -248,136 +248,6 @@ $(document).ready(function () {
         ignore: ':hidden,:disabled'
     });
 
-    // Validacije forme za dodavanje kluba
-    $('#createNewClub').validate({
-        ignore: ':hidden,:disabled',
-        rules: {
-            logo: {
-                required: false,
-                extension: 'png|jpg|jpeg'
-            },
-            name: {
-                required: true,
-                string: true,
-                maxlength: 255
-            },
-            nature: {
-                required: true,
-                string: true,
-                maxlength: 255
-            },
-            continent: {
-                required: true,
-                digits: true
-            },
-            country: {
-                required: true,
-                digits: true
-            },
-            province: {
-                required: true,
-                digits: true
-            },
-            region: {
-                required: true,
-                digits: true
-            },
-            municipality: {
-                required: true,
-                digits: true
-            },
-            city: {
-                required: true,
-                string: true,
-                maxlength: 255
-            },
-            type: {
-                required: true,
-                digits: true
-            },
-            sport: {
-                required: true,
-                digits: true
-            },
-            category: {
-                required: true,
-                digits: true
-            },
-            established_in: {
-                digits: true,
-                range: [1800, new Date().getFullYear()]
-            },
-            home_field: {
-                string: true,
-                maxlength: 255
-            },
-            competition: {
-                string: true,
-                maxlength: 255
-            },
-            association: {
-                required: true,
-                digits: true
-            },
-            phone_1: {
-                digits: true,
-                maxlength: 255
-            },
-            phone_2: {
-                digits: true,
-                maxlength: 50
-            },
-            fax: {
-                digits: true,
-                maxlength: 50
-            },
-            email: {
-                email: true,
-                maxlength: 255
-            },
-            website: {
-                string: true,
-                maxlength: 255
-            },
-            address: {
-                string: true,
-                maxlength: 255
-            },
-            facebook: {
-                string: true,
-                maxlength: 255
-            },
-            instagram: {
-                string: true,
-                maxlength: 255
-            },
-            twitter: {
-                string: true,
-                maxlength: 255
-            },
-            youtube: {
-                string: true,
-                maxlength: 255
-            },
-            video: {
-                string: true,
-                maxlength: 255
-            },
-            history: {
-                string: true
-            },
-            'galerija[]' : {
-                extension: 'png|jpg|jpeg'
-            },
-            'proof[]' : {
-                required: true,
-                extension: 'png|jpg|jpeg'
-            }
-        },
-        invalidHandler: function(form, validator) {
-            $('html, body').animate({scrollTop: '500em'}, 300);
-        }
-    });
 
     $('#editClubHistory').validate({
         ignore: ':hidden,:disabled',
@@ -408,156 +278,6 @@ $(document).ready(function () {
                 required: true,
                 extension: "jpg|jpeg|png"
             }
-        }
-    });
-
-    $('#createNewPlayer').validate({
-        ignore: ':hidden,:disabled',
-        rules: {
-            avatar: {
-                extension: 'png|jpg|jpeg'
-            },
-            firstname: {
-                required: true,
-                string: true,
-                lettersonly: true,
-                maxlength: 255
-            },
-            lastname: {
-                required: true,
-                string: true,
-                lettersonly: true,
-                maxlength: 255
-            },
-            player_nature: {
-                required: true,
-                digits: true
-            },
-            continent: {
-                required: true,
-                digits: true
-            },
-            country: {
-                required: true,
-                digits: true
-            },
-            province: {
-                required: true,
-                digits: true
-            },
-            region: {
-                required: true,
-                digits: true
-            },
-            municipality: {
-                required: true,
-                digits: true
-            },
-            city: {
-                required: true,
-                string: true,
-                maxlength: 255
-            },
-            facebook: {
-                string: true,
-                maxlength: 255
-            },
-            instagram: {
-                string: true,
-                maxlength: 255
-            },
-            twitter: {
-                string: true,
-                maxlength: 255
-            },
-            youtube: {
-                string: true,
-                maxlength: 255
-            },
-            video: {
-                string: true,
-                maxlength: 255
-            },
-            requested_club: {
-                digits: true
-            },
-            weight: {
-                number: true
-            },
-            height: {
-                number: true
-            },
-            preferred_leg: {
-                string: true,
-                maxlength: 255
-            },
-            preferred_arm: {
-                string: true,
-                maxlength: 255
-            },
-            rank: {
-                digits: true
-            },
-            discipline: {
-                string: true,
-                maxlength: 255
-            },
-            best_result: {
-                string: true,
-                maxlength: 255
-            },
-            agent: {
-                string: true,
-                lettersonly: true,
-                maxlength: 255
-            },
-            position: {
-                string: true,
-                maxlength: 255
-            },
-            competition: {
-                string: true,
-                maxlength: 255
-            },
-            category: {
-                string: true,
-                maxlength: 255
-            },
-            market_value: {
-                digits: true
-            },
-            branch: {
-                string: true,
-                maxlength: 255
-            },
-            belt: {
-                string: true,
-                maxlength: 255
-            },
-            stlye: {
-                string: true,
-                maxlength: 255
-            },
-            distance: {
-                digits: true
-            },
-            coach: {
-                string: true,
-                lettersonly: true,
-                maxlength: 255
-            },
-            best_rank: {
-                digits: true
-            },
-            biography: {
-                string: true
-            },
-            'galerija[]': {
-                extension: "jpg|jpeg|png"
-            }
-        },
-        invalidHandler: function(form, validator) {
-            $('html, body').animate({scrollTop: '500em'}, 300);
         }
     });
 
@@ -628,8 +348,8 @@ $(document).ready(function () {
                 string: true,
                 maxlength: 255
             }
-        } ,
-        invalidHandler: function(form, validator) {
+        },
+        invalidHandler: function (form, validator) {
             $('html, body').animate({scrollTop: '500em'}, 300);
         }
     });
@@ -709,7 +429,7 @@ $(document).ready(function () {
                 digits: true
             }
         },
-        invalidHandler: function(form, validator) {
+        invalidHandler: function (form, validator) {
             $('html, body').animate({scrollTop: '500em'}, 300);
         }
     });
@@ -733,109 +453,6 @@ $(document).ready(function () {
             'galerija[]': {
                 extension: "jpg|jpeg|png"
             }
-        }
-    });
-
-    $('#createNewStaff').validate({
-        ignore: ':hidden,:disabled',
-        rules: {
-            avatar: {
-                extension: 'png|jpg|jpeg'
-            },
-            firstname: {
-                required: true,
-                string: true,
-                lettersonly: true,
-                maxlength: 255
-            },
-            lastname: {
-                required: true,
-                string: true,
-                lettersonly: true,
-                maxlength: 255
-            },
-            profession: {
-                required: true,
-                digits: true
-            },
-            continent: {
-                required: true,
-                digits: true
-            },
-            country: {
-                required: true,
-                digits: true
-            },
-            province: {
-                required: true,
-                digits: true
-            },
-            region: {
-                required: true,
-                digits: true
-            },
-            municipality: {
-                required: true,
-                digits: true
-            },
-            city: {
-                required: true,
-                string: true,
-                maxlength: 255
-            },
-            facebook: {
-                string: true,
-                maxlength: 255
-            },
-            instagram: {
-                string: true,
-                maxlength: 255
-            },
-            twitter: {
-                string: true,
-                maxlength: 255
-            },
-            youtube: {
-                string: true,
-                maxlength: 255
-            },
-            video: {
-                string: true,
-                maxlength: 255
-            },
-            requested_club: {
-                digits: true
-            },
-            club_name: {
-                string: true,
-                maxlength: 255
-            },
-            education: {
-                string: true,
-                maxlength: 255
-            },
-            additional_education: {
-                string: true,
-                maxlength: 255
-            },
-            number_of_certificates: {
-                digits: true
-            },
-            number_of_projects: {
-                digits: true
-            },
-            work_experience: {
-                number: true
-            },
-            biography: {
-                string: true
-            },
-            'galerija[]': {
-                extension: "jpg|jpeg|png"
-            }
-        },
-        invalidHandler: function(form, validator) {
-            $('html, body').animate({scrollTop: '500em'}, 300);
         }
     });
 
@@ -907,7 +524,7 @@ $(document).ready(function () {
                 maxlength: 255
             }
         },
-        invalidHandler: function(form, validator) {
+        invalidHandler: function (form, validator) {
             $('html, body').animate({scrollTop: '500em'}, 300);
         }
     });
@@ -940,7 +557,7 @@ $(document).ready(function () {
                 number: true
             }
         },
-        invalidHandler: function(form, validator) {
+        invalidHandler: function (form, validator) {
             $('html, body').animate({scrollTop: '500em'}, 300);
         }
     });
@@ -964,143 +581,6 @@ $(document).ready(function () {
             'galerija[]': {
                 extension: "jpg|jpeg|png"
             }
-        }
-    });
-
-    $('#createNewSchool').validate({
-        ignore: ':hidden,:disabled',
-        rules: {
-            logo: {
-                required: true,
-                extension: 'png|jpg|jpeg'
-            },
-            name: {
-                required: true,
-                string: true,
-                maxlength: 255
-            },
-            nature: {
-                required: true,
-                string: true,
-                maxlength: 255
-            },
-            continent: {
-                required: true,
-                digits: true
-            },
-            country: {
-                required: true,
-                digits: true
-            },
-            province: {
-                required: true,
-                digits: true
-            },
-            region: {
-                required: true,
-                digits: true
-            },
-            municipality: {
-                required: true,
-                digits: true
-            },
-            city: {
-                required: true,
-                string: true,
-                maxlength: 255
-            },
-            type: {
-                required: true,
-                digits: true
-            },
-            sport: {
-                required: true,
-                digits: true
-            },
-            category: {
-                required: true,
-                digits: true
-            },
-            established_in: {
-                digits: true,
-                range: [1800, new Date().getFullYear()]
-            },
-            home_field: {
-                string: true,
-                maxlength: 255
-            },
-            competition: {
-                string: true,
-                maxlength: 255
-            },
-            phone_1: {
-                digits: true,
-                maxlength: 255
-            },
-            phone_2: {
-                digits: true,
-                maxlength: 50
-            },
-            fax: {
-                digits: true,
-                maxlength: 50
-            },
-            email: {
-                email: true,
-                maxlength: 255
-            },
-            website: {
-                string: true,
-                maxlength: 255
-            },
-            address: {
-                string: true,
-                maxlength: 255
-            },
-            pioniri: {
-                required: true,
-                digits: true,
-                range: [0, 1]
-            },
-            kadeti: {
-                required: true,
-                digits: true,
-                range: [0, 1]
-            },
-            juniori: {
-                required: true,
-                digits: true,
-                range: [0, 1]
-            },
-            facebook: {
-                string: true,
-                maxlength: 255
-            },
-            instagram: {
-                string: true,
-                maxlength: 255
-            },
-            twitter: {
-                string: true,
-                maxlength: 255
-            },
-            youtube: {
-                string: true,
-                maxlength: 255
-            },
-            video: {
-                string: true,
-                maxlength: 255
-            },
-            history: {
-                string: true
-            },
-            'galerija[]': {
-                extension: 'png|jpg|jpeg'
-            }
-        },
-        invalidHandler: function(form, validator) {
-            $('html, body').animate({scrollTop: '500em'}, 300);
         }
     });
 
@@ -1229,7 +709,7 @@ $(document).ready(function () {
                 maxlength: 255
             }
         },
-        invalidHandler: function(form, validator) {
+        invalidHandler: function (form, validator) {
             $('html, body').animate({scrollTop: '500em'}, 300);
         }
     });
@@ -1255,309 +735,6 @@ $(document).ready(function () {
             'galerija[]': {
                 extension: "jpg|jpeg|png"
             }
-        }
-    });
-
-    $('#createNewObject').validate({
-        ignore: ':hidden,:disabled',
-        rules: {
-            image: {
-                required: true,
-                extension: 'png|jpg|jpeg'
-            },
-            name: {
-                required: true,
-                string: true,
-                maxlength: 255
-            },
-            continent: {
-                required: true,
-                digits: true
-            },
-            country: {
-                required: true,
-                digits: true
-            },
-            province: {
-                required: true,
-                digits: true
-            },
-            region: {
-                required: true,
-                digits: true
-            },
-            municipality: {
-                required: true,
-                digits: true
-            },
-            city: {
-                required: true,
-                string: true,
-                maxlength: 255
-            },
-            facebook: {
-                string: true,
-                maxlength: 255
-            },
-            instagram: {
-                string: true,
-                maxlength: 255
-            },
-            twitter: {
-                string: true,
-                maxlength: 255
-            },
-            youtube: {
-                string: true,
-                maxlength: 255
-            },
-            number_of_fields: {
-                digits: true,
-                range: [1, 50]
-            },
-            number_of_pools: {
-                digits: true,
-                range: [1, 50]
-            },
-            number_of_tracks: {
-                digits: true,
-                range: [1, 100]
-            },
-            number_of_balls: {
-                digits: true,
-                range: [1, 500]
-            },
-            number_of_shooting_places: {
-                digits: true,
-                range: [1, 500]
-            },
-            type_of_grass: {
-                string: true,
-                maxlength: 255,
-                lettersonly: true
-            },
-            elevation: {
-                digits: true,
-                range: [1, 8000]
-            },
-            stadium_length: {
-                digits: true,
-                range: [1, 300]
-            },
-            stadium_width: {
-                digits: true,
-                range: [1, 300]
-            },
-            number_of_ski_tracks: {
-                digits: true,
-                range: [1, 200]
-            },
-            number_of_ski_lifts: {
-                digits: true,
-                range: [1, 200]
-            },
-            water_effects: {
-                digits: true,
-                range: [0, 1]
-            },
-            area: {
-                digits: true
-            },
-            water_area: {
-                digits: true
-            },
-            capacity: {
-                digits: true
-            },
-            pool_capacity: {
-                digits: true
-            },
-            stadium_capacity: {
-                digits: true
-            },
-            type_of_field: {
-                string: true,
-                maxlength: 255,
-                lettersonly: true
-            },
-            wifi: {
-                string: true,
-                maxlength: 255,
-                lettersonly: true
-            },
-            parking: {
-                string: true,
-                maxlength: 255,
-                lettersonly: true
-            },
-            restaurant: {
-                string: true,
-                maxlength: 255,
-                lettersonly: true
-            },
-            hotels: {
-                string: true,
-                maxlength: 255
-            },
-            cafe: {
-                string: true,
-                maxlength: 255,
-                lettersonly: true
-            },
-            access_to_disabled: {
-                string: true,
-                maxlength: 255,
-                lettersonly: true
-            },
-            number_of_locker_rooms: {
-                digits: true,
-                range: [0, 50]
-            },
-            rent_equipment: {
-                digits: true,
-                range: [0, 1]
-            },
-            hot_water_showers: {
-                digits: true,
-                range: [0, 1]
-            },
-            result_board: {
-                digits: true,
-                range: [0, 1]
-            },
-            kids_playground: {
-                digits: true,
-                range: [0, 1]
-            },
-            wardrobe_with_key: {
-                digits: true,
-                range: [0, 1]
-            },
-            props: {
-                digits: true,
-                range: [0, 1]
-            },
-            air_conditioning: {
-                digits: true,
-                range: [0, 1]
-            },
-            protective_net: {
-                digits: true,
-                range: [0, 1]
-            },
-            optimum_temperature: {
-                digits: true,
-                range: [0, 1]
-            },
-            video_surveillance: {
-                digits: true,
-                range: [0, 1]
-            },
-            equipment_rent: {
-                digits: true,
-                range: [0, 1]
-            },
-            kid_pools: {
-                digits: true,
-                range: [0, 1]
-            },
-            entering_a_props: {
-                digits: true,
-                range: [0, 1]
-            },
-            urine_detector: {
-                digits: true,
-                range: [0, 1]
-            },
-            reservations: {
-                digits: true,
-                range: [0, 1]
-            },
-            child_equipment: {
-                digits: true,
-                range: [0, 1]
-            },
-            special_shoes: {
-                digits: true,
-                range: [0, 1]
-            },
-            hygiene_equipment: {
-                digits: true,
-                range: [0, 1]
-            },
-            member_card: {
-                digits: true,
-                range: [0, 1]
-            },
-            maintenance_service: {
-                digits: true,
-                range: [0, 1]
-            },
-            emergency_intervention: {
-                digits: true,
-                range: [0, 1]
-            },
-            skiing_school: {
-                digits: true,
-                range: [0, 1]
-            },
-            snowboarding_school: {
-                digits: true,
-                range: [0, 1]
-            },
-            skiing_equipment_shops: {
-                digits: true,
-                range: [0, 1]
-            },
-            mobile_rescue_team: {
-                digits: true,
-                range: [0, 1]
-            },
-            night_skiing: {
-                digits: true,
-                range: [0, 1]
-            },
-            commenting_cabins: {
-                digits: true,
-                range: [0, 1]
-            },
-            speaker_system: {
-                digits: true,
-                range: [0, 1]
-            },
-            fan_shop: {
-                digits: true,
-                range: [0, 1]
-            },
-            use_own_equipment: {
-                digits: true,
-                range: [0, 1]
-            },
-            equipment_service: {
-                digits: true,
-                range: [0, 1]
-            },
-            shooting_school: {
-                digits: true,
-                range: [0, 1]
-            },
-            protective_equipment: {
-                digits: true,
-                range: [0, 1]
-            },
-            history: {
-                string: true
-            },
-            'galerija[]' : {
-                extension: 'png|jpg|jpeg'
-            },
-            'proof[]' : {
-                required: true,
-                extension: 'png|jpg|jpeg'
-            }
-        },
-        invalidHandler: function(form, validator) {
-            $('html, body').animate({scrollTop: '500em'}, 300);
         }
     });
 
@@ -1624,7 +801,7 @@ $(document).ready(function () {
                 maxlength: 255
             }
         },
-        invalidHandler: function(form, validator) {
+        invalidHandler: function (form, validator) {
             $('html, body').animate({scrollTop: '500em'}, 300);
         }
     });
@@ -1867,7 +1044,7 @@ $(document).ready(function () {
                 range: [0, 1]
             }
         },
-        invalidHandler: function(form, validator) {
+        invalidHandler: function (form, validator) {
             $('html, body').animate({scrollTop: '500em'}, 300);
         }
     });
@@ -1904,90 +1081,6 @@ $(document).ready(function () {
 
     $('#editObjectSkiPrices').validate({
         ignore: ':hidden,:disabled'
-    });
-
-    $('#createNewEvent').validate({
-        ignore: ':hidden,:disabled',
-        rules: {
-            image: {
-                required: true,
-                extension: 'png|jpg|jpeg'
-            },
-            name: {
-                required: true,
-                string: true,
-                maxlength: 255
-            },
-            type: {
-                required: true,
-                digits: true
-            },
-            sport: {
-                required: true,
-                digits: true
-            },
-            continent: {
-                required: true,
-                digits: true
-            },
-            country: {
-                required: true,
-                digits: true
-            },
-            province: {
-                required: true,
-                digits: true
-            },
-            region: {
-                required: true,
-                digits: true
-            },
-            municipality: {
-                required: true,
-                digits: true
-            },
-            city: {
-                required: true,
-                string: true,
-                maxlength: 255
-            },
-            date_start: {
-                required: true,
-                date: true
-            },
-            time_start: {
-                required: true
-            },
-            event_type_id: {
-                required: true,
-                digits: true
-            },
-            max_participants: {
-                digits: true,
-                range: [1, 10000]
-            },
-            registration_fee: {
-                required: true,
-                number: true,
-                range: [1, 1000]
-            },
-            first_place_award: {
-                required: true,
-                number: true,
-                range: [1, 100000]
-            },
-            duration: {
-                digits: true,
-                range: [1, 50]
-            },
-            description: {
-                string: true,
-                maxlength: 2000
-            }
-        },
-        invalidHandler: function(form, validator) {
-            $('html, body').animate({scrollTop: '500em'}, 300);
-        }
     });
 
     $('#editEventGeneral').validate({
@@ -2035,7 +1128,7 @@ $(document).ready(function () {
                 maxlength: 255
             }
         },
-        invalidHandler: function(form, validator) {
+        invalidHandler: function (form, validator) {
             $('html, body').animate({scrollTop: '500em'}, 300);
         }
     });
@@ -2077,7 +1170,7 @@ $(document).ready(function () {
                 maxlength: 2000
             }
         },
-        invalidHandler: function(form, validator) {
+        invalidHandler: function (form, validator) {
             $('html, body').animate({scrollTop: '500em'}, 300);
         }
     });
@@ -2107,8 +1200,8 @@ $(document).ready(function () {
     setSelectedSports(sportTypeSelect, sportSelect);
 
     // Nadji najveci array key od old inputa za licnost ako postoji
-    if($('.licnostHover').length) {
-        var num = $('.licnostHover').map(function() {
+    if ($('.licnostHover').length) {
+        var num = $('.licnostHover').map(function () {
             return $(this).data('key');
         }).get();
 
@@ -2118,8 +1211,8 @@ $(document).ready(function () {
     }
 
     // Nadji najveci array key od old inputa za nagradu/trofej ako postoji
-    if($('.nagradaHover').length) {
-        var num1 = $('.nagradaHover').map(function() {
+    if ($('.nagradaHover').length) {
+        var num1 = $('.nagradaHover').map(function () {
             return $(this).data('key');
         }).get();
 
@@ -2129,8 +1222,8 @@ $(document).ready(function () {
     }
 
     // Nadji najveci array key od old inputa za klub/historija ako postoji
-    if($('.historyHover').length) {
-        var num2 = $('.historyHover').map(function() {
+    if ($('.historyHover').length) {
+        var num2 = $('.historyHover').map(function () {
             return $(this).data('key');
         }).get();
 
@@ -2140,8 +1233,8 @@ $(document).ready(function () {
     }
 
     // Nadji najveci array key od old inputa za teren/sala ako postoji
-    if($('.terenHover').length) {
-        var num3 = $('.terenHover').map(function() {
+    if ($('.terenHover').length) {
+        var num3 = $('.terenHover').map(function () {
             return $(this).data('key');
         }).get();
 
@@ -2151,8 +1244,8 @@ $(document).ready(function () {
     }
 
     // Nadji najveci array key od old inputa za balon cjenovnik ako postoji
-    if($('.balonCjenovnikHover').length) {
-        var num4 = $('.balonCjenovnikHover').map(function() {
+    if ($('.balonCjenovnikHover').length) {
+        var num4 = $('.balonCjenovnikHover').map(function () {
             return $(this).data('key');
         }).get();
 
@@ -2162,8 +1255,8 @@ $(document).ready(function () {
     }
 
     // Nadji najveci array key od old inputa za staze ako postoji
-    if($('.stazeHover').length) {
-        var num5 = $('.stazeHover').map(function() {
+    if ($('.stazeHover').length) {
+        var num5 = $('.stazeHover').map(function () {
             return $(this).data('key');
         }).get();
 
@@ -2173,8 +1266,8 @@ $(document).ready(function () {
     }
 
     // Nadji najveci array key od old inputa za ski cjenovnik ako postoji
-    if($('.skiCjenovnikHover').length) {
-        var num6 = $('.skiCjenovnikHover').map(function() {
+    if ($('.skiCjenovnikHover').length) {
+        var num6 = $('.skiCjenovnikHover').map(function () {
             return $(this).data('key');
         }).get();
 
@@ -2186,8 +1279,8 @@ $(document).ready(function () {
 
     // Custom metode za validaciju
     // Provjera stringa
-    jQuery.validator.addMethod("string", function(value, element){
-        if(value === null) {
+    jQuery.validator.addMethod("string", function (value, element) {
+        if (value === null) {
             return true;
         }
         if ((typeof value === 'string' || value instanceof String)) {
@@ -2196,7 +1289,7 @@ $(document).ready(function () {
         return false;
     }, "Polje mora biti tipa string.");
 
-    jQuery.validator.addMethod("lettersonly", function(value, element) {
+    jQuery.validator.addMethod("lettersonly", function (value, element) {
         return this.optional(element) || XRegExp('^[\\p{L}|\\s]*$').test(value);
     }, "Polje mora sadržati samo slova");
 
@@ -2247,60 +1340,62 @@ $(document).ready(function () {
     });
 
     // Dodavanje kluba - Obriši ličnost
-    $('#licnostiLista').on('click', '.izbrisiLicnost',function () {
-        $(this).closest('.licnostHover').slideUp('normal', function() { $(this).remove(); } );
+    $('#licnostiLista').on('click', '.izbrisiLicnost', function () {
+        $(this).closest('.licnostHover').slideUp('normal', function () {
+            $(this).remove();
+        });
     });
 
     // Dodavanje kluba - Dodaj nagradu
     $('#dodajNagradu').on('click', function () {
-       var nagrada_form_input = '<div class="row nagradaHover"><div class="izbrisiNagradu"><i class="fa fa-times-circle-o"></i></div><div class="col-md-6">' +
-           '<div class="form-group col-md-6">' +
-           '<label for="vrsta-nagrade"><img class="flow-icons-013" src="/images/icons/medalja.svg"> Vrsta nagrade</label>' +
-           '<select name="nagrada[' + nagradeCount + '][vrsta]" class="form-control">' +
-           '<option value="" selected>Izaberite vrstu osvojene nagrade</option>' +
-           '<option value="Medalja">Medalja</option>' +
-           '<option value="Trofej/Pehar">Trofej/Pehar</option>' +
-           '<option value="Priznanje">Priznanje</option>' +
-           '<option value="Plaketa">Plaketa</option>' +
-           '</select>' +
-           '</div>' +
-           '<div class="form-group col-md-6">' +
-           '<label for="tip-nagrade"><img class="flow-icons-013" src="/images/icons/medalja.svg"> Tip nagrade</label>' +
-           '<select name="nagrada[' + nagradeCount + '][tip]" class="form-control">' +
-           '<option value="" selected>Izaberite tip nagrade</option>' +
-           '<option value="Zlato">Zlato (1. mjesto)</option>' +
-           '<option value="Srebro">Srebro (2. mjesto)</option>' +
-           '<option value="Bronza">Bronza (3. mjesto)</option>' +
-           '<option value="Ostalo">Ostalo</option>' +
-           '</select>' +
-           '</div>' +
-           '<div class="form-group col-md-12">' +
-           '<label for="tip-nagrade"><img class="flow-icons-013" src="/images/icons/medalja.svg"> Nivo takmičenja</label>' +
-           '<select name="nagrada[' + nagradeCount + '][nivo]" class="form-control">' +
-           '<option value="" selected>Izaberite nivo takmičenja</option>' +
-           '<option value="Internacionalni nivo">Internacionalni nivo</option>' +
-           '<option value="Regionalni nivo">Regionalni nivo</option>' +
-           '<option value="Državni nivo">Državni nivo</option>' +
-           '<option value="Entitetski nivo">Entitetski nivo</option>' +
-           '<option value="Drugo">Drugo</option>' +
-           '</select>' +
-           '</div>' +
-           '</div>' +
-           '<div class="col-md-6">' +
-           '<div class="form-group">' +
-           '<label for="takmicenje"><img class="flow-icons-013" src="/images/icons/trophy.svg"> Naziv takmičenja</label>' +
-           '<input type="text" name="nagrada[' + nagradeCount + '][takmicenje]" class="form-control" placeholder="Unesite naziv takmicenja za koje je osvojena nagrada">' +
-           '</div>' +
-           '<div class="form-group col-md-6 col-xs-12">' +
-           '<label for="sezona"><img class="flow-icons-013" src="/images/icons/small-calendar.svg"> Sezona/Godina</label>' +
-           '<input type="text" name="nagrada[' + nagradeCount + '][sezona]" class="form-control" placeholder="Unesite Sezonu/Godinu osvajanja trofeja">' +
-           '</div>' +
-           '<div class="form-group col-md-6 col-xs-12">' +
-           '<label for="osvajanja"><img class="flow-icons-013" src="/images/icons/the-sum-of.svg"> Broj osvajanja</label>' +
-           '<input type="number" name="nagrada[' + nagradeCount + '][osvajanja]" class="form-control" placeholder="Unesite broj osvajanja trofeja">' +
-           '</div>' +
-           '</div>' +
-           '</div>';
+        var nagrada_form_input = '<div class="row nagradaHover"><div class="izbrisiNagradu"><i class="fa fa-times-circle-o"></i></div><div class="col-md-6">' +
+            '<div class="form-group col-md-6">' +
+            '<label for="vrsta-nagrade"><img class="flow-icons-013" src="/images/icons/medalja.svg"> Vrsta nagrade</label>' +
+            '<select name="nagrada[' + nagradeCount + '][vrsta]" class="form-control">' +
+            '<option value="" selected>Izaberite vrstu osvojene nagrade</option>' +
+            '<option value="Medalja">Medalja</option>' +
+            '<option value="Trofej/Pehar">Trofej/Pehar</option>' +
+            '<option value="Priznanje">Priznanje</option>' +
+            '<option value="Plaketa">Plaketa</option>' +
+            '</select>' +
+            '</div>' +
+            '<div class="form-group col-md-6">' +
+            '<label for="tip-nagrade"><img class="flow-icons-013" src="/images/icons/medalja.svg"> Tip nagrade</label>' +
+            '<select name="nagrada[' + nagradeCount + '][tip]" class="form-control">' +
+            '<option value="" selected>Izaberite tip nagrade</option>' +
+            '<option value="Zlato">Zlato (1. mjesto)</option>' +
+            '<option value="Srebro">Srebro (2. mjesto)</option>' +
+            '<option value="Bronza">Bronza (3. mjesto)</option>' +
+            '<option value="Ostalo">Ostalo</option>' +
+            '</select>' +
+            '</div>' +
+            '<div class="form-group col-md-12">' +
+            '<label for="tip-nagrade"><img class="flow-icons-013" src="/images/icons/medalja.svg"> Nivo takmičenja</label>' +
+            '<select name="nagrada[' + nagradeCount + '][nivo]" class="form-control">' +
+            '<option value="" selected>Izaberite nivo takmičenja</option>' +
+            '<option value="Internacionalni nivo">Internacionalni nivo</option>' +
+            '<option value="Regionalni nivo">Regionalni nivo</option>' +
+            '<option value="Državni nivo">Državni nivo</option>' +
+            '<option value="Entitetski nivo">Entitetski nivo</option>' +
+            '<option value="Drugo">Drugo</option>' +
+            '</select>' +
+            '</div>' +
+            '</div>' +
+            '<div class="col-md-6">' +
+            '<div class="form-group">' +
+            '<label for="takmicenje"><img class="flow-icons-013" src="/images/icons/trophy.svg"> Naziv takmičenja</label>' +
+            '<input type="text" name="nagrada[' + nagradeCount + '][takmicenje]" class="form-control" placeholder="Unesite naziv takmicenja za koje je osvojena nagrada">' +
+            '</div>' +
+            '<div class="form-group col-md-6 col-xs-12">' +
+            '<label for="sezona"><img class="flow-icons-013" src="/images/icons/small-calendar.svg"> Sezona/Godina</label>' +
+            '<input type="text" name="nagrada[' + nagradeCount + '][sezona]" class="form-control" placeholder="Unesite Sezonu/Godinu osvajanja trofeja">' +
+            '</div>' +
+            '<div class="form-group col-md-6 col-xs-12">' +
+            '<label for="osvajanja"><img class="flow-icons-013" src="/images/icons/the-sum-of.svg"> Broj osvajanja</label>' +
+            '<input type="number" name="nagrada[' + nagradeCount + '][osvajanja]" class="form-control" placeholder="Unesite broj osvajanja trofeja">' +
+            '</div>' +
+            '</div>' +
+            '</div>';
 
         $(nagrada_form_input).appendTo('#tab-vitrina #nagradeLista').hide().slideDown();
         nagradeCount++;
@@ -2309,15 +1404,17 @@ $(document).ready(function () {
     });
 
     // Dodavanje kluba - Obriši nagradu
-    $('#nagradeLista').on('click', '.izbrisiNagradu',function () {
-        $(this).closest('.nagradaHover').slideUp('normal', function() { $(this).remove(); } );
+    $('#nagradeLista').on('click', '.izbrisiNagradu', function () {
+        $(this).closest('.nagradaHover').slideUp('normal', function () {
+            $(this).remove();
+        });
     });
 
     // Dodavanje kluba - Promjena kontinenta
     continentSelect.on('change', function () {
         var itemsToShow = countrySelect.children("option[data-parent^=" + continentSelect.val() + "]");
 
-        if(itemsToShow.length > 0) {
+        if (itemsToShow.length > 0) {
             countrySelect.prop('disabled', false);
             countrySelect.children('option').hide();
             countrySelect.children('option:first').show();
@@ -2337,7 +1434,7 @@ $(document).ready(function () {
     countrySelect.on('change', function () {
         var itemsToShow = provinceSelect.children("option[data-parent^=" + countrySelect.val() + "]");
 
-        if(itemsToShow.length > 0) {
+        if (itemsToShow.length > 0) {
             provinceSelect.prop('disabled', false);
             provinceSelect.children('option').hide();
             provinceSelect.children('option:first').show();
@@ -2363,7 +1460,7 @@ $(document).ready(function () {
     provinceSelect.on('change', function () {
         var itemsToShow = regionSelect.children("option[data-parent^=" + provinceSelect.val() + "]");
 
-        if(itemsToShow.length > 0) {
+        if (itemsToShow.length > 0) {
             regionSelect.prop('disabled', false);
             regionSelect.children('option').hide();
             regionSelect.children('option:first').show();
@@ -2385,7 +1482,7 @@ $(document).ready(function () {
     regionSelect.on('change', function () {
         var itemsToShow = municipalitySelect.children("option[data-parent^=" + regionSelect.val() + "]");
 
-        if(itemsToShow.length > 0) {
+        if (itemsToShow.length > 0) {
             municipalitySelect.prop('disabled', false);
             municipalitySelect.children('option').hide();
             municipalitySelect.children('option:first').show();
@@ -2404,17 +1501,17 @@ $(document).ready(function () {
     // Selekt za sportove
     sportTypeSelect.on('change', function () {
         var itemsToShow;
-        if(sportTypeSelect.val() == 1 || sportTypeSelect.val() == 2) {
-           if(sportTypeSelect.val() == 1) {
-               itemsToShow = sportSelect.children("option[data-disabled^='0']");
-           } else if (sportTypeSelect.val() == 2) {
-               itemsToShow = sportSelect.children("option[data-disabled^='1']");
-           }
-           sportSelect.prop('selectedIndex', 0);
-           sportSelect.prop('disabled', false);
-           sportSelect.children('option').hide();
-           sportSelect.children('option:first').show();
-           itemsToShow.show();
+        if (sportTypeSelect.val() == 1 || sportTypeSelect.val() == 2) {
+            if (sportTypeSelect.val() == 1) {
+                itemsToShow = sportSelect.children("option[data-disabled^='0']");
+            } else if (sportTypeSelect.val() == 2) {
+                itemsToShow = sportSelect.children("option[data-disabled^='1']");
+            }
+            sportSelect.prop('selectedIndex', 0);
+            sportSelect.prop('disabled', false);
+            sportSelect.children('option').hide();
+            sportSelect.children('option:first').show();
+            itemsToShow.show();
         } else {
             sportSelect.prop('disabled', 'disabled');
         }
@@ -2431,8 +1528,8 @@ $(document).ready(function () {
     // Selekt za sportove search
     $("select#sport_type").on("change", function () {
         var itemsToShow;
-        if($("select#sport_type").val() == 1 || $("select#sport_type").val() == 2) {
-            if($("select#sport_type").val() == 1) {
+        if ($("select#sport_type").val() == 1 || $("select#sport_type").val() == 2) {
+            if ($("select#sport_type").val() == 1) {
                 itemsToShow = sportSelect.children("option[data-disabled^='0']");
             } else if ($("select#sport_type").val() == 2) {
                 itemsToShow = sportSelect.children("option[data-disabled^='1']");
@@ -2473,8 +1570,10 @@ $(document).ready(function () {
     });
 
     // Dodavanje kluba - Obriši ličnost
-    $('#historijaLista').on('click', '.izbrisiHistory',function () {
-        $(this).closest('.historyHover').slideUp('normal', function() { $(this).remove(); } );
+    $('#historijaLista').on('click', '.izbrisiHistory', function () {
+        $(this).closest('.historyHover').slideUp('normal', function () {
+            $(this).remove();
+        });
     });
 
     // Dodavanje objekta - Dodaj teren/salu
@@ -2562,8 +1661,10 @@ $(document).ready(function () {
     });
 
     // Dodavanje objekta - Obriši teren/salu
-    $('#tereniLista').on('click', '.izbrisiTeren',function () {
-        $(this).closest('.terenHover').slideUp('normal', function() { $(this).remove(); } );
+    $('#tereniLista').on('click', '.izbrisiTeren', function () {
+        $(this).closest('.terenHover').slideUp('normal', function () {
+            $(this).remove();
+        });
     });
 
     // Dodavanje objekta - Dodaj cjenovnik
@@ -2605,8 +1706,10 @@ $(document).ready(function () {
     });
 
     // Dodavanje objekta - Obriši cjenovnik
-    $('#balonCjenovnikLista').on('click', '.izbrisiBalonCjenovnik',function () {
-        $(this).closest('.balonCjenovnikHover').slideUp('normal', function() { $(this).remove(); } );
+    $('#balonCjenovnikLista').on('click', '.izbrisiBalonCjenovnik', function () {
+        $(this).closest('.balonCjenovnikHover').slideUp('normal', function () {
+            $(this).remove();
+        });
     });
 
     // Dodavanje objekta - Dodaj stazu
@@ -2655,8 +1758,10 @@ $(document).ready(function () {
     });
 
     // Dodavanje objekta - Obriši stazu
-    $('#stazeLista').on('click', '.izbrisiStazu',function () {
-        $(this).closest('.stazeHover').slideUp('normal', function() { $(this).remove(); } );
+    $('#stazeLista').on('click', '.izbrisiStazu', function () {
+        $(this).closest('.stazeHover').slideUp('normal', function () {
+            $(this).remove();
+        });
     });
 
     // Dodavanje objekta - Dodaj cjenovnik
@@ -2688,24 +1793,26 @@ $(document).ready(function () {
     });
 
     // Dodavanje objekta - Obriši cjenovnik
-    $('#skiCjenovnikLista').on('click', '.izbrisiSkiCjenovnik',function () {
-        $(this).closest('.skiCjenovnikHover').slideUp('normal', function() { $(this).remove(); } );
+    $('#skiCjenovnikLista').on('click', '.izbrisiSkiCjenovnik', function () {
+        $(this).closest('.skiCjenovnikHover').slideUp('normal', function () {
+            $(this).remove();
+        });
     });
 
     $('#time_start').timepicki({
-        min_hour_value:0,
-        max_hour_value:23,
-        show_meridian:false
+        min_hour_value: 0,
+        max_hour_value: 23,
+        show_meridian: false
     });
 
     eventType.on('change', function () {
-       var type = eventType.val();
+        var type = eventType.val();
 
-       if(type == 1) {
-           $('.turnir-options').show();
-       } else {
-           $('.turnir-options').hide();
-       }
+        if (type == 1) {
+            $('.turnir-options').show();
+        } else {
+            $('.turnir-options').hide();
+        }
     });
 
     $('#eventsCalendar').fullCalendar({
@@ -2716,7 +1823,7 @@ $(document).ready(function () {
             right: 'month,agendaWeek,agendaDay'
         },
         events: '/getEventsByDate',
-        eventClick: function(calEvent) {
+        eventClick: function (calEvent) {
             var event_id = calEvent.id;
 
             $(location).attr('href', '/events/' + event_id);
@@ -2745,16 +1852,16 @@ $(document).ready(function () {
     };
     date_input.datepicker(options);
 
-/*    var date_input2 = $('input[name="dob"]'); //our date input has the name "date"
-    var container2 = $('form').length > 0 ? $('form').parent() : "body";
-    var options2 = {
-        dateFormat: 'mm/dd/yy',
-        container: container2,
-        todayHighlight: true,
-        autoClose: true,
-        maxDate: new Date()
-    };
-    date_input2.datepicker(options2);*/
+    /*    var date_input2 = $('input[name="dob"]'); //our date input has the name "date"
+        var container2 = $('form').length > 0 ? $('form').parent() : "body";
+        var options2 = {
+            dateFormat: 'mm/dd/yy',
+            container: container2,
+            todayHighlight: true,
+            autoClose: true,
+            maxDate: new Date()
+        };
+        date_input2.datepicker(options2);*/
 
     var date_input3 = $('input.pickDate'); //our date input has the name "date"
     var container3 = $('form').length > 0 ? $('form').parent() : "body";
@@ -2866,7 +1973,7 @@ jQuery.extend(jQuery.validator.messages, {
 function addLicnostValidation() {
     var licnost = $('form').find('input[name^="licnost"]');
 
-    licnost.filter('input[name$="[ime]"]').each(function() {
+    licnost.filter('input[name$="[ime]"]').each(function () {
         $(this).rules("add", {
             required: true,
             string: true,
@@ -2874,7 +1981,7 @@ function addLicnostValidation() {
         });
     });
 
-    licnost.filter('input[name$="[prezime]"]').each(function() {
+    licnost.filter('input[name$="[prezime]"]').each(function () {
         $(this).rules("add", {
             required: true,
             string: true,
@@ -2882,14 +1989,14 @@ function addLicnostValidation() {
         });
     });
 
-    licnost.filter('input[name$="[opis]"]').each(function() {
+    licnost.filter('input[name$="[opis]"]').each(function () {
         $(this).rules("add", {
             string: true,
             maxlength: 1000
         });
     });
 
-    licnost.filter('input[name$="[avatar]"]').each(function() {
+    licnost.filter('input[name$="[avatar]"]').each(function () {
         $(this).rules("add", {
             extension: 'png|jpg|jpeg'
         });
@@ -2899,7 +2006,7 @@ function addLicnostValidation() {
 function addTrophyValidation() {
     var nagrada = $('form').find('input[name^="nagrada"], select[name^="nagrada"]');
 
-    nagrada.filter('select[name$="[vrsta]"]').each(function() {
+    nagrada.filter('select[name$="[vrsta]"]').each(function () {
         $(this).rules("add", {
             required: true,
             string: true,
@@ -2907,7 +2014,7 @@ function addTrophyValidation() {
         });
     });
 
-    nagrada.filter('select[name$="[tip]"]').each(function() {
+    nagrada.filter('select[name$="[tip]"]').each(function () {
         $(this).rules("add", {
             required: true,
             string: true,
@@ -2915,7 +2022,7 @@ function addTrophyValidation() {
         });
     });
 
-    nagrada.filter('select[name$="[nivo]"]').each(function() {
+    nagrada.filter('select[name$="[nivo]"]').each(function () {
         $(this).rules("add", {
             required: true,
             string: true,
@@ -2923,7 +2030,7 @@ function addTrophyValidation() {
         });
     });
 
-    nagrada.filter('input[name$="[takmicenje]"]').each(function() {
+    nagrada.filter('input[name$="[takmicenje]"]').each(function () {
         $(this).rules("add", {
             required: true,
             string: true,
@@ -2931,7 +2038,7 @@ function addTrophyValidation() {
         });
     });
 
-    nagrada.filter('input[name$="[sezona]"]').each(function() {
+    nagrada.filter('input[name$="[sezona]"]').each(function () {
         $(this).rules("add", {
             required: true,
             digits: true,
@@ -2940,7 +2047,7 @@ function addTrophyValidation() {
     });
 
 
-    nagrada.filter('input[name$="[osvajanja]"]').each(function() {
+    nagrada.filter('input[name$="[osvajanja]"]').each(function () {
         $(this).rules("add", {
             digits: true
         });
@@ -2950,7 +2057,7 @@ function addTrophyValidation() {
 function addGalleryValidation() {
     var gallery = $('form').find('input[name^="galerija"]');
 
-    gallery.each(function() {
+    gallery.each(function () {
         $(this).rules("add", {
             accept: 'image/*'
         });
@@ -2960,7 +2067,7 @@ function addGalleryValidation() {
 function addHistoryValidation() {
     var history = $('form').find('input[name^="history"]');
 
-    history.filter('input[name$="[season]"]').each(function() {
+    history.filter('input[name$="[season]"]').each(function () {
         $(this).rules("add", {
             required: true,
             string: true,
@@ -2968,7 +2075,7 @@ function addHistoryValidation() {
         });
     });
 
-    history.filter('input[name$="[club]"]').each(function() {
+    history.filter('input[name$="[club]"]').each(function () {
         $(this).rules("add", {
             required: true,
             string: true,
@@ -2980,7 +2087,7 @@ function addHistoryValidation() {
 function addTerenValidation() {
     var teren = $('form').find('input[name^="tereni"], select[name^="tereni"]');
 
-    teren.filter('input[name$="[name]"]').each(function() {
+    teren.filter('input[name$="[name]"]').each(function () {
         $(this).rules("add", {
             required: true,
             string: true,
@@ -2988,7 +2095,7 @@ function addTerenValidation() {
         });
     });
 
-    teren.filter('input[name$="[sports][]"]').each(function() {
+    teren.filter('input[name$="[sports][]"]').each(function () {
         $(this).rules("add", {
             required: true,
             string: true,
@@ -2996,7 +2103,7 @@ function addTerenValidation() {
         });
     });
 
-    teren.filter('select[name$="[type_of_field]"]').each(function() {
+    teren.filter('select[name$="[type_of_field]"]').each(function () {
         $(this).rules("add", {
             required: true,
             string: true,
@@ -3005,25 +2112,25 @@ function addTerenValidation() {
         });
     });
 
-    teren.filter('input[name$="[capacity]"]').each(function() {
+    teren.filter('input[name$="[capacity]"]').each(function () {
         $(this).rules("add", {
             digits: true
         });
     });
 
-    teren.filter('input[name$="[public_capacity]"]').each(function() {
+    teren.filter('input[name$="[public_capacity]"]').each(function () {
         $(this).rules("add", {
             digits: true
         });
     });
 
-    teren.filter('input[name$="[length]"]').each(function() {
+    teren.filter('input[name$="[length]"]').each(function () {
         $(this).rules("add", {
             number: true
         });
     });
 
-    teren.filter('input[name$="[width]"]').each(function() {
+    teren.filter('input[name$="[width]"]').each(function () {
         $(this).rules("add", {
             number: true
         });
@@ -3033,7 +2140,7 @@ function addTerenValidation() {
 function addCjenovnikBalonValidation() {
     var cjenovnik = $('form').find('input[name^="cjenovnik"], select[name^="cjenovnik"]');
 
-    cjenovnik.filter('select[name$="[sport]"]').each(function() {
+    cjenovnik.filter('select[name$="[sport]"]').each(function () {
         $(this).rules("add", {
             required: true,
             string: true,
@@ -3041,7 +2148,7 @@ function addCjenovnikBalonValidation() {
         });
     });
 
-    cjenovnik.filter('input[name$="[name]"]').each(function() {
+    cjenovnik.filter('input[name$="[name]"]').each(function () {
         $(this).rules("add", {
             required: true,
             string: true,
@@ -3049,7 +2156,7 @@ function addCjenovnikBalonValidation() {
         });
     });
 
-    cjenovnik.filter('input[name$="[price_per_hour]"]').each(function() {
+    cjenovnik.filter('input[name$="[price_per_hour]"]').each(function () {
         $(this).rules("add", {
             required: true,
             number: true,
@@ -3061,7 +2168,7 @@ function addCjenovnikBalonValidation() {
 function addStazeValidation() {
     var staze = $('form').find('input[name^="staze"], select[name^="staze"]');
 
-    staze.filter('input[name$="[name]"]').each(function() {
+    staze.filter('input[name$="[name]"]').each(function () {
         $(this).rules("add", {
             required: true,
             string: true,
@@ -3069,7 +2176,7 @@ function addStazeValidation() {
         });
     });
 
-    staze.filter('select[name$="[level]"]').each(function() {
+    staze.filter('select[name$="[level]"]').each(function () {
         $(this).rules("add", {
             required: true,
             string: true,
@@ -3078,28 +2185,28 @@ function addStazeValidation() {
         });
     });
 
-    staze.filter('input[name$="[length]"]').each(function() {
+    staze.filter('input[name$="[length]"]').each(function () {
         $(this).rules("add", {
             number: true,
             range: [1, 30000]
         });
     });
 
-    staze.filter('input[name$="[time]"]').each(function() {
+    staze.filter('input[name$="[time]"]').each(function () {
         $(this).rules("add", {
             number: true,
             range: [1, 1000]
         });
     });
 
-    staze.filter('input[name$="[start_point]"]').each(function() {
+    staze.filter('input[name$="[start_point]"]').each(function () {
         $(this).rules("add", {
             number: true,
             range: [1, 8000]
         });
     });
 
-    staze.filter('input[name$="[end_point]"]').each(function() {
+    staze.filter('input[name$="[end_point]"]').each(function () {
         $(this).rules("add", {
             number: true,
             range: [1, 8000]
@@ -3110,7 +2217,7 @@ function addStazeValidation() {
 function addCjenovnikSkiValidation() {
     var cjenovnik = $('form').find('input[name^="cjenovnik"], select[name^="cjenovnik"]');
 
-    cjenovnik.filter('input[name$="[description]"]').each(function() {
+    cjenovnik.filter('input[name$="[description]"]').each(function () {
         $(this).rules("add", {
             required: true,
             string: true,
@@ -3118,7 +2225,7 @@ function addCjenovnikSkiValidation() {
         });
     });
 
-    cjenovnik.filter('input[name$="[price]"]').each(function() {
+    cjenovnik.filter('input[name$="[price]"]').each(function () {
         $(this).rules("add", {
             required: true,
             number: true,
@@ -3126,7 +2233,7 @@ function addCjenovnikSkiValidation() {
         });
     });
 
-    cjenovnik.filter('input[name$="[price_kids]"]').each(function() {
+    cjenovnik.filter('input[name$="[price_kids]"]').each(function () {
         $(this).rules("add", {
             required: true,
             number: true,
@@ -3136,7 +2243,7 @@ function addCjenovnikSkiValidation() {
 }
 
 function updateAssociationsList(sport, country, associationBox, associationRadio) {
-    if(!sport || !country) {
+    if (!sport || !country) {
         associationBox.hide();
         return;
     }
@@ -3144,7 +2251,7 @@ function updateAssociationsList(sport, country, associationBox, associationRadio
     var associationsToShow = associationBox.find("input[data-region=" + country + "][data-sport=" + sport + "]");
     associationRadio.prop('checked', false);
 
-    if(associationsToShow.length > 0) {
+    if (associationsToShow.length > 0) {
         associationRadio.closest('label').hide();
         associationsToShow.closest('label').css('display', 'inline-block');
         associationBox.show();
@@ -3156,8 +2263,8 @@ function updateAssociationsList(sport, country, associationBox, associationRadio
 function setSelectedSports(sportTypeSelect, sportSelect) {
     var selectedOption = sportSelect.val();
     var itemsToShow;
-    if(sportTypeSelect.val() == 1 || sportTypeSelect.val() == 2) {
-        if(sportTypeSelect.val() == 1) {
+    if (sportTypeSelect.val() == 1 || sportTypeSelect.val() == 2) {
+        if (sportTypeSelect.val() == 1) {
             itemsToShow = sportSelect.children("option[data-disabled^='0']");
         } else if (sportTypeSelect.val() == 2) {
             itemsToShow = sportSelect.children("option[data-disabled^='1']");

@@ -59,7 +59,7 @@
                             <form id="createNewSchool" role="form" action="{{ url('/schools/create') }}" method="POST" enctype="multipart/form-data" >
                                 {!! csrf_field() !!}
                                 <!-- Tab panes -->
-                                <div class="tab-content card__content">
+                                <div class="tab-content card__content" id="tabs">
 
 
                                     <!-- Tab: Općenito -->

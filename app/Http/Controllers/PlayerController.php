@@ -119,6 +119,9 @@ class PlayerController extends Controller
 
     public function displayAddPlayer($sport_id)
     {
+        $scripts[] = '/js/validation/athletes-validation.js';
+        view()->share('scripts', $scripts);
+
         $sport = $this->sportRepository
             ->getById($sport_id);
 
@@ -184,6 +187,7 @@ class PlayerController extends Controller
 
         $clubs = $this->clubRepository
             ->getAllForSport($sport_id);
+
 
         return view('athlete.new', compact('sport', 'inputs', 'playerNatures', 'regions', 'clubs'));
     }

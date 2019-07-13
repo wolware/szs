@@ -16,6 +16,9 @@ class NewsController extends Controller
     public function addNewsForm(){
         $vijest_kategorija = VijestKategorija::all();
 
+        $scripts[] = '/js/validation/news-validation.js';
+        view()->share('scripts', $scripts);
+
         return view('news.new', compact('vijest_kategorija'));
     }
 

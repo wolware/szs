@@ -88,7 +88,7 @@
                             <form id="createNewPlayer" role="form" action="{{ url('/athletes/' . $sport->id . '/create') }}" method="POST" enctype="multipart/form-data">
                             {!! csrf_field() !!}
                             <!-- Tab panes -->
-                                <div class="tab-content card__content">
+                                <div class="tab-content card__content" id="tabs">
 
 
                                     <!-- Tab: Općenito -->
