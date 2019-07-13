@@ -247,7 +247,7 @@
                                                 <label for="time_start">Vrijeme početka*</label>
                                                 {{--<input type="text" name="time_start" id="time_start" class="form-control" placeholder="Unesite vrijeme početka eventa" value="{{ old('time_start') }}">--}}
                                                 <div class="input-group bootstrap-timepicker timepicker">
-                                                    <input id="timepicker" type="text" class="form-control input-small">
+                                                    <input id="timepicker" type="text" class="form-control input-small" name="time_start">
                                                     <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
                                                 </div>
                                             </div>
