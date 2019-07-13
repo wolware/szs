@@ -98,7 +98,7 @@
     }
 </script>
 
-<div class="site-wrapper clearfix">
+<div class="site-wrapper clearfix" id="app">
     <div class="site-overlay"></div>
     <!-- Header
       ================================================== -->
