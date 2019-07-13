@@ -535,5 +535,8 @@
         <script src="{{$script}}" type="text/javascript"></script>
     @endforeach
 @endif
+
+@stack('scripts-end')
+
 </body>
 </html>
