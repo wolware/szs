@@ -159,4 +159,9 @@ Route::middleware('auth')->group(function () {
 
     //LOGOUT
     Route::get('user/logout', 'Auth\LoginController@logout');
+
+    /*Uploads*/
+    Route::post('uploads', 'UploadController@postUpload');
+    Route::delete('uploads', 'UploadController@deleteUpload');
+    Route::get('uploads/{folder}/{filename}', 'UploadController@getUpload');
 });
