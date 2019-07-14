@@ -256,7 +256,7 @@ class ClubController extends Controller
         if ($validator->fails()) {
             return redirect('clubs/new')
                 ->withErrors($validator)
-                ->withInput();
+                ->withInput($data->input());
         } else {
             if ($data->filled('logo')) {
                 foreach ($data['logo'] as $file) {

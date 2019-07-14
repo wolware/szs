@@ -20,9 +20,23 @@ $maxFiles
                 <div id="dzpreviews" class="dzpreview dropzone-previews"></div>
             </div>
             <strong>{{isset($dzDescription) ? $dzDescription : "Fajlovi se mogu prebacivati i drag & drop metodom." }}</strong>
-{{--            {!! Form::hidden($zoneID.'-input', isset($zoneDisplay) ? $zoneDisplay : '', ['id' => $zoneID.'-input']) !!}--}}
+
+            @if(old($zoneID) && @count(old($zoneID)))
+                <p><strong>
+                        Predhodno uploadovani fajlovi:
+                    </strong></p>
+                @foreach(old($zoneID) as $attachment)
+                    <p><strong>
+                            {{json_decode($attachment)->originalName}}
+                        </strong></p>
+                    <input type="hidden" name="{{$zoneID}}[attachments]" value="{{$attachment}}">
+                @endforeach
+            @endif
         </div>
     </div>
+
+
+    {{--    {{dd(old('logo'))}}--}}
 
     <div id="{{$zoneID}}-uploaded-files"></div>
 </div>
