@@ -26,7 +26,7 @@ $maxFiles
                 <p><strong>
                         Predhodno uploadovani fajlovi:
                     </strong></p>
-                @foreach(old($zoneID) as $attachment)
+                @foreach(old($zoneID)['attachments'] as $attachment)
                     <p><strong>
                             {{json_decode($attachment)->originalName}}
                         </strong></p>

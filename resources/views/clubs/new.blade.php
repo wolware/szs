@@ -887,20 +887,27 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row dodavanje-slika">
-                                            <div class="col-md-12 sadrzaj-slike">
-                                                <p class="dodaj-sliku-naslov">Dodajte slike *</p>
-                                                <p class="dodaj-sliku-call">koje dokazuju da ste Vi vlasnik kluba</p>
-                                                <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-                                                    Odaberi slike... <input type="file"
-                                                                            class="galerija_dokaz not-visible"
-                                                                            name="proof[]" accept="image/*" multiple>
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="row form-objavi-klub-01" id="galerija_dokaz_prikaz">
-                                        </div>
-
+{{--                                        <div class="row dodavanje-slika">--}}
+{{--                                            <div class="col-md-12 sadrzaj-slike">--}}
+{{--                                                <p class="dodaj-sliku-naslov">Dodajte slike *</p>--}}
+{{--                                                <p class="dodaj-sliku-call">koje dokazuju da ste Vi vlasnik kluba</p>--}}
+{{--                                                <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">--}}
+{{--                                                    Odaberi slike... <input type="file"--}}
+{{--                                                                            class="galerija_dokaz not-visible"--}}
+{{--                                                                            name="proof[]" accept="image/*" multiple>--}}
+{{--                                                </label>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="row form-objavi-klub-01" id="galerija_dokaz_prikaz">--}}
+{{--                                        </div>--}}
+                                        @include('partials.dropzone', [
+                                            'zoneID' => 'proof',
+                                            'zoneUploadUrl' => 'uploads',
+                                            'zoneDeleteUrl' => 'uploads',
+                                            'zoneLabel' => 'Dodajte koje dokazuju da ste Vi vlasnik kluba *',
+                                            'dzDescription' => 'Fotografije se mogu prebaciti i drag & drop metodom.',
+                                            'maxFiles' => 100
+                                            ])
                                         <div class="row">
                                             <div class="col-md-4"></div>
                                             <!--<div class="form-group form-group--submit col-md-4">
