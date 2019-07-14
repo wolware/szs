@@ -99,32 +99,32 @@
 
                                                 <div class="col-md-6 objavi-klub-logo-setup">
 
-                                                    <div class="col-md-7">
+                                                    @include('partials.dropzone', ['zoneID' => 'logo', 'zoneUploadUrl' => 'uploads', 'zoneDeleteUrl' => 'uploads', 'zoneLabel' => 'Identitet kluba'])
+{{--                                                    <div class="col-md-7">--}}
 
-                                                        <div class="alc-staff__photo">
-                                                            <img class="slika-upload-klub" id="slika-upload-klub"
-                                                                 src="{{asset('images/SZS-club-logo.png')}}" alt="">
-                                                        </div>
+{{--                                                        <div class="alc-staff__photo">--}}
+{{--                                                            <img class="slika-upload-klub" id="slika-upload-klub"--}}
+{{--                                                                 src="{{asset('images/SZS-club-logo.png')}}" alt="">--}}
+{{--                                                        </div>--}}
 
-                                                    </div>
+{{--                                                    </div>--}}
+{{--                                                    <div class="col-md-5 sadrzaj-slike">--}}
 
-                                                    <div class="col-md-5 sadrzaj-slike">
+{{--                                                        <p class="dodaj-sliku-naslov klub-a1">Logo kluba*</p>--}}
+{{--                                                        <p class="dodaj-sliku-call">Identitet kluba</p>--}}
+{{--                                                        <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">--}}
+{{--                                                            Odaberi logo... <input type="file" id="file_logo_kluba"--}}
+{{--                                                                                   name="logo" class="not-visible"--}}
+{{--                                                                                   accept="image/*"--}}
+{{--                                                                                   onchange="previewFile('#file_logo_kluba', '#slika-upload-klub', 1024, 1024, 512, 512)">--}}
+{{--                                                        </label>--}}
+{{--                                                        <div class="info001">--}}
+{{--                                                            <p class="info-upload-slike">Preporučene dimenzije za--}}
+{{--                                                                logo:</p>--}}
+{{--                                                            <p class="info-upload-slike">Minimalno: 512x512 px</p>--}}
+{{--                                                        </div>--}}
 
-                                                        <p class="dodaj-sliku-naslov klub-a1">Logo kluba*</p>
-                                                        <p class="dodaj-sliku-call">Identitet kluba</p>
-                                                        <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-                                                            Odaberi logo... <input type="file" id="file_logo_kluba"
-                                                                                   name="logo" class="not-visible"
-                                                                                   accept="image/*"
-                                                                                   onchange="previewFile('#file_logo_kluba', '#slika-upload-klub', 1024, 1024, 512, 512)">
-                                                        </label>
-                                                        <div class="info001">
-                                                            <p class="info-upload-slike">Preporučene dimenzije za
-                                                                logo:</p>
-                                                            <p class="info-upload-slike">Minimalno: 512x512 px</p>
-                                                        </div>
-
-                                                    </div>
+{{--                                                    </div>--}}
                                                 </div>
 
                                                 <div class="col-md-6">

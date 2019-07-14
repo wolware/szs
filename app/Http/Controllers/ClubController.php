@@ -58,6 +58,16 @@ class ClubController extends Controller
         $clubCategories = $this->clubRepository->getSportCategories();
         $associations = $this->associationRepository->getAll();
 
+        $css = [
+            'https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.2.0/dropzone.css'
+        ];
+        view()->share('css', $css);
+
+        $vendorScripts = [
+            '/js/dropzone.js'
+        ];
+        view()->share('vendorScripts', $vendorScripts);
+
         $scripts[] = '/js/validation/clubs-validation.js';
         view()->share('scripts', $scripts);
 

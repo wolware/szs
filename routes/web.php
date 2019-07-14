@@ -163,5 +163,7 @@ Route::middleware('auth')->group(function () {
     /*Uploads*/
     Route::post('uploads', 'UploadController@postUpload');
     Route::delete('uploads', 'UploadController@deleteUpload');
-    Route::get('uploads/{folder}/{filename}', 'UploadController@getUpload');
+    Route::get('images/{folder}/{filename}', function ($folder, $filename){
+        return redirect()->to('/storage/images/' . $folder . '/' . $filename);
+    });
 });

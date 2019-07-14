@@ -77,6 +77,12 @@
     <!-- Additional CSS Themes file - not required-->
     <link rel="stylesheet" href="{{asset('css/easy-autocomplete.themes.min.css')}}">
 
+    @if (isset($css))
+        @foreach ($css as $key => $obj)
+            <link rel="stylesheet" href="{{$obj}}?v={{Config::get('app.assets_version')}}">
+        @endforeach
+    @endif
+
 </head>
 <body>
 <!-- Facebook script for Sharing -->
@@ -98,7 +104,7 @@
     }
 </script>
 
-<div class="site-wrapper clearfix" id="app">
+<div class="site-wrapper clearfix">
     <div class="site-overlay"></div>
     <!-- Header
       ================================================== -->
@@ -393,18 +399,28 @@
 </div>
 <!-- Footer / End -->
 <!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
 <!-- Javascript Files
  ================================================== -->
 <!-- Core JS -->
 <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('js/core-min.js') }}"></script>
 
+
+<script src="{{mix('js/app.js')}}"></script>
+
 <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
 {{--<script type="text/javascript" src={{asset('js/bootstrap.min.js')}}></script>--}}
 
 {{--<script type="text/javascript" src={{asset('js/jquery-1.8.3.min.js')}}></script>--}}
 
+@if(isset($vendorScripts))
+    @foreach($vendorScripts as $script)
+        <script src="{{$script}}" type="text/javascript"></script>
+    @endforeach
+@endif
+<script>
+    Dropzone.autoDiscover = false;
+</script>
 <!-- Template JS -->
 <script type="text/javascript" src={{asset('js/validate.js')}}></script>
 <script type="text/javascript" src="http://cdn.jsdelivr.net/jquery.validation/1.13.1/additional-methods.js"></script>
@@ -420,6 +436,8 @@
     );
 </script>
 <script src="{{ asset('js/init.js') }}"></script>
+
+
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBmi40ZDQOH7C-IoehR0_DSk0QrMdXrPi4&libraries=places&region=BA&language=hr"></script>
 <script>
     Element.prototype.remove = function () {

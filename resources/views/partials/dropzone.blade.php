@@ -24,14 +24,47 @@ $zoneDeleteUrl
 
 @push('scripts-end')
     <script>
-        $(document).ready(function(){
+        $(document).ready(function () {
+            // Dropzone.autoDiscover = false;
+            $("#{{$zoneID}}").dropzone({
+                url: "/{{$zoneUploadUrl}}",
+                addRemoveLinks: true,
+                init: function () {
+                    this.on("removedfile", function (file) {
+                        if (file.status == 'success') {
+                            var fileUploded = file.previewElement.querySelector("[data-dz-name]");
 
-            window.callDropzoneOn(
-                '{{$zoneUploadUrl}}', // change to laravel route
-                '{{$zoneDeleteUrl}}', // change to laravel route
-                '#{{$zoneID}}', // .dropzone class element
-                '#{{$zoneID}}-input' // input for file paths
-            );
+                            var filename = $(fileUploded).attr('data-path');
+
+                            $.ajax({
+                                url: '/{{$zoneDeleteUrl}}',
+                                type: "delete",
+                                data: {'path': filename},
+                                success: function (data) {
+                                    $('[value="' + filename + '"]').remove();
+                                }
+                            });
+                        }
+                    });
+                },
+                sending: function (file, xhr, formData) {
+                    formData.append("_token", $('meta[name="csrf-token"]').attr('content'));
+                },
+                success: function (file, response) {
+
+                    $('<input>').attr('type', 'hidden').attr('name', 'attachments[]').val(JSON.stringify(response)).appendTo('#attachments-files');
+
+                    var fileUploded = file.previewElement.querySelector("[data-dz-name]");
+                    $(fileUploded).attr('data-path', response.path);
+
+                    file.previewElement.classList.add("dz-success");
+                    console.log("Successfully uploaded :" + response.originalName);
+                },
+                error: function (file, response) {
+                    file.previewElement.classList.add("dz-error");
+                }
+            });
+
         });
     </script>
 @endpush
