@@ -109,12 +109,12 @@
                                                                 'maxFiles' => 1
                                                                 ])
 {{--                                                    <div class="col-md-7">--}}
-
+{{----}}
 {{--                                                        <div class="alc-staff__photo">--}}
 {{--                                                            <img class="slika-upload-klub" id="slika-upload-klub"--}}
 {{--                                                                 src="{{asset('images/SZS-club-logo.png')}}" alt="">--}}
 {{--                                                        </div>--}}
-
+{{----}}
 {{--                                                    </div>--}}
 {{--                                                    <div class="col-md-5 sadrzaj-slike">--}}
 
@@ -126,11 +126,11 @@
 {{--                                                                                   accept="image/*"--}}
 {{--                                                                                   onchange="previewFile('#file_logo_kluba', '#slika-upload-klub', 1024, 1024, 512, 512)">--}}
 {{--                                                        </label>--}}
-{{--                                                        <div class="info001">--}}
-{{--                                                            <p class="info-upload-slike">Preporučene dimenzije za--}}
-{{--                                                                logo:</p>--}}
-{{--                                                            <p class="info-upload-slike">Minimalno: 512x512 px</p>--}}
-{{--                                                        </div>--}}
+                                                        <div class="info001">
+                                                            <p class="info-upload-slike">Preporučene dimenzije za
+                                                                logo:</p>
+                                                            <p class="info-upload-slike">Minimalno: 512x512 px</p>
+                                                        </div>
 
 {{--                                                    </div>--}}
                                                 </div>
@@ -804,12 +804,20 @@
                                     <div role="tabpanel" class="tab-pane fade" id="tab-galerija">
                                         <div class="row dodavanje-slika">
                                             <div class="col-md-12 sadrzaj-slike">
-                                                <p class="dodaj-sliku-naslov">Dodajte slike</p>
-                                                <p class="dodaj-sliku-call">u Vašu galeriju</p>
-                                                <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-                                                    Odaberi slike... <input type="file" class="galerija not-visible"
-                                                                            name="galerija[]" accept="image/*" multiple>
-                                                </label>
+                                                @include('partials.dropzone', [
+                                                                'zoneID' => 'galerija',
+                                                                'zoneUploadUrl' => 'uploads',
+                                                                'zoneDeleteUrl' => 'uploads',
+                                                                'zoneLabel' => 'Dodajte slike u Vašu galeriju',
+                                                                'dzDescription' => 'Fotografije se mogu prebaciti i drag & drop metodom.',
+                                                                'maxFiles' => 100
+                                                                ])
+{{--                                                <p class="dodaj-sliku-naslov">Dodajte slike</p>--}}
+{{--                                                <p class="dodaj-sliku-call">u Vašu galeriju</p>--}}
+{{--                                                <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">--}}
+{{--                                                    Odaberi slike... <input type="file" class="galerija not-visible"--}}
+{{--                                                                            name="galerija[]" accept="image/*" multiple>--}}
+{{--                                                </label>--}}
                                                 <div class="info001">
                                                     <p class="info-upload-slike">Preporučena dimenzija za vaše
                                                         slike:</p>
@@ -817,8 +825,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row form-objavi-klub-01" id="galerija_prikaz">
-                                        </div>
+{{--                                        <div class="row form-objavi-klub-01" id="galerija_prikaz">--}}
+{{--                                        </div>--}}
 
                                         <div class="row">
                                             <div class="col-md-4"></div>

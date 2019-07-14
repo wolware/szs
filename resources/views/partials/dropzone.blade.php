@@ -20,6 +20,7 @@ $maxFiles
                 <div id="dzpreviews" class="dzpreview dropzone-previews"></div>
             </div>
             <strong>{{isset($dzDescription) ? $dzDescription : "Fajlovi se mogu prebacivati i drag & drop metodom." }}</strong>
+            {!! Form::hidden($zoneID.'Input', isset($zoneDisplay) ? $zoneDisplay : '', ['id' => $zoneID.'Input']) !!}
 
             @if(old($zoneID) && @count(old($zoneID)))
                 <p><strong>
@@ -29,7 +30,7 @@ $maxFiles
                     <p><strong>
                             {{json_decode($attachment)->originalName}}
                         </strong></p>
-                    <input type="hidden" name="{{$zoneID}}[attachments]" value="{{$attachment}}">
+                    <input type="hidden" name="{{$zoneID}}[attachments][{{$loop->index}}]" value="{{$attachment}}">
                 @endforeach
             @endif
         </div>
@@ -41,7 +42,9 @@ $maxFiles
 
 @push('scripts-end')
     <script>
+
         $(document).ready(function () {
+            var numberOfUploadedFiles = {{old($zoneID) ? count(old($zoneID)): 0 }};
             // Dropzone.autoDiscover = false;
             $("#{{$zoneID}}").dropzone({
                 url: "/{{$zoneUploadUrl}}",
@@ -69,9 +72,9 @@ $maxFiles
                     formData.append("_token", $('meta[name="csrf-token"]').attr('content'));
                 },
                 success: function (file, response) {
-
-                    $('<input>').attr('type', 'hidden').attr('name', '{{$zoneID}}[attachments]').val(JSON.stringify(response)).appendTo('#{{$zoneID}}-uploaded-files');
-
+                    console.log(file, response);
+                    $('<input>').attr('type', 'hidden').attr('name', '{{$zoneID}}[attachments]['+numberOfUploadedFiles+']').val(JSON.stringify(response)).appendTo('#{{$zoneID}}-uploaded-files');
+                    numberOfUploadedFiles++;
                     var fileUploded = file.previewElement.querySelector("[data-dz-name]");
                     $(fileUploded).attr('data-path', response.path);
 

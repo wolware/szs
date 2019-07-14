@@ -248,7 +248,7 @@ class ClubController extends Controller
             'nagrada.*.osvajanja' => 'nullable|integer',
             // Slike
             'galerija' => 'array',
-            'galerija.*' => 'required|image',
+//            'galerija.*' => 'required|image',
             // Dokazi
             'proof' => 'required|array',
             'proof.*' => 'required|image',
@@ -260,7 +260,7 @@ class ClubController extends Controller
                 ->withInput($data->input());
         } else {
             if ($data->filled('logo')) {
-                foreach ($data['logo'] as $file) {
+                foreach ($data['logo']['attachments'] as $file) {
                     $logo = UploadController::moveToStorage($file, '/images/club_logo');
                     $newLogoName = $logo['name'];
                 }
@@ -357,15 +357,16 @@ class ClubController extends Controller
                     }
                 }
 
-                if ($data->file('galerija')) {
-                    $galerije = $data->file('galerija');
-                    foreach ($galerije as $key => $slika) {
-                        $newgalName = $key . '-' . time() . '-' . $club_id . '.' . $slika->getClientOriginalExtension();
-                        $destPath = public_path('/images/galerija_klub');
-                        $slika->move($destPath, $newgalName);
+                if ($data->filled('galerija')) {
+                    $galerije = $data['galerija'];
+                    foreach ($galerije['attachments'] as $key => $slika) {
+                        $image = UploadController::moveToStorage($slika, '/images/galerija_klub');
+//                        $newgalName = $key . '-' . time() . '-' . $club_id . '.' . $slika->getClientOriginalExtension();
+//                        $destPath = public_path('/images/galerija_klub');
+//                        $slika->move($destPath, $newgalName);
 
                         Gallery::create([
-                            'image' => $newgalName,
+                            'image' => $image['name'],
                             'club_id' => $club_id
                         ]);
                     }
