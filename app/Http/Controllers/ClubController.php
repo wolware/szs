@@ -50,7 +50,7 @@ class ClubController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+
     public function new_show()
     {
         $regions = $this->regionRepository->getAll();
@@ -74,11 +74,13 @@ class ClubController extends Controller
         return view('clubs.new', compact('regions', 'sports', 'clubCategories', 'associations'));
     }
 
-    public function clubs_add(){
+    public function clubs_add()
+    {
         return view('clubs.add');
     }
 
-    public function index_show(Request $data){
+    public function index_show(Request $data)
+    {
         $clubCategories = $this->clubRepository
             ->getSportCategories();
 
@@ -94,13 +96,13 @@ class ClubController extends Controller
         $region_filled = Input::filled('region');
         $municipality_filled = Input::filled('municipality');
 
-        if($province_filled) {
-            if(!$region_filled) {
+        if ($province_filled) {
+            if (!$region_filled) {
                 $region_ids[] = Input::get('province');
                 $province = $this->regionRepository
                     ->getById(Input::get('province'));
 
-                if($province) {
+                if ($province) {
                     foreach ($province->child_regions as $region) {
                         $region_ids[] = $region->id;
 
@@ -112,13 +114,13 @@ class ClubController extends Controller
             } else {
                 $region_ids[] = Input::get('region');
 
-                if($municipality_filled) {
+                if ($municipality_filled) {
                     $region_ids[] = Input::get('municipality');
                 } else {
                     $region = $this->regionRepository
                         ->getById(Input::get('region'));
 
-                    if($region) {
+                    if ($region) {
                         foreach ($region->child_regions as $region) {
                             $region_ids[] = $region->id;
                         }
@@ -127,31 +129,31 @@ class ClubController extends Controller
             }
         }
 
-        $query = Club::query()->where('status','active');
-        if(Input::filled('category')){
+        $query = Club::query()->where('status', 'active');
+        if (Input::filled('category')) {
             $query->where('club_category_id', Input::get('category'));
         }
 
-        if(Input::filled('sport_type')){
+        if (Input::filled('sport_type')) {
             $type = Input::get('sport_type') == '1' ? 'normal' : 'disabled';
             $query->where('club_type', $type);
         }
 
-        if(Input::filled('sport')){
+        if (Input::filled('sport')) {
             $query->where('sport_id', Input::get('sport'));
         }
 
-        if(!empty($region_ids)){
+        if (!empty($region_ids)) {
             $query->whereIn('region_id', $region_ids);
         }
 
-        if(Input::filled('sort')){
+        if (Input::filled('sort')) {
             $sort = Input::get('sort');
-            if($sort === 'name_desc') {
+            if ($sort === 'name_desc') {
                 $query->orderBy('name', 'DESC');
-            } else if($sort === 'name_asc') {
+            } else if ($sort === 'name_asc') {
                 $query->orderBy('name', 'ASC');
-            } else if($sort === 'sport') {
+            } else if ($sort === 'sport') {
                 $query->whereHas('sport', function ($query) {
                     $query->orderBy('sports.name', 'DESC');
                 });
@@ -164,13 +166,14 @@ class ClubController extends Controller
         return view('clubs.index', compact('clubCategories', 'sports', 'regions', 'results'));
     }
 
-    public function club_show($id){
-        $club = Club::with(['histories','trophies','club_staff','images','creator','association','region'])
+    public function club_show($id)
+    {
+        $club = Club::with(['histories', 'trophies', 'club_staff', 'images', 'creator', 'association', 'region'])
             ->where('id', $id)
             ->first();
 
 
-        if($club) {
+        if ($club) {
             $regions = collect();
             $currentRegion = $club->region;
             while ($currentRegion) {
@@ -185,40 +188,41 @@ class ClubController extends Controller
             $staff = $club->staff()->paginate(12);
 
             $authId = Auth::user() != null ? Auth::user()->id : 0;
-            if($club->user_id != $authId)
-                DB::update('update clubs set number_of_views = ? where id= ?',[$club->number_of_views+1,$club->id]);
+            if ($club->user_id != $authId)
+                DB::update('update clubs set number_of_views = ? where id= ?', [$club->number_of_views + 1, $club->id]);
 
 
-            return view('clubs.profile', compact('club','players', 'staff'));
+            return view('clubs.profile', compact('club', 'players', 'staff'));
         }
 
         abort(404);
     }
 
-    public function new(Request $data){
-    	$validator = Validator::make($data->all(),[
-    	    'logo' => 'image|nullable|dimensions:min_width=200,min_height=200',
-    		'name' => 'required|max:255|string',
-    		'nature' => 'required|max:255|string',
-    		'continent' => 'required|integer|exists:regions,id',
-    		'country' => 'required|integer|exists:regions,id',
-    		'province' => 'integer|exists:regions,id',
-    		'region' => 'integer|exists:regions,id',
-    		'municipality' => 'integer|exists:regions,id',
-    		'city' => 'required|max:255|string',
-    		'type' => 'required|integer',
-    		'sport' => 'required|integer|exists:sports,id',
-    		'category' => 'required|integer|exists:club_categories,id',
-    		'established_in' => 'nullable|digits:4|integer|min:1800|max:'.date('Y'),
-    		'home_field' => 'nullable|max:255|string',
-    		'competition' => 'nullable|max:255|string',
-    		'association' => 'nullable|integer|exists:associations,id',
-    		'phone_1' => 'nullable|max:50|string',
+    public function new(Request $data)
+    {
+        $validator = Validator::make($data->all(), [
+            'logo' => 'array|nullable',
+            'name' => 'required|max:255|string',
+            'nature' => 'required|max:255|string',
+            'continent' => 'required|integer|exists:regions,id',
+            'country' => 'required|integer|exists:regions,id',
+            'province' => 'integer|exists:regions,id',
+            'region' => 'integer|exists:regions,id',
+            'municipality' => 'integer|exists:regions,id',
+            'city' => 'required|max:255|string',
+            'type' => 'required|integer',
+            'sport' => 'required|integer|exists:sports,id',
+            'category' => 'required|integer|exists:club_categories,id',
+            'established_in' => 'nullable|digits:4|integer|min:1800|max:' . date('Y'),
+            'home_field' => 'nullable|max:255|string',
+            'competition' => 'nullable|max:255|string',
+            'association' => 'nullable|integer|exists:associations,id',
+            'phone_1' => 'nullable|max:50|string',
             'phone_2' => 'nullable|max:50|string',
             'fax' => 'nullable|max:50|string',
             'email' => 'nullable|max:255|email',
             'website' => 'nullable|max:255|string',
-    		'address' => 'nullable|max:255|string',
+            'address' => 'nullable|max:255|string',
             'facebook' => 'nullable|max:255|string',
             'instagram' => 'nullable|max:255|string',
             'twitter' => 'nullable|max:255|string',
@@ -239,7 +243,7 @@ class ClubController extends Controller
             'nagrada.*.tip' => 'required|max:255|string|in:Zlato,Srebro,Bronza,Ostalo',
             'nagrada.*.nivo' => 'required|max:255|string|in:Internacionalni nivo,Regionalni nivo,Državni nivo,Entitetski nivo,Drugo',
             'nagrada.*.takmicenje' => 'required|max:255|string',
-            'nagrada.*.sezona' => 'required|digits:4|integer|min:1800|max:'.date('Y'),
+            'nagrada.*.sezona' => 'required|digits:4|integer|min:1800|max:' . date('Y'),
             'nagrada.*.osvajanja' => 'nullable|integer',
             // Slike
             'galerija' => 'array',
@@ -247,33 +251,33 @@ class ClubController extends Controller
             // Dokazi
             'proof' => 'required|array',
             'proof.*' => 'required|image',
-    	]);
+        ]);
 
-    	if ($validator->fails()) {
-    		return redirect('clubs/new')
-    					->withErrors($validator)
-    					->withInput();
-    	} else {
-    		if($data->file('logo')){
-    			$logo = $data->file('logo');
-    			$newLogoName = time() . '-' . Auth::user()->id . '.' . $logo->getClientOriginalExtension();
-    			$destinationPath = public_path('/images/club_logo');
-    			$logo->move($destinationPath, $newLogoName);
-    		} else {
+        if ($validator->fails()) {
+            return redirect('clubs/new')
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            if ($data->filled('logo')) {
+                foreach ($data['logo'] as $file) {
+                    $logo = UploadController::moveToStorage($file, '/images/club_logo');
+                    $newLogoName = $logo['name'];
+                }
+            } else {
                 $newLogoName = 'default.png';
             }
             // Provjeri najmanji level regije
             $region_id = $data->get('country');
 
-    		if($data->has('province')) {
-    		    $region_id = $data->get('province');
+            if ($data->has('province')) {
+                $region_id = $data->get('province');
             }
 
-            if($data->has('region')) {
+            if ($data->has('region')) {
                 $region_id = $data->get('region');
             }
 
-            if($data->has('municipality')) {
+            if ($data->has('municipality')) {
                 $region_id = $data->get('municipality');
             }
 
@@ -305,35 +309,35 @@ class ClubController extends Controller
                 'updated_at' => new Carbon(),
             ]);
 
-    		if(!empty($club_id)){
-                if($data->filled('history')){
+            if (!empty($club_id)) {
+                if ($data->filled('history')) {
                     History::create([
                         'content' => $data->get('history'),
                         'club_id' => $club_id
                     ]);
                 }
 
-                if($data->filled('nagrada')){
-                    foreach($data->get('nagrada') as $key => $nagrada){
-                        if($nagrada){
+                if ($data->filled('nagrada')) {
+                    foreach ($data->get('nagrada') as $key => $nagrada) {
+                        if ($nagrada) {
                             Trophy::create([
                                 'type' => $data['nagrada'][$key]['vrsta'],
                                 'place' => $data['nagrada'][$key]['tip'],
                                 'competition_name' => $data['nagrada'][$key]['takmicenje'],
-                                'level_of_competition' =>  $data['nagrada'][$key]['nivo'],
-                                'season' =>  $data['nagrada'][$key]['sezona'],
+                                'level_of_competition' => $data['nagrada'][$key]['nivo'],
+                                'season' => $data['nagrada'][$key]['sezona'],
                                 'club_id' => $club_id
                             ]);
                         }
                     }
                 }
 
-                if($data->filled('licnost')){
-                    foreach($data->get('licnost') as $key => $licnost){
-                        if($licnost){
+                if ($data->filled('licnost')) {
+                    foreach ($data->get('licnost') as $key => $licnost) {
+                        if ($licnost) {
                             $logo = array_key_exists('avatar', $data['licnost'][$key]) ? $data['licnost'][$key]['avatar'] : null;
 
-                            if($logo) {
+                            if ($logo) {
                                 $newavatarlicnostiName = time() . '-' . $club_id . '.' . $logo->getClientOriginalExtension();
                                 $destPath = public_path('/images/avatar_licnost');
                                 $logo->move($destPath, $newavatarlicnostiName);
@@ -352,10 +356,10 @@ class ClubController extends Controller
                     }
                 }
 
-                if($data->file('galerija')){
+                if ($data->file('galerija')) {
                     $galerije = $data->file('galerija');
-                    foreach($galerije as $key => $slika){
-                        $newgalName = $key . '-' .time() . '-' .  $club_id . '.' . $slika->getClientOriginalExtension();
+                    foreach ($galerije as $key => $slika) {
+                        $newgalName = $key . '-' . time() . '-' . $club_id . '.' . $slika->getClientOriginalExtension();
                         $destPath = public_path('/images/galerija_klub');
                         $slika->move($destPath, $newgalName);
 
@@ -366,10 +370,10 @@ class ClubController extends Controller
                     }
                 }
 
-                if($data->file('proof')){
+                if ($data->file('proof')) {
                     $galerije = $data->file('proof');
-                    foreach($galerije as $key => $slika){
-                        $newgalName = 'proof-' . $key . '-' .time() . '-' .  $club_id . '.' . $slika->getClientOriginalExtension();
+                    foreach ($galerije as $key => $slika) {
+                        $newgalName = 'proof-' . $key . '-' . time() . '-' . $club_id . '.' . $slika->getClientOriginalExtension();
                         $destPath = public_path('/images/club_proof');
                         $slika->move($destPath, $newgalName);
 
@@ -385,23 +389,24 @@ class ClubController extends Controller
                 return redirect('/clubs/' . $club_id);
             }
 
-    	}
+        }
 
         return redirect('/clubs/new');
     }
 
-    public function edit_club_show($id){
+    public function edit_club_show($id)
+    {
 
         $regions = $this->regionRepository->getAll();
         $sports = $this->sportRepository->getAll();
         $clubCategories = $this->clubRepository->getSportCategories();
         $associations = $this->associationRepository->getAll();
 
-        $club = Club::with(['histories','trophies','club_staff','images','creator','association','region','category','association'])
+        $club = Club::with(['histories', 'trophies', 'club_staff', 'images', 'creator', 'association', 'region', 'category', 'association'])
             ->where('id', $id)
             ->first();
 
-        if($club) {
+        if ($club) {
             $clubRegions = collect();
             $currentRegion = $club->region;
             while ($currentRegion) {
@@ -418,14 +423,15 @@ class ClubController extends Controller
 
     }
 
-    public function edit_club(Request $data, $id){
+    public function edit_club(Request $data, $id)
+    {
         // Provjera da li je user vlasnik kluba
         $isOwner = Club::where('id', $id)->where('user_id', Auth::user()->id)->first();
-        if(!$isOwner) {
+        if (!$isOwner) {
             abort(404);
         }
 
-        $validator = Validator::make($data->all(),[
+        $validator = Validator::make($data->all(), [
             'logo' => 'image|dimensions:min_width=200,min_height=200',
             'name' => 'required|max:255|string',
             'nature' => 'required|max:255|string',
@@ -438,7 +444,7 @@ class ClubController extends Controller
             'type' => 'required|integer',
             'sport' => 'required|integer|exists:sports,id',
             'category' => 'required|integer|exists:club_categories,id',
-            'established_in' => 'nullable|digits:4|integer|min:1800|max:'.date('Y'),
+            'established_in' => 'nullable|digits:4|integer|min:1800|max:' . date('Y'),
             'home_field' => 'nullable|max:255|string',
             'competition' => 'nullable|max:255|string',
             'association' => 'nullable|integer|exists:associations,id',
@@ -455,23 +461,23 @@ class ClubController extends Controller
             'video' => 'nullable|max:255|string'
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect('/clubs/' . $id . '/edit')
-                        ->withErrors($validator)
-                        ->withInput();
+                ->withErrors($validator)
+                ->withInput();
         } else {
             // Provjeri najmanji level regije
             $region_id = $data->get('country');
 
-            if($data->has('province')) {
+            if ($data->has('province')) {
                 $region_id = $data->get('province');
             }
 
-            if($data->has('region')) {
+            if ($data->has('region')) {
                 $region_id = $data->get('region');
             }
 
-            if($data->has('municipality')) {
+            if ($data->has('municipality')) {
                 $region_id = $data->get('municipality');
             }
 
@@ -500,7 +506,7 @@ class ClubController extends Controller
                 'updated_at' => new Carbon(),
             ];
 
-            if($data->file('logo')){
+            if ($data->file('logo')) {
                 $logo = $data->file('logo');
                 $newLogoName = time() . '-' . Auth::user()->id . '.' . $logo->getClientOriginalExtension();
                 $destinationPath = public_path('/images/club_logo');
@@ -512,7 +518,7 @@ class ClubController extends Controller
             $updateClub = Club::where('id', $id)
                 ->update($fieldsToUpdate);
 
-            if($updateClub) {
+            if ($updateClub) {
                 flash()->overlay('Uspješno ste editovali "Općenito" sekciju kluba.', 'Čestitamo');
                 return redirect('/clubs/' . $id . '/edit');
             }
@@ -521,11 +527,12 @@ class ClubController extends Controller
         }
     }
 
-    public function edit_licnost(Request $data, $id){
+    public function edit_licnost(Request $data, $id)
+    {
 
         // Provjera da li je user vlasnik kluba
         $isOwner = Club::where('id', $id)->where('user_id', Auth::user()->id)->first();
-        if(!$isOwner) {
+        if (!$isOwner) {
             abort(404);
         }
 
@@ -539,20 +546,20 @@ class ClubController extends Controller
             'licnost.*.opis' => 'nullable|max:1000|string',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect('clubs/' . $id . '/edit')
-                        ->withErrors($validator)
-                        ->withInput();
+                ->withErrors($validator)
+                ->withInput();
         } else {
             $oldIds = [];
 
-            if($data->filled('licnost')){
-                foreach($data->get('licnost') as $key => $licnost){
-                    if($licnost){
+            if ($data->filled('licnost')) {
+                foreach ($data->get('licnost') as $key => $licnost) {
+                    if ($licnost) {
                         $logo = array_key_exists('avatar', $data['licnost'][$key]) ? $data['licnost'][$key]['avatar'] : null;
                         $newavatarlicnostiName = null;
                         // Ako nema id dodaj licnost
-                        if(!array_key_exists('id', $licnost)) {
+                        if (!array_key_exists('id', $licnost)) {
                             if ($logo) {
                                 $newavatarlicnostiName = time() . '-' . $id . '.' . $logo->getClientOriginalExtension();
                                 $destPath = public_path('/images/avatar_licnost');
@@ -573,7 +580,7 @@ class ClubController extends Controller
                         } else {
                             $old_licnost = ClubStaff::where('id', $licnost['id'])->where('club_id', $id)->first();
 
-                            if($old_licnost) {
+                            if ($old_licnost) {
                                 $oldIds[] = $old_licnost->id;
 
                                 $fieldsToUpdate = [
@@ -613,100 +620,103 @@ class ClubController extends Controller
         }
     }
 
-    public function edit_vremeplov(Request $data, $id){
+    public function edit_vremeplov(Request $data, $id)
+    {
 
         // Provjera da li je user vlasnik kluba
         $history = History::where('id', $id)->first();
         $isOwner = Club::where('id', $history->club_id)->where('user_id', Auth::user()->id)->first();
-        if(!$isOwner) {
+        if (!$isOwner) {
             abort(404);
         }
 
-        $validator = Validator::make($data->all(),[
+        $validator = Validator::make($data->all(), [
             'history' => 'nullable|string',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect('clubs/' . $history->club_id . '/edit')
-                        ->withErrors($validator)
-                        ->withInput();
-        }else{
+                ->withErrors($validator)
+                ->withInput();
+        } else {
             $updateHistory = $history
                 ->update([
                     'content' => $data->history
                 ]);
 
-            if($updateHistory) {
+            if ($updateHistory) {
                 flash()->overlay('Uspješno ste editovali historiju kluba.', 'Čestitamo');
                 return redirect('clubs/' . $history->club_id . '/edit');
             }
         }
     }
 
-    public function add_vremeplov(Request $data, $club_id){
+    public function add_vremeplov(Request $data, $club_id)
+    {
 
         // Provjera da li je user vlasnik kluba
         $isOwner = Club::where('id', $club_id)->where('user_id', Auth::user()->id)->first();
-        if(!$isOwner) {
+        if (!$isOwner) {
             abort(404);
         }
 
-        $validator = Validator::make($data->all(),[
+        $validator = Validator::make($data->all(), [
             'history' => 'nullable|string',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect('clubs/' . $club_id . '/edit')
                 ->withErrors($validator)
                 ->withInput();
-        }else{
+        } else {
             $addHistory = History::create([
-                    'content' => $data->history,
-                    'club_id' => $club_id
-                ]);
+                'content' => $data->history,
+                'club_id' => $club_id
+            ]);
 
-            if($addHistory) {
+            if ($addHistory) {
                 flash()->overlay('Uspješno ste editovali historiju kluba.', 'Čestitamo');
                 return redirect('clubs/' . $club_id . '/edit');
             }
         }
     }
 
-    public function edit_trofej(Request $data, $id){
+    public function edit_trofej(Request $data, $id)
+    {
         // Provjera da li je user vlasnik kluba
         $isOwner = Club::where('id', $id)->where('user_id', Auth::user()->id)->first();
-        if(!$isOwner) {
+        if (!$isOwner) {
             abort(404);
         }
 
-        $validator = Validator::make($data->all(),[
+        $validator = Validator::make($data->all(), [
             'nagrada' => 'array',
             'nagrada.*' => 'array',
             'nagrada.*.vrsta' => 'required|max:255|string|in:Medalja,Trofej/Pehar,Priznanje,Plaketa',
             'nagrada.*.tip' => 'required|max:255|string|in:Zlato,Srebro,Bronza,Ostalo',
             'nagrada.*.nivo' => 'required|max:255|string|in:Internacionalni nivo,Regionalni nivo,Državni nivo,Entitetski nivo,Drugo',
             'nagrada.*.takmicenje' => 'required|max:255|string',
-            'nagrada.*.sezona' => 'required|digits:4|integer|min:1800|max:'.date('Y'),
+            'nagrada.*.sezona' => 'required|digits:4|integer|min:1800|max:' . date('Y'),
             'nagrada.*.osvajanja' => 'nullable|integer',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect('clubs/' . $id . '/edit')
-                        ->withErrors($validator)
-                        ->withInput();
+                ->withErrors($validator)
+                ->withInput();
         } else {
             $oldIds = [];
 
-            if($data->filled('nagrada')){
-                foreach($data->get('nagrada') as $key => $nagrada){
-                    if($nagrada){
-                        if(!array_key_exists('id', $nagrada)) {
+            if ($data->filled('nagrada')) {
+                foreach ($data->get('nagrada') as $key => $nagrada) {
+                    if ($nagrada) {
+                        if (!array_key_exists('id', $nagrada)) {
                             $new_nagrada = Trophy::create([
                                 'type' => $data['nagrada'][$key]['vrsta'],
                                 'place' => $data['nagrada'][$key]['tip'],
                                 'competition_name' => $data['nagrada'][$key]['takmicenje'],
-                                'level_of_competition' =>  $data['nagrada'][$key]['nivo'],
-                                'season' =>  $data['nagrada'][$key]['sezona'],
+                                'level_of_competition' => $data['nagrada'][$key]['nivo'],
+                                'season' => $data['nagrada'][$key]['sezona'],
                                 'club_id' => $id
                             ]);
 
@@ -714,15 +724,15 @@ class ClubController extends Controller
                         } else {
                             $old_nagrada = Trophy::where('id', $nagrada['id'])->where('club_id', $id)->first();
 
-                            if($old_nagrada) {
+                            if ($old_nagrada) {
                                 $oldIds[] = $old_nagrada->id;
 
                                 $old_nagrada->update([
                                     'type' => $data['nagrada'][$key]['vrsta'],
                                     'place' => $data['nagrada'][$key]['tip'],
                                     'competition_name' => $data['nagrada'][$key]['takmicenje'],
-                                    'level_of_competition' =>  $data['nagrada'][$key]['nivo'],
-                                    'season' =>  $data['nagrada'][$key]['sezona'],
+                                    'level_of_competition' => $data['nagrada'][$key]['nivo'],
+                                    'season' => $data['nagrada'][$key]['sezona'],
                                 ]);
                             }
                         }
@@ -746,14 +756,15 @@ class ClubController extends Controller
         }
     }
 
-    public function edit_galerija(Request $data, $id){
+    public function edit_galerija(Request $data, $id)
+    {
         // Provjera da li je user vlasnik kluba
         $isOwner = Club::where('id', $id)->where('user_id', Auth::user()->id)->first();
-        if(!$isOwner) {
+        if (!$isOwner) {
             abort(404);
         }
 
-        $validator = Validator::make($data->all(),[
+        $validator = Validator::make($data->all(), [
             'galerija' => 'array',
             'galerija.*' => 'required|image',
         ]);
@@ -763,10 +774,10 @@ class ClubController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         } else {
-            if($data->file('galerija')){
+            if ($data->file('galerija')) {
                 $galerije = $data->file('galerija');
-                foreach($galerije as $key => $slika){
-                    $newgalName = $key . '-' .time() . '-' .  $id . '.' . $slika->getClientOriginalExtension();
+                foreach ($galerije as $key => $slika) {
+                    $newgalName = $key . '-' . time() . '-' . $id . '.' . $slika->getClientOriginalExtension();
                     $destPath = public_path('/images/galerija_klub');
                     $slika->move($destPath, $newgalName);
 
@@ -782,14 +793,15 @@ class ClubController extends Controller
         }
     }
 
-    public function edit_proof(Request $data, $id){
+    public function edit_proof(Request $data, $id)
+    {
         // Provjera da li je user vlasnik kluba
         $isOwner = Club::where('id', $id)->where('user_id', Auth::user()->id)->first();
-        if(!$isOwner) {
+        if (!$isOwner) {
             abort(404);
         }
 
-        $validator = Validator::make($data->all(),[
+        $validator = Validator::make($data->all(), [
             'proof' => 'required|array',
             'proof.*' => 'required|image',
         ]);
@@ -799,10 +811,10 @@ class ClubController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         } else {
-            if($data->file('proof')){
+            if ($data->file('proof')) {
                 $galerije = $data->file('proof');
-                foreach($galerije as $key => $slika){
-                    $newgalName = 'proof-' . $key . '-' .time() . '-' .  $id . '.' . $slika->getClientOriginalExtension();
+                foreach ($galerije as $key => $slika) {
+                    $newgalName = 'proof-' . $key . '-' . time() . '-' . $id . '.' . $slika->getClientOriginalExtension();
                     $destPath = public_path('/images/club_proof');
                     $slika->move($destPath, $newgalName);
 
@@ -819,16 +831,17 @@ class ClubController extends Controller
         }
     }
 
-    public function approvePlayer($id, $player_id, $notify_id) {
+    public function approvePlayer($id, $player_id, $notify_id)
+    {
         // Provjera da li je user vlasnik kluba
         $isOwner = Club::where('id', $id)->where('user_id', Auth::user()->id)->first();
-        if(!$isOwner) {
+        if (!$isOwner) {
             abort(404);
         }
 
         $player = Player::find($player_id);
 
-        if(!$player) {
+        if (!$player) {
             abort(404);
         }
 
@@ -836,8 +849,8 @@ class ClubController extends Controller
 
         $isApproved = false;
 
-        if($request) {
-            if(!$request->approved){
+        if ($request) {
+            if (!$request->approved) {
                 $approveRequest = $request->update([
                     'approved' => true
                 ]);
@@ -849,7 +862,7 @@ class ClubController extends Controller
             }
 
             if ($approveRequest) {
-                if($isApproved) {
+                if ($isApproved) {
                     $updatePlayer = $player->update([
                         'club_id' => $id
                     ]);
@@ -860,7 +873,7 @@ class ClubController extends Controller
                 }
 
                 if ($updatePlayer) {
-                    if($isApproved) {
+                    if ($isApproved) {
                         flash()->overlay('Uspješno ste prihvatili zahtjev sportiste za pridruživanje klubu.', 'Čestitamo');
                     } else {
                         flash()->overlay('Uspješno ste vratili na čekanje zahtjev sportiste za pridruživanje klubu.', 'Čestitamo');
@@ -871,16 +884,17 @@ class ClubController extends Controller
         }
     }
 
-    public function approveStaff($id, $staff_id, $notify_id) {
+    public function approveStaff($id, $staff_id, $notify_id)
+    {
         // Provjera da li je user vlasnik kluba
         $isOwner = Club::where('id', $id)->where('user_id', Auth::user()->id)->first();
-        if(!$isOwner) {
+        if (!$isOwner) {
             abort(404);
         }
 
         $staff = Staff::find($staff_id);
 
-        if(!$staff) {
+        if (!$staff) {
             abort(404);
         }
 
@@ -888,8 +902,8 @@ class ClubController extends Controller
 
         $isApproved = false;
 
-        if($request) {
-            if(!$request->approved){
+        if ($request) {
+            if (!$request->approved) {
                 $approveRequest = $request->update([
                     'approved' => true
                 ]);
@@ -901,7 +915,7 @@ class ClubController extends Controller
             }
 
             if ($approveRequest) {
-                if($isApproved) {
+                if ($isApproved) {
                     $updateStaff = $staff->update([
                         'club_id' => $id
                     ]);
@@ -912,7 +926,7 @@ class ClubController extends Controller
                 }
 
                 if ($updateStaff) {
-                    if($isApproved) {
+                    if ($isApproved) {
                         flash()->overlay('Uspješno ste prihvatili zahtjev stručnog kadra za pridruživanje klubu.', 'Čestitamo');
                     } else {
                         flash()->overlay('Uspješno ste vratili na čekanje zahtjev stručnog kadra za pridruživanje klubu.', 'Čestitamo');

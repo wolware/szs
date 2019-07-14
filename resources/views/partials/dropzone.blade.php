@@ -2,6 +2,12 @@
 $zoneID
 $zoneUploadUrl
 $zoneDeleteUrl
+
+optional:
+$zoneLabel
+$dzMessage
+$dzDescription
+$maxFiles
 -->
 <!-- Some html before -->
 <div class="row">
@@ -10,15 +16,15 @@ $zoneDeleteUrl
             <label for="{{$zoneID}}Input">{{ isset($zoneLabel) ? $zoneLabel : 'Odaberi sliku'}}</label>
             <div id="{{$zoneID}}" class="dzupload dropzone dropzone-file-area"
                  data-uploadtype="attachments">
-                <div class="dz-message">Klikni ili prevuci fajlove ovdje</div>
+                <div class="dz-message">{{isset($dzMessage) ? $dzMessage : "Klikni ili prevuci fajlove ovdje"}}</div>
                 <div id="dzpreviews" class="dzpreview dropzone-previews"></div>
             </div>
-            <strong>Fajlovi se mogu uploadovati i "drag & drop" metodom</strong>
-            {!! Form::hidden($zoneID.'-input', isset($zoneDisplay) ? $zoneDisplay : '', ['id' => $zoneID.'-input']) !!}
+            <strong>{{isset($dzDescription) ? $dzDescription : "Fajlovi se mogu prebacivati i drag & drop metodom." }}</strong>
+{{--            {!! Form::hidden($zoneID.'-input', isset($zoneDisplay) ? $zoneDisplay : '', ['id' => $zoneID.'-input']) !!}--}}
         </div>
     </div>
 
-    <div id="uploaded-files"></div>
+    <div id="{{$zoneID}}-uploaded-files"></div>
 </div>
 <!-- Some html after -->
 
@@ -29,6 +35,7 @@ $zoneDeleteUrl
             $("#{{$zoneID}}").dropzone({
                 url: "/{{$zoneUploadUrl}}",
                 addRemoveLinks: true,
+                maxFiles: "{{isset($maxFiles) ? $maxFiles : 50}}",
                 init: function () {
                     this.on("removedfile", function (file) {
                         if (file.status == 'success') {
@@ -52,13 +59,14 @@ $zoneDeleteUrl
                 },
                 success: function (file, response) {
 
-                    $('<input>').attr('type', 'hidden').attr('name', 'attachments[]').val(JSON.stringify(response)).appendTo('#attachments-files');
+                    $('<input>').attr('type', 'hidden').attr('name', '{{$zoneID}}[attachments]').val(JSON.stringify(response)).appendTo('#{{$zoneID}}-uploaded-files');
 
                     var fileUploded = file.previewElement.querySelector("[data-dz-name]");
                     $(fileUploded).attr('data-path', response.path);
 
                     file.previewElement.classList.add("dz-success");
                     console.log("Successfully uploaded :" + response.originalName);
+
                 },
                 error: function (file, response) {
                     file.previewElement.classList.add("dz-error");
