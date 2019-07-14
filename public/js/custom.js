@@ -1293,59 +1293,6 @@ $(document).ready(function () {
         return this.optional(element) || XRegExp('^[\\p{L}|\\s]*$').test(value);
     }, "Polje mora sadržati samo slova");
 
-    // Dodavanje kluba - Dodaj ličnost
-    $('#dodajLicnost').on('click', function () {
-        var licnost_form_input = '<div class="row licnostHover"><div class="izbrisiLicnost"><i class="fa fa-times-circle-o"></i></div>' +
-            '<div class="row identitet-style">' +
-            '<div class="col-md-6 objavi-klub-logo-setup">' +
-            '<div class="col-md-7">' +
-            '<div class="alc-staff__photo">' +
-            '<img class="slika-edit-profil" id="slika-licnost-prikaz' + licnostiCount + '" src="/images/default_avatar.png" alt="">' +
-            '</div>' +
-            '</div>' +
-            '<div class="col-md-5 sadrzaj-slike">' +
-            '<p class="dodaj-sliku-naslov klub-a1">Slika ličnosti</p>' +
-            '<p class="dodaj-sliku-call">Odaberite sliku za istaknutu ličnost</p>' +
-            '<label class="btn btn-default btn-xs btn-file dodaj-sliku-button">' +
-            'Odaberi sliku... <input type="file" name="licnost[' + licnostiCount + '][avatar]" id="licnostAvatar' + licnostiCount + '" accept="image/*" class="not-visible" onchange="previewFile(\'#licnostAvatar' + licnostiCount + '\',\'#slika-licnost-prikaz' + licnostiCount + '\', 1080, 1920, 250, 312)">' +
-            '</label>' +
-            '<div class="info001">' +
-            '<p class="info-upload-slike">Preporučene dimenzije za sliku ličnosti:</p>' +
-            '<p class="info-upload-slike">Minimalno: 312x250 px</p>' +
-            '<p class="info-upload-slike">Maksimalno: 1920x1080 px</p>' +
-            '</div>' +
-            '</div>' +
-            '</div>' +
-            '<div class="col-md-6">' +
-            '<div class="form-group col-md-6 col-xs-12">' +
-            '<label for="ime-kluba"><img class="flow-icons-013" src="/images/icons/edit.svg"> Ime</label>' +
-            '<input type="text" name="licnost[' + licnostiCount + '][ime]" class="form-control" placeholder="Unesite ime ličnosti">' +
-            '</div>' +
-            '<div class="form-group col-md-6 col-xs-12">' +
-            '<label for="ime-kluba"><img class="flow-icons-013" src="/images/icons/edit.svg"> Prezime</label>' +
-            '<input type="text" name="licnost[' + licnostiCount + '][prezime]" class="form-control" placeholder="Unesite prezime ime ličnosti">' +
-            '</div>' +
-            '<div class="form-group col-md-12">' +
-            '<label for="opis"><img class="flow-icons-013" src="/images/icons/edit.svg"> Opis i uloga</label>' +
-            '<textarea class="form-control" rows="4" name="licnost[' + licnostiCount + '][opis]" placeholder="Upišite kratak opis uloge i funkcije navedene ličnosti u klubu..."></textarea>' +
-            '</div>' +
-            '</div>' +
-            '</div>' +
-            '</div>';
-
-        $(licnost_form_input).appendTo('#tab-licnosti #licnostiLista').hide().slideDown();
-        licnostiCount++;
-
-        addLicnostValidation();
-    });
-
-    // Dodavanje kluba - Obriši ličnost
-    $('#licnostiLista').on('click', '.izbrisiLicnost', function () {
-        $(this).closest('.licnostHover').slideUp('normal', function () {
-            $(this).remove();
-        });
-    });
-
     // Dodavanje kluba - Dodaj nagradu
     $('#dodajNagradu').on('click', function () {
         var nagrada_form_input = '<div class="row nagradaHover"><div class="izbrisiNagradu"><i class="fa fa-times-circle-o"></i></div><div class="col-md-6">' +

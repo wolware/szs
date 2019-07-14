@@ -1,10 +1,10 @@
 let validator = $('#createNewClub').validate({
     ignore: ':hidden,:disabled',
     rules: {
-        logo: {
-            required: false,
-            extension: 'png|jpg|jpeg'
-        },
+        // logo: {
+        //     required: false,
+        //     extension: 'png|jpg|jpeg'
+        // },
         name: {
             required: true,
             string: true,
@@ -134,7 +134,9 @@ $('[role="tab"]').click(function (e) {
     var valid = true;
     tab.each(function (activeTab) {
         $('input', activeTab).each(function(i, v){
-            valid = validator.element(v) && valid;
+            if(this.type != "hidden" && this.type != 'file'){
+                valid = validator.element(v) && valid;
+            }
         });
     });
 
@@ -145,3 +147,5 @@ $('[role="tab"]').click(function (e) {
         },500);
     }
 });
+
+

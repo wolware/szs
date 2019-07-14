@@ -35,9 +35,6 @@ $maxFiles
         </div>
     </div>
 
-
-    {{--    {{dd(old('logo'))}}--}}
-
     <div id="{{$zoneID}}-uploaded-files"></div>
 </div>
 <!-- Some html after -->
@@ -88,5 +85,6 @@ $maxFiles
             });
 
         });
+
     </script>
 @endpush

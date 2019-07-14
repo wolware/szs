@@ -166,4 +166,6 @@ Route::middleware('auth')->group(function () {
     Route::get('images/{folder}/{filename}', function ($folder, $filename){
         return redirect()->to('/storage/images/' . $folder . '/' . $filename);
     });
+
+    Route::get('/getNewFigureForm', 'ClubController@getNewFigureForm');
 });

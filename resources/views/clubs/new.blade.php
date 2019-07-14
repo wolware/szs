@@ -519,18 +519,27 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-5 sadrzaj-slike">
-                                                                        <p class="dodaj-sliku-naslov klub-a1">Slika
-                                                                            ličnosti</p>
-                                                                        <p class="dodaj-sliku-call">Odaberite sliku za
-                                                                            istaknutu ličnost</p>
-                                                                        <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-                                                                            Odaberi sliku... <input type="file"
-                                                                                                    name="licnost[{{ $key }}][avatar]"
-                                                                                                    id="licnostAvatar{{ $key }}"
-                                                                                                    accept="image/*"
-                                                                                                    class="not-visible"
-                                                                                                    onchange="previewFile('#licnostAvatar{{ $key }}', '#slika-licnost-prikaz{{ $key }}', 1080, 1920, 250, 312)">
-                                                                        </label>
+{{--                                                                        <p class="dodaj-sliku-naslov klub-a1">Slika--}}
+{{--                                                                            ličnosti</p>--}}
+{{--                                                                        <p class="dodaj-sliku-call">Odaberite sliku za--}}
+{{--                                                                            istaknutu ličnost</p>--}}
+{{--                                                                        <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">--}}
+{{--                                                                            Odaberi sliku... <input type="file"--}}
+{{--                                                                                                    name="licnost[{{ $key }}][avatar]"--}}
+{{--                                                                                                    id="licnostAvatar{{ $key }}"--}}
+{{--                                                                                                    accept="image/*"--}}
+{{--                                                                                                    class="not-visible"--}}
+{{--                                                                                                    onchange="previewFile('#licnostAvatar{{ $key }}', '#slika-licnost-prikaz{{ $key }}', 1080, 1920, 250, 312)">--}}
+{{--                                                                        </label>--}}
+                                                                        @include('partials.dropzone', [
+                                                                'zoneID' => 'licnost[' . $key . '][avatar]',
+                                                                'zoneUploadUrl' => 'uploads',
+                                                                'zoneDeleteUrl' => 'uploads',
+                                                                'zoneLabel' => 'Odaberite sliku za istaknutu ličnost',
+                                                                'dzMessage' => 'Klikni ili prevuci sliku ovdje',
+                                                                'dzDescription' => 'Slika se može prebaciti i drag & drop metodom.',
+                                                                'maxFiles' => 1
+                                                                ])
                                                                         <div class="info001">
                                                                             <p class="info-upload-slike">Preporučene
                                                                                 dimenzije za sliku ličnosti:</p>
