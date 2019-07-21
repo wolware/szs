@@ -79,22 +79,38 @@
                                             <div class="row">
                                                 <div class="row identitet-style">
                                                     <div class="col-md-6 objavi-klub-logo-setup">
-                                                        <div class="col-md-7">
+{{--                                                        <div class="col-md-7">--}}
+{{--                                                            <div class="alc-staff__photo">--}}
+{{--                                                                <img class="slika-upload-klub" id="slika_upload_klub" src="{{asset('images/object_avatars/' . $object->image)}}" alt="">--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+                                                        @if(isset($object->image))
                                                             <div class="alc-staff__photo">
-                                                                <img class="slika-upload-klub" id="slika_upload_klub" src="{{asset('images/object_avatars/' . $object->image)}}" alt="">
+                                                                <img class="slika-upload-klub"
+                                                                     src="{{asset('images/object_avatars/'.$object->image)}}"
+                                                                     alt="">
                                                             </div>
-                                                        </div>
-                                                        <div class="col-md-5 sadrzaj-slike">
-                                                            <p class="dodaj-sliku-naslov klub-a1">Slika profila</p>
-                                                            <p class="dodaj-sliku-call">Identitet objekta</p>
-                                                            <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-                                                                Odaberi sliku... <input type="file" id="slikaprof" name="image" class="not-visible" onchange="previewFile('#slikaprof','#slika_upload_klub',2048, 2048, 600, 800)">
-                                                            </label>
+                                                        @endif
+                                                        @include('partials.dropzone', [
+                                                            'zoneID' => 'image',
+                                                            'zoneUploadUrl' => 'uploads',
+                                                            'zoneDeleteUrl' => 'uploads',
+                                                            'zoneLabel' => 'Slika profila',
+                                                            'dzMessage' => 'Klikni ili prevuci logo objekta ovdje',
+                                                            'dzDescription' => 'Logo se može prebaciti i drag & drop metodom.',
+                                                            'maxFiles' => 1
+                                                            ])
+{{--                                                        <div class="col-md-5 sadrzaj-slike">--}}
+{{--                                                            <p class="dodaj-sliku-naslov klub-a1">Slika profila</p>--}}
+{{--                                                            <p class="dodaj-sliku-call">Identitet objekta</p>--}}
+{{--                                                            <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">--}}
+{{--                                                                Odaberi sliku... <input type="file" id="slikaprof" name="image" class="not-visible" onchange="previewFile('#slikaprof','#slika_upload_klub',2048, 2048, 600, 800)">--}}
+{{--                                                            </label>--}}
                                                             <div class="info001">
                                                                 <p class="info-upload-slike">Preporučene dimenzije za sliku:</p>
                                                                 <p class="info-upload-slike">Minimalno: 800x600 px</p>
                                                             </div>
-                                                        </div>
+{{--                                                        </div>--}}
                                                     </div>
 
                                                     <div class="col-md-6">
@@ -647,18 +663,26 @@
                                             {!! csrf_field() !!}
                                             <input type="hidden" name="_method" value="PATCH">
                                             <div class="row dodavanje-slika">
-                                                <div class="col-md-12 sadrzaj-slike">
-                                                    <p class="dodaj-sliku-naslov">Dodajte slike</p>
-                                                    <p class="dodaj-sliku-call">u Vašu galeriju</p>
-                                                    <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-                                                        Odaberi slike... <input type="file" class="galerija not-visible" name="galerija[]" accept="image/*" multiple>
-                                                    </label>
+                                                @include('partials.dropzone', [
+                                                'zoneID' => 'galerija',
+                                                'zoneUploadUrl' => 'uploads',
+                                                'zoneDeleteUrl' => 'uploads',
+                                                'zoneLabel' => 'Dodajte slike u Vašu galeriju',
+                                                'dzDescription' => 'Fotografije se mogu prebaciti i drag & drop metodom.',
+                                                'maxFiles' => 100
+                                                ])
+{{--                                                <div class="col-md-12 sadrzaj-slike">--}}
+{{--                                                    <p class="dodaj-sliku-naslov">Dodajte slike</p>--}}
+{{--                                                    <p class="dodaj-sliku-call">u Vašu galeriju</p>--}}
+{{--                                                    <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">--}}
+{{--                                                        Odaberi slike... <input type="file" class="galerija not-visible" name="galerija[]" accept="image/*" multiple>--}}
+{{--                                                    </label>--}}
                                                     <div class="info001">
                                                         <p class="info-upload-slike">Preporučena dimenzija za vaše
                                                             slike:</p>
                                                         <p class="info-upload-slike">1920x1080 px</p>
                                                     </div>
-                                                </div>
+{{--                                                </div>--}}
                                             </div>
                                             <div class="row form-objavi-klub-01" id="galerija_prikaz">
                                                 @foreach($object->images as $slika)
@@ -699,13 +723,21 @@
                                                 </div>
                                             </div>
                                             <div class="row dodavanje-slika">
-                                                <div class="col-md-12 sadrzaj-slike">
-                                                    <p class="dodaj-sliku-naslov">Dodajte slike *</p>
-                                                    <p class="dodaj-sliku-call">koje dokazuju da ste Vi vlasnik kluba</p>
-                                                    <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-                                                        Odaberi slike... <input type="file" class="galerija_dokaz not-visible" name="proof[]" accept="image/*" multiple>
-                                                    </label>
-                                                </div>
+                                                @include('partials.dropzone', [
+                                                     'zoneID' => 'proof',
+                                                     'zoneUploadUrl' => 'uploads',
+                                                     'zoneDeleteUrl' => 'uploads',
+                                                     'zoneLabel' => 'Dodajte slike koje dokazuju da ste Vi vlasnik objekta *',
+                                                     'dzDescription' => 'Fotografije se mogu prebaciti i drag & drop metodom.',
+                                                     'maxFiles' => 100
+                                                     ])
+{{--                                                <div class="col-md-12 sadrzaj-slike">--}}
+{{--                                                    <p class="dodaj-sliku-naslov">Dodajte slike *</p>--}}
+{{--                                                    <p class="dodaj-sliku-call">koje dokazuju da ste Vi vlasnik kluba</p>--}}
+{{--                                                    <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">--}}
+{{--                                                        Odaberi slike... <input type="file" class="galerija_dokaz not-visible" name="proof[]" accept="image/*" multiple>--}}
+{{--                                                    </label>--}}
+{{--                                                </div>--}}
                                             </div>
                                             <div class="row form-objavi-klub-01" id="galerija_dokaz_prikaz">
                                                 @foreach($object->proof_images as $slika)

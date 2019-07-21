@@ -3,14 +3,17 @@
 namespace App\Repositories;
 
 use App\Gallery;
+use App\Http\Controllers\UploadController;
 use App\Objects;
 use App\ObjectTypes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
-class ObjectRepository {
+class ObjectRepository
+{
     protected $model;
     protected $objectTypeModel;
 
@@ -370,55 +373,68 @@ class ObjectRepository {
             ]
         ],
     ];
+
     /**
      * ObjectRepository constructor.
      * @param Objects $model
      * @param ObjectTypes $objectTypes
      */
-    public function __construct(Objects $model, ObjectTypes $objectTypes){
+    public function __construct(Objects $model, ObjectTypes $objectTypes)
+    {
         $this->model = $model;
         $this->objectTypeModel = $objectTypes;
     }
 
-    public function getAllObjectTypes() {
+    public function getAllObjectTypes()
+    {
         return $this->objectTypeModel->all();
     }
 
-    public function getById($id) {
+    public function getById($id)
+    {
         return $this->model
-            ->with(['type','images','user'])
+            ->with(['type', 'images', 'user'])
             ->where('id', $id)
             ->first();
     }
 
-    public function getObjectTypeById($id) {
+    public function getObjectTypeById($id)
+    {
         return $this->objectTypeModel
             ->where('id', $id)
             ->first();
     }
 
-    public function createObject(Request $request, ObjectTypes $object_type, $unique_columns) {
+    public function createObject(Request $request, ObjectTypes $object_type, $unique_columns)
+    {
         $newLogoName = 'default.png';
 
-        if($request->file('image')){
-            $logo = $request->file('image');
-            $newLogoName = time() . '-' . Auth::user()->id . '.' . $logo->getClientOriginalExtension();
-            $destinationPath = public_path('/images/object_avatars');
-            $logo->move($destinationPath, $newLogoName);
+        if ($request->filled('image')) {
+            foreach ($request['image']['attachments'] as $file) {
+                $logo = UploadController::moveToStorage($file, '/images/object_avatars');
+                $newLogoName = $logo['name'];
+            }
         }
+
+//        if($request->file('image')){
+//            $logo = $request->file('image');
+//            $newLogoName = time() . '-' . Auth::user()->id . '.' . $logo->getClientOriginalExtension();
+//            $destinationPath = public_path('/images/object_avatars');
+//            $logo->move($destinationPath, $newLogoName);
+//        }
 
         // Provjeri najmanji level regije
         $region_id = $request->get('country');
 
-        if($request->has('province')) {
+        if ($request->has('province')) {
             $region_id = $request->get('province');
         }
 
-        if($request->has('region')) {
+        if ($request->has('region')) {
             $region_id = $request->get('region');
         }
 
-        if($request->has('municipality')) {
+        if ($request->has('municipality')) {
             $region_id = $request->get('municipality');
         }
 
@@ -439,7 +455,7 @@ class ObjectRepository {
             'user_id' => Auth::user()->id
         ]);
 
-        if($createGeneralObject) {
+        if ($createGeneralObject) {
             $attributesToInsert = [];
             $attributesToInsert['id'] = $createGeneralObject->id;
 
@@ -453,31 +469,27 @@ class ObjectRepository {
 
             $createObjectUnique = DB::table($object_type->object_table)->insert($attributesToInsert);
 
-            if($createObjectUnique) {
+            if ($createObjectUnique) {
 
-                if($request->file('galerija')){
-                    $galerije = $request->file('galerija');
-                    foreach($galerije as $key => $slika){
-                        $newgalName = $key . '-' .time() . '-' .  $createGeneralObject->id . '.' . $slika->getClientOriginalExtension();
-                        $destPath = public_path('/images/galerija_objekti');
-                        $slika->move($destPath, $newgalName);
+                if ($request->filled('galerija')) {
+                    $gallery = $request['galerija'];
+                    foreach ($gallery['attachments'] as $key => $attachment) {
+                        $image = UploadController::moveToStorage($attachment, '/images/galerija_objekti');
 
                         Gallery::create([
-                            'image' => $newgalName,
+                            'image' => $image['name'],
                             'object_id' => $createGeneralObject->id
                         ]);
                     }
                 }
 
-                if($request->file('proof')){
-                    $galerije = $request->file('proof');
-                    foreach($galerije as $key => $slika){
-                        $newgalName = 'proof-' . $key . '-' .time() . '-' .  $createGeneralObject->id . '.' . $slika->getClientOriginalExtension();
-                        $destPath = public_path('/images/object_proof');
-                        $slika->move($destPath, $newgalName);
+                if ($request->filled('proof')) {
+                    $gallery = $request['proof'];
+                    foreach ($gallery['attachments'] as $key => $attachment) {
+                        $image = UploadController::moveToStorage($attachment, '/images/object_proof');
 
                         Gallery::create([
-                            'image' => $newgalName,
+                            'image' => $image['name'],
                             'object_id' => $createGeneralObject->id,
                             'is_proof' => true
                         ]);
@@ -485,14 +497,14 @@ class ObjectRepository {
                 }
 
                 // Ovdje handle za dodavanje staza cijena i ostalog
-                if($object_type->type == 'Balon') {
-                    if($request->filled('tereni')){
+                if ($object_type->type == 'Balon') {
+                    if ($request->filled('tereni')) {
                         $tereni = $request->get('tereni');
                         foreach ($tereni as $teren) {
-                            if($teren) {
+                            if ($teren) {
                                 DB::table('balon_fields')->insert([
                                     'name' => $teren['name'],
-                                    'sports' => implode(",",$teren['sports']),
+                                    'sports' => implode(",", $teren['sports']),
                                     'type_of_field' => $teren['type_of_field'],
                                     'capacity' => $teren['capacity'] ? $teren['capacity'] : null,
                                     'public_capacity' => $teren['public_capacity'] ? $teren['public_capacity'] : null,
@@ -505,10 +517,10 @@ class ObjectRepository {
                             }
                         }
                     }
-                    if($request->filled('cjenovnik')){
+                    if ($request->filled('cjenovnik')) {
                         $cjenovnik = $request->get('cjenovnik');
                         foreach ($cjenovnik as $cijena) {
-                            if($cijena) {
+                            if ($cijena) {
                                 DB::table('balon_prices')->insert([
                                     'sport' => $cijena['sport'],
                                     'name' => $cijena['name'],
@@ -520,11 +532,11 @@ class ObjectRepository {
                             }
                         }
                     }
-                } else if($object_type->type == 'Skijalište') {
-                    if($request->filled('staze')){
+                } else if ($object_type->type == 'Skijalište') {
+                    if ($request->filled('staze')) {
                         $staze = $request->get('staze');
                         foreach ($staze as $staza) {
-                            if($staza) {
+                            if ($staza) {
                                 DB::table('skiing_tracks')->insert([
                                     'name' => $staza['name'],
                                     'level' => $staza['level'],
@@ -540,10 +552,10 @@ class ObjectRepository {
                         }
                     }
 
-                    if($request->filled('cjenovnik')){
+                    if ($request->filled('cjenovnik')) {
                         $cjenovnik = $request->get('cjenovnik');
                         foreach ($cjenovnik as $cijena) {
-                            if($cijena) {
+                            if ($cijena) {
                                 DB::table('skiing_prices')->insert([
                                     'description' => $cijena['description'],
                                     'price' => $cijena['price'],
@@ -567,15 +579,16 @@ class ObjectRepository {
         return null;
     }
 
-    public function getByIdWithAllData($id) {
+    public function getByIdWithAllData($id)
+    {
         $object = $this->getById($id);
 
-        if($object) {
+        if ($object) {
             $objectData = DB::table($object->type->object_table)
                 ->where('id', $id)
                 ->first();
 
-            if($objectData) {
+            if ($objectData) {
                 $objectData = $this->unsetData(['id', 'object_id', 'created_at', 'updated_at'], $objectData);
 
                 $objectDataGeneral = [];
@@ -583,11 +596,11 @@ class ObjectRepository {
                 $objectDataSZS = [];
 
                 foreach ($objectData as $key => $data) {
-                    if(array_key_exists($key, $this->generalAttributes)) {
+                    if (array_key_exists($key, $this->generalAttributes)) {
                         $objectDataGeneral[$key] = $data;
-                    } else if(array_key_exists($key, $this->additionalAttributes)) {
+                    } else if (array_key_exists($key, $this->additionalAttributes)) {
                         $objectDataAdditional[$key] = $data;
-                    } else if(array_key_exists($key, $this->szsAttributes)) {
+                    } else if (array_key_exists($key, $this->szsAttributes)) {
                         $objectDataSZS[$key] = $data;
                     }
                 }
@@ -612,13 +625,13 @@ class ObjectRepository {
                 $object->setAttribute('object_data_szs', $dataSZS);
 
 
-                if($object->type->type == 'Balon') {
+                if ($object->type->type == 'Balon') {
                     $fields = DB::table('balon_fields')->where('balon_objects_id', $object->id)->get();
                     $object->setAttribute('fields', $fields);
 
                     $prices = DB::table('balon_prices')->where('balon_objects_id', $object->id)->get();
                     $object->setAttribute('prices', $prices);
-                } else if($object->type->type == 'Skijalište') {
+                } else if ($object->type->type == 'Skijalište') {
                     $tracks = DB::table('skiing_tracks')->where('skiing_objects_id', $object->id)->get();
                     $object->setAttribute('tracks', $tracks);
 
@@ -633,7 +646,8 @@ class ObjectRepository {
         return null;
     }
 
-    public function unsetData($dataToUnset = [], $array = []) {
+    public function unsetData($dataToUnset = [], $array = [])
+    {
 
         $dataToUnset = json_decode(json_encode($dataToUnset), true);
         $array = json_decode(json_encode($array), true);
@@ -645,28 +659,33 @@ class ObjectRepository {
         return $array;
     }
 
-    public function updateGeneral(Request $request, Objects $object){
+    public function updateGeneral(Request $request, Objects $object)
+    {
         $newLogoName = $object->image;
 
-        if($request->file('image')){
-            $logo = $request->file('image');
-            $newLogoName = time() . '-' . Auth::user()->id . '.' . $logo->getClientOriginalExtension();
-            $destinationPath = public_path('/images/object_avatars');
-            $logo->move($destinationPath, $newLogoName);
+        if ($request->filled('image')) {
+            foreach ($request['image']['attachments'] as $file) {
+                $logo = UploadController::moveToStorage($file, '/images/object_avatars');
+                //delete old file
+                if ($object->image)
+                    Storage::delete('/public/images/club_logo/' . $object->image);
+
+                $newLogoName = $logo['name'];
+            }
         }
 
         // Provjeri najmanji level regije
         $region_id = $request->get('country');
 
-        if($request->has('province')) {
+        if ($request->has('province')) {
             $region_id = $request->get('province');
         }
 
-        if($request->has('region')) {
+        if ($request->has('region')) {
             $region_id = $request->get('region');
         }
 
-        if($request->has('municipality')) {
+        if ($request->has('municipality')) {
             $region_id = $request->get('municipality');
         }
 
@@ -683,25 +702,26 @@ class ObjectRepository {
             'youtube' => $request->get('youtube')
         ]);
 
-        if($updateObjectGeneral) {
+        if ($updateObjectGeneral) {
             return $updateObjectGeneral;
         }
 
         return null;
     }
 
-    public function updateStatus(Request $request, $object, $allUniqueAttributes) {
+    public function updateStatus(Request $request, $object, $allUniqueAttributes)
+    {
 
         $updateObjectCommonStatus = Objects::find($object->id)->update([
             'established_in' => Carbon::parse($request->get('established_in')),
         ]);
 
-        if($updateObjectCommonStatus) {
+        if ($updateObjectCommonStatus) {
             $uniqueColumns = [];
 
             $allUniqueAttributes['updated_at'] = Carbon::now();
             foreach ($allUniqueAttributes as $column) {
-                if($request->has($column)) {
+                if ($request->has($column)) {
                     $uniqueColumns[$column] = $request->get($column);
                 }
             }
@@ -710,7 +730,7 @@ class ObjectRepository {
                 ->where('id', $object->id)
                 ->update($uniqueColumns);
 
-            if($updateObjectUniqueStatus) {
+            if ($updateObjectUniqueStatus) {
 
                 return $updateObjectUniqueStatus;
             }
@@ -720,54 +740,51 @@ class ObjectRepository {
 
     }
 
-    public function updateHistory(Request $request, Objects $object){
+    public function updateHistory(Request $request, Objects $object)
+    {
 
-        $updateObjectHistory= $object->update([
+        $updateObjectHistory = $object->update([
             'history' => $request->get('history')
         ]);
 
-        if($updateObjectHistory) {
+        if ($updateObjectHistory) {
             return $updateObjectHistory;
         }
 
         return null;
     }
 
-    public function updateGallery(Request $request, Objects $object) {
-        if($request->file('galerija')){
-            $galerije = $request->file('galerija');
-            foreach($galerije as $key => $slika){
-                $newgalName = $key . '-' .time() . '-' .  $object->id . '.' . $slika->getClientOriginalExtension();
-                $destPath = public_path('/images/galerija_objekti');
-                $slika->move($destPath, $newgalName);
+    public function updateGallery(Request $request, Objects $object)
+    {
+        if ($request->filled('galerija')) {
+            $gallery = $request['galerija'];
+            foreach ($gallery['attachments'] as $key => $attachment) {
+                $image = UploadController::moveToStorage($attachment, '/images/galerija_objekti');
 
                 Gallery::create([
-                    'image' => $newgalName,
+                    'image' => $image['name'],
                     'object_id' => $object->id
                 ]);
             }
-
             return true;
         }
 
         return null;
     }
 
-    public function updateProof(Request $request, Objects $object) {
-        if($request->file('proof')){
-            $galerije = $request->file('proof');
-            foreach($galerije as $key => $slika){
-                $newgalName = 'proof-' . $key . '-' .time() . '-' .  $object->id . '.' . $slika->getClientOriginalExtension();
-                $destPath = public_path('/images/object_proof');
-                $slika->move($destPath, $newgalName);
+    public function updateProof(Request $request, Objects $object)
+    {
+        if ($request->filled('proof')) {
+            $gallery = $request['proof'];
+            foreach ($gallery['attachments'] as $key => $attachment) {
+                $image = UploadController::moveToStorage($attachment, '/images/object_proof');
 
                 Gallery::create([
-                    'image' => $newgalName,
+                    'image' => $image['name'],
                     'object_id' => $object->id,
                     'is_proof' => true
                 ]);
             }
-
             return true;
         }
 
@@ -775,16 +792,17 @@ class ObjectRepository {
     }
 
 
-    public function updateBalonFields(Request $request, Objects $object) {
+    public function updateBalonFields(Request $request, Objects $object)
+    {
         $oldIds = [];
-        if($request->filled('tereni')){
+        if ($request->filled('tereni')) {
             $tereni = $request->get('tereni');
             foreach ($tereni as $teren) {
-                if($teren) {
-                    if(!array_key_exists('id', $teren)) {
+                if ($teren) {
+                    if (!array_key_exists('id', $teren)) {
                         $new_field = DB::table('balon_fields')->insertGetId([
                             'name' => $teren['name'],
-                            'sports' => implode(",",$teren['sports']),
+                            'sports' => implode(",", $teren['sports']),
                             'type_of_field' => $teren['type_of_field'],
                             'capacity' => $teren['capacity'] ? $teren['capacity'] : null,
                             'public_capacity' => $teren['public_capacity'] ? $teren['public_capacity'] : null,
@@ -799,12 +817,12 @@ class ObjectRepository {
                     } else {
                         $old_field = DB::table('balon_fields')->where('id', $teren['id'])->where('balon_objects_id', $object->id)->first();
 
-                        if($old_field) {
+                        if ($old_field) {
                             $oldIds[] = $old_field->id;
 
                             DB::table('balon_fields')->where('id', $teren['id'])->where('balon_objects_id', $object->id)->update([
                                 'name' => $teren['name'],
-                                'sports' => implode(",",$teren['sports']),
+                                'sports' => implode(",", $teren['sports']),
                                 'type_of_field' => $teren['type_of_field'],
                                 'capacity' => $teren['capacity'] ? $teren['capacity'] : null,
                                 'public_capacity' => $teren['public_capacity'] ? $teren['public_capacity'] : null,
@@ -831,13 +849,14 @@ class ObjectRepository {
         }
     }
 
-    public function updateBalonPrices(Request $request, Objects $object) {
+    public function updateBalonPrices(Request $request, Objects $object)
+    {
         $oldIds = [];
-        if($request->filled('cjenovnik')){
+        if ($request->filled('cjenovnik')) {
             $cjenovnik = $request->get('cjenovnik');
             foreach ($cjenovnik as $cijena) {
-                if($cijena) {
-                    if(!array_key_exists('id', $cijena)) {
+                if ($cijena) {
+                    if (!array_key_exists('id', $cijena)) {
                         $new_field = DB::table('balon_prices')->insertGetId([
                             'name' => $cijena['name'],
                             'sport' => $cijena['sport'],
@@ -851,7 +870,7 @@ class ObjectRepository {
                     } else {
                         $old_field = DB::table('balon_prices')->where('id', $cijena['id'])->where('balon_objects_id', $object->id)->first();
 
-                        if($old_field) {
+                        if ($old_field) {
                             $oldIds[] = $old_field->id;
 
                             DB::table('balon_prices')->where('id', $cijena['id'])->where('balon_objects_id', $object->id)->update([
@@ -879,13 +898,14 @@ class ObjectRepository {
         }
     }
 
-    public function updateSkiTracks(Request $request, Objects $object) {
+    public function updateSkiTracks(Request $request, Objects $object)
+    {
         $oldIds = [];
-        if($request->filled('staze')){
+        if ($request->filled('staze')) {
             $staze = $request->get('staze');
             foreach ($staze as $staza) {
-                if($staza) {
-                    if(!array_key_exists('id', $staza)) {
+                if ($staza) {
+                    if (!array_key_exists('id', $staza)) {
                         $new_field = DB::table('skiing_tracks')->insertGetId([
                             'name' => $staza['name'],
                             'level' => $staza['level'],
@@ -902,7 +922,7 @@ class ObjectRepository {
                     } else {
                         $old_field = DB::table('skiing_tracks')->where('id', $staza['id'])->where('skiing_objects_id', $object->id)->first();
 
-                        if($old_field) {
+                        if ($old_field) {
                             $oldIds[] = $old_field->id;
 
                             DB::table('skiing_tracks')->where('id', $staza['id'])->where('skiing_objects_id', $object->id)->update([
@@ -933,13 +953,14 @@ class ObjectRepository {
         }
     }
 
-    public function updateSkiPrices(Request $request, Objects $object) {
+    public function updateSkiPrices(Request $request, Objects $object)
+    {
         $oldIds = [];
-        if($request->filled('cjenovnik')){
+        if ($request->filled('cjenovnik')) {
             $cjenovnik = $request->get('cjenovnik');
             foreach ($cjenovnik as $cijena) {
-                if($cijena) {
-                    if(!array_key_exists('id', $cijena)) {
+                if ($cijena) {
+                    if (!array_key_exists('id', $cijena)) {
                         $new_field = DB::table('skiing_prices')->insertGetId([
                             'description' => $cijena['description'],
                             'price' => $cijena['price'],
@@ -953,7 +974,7 @@ class ObjectRepository {
                     } else {
                         $old_field = DB::table('skiing_prices')->where('id', $cijena['id'])->where('skiing_objects_id', $object->id)->first();
 
-                        if($old_field) {
+                        if ($old_field) {
                             $oldIds[] = $old_field->id;
 
                             DB::table('skiing_prices')->where('id', $cijena['id'])->where('skiing_objects_id', $object->id)->update([

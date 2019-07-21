@@ -85,7 +85,8 @@ class ObjectController extends Controller
     ];
 
     protected $objectCommonValidationRules = [
-        'image' => 'required|image|dimensions:min_width=800,min_height=600',
+        'image' => 'array',
+        'image.*' => 'required',
         'name' => 'required|string|max:255',
         'continent' => 'required|integer|exists:regions,id',
         'country' => 'required|integer|exists:regions,id',
@@ -228,6 +229,15 @@ class ObjectController extends Controller
 
     public function displayAddObject($object_id)
     {
+        $css = [
+            'https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.2.0/dropzone.css'
+        ];
+        view()->share('css', $css);
+
+        $vendorScripts = [
+            '/js/dropzone.js'
+        ];
+        view()->share('vendorScripts', $vendorScripts);
 
         $scripts[] = '/js/validation/objects-validation.js';
         view()->share('scripts', $scripts);
@@ -275,7 +285,8 @@ class ObjectController extends Controller
         return view('objects.new', compact('object_type', 'inputs', 'regions'));
     }
 
-    public function createObject(Request $request, $object_type_id) {
+    public function createObject(Request $request, $object_type_id)
+    {
         $object_type = $this->objectRepository
             ->getObjectTypeById($object_type_id);
 
@@ -363,6 +374,16 @@ class ObjectController extends Controller
             abort(404);
         }
 
+        $css = [
+            'https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.2.0/dropzone.css'
+        ];
+        view()->share('css', $css);
+
+        $vendorScripts = [
+            '/js/dropzone.js'
+        ];
+        view()->share('vendorScripts', $vendorScripts);
+
         $columns = Schema::getColumnListing($object->type->object_table);
         $to_delete = ['id', 'object_type_id', 'created_at', 'updated_at'];
         $columns = array_diff($columns, $to_delete);
@@ -439,7 +460,8 @@ class ObjectController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'image' => 'image|dimensions:min_width=800,min_height=600',
+            'image' => 'array',
+            'image.*' => 'required',
             'name' => 'required|string|max:255',
             'continent' => 'required|integer|exists:regions,id',
             'country' => 'required|integer|exists:regions,id',
@@ -575,7 +597,7 @@ class ObjectController extends Controller
 
         $validator = Validator::make($request->all(), [
             'galerija' => 'array',
-            'galerija.*' => 'required|image'
+            'galerija.*' => 'required'
         ]);
 
         if($validator->fails()){
@@ -610,7 +632,7 @@ class ObjectController extends Controller
 
         $validator = Validator::make($request->all(), [
             'proof' => 'required|array',
-            'proof.*' => 'required|image'
+            'proof.*' => 'required'
         ]);
 
         if($validator->fails()){

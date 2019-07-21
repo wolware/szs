@@ -71,7 +71,6 @@ $maxFiles
                     formData.append("_token", $('meta[name="csrf-token"]').attr('content'));
                 },
                 success: function (file, response) {
-                    console.log(file, response);
                     $('<input>').attr('type', 'hidden').attr('name', '{{$zoneID}}[attachments]['+numberOfUploadedFiles+']').val(JSON.stringify(response)).appendTo('#{{$zoneID}}-uploaded-files');
                     numberOfUploadedFiles++;
                     var fileUploded = file.previewElement.querySelector("[data-dz-name]");

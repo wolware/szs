@@ -772,13 +772,13 @@
                                         {!! csrf_field() !!}
                                         <div class="row dodavanje-slika">
                                             @include('partials.dropzone', [
-                                                                'zoneID' => 'galerija',
-                                                                'zoneUploadUrl' => 'uploads',
-                                                                'zoneDeleteUrl' => 'uploads',
-                                                                'zoneLabel' => 'Dodajte slike u Vašu galeriju',
-                                                                'dzDescription' => 'Fotografije se mogu prebaciti i drag & drop metodom.',
-                                                                'maxFiles' => 100
-                                                                ])
+                                                'zoneID' => 'galerija',
+                                                'zoneUploadUrl' => 'uploads',
+                                                'zoneDeleteUrl' => 'uploads',
+                                                'zoneLabel' => 'Dodajte slike u Vašu galeriju',
+                                                'dzDescription' => 'Fotografije se mogu prebaciti i drag & drop metodom.',
+                                                'maxFiles' => 100
+                                                ])
 
                                             <div class="info001">
                                                 <p class="info-upload-slike">Preporučena dimenzija za vaše
@@ -859,13 +859,13 @@
                                         </div>
                                         <div class="row dodavanje-slika">
                                             @include('partials.dropzone', [
-                                             'zoneID' => 'proof',
-                                             'zoneUploadUrl' => 'uploads',
-                                             'zoneDeleteUrl' => 'uploads',
-                                             'zoneLabel' => 'Dodajte koje dokazuju da ste Vi vlasnik kluba *',
-                                             'dzDescription' => 'Fotografije se mogu prebaciti i drag & drop metodom.',
-                                             'maxFiles' => 100
-                                             ])
+                                                 'zoneID' => 'proof',
+                                                 'zoneUploadUrl' => 'uploads',
+                                                 'zoneDeleteUrl' => 'uploads',
+                                                 'zoneLabel' => 'Dodajte slike koje dokazuju da ste Vi vlasnik kluba *',
+                                                 'dzDescription' => 'Fotografije se mogu prebaciti i drag & drop metodom.',
+                                                 'maxFiles' => 100
+                                                 ])
                                         </div>
                                         <div class="row form-objavi-klub-01" id="galerija_dokaz_prikaz">
                                             @foreach($club->proof_images as $slika)
