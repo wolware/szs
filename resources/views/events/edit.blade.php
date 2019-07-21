@@ -68,27 +68,41 @@
 
                                                     <div class="col-md-6 objavi-klub-logo-setup">
 
-                                                        <div class="col-md-7">
-
+{{--                                                        <div class="col-md-7">--}}
+                                                        @if(isset($event->image))
                                                             <div class="alc-staff__photo">
-                                                                <img class="slika-upload-klub" id="slika-upload-klub" src="{{asset('images/event_images/' . $event->image)}}" alt="">
+                                                                <img class="slika-upload-klub"
+                                                                     src="{{asset('images/event_images/'.$event->image)}}"
+                                                                     alt="">
                                                             </div>
+                                                        @endif
+                                                        @include('partials.dropzone', [
+                                                        'zoneID' => 'image',
+                                                        'zoneUploadUrl' => 'uploads',
+                                                        'zoneDeleteUrl' => 'uploads',
+                                                        'zoneLabel' => 'Slika eventa',
+                                                        'dzDescription' => 'Slika se može prebaciti i drag & drop metodom.',
+                                                        'maxFiles' => 1
+                                                        ])
+{{--                                                            <div class="alc-staff__photo">--}}
+{{--                                                                <img class="slika-upload-klub" id="slika-upload-klub" src="{{asset('images/event_images/' . $event->image)}}" alt="">--}}
+{{--                                                            </div>--}}
 
-                                                        </div>
+{{--                                                        </div>--}}
 
-                                                        <div class="col-md-5 sadrzaj-slike">
-
-                                                            <p class="dodaj-sliku-naslov klub-a1">Slika eventa</p>
-                                                            <p class="dodaj-sliku-call">Identitet eventa</p>
-                                                            <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-                                                                Odaberi logo... <input type="file" id="file_logo_kluba" name="image" class="not-visible" accept="image/*" onchange="previewFile('#file_logo_kluba', '#slika-upload-klub', 1024, 1024, 512, 512)">
-                                                            </label>
+{{--                                                        <div class="col-md-5 sadrzaj-slike">--}}
+{{----}}
+{{--                                                            <p class="dodaj-sliku-naslov klub-a1">Slika eventa</p>--}}
+{{--                                                            <p class="dodaj-sliku-call">Identitet eventa</p>--}}
+{{--                                                            <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">--}}
+{{--                                                                Odaberi logo... <input type="file" id="file_logo_kluba" name="image" class="not-visible" accept="image/*" onchange="previewFile('#file_logo_kluba', '#slika-upload-klub', 1024, 1024, 512, 512)">--}}
+{{--                                                            </label>--}}
                                                             <div class="info001">
                                                                 <p class="info-upload-slike">Preporučene dimenzije za sliku:</p>
                                                                 <p class="info-upload-slike">Minimalno: 512x512 px</p>
                                                             </div>
 
-                                                        </div>
+{{--                                                        </div>--}}
                                                     </div>
 
                                                     <div class="col-md-6">

@@ -27,6 +27,16 @@ class EventController extends Controller
         $scripts[] = '/js/validation/event-validation.js';
         view()->share('scripts', $scripts);
 
+        $css = [
+            'https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.2.0/dropzone.css'
+        ];
+        view()->share('css', $css);
+
+        $vendorScripts = [
+            '/js/dropzone.js'
+        ];
+        view()->share('vendorScripts', $vendorScripts);
+
         $regions = $this->regionRepository
             ->getAll();
 
@@ -41,7 +51,8 @@ class EventController extends Controller
 
     public function createEvent(Request $request) {
         $validator = Validator::make($request->all(), [
-            'image' => 'required|image|dimensions:min_width=512,min_height=512',
+            'image' => 'required|array',
+            'image.*' => 'required',
             'name' => 'required|string|max:255',
             'sport' => 'required|integer|exists:sports,id',
             'continent' => 'required|integer|exists:regions,id',
@@ -117,7 +128,18 @@ class EventController extends Controller
         return view('events.profile', compact('event'));
     }
 
-    public function displayEditEvent($id) {
+    public function displayEditEvent($id)
+    {
+        $css = [
+            'https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.2.0/dropzone.css'
+        ];
+        view()->share('css', $css);
+
+        $vendorScripts = [
+            '/js/dropzone.js'
+        ];
+        view()->share('vendorScripts', $vendorScripts);
+
         $regions = $this->regionRepository->getAll();
         $sports = $this->sportRepository->getAll();
         $event_types = $this->eventRepository
@@ -158,7 +180,8 @@ class EventController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'image' => 'image|dimensions:min_width=512,min_height=512',
+            'image' => 'array',
+            'image.*' => 'required',
             'name' => 'required|string|max:255',
             'sport' => 'required|integer|exists:sports,id',
             'continent' => 'required|integer|exists:regions,id',

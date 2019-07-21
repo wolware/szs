@@ -38,6 +38,7 @@ class UploadController extends Controller
 
     public function deleteUpload(Request $request)
     {
+        dd($request->input());
         $data['path'] = $request->input('path');
         Storage::delete($data['path']);
 

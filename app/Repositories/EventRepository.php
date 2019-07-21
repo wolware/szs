@@ -4,9 +4,11 @@ namespace App\Repositories;
 
 use App\Event;
 use App\EventType;
+use App\Http\Controllers\UploadController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class EventRepository {
     protected $model;
@@ -21,11 +23,14 @@ class EventRepository {
         return $this->eventTypeModel->all();
     }
 
-    public function createEvent(Request $request) {
-        $logo = $request->file('image');
-        $newLogoName = time() . '-' . Auth::user()->id . '.' . $logo->getClientOriginalExtension();
-        $destinationPath = public_path('/images/event_images');
-        $logo->move($destinationPath, $newLogoName);
+    public function createEvent(Request $request)
+    {
+        if ($request->filled('image')) {
+            foreach ($request['image']['attachments'] as $file) {
+                $logo = UploadController::moveToStorage($file, '/images/event_images');
+                $newLogoName = $logo['name'];
+            }
+        }
 
         // Provjeri najmanji level regije
         $region_id = $request->get('country');
@@ -96,14 +101,19 @@ class EventRepository {
             ->first();
     }
 
-    public function updateGeneral(Request $request, Event $event){
+    public function updateGeneral(Request $request, Event $event)
+    {
         $newLogoName = $event->image;
 
-        if($request->file('image')){
-            $logo = $request->file('image');
-            $newLogoName = time() . '-' . Auth::user()->id . '.' . $logo->getClientOriginalExtension();
-            $destinationPath = public_path('/images/event_images');
-            $logo->move($destinationPath, $newLogoName);
+        if ($request->filled('image')) {
+            foreach ($request['image']['attachments'] as $file) {
+                $logo = UploadController::moveToStorage($file, '/images/event_images');
+                //delete old file
+                if ($event->image)
+                    Storage::delete('/public/images/event_images/' . $event->image);
+
+                $newLogoName = $logo['name'];
+            }
         }
 
         $region_id = $request->get('country');
