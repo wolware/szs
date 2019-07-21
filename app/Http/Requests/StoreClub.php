@@ -56,7 +56,7 @@ class StoreClub extends FormRequest
             // Licnosti
             'licnost' => 'array',
             'licnost.*' => 'array',
-            'licnost.*.avatar' => 'image|dimensions:min_width=312,min_height=250',
+            'licnost.*.avatar' => 'array',
             'licnost.*.ime' => 'required|max:255|string',
             'licnost.*.prezime' => 'required|max:255|string',
             'licnost.*.opis' => 'nullable|max:1000|string',

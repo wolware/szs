@@ -2,7 +2,6 @@
     <div class="izbrisiLicnost"><i class="fa fa-times-circle-o"></i></div>
     <div class="row identitet-style">
         <div class="col-md-6 objavi-klub-logo-setup">
-
                 @include('partials.dropzone', [
                                'zoneID' => 'licnost[' . $licnostiCount . '][avatar]',
                                'zoneUploadUrl' => 'uploads',
@@ -10,7 +9,7 @@
                                'zoneLabel' => 'Odaberite sliku za istaknutu ličnost',
                                'dzMessage' => 'Klikni ili prevuci sliku ovdje',
                                'dzDescription' => 'Slika se može prebaciti i drag & drop metodom.',
-                               'maxFiles' => 1
+                               'maxFiles' => 1,
                                ])
             <div class="col-sm-7">
                 <div class="info001">

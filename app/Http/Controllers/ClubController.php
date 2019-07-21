@@ -279,20 +279,28 @@ class ClubController extends Controller
             }
 
             if ($data->filled('licnost')) {
-                foreach ($data->get('licnost') as $key => $licnost) {
-                    if ($licnost) {
-                        $logo = array_key_exists('avatar', $data['licnost'][$key]) ? $data['licnost'][$key]['avatar'] : null;
+                foreach ($data['licnost'] as $key => $licnost) {
 
-                        if ($logo) {
-                            $newavatarlicnostiName = time() . '-' . $club_id . '.' . $logo->getClientOriginalExtension();
-                            $destPath = public_path('/images/avatar_licnost');
-                            $logo->move($destPath, $newavatarlicnostiName);
-                        } else {
-                            $newavatarlicnostiName = 'default_avatar.png';
+                    if ($licnost) {
+                        $avatarName = 'default_avatar.png';
+                        if (array_key_exists('avatar', $licnost)){
+                            foreach ($licnost['avatar']['attachments'] as $file) {
+                                $logo = UploadController::moveToStorage($file, '/images/avatar_licnost');
+                                $avatarName = $logo['name'];
+                            }
                         }
+//                        $logo = array_key_exists('avatar', $data['licnost'][$key]) ? $data['licnost'][$key]['avatar'] : null;
+//
+//                        if ($logo) {
+//                            $newavatarlicnostiName = time() . '-' . $club_id . '.' . $logo->getClientOriginalExtension();
+//                            $destPath = public_path('/images/avatar_licnost');
+//                            $logo->move($destPath, $newavatarlicnostiName);
+//                        } else {
+//                            $newavatarlicnostiName = 'default_avatar.png';
+//                        }
 
                         ClubStaff::create([
-                            'avatar' => $newavatarlicnostiName,
+                            'avatar' => $avatarName,
                             'firstname' => $data['licnost'][$key]['ime'],
                             'lastname' => $data['licnost'][$key]['prezime'],
                             'biography' => $data['licnost'][$key]['opis'] ? $data['licnost'][$key]['opis'] : null,

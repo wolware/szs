@@ -21,7 +21,9 @@ $maxFiles
             </div>
             <strong>{{isset($dzDescription) ? $dzDescription : "Fajlovi se mogu prebacivati i drag & drop metodom." }}</strong>
             {!! Form::hidden($zoneID.'Input', isset($zoneDisplay) ? $zoneDisplay : '', ['id' => $zoneID.'Input']) !!}
-            <label id="{{$zoneID}}-error" class="error" for="{{$zoneID}}" style="display: none">Ovo polje je obavezno.</label>
+            <label id="{{$zoneID}}-error" class="error" for="{{$zoneID}}" style="display: none">Ovo polje je
+                obavezno.</label>
+
             @if(old($zoneID) && @count(old($zoneID)))
                 <p><strong>
                         Predhodno uploadovani fajlovi:
@@ -35,7 +37,6 @@ $maxFiles
             @endif
         </div>
     </div>
-
     <div id="{{$zoneID}}-uploaded-files"></div>
 </div>
 <!-- Some html after -->
@@ -43,48 +44,48 @@ $maxFiles
 @push('scripts-end')
     <script>
         // $(document).ready(function () {
-            var numberOfUploadedFiles = {{old($zoneID) ? count(old($zoneID)): 0 }};
-            Dropzone.autoDiscover = false;
-            $("#{{$zoneID}}").dropzone({
-                url: "/{{$zoneUploadUrl}}",
-                addRemoveLinks: true,
-                maxFiles: "{{isset($maxFiles) ? $maxFiles : 50}}",
-                init: function () {
-                    this.on("removedfile", function (file) {
-                        if (file.status == 'success') {
-                            var fileUploded = file.previewElement.querySelector("[data-dz-name]");
+        var numberOfUploadedFiles = {{old($zoneID) ? count(old($zoneID)): 0 }};
+        Dropzone.autoDiscover = false;
+        $("#{{$zoneID}}").dropzone({
+            url: "/{{$zoneUploadUrl}}",
+            addRemoveLinks: true,
+            maxFiles: "{{isset($maxFiles) ? $maxFiles : 50}}",
+            init: function () {
+                this.on("removedfile", function (file) {
+                    if (file.status == 'success') {
+                        var fileUploded = file.previewElement.querySelector("[data-dz-name]");
 
-                            var filename = $(fileUploded).attr('data-path');
+                        var filename = $(fileUploded).attr('data-path');
 
-                            $.ajax({
-                                url: '/{{$zoneDeleteUrl}}',
-                                type: "delete",
-                                data: {'path': filename},
-                                success: function (data) {
-                                    $('[value="' + filename + '"]').remove();
-                                }
-                            });
-                        }
-                    });
-                },
-                sending: function (file, xhr, formData) {
-                    formData.append("_token", $('meta[name="csrf-token"]').attr('content'));
-                },
-                success: function (file, response) {
-                    $("#{{$zoneID}}-error").hide();
-                    $('<input>').attr('type', 'hidden').attr('name', '{{$zoneID}}[attachments]['+numberOfUploadedFiles+']').val(JSON.stringify(response)).appendTo('#{{$zoneID}}-uploaded-files');
-                    numberOfUploadedFiles++;
-                    var fileUploded = file.previewElement.querySelector("[data-dz-name]");
-                    $(fileUploded).attr('data-path', response.path);
+                        $.ajax({
+                            url: '/{{$zoneDeleteUrl}}',
+                            type: "delete",
+                            data: {'path': filename},
+                            success: function (data) {
+                                $('[value="' + filename + '"]').remove();
+                            }
+                        });
+                    }
+                });
+            },
+            sending: function (file, xhr, formData) {
+                formData.append("_token", $('meta[name="csrf-token"]').attr('content'));
+            },
+            success: function (file, response) {
+                $("#{{$zoneID}}-error").hide();
+                $('<input>').attr('type', 'hidden').attr('name', '{{$zoneID}}[attachments][' + numberOfUploadedFiles + ']').val(JSON.stringify(response)).appendTo('#{{$zoneID}}-uploaded-files');
+                numberOfUploadedFiles++;
+                var fileUploded = file.previewElement.querySelector("[data-dz-name]");
+                $(fileUploded).attr('data-path', response.path);
 
-                    file.previewElement.classList.add("dz-success");
-                    console.log("Successfully uploaded :" + response.originalName);
+                file.previewElement.classList.add("dz-success");
+                console.log("Successfully uploaded :" + response.originalName);
 
-                },
-                error: function (file, response) {
-                    file.previewElement.classList.add("dz-error");
-                }
-            });
+            },
+            error: function (file, response) {
+                file.previewElement.classList.add("dz-error");
+            }
+        });
 
         // });
 

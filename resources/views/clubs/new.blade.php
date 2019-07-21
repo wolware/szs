@@ -505,20 +505,21 @@
                                             <div id="licnostiLista">
                                                 @if(old('licnost'))
                                                     @foreach(old('licnost') as $key => $licnost)
-                                                        <div class="row licnostHover" data-key="{{ $key }}">
-                                                            <div class="izbrisiLicnost"><i
-                                                                        class="fa fa-times-circle-o"></i></div>
-                                                            <div class="row identitet-style">
-                                                                <div class="col-md-6 objavi-klub-logo-setup">
-                                                                    <div class="col-md-7">
-                                                                        <div class="alc-staff__photo">
-                                                                            <img class="slika-edit-profil"
-                                                                                 id="slika-licnost-prikaz{{ $key }}"
-                                                                                 src="{{ asset('images/default_avatar.png') }}"
-                                                                                 alt="">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-5 sadrzaj-slike">
+                                                        @include('partials.new_figure', ['licnostiCount' => $loop->index + 1])
+{{--                                                        <div class="row licnostHover" data-key="{{ $key }}">--}}
+{{--                                                            <div class="izbrisiLicnost"><i--}}
+{{--                                                                        class="fa fa-times-circle-o"></i></div>--}}
+{{--                                                            <div class="row identitet-style">--}}
+{{--                                                                <div class="col-md-6 objavi-klub-logo-setup">--}}
+{{--                                                                    <div class="col-md-7">--}}
+{{--                                                                        <div class="alc-staff__photo">--}}
+{{--                                                                            <img class="slika-edit-profil"--}}
+{{--                                                                                 id="slika-licnost-prikaz{{ $key }}"--}}
+{{--                                                                                 src="{{ asset('images/default_avatar.png') }}"--}}
+{{--                                                                                 alt="">--}}
+{{--                                                                        </div>--}}
+{{--                                                                    </div>--}}
+{{--                                                                    <div class="col-md-5 sadrzaj-slike">--}}
 {{--                                                                        <p class="dodaj-sliku-naslov klub-a1">Slika--}}
 {{--                                                                            ličnosti</p>--}}
 {{--                                                                        <p class="dodaj-sliku-call">Odaberite sliku za--}}
@@ -531,57 +532,57 @@
 {{--                                                                                                    class="not-visible"--}}
 {{--                                                                                                    onchange="previewFile('#licnostAvatar{{ $key }}', '#slika-licnost-prikaz{{ $key }}', 1080, 1920, 250, 312)">--}}
 {{--                                                                        </label>--}}
-                                                                        @include('partials.dropzone', [
-                                                                'zoneID' => 'licnost[' . $key . '][avatar]',
-                                                                'zoneUploadUrl' => 'uploads',
-                                                                'zoneDeleteUrl' => 'uploads',
-                                                                'zoneLabel' => 'Odaberite sliku za istaknutu ličnost',
-                                                                'dzMessage' => 'Klikni ili prevuci sliku ovdje',
-                                                                'dzDescription' => 'Slika se može prebaciti i drag & drop metodom.',
-                                                                'maxFiles' => 1
-                                                                ])
-                                                                        <div class="info001">
-                                                                            <p class="info-upload-slike">Preporučene
-                                                                                dimenzije za sliku ličnosti:</p>
-                                                                            <p class="info-upload-slike">Minimalno:
-                                                                                312x250 px</p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-6">
-                                                                    <div class="form-group col-md-6 col-xs-12">
-                                                                        <label for="ime-kluba"><img
-                                                                                    class="flow-icons-013"
-                                                                                    src="{{ asset('images/icons/edit.svg') }}">
-                                                                            Ime</label>
-                                                                        <input type="text"
-                                                                               name="licnost[{{ $key }}][ime]"
-                                                                               class="form-control"
-                                                                               placeholder="Unesite ime ličnosti"
-                                                                               value="{{ old('licnost.' . $key . '.ime') }}">
-                                                                    </div>
-                                                                    <div class="form-group col-md-6 col-xs-12">
-                                                                        <label for="ime-kluba"><img
-                                                                                    class="flow-icons-013"
-                                                                                    src="{{ asset('images/icons/edit.svg') }}">
-                                                                            Prezime</label>
-                                                                        <input type="text"
-                                                                               name="licnost[{{ $key }}][prezime]"
-                                                                               class="form-control"
-                                                                               placeholder="Unesite prezime ime ličnosti"
-                                                                               value="{{ old('licnost.' . $key . '.prezime') }}">
-                                                                    </div>
-                                                                    <div class="form-group col-md-12">
-                                                                        <label for="opis"><img class="flow-icons-013"
-                                                                                               src="{{ asset('images/icons/edit.svg') }}">
-                                                                            Opis i uloga</label>
-                                                                        <textarea class="form-control" rows="4"
-                                                                                  name="licnost[{{ $key }}][opis]"
-                                                                                  placeholder="Upišite kratak opis uloge i funkcije navedene ličnosti u klubu...">{{ old('licnost.' . $key . '.opis') }}</textarea>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+{{--                                                                        @include('partials.dropzone', [--}}
+{{--                                                                'zoneID' => 'licnost[' . $key . '][avatar]',--}}
+{{--                                                                'zoneUploadUrl' => 'uploads',--}}
+{{--                                                                'zoneDeleteUrl' => 'uploads',--}}
+{{--                                                                'zoneLabel' => 'Odaberite sliku za istaknutu ličnost',--}}
+{{--                                                                'dzMessage' => 'Klikni ili prevuci sliku ovdje',--}}
+{{--                                                                'dzDescription' => 'Slika se može prebaciti i drag & drop metodom.',--}}
+{{--                                                                'maxFiles' => 1--}}
+{{--                                                                ])--}}
+{{--                                                                        <div class="info001">--}}
+{{--                                                                            <p class="info-upload-slike">Preporučene--}}
+{{--                                                                                dimenzije za sliku ličnosti:</p>--}}
+{{--                                                                            <p class="info-upload-slike">Minimalno:--}}
+{{--                                                                                312x250 px</p>--}}
+{{--                                                                        </div>--}}
+{{--                                                                    </div>--}}
+{{--                                                                </div>--}}
+{{--                                                                <div class="col-md-6">--}}
+{{--                                                                    <div class="form-group col-md-6 col-xs-12">--}}
+{{--                                                                        <label for="ime-kluba"><img--}}
+{{--                                                                                    class="flow-icons-013"--}}
+{{--                                                                                    src="{{ asset('images/icons/edit.svg') }}">--}}
+{{--                                                                            Ime</label>--}}
+{{--                                                                        <input type="text"--}}
+{{--                                                                               name="licnost[{{ $key }}][ime]"--}}
+{{--                                                                               class="form-control"--}}
+{{--                                                                               placeholder="Unesite ime ličnosti"--}}
+{{--                                                                               value="{{ old('licnost.' . $key . '.ime') }}">--}}
+{{--                                                                    </div>--}}
+{{--                                                                    <div class="form-group col-md-6 col-xs-12">--}}
+{{--                                                                        <label for="ime-kluba"><img--}}
+{{--                                                                                    class="flow-icons-013"--}}
+{{--                                                                                    src="{{ asset('images/icons/edit.svg') }}">--}}
+{{--                                                                            Prezime</label>--}}
+{{--                                                                        <input type="text"--}}
+{{--                                                                               name="licnost[{{ $key }}][prezime]"--}}
+{{--                                                                               class="form-control"--}}
+{{--                                                                               placeholder="Unesite prezime ime ličnosti"--}}
+{{--                                                                               value="{{ old('licnost.' . $key . '.prezime') }}">--}}
+{{--                                                                    </div>--}}
+{{--                                                                    <div class="form-group col-md-12">--}}
+{{--                                                                        <label for="opis"><img class="flow-icons-013"--}}
+{{--                                                                                               src="{{ asset('images/icons/edit.svg') }}">--}}
+{{--                                                                            Opis i uloga</label>--}}
+{{--                                                                        <textarea class="form-control" rows="4"--}}
+{{--                                                                                  name="licnost[{{ $key }}][opis]"--}}
+{{--                                                                                  placeholder="Upišite kratak opis uloge i funkcije navedene ličnosti u klubu...">{{ old('licnost.' . $key . '.opis') }}</textarea>--}}
+{{--                                                                    </div>--}}
+{{--                                                                </div>--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
                                                     @endforeach
                                                 @endif
                                             </div>
