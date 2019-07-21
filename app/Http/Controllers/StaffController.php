@@ -102,7 +102,18 @@ class StaffController extends Controller
         return view('staff.index', compact('professions', 'regions', 'results'));
     }
 
-    public function displayAddStaff() {
+    public function displayAddStaff()
+    {
+
+        $css = [
+            'https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.2.0/dropzone.css'
+        ];
+        view()->share('css', $css);
+
+        $vendorScripts = [
+            '/js/dropzone.js'
+        ];
+        view()->share('vendorScripts', $vendorScripts);
 
         $scripts[] = '/js/validation/staff-validation.js';
         view()->share('scripts', $scripts);
@@ -122,7 +133,8 @@ class StaffController extends Controller
     public function createStaff(Request $request) {
 
         $validator = Validator::make($request->all(), [
-            'avatar' => 'image|dimensions:min_width=512,min_height=512',
+            'avatar' => 'array',
+            'avatar.*' => 'required',
             'firstname' => 'required|string|max:255|alpha',
             'lastname' => 'required|string|max:255|alpha',
             'profession' => 'required|integer|exists:professions,id',
@@ -165,7 +177,7 @@ class StaffController extends Controller
             'nagrada.*.osvajanja' => 'nullable|integer',
             // Slike
             'galerija' => 'array',
-            'galerija.*' => 'required|image',
+            'galerija.*' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -210,7 +222,18 @@ class StaffController extends Controller
         abort(404);
     }
 
-    public function displayEditStaff($id) {
+    public function displayEditStaff($id)
+    {
+        $css = [
+            'https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.2.0/dropzone.css'
+        ];
+        view()->share('css', $css);
+
+        $vendorScripts = [
+            '/js/dropzone.js'
+        ];
+        view()->share('vendorScripts', $vendorScripts);
+
         $languages = Language::all();
         $professions = Profession::all();
 
@@ -255,7 +278,8 @@ class StaffController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'avatar' => 'image|dimensions:min_width=512,min_height=512',
+            'avatar' => 'array',
+            'avatar.*' => 'array|required',
             'firstname' => 'required|string|max:255|alpha',
             'lastname' => 'required|string|max:255|alpha',
             'profession' => 'required|integer|exists:professions,id',
@@ -429,7 +453,7 @@ class StaffController extends Controller
 
         $validator = Validator::make($request->all(), [
             'galerija' => 'array',
-            'galerija.*' => 'required|image'
+            'galerija.*' => 'required'
         ]);
 
         if($validator->fails()){

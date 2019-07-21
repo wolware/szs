@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\ClubRequest;
 use App\Gallery;
+use App\Http\Controllers\UploadController;
 use App\Language;
 use App\Staff;
 use App\StaffWorkHistory;
@@ -11,6 +12,7 @@ use App\Trophy;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class StaffRepository {
     protected $model;
@@ -25,14 +27,15 @@ class StaffRepository {
             ->get();
     }
 
-    public function createStaff(Request $request) {
+    public function createStaff(Request $request)
+    {
         $newLogoName = 'default.png';
 
-        if($request->file('avatar')){
-            $logo = $request->file('avatar');
-            $newLogoName = time() . '-' . Auth::user()->id . '.' . $logo->getClientOriginalExtension();
-            $destinationPath = public_path('/images/staff_avatars');
-            $logo->move($destinationPath, $newLogoName);
+        if ($request->filled('avatar')) {
+            foreach ($request['avatar']['attachments'] as $file) {
+                $logo = UploadController::moveToStorage($file, '/images/staff_avatars');
+                $newLogoName = $logo['name'];
+            }
         }
 
         // Provjeri najmanji level regije
@@ -120,19 +123,17 @@ class StaffRepository {
                     }
                 }
 
-                if($request->file('galerija')){
-                    $galerije = $request->file('galerija');
-                    foreach($galerije as $key => $slika){
-                        $newgalName = $key . '-' .time() . '-' .  $createStaff->id . '.' . $slika->getClientOriginalExtension();
-                        $destPath = public_path('/images/galerija_kadrovi');
-                        $slika->move($destPath, $newgalName);
+            if ($request->filled('galerija')) {
+                $gallery = $request['galerija'];
+                foreach ($gallery['attachments'] as $key => $attachment) {
+                    $image = UploadController::moveToStorage($attachment, '/images/galerija_kadrovi');
 
-                        Gallery::create([
-                            'image' => $newgalName,
-                            'staff_id' => $createStaff->id
-                        ]);
-                    }
+                    Gallery::create([
+                        'image' => $image['name'],
+                        'staff_id' => $createStaff->id
+                    ]);
                 }
+            }
 
                 return $createStaff;
         } else {
@@ -148,14 +149,19 @@ class StaffRepository {
             ->first();
     }
 
-    public function updateGeneral(Request $request, Staff $staff){
+    public function updateGeneral(Request $request, Staff $staff)
+    {
         $newLogoName = $staff->avatar;
 
-        if($request->file('avatar')){
-            $logo = $request->file('avatar');
-            $newLogoName = time() . '-' . Auth::user()->id . '.' . $logo->getClientOriginalExtension();
-            $destinationPath = public_path('/images/staff_avatars');
-            $logo->move($destinationPath, $newLogoName);
+        if ($request->filled('avatar')) {
+            foreach ($request['avatar']['attachments'] as $file) {
+                $logo = UploadController::moveToStorage($file, '/images/staff_avatars');
+                $newLogoName = $logo['name'];
+
+                if ($staff->avatar)
+                    Storage::delete('/public/images/staff_avatars/' . $staff->avatar);
+
+            }
         }
 
         // Provjeri najmanji level regije
@@ -339,19 +345,16 @@ class StaffRepository {
     }
 
     public function updateGallery(Request $request, Staff $staff) {
-        if($request->file('galerija')){
-            $galerije = $request->file('galerija');
-            foreach($galerije as $key => $slika){
-                $newgalName = $key . '-' .time() . '-' .  $staff->id . '.' . $slika->getClientOriginalExtension();
-                $destPath = public_path('/images/galerija_kadrovi');
-                $slika->move($destPath, $newgalName);
+        if ($request->filled('galerija')) {
+            $gallery = $request['galerija'];
+            foreach ($gallery['attachments'] as $key => $attachment) {
+                $image = UploadController::moveToStorage($attachment, '/images/galerija_kadrovi');
 
                 Gallery::create([
-                    'image' => $newgalName,
+                    'image' => $image['name'],
                     'staff_id' => $staff->id
                 ]);
             }
-
             return true;
         }
 
