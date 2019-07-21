@@ -9,6 +9,7 @@ use App\SchoolMember;
 use App\Trophy;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class SchoolRepository {
     protected $model;
@@ -153,16 +154,20 @@ class SchoolRepository {
             ->first();
     }
 
-    public function updateGeneral(Request $request, School $school) {
+    public function updateGeneral(Request $request, School $school)
+    {
         $newLogoName = $school->logo;
 
-        if($request->file('logo')){
-            $logo = $request->file('logo');
-            $newLogoName = time() . '-' . Auth::user()->id . '.' . $logo->getClientOriginalExtension();
-            $destinationPath = public_path('/images/school_logo');
-            $logo->move($destinationPath, $newLogoName);
-        }
+        if ($request->filled('logo')) {
+            foreach ($request['logo']['attachments'] as $file) {
+                $logo = UploadController::moveToStorage($file, '/images/school_logo');
+                //delete old file
+                if ($school->logo)
+                    Storage::delete('/public/images/school_logo/' . $school->logo);
 
+                $newLogoName = $logo['name'];
+            }
+        }
         // Provjeri najmanji level regije
         $region_id = $request->get('country');
 
@@ -343,22 +348,18 @@ class SchoolRepository {
     }
 
     public function updateGallery(Request $request, School $school) {
-        if($request->file('galerija')){
-            $galerije = $request->file('galerija');
-            foreach($galerije as $key => $slika){
-                $newgalName = $key . '-' .time() . '-' .  $school->id . '.' . $slika->getClientOriginalExtension();
-                $destPath = public_path('/images/galerija_skola');
-                $slika->move($destPath, $newgalName);
+        if ($request->filled('galerija')) {
+            $gallery = $request['galerija'];
+            foreach ($gallery['attachments'] as $key => $attachment) {
+                $image = UploadController::moveToStorage($attachment, '/images/galerija_skola');
 
                 Gallery::create([
-                    'image' => $newgalName,
+                    'image' => $image['name'],
                     'school_id' => $school->id
                 ]);
             }
-
             return true;
         }
-
         return null;
     }
 }

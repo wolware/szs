@@ -70,27 +70,43 @@
 
                                                     <div class="col-md-6 objavi-klub-logo-setup">
 
-                                                        <div class="col-md-7">
-
+                                                        @if(isset($school->logo))
                                                             <div class="alc-staff__photo">
-                                                                <img class="slika-upload-klub" id="schoolLogoPreview" src="{{ asset('images/school_logo/' . $school->logo) }}" alt="">
+                                                                <img class="slika-upload-klub"
+                                                                     src="{{asset('images/school_logo/'.$school->logo)}}"
+                                                                     alt="">
                                                             </div>
+                                                        @endif
+{{--                                                        <div class="col-md-7">--}}
+{{----}}
+{{--                                                            <div class="alc-staff__photo">--}}
+{{--                                                                <img class="slika-upload-klub" id="schoolLogoPreview" src="{{ asset('images/school_logo/' . $school->logo) }}" alt="">--}}
+{{--                                                            </div>--}}
+{{----}}
+{{--                                                        </div>--}}
 
-                                                        </div>
-
-                                                        <div class="col-md-5 sadrzaj-slike">
-
-                                                            <p class="dodaj-sliku-naslov klub-a1">Logo škole</p>
-                                                            <p class="dodaj-sliku-call">Identitet škole</p>
-                                                            <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-                                                                Odaberi logo... <input type="file" id="schoolLogo" name="logo" class="not-visible" onchange="previewFile('#schoolLogo', '#schoolLogoPreview', 1024, 1024, 512, 512)">
-                                                            </label>
+{{--                                                        <div class="col-md-5 sadrzaj-slike">--}}
+{{----}}
+{{--                                                            <p class="dodaj-sliku-naslov klub-a1">Logo škole</p>--}}
+{{--                                                            <p class="dodaj-sliku-call">Identitet škole</p>--}}
+{{--                                                            <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">--}}
+{{--                                                                Odaberi logo... <input type="file" id="schoolLogo" name="logo" class="not-visible" onchange="previewFile('#schoolLogo', '#schoolLogoPreview', 1024, 1024, 512, 512)">--}}
+{{--                                                            </label>--}}
+                                                            @include('partials.dropzone', [
+                                                                'zoneID' => 'logo',
+                                                                'zoneUploadUrl' => 'uploads',
+                                                                'zoneDeleteUrl' => 'uploads',
+                                                                'zoneLabel' => 'Identitet škole',
+                                                                'dzMessage' => 'Klikni ili prevuci logo škole ovdje',
+                                                                'dzDescription' => 'Logo se može prebaciti i drag & drop metodom.',
+                                                                'maxFiles' => 1
+                                                                ])
                                                             <div class="info001">
                                                                 <p class="info-upload-slike">Preporučene dimenzije za logo:</p>
                                                                 <p class="info-upload-slike">Minimalno: 512x512 px</p>
                                                             </div>
-
-                                                        </div>
+{{----}}
+{{--                                                        </div>--}}
                                                     </div>
 
                                                     <div class="col-md-6">
@@ -541,17 +557,26 @@
                                             {!! csrf_field() !!}
                                             <input name="_method" type="hidden" value="PATCH">
                                             <div class="row dodavanje-slika">
-                                                <div class="col-md-12 sadrzaj-slike">
-                                                    <p class="dodaj-sliku-naslov">Dodajte slike</p>
-                                                    <p class="dodaj-sliku-call">u Vašu galeriju</p>
-                                                    <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-                                                        Odaberi slike... <input type="file" class="galerija_edit not-visible" name="galerija[]" accept="image/*" multiple>
-                                                    </label>
-                                                    <div class="info001">
+{{--                                                <div class="col-md-12 sadrzaj-slike">--}}
+{{--                                                    <p class="dodaj-sliku-naslov">Dodajte slike</p>--}}
+{{--                                                    <p class="dodaj-sliku-call">u Vašu galeriju</p>--}}
+{{--                                                    <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">--}}
+{{--                                                        Odaberi slike... <input type="file" class="galerija_edit not-visible" name="galerija[]" accept="image/*" multiple>--}}
+{{--                                                    </label>--}}
+                                                @include('partials.dropzone', [
+                                                                'zoneID' => 'galerija',
+                                                                'zoneUploadUrl' => 'uploads',
+                                                                'zoneDeleteUrl' => 'uploads',
+                                                                'zoneLabel' => 'Dodajte slike u Vašu galeriju',
+                                                                'dzDescription' => 'Fotografije se mogu prebaciti i drag & drop metodom.',
+                                                                'maxFiles' => 100
+                                                                ])
+
+                                                <div class="info001">
                                                         <p class="info-upload-slike">Preporučena dimenzija za vaše slike:</p>
                                                         <p class="info-upload-slike">1920x1080 px</p>
                                                     </div>
-                                                </div>
+{{--                                                </div>--}}
                                             </div>
                                             <div class="row form-objavi-klub-01">
                                                 @foreach($school->images as $slika)

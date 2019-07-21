@@ -191,6 +191,19 @@ class SchoolController extends Controller
 
     public function displayEditSchool($id)
     {
+        $scripts[] = '/js/new-figure.js';
+        view()->share('scripts', $scripts);
+
+        $css = [
+            'https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.2.0/dropzone.css'
+        ];
+        view()->share('css', $css);
+
+        $vendorScripts = [
+            '/js/dropzone.js'
+        ];
+        view()->share('vendorScripts', $vendorScripts);
+
         $regions = $this->regionRepository->getAll();
         $sports = $this->sportRepository->getAll();
         $clubCategories = $this->clubRepository->getSportCategories();
@@ -230,7 +243,8 @@ class SchoolController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'logo' => 'image|dimensions:min_width=200,min_height=200',
+            'logo' => 'array',
+            'logo.attachments' => 'required',
             'name' => 'required|max:255|string',
             'nature' => 'required|max:255|string',
             'continent' => 'required|integer|exists:regions,id',
@@ -412,7 +426,7 @@ class SchoolController extends Controller
 
         $validator = Validator::make($request->all(), [
             'galerija' => 'array',
-            'galerija.*' => 'required|image'
+            'galerija.*' => 'required'
         ]);
 
         if ($validator->fails()) {
