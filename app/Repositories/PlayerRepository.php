@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\ClubRequest;
 use App\Gallery;
+use App\Http\Controllers\UploadController;
 use App\Player;
 use App\PlayerClubHistory;
 use App\PlayerNature;
@@ -13,6 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 
 class PlayerRepository {
@@ -139,11 +141,12 @@ class PlayerRepository {
     public function createPlayer(Request $request, Sport $sport, $unique_columns) {
         $newLogoName = 'default.png';
 
-        if($request->file('avatar')){
-            $logo = $request->file('avatar');
-            $newLogoName = time() . '-' . Auth::user()->id . '.' . $logo->getClientOriginalExtension();
-            $destinationPath = public_path('/images/athlete_avatars');
-            $logo->move($destinationPath, $newLogoName);
+        if ($request->filled('avatar')) {
+            foreach ($request['avatar']['attachments'] as $file) {
+                $avatar = UploadController::moveToStorage($file, '/images/athlete_avatars');
+
+                $newLogoName = $avatar['name'];
+            }
         }
 
         // Provjeri najmanji level regije
@@ -230,15 +233,13 @@ class PlayerRepository {
                     }
                 }
 
-                if($request->file('galerija')){
-                    $galerije = $request->file('galerija');
-                    foreach($galerije as $key => $slika){
-                        $newgalName = $key . '-' .time() . '-' .  $createPlayer->id . '.' . $slika->getClientOriginalExtension();
-                        $destPath = public_path('/images/galerija_sportista');
-                        $slika->move($destPath, $newgalName);
+                if ($request->filled('galerija')) {
+                    $gallery = $request['galerija'];
+                    foreach ($gallery['attachments'] as $key => $slika) {
+                        $image = UploadController::moveToStorage($slika, '/images/galerija_sportista');
 
                         Gallery::create([
-                            'image' => $newgalName,
+                            'image' => $image['name'],
                             'player_id' => $createPlayer->id
                         ]);
                     }
@@ -291,14 +292,20 @@ class PlayerRepository {
         return $array;
     }
 
-    public function updateGeneral(Request $request, Player $player){
-        $newLogoName = $player->avatar;
+    public function updateGeneral(Request $request, Player $player)
+    {
+        $newLogoName = 'default.png';
 
-        if($request->file('avatar')){
-            $logo = $request->file('avatar');
-            $newLogoName = time() . '-' . Auth::user()->id . '.' . $logo->getClientOriginalExtension();
-            $destinationPath = public_path('/images/athlete_avatars');
-            $logo->move($destinationPath, $newLogoName);
+        if ($request->filled('avatar')) {
+            foreach ($request['avatar']['attachments'] as $file) {
+                $avatar = UploadController::moveToStorage($file, '/images/athlete_avatars');
+
+                //delete old file
+                if ($player->avatar)
+                    Storage::delete('/public/images/athlete_avatars/' . $player->avatar);
+
+                $newLogoName = $avatar['name'];
+            }
         }
 
         // Provjeri najmanji level regije
@@ -485,23 +492,20 @@ class PlayerRepository {
         }
     }
 
-    public function updateGallery(Request $request, Player $player) {
-        if($request->file('galerija')){
-            $galerije = $request->file('galerija');
-            foreach($galerije as $key => $slika){
-                $newgalName = $key . '-' .time() . '-' .  $player->id . '.' . $slika->getClientOriginalExtension();
-                $destPath = public_path('/images/galerija_sportista');
-                $slika->move($destPath, $newgalName);
+    public function updateGallery(Request $request, Player $player)
+    {
+        if ($request->filled('galerija')) {
+            $gallery = $request['galerija'];
+            foreach ($gallery['attachments'] as $key => $attachment) {
+                $image = UploadController::moveToStorage($attachment, '/images/galerija_sportista');
 
                 Gallery::create([
-                    'image' => $newgalName,
+                    'image' => $image['name'],
                     'player_id' => $player->id
                 ]);
             }
-
             return true;
         }
-
         return null;
     }
 

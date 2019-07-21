@@ -153,10 +153,13 @@ $('[role="tab"]').click(function (e) {
 
     var valid = true;
     tab.each(function (activeTab) {
-        $('input', activeTab).each(function (i, v) {
-            valid = validator.element(v) && valid;
+        $('input', activeTab).each(function(i, v){
+            if(this.type != "hidden" && this.type != 'file'){
+                valid = validator.element(v) && valid;
+            }
         });
     });
+
 
     if (!valid) {
         e.stopPropagation();

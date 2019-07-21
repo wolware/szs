@@ -99,29 +99,37 @@
                                             <div class="row identitet-style">
 
                                                 <div class="col-md-6 objavi-klub-logo-setup">
+                                                    @include('partials.dropzone', [
+                                                        'zoneID' => 'avatar',
+                                                        'zoneUploadUrl' => 'uploads',
+                                                        'zoneDeleteUrl' => 'uploads',
+                                                        'zoneLabel' => 'Slika sportiste',
+                                                        'dzMessage' => 'Klikni ili prevuci sliku sportiste ovdje',
+                                                        'dzDescription' => 'Slika se može prebaciti i drag & drop metodom.',
+                                                        'maxFiles' => 1
+                                                        ])
+{{--                                                    <div class="col-md-7">--}}
 
-                                                    <div class="col-md-7">
+{{--                                                        <div class="alc-staff__photo">--}}
+{{--                                                            <img class="slika-upload-klub" id="slika_upload_klub" src="{{asset('images/dino-secic.jpg')}}">--}}
+{{--                                                        </div>--}}
 
-                                                        <div class="alc-staff__photo">
-                                                            <img class="slika-upload-klub" id="slika_upload_klub" src="{{asset('images/dino-secic.jpg')}}">
-                                                        </div>
+{{--                                                    </div>--}}
 
-                                                    </div>
+{{--                                                    <div class="col-md-5 sadrzaj-slike">--}}
 
-                                                    <div class="col-md-5 sadrzaj-slike">
+{{--                                                        <p class="dodaj-sliku-naslov klub-a1">Slika sportiste</p>--}}
+{{--                                                        <p class="dodaj-sliku-call">Vaš identitet</p>--}}
+{{--                                                        <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">--}}
+{{--                                                            Odaberi sliku... <input type="file" id="slikaprof" name="avatar" class="not-visible" accept="image/*" onchange="previewFile('#slikaprof', '#slika_upload_klub', 2048, 2048, 512, 512)">--}}
+{{--                                                        </label>--}}
+{{--                                                        <div class="info001">--}}
+{{--                                                            <p class="info-upload-slike">Preporučene dimenzije za--}}
+{{--                                                                sliku:</p>--}}
+{{--                                                            <p class="info-upload-slike">Minimalno: 512x512 px</p>--}}
+{{--                                                        </div>--}}
 
-                                                        <p class="dodaj-sliku-naslov klub-a1">Slika sportiste</p>
-                                                        <p class="dodaj-sliku-call">Vaš identitet</p>
-                                                        <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-                                                            Odaberi sliku... <input type="file" id="slikaprof" name="avatar" class="not-visible" accept="image/*" onchange="previewFile('#slikaprof', '#slika_upload_klub', 2048, 2048, 512, 512)">
-                                                        </label>
-                                                        <div class="info001">
-                                                            <p class="info-upload-slike">Preporučene dimenzije za
-                                                                sliku:</p>
-                                                            <p class="info-upload-slike">Minimalno: 512x512 px</p>
-                                                        </div>
-
-                                                    </div>
+{{--                                                    </div>--}}
                                                 </div>
 
                                                 <div class="col-md-6">
@@ -512,12 +520,20 @@
 
 
                                         <div class="row dodavanje-slika">
-                                            <div class="col-md-12 sadrzaj-slike">
-                                                <p class="dodaj-sliku-naslov">Dodajte slike</p>
-                                                <p class="dodaj-sliku-call">u Vašu galeriju</p>
-                                                <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-                                                    Odaberi slike... <input type="file" class="galerija not-visible" name="galerija[]" accept="image/*" multiple>
-                                                </label>
+{{--                                            <div class="col-md-12 sadrzaj-slike">--}}
+{{--                                                <p class="dodaj-sliku-naslov">Dodajte slike</p>--}}
+{{--                                                <p class="dodaj-sliku-call">u Vašu galeriju</p>--}}
+{{--                                                <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">--}}
+{{--                                                    Odaberi slike... <input type="file" class="galerija not-visible" name="galerija[]" accept="image/*" multiple>--}}
+{{--                                                </label>--}}
+                                            @include('partials.dropzone', [
+                                                    'zoneID' => 'galerija',
+                                                    'zoneUploadUrl' => 'uploads',
+                                                    'zoneDeleteUrl' => 'uploads',
+                                                    'zoneLabel' => 'Dodajte slike u Vašu galeriju',
+                                                    'dzDescription' => 'Fotografije se mogu prebaciti i drag & drop metodom.',
+                                                    'maxFiles' => 100
+                                                    ])
                                                 <div class="info001">
                                                     <p class="info-upload-slike">Preporučena dimenzija za vaše
                                                         slike:</p>

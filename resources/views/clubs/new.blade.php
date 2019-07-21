@@ -805,13 +805,13 @@
                                         <div class="row dodavanje-slika">
                                             <div class="col-md-12 sadrzaj-slike">
                                                 @include('partials.dropzone', [
-                                                                'zoneID' => 'galerija',
-                                                                'zoneUploadUrl' => 'uploads',
-                                                                'zoneDeleteUrl' => 'uploads',
-                                                                'zoneLabel' => 'Dodajte slike u Vašu galeriju',
-                                                                'dzDescription' => 'Fotografije se mogu prebaciti i drag & drop metodom.',
-                                                                'maxFiles' => 100
-                                                                ])
+                                                    'zoneID' => 'galerija',
+                                                    'zoneUploadUrl' => 'uploads',
+                                                    'zoneDeleteUrl' => 'uploads',
+                                                    'zoneLabel' => 'Dodajte slike u Vašu galeriju',
+                                                    'dzDescription' => 'Fotografije se mogu prebaciti i drag & drop metodom.',
+                                                    'maxFiles' => 100
+                                                    ])
 
                                                 <div class="info001">
                                                     <p class="info-upload-slike">Preporučena dimenzija za vaše

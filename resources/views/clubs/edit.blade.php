@@ -109,14 +109,14 @@
 {{--                                                    </div>--}}
 
                                                     @include('partials.dropzone', [
-                                                                                                'zoneID' => 'logo',
-                                                                                                'zoneUploadUrl' => 'uploads',
-                                                                                                'zoneDeleteUrl' => 'uploads',
-                                                                                                'zoneLabel' => 'Identitet kluba',
-                                                                                                'dzMessage' => 'Klikni ili prevuci logo kluba ovdje',
-                                                                                                'dzDescription' => 'Logo se može prebaciti i drag & drop metodom.',
-                                                                                                'maxFiles' => 1
-                                                                                                ])
+                                                        'zoneID' => 'logo',
+                                                        'zoneUploadUrl' => 'uploads',
+                                                        'zoneDeleteUrl' => 'uploads',
+                                                        'zoneLabel' => 'Identitet kluba',
+                                                        'dzMessage' => 'Klikni ili prevuci logo kluba ovdje',
+                                                        'dzDescription' => 'Logo se može prebaciti i drag & drop metodom.',
+                                                        'maxFiles' => 1
+                                                        ])
                                                 </div>
 
                                                 <div class="col-md-6">

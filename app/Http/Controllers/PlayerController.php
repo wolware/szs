@@ -43,7 +43,7 @@ class PlayerController extends Controller
     ];
 
     protected $playerCommonValidationRules = [
-        'avatar' => 'image|dimensions:min_width=512,min_height=512',
+//        'avatar' => 'image|dimensions:min_width=512,min_height=512',
         'firstname' => 'required|string|max:255|alpha',
         'lastname' => 'required|string|max:255|alpha',
         'continent' => 'required|integer|exists:regions,id',
@@ -77,7 +77,7 @@ class PlayerController extends Controller
         'nagrada.*.osvajanja' => 'nullable|integer',
         // Slike
         'galerija' => 'array',
-        'galerija.*' => 'required|image',
+        'galerija.attachments' => 'required',
     ];
 
     protected $playerUniqueValidationRules = [
@@ -119,6 +119,16 @@ class PlayerController extends Controller
 
     public function displayAddPlayer($sport_id)
     {
+        $css = [
+            'https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.2.0/dropzone.css'
+        ];
+        view()->share('css', $css);
+
+        $vendorScripts = [
+            '/js/dropzone.js'
+        ];
+        view()->share('vendorScripts', $vendorScripts);
+
         $scripts[] = '/js/validation/athletes-validation.js';
         view()->share('scripts', $scripts);
 
@@ -273,6 +283,16 @@ class PlayerController extends Controller
             abort(404);
         }
 
+        $css = [
+            'https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.2.0/dropzone.css'
+        ];
+        view()->share('css', $css);
+
+        $vendorScripts = [
+            '/js/dropzone.js'
+        ];
+        view()->share('vendorScripts', $vendorScripts);
+
         $columns = Schema::getColumnListing($player->player_type->players_table);
         $to_delete = ['id', 'player_type_id', 'created_at', 'updated_at'];
         $columns = array_diff($columns, $to_delete);
@@ -359,7 +379,8 @@ class PlayerController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'avatar' => 'image|dimensions:min_width=512,min_height=512',
+            'avatar' => 'array',
+            'avatar.attachments' => 'required',
             'firstname' => 'required|string|max:255|alpha',
             'lastname' => 'required|string|max:255|alpha',
             'continent' => 'required|integer|exists:regions,id',
@@ -535,7 +556,7 @@ class PlayerController extends Controller
 
         $validator = Validator::make($request->all(), [
             'galerija' => 'array',
-            'galerija.*' => 'required|image'
+            'galerija.*' => 'required'
         ]);
 
         if ($validator->fails()) {
@@ -549,6 +570,9 @@ class PlayerController extends Controller
 
             if ($updatePlayerGallery) {
                 flash()->overlay('Uspješno ste izmjenili galeriju sportiste.', 'Čestitamo');
+                return back();
+            } else {
+                flash()->overlay('Došlo je do greške pri spremanju galerije.', 'Greška');
                 return back();
             }
         }
