@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreEvent;
 use App\Repositories\EventRepository;
 use App\Repositories\RegionRepository;
 use App\Repositories\SportRepository;
@@ -49,7 +50,13 @@ class EventController extends Controller
         return view('events.add', compact('regions', 'sports', 'event_types'));
     }
 
-    public function createEvent(Request $request) {
+    public function createEvent(Request $request)
+    {
+        $messages = [
+            'image.required' => 'Slika eventa je obavezna.'
+        ];
+
+
         $validator = Validator::make($request->all(), [
             'image' => 'required|array',
             'image.*' => 'required',
@@ -69,7 +76,7 @@ class EventController extends Controller
             'first_place_award' => 'nullable|required_if:event_type_id,==,1|numeric|min:1|max:100000',
             'duration' => 'nullable|integer|min:1|max:50',
             'description' => 'nullable|string|max:2000'
-        ]);
+        ], $messages);
 
         $validator->after(function ($validator) use ($request){
             if (!$request->has('latitude') || !$request->has('longitude')) {

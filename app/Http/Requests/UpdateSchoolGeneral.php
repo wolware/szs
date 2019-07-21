@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreSchool extends FormRequest
+class UpdateSchoolGeneral extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -37,7 +37,7 @@ class StoreSchool extends FormRequest
             'type' => 'required|integer',
             'sport' => 'required|integer|exists:sports,id',
             'category' => 'required|integer|exists:club_categories,id',
-            'established_in' => 'nullable|digits:4|integer|min:1800|max:'.date('Y'),
+            'established_in' => 'nullable|digits:4|integer|min:1800|max:' . date('Y'),
             'home_field' => 'nullable|max:255|string',
             'competition' => 'nullable|max:255|string',
             'phone_1' => 'nullable|max:50|string',
@@ -53,27 +53,7 @@ class StoreSchool extends FormRequest
             'instagram' => 'nullable|max:255|string',
             'twitter' => 'nullable|max:255|string',
             'youtube' => 'nullable|max:255|string',
-            'video' => 'nullable|max:255|string',
-            'history' => 'nullable|string',
-            // Licnosti
-            'licnost' => 'array',
-            'licnost.*' => 'array',
-            'licnost.*.avatar' => 'image|dimensions:min_width=312,min_height=250',
-            'licnost.*.ime' => 'required|max:255|string',
-            'licnost.*.prezime' => 'required|max:255|string',
-            'licnost.*.opis' => 'nullable|max:1000|string',
-            // Nagrade
-            'nagrada' => 'array',
-            'nagrada.*' => 'array',
-            'nagrada.*.vrsta' => 'required|max:255|string|in:Medalja,Trofej/Pehar,Priznanje,Plaketa',
-            'nagrada.*.tip' => 'required|max:255|string|in:Zlato,Srebro,Bronza,Ostalo',
-            'nagrada.*.nivo' => 'required|max:255|string|in:Internacionalni nivo,Regionalni nivo,Državni nivo,Entitetski nivo,Drugo',
-            'nagrada.*.takmicenje' => 'required|max:255|string',
-            'nagrada.*.sezona' => 'required|digits:4|integer|min:1800|max:'.date('Y'),
-            'nagrada.*.osvajanja' => 'nullable|integer',
-            // Slike
-            'galerija' => 'array',
-            'galerija.*' => 'required',
+            'video' => 'nullable|max:255|string'
         ];
     }
 

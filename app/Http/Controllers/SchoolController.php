@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSchool;
+use App\Http\Requests\UpdateSchoolGeneral;
 use App\Repositories\AssociationRepository;
 use App\Repositories\ClubRepository;
 use App\Repositories\RegionRepository;
@@ -37,6 +38,7 @@ class SchoolController extends Controller
         $this->clubRepository = $clubRepository;
         $this->schoolRepository = $schoolRepository;
     }
+
     public function index_show()
     {
         $clubCategories = $this->clubRepository
@@ -227,7 +229,7 @@ class SchoolController extends Controller
         abort(404);
     }
 
-    public function editSchoolGeneral($id, Request $request)
+    public function editSchoolGeneral($id, UpdateSchoolGeneral $request)
     {
         $school = $this->schoolRepository
             ->getById($id);
@@ -242,53 +244,14 @@ class SchoolController extends Controller
             abort(404);
         }
 
-        $validator = Validator::make($request->all(), [
-            'logo' => 'array',
-            'logo.attachments' => 'required',
-            'name' => 'required|max:255|string',
-            'nature' => 'required|max:255|string',
-            'continent' => 'required|integer|exists:regions,id',
-            'country' => 'required|integer|exists:regions,id',
-            'province' => 'integer|exists:regions,id',
-            'region' => 'integer|exists:regions,id',
-            'municipality' => 'integer|exists:regions,id',
-            'city' => 'required|max:255|string',
-            'type' => 'required|integer',
-            'sport' => 'required|integer|exists:sports,id',
-            'category' => 'required|integer|exists:club_categories,id',
-            'established_in' => 'nullable|digits:4|integer|min:1800|max:' . date('Y'),
-            'home_field' => 'nullable|max:255|string',
-            'competition' => 'nullable|max:255|string',
-            'phone_1' => 'nullable|max:50|string',
-            'phone_2' => 'nullable|max:50|string',
-            'fax' => 'nullable|max:50|string',
-            'email' => 'nullable|max:255|email',
-            'website' => 'nullable|max:255|string',
-            'address' => 'nullable|max:255|string',
-            'pioniri' => 'required|boolean',
-            'kadeti' => 'required|boolean',
-            'juniori' => 'required|boolean',
-            'facebook' => 'nullable|max:255|string',
-            'instagram' => 'nullable|max:255|string',
-            'twitter' => 'nullable|max:255|string',
-            'youtube' => 'nullable|max:255|string',
-            'video' => 'nullable|max:255|string'
-        ]);
+        $updateSchoolGeneral = $this->schoolRepository
+            ->updateGeneral($request, $school);
 
-        if ($validator->fails()) {
-            return redirect('/schools/' . $id . '/edit')
-                ->withErrors($validator)
-                ->withInput();
-        } else {
-
-            $updateSchoolGeneral = $this->schoolRepository
-                ->updateGeneral($request, $school);
-
-            if ($updateSchoolGeneral) {
-                flash()->overlay('Uspješno ste izmjenili "Općenito" sekciju škole sporta.', 'Čestitamo');
-                return back();
-            }
+        if ($updateSchoolGeneral) {
+            flash()->overlay('Uspješno ste izmjenili "Općenito" sekciju škole sporta.', 'Čestitamo');
+            return back();
         }
+
 
     }
 

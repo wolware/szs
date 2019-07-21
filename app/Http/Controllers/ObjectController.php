@@ -85,7 +85,7 @@ class ObjectController extends Controller
     ];
 
     protected $objectCommonValidationRules = [
-        'image' => 'array',
+        'image' => 'array|required',
         'image.*' => 'required',
         'name' => 'required|string|max:255',
         'continent' => 'required|integer|exists:regions,id',
@@ -102,6 +102,7 @@ class ObjectController extends Controller
         // Slike
         'galerija' => 'array',
         'galerija.*' => 'required|image',
+        'proof' => 'required|array'
     ];
 
     protected $objectBalonAdditionalValidations = [
@@ -206,6 +207,11 @@ class ObjectController extends Controller
         'protective_equipment' => 'nullable|boolean',
     ];
 
+    protected $messages = [
+        'image.required' => 'Logo škole je obavezan.',
+        'proof.required' => 'Dokaz vlasništva je obavezan.',
+    ];
+
     /**
      * ObjectController constructor.
      * @param ObjectRepository $objectRepository
@@ -308,7 +314,7 @@ class ObjectController extends Controller
             $completeValidationRules = array_merge($completeValidationRules, $this->objectSkiAdditionalValidations);
         }
 
-        $validator = Validator::make($request->all(), $completeValidationRules);
+        $validator = Validator::make($request->all(), $completeValidationRules, $this->messages);
 
         $validator->after(function ($validator) use ($request){
             if (!$request->has('latitude') || !$request->has('longitude')) {
@@ -633,7 +639,7 @@ class ObjectController extends Controller
         $validator = Validator::make($request->all(), [
             'proof' => 'required|array',
             'proof.*' => 'required'
-        ]);
+        ], $this->messages);
 
         if($validator->fails()){
             return redirect('/objects/' . $id . '/edit')
