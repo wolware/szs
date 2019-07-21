@@ -1,10 +1,6 @@
 let validator = $('#clubForm').validate({
     ignore: ':hidden,:disabled',
     rules: {
-        // logo: {
-        //     required: false,
-        //     extension: 'png|jpg|jpeg'
-        // },
         name: {
             required: true,
             string: true,
@@ -139,6 +135,10 @@ $('[role="tab"]').click(function (e) {
             }
         });
     });
+
+    if ($('#logo-uploaded-files').children().length < 1){
+        $("#dropzone-error").show();
+    }
 
     if(!valid){
         e.stopPropagation();

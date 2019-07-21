@@ -21,7 +21,7 @@ $maxFiles
             </div>
             <strong>{{isset($dzDescription) ? $dzDescription : "Fajlovi se mogu prebacivati i drag & drop metodom." }}</strong>
             {!! Form::hidden($zoneID.'Input', isset($zoneDisplay) ? $zoneDisplay : '', ['id' => $zoneID.'Input']) !!}
-
+            <label id="dropzone-error" class="error" for="logo" style="display: none">Ovo polje je obavezno.</label>
             @if(old($zoneID) && @count(old($zoneID)))
                 <p><strong>
                         Predhodno uploadovani fajlovi:
@@ -71,6 +71,7 @@ $maxFiles
                     formData.append("_token", $('meta[name="csrf-token"]').attr('content'));
                 },
                 success: function (file, response) {
+                    $("#dropzone-error").hide();
                     $('<input>').attr('type', 'hidden').attr('name', '{{$zoneID}}[attachments]['+numberOfUploadedFiles+']').val(JSON.stringify(response)).appendTo('#{{$zoneID}}-uploaded-files');
                     numberOfUploadedFiles++;
                     var fileUploded = file.previewElement.querySelector("[data-dz-name]");

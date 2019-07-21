@@ -84,7 +84,7 @@
                                     @endif
                                 </div>
                             </div>
-                            <form id="createNewClub" role="form" action="{{ url('/clubs/new/create') }}" method="POST"
+                            <form id="clubForm" role="form" action="{{ url('/clubs/new/create') }}" method="POST"
                                   enctype="multipart/form-data">
                             {!! csrf_field() !!}
                             <!-- Tab panes -->
