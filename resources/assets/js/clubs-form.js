@@ -52,7 +52,7 @@ $('#dodajLicnost').on('click', function () {
                 licnostiCount++;
             }
         }
-    )
+    );
 
     addLicnostValidation();
 });

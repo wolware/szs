@@ -62,6 +62,5 @@ class UploadController extends Controller
         $file->path = storage_path('public'). $movePath . '/' . $name;
         return ['path' => $file->path, 'mime' => $file->mime, 'name' => $name];
 
-
     }
 }

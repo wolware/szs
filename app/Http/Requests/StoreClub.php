@@ -74,6 +74,7 @@ class StoreClub extends FormRequest
 //            'galerija.*' => 'required|image',
             // Dokazi
             'proof' => 'required|array',
+            'proof.attachments' => 'required',
 //            'proof.*' => 'required|image',
         ];
     }

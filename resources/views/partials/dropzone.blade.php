@@ -42,8 +42,7 @@ $maxFiles
 
 @push('scripts-end')
     <script>
-
-        $(document).ready(function () {
+        // $(document).ready(function () {
             var numberOfUploadedFiles = {{old($zoneID) ? count(old($zoneID)): 0 }};
             // Dropzone.autoDiscover = false;
             $("#{{$zoneID}}").dropzone({
@@ -87,7 +86,7 @@ $maxFiles
                 }
             });
 
-        });
+        // });
 
     </script>
 @endpush
