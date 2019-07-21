@@ -111,12 +111,12 @@ let validator = $('#clubForm').validate({
         history: {
             string: true
         },
-        // 'galerija[]' : {
+        // 'galerijaInput' : {
         //     extension: 'png|jpg|jpeg'
         // },
         // 'proof[]' : {
         //     required: true,
-        //     extension: 'png|jpg|jpeg'
+            // extension: 'png|jpg|jpeg'
         // }
     },
     invalidHandler: function(form, validator) {
@@ -135,10 +135,6 @@ $('[role="tab"]').click(function (e) {
             }
         });
     });
-
-    if ($('#logo-uploaded-files').children().length < 1){
-        $("#dropzone-error").show();
-    }
 
     if(!valid){
         e.stopPropagation();

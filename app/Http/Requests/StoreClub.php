@@ -71,11 +71,16 @@ class StoreClub extends FormRequest
             'nagrada.*.osvajanja' => 'nullable|integer',
             // Slike
             'galerija' => 'array',
-//            'galerija.*' => 'required|image',
-            // Dokazi
             'proof' => 'required|array',
             'proof.attachments' => 'required',
-//            'proof.*' => 'required|image',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'proof.required' => 'Dokaz vlasništva je obavezan.',
+            'proof.*' => 'Obavezan upload minimalno jednog fajla za dokaz vlasništva.'
         ];
     }
 }
