@@ -418,9 +418,6 @@
         <script src="{{$script}}" type="text/javascript"></script>
     @endforeach
 @endif
-<script>
-    Dropzone.autoDiscover = false;
-</script>
 <!-- Template JS -->
 <script type="text/javascript" src={{asset('js/validate.js')}}></script>
 <script type="text/javascript" src="http://cdn.jsdelivr.net/jquery.validation/1.13.1/additional-methods.js"></script>

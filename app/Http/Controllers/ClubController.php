@@ -7,6 +7,7 @@ use App\ClubStaff;
 use App\Gallery;
 use App\History;
 use App\Http\Requests\StoreClub;
+use App\Http\Requests\UpdateClub;
 use App\Player;
 use App\Repositories\AssociationRepository;
 use App\Repositories\ClubRepository;
@@ -17,6 +18,7 @@ use App\Trophy;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Club;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -337,6 +339,20 @@ class ClubController extends Controller
     public function edit_club_show($id)
     {
 
+        $css = [
+            'https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.2.0/dropzone.css'
+        ];
+        view()->share('css', $css);
+
+        $vendorScripts = [
+            '/js/dropzone.js'
+        ];
+        view()->share('vendorScripts', $vendorScripts);
+
+        $scripts[] = '/js/validation/clubs-validation.js';
+        $scripts[] = '/js/clubs-form.js';
+        view()->share('scripts', $scripts);
+
         $regions = $this->regionRepository->getAll();
         $sports = $this->sportRepository->getAll();
         $clubCategories = $this->clubRepository->getSportCategories();
@@ -363,7 +379,7 @@ class ClubController extends Controller
 
     }
 
-    public function edit_club(Request $data, $id)
+    public function edit_club(UpdateClub $data, $id)
     {
         // Provjera da li je user vlasnik kluba
         $isOwner = Club::where('id', $id)->where('user_id', Auth::user()->id)->first();
@@ -371,100 +387,69 @@ class ClubController extends Controller
             abort(404);
         }
 
-        $validator = Validator::make($data->all(), [
-            'logo' => 'image|dimensions:min_width=200,min_height=200',
-            'name' => 'required|max:255|string',
-            'nature' => 'required|max:255|string',
-            'continent' => 'required|integer|exists:regions,id',
-            'country' => 'required|integer|exists:regions,id',
-            'province' => 'integer|exists:regions,id',
-            'region' => 'integer|exists:regions,id',
-            'municipality' => 'integer|exists:regions,id',
-            'city' => 'required|max:255|string',
-            'type' => 'required|integer',
-            'sport' => 'required|integer|exists:sports,id',
-            'category' => 'required|integer|exists:club_categories,id',
-            'established_in' => 'nullable|digits:4|integer|min:1800|max:' . date('Y'),
-            'home_field' => 'nullable|max:255|string',
-            'competition' => 'nullable|max:255|string',
-            'association' => 'nullable|integer|exists:associations,id',
-            'phone_1' => 'nullable|max:50|string',
-            'phone_2' => 'nullable|max:50|string',
-            'fax' => 'nullable|max:50|string',
-            'email' => 'nullable|max:255|email',
-            'website' => 'nullable|max:255|string',
-            'address' => 'nullable|max:255|string',
-            'facebook' => 'nullable|max:255|string',
-            'instagram' => 'nullable|max:255|string',
-            'twitter' => 'nullable|max:255|string',
-            'youtube' => 'nullable|max:255|string',
-            'video' => 'nullable|max:255|string'
-        ]);
+        $club = Club::findOrFail($id);
 
-        if ($validator->fails()) {
-            return redirect('/clubs/' . $id . '/edit')
-                ->withErrors($validator)
-                ->withInput();
-        } else {
-            // Provjeri najmanji level regije
-            $region_id = $data->get('country');
+        // Provjeri najmanji level regije
+        $region_id = $data->get('country');
 
-            if ($data->has('province')) {
-                $region_id = $data->get('province');
-            }
-
-            if ($data->has('region')) {
-                $region_id = $data->get('region');
-            }
-
-            if ($data->has('municipality')) {
-                $region_id = $data->get('municipality');
-            }
-
-            $fieldsToUpdate = [
-                'name' => $data->get('name'),
-                'nature' => $data->get('nature'),
-                'city' => $data->get('city'),
-                'established_in' => $data->get('established_in'),
-                'home_field' => $data->get('home_field'),
-                'competition' => $data->get('competition'),
-                'phone_1' => $data->get('phone_1'),
-                'phone_2' => $data->get('phone_2'),
-                'fax' => $data->get('fax'),
-                'email' => $data->get('email'),
-                'website' => $data->get('website'),
-                'address' => $data->get('address'),
-                'facebook' => $data->get('facebook'),
-                'twitter' => $data->get('twitter'),
-                'instagram' => $data->get('instagram'),
-                'youtube' => $data->get('youtube'),
-                'video' => $data->get('video'),
-                'association_id' => $data->get('association'),
-                'club_category_id' => $data->get('category'),
-                'sport_id' => $data->get('sport'),
-                'region_id' => $region_id,
-                'updated_at' => new Carbon(),
-            ];
-
-            if ($data->file('logo')) {
-                $logo = $data->file('logo');
-                $newLogoName = time() . '-' . Auth::user()->id . '.' . $logo->getClientOriginalExtension();
-                $destinationPath = public_path('/images/club_logo');
-                $logo->move($destinationPath, $newLogoName);
-
-                $fieldsToUpdate['logo'] = $newLogoName;
-            }
-
-            $updateClub = Club::where('id', $id)
-                ->update($fieldsToUpdate);
-
-            if ($updateClub) {
-                flash()->overlay('Uspješno ste editovali "Općenito" sekciju kluba.', 'Čestitamo');
-                return redirect('/clubs/' . $id . '/edit');
-            }
-
-            abort(404);
+        if ($data->has('province')) {
+            $region_id = $data->get('province');
         }
+
+        if ($data->has('region')) {
+            $region_id = $data->get('region');
+        }
+
+        if ($data->has('municipality')) {
+            $region_id = $data->get('municipality');
+        }
+
+        $fieldsToUpdate = [
+            'name' => $data->get('name'),
+            'nature' => $data->get('nature'),
+            'city' => $data->get('city'),
+            'established_in' => $data->get('established_in'),
+            'home_field' => $data->get('home_field'),
+            'competition' => $data->get('competition'),
+            'phone_1' => $data->get('phone_1'),
+            'phone_2' => $data->get('phone_2'),
+            'fax' => $data->get('fax'),
+            'email' => $data->get('email'),
+            'website' => $data->get('website'),
+            'address' => $data->get('address'),
+            'facebook' => $data->get('facebook'),
+            'twitter' => $data->get('twitter'),
+            'instagram' => $data->get('instagram'),
+            'youtube' => $data->get('youtube'),
+            'video' => $data->get('video'),
+            'association_id' => $data->get('association'),
+            'club_category_id' => $data->get('category'),
+            'sport_id' => $data->get('sport'),
+            'region_id' => $region_id,
+            'updated_at' => new Carbon(),
+        ];
+
+        if ($data->filled('logo')) {
+            foreach ($data['logo']['attachments'] as $file) {
+                $logo = UploadController::moveToStorage($file, '/images/club_logo');
+                //delete old file
+                if ($club->logo)
+                    Storage::delete('/public/images/club_logo/' . $club->logo);
+
+                $fieldsToUpdate['logo'] = $logo['name'];
+            }
+        }
+
+        $updateClub = Club::where('id', $id)
+            ->update($fieldsToUpdate);
+
+        if ($updateClub) {
+            flash()->overlay('Uspješno ste editovali "Općenito" sekciju kluba.', 'Čestitamo');
+            return redirect('/clubs/' . $id . '/edit');
+        }
+
+        abort(404);
+
     }
 
     public function edit_licnost(Request $data, $id)
@@ -706,31 +691,30 @@ class ClubController extends Controller
 
         $validator = Validator::make($data->all(), [
             'galerija' => 'array',
-            'galerija.*' => 'required|image',
+            'galerija.*' => 'required',
         ]);
 
         if ($validator->fails()) {
             return redirect('clubs/' . $id . '/edit')
                 ->withErrors($validator)
                 ->withInput();
-        } else {
-            if ($data->file('galerija')) {
-                $galerije = $data->file('galerija');
-                foreach ($galerije as $key => $slika) {
-                    $newgalName = $key . '-' . time() . '-' . $id . '.' . $slika->getClientOriginalExtension();
-                    $destPath = public_path('/images/galerija_klub');
-                    $slika->move($destPath, $newgalName);
-
-                    Gallery::create([
-                        'image' => $newgalName,
-                        'club_id' => $id
-                    ]);
-                }
-            }
-
-            flash()->overlay('Uspješno ste editovali galeriju kluba.', 'Čestitamo');
-            return redirect('clubs/' . $id . '/edit');
         }
+
+        if ($data->filled('galerija')) {
+            $gallery = $data['galerija'];
+            foreach ($gallery['attachments'] as $key => $slika) {
+                $image = UploadController::moveToStorage($slika, '/images/galerija_klub');
+
+                Gallery::create([
+                    'image' => $image['name'],
+                    'club_id' => $id
+                ]);
+            }
+        }
+
+        flash()->overlay('Uspješno ste editovali galeriju kluba.', 'Čestitamo');
+        return redirect('clubs/' . $id . '/edit');
+
     }
 
     public function edit_proof(Request $data, $id)
@@ -743,32 +727,32 @@ class ClubController extends Controller
 
         $validator = Validator::make($data->all(), [
             'proof' => 'required|array',
-            'proof.*' => 'required|image',
+            'proof.*' => 'required',
         ]);
 
         if ($validator->fails()) {
             return redirect('clubs/' . $id . '/edit')
                 ->withErrors($validator)
                 ->withInput();
-        } else {
-            if ($data->file('proof')) {
-                $galerije = $data->file('proof');
-                foreach ($galerije as $key => $slika) {
-                    $newgalName = 'proof-' . $key . '-' . time() . '-' . $id . '.' . $slika->getClientOriginalExtension();
-                    $destPath = public_path('/images/club_proof');
-                    $slika->move($destPath, $newgalName);
 
-                    Gallery::create([
-                        'image' => $newgalName,
-                        'club_id' => $id,
-                        'is_proof' => true
-                    ]);
-                }
-            }
-
-            flash()->overlay('Uspješno ste izmjenili dokaze o vlasništvu kluba kluba.', 'Čestitamo');
-            return redirect('clubs/' . $id . '/edit');
         }
+        if ($data->filled('proof')) {
+            $gallery = $data['proof'];
+            foreach ($gallery['attachments'] as $key => $slika) {
+                $image = UploadController::moveToStorage($slika, '/images/club_proof');
+
+                Gallery::create([
+                    'image' => $image['name'],
+                    'club_id' => $id,
+                    'is_proof' => true
+                ]);
+            }
+        }
+
+
+        flash()->overlay('Uspješno ste izmjenili dokaze o vlasništvu kluba kluba.', 'Čestitamo');
+        return redirect('clubs/' . $id . '/edit');
+
     }
 
     public function approvePlayer($id, $player_id, $notify_id)

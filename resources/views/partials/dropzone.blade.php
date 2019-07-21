@@ -44,7 +44,7 @@ $maxFiles
     <script>
         // $(document).ready(function () {
             var numberOfUploadedFiles = {{old($zoneID) ? count(old($zoneID)): 0 }};
-            // Dropzone.autoDiscover = false;
+            Dropzone.autoDiscover = false;
             $("#{{$zoneID}}").dropzone({
                 url: "/{{$zoneUploadUrl}}",
                 addRemoveLinks: true,

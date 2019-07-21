@@ -1,4 +1,4 @@
-let validator = $('#createNewClub').validate({
+let validator = $('#clubForm').validate({
     ignore: ':hidden,:disabled',
     rules: {
         // logo: {
@@ -115,13 +115,13 @@ let validator = $('#createNewClub').validate({
         history: {
             string: true
         },
-        'galerija[]' : {
-            extension: 'png|jpg|jpeg'
-        },
-        'proof[]' : {
-            required: true,
-            extension: 'png|jpg|jpeg'
-        }
+        // 'galerija[]' : {
+        //     extension: 'png|jpg|jpeg'
+        // },
+        // 'proof[]' : {
+        //     required: true,
+        //     extension: 'png|jpg|jpeg'
+        // }
     },
     invalidHandler: function(form, validator) {
         $('html, body').animate({scrollTop: '500em'}, 300);
