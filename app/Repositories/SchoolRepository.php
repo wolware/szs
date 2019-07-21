@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Gallery;
+use App\Http\Controllers\UploadController;
 use App\School;
 use App\SchoolMember;
 use App\Trophy;
@@ -17,14 +18,15 @@ class SchoolRepository {
         $this->model = $model;
     }
 
-    public function createSchool(Request $data) {
-        $newLogoName = 'default.png';
-
-        if($data->file('logo')){
-            $logo = $data->file('logo');
-            $newLogoName = time() . '-' . Auth::user()->id . '.' . $logo->getClientOriginalExtension();
-            $destinationPath = public_path('/images/school_logo');
-            $logo->move($destinationPath, $newLogoName);
+    public function createSchool(Request $data)
+    {
+        if ($data->filled('logo')) {
+            foreach ($data['logo']['attachments'] as $file) {
+                $logo = UploadController::moveToStorage($file, '/images/school_logo');
+                $newLogoName = $logo['name'];
+            }
+        } else {
+            $newLogoName = 'default.png';
         }
 
         // Provjeri najmanji level regije
@@ -112,19 +114,30 @@ class SchoolRepository {
                 }
             }
 
-            if($data->file('galerija')){
-                $galerije = $data->file('galerija');
-                foreach($galerije as $key => $slika){
-                    $newgalName = $key . '-' .time() . '-' .  $createSchool->id . '.' . $slika->getClientOriginalExtension();
-                    $destPath = public_path('/images/galerija_skola');
-                    $slika->move($destPath, $newgalName);
+            if ($data->filled('galerija')) {
+                $gallery = $data['galerija'];
+                foreach ($gallery['attachments'] as $key => $slika) {
+                    $image = UploadController::moveToStorage($slika, '/images/galerija_skola');
 
                     Gallery::create([
-                        'image' => $newgalName,
+                        'image' => $image['name'],
                         'school_id' => $createSchool->id
                     ]);
                 }
             }
+//            if($data->file('galerija')){
+//                $galerije = $data->file('galerija');
+//                foreach($galerije as $key => $slika){
+//                    $newgalName = $key . '-' .time() . '-' .  $createSchool->id . '.' . $slika->getClientOriginalExtension();
+//                    $destPath = public_path('/images/galerija_skola');
+//                    $slika->move($destPath, $newgalName);
+//
+//                    Gallery::create([
+//                        'image' => $newgalName,
+//                        'school_id' => $createSchool->id
+//                    ]);
+//                }
+//            }
 
             return $createSchool;
 

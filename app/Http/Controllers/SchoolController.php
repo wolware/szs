@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSchool;
 use App\Repositories\AssociationRepository;
 use App\Repositories\ClubRepository;
 use App\Repositories\RegionRepository;
@@ -53,13 +54,13 @@ class SchoolController extends Controller
         $region_filled = Input::filled('region');
         $municipality_filled = Input::filled('municipality');
 
-        if($province_filled) {
-            if(!$region_filled) {
+        if ($province_filled) {
+            if (!$region_filled) {
                 $region_ids[] = Input::get('province');
                 $province = $this->regionRepository
                     ->getById(Input::get('province'));
 
-                if($province) {
+                if ($province) {
                     foreach ($province->child_regions as $region) {
                         $region_ids[] = $region->id;
 
@@ -71,13 +72,13 @@ class SchoolController extends Controller
             } else {
                 $region_ids[] = Input::get('region');
 
-                if($municipality_filled) {
+                if ($municipality_filled) {
                     $region_ids[] = Input::get('municipality');
                 } else {
                     $region = $this->regionRepository
                         ->getById(Input::get('region'));
 
-                    if($region) {
+                    if ($region) {
                         foreach ($region->child_regions as $region) {
                             $region_ids[] = $region->id;
                         }
@@ -86,31 +87,31 @@ class SchoolController extends Controller
             }
         }
 
-        $query = School::query()->where('status','active');
-        if(Input::filled('category')){
+        $query = School::query()->where('status', 'active');
+        if (Input::filled('category')) {
             $query->where('club_category_id', Input::get('category'));
         }
 
-        if(Input::filled('sport_type')) {
+        if (Input::filled('sport_type')) {
             $type = Input::get('sport_type') == '1' ? 'normal' : 'disabled';
             $query->where('school_type', $type);
         }
 
-        if(Input::filled('sport')){
+        if (Input::filled('sport')) {
             $query->where('sport_id', Input::get('sport'));
         }
 
-        if(!empty($region_ids)){
+        if (!empty($region_ids)) {
             $query->whereIn('region_id', $region_ids);
         }
 
-        if(Input::filled('sort')){
+        if (Input::filled('sort')) {
             $sort = Input::get('sort');
-            if($sort === 'name_desc') {
+            if ($sort === 'name_desc') {
                 $query->orderBy('name', 'DESC');
-            } else if($sort === 'name_asc') {
+            } else if ($sort === 'name_asc') {
                 $query->orderBy('name', 'ASC');
-            } else if($sort === 'sport') {
+            } else if ($sort === 'sport') {
                 $query->whereHas('sport', function ($query) {
                     $query->orderBy('sports.name', 'DESC');
                 });
@@ -123,92 +124,49 @@ class SchoolController extends Controller
         return view('schools.index', compact('clubCategories', 'sports', 'regions', 'results'));
     }
 
-    public function displayAddSchool(){
+    public function displayAddSchool()
+    {
 
         $regions = $this->regionRepository->getAll();
         $sports = $this->sportRepository->getAll();
         $clubCategories = $this->clubRepository->getSportCategories();
 
         $scripts[] = '/js/validation/schools-validation.js';
+        $scripts[] = '/js/new-figure.js';
         view()->share('scripts', $scripts);
+
+        $css = [
+            'https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.2.0/dropzone.css'
+        ];
+        view()->share('css', $css);
+
+        $vendorScripts = [
+            '/js/dropzone.js'
+        ];
+        view()->share('vendorScripts', $vendorScripts);
 
         return view('schools.new', compact('regions', 'sports', 'clubCategories'));
 
     }
 
-    public function createSchool(Request $data) {
-        $validator = Validator::make($data->all(),[
-            'logo' => 'required|image|dimensions:min_width=200,min_height=200',
-            'name' => 'required|max:255|string',
-            'nature' => 'required|max:255|string',
-            'continent' => 'required|integer|exists:regions,id',
-            'country' => 'required|integer|exists:regions,id',
-            'province' => 'integer|exists:regions,id',
-            'region' => 'integer|exists:regions,id',
-            'municipality' => 'integer|exists:regions,id',
-            'city' => 'required|max:255|string',
-            'type' => 'required|integer',
-            'sport' => 'required|integer|exists:sports,id',
-            'category' => 'required|integer|exists:club_categories,id',
-            'established_in' => 'nullable|digits:4|integer|min:1800|max:'.date('Y'),
-            'home_field' => 'nullable|max:255|string',
-            'competition' => 'nullable|max:255|string',
-            'phone_1' => 'nullable|max:50|string',
-            'phone_2' => 'nullable|max:50|string',
-            'fax' => 'nullable|max:50|string',
-            'email' => 'nullable|max:255|email',
-            'website' => 'nullable|max:255|string',
-            'address' => 'nullable|max:255|string',
-            'pioniri' => 'required|boolean',
-            'kadeti' => 'required|boolean',
-            'juniori' => 'required|boolean',
-            'facebook' => 'nullable|max:255|string',
-            'instagram' => 'nullable|max:255|string',
-            'twitter' => 'nullable|max:255|string',
-            'youtube' => 'nullable|max:255|string',
-            'video' => 'nullable|max:255|string',
-            'history' => 'nullable|string',
-            // Licnosti
-            'licnost' => 'array',
-            'licnost.*' => 'array',
-            'licnost.*.avatar' => 'image|dimensions:min_width=312,min_height=250',
-            'licnost.*.ime' => 'required|max:255|string',
-            'licnost.*.prezime' => 'required|max:255|string',
-            'licnost.*.opis' => 'nullable|max:1000|string',
-            // Nagrade
-            'nagrada' => 'array',
-            'nagrada.*' => 'array',
-            'nagrada.*.vrsta' => 'required|max:255|string|in:Medalja,Trofej/Pehar,Priznanje,Plaketa',
-            'nagrada.*.tip' => 'required|max:255|string|in:Zlato,Srebro,Bronza,Ostalo',
-            'nagrada.*.nivo' => 'required|max:255|string|in:Internacionalni nivo,Regionalni nivo,Državni nivo,Entitetski nivo,Drugo',
-            'nagrada.*.takmicenje' => 'required|max:255|string',
-            'nagrada.*.sezona' => 'required|digits:4|integer|min:1800|max:'.date('Y'),
-            'nagrada.*.osvajanja' => 'nullable|integer',
-            // Slike
-            'galerija' => 'array',
-            'galerija.*' => 'required|image',
-        ]);
+    public function createSchool(StoreSchool $data)
+    {
+        $createSchool = $this->schoolRepository
+            ->createSchool($data);
 
-        if ($validator->fails()) {
-            return redirect('schools/new')
-                ->withErrors($validator)
-                ->withInput();
-        } else {
-            $createSchool = $this->schoolRepository
-                ->createSchool($data);
-
-            if($createSchool) {
-                flash()->overlay('Uspješno ste dodali novu školu.', 'Čestitamo');
-                return redirect('/schools/' . $createSchool->id);
-            }
+        if ($createSchool) {
+            flash()->overlay('Uspješno ste dodali novu školu.', 'Čestitamo');
+            return redirect('/schools/' . $createSchool->id);
         }
+
     }
 
-    public function showSchool($id){
+    public function showSchool($id)
+    {
         $school = $this->schoolRepository
             ->getById($id);
 
-        if($school) {
+        if ($school) {
             $regions = collect();
             $currentRegion = $school->region;
             while ($currentRegion) {
@@ -221,8 +179,8 @@ class SchoolController extends Controller
 
             $authId = Auth::user() != null ? Auth::user()->id : 0;
 
-            if($school->user_id != $authId)
-                DB::update('update schools set number_of_views = ? where id= ?',[$school->number_of_views+1,$school->id]);
+            if ($school->user_id != $authId)
+                DB::update('update schools set number_of_views = ? where id= ?', [$school->number_of_views + 1, $school->id]);
 
 
             return view('schools.profile', compact('school'));
@@ -231,7 +189,8 @@ class SchoolController extends Controller
         abort(404);
     }
 
-    public function displayEditSchool($id) {
+    public function displayEditSchool($id)
+    {
         $regions = $this->regionRepository->getAll();
         $sports = $this->sportRepository->getAll();
         $clubCategories = $this->clubRepository->getSportCategories();
@@ -239,7 +198,7 @@ class SchoolController extends Controller
         $school = $this->schoolRepository
             ->getById($id);
 
-        if($school) {
+        if ($school) {
             $clubRegions = collect();
             $currentRegion = $school->region;
             while ($currentRegion) {
@@ -255,17 +214,18 @@ class SchoolController extends Controller
         abort(404);
     }
 
-    public function editSchoolGeneral($id, Request $request) {
+    public function editSchoolGeneral($id, Request $request)
+    {
         $school = $this->schoolRepository
             ->getById($id);
 
-        if(!$school) {
+        if (!$school) {
             abort(404);
         }
 
         // Provjera da li je user napravio skolu
         $isOwner = $school->user->id == Auth::user()->id;
-        if(!$isOwner) {
+        if (!$isOwner) {
             abort(404);
         }
 
@@ -282,7 +242,7 @@ class SchoolController extends Controller
             'type' => 'required|integer',
             'sport' => 'required|integer|exists:sports,id',
             'category' => 'required|integer|exists:club_categories,id',
-            'established_in' => 'nullable|digits:4|integer|min:1800|max:'.date('Y'),
+            'established_in' => 'nullable|digits:4|integer|min:1800|max:' . date('Y'),
             'home_field' => 'nullable|max:255|string',
             'competition' => 'nullable|max:255|string',
             'phone_1' => 'nullable|max:50|string',
@@ -301,7 +261,7 @@ class SchoolController extends Controller
             'video' => 'nullable|max:255|string'
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect('/schools/' . $id . '/edit')
                 ->withErrors($validator)
                 ->withInput();
@@ -310,7 +270,7 @@ class SchoolController extends Controller
             $updateSchoolGeneral = $this->schoolRepository
                 ->updateGeneral($request, $school);
 
-            if($updateSchoolGeneral) {
+            if ($updateSchoolGeneral) {
                 flash()->overlay('Uspješno ste izmjenili "Općenito" sekciju škole sporta.', 'Čestitamo');
                 return back();
             }
@@ -318,17 +278,18 @@ class SchoolController extends Controller
 
     }
 
-    public function editSchoolStaff($id, Request $request) {
+    public function editSchoolStaff($id, Request $request)
+    {
         $school = $this->schoolRepository
             ->getById($id);
 
-        if(!$school) {
+        if (!$school) {
             abort(404);
         }
 
         // Provjera da li je user napravio skolu
         $isOwner = $school->user->id == Auth::user()->id;
-        if(!$isOwner) {
+        if (!$isOwner) {
             abort(404);
         }
 
@@ -341,7 +302,7 @@ class SchoolController extends Controller
             'licnost.*.opis' => 'nullable|max:1000|string',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect('/schools/' . $id . '/edit')
                 ->withErrors($validator)
                 ->withInput();
@@ -350,24 +311,25 @@ class SchoolController extends Controller
             $updateSchoolStaff = $this->schoolRepository
                 ->updateStaff($request, $school);
 
-            if($updateSchoolStaff) {
+            if ($updateSchoolStaff) {
                 flash()->overlay('Uspješno ste izmjenili članove škole sporta.', 'Čestitamo');
                 return back();
             }
         }
     }
 
-    public function editSchoolHistory($id, Request $request) {
+    public function editSchoolHistory($id, Request $request)
+    {
         $school = $this->schoolRepository
             ->getById($id);
 
-        if(!$school) {
+        if (!$school) {
             abort(404);
         }
 
         // Provjera da li je user napravio skolu
         $isOwner = $school->user->id == Auth::user()->id;
-        if(!$isOwner) {
+        if (!$isOwner) {
             abort(404);
         }
 
@@ -375,7 +337,7 @@ class SchoolController extends Controller
             'history' => 'nullable|string'
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect('/schools/' . $id . '/edit')
                 ->withErrors($validator)
                 ->withInput();
@@ -384,24 +346,25 @@ class SchoolController extends Controller
             $updateSchoolHistory = $this->schoolRepository
                 ->updateHistory($request, $school);
 
-            if($updateSchoolHistory) {
+            if ($updateSchoolHistory) {
                 flash()->overlay('Uspješno ste izmjenili historiju škole sporta.', 'Čestitamo');
                 return back();
             }
         }
     }
 
-    public function editSchoolTrophies($id, Request $request) {
+    public function editSchoolTrophies($id, Request $request)
+    {
         $school = $this->schoolRepository
             ->getById($id);
 
-        if(!$school) {
+        if (!$school) {
             abort(404);
         }
 
         // Provjera da li je user napravio skolu
         $isOwner = $school->user->id == Auth::user()->id;
-        if(!$isOwner) {
+        if (!$isOwner) {
             abort(404);
         }
 
@@ -412,11 +375,11 @@ class SchoolController extends Controller
             'nagrada.*.tip' => 'required|max:255|string|in:Zlato,Srebro,Bronza,Ostalo',
             'nagrada.*.nivo' => 'required|max:255|string|in:Internacionalni nivo,Regionalni nivo,Državni nivo,Entitetski nivo,Drugo',
             'nagrada.*.takmicenje' => 'required|max:255|string',
-            'nagrada.*.sezona' => 'required|digits:4|integer|min:1800|max:'.date('Y'),
+            'nagrada.*.sezona' => 'required|digits:4|integer|min:1800|max:' . date('Y'),
             'nagrada.*.osvajanja' => 'nullable|integer',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect('/schools/' . $id . '/edit')
                 ->withErrors($validator)
                 ->withInput();
@@ -425,24 +388,25 @@ class SchoolController extends Controller
             $updateSchoolTrophies = $this->schoolRepository
                 ->updateTrophies($request, $school);
 
-            if($updateSchoolTrophies) {
+            if ($updateSchoolTrophies) {
                 flash()->overlay('Uspješno ste izmjenili trofeje/nagrade škole sporta.', 'Čestitamo');
                 return back();
             }
         }
     }
 
-    public function editSchoolGallery($id, Request $request) {
+    public function editSchoolGallery($id, Request $request)
+    {
         $school = $this->schoolRepository
             ->getById($id);
 
-        if(!$school) {
+        if (!$school) {
             abort(404);
         }
 
         // Provjera da li je user napravio skolu
         $isOwner = $school->user->id == Auth::user()->id;
-        if(!$isOwner) {
+        if (!$isOwner) {
             abort(404);
         }
 
@@ -451,7 +415,7 @@ class SchoolController extends Controller
             'galerija.*' => 'required|image'
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return redirect('/schools/' . $id . '/edit')
                 ->withErrors($validator)
                 ->withInput();
@@ -460,7 +424,7 @@ class SchoolController extends Controller
             $updateSchoolGallery = $this->schoolRepository
                 ->updateGallery($request, $school);
 
-            if($updateSchoolGallery) {
+            if ($updateSchoolGallery) {
                 flash()->overlay('Uspješno ste izmjenili galeriju škole sporta.', 'Čestitamo');
                 return back();
             }

@@ -72,7 +72,7 @@ class ClubController extends Controller
         view()->share('vendorScripts', $vendorScripts);
 
         $scripts[] = '/js/validation/clubs-validation.js';
-        $scripts[] = '/js/clubs-form.js';
+        $scripts[] = '/js/new-figure.js';
         view()->share('scripts', $scripts);
 
         return view('clubs.new', compact('regions', 'sports', 'clubCategories', 'associations'));
@@ -350,7 +350,7 @@ class ClubController extends Controller
         view()->share('vendorScripts', $vendorScripts);
 
         $scripts[] = '/js/validation/clubs-validation.js';
-        $scripts[] = '/js/clubs-form.js';
+        $scripts[] = '/js/new-figure.js';
         view()->share('scripts', $scripts);
 
         $regions = $this->regionRepository->getAll();

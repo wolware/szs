@@ -13,7 +13,7 @@ let mix = require('laravel-mix');
 
 mix.js('resources/assets/js/app.js', 'public/js')
     .js('resources/assets/js/clubs-validation.js', 'public/js/validation')
-    .js('resources/assets/js/clubs-form.js', 'public/js')
+    .js('resources/assets/js/new-figure.js', 'public/js')
     .js('resources/assets/js/event-validation.js', 'public/js/validation')
     .js('resources/assets/js/athletes-validation.js', 'public/js/validation')
     .js('resources/assets/js/objects-validation.js', 'public/js/validation')
