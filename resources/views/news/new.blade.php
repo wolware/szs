@@ -74,27 +74,36 @@
 
                                                 <div class="col-md-6 objavi-klub-logo-setup">
 
-                                                    <div class="col-md-7">
+{{--                                                    <div class="col-md-7">--}}
+{{----}}
+{{--                                                        <div class="alc-staff__photo">--}}
+{{--                                                            <img class="slika-upload-klub" src="{{ asset('images/vijesti/vijesti-dodaj-sliku.png') }}" alt="">--}}
+{{--                                                        </div>--}}
+{{----}}
+{{--                                                    </div>--}}
 
-                                                        <div class="alc-staff__photo">
-                                                            <img class="slika-upload-klub" src="{{ asset('images/vijesti/vijesti-dodaj-sliku.png') }}" alt="">
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="col-md-5 sadrzaj-slike">
-
-                                                        <p class="dodaj-sliku-naslov klub-a1">Slika vijesti</p>
-                                                        <p class="dodaj-sliku-call">Identitet vijesti</p>
-                                                        <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">
-                                                            Odaberi sliku... <input type="file" id="vijestSlika" name="slika" style="display: none;">
-                                                        </label>
+{{--                                                    <div class="col-md-5 sadrzaj-slike">--}}
+{{----}}
+{{--                                                        <p class="dodaj-sliku-naslov klub-a1">Slika vijesti</p>--}}
+{{--                                                        <p class="dodaj-sliku-call">Identitet vijesti</p>--}}
+{{--                                                        <label class="btn btn-default btn-xs btn-file dodaj-sliku-button">--}}
+{{--                                                            Odaberi sliku... <input type="file" id="vijestSlika" name="slika" style="display: none;">--}}
+{{--                                                        </label>--}}
+                                                    @include('partials.dropzone', [
+                                                                'zoneID' => 'slika',
+                                                                'zoneUploadUrl' => 'uploads',
+                                                                'zoneDeleteUrl' => 'uploads',
+                                                                'zoneLabel' => 'Slika vijesti',
+                                                                'dzMessage' => 'Klikni ili prevuci sliku ovdje',
+                                                                'dzDescription' => 'Slika se može prebaciti i drag & drop metodom.',
+                                                                'maxFiles' => 1
+                                                                ])
                                                         <div class="info001">
                                                             <p class="info-upload-slike">Preporučene dimenzije za sliku:</p>
                                                             <p class="info-upload-slike">Minimalno: 980x720 px</p>
                                                         </div>
 
-                                                    </div>
+{{--                                                    </div>--}}
                                                 </div>
 
 

@@ -167,5 +167,9 @@ Route::middleware('auth')->group(function () {
         return redirect()->to('/storage/images/' . $folder . '/' . $filename);
     });
 
+    Route::get('images/vijesti/galerija/{filename}', function ($filename){
+        return redirect()->to('/storage/images/vijesti/galerija/' . $filename);
+    });
+
     Route::get('/getNewFigureForm', 'ClubController@getNewFigureForm');
 });

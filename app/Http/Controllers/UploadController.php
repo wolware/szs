@@ -6,6 +6,7 @@ use App\Http\Requests\FileUploadRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class UploadController extends Controller
 {
@@ -53,14 +54,21 @@ class UploadController extends Controller
         return response()->file($pathToFile);
     }
 
-    public static function moveToStorage($file, $movePath)
+    public static function moveToStorage($file, $movePath, $width = null, $height = null, $croppedPath = null)
     {
-
         $file = json_decode($file);
         $name = str_replace('.', time() . '-' . Auth::user()->id . '.', $file->originalName);
-        Storage::move($file->path, 'public'. $movePath . '/' . $name);
 
+        if ($width && $height){
+            Image::make(storage_path() .'/app/'.$file->path)
+                ->fit($height, $width, function ($constraint) {
+                    $constraint->upsize();
+                })->save(storage_path().'/app/public' . $croppedPath . $name);
+        }
+
+        Storage::move($file->path, 'public'. $movePath . '/' . $name);
         $file->path = storage_path('public'). $movePath . '/' . $name;
+
         return ['path' => $file->path, 'mime' => $file->mime, 'name' => $name];
 
     }
