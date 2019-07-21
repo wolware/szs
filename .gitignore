@@ -13,6 +13,7 @@ yarn-error.log
 package-lock.json
 composer.lock
 
+public/js/new-figure.js
 public/js/validation
 public/mix-manifest.json
 
