@@ -23,17 +23,18 @@
             <div class="form-group col-md-6 col-xs-12">
                 <label for="licnost[{{$licnostiCount}}][ime]"><img class="flow-icons-013" src="/images/icons/edit.svg"> Ime</label>
                 <input type="text" name="licnost[{{$licnostiCount}}][ime]" class="form-control"
-                       placeholder="Unesite ime ličnosti">
+                       placeholder="Unesite ime ličnosti" value="{{isset($licnost) ? $licnost->firstname : null}}">
             </div>
             <div class="form-group col-md-6 col-xs-12">
                 <label for="licnost[{{$licnostiCount}}][prezime]"><img class="flow-icons-013" src="/images/icons/edit.svg"> Prezime</label>
                 <input type="text" name="licnost[{{$licnostiCount}}][prezime]" class="form-control"
-                       placeholder="Unesite prezime ime ličnosti">
+                       placeholder="Unesite prezime ime ličnosti" value="{{isset($licnost) ? $licnost->lastname : null}}">
             </div>
             <div class="form-group col-md-12">
                 <label for="licnost[{{$licnostiCount}}][opis]"><img class="flow-icons-013" src="/images/icons/edit.svg"> Opis i uloga</label>
                 <textarea class="form-control" rows="4" name="licnost[{{$licnostiCount}}][opis]"
-                          placeholder="Upišite kratak opis uloge i funkcije navedene ličnosti u klubu..."></textarea>
+                          placeholder="Upišite kratak opis uloge i funkcije navedene ličnosti u klubu...">{{isset($licnost) ? $licnost->biography : null}}
+                </textarea>
             </div>
         </div>
     </div>
