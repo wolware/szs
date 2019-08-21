@@ -4,6 +4,7 @@ function jq( id ) {
 
 }
 $(document).ready(function () {
+
 // Dodavanje kluba - Dodaj ličnost
     $('#dodajLicnost').on('click', function () {
 

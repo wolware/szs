@@ -43,6 +43,17 @@ $maxFiles
 
 @push('scripts-end')
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        function jq( id ) {
+
+            return id.replace( /(:|\.|\[|\]|,|=|@)/g, "\\$1" );
+
+        }
         // $(document).ready(function () {
         var numberOfUploadedFiles = {{old($zoneID) ? count(old($zoneID)): 0 }};
         Dropzone.autoDiscover = false;
@@ -62,7 +73,8 @@ $maxFiles
                             type: "delete",
                             data: {'path': filename},
                             success: function (data) {
-                                $('[value="' + filename + '"]').remove();
+                                console.log(data);
+                                console.log($('#' + jq(data.path)));
                             }
                         });
                     }
@@ -73,7 +85,12 @@ $maxFiles
             },
             success: function (file, response) {
                 $("#{{$zoneID}}-error").hide();
-                $('<input>').attr('type', 'hidden').attr('name', '{{$zoneID}}[attachments][' + numberOfUploadedFiles + ']').val(JSON.stringify(response)).appendTo('#{{$zoneID}}-uploaded-files');
+                $('<input>').attr('type', 'hidden')
+                    .attr('name', '{{$zoneID}}[attachments][' + numberOfUploadedFiles + ']')
+                    .attr('name', '{{$zoneID}}[attachments][' + numberOfUploadedFiles + ']')
+                    .attr('id', response.path)
+                    .val(JSON.stringify(response))
+                    .appendTo('#{{$zoneID}}-uploaded-files');
                 numberOfUploadedFiles++;
                 var fileUploded = file.previewElement.querySelector("[data-dz-name]");
                 $(fileUploded).attr('data-path', response.path);
